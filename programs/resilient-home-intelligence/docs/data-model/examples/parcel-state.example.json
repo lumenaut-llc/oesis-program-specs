@@ -1,0 +1,33 @@
+{
+  "parcel_id": "parcel_123",
+  "computed_at": "2026-03-30T19:46:00Z",
+  "stay_status": "caution",
+  "enter_status": "unknown",
+  "escape_status": "safe",
+  "asset_status": "caution",
+  "confidence": 0.54,
+  "evidence_mode": "local_only",
+  "reasons": [
+    "Indoor air observations show an abrupt gas-trend change.",
+    "No confirming outdoor or neighborhood evidence is available."
+  ],
+  "hazards": {
+    "smoke_probability": 0.42,
+    "flood_probability": 0.05,
+    "heat_probability": 0.27
+  },
+  "freshness": {
+    "latest_observation_at": "2026-03-30T19:45:00Z",
+    "seconds_since_latest": 60,
+    "stale": false
+  },
+  "provenance_summary": {
+    "observation_count": 3,
+    "source_modes": [
+      "homeowner_node"
+    ],
+    "observation_refs": [
+      "obs_01HT000001"
+    ]
+  }
+}
