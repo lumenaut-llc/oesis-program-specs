@@ -36,3 +36,5 @@ The first concrete ingest contract is `rhi.bench-air.v1`, produced by the bench-
 The first executable contract check lives in `scripts/validate_examples.py`. It validates the current example payloads in `../../docs/data-model/examples/` against the MVP expectations for:
 - `rhi.bench-air.v1` node observations
 - parcel-state snapshots
+
+The next reference scaffold is `scripts/normalize_packet.py`. It reads a node packet, performs the same lightweight validation assumptions as the validator, and emits a normalized observation object shaped for the inference engine boundary.

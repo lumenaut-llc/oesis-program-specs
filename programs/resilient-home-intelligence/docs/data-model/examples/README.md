@@ -3,7 +3,9 @@
 These JSON example payloads are intended as implementation scaffolding for the first MVP contracts.
 
 - `node-observation.example.json`
-  Example of a normalized raw packet from `rhi.bench-air.v1`.
+  Example of a raw node packet from `rhi.bench-air.v1`.
+- `normalized-observation.example.json`
+  Example of the canonical observation object emitted by the ingest boundary.
 - `parcel-state.example.json`
   Example of a homeowner-facing parcel-state snapshot after inference.
 

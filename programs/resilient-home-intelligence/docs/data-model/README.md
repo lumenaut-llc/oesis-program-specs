@@ -20,6 +20,7 @@ Machine-readable starter artifacts now live in:
 - `schemas/node-observation.schema.json`
 - `schemas/parcel-state.schema.json`
 - `examples/node-observation.example.json`
+- `examples/normalized-observation.example.json`
 - `examples/parcel-state.example.json`
 
 ## Related workstreams

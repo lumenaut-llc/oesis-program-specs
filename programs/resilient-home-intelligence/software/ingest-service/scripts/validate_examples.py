@@ -142,9 +142,54 @@ def validate_parcel_state(payload):
         require_type(provenance["observation_refs"], list, "provenance_summary.observation_refs")
 
 
+def validate_normalized_observation(payload):
+    required = [
+        "observation_id",
+        "node_id",
+        "parcel_id",
+        "observed_at",
+        "ingested_at",
+        "observation_type",
+        "values",
+        "health",
+        "provenance",
+        "raw_packet",
+    ]
+    for field in required:
+        require(field in payload, f"normalized observation missing required field: {field}")
+
+    require_type(payload["observation_id"], str, "observation_id")
+    require_type(payload["node_id"], str, "node_id")
+    require(isinstance(payload["parcel_id"], (str, type(None))), "parcel_id: expected string or null")
+    require_type(payload["observed_at"], str, "observed_at")
+    require_type(payload["ingested_at"], str, "ingested_at")
+    require(payload["observation_type"] == "air.node.snapshot", "observation_type must be air.node.snapshot")
+
+    values = payload["values"]
+    require_type(values, dict, "values")
+    for field in ("temperature_c_primary", "relative_humidity_pct_primary", "pressure_hpa", "gas_resistance_ohm"):
+        require_number(values[field], f"values.{field}")
+
+    health = payload["health"]
+    require_type(health, dict, "health")
+    require_number(health["uptime_s"], "health.uptime_s", minimum=0)
+    require_type(health["wifi_connected"], bool, "health.wifi_connected")
+    require_number(health["read_failures_total"], "health.read_failures_total", minimum=0)
+
+    provenance = payload["provenance"]
+    require_type(provenance, dict, "provenance")
+    require(provenance["source_kind"] == "homeowner_node", "provenance.source_kind invalid")
+    require(provenance["schema_version"] == "rhi.bench-air.v1", "provenance.schema_version invalid")
+    require_type(provenance["firmware_version"], str, "provenance.firmware_version")
+    require_type(provenance["raw_packet_ref"], str, "provenance.raw_packet_ref")
+
+    validate_node_observation(payload["raw_packet"])
+
+
 def main():
     files = [
         ("node observation", EXAMPLES_DIR / "node-observation.example.json", validate_node_observation),
+        ("normalized observation", EXAMPLES_DIR / "normalized-observation.example.json", validate_normalized_observation),
         ("parcel state", EXAMPLES_DIR / "parcel-state.example.json", validate_parcel_state),
     ]
 
