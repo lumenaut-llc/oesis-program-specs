@@ -2,12 +2,19 @@
 // Uses SHT45 and BME680 over I2C on GPIO8/GPIO9 and prints one
 // JSON packet per line for local ingest validation.
 
+#include <Arduino.h>
 #include <Wire.h>
-#include <WiFi.h>
 #include <time.h>
 #include <Adafruit_BME680.h>
 #include <Adafruit_SHT4x.h>
 #include <Adafruit_Sensor.h>
+
+#if __has_include(<WiFi.h>)
+#include <WiFi.h>
+#define BENCH_AIR_HAS_WIFI 1
+#else
+#define BENCH_AIR_HAS_WIFI 0
+#endif
 
 #if __has_include("secrets.h")
 #include "secrets.h"
@@ -230,6 +237,13 @@ void syncTimeIfConfigured() {
     return;
   }
 
+#if !BENCH_AIR_HAS_WIFI
+  last_error = "wifi_unavailable";
+  Serial.println("# Wi-Fi support unavailable in this build, using placeholder observed_at");
+  wifi_connected = false;
+  time_synced = false;
+  return;
+#else
   WiFi.mode(WIFI_STA);
   WiFi.begin(kWifiSsid, kWifiPassword);
 
@@ -267,6 +281,7 @@ void syncTimeIfConfigured() {
   updateObservedAt();
   Serial.print("# time synced: ");
   Serial.println(observed_at);
+#endif
 }
 
 void setup() {
