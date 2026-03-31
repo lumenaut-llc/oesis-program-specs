@@ -10,6 +10,27 @@ Provide a minimal ESP32 bring-up sketch that emits the agreed `rhi.bench-air.v1`
   Minimal I2C scanner for `GPIO8` and `GPIO9`
 - `bench_air_node_serial_json/bench_air_node_serial_json.ino`
   Arduino-style sketch for ESP32-S3 that reads SHT45 and BME680, then prints one JSON packet per line at `115200`
+- `bench_air_node_serial_json/secrets.example.h`
+  Copy-to-local template for optional Wi-Fi time-sync credentials
+- `platformio.ini`
+  Pinned ESP32-S3 build scaffold with separate environments for the scanner and serial JSON sketch
+- `tools/capture_serial.sh`
+  Simple macOS serial capture helper that writes a monitor log to disk
+
+## Pinned build setup
+
+The firmware directory now includes `platformio.ini` with a pinned ESP32 platform and library set:
+
+- platform: `espressif32@6.7.0`
+- board: `esp32-s3-devkitc-1`
+- framework: Arduino
+
+Recommended commands from this directory:
+
+```bash
+pio run -e bench_air_node_i2c_scanner
+pio run -e bench_air_node_serial_json
+```
 
 ## Arduino libraries
 
@@ -26,7 +47,13 @@ The serial JSON sketch can emit a real UTC `observed_at` timestamp if you fill i
 - `kWifiSsid`
 - `kWifiPassword`
 
-If those remain blank, the sketch stays in serial-only bring-up mode and uses the placeholder timestamp.
+Recommended local pattern:
+
+1. Copy `bench_air_node_serial_json/secrets.example.h` to `bench_air_node_serial_json/secrets.h`
+2. Fill in your Wi-Fi credentials locally
+3. Do not commit `secrets.h`
+
+If credentials remain blank, the sketch stays in serial-only bring-up mode and uses the placeholder timestamp.
 
 ## First run
 
@@ -40,6 +67,20 @@ If those remain blank, the sketch stays in serial-only bring-up mode and uses th
 8. Flash the serial JSON sketch
 9. Confirm you see one valid JSON object per line every 5 seconds
 10. If Wi-Fi credentials are configured, confirm you see a `# time synced:` boot line and non-placeholder `observed_at` values
+
+## Serial capture on macOS
+
+To save a serial session to `serial.log`, first identify the device:
+
+```bash
+ls /dev/cu.usbmodem*
+```
+
+Then run:
+
+```bash
+./tools/capture_serial.sh /dev/cu.usbmodem101 serial.log
+```
 
 ## Current limitations
 

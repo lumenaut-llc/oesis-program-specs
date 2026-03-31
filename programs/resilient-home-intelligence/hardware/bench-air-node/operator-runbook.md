@@ -63,7 +63,8 @@ Stop here if the second address does not appear.
 
 Optional before flashing:
 
-- fill in `kWifiSsid` and `kWifiPassword` in the sketch if you want real UTC timestamps via NTP
+- copy `firmware/bench_air_node_serial_json/secrets.example.h` to `firmware/bench_air_node_serial_json/secrets.h`
+- fill in your Wi-Fi credentials there if you want real UTC timestamps via NTP
 
 Expected boot comments:
 
@@ -98,6 +99,13 @@ If you captured a whole serial monitor log with `#` boot lines, extract the newe
 ```bash
 python3 scripts/extract_latest_packet.py serial.log --output packet.json
 python3 scripts/ingest_packet.py packet.json
+```
+
+Recommended macOS capture flow:
+
+```bash
+cd ../../hardware/bench-air-node/firmware
+./tools/capture_serial.sh /dev/cu.usbmodem101 serial.log
 ```
 
 ## Pass criteria

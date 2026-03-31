@@ -9,13 +9,25 @@
 #include <Adafruit_SHT4x.h>
 #include <Adafruit_Sensor.h>
 
+#if __has_include("secrets.h")
+#include "secrets.h"
+#endif
+
+#ifndef BENCH_AIR_WIFI_SSID
+#define BENCH_AIR_WIFI_SSID ""
+#endif
+
+#ifndef BENCH_AIR_WIFI_PASSWORD
+#define BENCH_AIR_WIFI_PASSWORD ""
+#endif
+
 static const char* kSchemaVersion = "rhi.bench-air.v1";
 static const char* kNodeId = "bench-air-01";
 static const char* kFirmwareVersion = "0.1.0";
 static const char* kLocationMode = "indoor";
 static const char* kObservedAtPlaceholder = "1970-01-01T00:00:00Z";
-static const char* kWifiSsid = "";
-static const char* kWifiPassword = "";
+static const char* kWifiSsid = BENCH_AIR_WIFI_SSID;
+static const char* kWifiPassword = BENCH_AIR_WIFI_PASSWORD;
 static const char* kNtpServer = "pool.ntp.org";
 static const long kGmtOffsetSeconds = 0;
 static const int kDaylightOffsetSeconds = 0;
