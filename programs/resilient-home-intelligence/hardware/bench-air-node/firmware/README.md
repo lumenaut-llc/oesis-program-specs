@@ -19,6 +19,15 @@ Install these libraries before compiling the serial JSON sketch:
 - `Adafruit BME680 Library`
 - `Adafruit Unified Sensor`
 
+## Optional time sync
+
+The serial JSON sketch can emit a real UTC `observed_at` timestamp if you fill in:
+
+- `kWifiSsid`
+- `kWifiPassword`
+
+If those remain blank, the sketch stays in serial-only bring-up mode and uses the placeholder timestamp.
+
 ## First run
 
 1. Open `bench_air_node_i2c_scanner.ino` in the Arduino IDE or another ESP32-capable workflow
@@ -30,10 +39,11 @@ Install these libraries before compiling the serial JSON sketch:
 7. Open `bench_air_node_serial_json.ino`
 8. Flash the serial JSON sketch
 9. Confirm you see one valid JSON object per line every 5 seconds
+10. If Wi-Fi credentials are configured, confirm you see a `# time synced:` boot line and non-placeholder `observed_at` values
 
 ## Current limitations
 
-- `observed_at` is still a placeholder timestamp until real time is available
+- `observed_at` remains a placeholder unless Wi-Fi time sync is configured and succeeds
 - Wi-Fi transport is not enabled
 
 The immediate goal is to prove sensor bring-up, packet shape, and ingest compatibility first. Time sync and network transport can come next.

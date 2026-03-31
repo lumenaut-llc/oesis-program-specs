@@ -63,6 +63,8 @@ During first-build bring-up it is fine to print a few human-readable boot messag
 - `bme680`: pressure and gas-trend source, plus secondary temp and humidity
 - `wifi_connected`: `false` is expected for serial-only bring-up
 
+If Wi-Fi credentials are configured for time sync, `wifi_connected` may be `true` even when packets are still only being inspected over serial.
+
 ## First-build fallback for time
 
 If the node does not yet have a real clock, use one of these approaches consistently:
@@ -70,7 +72,14 @@ If the node does not yet have a real clock, use one of these approaches consiste
 - emit boot-relative timestamps only in debug logs and wait to emit JSON packets until time is available
 - emit a placeholder RFC 3339 timestamp and clearly document that it is provisional during serial-only bring-up
 
-The preferred path for the MVP is still to emit valid RFC 3339 timestamps once Wi-Fi or another clock source exists.
+The preferred path for the MVP is to emit valid RFC 3339 UTC timestamps once Wi-Fi/NTP or another clock source exists.
+
+## Current firmware behavior
+
+The current bench-air firmware scaffold supports two modes:
+
+- serial-only bring-up: blank Wi-Fi credentials, placeholder `observed_at`, `wifi_connected: false`
+- Wi-Fi-assisted time sync: configured credentials, NTP-backed UTC `observed_at`, `wifi_connected: true` when connected
 
 ## Serial line example
 

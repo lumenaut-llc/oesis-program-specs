@@ -61,6 +61,10 @@ Stop here if the second address does not appear.
 3. Ignore the boot comment lines that start with `#`
 4. Copy one full JSON packet line into a file named `packet.json`
 
+Optional before flashing:
+
+- fill in `kWifiSsid` and `kWifiPassword` in the sketch if you want real UTC timestamps via NTP
+
 Expected boot comments:
 
 ```text
@@ -73,6 +77,7 @@ Expected packet behavior:
 - one JSON object per line
 - one packet about every 5 seconds
 - `sht45` and `bme680` both present when wiring is healthy
+- `observed_at` is a real UTC timestamp only if Wi-Fi time sync is configured and succeeds
 
 ## Stage 4: validate locally
 
@@ -98,8 +103,8 @@ python3 scripts/ingest_packet.py < packet.json
 
 ## Known first-build limitations
 
-- `observed_at` is still a placeholder timestamp until time sync is added
-- `wifi_connected` remains `false`
+- `observed_at` remains a placeholder if Wi-Fi time sync is not configured or fails
+- Wi-Fi is only used here for optional time sync, not packet transport
 - gas resistance is useful for trend inspection, not calibrated AQI
 
 ## If something fails
