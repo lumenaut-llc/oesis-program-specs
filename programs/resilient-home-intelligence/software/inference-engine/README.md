@@ -34,3 +34,7 @@ The goal is not perfect classification. The goal is a transparent first-pass par
 - parcel platform reads parcel-state outputs
 - shared-map may later consume parcel-level summaries
 - privacy and governance define which evidence can be shared across parcel boundaries
+
+## Implementation scaffold
+
+The first executable inference reference lives in `scripts/infer_parcel_state.py`. It reads a normalized observation example, applies intentionally simple rules, and emits a parcel-state snapshot that matches the MVP data contract.
