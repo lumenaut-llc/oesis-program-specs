@@ -18,6 +18,7 @@ Resilient Home Intelligence
 - `architecture.md`
 - `interfaces.md`
 - `config/hazard_thresholds_v0.json`
+- `config/trust_gates_v0.json`
 - `scripts/infer_parcel_state.py`
 - `../../docs/data-model/parcel-context-schema.md`
 - `../../docs/data-model/evidence-mode-and-observability.md`
@@ -35,6 +36,7 @@ This document defines the first rules posture for three hazards:
 It does not define a production model. It defines what the MVP reference logic may and may not do.
 
 The reference thresholds for this ruleset should live in `config/hazard_thresholds_v0.json` rather than remaining hardcoded in the inference script.
+Trust-gating thresholds for stale data, low-confidence suppression, and cross-source disagreement should live in `config/trust_gates_v0.json`.
 
 ## Governing principles
 
@@ -129,6 +131,18 @@ For MVP reference logic:
 - `unknown` should be the default when evidence is sparse, weakly representative, stale, or single-source
 - `unsafe` should require stronger and more hazard-relevant evidence than the current bench-air-only scaffold
 - `reentry` and `egress` should be especially conservative because they can sound action-like even when the product avoids command language
+
+## Trust gates v0
+
+The reference engine may emit `system` limitations when the estimate is being held back by inference discipline rather than by a direct evidence source.
+
+Initial trust gates:
+
+- stale local observation gate
+- low-confidence gate
+- cross-source disagreement gate when regional or shared context materially outweighs the local reading
+
+These gates should be configured in `config/trust_gates_v0.json` rather than embedded as magic numbers in the inference script.
 
 ## Minimum reasons guidance
 

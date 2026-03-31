@@ -12,6 +12,7 @@ EXAMPLES_DIR = ROOT / "docs" / "data-model" / "examples"
 CONFIG_DIR = ROOT / "software" / "inference-engine" / "config"
 PUBLIC_CONTEXT_POLICY_PATH = CONFIG_DIR / "public_context_policy.json"
 HAZARD_THRESHOLDS_PATH = CONFIG_DIR / "hazard_thresholds_v0.json"
+TRUST_GATES_PATH = CONFIG_DIR / "trust_gates_v0.json"
 
 
 class InferenceError(Exception):
@@ -109,6 +110,13 @@ def load_hazard_thresholds() -> dict:
 
 
 HAZARD_THRESHOLDS = load_hazard_thresholds()
+
+
+def load_trust_gates() -> dict:
+    return load_json(TRUST_GATES_PATH)
+
+
+TRUST_GATES = load_trust_gates()
 
 
 def get_policy_for_source(source_name: str) -> dict:
@@ -755,11 +763,11 @@ def build_evidence_contributions(
                 role="limitation",
                 summary="The latest local observation is aging out and may no longer reflect current parcel conditions.",
                 hazards=["smoke", "heat", "flood"],
-                weight=0.76,
+                weight=TRUST_GATES["freshness_gate"]["stale_weight"],
             )
         )
 
-    if confidence < 0.45:
+    if confidence < TRUST_GATES["confidence_gate"]["low_confidence_threshold"]:
         contributions.append(
             make_evidence_contribution(
                 contribution_id="low_confidence_gate",
@@ -768,7 +776,7 @@ def build_evidence_contributions(
                 role="limitation",
                 summary="Confidence is limited because the current estimate relies on sparse or weakly representative evidence.",
                 hazards=["smoke", "heat", "flood"],
-                weight=0.68,
+                weight=TRUST_GATES["confidence_gate"]["weight"],
             )
         )
 
@@ -778,7 +786,13 @@ def build_evidence_contributions(
     strongest_shared_smoke = shared_context["hazards"]["smoke_probability"] if shared_context else 0.0
     strongest_shared_heat = shared_context["hazards"]["heat_probability"] if shared_context else 0.0
 
-    if gas_resistance is not None and gas_resistance >= 180000 and max(strongest_public_smoke, strongest_shared_smoke) >= 0.3:
+    disagreement = TRUST_GATES["cross_source_disagreement"]
+
+    if (
+        gas_resistance is not None
+        and gas_resistance >= disagreement["smoke_local_steady_min_gas_resistance_ohm"]
+        and max(strongest_public_smoke, strongest_shared_smoke) >= disagreement["smoke_external_support_threshold"]
+    ):
         contributions.append(
             make_evidence_contribution(
                 contribution_id="smoke_disagreement_gate",
@@ -787,11 +801,15 @@ def build_evidence_contributions(
                 role="limitation",
                 summary="Regional or neighborhood smoke context is stronger than the local node trend, so the estimate remains conservative.",
                 hazards=["smoke"],
-                weight=0.5,
+                weight=disagreement["weight"],
             )
         )
 
-    if temperature_c is not None and temperature_c < 24 and max(strongest_public_heat, strongest_shared_heat) >= 0.3:
+    if (
+        temperature_c is not None
+        and temperature_c < disagreement["heat_local_cool_max_temp_c"]
+        and max(strongest_public_heat, strongest_shared_heat) >= disagreement["heat_external_support_threshold"]
+    ):
         contributions.append(
             make_evidence_contribution(
                 contribution_id="heat_disagreement_gate",
@@ -800,7 +818,7 @@ def build_evidence_contributions(
                 role="limitation",
                 summary="Regional or neighborhood heat context is stronger than the local node reading, so parcel heat interpretation remains cautious.",
                 hazards=["heat"],
-                weight=0.5,
+                weight=disagreement["weight"],
             )
         )
 

@@ -60,6 +60,7 @@ Expected engine behavior:
 - avoid emitting language that implies emergency authorization or guaranteed safety
 - downgrade or ignore stale public context according to a defined freshness policy
 - read hazard thresholds from versioned configuration where practical
+- read trust gates for stale-data suppression, low-confidence limits, and disagreement handling from versioned configuration where practical
 
 ## Open questions
 
