@@ -30,6 +30,9 @@ Program-level system narrative and top-level operating model.
 - `sensor-placement-and-representativeness-guide.md` defines how siting affects confidence and observability.
 - `data-rights-and-participant-controls-ux-outline.md` defines the participant-facing control model.
 - `network-effect-measurement-methodology.md` defines how to test whether nearby participation really improves the product.
+- `multi-unit-building-operating-model.md` extends the operating model to apartments, condos, and shared buildings.
+- `resilience-hub-operating-model.md` defines how community hubs fit into the network.
+- `household-recommendation-catalog.md` inventories candidate household action guidance.
 - Root-level canonical overview files still contain additional program framing and should be reconciled here over time.
 
 ## Related workstreams
@@ -42,7 +45,6 @@ Program-level system narrative and top-level operating model.
 
 ## Next docs to add
 
-- multi-unit building operating model
-- resilience-hub operating model
 - public and partner data export posture
-- household recommendation catalog
+- operator dashboard posture
+- community incident workflow model
