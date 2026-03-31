@@ -1,0 +1,239 @@
+// Bench air node packet emitter for ESP32-S3.
+// Uses SHT45 and BME680 over I2C on GPIO8/GPIO9 and prints one
+// JSON packet per line for local ingest validation.
+
+#include <Wire.h>
+#include <Adafruit_BME680.h>
+#include <Adafruit_SHT4x.h>
+#include <Adafruit_Sensor.h>
+
+static const char* kSchemaVersion = "rhi.bench-air.v1";
+static const char* kNodeId = "bench-air-01";
+static const char* kFirmwareVersion = "0.1.0";
+static const char* kLocationMode = "indoor";
+static const char* kObservedAtPlaceholder = "1970-01-01T00:00:00Z";
+
+static const int kI2cSdaPin = 8;
+static const int kI2cSclPin = 9;
+static const unsigned long kSampleIntervalMs = 5000;
+static const uint8_t kBme680Addresses[] = {0x77, 0x76};
+
+struct Sht45Reading {
+  bool present;
+  float temperature_c;
+  float relative_humidity_pct;
+};
+
+struct Bme680Reading {
+  bool present;
+  float temperature_c;
+  float relative_humidity_pct;
+  float pressure_hpa;
+  float gas_resistance_ohm;
+};
+
+unsigned long last_sample_ms = 0;
+unsigned long read_failures_total = 0;
+bool sht45_present = false;
+bool bme680_present = false;
+uint8_t bme680_address = 0;
+String last_error = "boot";
+
+Adafruit_SHT4x sht4 = Adafruit_SHT4x();
+Adafruit_BME680 bme680;
+
+Sht45Reading readSht45() {
+  Sht45Reading reading;
+  reading.present = false;
+  reading.temperature_c = 0.0f;
+  reading.relative_humidity_pct = 0.0f;
+
+  if (!sht45_present) {
+    return reading;
+  }
+
+  sensors_event_t humidity_event;
+  sensors_event_t temperature_event;
+  sht4.getEvent(&humidity_event, &temperature_event);
+
+  if (isnan(temperature_event.temperature) || isnan(humidity_event.relative_humidity)) {
+    last_error = "sht45_read_failed";
+    return reading;
+  }
+
+  reading.present = true;
+  reading.temperature_c = temperature_event.temperature;
+  reading.relative_humidity_pct = humidity_event.relative_humidity;
+  return reading;
+}
+
+Bme680Reading readBme680() {
+  Bme680Reading reading;
+  reading.present = false;
+  reading.temperature_c = 0.0f;
+  reading.relative_humidity_pct = 0.0f;
+  reading.pressure_hpa = 0.0f;
+  reading.gas_resistance_ohm = 0.0f;
+
+  if (!bme680_present) {
+    return reading;
+  }
+
+  if (!bme680.performReading()) {
+    last_error = "bme680_read_failed";
+    return reading;
+  }
+
+  reading.present = true;
+  reading.temperature_c = bme680.temperature;
+  reading.relative_humidity_pct = bme680.humidity;
+  reading.pressure_hpa = bme680.pressure / 100.0f;
+  reading.gas_resistance_ohm = bme680.gas_resistance;
+  return reading;
+}
+
+void printFloat(float value, int digits = 1) {
+  Serial.print(value, digits);
+}
+
+void printJsonString(const String& value) {
+  Serial.print('"');
+  for (size_t i = 0; i < value.length(); ++i) {
+    char c = value.charAt(i);
+    if (c == '"' || c == '\\') {
+      Serial.print('\\');
+    }
+    Serial.print(c);
+  }
+  Serial.print('"');
+}
+
+void emitPacket(const Sht45Reading& sht45, const Bme680Reading& bme680) {
+  Serial.print("{\"schema_version\":\"");
+  Serial.print(kSchemaVersion);
+  Serial.print("\",\"node_id\":\"");
+  Serial.print(kNodeId);
+  Serial.print("\",\"observed_at\":\"");
+  Serial.print(kObservedAtPlaceholder);
+  Serial.print("\",\"firmware_version\":\"");
+  Serial.print(kFirmwareVersion);
+  Serial.print("\",\"location_mode\":\"");
+  Serial.print(kLocationMode);
+  Serial.print("\",\"sensors\":{\"sht45\":{\"present\":");
+  Serial.print(sht45.present ? "true" : "false");
+  Serial.print(",\"temperature_c\":");
+  printFloat(sht45.temperature_c);
+  Serial.print(",\"relative_humidity_pct\":");
+  printFloat(sht45.relative_humidity_pct);
+  Serial.print("},\"bme680\":{\"present\":");
+  Serial.print(bme680.present ? "true" : "false");
+  Serial.print(",\"temperature_c\":");
+  printFloat(bme680.temperature_c);
+  Serial.print(",\"relative_humidity_pct\":");
+  printFloat(bme680.relative_humidity_pct);
+  Serial.print(",\"pressure_hpa\":");
+  printFloat(bme680.pressure_hpa);
+  Serial.print(",\"gas_resistance_ohm\":");
+  printFloat(bme680.gas_resistance_ohm, 0);
+  Serial.print("}},\"derived\":{\"temperature_c_primary\":");
+  printFloat(sht45.temperature_c);
+  Serial.print(",\"relative_humidity_pct_primary\":");
+  printFloat(sht45.relative_humidity_pct);
+  Serial.print(",\"pressure_hpa\":");
+  printFloat(bme680.pressure_hpa);
+  Serial.print(",\"voc_trend_source\":\"gas_resistance_ohm\"},\"health\":{\"uptime_s\":");
+  Serial.print(millis() / 1000UL);
+  Serial.print(",\"wifi_connected\":false,\"free_heap_bytes\":");
+#ifdef ESP32
+  Serial.print(ESP.getFreeHeap());
+#else
+  Serial.print(0);
+#endif
+  Serial.print(",\"read_failures_total\":");
+  Serial.print(read_failures_total);
+  Serial.print(",\"last_error\":");
+  if (last_error.length() == 0) {
+    Serial.print("null");
+  } else {
+    printJsonString(last_error);
+  }
+  Serial.print("}}");
+  Serial.println();
+}
+
+bool beginBme680() {
+  for (size_t i = 0; i < sizeof(kBme680Addresses) / sizeof(kBme680Addresses[0]); ++i) {
+    uint8_t candidate = kBme680Addresses[i];
+    if (bme680.begin(candidate, &Wire)) {
+      bme680_address = candidate;
+      bme680.setTemperatureOversampling(BME68X_OS_8X);
+      bme680.setHumidityOversampling(BME68X_OS_2X);
+      bme680.setPressureOversampling(BME68X_OS_4X);
+      bme680.setIIRFilterSize(BME68X_FILTER_SIZE_3);
+      bme680.setGasHeater(320, 150);
+      return true;
+    }
+  }
+  return false;
+}
+
+void setup() {
+  Serial.begin(115200);
+  delay(250);
+  Wire.begin(kI2cSdaPin, kI2cSclPin);
+
+  Serial.println("# bench_air_node_serial_json");
+  Serial.print("# I2C pin plan: SDA=GPIO");
+  Serial.print(kI2cSdaPin);
+  Serial.print(" SCL=GPIO");
+  Serial.println(kI2cSclPin);
+  Serial.println("# using Adafruit SHT4x and BME680 libraries");
+
+  sht45_present = sht4.begin(&Wire);
+  if (sht45_present) {
+    sht4.setPrecision(SHT4X_HIGH_PRECISION);
+    sht4.setHeater(SHT4X_NO_HEATER);
+    Serial.println("# SHT45 detected");
+  } else {
+    last_error = "sht45_init_failed";
+    Serial.println("# SHT45 not detected");
+  }
+
+  bme680_present = beginBme680();
+  if (bme680_present) {
+    Serial.print("# BME680 detected at 0x");
+    if (bme680_address < 16) {
+      Serial.print('0');
+    }
+    Serial.println(bme680_address, HEX);
+    if (last_error == "sht45_init_failed") {
+      // Keep the earlier init error if SHT45 is still missing.
+    } else {
+      last_error = "";
+    }
+  } else {
+    last_error = "bme680_init_failed";
+    Serial.println("# BME680 not detected");
+  }
+}
+
+void loop() {
+  unsigned long now = millis();
+  if (now - last_sample_ms < kSampleIntervalMs) {
+    delay(50);
+    return;
+  }
+
+  last_sample_ms = now;
+
+  Sht45Reading sht45 = readSht45();
+  Bme680Reading bme680 = readBme680();
+
+  if (!sht45.present || !bme680.present) {
+    read_failures_total++;
+  } else if (last_error == "sht45_read_failed" || last_error == "bme680_read_failed") {
+    last_error = "";
+  }
+
+  emitPacket(sht45, bme680);
+}

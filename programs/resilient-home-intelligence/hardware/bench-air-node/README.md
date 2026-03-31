@@ -29,7 +29,7 @@ The bench air node is an evidence producer, not a parcel-state engine. Its respo
 
 - ESP32-S3 development board
 - SHT45 breakout
-- BME688 breakout
+- BME680 breakout
 - USB power
 - indoor or sheltered testing
 - shared I2C bus
@@ -55,7 +55,7 @@ The bench air node is an evidence producer, not a parcel-state engine. Its respo
 
 ## Risks and constraints
 
-- The BME688 gas resistance value is useful for trend detection, not as a direct pollutant concentration.
+- The BME680 gas resistance value is useful for trend detection, not as a direct pollutant concentration.
 - Indoor placement can be biased by HVAC vents, kitchens, bathrooms, or direct sun through windows.
 - USB power keeps the build simple but does not represent the power constraints of outdoor nodes.
 - I2C wiring is fine for a bench prototype but should stay short and tidy to avoid intermittent read errors.
@@ -67,6 +67,7 @@ The bench air node is an evidence producer, not a parcel-state engine. Its respo
 - procurement and BOM
 - documentation templates
 - basic ingest path on the software side
+- serial JSON contract for first-build bring-up
 
 ## Next milestones
 
@@ -79,3 +80,11 @@ The bench air node is an evidence producer, not a parcel-state engine. Its respo
 ## Open questions
 
 See `open-questions.md` for unresolved decisions on enclosure, long-term drift handling, and whether this node should emit any local anomaly scoring.
+
+## Key docs
+
+- `build-guide.md`
+- `wiring.md`
+- `firmware-notes.md`
+- `serial-json-contract.md`
+- `firmware/README.md`

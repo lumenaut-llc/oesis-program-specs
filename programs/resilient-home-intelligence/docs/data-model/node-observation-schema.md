@@ -48,7 +48,7 @@ Example packet:
       "temperature_c": 23.4,
       "relative_humidity_pct": 41.8
     },
-    "bme688": {
+    "bme680": {
       "present": true,
       "temperature_c": 24.1,
       "relative_humidity_pct": 40.9,
