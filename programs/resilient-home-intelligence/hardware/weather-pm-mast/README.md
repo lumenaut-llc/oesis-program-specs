@@ -2,26 +2,63 @@
 
 ## What it is
 
-A more complete parcel mast that adds particulate sensing and local weather mechanics.
+A more complete parcel mast that adds particulate sensing and first local weather mechanics on top of the simpler outdoor node pattern.
+
+## Why it matters
+
+This node is the bridge from basic parcel-edge weather evidence into richer smoke and storm context. It lets the project validate:
+- particulate sensing on the parcel
+- mast wiring and enclosure discipline
+- packet growth beyond the simpler environmental nodes
+- maintenance expectations for exposed outdoor hardware
+- first local weather-mechanics evidence before a fully mature field station
 
 ## Standalone value
 
-This subsystem should be buildable and useful even if the full neighborhood platform does not exist yet.
+Even without neighborhood sharing, this subsystem gives a parcel owner useful local conditions:
+- PM1/2.5/4/10 trend visibility
+- local weather context for smoke and storm interpretation
+- a mast platform that can grow from a simpler PM-first build into a fuller outdoor station
+- operational lessons for maintenance, cleaning, and weather exposure
 
 ## Scope for current version
 
+- ESP32-S3 development board
+- SHT45 in radiation shield
+- BME680
 - SPS30
-- wind speed
-- wind direction
-- rainfall
 - mast hardware
+- vented outdoor enclosure
+- optional wind speed, wind direction, and rainfall after the PM-first build is stable
+- JSON packet output over serial and/or Wi-Fi
+
+## Inputs
+
+- ambient sheltered or mast-mounted outdoor air
+- particulate counts and mass trends from the SPS30
+- local time or monotonic uptime from firmware
+- device identity and firmware version
+- optional Wi-Fi credentials if packets are forwarded upstream or used for time sync
 
 ## Intended outputs
 
 - PM1/2.5/4/10
-- wind
-- rain
+- temperature
+- humidity
+- pressure
+- VOC/gas trend
+- optional wind
+- optional rain
+- node health
+- packet freshness timestamp
 - environmental context for smoke and storm logic
+
+## Risks and constraints
+
+- PM sensors add airflow, contamination, and maintenance concerns that simpler nodes do not have.
+- Direct rain, splash, and dust loading can degrade both survivability and data quality quickly.
+- Wind and rain mechanics should not be treated as solved in the first PM-first build unless they are actually instrumented and calibrated.
+- This node should publish evidence with uncertainty, not parcel hazard claims.
 
 ## Dependencies
 
@@ -29,17 +66,25 @@ This subsystem should be buildable and useful even if the full neighborhood plat
 - procurement and BOM
 - documentation templates
 - basic ingest path on the software side
+- mast-lite learnings for outdoor enclosure and siting
+- serial JSON contract for first-build bring-up
 
-## Build docs to create
+## Next milestones
+
+- prove a PM-first mast build with stable packet output
+- add wind and rain mechanics only after the PM/environment core is stable
+- define maintenance and cleaning cadence for SPS30
+- integrate the richer evidence stream into parcel inference
+
+## Open questions
+
+See `open-questions.md` for unresolved decisions on PM-first versus full weather-first scope, mast mechanics sequencing, and field maintenance expectations.
+
+## Key docs
 
 - `build-guide.md`
 - `wiring.md`
 - `firmware-notes.md`
-- `calibration.md`
-- `open-questions.md`
-
-## Next milestones
-
-- field stability testing
-- maintenance plan
-- integration with parcel inference
+- `serial-json-contract.md`
+- `operator-runbook.md`
+- `firmware/README.md`
