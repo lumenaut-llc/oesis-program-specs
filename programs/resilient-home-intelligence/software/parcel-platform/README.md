@@ -37,3 +37,5 @@ The first version should do a small number of things well:
 ## Implementation scaffold
 
 The first executable parcel-platform reference lives in `scripts/format_parcel_view.py`. It reads a parcel-state snapshot and emits the homeowner-facing response shape described in `interfaces.md`.
+
+For a full demo across the current reference stack, use `scripts/reference_pipeline.py`. It runs the raw packet through normalization, inference, and parcel formatting in one command.

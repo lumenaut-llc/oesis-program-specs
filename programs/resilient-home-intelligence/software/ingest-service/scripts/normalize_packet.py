@@ -23,9 +23,14 @@ def make_ref(prefix: str) -> str:
     return f"{prefix}_{uuid.uuid4().hex[:12]}"
 
 
+def get_bme_payload(sensors: dict) -> dict:
+    return sensors.get("bme688") or sensors.get("bme680") or {}
+
+
 def build_values(payload: dict) -> dict:
     sensors = payload["sensors"]
     derived = deepcopy(payload.get("derived", {}))
+    bme_payload = get_bme_payload(sensors)
 
     values = {}
     if "temperature_c_primary" in derived:
@@ -40,11 +45,11 @@ def build_values(payload: dict) -> dict:
 
     if "pressure_hpa" in derived:
         values["pressure_hpa"] = derived["pressure_hpa"]
-    elif sensors.get("bme680", {}).get("present"):
-        values["pressure_hpa"] = sensors["bme680"]["pressure_hpa"]
+    elif bme_payload.get("present"):
+        values["pressure_hpa"] = bme_payload["pressure_hpa"]
 
-    if sensors.get("bme680", {}).get("present"):
-        values["gas_resistance_ohm"] = sensors["bme680"]["gas_resistance_ohm"]
+    if bme_payload.get("present"):
+        values["gas_resistance_ohm"] = bme_payload["gas_resistance_ohm"]
 
     if "voc_trend_source" in derived:
         values["voc_trend_source"] = derived["voc_trend_source"]
