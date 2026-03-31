@@ -67,6 +67,8 @@ Build a USB-powered indoor air node around an ESP32-S3 DevKitC-1 with one SHT45 
 8. If Wi-Fi transport is enabled, keep serial logging on until the ingest path is stable.
 9. Store firmware version, board type, and sensor presence in every boot log and periodic health message.
 
+The exact first-build serial payload target is defined in `serial-json-contract.md`.
+
 ## First test procedure
 
 1. With only the SHT45 connected, boot the node and confirm the scanner detects `0x44`.
@@ -109,4 +111,5 @@ This version is for indoor or sheltered testing only. If it is used on a porch o
 - `README.md`
 - `wiring.md`
 - `firmware-notes.md`
+- `serial-json-contract.md`
 - `calibration.md`

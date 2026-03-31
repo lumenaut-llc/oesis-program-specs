@@ -67,6 +67,7 @@ The bench air node is an evidence producer, not a parcel-state engine. Its respo
 - procurement and BOM
 - documentation templates
 - basic ingest path on the software side
+- serial JSON contract for first-build bring-up
 
 ## Next milestones
 
@@ -79,3 +80,10 @@ The bench air node is an evidence producer, not a parcel-state engine. Its respo
 ## Open questions
 
 See `open-questions.md` for unresolved decisions on enclosure, long-term drift handling, and whether this node should emit any local anomaly scoring.
+
+## Key docs
+
+- `build-guide.md`
+- `wiring.md`
+- `firmware-notes.md`
+- `serial-json-contract.md`

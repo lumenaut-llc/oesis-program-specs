@@ -59,6 +59,17 @@ Suggested MVP packet:
 
 This packet is intentionally evidence-oriented. It does not attempt to emit `stay_status`, `enter_status`, or other parcel-state fields directly.
 
+## First-build serial target
+
+During bring-up, the node should emit one complete JSON packet per serial line at `115200`. The exact line-oriented payload target is documented in `serial-json-contract.md`.
+
+Practical first-build rules:
+
+- do not mix JSON and human-readable debug text on the same line
+- set `wifi_connected` to `false` during serial-only bring-up
+- prefer the SHT45 for `temperature_c_primary` and `relative_humidity_pct_primary`
+- include the `bme680` object only when the sensor is actually present and readable
+
 ## Error handling
 
 - if one sensor fails, continue publishing the remaining sensor data with explicit presence and error fields

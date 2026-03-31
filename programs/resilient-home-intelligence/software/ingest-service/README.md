@@ -39,6 +39,8 @@ The first executable contract check lives in `scripts/validate_examples.py`. It 
 
 The next reference scaffold is `scripts/normalize_packet.py`. It reads a node packet, performs the same lightweight validation assumptions as the validator, and emits a normalized observation object shaped for the inference engine boundary.
 
+`scripts/ingest_packet.py` is the simplest local end-to-end entrypoint for bench bring-up. It accepts a packet from a file or stdin, validates it, and prints the normalized observation.
+
 ## Local smoke-test path
 
 From `repo/programs/resilient-home-intelligence/software/ingest-service/`:
@@ -48,3 +50,13 @@ From `repo/programs/resilient-home-intelligence/software/ingest-service/`:
 3. Inspect the emitted normalized observation and confirm the raw packet includes `sht45` and `bme680`
 
 This gives the firmware bring-up work a stable local target before any HTTP service, Wi-Fi transport, or persistent storage is introduced.
+
+## Firmware handoff path
+
+When the ESP32 starts emitting serial JSON:
+
+1. Copy one packet line into `packet.json`
+2. Run `python3 scripts/ingest_packet.py packet.json`
+3. Confirm the packet validates and normalizes cleanly
+
+The expected first-build serial payload shape is documented in `../../hardware/bench-air-node/serial-json-contract.md`.
