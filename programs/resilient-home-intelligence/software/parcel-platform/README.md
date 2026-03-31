@@ -33,3 +33,7 @@ The first version should do a small number of things well:
 - ingest service and node schemas shape the evidence references exposed here
 - privacy and governance rules constrain what neighborhood or external context can be shown
 - shared-map may later consume summarized parcel outputs, but the parcel platform stays parcel-first
+
+## Implementation scaffold
+
+The first executable parcel-platform reference lives in `scripts/format_parcel_view.py`. It reads a parcel-state snapshot and emits the homeowner-facing response shape described in `interfaces.md`.
