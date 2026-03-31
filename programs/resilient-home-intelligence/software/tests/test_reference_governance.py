@@ -20,12 +20,14 @@ def load_module(name: str, path: Path):
 
 
 sys.path.insert(0, str(PARCEL_SCRIPT_DIR))
+sys.path.insert(0, str(SHARED_SCRIPT_DIR))
 
 format_parcel_view = load_module("format_parcel_view", PARCEL_SCRIPT_DIR / "format_parcel_view.py")
 format_evidence_summary = load_module("format_evidence_summary", PARCEL_SCRIPT_DIR / "format_evidence_summary.py")
 serve_parcel_api = load_module("serve_parcel_api", PARCEL_SCRIPT_DIR / "serve_parcel_api.py")
 summarize_reference_state = load_module("summarize_reference_state", PARCEL_SCRIPT_DIR / "summarize_reference_state.py")
 aggregate_shared_map = load_module("aggregate_shared_map", SHARED_SCRIPT_DIR / "aggregate_shared_map.py")
+serve_shared_map_api = load_module("serve_shared_map_api", SHARED_SCRIPT_DIR / "serve_shared_map_api.py")
 run_retention_cleanup = load_module("run_retention_cleanup", PARCEL_SCRIPT_DIR / "run_retention_cleanup.py")
 
 
@@ -75,6 +77,27 @@ class ReferenceGovernanceTests(unittest.TestCase):
             )
             self.assertEqual(visible["cells"][0]["shared_signal_status"], "visible")
             self.assertEqual(visible["cells"][0]["shared_participant_count"], 2)
+
+    def test_shared_map_inspection_summarizes_visible_and_suppressed_cells(self):
+        inspection = serve_shared_map_api.build_shared_map_inspection(
+            self.shared_signal,
+            sharing_store=self.sharing_store_seed,
+        )
+        self.assertIn("shared_map", inspection)
+        self.assertIn("inspection", inspection)
+        self.assertEqual(inspection["inspection"]["cell_count"], 1)
+        self.assertEqual(inspection["inspection"]["suppressed_cell_count"], 1)
+        self.assertEqual(inspection["inspection"]["visible_cell_count"], 0)
+        self.assertEqual(inspection["inspection"]["eligible_shared_ref_count"], 1)
+
+    def test_shared_map_handler_loads_configured_sharing_store(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            sharing_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+            serve_shared_map_api.SharedMapRequestHandler.sharing_store_path = sharing_path
+            handler = serve_shared_map_api.SharedMapRequestHandler.__new__(serve_shared_map_api.SharedMapRequestHandler)
+            configured = handler._configured_sharing_store()
+            self.assertEqual(configured["parcels"][0]["parcel_id"], "parcel_001")
 
     def test_rights_requests_and_access_events_are_persisted_and_summarized(self):
         with tempfile.TemporaryDirectory() as tmpdir:
