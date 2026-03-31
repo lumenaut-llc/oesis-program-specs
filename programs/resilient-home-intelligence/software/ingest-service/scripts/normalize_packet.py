@@ -40,11 +40,11 @@ def build_values(payload: dict) -> dict:
 
     if "pressure_hpa" in derived:
         values["pressure_hpa"] = derived["pressure_hpa"]
-    elif sensors.get("bme688", {}).get("present"):
-        values["pressure_hpa"] = sensors["bme688"]["pressure_hpa"]
+    elif sensors.get("bme680", {}).get("present"):
+        values["pressure_hpa"] = sensors["bme680"]["pressure_hpa"]
 
-    if sensors.get("bme688", {}).get("present"):
-        values["gas_resistance_ohm"] = sensors["bme688"]["gas_resistance_ohm"]
+    if sensors.get("bme680", {}).get("present"):
+        values["gas_resistance_ohm"] = sensors["bme680"]["gas_resistance_ohm"]
 
     if "voc_trend_source" in derived:
         values["voc_trend_source"] = derived["voc_trend_source"]

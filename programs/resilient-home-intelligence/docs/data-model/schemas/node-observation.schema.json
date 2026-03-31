@@ -41,15 +41,15 @@
       "type": "object",
       "required": [
         "sht45",
-        "bme688"
+        "bme680"
       ],
       "additionalProperties": false,
       "properties": {
         "sht45": {
           "$ref": "#/$defs/sht45Reading"
         },
-        "bme688": {
-          "$ref": "#/$defs/bme688Reading"
+        "bme680": {
+          "$ref": "#/$defs/bme680Reading"
         }
       }
     },
@@ -129,7 +129,7 @@
         }
       }
     },
-    "bme688Reading": {
+    "bme680Reading": {
       "type": "object",
       "required": [
         "present",

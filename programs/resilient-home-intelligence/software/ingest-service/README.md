@@ -38,3 +38,13 @@ The first executable contract check lives in `scripts/validate_examples.py`. It 
 - parcel-state snapshots
 
 The next reference scaffold is `scripts/normalize_packet.py`. It reads a node packet, performs the same lightweight validation assumptions as the validator, and emits a normalized observation object shaped for the inference engine boundary.
+
+## Local smoke-test path
+
+From `repo/programs/resilient-home-intelligence/software/ingest-service/`:
+
+1. Run `python3 scripts/validate_examples.py`
+2. Run `python3 scripts/normalize_packet.py`
+3. Inspect the emitted normalized observation and confirm the raw packet includes `sht45` and `bme680`
+
+This gives the firmware bring-up work a stable local target before any HTTP service, Wi-Fi transport, or persistent storage is introduced.

@@ -59,7 +59,7 @@ def validate_node_observation(payload):
 
     sensors = payload["sensors"]
     require_type(sensors, dict, "sensors")
-    for sensor_name in ("sht45", "bme688"):
+    for sensor_name in ("sht45", "bme680"):
         require(sensor_name in sensors, f"sensors missing {sensor_name}")
 
     sht45 = sensors["sht45"]
@@ -68,13 +68,13 @@ def validate_node_observation(payload):
     require_number(sht45["temperature_c"], "sensors.sht45.temperature_c")
     require_number(sht45["relative_humidity_pct"], "sensors.sht45.relative_humidity_pct", 0, 100)
 
-    bme688 = sensors["bme688"]
-    require_type(bme688, dict, "sensors.bme688")
-    require_type(bme688["present"], bool, "sensors.bme688.present")
-    require_number(bme688["temperature_c"], "sensors.bme688.temperature_c")
-    require_number(bme688["relative_humidity_pct"], "sensors.bme688.relative_humidity_pct", 0, 100)
-    require_number(bme688["pressure_hpa"], "sensors.bme688.pressure_hpa")
-    require_number(bme688["gas_resistance_ohm"], "sensors.bme688.gas_resistance_ohm", exclusive_minimum=0)
+    bme680 = sensors["bme680"]
+    require_type(bme680, dict, "sensors.bme680")
+    require_type(bme680["present"], bool, "sensors.bme680.present")
+    require_number(bme680["temperature_c"], "sensors.bme680.temperature_c")
+    require_number(bme680["relative_humidity_pct"], "sensors.bme680.relative_humidity_pct", 0, 100)
+    require_number(bme680["pressure_hpa"], "sensors.bme680.pressure_hpa")
+    require_number(bme680["gas_resistance_ohm"], "sensors.bme680.gas_resistance_ohm", exclusive_minimum=0)
 
     health = payload["health"]
     require_type(health, dict, "health")

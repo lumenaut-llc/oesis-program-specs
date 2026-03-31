@@ -3,7 +3,7 @@
 ## Responsibilities
 
 - boot reliably and identify installed sensors
-- sample SHT45 and BME688 on a predictable cadence
+- sample SHT45 and BME680 on a predictable cadence
 - emit timestamped JSON packets with node metadata
 - surface health telemetry and read failures without hiding them
 - stay simple enough to port later into `mast-lite`
@@ -14,7 +14,7 @@
 - quiet long-run mode: every 60 seconds
 - warm-up period: discard or flag the first 2 to 5 samples after boot
 
-Gas resistance should be treated as a trend signal, so downstream consumers should look at deltas and rolling windows rather than any single reading.
+Bring-up firmware should use `GPIO8` for `SDA` and `GPIO9` for `SCL`, matching the bench wiring docs. Gas resistance should be treated as a trend signal, so downstream consumers should look at deltas and rolling windows rather than any single reading.
 
 ## Packet shape
 
@@ -33,7 +33,7 @@ Suggested MVP packet:
       "temperature_c": 23.4,
       "relative_humidity_pct": 41.8
     },
-    "bme688": {
+    "bme680": {
       "present": true,
       "temperature_c": 24.1,
       "relative_humidity_pct": 40.9,
@@ -62,6 +62,7 @@ This packet is intentionally evidence-oriented. It does not attempt to emit `sta
 ## Error handling
 
 - if one sensor fails, continue publishing the remaining sensor data with explicit presence and error fields
+- during first-build bring-up, fail fast in scanner and bench-test sketches rather than hiding missing devices
 - count consecutive read failures per sensor
 - trigger a soft restart only after a defined failure threshold, not on a single bad read
 - never silently substitute stale values for fresh reads
