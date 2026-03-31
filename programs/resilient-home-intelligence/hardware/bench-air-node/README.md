@@ -87,3 +87,4 @@ See `open-questions.md` for unresolved decisions on enclosure, long-term drift h
 - `wiring.md`
 - `firmware-notes.md`
 - `serial-json-contract.md`
+- `firmware/README.md`

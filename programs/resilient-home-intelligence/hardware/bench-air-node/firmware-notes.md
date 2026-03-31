@@ -57,7 +57,7 @@ Suggested MVP packet:
 }
 ```
 
-This packet is intentionally evidence-oriented. It does not attempt to emit `stay_status`, `enter_status`, or other parcel-state fields directly.
+This packet is intentionally evidence-oriented. It does not attempt to emit `shelter_status`, `reentry_status`, or other parcel-state fields directly.
 
 ## First-build serial target
 
@@ -69,6 +69,8 @@ Practical first-build rules:
 - set `wifi_connected` to `false` during serial-only bring-up
 - prefer the SHT45 for `temperature_c_primary` and `relative_humidity_pct_primary`
 - include the `bme680` object only when the sensor is actually present and readable
+
+The first firmware scaffold for this contract lives in `firmware/bench_air_node_serial_json/bench_air_node_serial_json.ino`.
 
 ## Error handling
 

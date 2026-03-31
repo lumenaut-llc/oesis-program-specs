@@ -68,6 +68,7 @@ Build a USB-powered indoor air node around an ESP32-S3 DevKitC-1 with one SHT45 
 9. Store firmware version, board type, and sensor presence in every boot log and periodic health message.
 
 The exact first-build serial payload target is defined in `serial-json-contract.md`.
+The first firmware scaffold lives in `firmware/bench_air_node_serial_json/bench_air_node_serial_json.ino`.
 
 ## First test procedure
 
@@ -112,4 +113,5 @@ This version is for indoor or sheltered testing only. If it is used on a porch o
 - `wiring.md`
 - `firmware-notes.md`
 - `serial-json-contract.md`
+- `firmware/README.md`
 - `calibration.md`
