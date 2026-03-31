@@ -4,14 +4,14 @@ This repository is the first-pass scaffold for the Resilient Home Intelligence p
 
 ## Purpose
 
-Resilient Home Intelligence is a modular, homeowner-owned environmental sensing and parcel-safety initiative. It combines:
+Resilient Home Intelligence is a modular, homeowner-owned environmental sensing and parcel-awareness initiative. It combines:
 - physical sensor builds
 - parcel-level software
 - neighborhood inference
 - privacy/governance rules
 - documentation and pilot playbooks
 
-The system is designed so each parcel can receive a status even with partial sensor adoption. More participating nodes improve precision and confidence, but they do not unlock basic functionality.
+The system is designed so each parcel can receive parcel-level condition estimates even with partial sensor adoption. More participating nodes can improve precision and confidence, but they do not unlock basic functionality.
 
 ## Core principles
 
@@ -32,6 +32,8 @@ The system is designed so each parcel can receive a status even with partial sen
 ## Start here
 
 1. Read `programs/resilient-home-intelligence/README.md`
-2. Read `programs/resilient-home-intelligence/docs/system-overview/README.md`
-3. Review the hardware and software subproject READMEs
-4. Use `shared/templates/` when starting a new subsystem or document
+2. Read `NOTICE.md`
+3. Read `programs/resilient-home-intelligence/NOTICE.md`
+4. Read `programs/resilient-home-intelligence/docs/system-overview/README.md`
+5. Review the hardware and software subproject READMEs
+6. Use `shared/templates/` when starting a new subsystem or document

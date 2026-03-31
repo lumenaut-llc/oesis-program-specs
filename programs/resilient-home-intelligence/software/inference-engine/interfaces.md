@@ -9,7 +9,7 @@
 - `POST /v1/inference/recompute/{parcel_id}`
   Trigger an explicit recompute for one parcel.
 - `GET /v1/inference/models`
-  Return active hazard model versions or threshold sets.
+  Return active hazard model versions or threshold sets, including public-context policy versions when applicable.
 
 ## Internal events / jobs
 
@@ -26,6 +26,9 @@
 
 Primary input contract:
 - normalized observation records from `docs/data-model/node-observation-schema.md`
+- optional parcel context records from `docs/data-model/parcel-context-schema.md`
+- optional shared neighborhood signal records from `docs/data-model/schemas/shared-neighborhood-signal.schema.json`
+- optional public context records from `docs/data-model/public-context-schema.md`
 
 Primary output contract:
 - parcel-state snapshot defined in `docs/data-model/parcel-state-schema.md`
@@ -33,12 +36,15 @@ Primary output contract:
 Minimum parcel-state output fields:
 - `parcel_id`
 - `computed_at`
-- `stay_status`
-- `enter_status`
-- `escape_status`
-- `asset_status`
+- `shelter_status`
+- `reentry_status`
+- `egress_status`
+- `asset_risk_status`
 - `confidence`
 - `evidence_mode`
+- `inference_basis`
+- `explanation_payload`
+  Includes weighted `evidence_contributions` that the engine uses to derive UI-facing drivers and limitations.
 - `reasons`
 - `hazards`
 - `freshness`
@@ -49,6 +55,11 @@ Expected engine behavior:
 - score hazards independently before mapping to parcel-state outputs
 - represent stale or missing evidence explicitly in `freshness` and `reasons`
 - preserve traceable links back to the source observations used for a decision
+- preserve traceable links to public context when external evidence contributes to a decision
+- preserve distinctions between local private evidence, shared neighborhood evidence, and public context
+- avoid emitting language that implies emergency authorization or guaranteed safety
+- downgrade or ignore stale public context according to a defined freshness policy
+- read hazard thresholds from versioned configuration where practical
 
 ## Open questions
 

@@ -1,0 +1,330 @@
+import importlib.util
+import json
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+
+PROGRAM_ROOT = Path(__file__).resolve().parents[2]
+DOC_EXAMPLES = PROGRAM_ROOT / "docs" / "data-model" / "examples"
+PARCEL_SCRIPT_DIR = PROGRAM_ROOT / "software" / "parcel-platform" / "scripts"
+SHARED_SCRIPT_DIR = PROGRAM_ROOT / "software" / "shared-map" / "scripts"
+
+
+def load_module(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+sys.path.insert(0, str(PARCEL_SCRIPT_DIR))
+
+format_parcel_view = load_module("format_parcel_view", PARCEL_SCRIPT_DIR / "format_parcel_view.py")
+format_evidence_summary = load_module("format_evidence_summary", PARCEL_SCRIPT_DIR / "format_evidence_summary.py")
+serve_parcel_api = load_module("serve_parcel_api", PARCEL_SCRIPT_DIR / "serve_parcel_api.py")
+summarize_reference_state = load_module("summarize_reference_state", PARCEL_SCRIPT_DIR / "summarize_reference_state.py")
+aggregate_shared_map = load_module("aggregate_shared_map", SHARED_SCRIPT_DIR / "aggregate_shared_map.py")
+run_retention_cleanup = load_module("run_retention_cleanup", PARCEL_SCRIPT_DIR / "run_retention_cleanup.py")
+
+
+class ReferenceGovernanceTests(unittest.TestCase):
+    def setUp(self):
+        self.parcel_state = json.loads((DOC_EXAMPLES / "parcel-state.example.json").read_text(encoding="utf-8"))
+        self.sharing_settings = json.loads((DOC_EXAMPLES / "sharing-settings.example.json").read_text(encoding="utf-8"))
+        self.shared_signal = json.loads((DOC_EXAMPLES / "shared-neighborhood-signal.example.json").read_text(encoding="utf-8"))
+        self.sharing_store_seed = json.loads((DOC_EXAMPLES / "sharing-store.example.json").read_text(encoding="utf-8"))
+        self.rights_store_seed = json.loads((DOC_EXAMPLES / "rights-request-store.example.json").read_text(encoding="utf-8"))
+
+    def test_parcel_view_includes_sharing_summary_and_data_classes(self):
+        view = format_parcel_view.build_parcel_view(self.parcel_state, self.sharing_settings)
+        self.assertIn("sharing_summary", view)
+        self.assertTrue(view["sharing_summary"]["private_only"])
+        self.assertEqual(view["data_classes_visible"], ["private_parcel_data", "derived_parcel_state"])
+
+    def test_evidence_summary_groups_contributions_by_source_class(self):
+        summary = format_evidence_summary.build_evidence_summary(self.parcel_state)
+        self.assertEqual(summary["parcel_id"], "parcel_123")
+        self.assertEqual(summary["confidence_band"], "low")
+        self.assertIn("grouped_contributions", summary)
+        self.assertIn("local", summary["grouped_contributions"])
+        self.assertEqual(summary["grouped_contributions"]["local"][0]["contribution_id"], "local_siting_limit")
+
+    def test_shared_map_uses_store_eligibility(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            store_path = Path(tmpdir) / "sharing-store.json"
+            store_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+
+            initial = aggregate_shared_map.aggregate_shared_map(
+                self.shared_signal,
+                sharing_store=aggregate_shared_map.load_sharing_store(store_path),
+            )
+            self.assertEqual(initial["cells"][0]["shared_signal_status"], "suppressed")
+
+            updated = serve_parcel_api.clone_default_sharing("parcel_002")
+            updated["private_only"] = False
+            updated["neighborhood_aggregate"] = True
+            serve_parcel_api.update_sharing_store(store_path, "parcel_002", updated)
+
+            visible_payload = dict(self.shared_signal)
+            visible_payload["min_participants"] = 2
+            visible = aggregate_shared_map.aggregate_shared_map(
+                visible_payload,
+                sharing_store=aggregate_shared_map.load_sharing_store(store_path),
+            )
+            self.assertEqual(visible["cells"][0]["shared_signal_status"], "visible")
+            self.assertEqual(visible["cells"][0]["shared_participant_count"], 2)
+
+    def test_rights_requests_and_access_events_are_persisted_and_summarized(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            rights_path = Path(tmpdir) / "rights-store.json"
+            access_path = Path(tmpdir) / "access-log.json"
+
+            sharing_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+            rights_path.write_text(json.dumps(self.rights_store_seed), encoding="utf-8")
+            access_path.write_text("[]", encoding="utf-8")
+
+            request = serve_parcel_api.build_rights_request("parcel_001", "delete")
+            serve_parcel_api.append_rights_request(rights_path, request)
+            serve_parcel_api.append_access_event(
+                access_path,
+                actor="parcel-platform-api",
+                action="view_parcel_state",
+                parcel_id="parcel_001",
+                data_classes=["private_parcel_data", "derived_parcel_state"],
+                justification="parcel_view_request",
+            )
+
+            summary = summarize_reference_state.summarize(
+                json.loads(sharing_path.read_text(encoding="utf-8")),
+                json.loads(rights_path.read_text(encoding="utf-8")),
+                json.loads(access_path.read_text(encoding="utf-8")),
+            )
+
+            parcel_summary = summary["parcels"]["parcel_001"]
+            self.assertEqual(len(parcel_summary["rights_requests"]), 2)
+            self.assertEqual(len(parcel_summary["recent_access_events"]), 1)
+            self.assertEqual(parcel_summary["recent_access_events"][0]["action"], "view_parcel_state")
+
+    def test_reference_state_summary_helper_reads_file_backed_stores(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            rights_path = Path(tmpdir) / "rights-store.json"
+            access_path = Path(tmpdir) / "access-log.json"
+
+            sharing_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+            rights_path.write_text(json.dumps(self.rights_store_seed), encoding="utf-8")
+            access_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "event_id": "access_view_parcel_001_1",
+                            "occurred_at": "2026-03-30T20:30:00Z",
+                            "actor": "parcel-platform-api",
+                            "action": "view_parcel_state",
+                            "parcel_id": "parcel_001",
+                            "data_classes": ["private_parcel_data"],
+                            "justification": "parcel_view_request",
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            summary = serve_parcel_api.build_reference_state_summary(
+                sharing_path,
+                rights_path,
+                access_path,
+            )
+
+            self.assertEqual(summary["parcel_count"], 3)
+            self.assertIn("parcel_001", summary["parcels"])
+            self.assertEqual(summary["parcels"]["parcel_001"]["recent_access_events"][0]["action"], "view_parcel_state")
+
+    def test_delete_request_processing_completes_request_and_removes_sharing_state(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            rights_path = Path(tmpdir) / "rights-store.json"
+
+            sharing_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+            rights_store = {
+                "updated_at": "2026-03-30T20:40:00Z",
+                "requests": [
+                    {
+                        "request_id": "rights_delete_parcel_002",
+                        "parcel_id": "parcel_002",
+                        "account_id": "acct_123",
+                        "request_type": "delete",
+                        "status": "submitted",
+                        "created_at": "2026-03-30T20:20:00Z",
+                        "scope": ["private_parcel_data", "derived_parcel_state"],
+                        "requested_from_surface": "parcel_settings_ui",
+                    }
+                ],
+            }
+            rights_path.write_text(json.dumps(rights_store), encoding="utf-8")
+
+            result = serve_parcel_api.process_delete_request(
+                rights_path,
+                sharing_path,
+                "rights_delete_parcel_002",
+            )
+
+            self.assertEqual(result["status"], "completed")
+            updated_rights = json.loads(rights_path.read_text(encoding="utf-8"))
+            self.assertEqual(updated_rights["requests"][0]["status"], "completed")
+
+            updated_sharing = json.loads(sharing_path.read_text(encoding="utf-8"))
+            remaining_ids = [entry["parcel_id"] for entry in updated_sharing["parcels"]]
+            self.assertNotIn("parcel_002", remaining_ids)
+
+    def test_export_request_processing_writes_bundle_and_completes_request(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            rights_path = Path(tmpdir) / "rights-store.json"
+            access_path = Path(tmpdir) / "access-log.json"
+            export_path = Path(tmpdir) / "parcel-export.json"
+            parcel_state_path = Path(tmpdir) / "parcel-state.json"
+
+            sharing_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+            access_path.write_text(json.dumps([json.loads((DOC_EXAMPLES / "operator-access-event.example.json").read_text(encoding="utf-8"))]), encoding="utf-8")
+            parcel_state = dict(self.parcel_state)
+            parcel_state["parcel_id"] = "parcel_001"
+            parcel_state_path.write_text(json.dumps(parcel_state), encoding="utf-8")
+            rights_store = {
+                "updated_at": "2026-03-30T20:40:00Z",
+                "requests": [
+                    {
+                        "request_id": "rights_export_parcel_001",
+                        "parcel_id": "parcel_001",
+                        "account_id": "acct_123",
+                        "request_type": "export",
+                        "status": "submitted",
+                        "created_at": "2026-03-30T20:20:00Z",
+                        "scope": ["private_parcel_data", "derived_parcel_state"],
+                        "requested_from_surface": "parcel_settings_ui",
+                    }
+                ],
+            }
+            rights_path.write_text(json.dumps(rights_store), encoding="utf-8")
+
+            result = serve_parcel_api.process_export_request(
+                rights_path,
+                sharing_path,
+                access_path,
+                "rights_export_parcel_001",
+                export_path,
+                parcel_state_path=parcel_state_path,
+            )
+
+            self.assertEqual(result["status"], "completed")
+            bundle = json.loads(export_path.read_text(encoding="utf-8"))
+            self.assertEqual(bundle["parcel_id"], "parcel_001")
+            self.assertIsNotNone(bundle["sharing"])
+            self.assertEqual(bundle["parcel_state"]["parcel_id"], "parcel_001")
+            updated_rights = json.loads(rights_path.read_text(encoding="utf-8"))
+            self.assertEqual(updated_rights["requests"][0]["status"], "completed")
+
+    def test_export_request_processing_uses_completed_status_inside_bundle(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            rights_path = Path(tmpdir) / "rights-store.json"
+            access_path = Path(tmpdir) / "access-log.json"
+            export_path = Path(tmpdir) / "parcel-export.json"
+
+            sharing_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+            access_path.write_text("[]", encoding="utf-8")
+            rights_store = {
+                "updated_at": "2026-03-30T20:40:00Z",
+                "requests": [
+                    {
+                        "request_id": "rights_export_parcel_001",
+                        "parcel_id": "parcel_001",
+                        "account_id": "acct_123",
+                        "request_type": "export",
+                        "status": "submitted",
+                        "created_at": "2026-03-30T20:20:00Z",
+                        "scope": ["private_parcel_data", "derived_parcel_state"],
+                        "requested_from_surface": "parcel_settings_ui",
+                    }
+                ],
+            }
+            rights_path.write_text(json.dumps(rights_store), encoding="utf-8")
+
+            serve_parcel_api.process_export_request(
+                rights_path,
+                sharing_path,
+                access_path,
+                "rights_export_parcel_001",
+                export_path,
+            )
+
+            bundle = json.loads(export_path.read_text(encoding="utf-8"))
+            self.assertEqual(bundle["rights_requests"][0]["status"], "completed")
+
+    def test_retention_cleanup_prunes_old_access_and_completed_export_requests(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            rights_path = Path(tmpdir) / "rights-store.json"
+            access_path = Path(tmpdir) / "access-log.json"
+
+            rights_store = {
+                "updated_at": "2026-03-30T20:40:00Z",
+                "requests": [
+                    {
+                        "request_id": "rights_export_old",
+                        "parcel_id": "parcel_001",
+                        "account_id": "acct_123",
+                        "request_type": "export",
+                        "status": "completed",
+                        "created_at": "2026-01-01T00:00:00Z",
+                        "scope": ["private_parcel_data"],
+                        "requested_from_surface": "parcel_settings_ui",
+                    },
+                    {
+                        "request_id": "rights_delete_old",
+                        "parcel_id": "parcel_001",
+                        "account_id": "acct_123",
+                        "request_type": "delete",
+                        "status": "completed",
+                        "created_at": "2026-01-01T00:00:00Z",
+                        "scope": ["private_parcel_data"],
+                        "requested_from_surface": "parcel_settings_ui",
+                    },
+                ],
+            }
+            access_log = [
+                {
+                    "event_id": "access_old",
+                    "occurred_at": "2026-01-01T00:00:00Z",
+                    "actor": "parcel-platform-api",
+                    "action": "view_parcel_state",
+                    "parcel_id": "parcel_001",
+                    "data_classes": ["private_parcel_data"],
+                    "justification": "parcel_view_request",
+                }
+            ]
+            rights_path.write_text(json.dumps(rights_store), encoding="utf-8")
+            access_path.write_text(json.dumps(access_log), encoding="utf-8")
+
+            report = run_retention_cleanup.run_cleanup(
+                rights_store_path=rights_path,
+                access_log_path=access_path,
+                retention_days=30,
+            )
+
+            self.assertEqual(report["access_events_removed"], 1)
+            self.assertEqual(report["rights_requests_removed"], 1)
+
+            updated_rights = json.loads(rights_path.read_text(encoding="utf-8"))
+            remaining_ids = [item["request_id"] for item in updated_rights["requests"]]
+            self.assertNotIn("rights_export_old", remaining_ids)
+            self.assertIn("rights_delete_old", remaining_ids)
+
+            updated_access = json.loads(access_path.read_text(encoding="utf-8"))
+            self.assertEqual(updated_access, [])
+
+
+if __name__ == "__main__":
+    unittest.main()

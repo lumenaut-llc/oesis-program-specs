@@ -6,12 +6,14 @@
   "required": [
     "parcel_id",
     "computed_at",
-    "stay_status",
-    "enter_status",
-    "escape_status",
-    "asset_status",
+    "shelter_status",
+    "reentry_status",
+    "egress_status",
+    "asset_risk_status",
     "confidence",
     "evidence_mode",
+    "inference_basis",
+    "explanation_payload",
     "reasons",
     "hazards",
     "freshness",
@@ -27,16 +29,16 @@
       "type": "string",
       "format": "date-time"
     },
-    "stay_status": {
+    "shelter_status": {
       "$ref": "#/$defs/status"
     },
-    "enter_status": {
+    "reentry_status": {
       "$ref": "#/$defs/status"
     },
-    "escape_status": {
+    "egress_status": {
       "$ref": "#/$defs/status"
     },
-    "asset_status": {
+    "asset_risk_status": {
       "$ref": "#/$defs/status"
     },
     "confidence": {
@@ -53,6 +55,19 @@
         "insufficient"
       ]
     },
+    "inference_basis": {
+      "type": "string",
+      "enum": [
+        "local_only",
+        "local_plus_shared",
+        "local_plus_public",
+        "local_plus_shared_plus_public",
+        "public_only",
+        "shared_only",
+        "shared_plus_public",
+        "insufficient"
+      ]
+    },
     "reasons": {
       "type": "array",
       "items": {
@@ -60,6 +75,172 @@
         "minLength": 1
       },
       "minItems": 1
+    },
+    "explanation_payload": {
+      "type": "object",
+      "required": [
+        "headline",
+        "basis",
+        "drivers",
+        "limitations",
+        "evidence_contributions",
+        "source_breakdown"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "headline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": {
+          "type": "object",
+          "required": [
+            "evidence_mode",
+            "inference_basis",
+            "confidence_band"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "evidence_mode": {
+              "type": "string"
+            },
+            "inference_basis": {
+              "type": "string"
+            },
+            "confidence_band": {
+              "type": "string",
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ]
+            }
+          }
+        },
+        "drivers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidence_contributions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "contribution_id",
+              "source_class",
+              "source_name",
+              "role",
+              "summary",
+              "hazards",
+              "weight",
+              "visibility"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "contribution_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_class": {
+                "type": "string",
+                "enum": [
+                  "local",
+                  "shared",
+                  "public",
+                  "parcel_context",
+                  "system"
+                ]
+              },
+              "source_name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "driver",
+                  "limitation"
+                ]
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "hazards": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "smoke",
+                    "flood",
+                    "heat"
+                  ]
+                },
+                "minItems": 1
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "visibility": {
+                "type": "string",
+                "enum": [
+                  "homeowner_safe",
+                  "internal_only"
+                ]
+              },
+              "freshness_band": {
+                "type": "string",
+                "enum": [
+                  "fresh",
+                  "aging",
+                  "stale",
+                  "expired"
+                ]
+              }
+            }
+          }
+        },
+        "source_breakdown": {
+          "type": "object",
+          "required": [
+            "local",
+            "shared",
+            "public",
+            "parcel_context",
+            "system"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "local": {
+              "type": "boolean"
+            },
+            "shared": {
+              "type": "boolean"
+            },
+            "public": {
+              "type": "boolean"
+            },
+            "parcel_context": {
+              "type": "boolean"
+            },
+            "system": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
     },
     "hazards": {
       "type": "object",

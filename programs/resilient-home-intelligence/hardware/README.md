@@ -2,6 +2,8 @@
 
 Hardware subsystems are designed as standalone builds that also become inputs to the broader parcel platform.
 
+Read `NOTICE.md` before treating this subtree as a complete released hardware design package.
+
 ## Design rules
 
 - keep nodes modular

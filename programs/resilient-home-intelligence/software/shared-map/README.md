@@ -10,6 +10,7 @@ The neighborhood condition layer and parcel/cell visualization surface.
 - define outputs
 - define interfaces to adjacent services
 - track unresolved architectural questions
+- provide a coarse aggregation path that suppresses under-threshold shared signals
 
 ## Needs from other workstreams
 

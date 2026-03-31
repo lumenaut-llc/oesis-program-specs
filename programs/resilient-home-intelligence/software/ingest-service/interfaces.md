@@ -28,6 +28,12 @@ Primary MVP contract:
 - `rhi.bench-air.v1`
   Defined in `docs/data-model/node-observation-schema.md`
 
+First external adapter contract:
+- raw public weather payload
+  Normalized by `scripts/normalize_public_weather_context.py` into the canonical public-context object defined in `docs/data-model/public-context-schema.md`
+- raw public smoke payload
+  Normalized by `scripts/normalize_public_smoke_context.py` into the canonical public-context object defined in `docs/data-model/public-context-schema.md`
+
 Expected minimum request body:
 
 ```json
@@ -85,6 +91,16 @@ Normalized observation shape:
 - `health`
 - `provenance`
 - `raw_packet_ref`
+
+First normalized public-context shape:
+- `context_id`
+- `source_kind`
+- `source_name`
+- `observed_at`
+- `coverage_mode`
+- `parcel_id`
+- `hazards`
+- `summary`
 
 ## Open questions
 
