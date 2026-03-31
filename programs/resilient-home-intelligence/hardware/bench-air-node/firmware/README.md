@@ -37,3 +37,5 @@ Install these libraries before compiling the serial JSON sketch:
 - Wi-Fi transport is not enabled
 
 The immediate goal is to prove sensor bring-up, packet shape, and ingest compatibility first. Time sync and network transport can come next.
+
+For the full bench workflow from flash to local ingest validation, use `../operator-runbook.md`.

@@ -60,3 +60,4 @@ When the ESP32 starts emitting serial JSON:
 3. Confirm the packet validates and normalizes cleanly
 
 The expected first-build serial payload shape is documented in `../../hardware/bench-air-node/serial-json-contract.md`.
+The full first-build operator path is documented in `../../hardware/bench-air-node/operator-runbook.md`.
