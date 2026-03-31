@@ -99,6 +99,18 @@ class ReferenceGovernanceTests(unittest.TestCase):
             configured = handler._configured_sharing_store()
             self.assertEqual(configured["parcels"][0]["parcel_id"], "parcel_001")
 
+    def test_shared_map_inspection_exposes_eligible_refs_and_policy_notice(self):
+        inspection = serve_shared_map_api.build_shared_map_inspection(
+            self.shared_signal,
+            sharing_store=self.sharing_store_seed,
+        )
+        self.assertEqual(inspection["inspection"]["eligible_shared_refs"], ["parcel_ref_parcel_001"])
+        self.assertEqual(
+            inspection["inspection"]["coverage_notice"],
+            "Neighborhood conditions are delayed and aggregated. Participation is partial.",
+        )
+        self.assertFalse(inspection["inspection"]["public_map_supported"])
+
     def test_rights_requests_and_access_events_are_persisted_and_summarized(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             sharing_path = Path(tmpdir) / "sharing-store.json"
