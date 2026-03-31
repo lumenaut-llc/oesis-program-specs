@@ -93,6 +93,13 @@ If you prefer stdin:
 python3 scripts/ingest_packet.py < packet.json
 ```
 
+If you captured a whole serial monitor log with `#` boot lines, extract the newest packet first:
+
+```bash
+python3 scripts/extract_latest_packet.py serial.log --output packet.json
+python3 scripts/ingest_packet.py packet.json
+```
+
 ## Pass criteria
 
 - scanner finds `0x44` first
@@ -112,4 +119,5 @@ python3 scripts/ingest_packet.py < packet.json
 - no `0x44`: recheck SHT45 power, solder, and `GPIO8`/`GPIO9` wiring
 - no BME680 address: recheck `SDI` to `SDA`, `SCK` to `SCL`, and power
 - JSON does not validate: copy a full packet line, not a boot comment
+- mixed serial log is messy: run `python3 scripts/extract_latest_packet.py serial.log --output packet.json`
 - only one sensor reports `present: false`: inspect that sensor’s solder joints and bus wiring

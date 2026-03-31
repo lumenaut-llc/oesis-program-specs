@@ -41,6 +41,15 @@ The next reference scaffold is `scripts/normalize_packet.py`. It reads a node pa
 
 `scripts/ingest_packet.py` is the simplest local end-to-end entrypoint for bench bring-up. It accepts a packet from a file or stdin, validates it, and prints the normalized observation.
 
+`scripts/extract_latest_packet.py` pulls the newest JSON packet out of a mixed serial log so boot comments and other monitor noise do not need to be removed by hand.
+
+`scripts/serve_ingest_api.py` is the first minimal HTTP wrapper. It exposes:
+- `GET /v1/ingest/health`
+- `GET /v1/ingest/schemas`
+- `POST /v1/ingest/node-packets`
+
+The server is intentionally lightweight and uses the same normalization code as the local CLI path.
+
 ## Local smoke-test path
 
 From `repo/programs/resilient-home-intelligence/software/ingest-service/`:
@@ -58,6 +67,11 @@ When the ESP32 starts emitting serial JSON:
 1. Copy one packet line into `packet.json`
 2. Run `python3 scripts/ingest_packet.py packet.json`
 3. Confirm the packet validates and normalizes cleanly
+
+If you saved a full serial log instead of a clean packet file:
+
+1. Run `python3 scripts/extract_latest_packet.py serial.log --output packet.json`
+2. Run `python3 scripts/ingest_packet.py packet.json`
 
 The expected first-build serial payload shape is documented in `../../hardware/bench-air-node/serial-json-contract.md`.
 The full first-build operator path is documented in `../../hardware/bench-air-node/operator-runbook.md`.
