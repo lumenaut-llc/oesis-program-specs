@@ -2,20 +2,48 @@
 // Uses SHT45 and BME680 over I2C on GPIO8/GPIO9 and prints one
 // JSON packet per line for local ingest validation.
 
+#include <Arduino.h>
 #include <Wire.h>
+#include <time.h>
 #include <Adafruit_BME680.h>
 #include <Adafruit_SHT4x.h>
 #include <Adafruit_Sensor.h>
+
+#if __has_include(<WiFi.h>)
+#include <WiFi.h>
+#define BENCH_AIR_HAS_WIFI 1
+#else
+#define BENCH_AIR_HAS_WIFI 0
+#endif
+
+#if __has_include("secrets.h")
+#include "secrets.h"
+#endif
+
+#ifndef BENCH_AIR_WIFI_SSID
+#define BENCH_AIR_WIFI_SSID ""
+#endif
+
+#ifndef BENCH_AIR_WIFI_PASSWORD
+#define BENCH_AIR_WIFI_PASSWORD ""
+#endif
 
 static const char* kSchemaVersion = "rhi.bench-air.v1";
 static const char* kNodeId = "bench-air-01";
 static const char* kFirmwareVersion = "0.1.0";
 static const char* kLocationMode = "indoor";
 static const char* kObservedAtPlaceholder = "1970-01-01T00:00:00Z";
+static const char* kWifiSsid = BENCH_AIR_WIFI_SSID;
+static const char* kWifiPassword = BENCH_AIR_WIFI_PASSWORD;
+static const char* kNtpServer = "pool.ntp.org";
+static const long kGmtOffsetSeconds = 0;
+static const int kDaylightOffsetSeconds = 0;
 
 static const int kI2cSdaPin = 8;
 static const int kI2cSclPin = 9;
 static const unsigned long kSampleIntervalMs = 5000;
+static const unsigned long kWifiConnectTimeoutMs = 15000;
+static const unsigned long kTimeSyncTimeoutMs = 15000;
 static const uint8_t kBme680Addresses[] = {0x77, 0x76};
 
 struct Sht45Reading {
@@ -38,6 +66,9 @@ bool sht45_present = false;
 bool bme680_present = false;
 uint8_t bme680_address = 0;
 String last_error = "boot";
+bool wifi_connected = false;
+bool time_synced = false;
+String observed_at = kObservedAtPlaceholder;
 
 Adafruit_SHT4x sht4 = Adafruit_SHT4x();
 Adafruit_BME680 bme680;
@@ -108,13 +139,32 @@ void printJsonString(const String& value) {
   Serial.print('"');
 }
 
+void updateObservedAt() {
+  if (!time_synced) {
+    observed_at = kObservedAtPlaceholder;
+    return;
+  }
+
+  struct tm time_info;
+  if (!getLocalTime(&time_info)) {
+    observed_at = kObservedAtPlaceholder;
+    time_synced = false;
+    last_error = "time_read_failed";
+    return;
+  }
+
+  char buffer[25];
+  strftime(buffer, sizeof(buffer), "%Y-%m-%dT%H:%M:%SZ", &time_info);
+  observed_at = buffer;
+}
+
 void emitPacket(const Sht45Reading& sht45, const Bme680Reading& bme680) {
   Serial.print("{\"schema_version\":\"");
   Serial.print(kSchemaVersion);
   Serial.print("\",\"node_id\":\"");
   Serial.print(kNodeId);
   Serial.print("\",\"observed_at\":\"");
-  Serial.print(kObservedAtPlaceholder);
+  Serial.print(observed_at);
   Serial.print("\",\"firmware_version\":\"");
   Serial.print(kFirmwareVersion);
   Serial.print("\",\"location_mode\":\"");
@@ -143,7 +193,9 @@ void emitPacket(const Sht45Reading& sht45, const Bme680Reading& bme680) {
   printFloat(bme680.pressure_hpa);
   Serial.print(",\"voc_trend_source\":\"gas_resistance_ohm\"},\"health\":{\"uptime_s\":");
   Serial.print(millis() / 1000UL);
-  Serial.print(",\"wifi_connected\":false,\"free_heap_bytes\":");
+  Serial.print(",\"wifi_connected\":");
+  Serial.print(wifi_connected ? "true" : "false");
+  Serial.print(",\"free_heap_bytes\":");
 #ifdef ESP32
   Serial.print(ESP.getFreeHeap());
 #else
@@ -177,6 +229,61 @@ bool beginBme680() {
   return false;
 }
 
+void syncTimeIfConfigured() {
+  if (strlen(kWifiSsid) == 0) {
+    Serial.println("# Wi-Fi not configured, using placeholder observed_at");
+    wifi_connected = false;
+    time_synced = false;
+    return;
+  }
+
+#if !BENCH_AIR_HAS_WIFI
+  last_error = "wifi_unavailable";
+  Serial.println("# Wi-Fi support unavailable in this build, using placeholder observed_at");
+  wifi_connected = false;
+  time_synced = false;
+  return;
+#else
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(kWifiSsid, kWifiPassword);
+
+  unsigned long wifi_start_ms = millis();
+  while (WiFi.status() != WL_CONNECTED && millis() - wifi_start_ms < kWifiConnectTimeoutMs) {
+    delay(250);
+  }
+
+  wifi_connected = WiFi.status() == WL_CONNECTED;
+  if (!wifi_connected) {
+    last_error = "wifi_connect_failed";
+    Serial.println("# Wi-Fi connect failed, using placeholder observed_at");
+    return;
+  }
+
+  Serial.print("# Wi-Fi connected, IP=");
+  Serial.println(WiFi.localIP());
+
+  configTime(kGmtOffsetSeconds, kDaylightOffsetSeconds, kNtpServer);
+  unsigned long time_start_ms = millis();
+  while (!time_synced && millis() - time_start_ms < kTimeSyncTimeoutMs) {
+    struct tm time_info;
+    if (getLocalTime(&time_info, 250)) {
+      time_synced = true;
+      break;
+    }
+  }
+
+  if (!time_synced) {
+    last_error = "ntp_sync_failed";
+    Serial.println("# NTP sync failed, using placeholder observed_at");
+    return;
+  }
+
+  updateObservedAt();
+  Serial.print("# time synced: ");
+  Serial.println(observed_at);
+#endif
+}
+
 void setup() {
   Serial.begin(115200);
   delay(250);
@@ -188,6 +295,7 @@ void setup() {
   Serial.print(" SCL=GPIO");
   Serial.println(kI2cSclPin);
   Serial.println("# using Adafruit SHT4x and BME680 libraries");
+  syncTimeIfConfigured();
 
   sht45_present = sht4.begin(&Wire);
   if (sht45_present) {
@@ -228,6 +336,7 @@ void loop() {
 
   Sht45Reading sht45 = readSht45();
   Bme680Reading bme680 = readBme680();
+  updateObservedAt();
 
   if (!sht45.present || !bme680.present) {
     read_failures_total++;

@@ -113,5 +113,6 @@ This version is for indoor or sheltered testing only. If it is used on a porch o
 - `wiring.md`
 - `firmware-notes.md`
 - `serial-json-contract.md`
+- `operator-runbook.md`
 - `firmware/README.md`
 - `calibration.md`

@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <Wire.h>
 
 static const int kI2cSdaPin = 8;
