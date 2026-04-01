@@ -2,14 +2,25 @@ import importlib.util
 import json
 import sys
 import tempfile
+import threading
 import unittest
 from pathlib import Path
 
 
 PROGRAM_ROOT = Path(__file__).resolve().parents[2]
 DOC_EXAMPLES = PROGRAM_ROOT / "docs" / "data-model" / "examples"
+INGEST_SCRIPT_DIR = PROGRAM_ROOT / "software" / "ingest-service" / "scripts"
+INFERENCE_SCRIPT_DIR = PROGRAM_ROOT / "software" / "inference-engine" / "scripts"
 PARCEL_SCRIPT_DIR = PROGRAM_ROOT / "software" / "parcel-platform" / "scripts"
 SHARED_SCRIPT_DIR = PROGRAM_ROOT / "software" / "shared-map" / "scripts"
+WEATHER_PM_MAST_FIRMWARE = (
+    PROGRAM_ROOT
+    / "hardware"
+    / "weather-pm-mast"
+    / "firmware"
+    / "weather_pm_mast_serial_json"
+    / "weather_pm_mast_serial_json.ino"
+)
 
 
 def load_module(name: str, path: Path):
@@ -19,9 +30,13 @@ def load_module(name: str, path: Path):
     return module
 
 
+sys.path.insert(0, str(INGEST_SCRIPT_DIR))
+sys.path.insert(0, str(INFERENCE_SCRIPT_DIR))
 sys.path.insert(0, str(PARCEL_SCRIPT_DIR))
 sys.path.insert(0, str(SHARED_SCRIPT_DIR))
 
+normalize_packet = load_module("normalize_packet", INGEST_SCRIPT_DIR / "normalize_packet.py")
+infer_parcel_state = load_module("infer_parcel_state", INFERENCE_SCRIPT_DIR / "infer_parcel_state.py")
 format_parcel_view = load_module("format_parcel_view", PARCEL_SCRIPT_DIR / "format_parcel_view.py")
 format_evidence_summary = load_module("format_evidence_summary", PARCEL_SCRIPT_DIR / "format_evidence_summary.py")
 serve_parcel_api = load_module("serve_parcel_api", PARCEL_SCRIPT_DIR / "serve_parcel_api.py")
@@ -359,6 +374,124 @@ class ReferenceGovernanceTests(unittest.TestCase):
 
             updated_access = json.loads(access_path.read_text(encoding="utf-8"))
             self.assertEqual(updated_access, [])
+
+    def test_access_log_appends_are_safe_under_concurrency(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            access_path = Path(tmpdir) / "access-log.json"
+            access_path.write_text("[]", encoding="utf-8")
+            barrier = threading.Barrier(12)
+            errors = []
+
+            def worker(index: int):
+                try:
+                    barrier.wait(timeout=5)
+                    serve_parcel_api.append_access_event(
+                        access_path,
+                        actor="parcel-platform-api",
+                        action="view_parcel_state",
+                        parcel_id=f"parcel_{index}",
+                        data_classes=["private_parcel_data"],
+                        justification="parcel_view_request",
+                    )
+                except Exception as exc:  # pragma: no cover - assertion below captures failures
+                    errors.append(exc)
+
+            threads = [threading.Thread(target=worker, args=(index,)) for index in range(12)]
+            for thread in threads:
+                thread.start()
+            for thread in threads:
+                thread.join()
+
+            self.assertEqual(errors, [])
+            access_events = json.loads(access_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(access_events), 12)
+            self.assertEqual(
+                {event["parcel_id"] for event in access_events},
+                {f"parcel_{index}" for index in range(12)},
+            )
+
+    def test_export_paths_are_confined_to_allowed_roots(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            export_dir = Path(tmpdir) / "exports"
+            allowed_input_root = Path(tmpdir) / "allowed-inputs"
+            export_dir.mkdir()
+            allowed_input_root.mkdir()
+            parcel_state_path = allowed_input_root / "parcel-state.json"
+            parcel_state_path.write_text("{}", encoding="utf-8")
+
+            safe_output = serve_parcel_api.resolve_export_output_path(export_dir, "nested/bundle.json")
+            self.assertEqual(safe_output, (export_dir / "nested" / "bundle.json").resolve())
+
+            safe_input = serve_parcel_api.resolve_allowed_input_path(
+                str(parcel_state_path),
+                allowed_roots=[allowed_input_root],
+                label="parcel_state_path",
+            )
+            self.assertEqual(safe_input, parcel_state_path.resolve())
+
+            with self.assertRaises(serve_parcel_api.ParcelViewError):
+                serve_parcel_api.resolve_export_output_path(export_dir, "../escaped.json")
+
+            with self.assertRaises(serve_parcel_api.ParcelViewError):
+                serve_parcel_api.resolve_allowed_input_path(
+                    str(Path(tmpdir) / "outside.json"),
+                    allowed_roots=[allowed_input_root],
+                    label="parcel_state_path",
+                )
+
+    def test_normalize_packet_ignores_missing_sensor_derived_defaults(self):
+        payload = {
+            "schema_version": "rhi.bench-air.v1",
+            "node_id": "bench-air-01",
+            "observed_at": "2026-03-30T19:45:00Z",
+            "firmware_version": "0.1.0",
+            "location_mode": "indoor",
+            "sensors": {
+                "sht45": {
+                    "present": False,
+                    "temperature_c": 0.0,
+                    "relative_humidity_pct": 0.0,
+                },
+                "bme680": {
+                    "present": False,
+                    "temperature_c": 0.0,
+                    "relative_humidity_pct": 0.0,
+                    "pressure_hpa": 0.0,
+                    "gas_resistance_ohm": 1.0,
+                },
+            },
+            "derived": {
+                "temperature_c_primary": 0.0,
+                "relative_humidity_pct_primary": 0.0,
+                "pressure_hpa": 0.0,
+                "voc_trend_source": "gas_resistance_ohm",
+            },
+            "health": {
+                "uptime_s": 1,
+                "wifi_connected": True,
+                "free_heap_bytes": 1,
+                "read_failures_total": 2,
+                "last_error": "sensor_missing",
+            },
+        }
+
+        normalized = normalize_packet.normalize_packet(payload, parcel_id="parcel_demo_001")
+        self.assertEqual(normalized["values"], {})
+
+    def test_combine_public_contexts_rejects_mixed_parcels(self):
+        weather_context = json.loads((DOC_EXAMPLES / "public-context.example.json").read_text(encoding="utf-8"))
+        smoke_context = json.loads((DOC_EXAMPLES / "public-context.example.json").read_text(encoding="utf-8"))
+        smoke_context["context_id"] = "pubctx_other"
+        smoke_context["parcel_id"] = "parcel_other"
+        smoke_context["source_name"] = "demo_other_source"
+
+        with self.assertRaises(infer_parcel_state.InferenceError):
+            infer_parcel_state.combine_public_contexts([weather_context, smoke_context])
+
+    def test_weather_pm_mast_does_not_claim_live_pm_values_without_sensor_reads(self):
+        firmware_source = WEATHER_PM_MAST_FIRMWARE.read_text(encoding="utf-8")
+        self.assertIn('\\"sps30\\":{\\"present\\":false}', firmware_source)
+        self.assertNotIn("pm1_ugm3", firmware_source)
 
 
 if __name__ == "__main__":

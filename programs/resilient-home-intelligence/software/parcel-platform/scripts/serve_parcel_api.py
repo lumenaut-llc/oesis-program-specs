@@ -2,6 +2,9 @@
 
 import argparse
 import json
+import os
+import tempfile
+import threading
 from copy import deepcopy
 from datetime import datetime, timezone
 from http import HTTPStatus
@@ -16,6 +19,7 @@ from summarize_reference_state import summarize as summarize_reference_state
 
 
 ROOT = Path(__file__).resolve().parents[3]
+REPO_ROOT = ROOT.parents[1]
 EXAMPLES_DIR = ROOT / "docs" / "data-model" / "examples"
 DEFAULT_SHARING = json.loads((EXAMPLES_DIR / "sharing-settings.example.json").read_text(encoding="utf-8"))
 DEFAULT_RIGHTS_REQUEST = json.loads((EXAMPLES_DIR / "rights-request.example.json").read_text(encoding="utf-8"))
@@ -23,9 +27,109 @@ DEFAULT_SHARING_STORE = json.loads((EXAMPLES_DIR / "sharing-store.example.json")
 DEFAULT_RIGHTS_REQUEST_STORE = json.loads((EXAMPLES_DIR / "rights-request-store.example.json").read_text(encoding="utf-8"))
 DEFAULT_EXPORT_BUNDLE = json.loads((EXAMPLES_DIR / "export-bundle.example.json").read_text(encoding="utf-8"))
 
+_STORE_LOCKS: dict[Path, threading.RLock] = {}
+_STORE_LOCKS_GUARD = threading.Lock()
+
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def _store_lock(path: Path) -> threading.RLock:
+    resolved = path.resolve()
+    with _STORE_LOCKS_GUARD:
+        lock = _STORE_LOCKS.get(resolved)
+        if lock is None:
+            lock = threading.RLock()
+            _STORE_LOCKS[resolved] = lock
+        return lock
+
+
+def _read_json_unlocked(path: Path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _atomic_write_json(path: Path, payload):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    serialized = json.dumps(payload, indent=2, sort_keys=True)
+    fd, temp_name = tempfile.mkstemp(
+        dir=str(path.parent),
+        prefix=f".{path.name}.",
+        suffix=".tmp",
+    )
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(serialized)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temp_name, path)
+    except Exception:
+        try:
+            os.unlink(temp_name)
+        except OSError:
+            pass
+        raise
+
+
+def _load_json_store_unlocked(path: Path, default_payload):
+    if path.exists():
+        return _read_json_unlocked(path)
+    payload = deepcopy(default_payload)
+    _atomic_write_json(path, payload)
+    return payload
+
+
+def _save_json_store_unlocked(path: Path, payload, *, touch_updated_at: bool):
+    stored = deepcopy(payload)
+    if touch_updated_at:
+        stored["updated_at"] = now_iso()
+    _atomic_write_json(path, stored)
+    return stored
+
+
+def _load_access_log_unlocked(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    return _read_json_unlocked(path)
+
+
+def load_access_log(path: Path) -> list[dict]:
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        return deepcopy(_load_access_log_unlocked(resolved))
+
+
+def _save_access_log_unlocked(path: Path, payload: list[dict]):
+    _atomic_write_json(path, payload)
+
+
+def ensure_path_within_allowed_roots(path: Path, *, allowed_roots: list[Path], label: str) -> Path:
+    resolved = path.resolve()
+    for root in allowed_roots:
+        try:
+            resolved.relative_to(root.resolve())
+            return resolved
+        except ValueError:
+            continue
+    allowed = ", ".join(str(root.resolve()) for root in allowed_roots)
+    raise ParcelViewError(f"{label} must stay within one of: {allowed}")
+
+
+def resolve_export_output_path(export_dir: Path, output_name: str) -> Path:
+    export_root = export_dir.resolve()
+    return ensure_path_within_allowed_roots(
+        export_root / output_name,
+        allowed_roots=[export_root],
+        label="output_name",
+    )
+
+
+def resolve_allowed_input_path(raw_path: str, *, allowed_roots: list[Path], label: str) -> Path:
+    return ensure_path_within_allowed_roots(
+        Path(raw_path),
+        allowed_roots=allowed_roots,
+        label=label,
+    )
 
 
 def clone_default_sharing(parcel_id: str) -> dict:
@@ -50,69 +154,77 @@ def build_rights_request(parcel_id: str, request_type: str) -> dict:
 
 
 def load_sharing_store(path: Path) -> dict:
-    if path.exists():
-        return json.loads(path.read_text(encoding="utf-8"))
-    payload = deepcopy(DEFAULT_SHARING_STORE)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
-    return payload
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        return deepcopy(_load_json_store_unlocked(resolved, DEFAULT_SHARING_STORE))
 
 
 def save_sharing_store(path: Path, payload: dict):
-    payload["updated_at"] = now_iso()
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        _save_json_store_unlocked(resolved, payload, touch_updated_at=True)
 
 
 def load_rights_store(path: Path) -> dict:
-    if path.exists():
-        return json.loads(path.read_text(encoding="utf-8"))
-    payload = deepcopy(DEFAULT_RIGHTS_REQUEST_STORE)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
-    return payload
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        return deepcopy(_load_json_store_unlocked(resolved, DEFAULT_RIGHTS_REQUEST_STORE))
 
 
 def save_rights_store(path: Path, payload: dict):
-    payload["updated_at"] = now_iso()
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        _save_json_store_unlocked(resolved, payload, touch_updated_at=True)
 
 
 def append_rights_request(path: Path, request: dict):
-    store = load_rights_store(path)
-    store["requests"].append(deepcopy(request))
-    save_rights_store(path, store)
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_json_store_unlocked(resolved, DEFAULT_RIGHTS_REQUEST_STORE)
+        store["requests"].append(deepcopy(request))
+        _save_json_store_unlocked(resolved, store, touch_updated_at=True)
 
 
 def list_rights_requests(path: Path, parcel_id: str) -> list[dict]:
-    store = load_rights_store(path)
-    return [deepcopy(item) for item in store["requests"] if item["parcel_id"] == parcel_id]
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_json_store_unlocked(resolved, DEFAULT_RIGHTS_REQUEST_STORE)
+        return [deepcopy(item) for item in store["requests"] if item["parcel_id"] == parcel_id]
 
 
 def update_rights_request_status(path: Path, request_id: str, status: str) -> dict:
-    store = load_rights_store(path)
-    for request in store["requests"]:
-        if request["request_id"] == request_id:
-            request["status"] = status
-            save_rights_store(path, store)
-            return deepcopy(request)
-    raise KeyError(f"rights request not found: {request_id}")
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_json_store_unlocked(resolved, DEFAULT_RIGHTS_REQUEST_STORE)
+        for request in store["requests"]:
+            if request["request_id"] == request_id:
+                request["status"] = status
+                _save_json_store_unlocked(resolved, store, touch_updated_at=True)
+                return deepcopy(request)
+        raise KeyError(f"rights request not found: {request_id}")
 
 
 def remove_parcel_from_sharing_store(path: Path, parcel_id: str):
-    store = load_sharing_store(path)
-    store["parcels"] = [entry for entry in store["parcels"] if entry["parcel_id"] != parcel_id]
-    save_sharing_store(path, store)
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_json_store_unlocked(resolved, DEFAULT_SHARING_STORE)
+        store["parcels"] = [entry for entry in store["parcels"] if entry["parcel_id"] != parcel_id]
+        _save_json_store_unlocked(resolved, store, touch_updated_at=True)
 
 
 def process_delete_request(rights_store_path: Path, sharing_store_path: Path, request_id: str) -> dict:
-    store = load_rights_store(rights_store_path)
-    for request in store["requests"]:
-        if request["request_id"] != request_id:
-            continue
-        if request["request_type"] != "delete":
-            raise KeyError(f"rights request is not a delete request: {request_id}")
-        request["status"] = "completed"
-        save_rights_store(rights_store_path, store)
-        remove_parcel_from_sharing_store(sharing_store_path, request["parcel_id"])
-        return deepcopy(request)
+    rights_path = rights_store_path.resolve()
+    with _store_lock(rights_path):
+        store = _load_json_store_unlocked(rights_path, DEFAULT_RIGHTS_REQUEST_STORE)
+        for request in store["requests"]:
+            if request["request_id"] != request_id:
+                continue
+            if request["request_type"] != "delete":
+                raise KeyError(f"rights request is not a delete request: {request_id}")
+            request["status"] = "completed"
+            _save_json_store_unlocked(rights_path, store, touch_updated_at=True)
+            remove_parcel_from_sharing_store(sharing_store_path, request["parcel_id"])
+            return deepcopy(request)
     raise KeyError(f"rights request not found: {request_id}")
 
 
@@ -125,9 +237,7 @@ def export_bundle_for_parcel(parcel_id: str, sharing_store_path: Path, rights_st
             break
 
     rights_requests = list_rights_requests(rights_store_path, parcel_id)
-    access_events = []
-    if access_log_path.exists():
-        access_events = [deepcopy(event) for event in json.loads(access_log_path.read_text(encoding="utf-8")) if event["parcel_id"] == parcel_id]
+    access_events = [deepcopy(event) for event in load_access_log(access_log_path) if event["parcel_id"] == parcel_id]
 
     parcel_state = None
     if parcel_state_path and parcel_state_path.exists():
@@ -150,23 +260,27 @@ def export_bundle_for_parcel(parcel_id: str, sharing_store_path: Path, rights_st
 
 
 def process_export_request(rights_store_path: Path, sharing_store_path: Path, access_log_path: Path, request_id: str, output_path: Path, parcel_state_path: Path | None = None) -> dict:
-    store = load_rights_store(rights_store_path)
-    for request in store["requests"]:
-        if request["request_id"] != request_id:
-            continue
-        if request["request_type"] != "export":
-            raise KeyError(f"rights request is not an export request: {request_id}")
-        request["status"] = "completed"
-        save_rights_store(rights_store_path, store)
-        bundle = export_bundle_for_parcel(
-            request["parcel_id"],
-            sharing_store_path,
-            rights_store_path,
-            access_log_path,
-            parcel_state_path=parcel_state_path,
-        )
-        output_path.write_text(json.dumps(bundle, indent=2, sort_keys=True), encoding="utf-8")
-        return deepcopy(request)
+    rights_path = rights_store_path.resolve()
+    with _store_lock(rights_path):
+        store = _load_json_store_unlocked(rights_path, DEFAULT_RIGHTS_REQUEST_STORE)
+        for request in store["requests"]:
+            if request["request_id"] != request_id:
+                continue
+            if request["request_type"] != "export":
+                raise KeyError(f"rights request is not an export request: {request_id}")
+            request["status"] = "completed"
+            _save_json_store_unlocked(rights_path, store, touch_updated_at=True)
+            bundle = export_bundle_for_parcel(
+                request["parcel_id"],
+                sharing_store_path,
+                rights_store_path,
+                access_log_path,
+                parcel_state_path=parcel_state_path,
+            )
+            output_path = output_path.resolve()
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            _atomic_write_json(output_path, bundle)
+            return deepcopy(request)
     raise KeyError(f"rights request not found: {request_id}")
 
 
@@ -178,56 +292,60 @@ def build_reference_state_summary(sharing_store_path: Path, rights_store_path: P
 
 
 def append_access_event(path: Path, *, actor: str, action: str, parcel_id: str, data_classes: list[str], justification: str):
-    payload = []
-    if path.exists():
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    payload.append(
-        {
-            "event_id": f"access_{action}_{parcel_id}_{len(payload)+1}",
-            "occurred_at": now_iso(),
-            "actor": actor,
-            "action": action,
-            "parcel_id": parcel_id,
-            "data_classes": data_classes,
-            "justification": justification,
-        }
-    )
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        payload = _load_access_log_unlocked(resolved)
+        payload.append(
+            {
+                "event_id": f"access_{action}_{parcel_id}_{len(payload)+1}",
+                "occurred_at": now_iso(),
+                "actor": actor,
+                "action": action,
+                "parcel_id": parcel_id,
+                "data_classes": data_classes,
+                "justification": justification,
+            }
+        )
+        _save_access_log_unlocked(resolved, payload)
 
 
 def sharing_from_store(path: Path, parcel_id: str) -> dict:
-    store = load_sharing_store(path)
-    for entry in store["parcels"]:
-        if entry["parcel_id"] == parcel_id:
-            return deepcopy(entry["sharing"])
-    sharing = clone_default_sharing(parcel_id)
-    store["parcels"].append(
-        {
-            "parcel_id": parcel_id,
-            "parcel_ref": parcel_ref_for_id(parcel_id),
-            "sharing": deepcopy(sharing),
-        }
-    )
-    save_sharing_store(path, store)
-    return sharing
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_json_store_unlocked(resolved, DEFAULT_SHARING_STORE)
+        for entry in store["parcels"]:
+            if entry["parcel_id"] == parcel_id:
+                return deepcopy(entry["sharing"])
+        sharing = clone_default_sharing(parcel_id)
+        store["parcels"].append(
+            {
+                "parcel_id": parcel_id,
+                "parcel_ref": parcel_ref_for_id(parcel_id),
+                "sharing": deepcopy(sharing),
+            }
+        )
+        _save_json_store_unlocked(resolved, store, touch_updated_at=True)
+        return sharing
 
 
 def update_sharing_store(path: Path, parcel_id: str, sharing: dict):
-    store = load_sharing_store(path)
-    for entry in store["parcels"]:
-        if entry["parcel_id"] == parcel_id:
-            entry["sharing"] = deepcopy(sharing)
-            entry["parcel_ref"] = entry.get("parcel_ref") or parcel_ref_for_id(parcel_id)
-            save_sharing_store(path, store)
-            return
-    store["parcels"].append(
-        {
-            "parcel_id": parcel_id,
-            "parcel_ref": parcel_ref_for_id(parcel_id),
-            "sharing": deepcopy(sharing),
-        }
-    )
-    save_sharing_store(path, store)
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_json_store_unlocked(resolved, DEFAULT_SHARING_STORE)
+        for entry in store["parcels"]:
+            if entry["parcel_id"] == parcel_id:
+                entry["sharing"] = deepcopy(sharing)
+                entry["parcel_ref"] = entry.get("parcel_ref") or parcel_ref_for_id(parcel_id)
+                _save_json_store_unlocked(resolved, store, touch_updated_at=True)
+                return
+        store["parcels"].append(
+            {
+                "parcel_id": parcel_id,
+                "parcel_ref": parcel_ref_for_id(parcel_id),
+                "sharing": deepcopy(sharing),
+            }
+        )
+        _save_json_store_unlocked(resolved, store, touch_updated_at=True)
 
 
 class ParcelPlatformRequestHandler(BaseHTTPRequestHandler):
@@ -236,6 +354,7 @@ class ParcelPlatformRequestHandler(BaseHTTPRequestHandler):
     rights_store_path = None
     access_log_path = None
     export_dir_path = None
+    allowed_input_roots = []
 
     def _send_json(self, status: int, payload: dict):
         body = json.dumps(payload, indent=2, sort_keys=True).encode("utf-8")
@@ -507,10 +626,15 @@ class ParcelPlatformRequestHandler(BaseHTTPRequestHandler):
                 payload = self._read_json()
                 request_id = payload["request_id"]
                 output_name = payload.get("output_name", f"{request_id}.json")
-                output_path = (self.export_dir_path / output_name).resolve()
+                output_path = resolve_export_output_path(self.export_dir_path, output_name)
                 parcel_state_path = None
                 if payload.get("parcel_state_path"):
-                    parcel_state_path = Path(payload["parcel_state_path"]).resolve()
+                    allowed_roots = [*self.allowed_input_roots, self.export_dir_path]
+                    parcel_state_path = resolve_allowed_input_path(
+                        payload["parcel_state_path"],
+                        allowed_roots=allowed_roots,
+                        label="parcel_state_path",
+                    )
                 result = process_export_request(
                     self.rights_store_path,
                     self.sharing_store_path,
@@ -615,6 +739,7 @@ def main():
     ParcelPlatformRequestHandler.rights_store_path = Path(args.rights_store).resolve()
     ParcelPlatformRequestHandler.access_log_path = Path(args.access_log).resolve()
     ParcelPlatformRequestHandler.export_dir_path = Path(args.export_dir).resolve()
+    ParcelPlatformRequestHandler.allowed_input_roots = [REPO_ROOT.resolve()]
     ParcelPlatformRequestHandler.export_dir_path.mkdir(parents=True, exist_ok=True)
     server = ThreadingHTTPServer((args.host, args.port), ParcelPlatformRequestHandler)
     print(f"Listening on http://{args.host}:{args.port}")

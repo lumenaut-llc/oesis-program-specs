@@ -27,31 +27,42 @@ def get_bme_payload(sensors: dict) -> dict:
     return sensors.get("bme688") or sensors.get("bme680") or {}
 
 
+def has_value(payload: dict, field_name: str) -> bool:
+    return field_name in payload and payload[field_name] is not None
+
+
 def build_values(payload: dict) -> dict:
     sensors = payload["sensors"]
     derived = deepcopy(payload.get("derived", {}))
+    sht45_payload = sensors.get("sht45", {})
     bme_payload = get_bme_payload(sensors)
+    sht45_present = bool(sht45_payload.get("present"))
+    bme_present = bool(bme_payload.get("present"))
 
     values = {}
-    if "temperature_c_primary" in derived:
+    if sht45_present and has_value(derived, "temperature_c_primary"):
         values["temperature_c_primary"] = derived["temperature_c_primary"]
-    elif sensors.get("sht45", {}).get("present"):
-        values["temperature_c_primary"] = sensors["sht45"]["temperature_c"]
+    elif sht45_present:
+        values["temperature_c_primary"] = sht45_payload["temperature_c"]
+    elif bme_present:
+        values["temperature_c_primary"] = bme_payload["temperature_c"]
 
-    if "relative_humidity_pct_primary" in derived:
+    if sht45_present and has_value(derived, "relative_humidity_pct_primary"):
         values["relative_humidity_pct_primary"] = derived["relative_humidity_pct_primary"]
-    elif sensors.get("sht45", {}).get("present"):
-        values["relative_humidity_pct_primary"] = sensors["sht45"]["relative_humidity_pct"]
+    elif sht45_present:
+        values["relative_humidity_pct_primary"] = sht45_payload["relative_humidity_pct"]
+    elif bme_present:
+        values["relative_humidity_pct_primary"] = bme_payload["relative_humidity_pct"]
 
-    if "pressure_hpa" in derived:
+    if bme_present and has_value(derived, "pressure_hpa"):
         values["pressure_hpa"] = derived["pressure_hpa"]
-    elif bme_payload.get("present"):
+    elif bme_present:
         values["pressure_hpa"] = bme_payload["pressure_hpa"]
 
-    if bme_payload.get("present"):
+    if bme_present:
         values["gas_resistance_ohm"] = bme_payload["gas_resistance_ohm"]
 
-    if "voc_trend_source" in derived:
+    if bme_present and has_value(derived, "voc_trend_source"):
         values["voc_trend_source"] = derived["voc_trend_source"]
 
     return values

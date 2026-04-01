@@ -184,6 +184,10 @@ def combine_public_contexts(public_contexts: list[dict]) -> dict | None:
     members = []
 
     for context in public_contexts:
+        if context["parcel_id"] != first["parcel_id"]:
+            raise InferenceError("public contexts must share the same parcel_id")
+        if context["coverage_mode"] != first["coverage_mode"]:
+            raise InferenceError("public contexts must share the same coverage_mode")
         combined_source_names.append(context["source_name"])
         combined_summary.extend(context.get("summary", []))
         for hazard_name in combined_hazards:

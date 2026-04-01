@@ -58,6 +58,14 @@ Adafruit_BME680 bme680;
 
 void printFloat(float value, int digits = 1) { Serial.print(value, digits); }
 
+void printOptionalFloat(bool has_value, float value, int digits = 1) {
+  if (!has_value) {
+    Serial.print("null");
+    return;
+  }
+  printFloat(value, digits);
+}
+
 void printJsonString(const String& value) {
   Serial.print('"');
   for (size_t i = 0; i < value.length(); ++i) {
@@ -151,6 +159,11 @@ void syncTimeIfConfigured() {
 }
 
 void emitPacket(const Sht45Reading& sht45, const Bme680Reading& bme680_reading) {
+  float derived_temperature_c = sht45.present ? sht45.temperature_c : bme680_reading.temperature_c;
+  float derived_relative_humidity_pct = sht45.present ? sht45.relative_humidity_pct : bme680_reading.relative_humidity_pct;
+  bool has_primary_temperature = sht45.present || bme680_reading.present;
+  bool has_primary_humidity = sht45.present || bme680_reading.present;
+
   Serial.print("{\"schema_version\":\""); Serial.print(kSchemaVersion);
   Serial.print("\",\"node_id\":\""); Serial.print(kNodeId);
   Serial.print("\",\"observed_at\":\""); Serial.print(observed_at);
@@ -164,11 +177,17 @@ void emitPacket(const Sht45Reading& sht45, const Bme680Reading& bme680_reading) 
   Serial.print(",\"relative_humidity_pct\":"); printFloat(bme680_reading.relative_humidity_pct);
   Serial.print(",\"pressure_hpa\":"); printFloat(bme680_reading.pressure_hpa);
   Serial.print(",\"gas_resistance_ohm\":"); printFloat(bme680_reading.gas_resistance_ohm, 0);
-  Serial.print("},\"sps30\":{\"present\":true,\"pm1_ugm3\":7.2,\"pm2_5_ugm3\":10.8,\"pm4_ugm3\":12.1,\"pm10_ugm3\":14.0}},\"derived\":{\"temperature_c_primary\":");
-  printFloat(sht45.temperature_c);
-  Serial.print(",\"relative_humidity_pct_primary\":"); printFloat(sht45.relative_humidity_pct);
-  Serial.print(",\"pressure_hpa\":"); printFloat(bme680_reading.pressure_hpa);
-  Serial.print(",\"voc_trend_source\":\"gas_resistance_ohm\"},\"health\":{\"uptime_s\":");
+  Serial.print("},\"sps30\":{\"present\":false}},\"derived\":{\"temperature_c_primary\":");
+  printOptionalFloat(has_primary_temperature, derived_temperature_c);
+  Serial.print(",\"relative_humidity_pct_primary\":"); printOptionalFloat(has_primary_humidity, derived_relative_humidity_pct);
+  Serial.print(",\"pressure_hpa\":"); printOptionalFloat(bme680_reading.present, bme680_reading.pressure_hpa);
+  Serial.print(",\"voc_trend_source\":");
+  if (bme680_reading.present) {
+    Serial.print("\"gas_resistance_ohm\"");
+  } else {
+    Serial.print("null");
+  }
+  Serial.print("},\"health\":{\"uptime_s\":");
   Serial.print(millis() / 1000UL);
   Serial.print(",\"wifi_connected\":"); Serial.print(wifi_connected ? "true" : "false");
   Serial.print(",\"free_heap_bytes\":");

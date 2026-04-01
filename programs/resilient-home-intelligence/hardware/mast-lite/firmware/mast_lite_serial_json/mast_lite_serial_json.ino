@@ -108,6 +108,14 @@ void printFloat(float value, int digits = 1) {
   Serial.print(value, digits);
 }
 
+void printOptionalFloat(bool has_value, float value, int digits = 1) {
+  if (!has_value) {
+    Serial.print("null");
+    return;
+  }
+  printFloat(value, digits);
+}
+
 void printJsonString(const String& value) {
   Serial.print('"');
   for (size_t i = 0; i < value.length(); ++i) {
@@ -138,6 +146,11 @@ void updateObservedAt() {
 }
 
 void emitPacket(const Sht45Reading& sht45, const Bme680Reading& bme680_reading) {
+  float derived_temperature_c = sht45.present ? sht45.temperature_c : bme680_reading.temperature_c;
+  float derived_relative_humidity_pct = sht45.present ? sht45.relative_humidity_pct : bme680_reading.relative_humidity_pct;
+  bool has_primary_temperature = sht45.present || bme680_reading.present;
+  bool has_primary_humidity = sht45.present || bme680_reading.present;
+
   Serial.print("{\"schema_version\":\"");
   Serial.print(kSchemaVersion);
   Serial.print("\",\"node_id\":\"");
@@ -165,12 +178,18 @@ void emitPacket(const Sht45Reading& sht45, const Bme680Reading& bme680_reading) 
   Serial.print(",\"gas_resistance_ohm\":");
   printFloat(bme680_reading.gas_resistance_ohm, 0);
   Serial.print("}},\"derived\":{\"temperature_c_primary\":");
-  printFloat(sht45.temperature_c);
+  printOptionalFloat(has_primary_temperature, derived_temperature_c);
   Serial.print(",\"relative_humidity_pct_primary\":");
-  printFloat(sht45.relative_humidity_pct);
+  printOptionalFloat(has_primary_humidity, derived_relative_humidity_pct);
   Serial.print(",\"pressure_hpa\":");
-  printFloat(bme680_reading.pressure_hpa);
-  Serial.print(",\"voc_trend_source\":\"gas_resistance_ohm\"},\"health\":{\"uptime_s\":");
+  printOptionalFloat(bme680_reading.present, bme680_reading.pressure_hpa);
+  Serial.print(",\"voc_trend_source\":");
+  if (bme680_reading.present) {
+    Serial.print("\"gas_resistance_ohm\"");
+  } else {
+    Serial.print("null");
+  }
+  Serial.print("},\"health\":{\"uptime_s\":");
   Serial.print(millis() / 1000UL);
   Serial.print(",\"wifi_connected\":");
   Serial.print(wifi_connected ? "true" : "false");
