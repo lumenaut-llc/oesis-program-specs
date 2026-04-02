@@ -4,6 +4,11 @@
 
 Translate the integrated parcel system design into a practical first bill of materials by deployment tier.
 
+Companion checklist:
+
+- `parcel-kit-procurement-checklist.md`
+- `parcel-installation-checklist.md`
+
 ## Governing rule
 
 The parcel kit is one system, but not one physical box.

@@ -49,11 +49,20 @@ Start here:
 - `NOTICE.md`
 - `social-posts.md`
 - `landing-page-copy.md`
+- `preview-execution-plan.md`
+- `site/`
 - `pinned-post-opener.md`
 - `launch-checklist.md`
 - `publish-internal-map.md`
 
 ## For contributors and reviewers
+
+If you are assembling a review packet, start with:
+
+- `reviewer-packet-index.md`
+
+That file is an internal handoff map for packet assembly.
+It should not be treated as a public-site asset or linked from preview-social surfaces by default.
 
 Do not assume a preview artifact is approved for technical publication merely because it exists in the repo.
 

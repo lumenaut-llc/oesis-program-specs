@@ -17,6 +17,8 @@ Supporting specs:
 
 - `../data-model/node-registry-schema.md`
 - `../build-guides/integrated-parcel-kit-bom.md`
+- `../build-guides/parcel-kit-procurement-checklist.md`
+- `../build-guides/parcel-installation-checklist.md`
 
 ## Core design rule
 
