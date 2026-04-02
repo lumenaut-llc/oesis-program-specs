@@ -14,8 +14,10 @@
 - `programs/resilient-home-intelligence/README.md`
 - `programs/resilient-home-intelligence/docs/README.md`
 - `programs/resilient-home-intelligence/docs/build-guides/README.md`
+- `programs/resilient-home-intelligence/docs/build-guides/integrated-parcel-kit-bom.md`
 - `programs/resilient-home-intelligence/docs/calibration/README.md`
 - `programs/resilient-home-intelligence/docs/data-model/README.md`
+- `programs/resilient-home-intelligence/docs/data-model/node-registry-schema.md`
 - `programs/resilient-home-intelligence/docs/data-model/parcel-state-schema.md`
 - `programs/resilient-home-intelligence/docs/pilot-playbooks/README.md`
 - `programs/resilient-home-intelligence/docs/pilot-playbooks/first-block-pilot.md`

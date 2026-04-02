@@ -19,6 +19,7 @@ Program-level system narrative and top-level operating model.
 - `feature-matrix-by-use-case.md` compares use cases, sensors, outputs, strengths, and constraints.
 - `product-requirements-phase-1.md` defines the first homeowner-focused product slice.
 - `block-level-operating-model.md` defines how shared block intelligence should work.
+- `integrated-parcel-system-spec.md` defines the unified parcel-kit architecture and cross-node integration rules.
 - `neighborhood-signal-transformation-overview.md` frames the privacy-scoped path from home signals to block intelligence.
 - `recommendation-engine-and-safety-language.md` defines guidance posture and language boundaries.
 - `pilot-success-metrics-and-evaluation.md` defines how early pilots should be judged.
@@ -31,7 +32,6 @@ Program-level system narrative and top-level operating model.
 - `data-rights-and-participant-controls-ux-outline.md` defines the participant-facing control model.
 - `network-effect-measurement-methodology.md` defines how to test whether nearby participation really improves the product.
 - `multi-unit-building-operating-model.md` extends the operating model to apartments, condos, and shared buildings.
-- `integrated-parcel-system-spec.md` defines the singular parcel-kit architecture that connects the current hardware families into one end-to-end design.
 - `resilience-hub-operating-model.md` defines how community hubs fit into the network.
 - `household-recommendation-catalog.md` inventories candidate household action guidance.
 - Root-level canonical overview files still contain additional program framing and should be reconciled here over time.

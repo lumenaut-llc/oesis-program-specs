@@ -18,6 +18,7 @@ Parcel-state fields are stubbed in `parcel-state-schema.md`. The first concrete 
 
 Machine-readable starter artifacts now live in:
 - `schemas/node-observation.schema.json`
+- `schemas/node-registry.schema.json`
 - `schemas/parcel-state.schema.json`
 - `schemas/sharing-settings.schema.json`
 - `schemas/consent-record.schema.json`
@@ -29,6 +30,7 @@ Machine-readable starter artifacts now live in:
 - `schemas/export-bundle.schema.json`
 - `schemas/retention-cleanup-report.schema.json`
 - `examples/node-observation.example.json`
+- `examples/node-registry.example.json`
 - `examples/normalized-observation.example.json`
 - `examples/parcel-state.example.json`
 - `examples/sharing-settings.example.json`
@@ -51,7 +53,6 @@ Machine-readable starter artifacts now live in:
 ## Next docs to add
 
 - `node-observation-schema.md`
-- node registry model
 - provenance summary model
 - sharing settings model
 - consent record model

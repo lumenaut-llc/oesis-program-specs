@@ -4,6 +4,8 @@ These JSON example payloads are intended as implementation scaffolding for the f
 
 - `node-observation.example.json`
   Example of a raw node packet from `rhi.bench-air.v1`.
+- `node-registry.example.json`
+  Example of a parcel-scoped registry binding multiple hardware nodes into one system.
 - `normalized-observation.example.json`
   Example of the canonical observation object emitted by the ingest boundary.
 - `parcel-state.example.json`

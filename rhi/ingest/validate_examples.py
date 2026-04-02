@@ -509,6 +509,79 @@ def validate_sharing_store(payload):
         validate_sharing_settings(entry["sharing"])
 
 
+def validate_node_registry(payload):
+    required = ["updated_at", "parcel_id", "nodes"]
+    for field in required:
+        require(field in payload, f"node registry missing required field: {field}")
+
+    require_type(payload["updated_at"], str, "updated_at")
+    require_type(payload["parcel_id"], str, "parcel_id")
+    require_type(payload["nodes"], list, "nodes")
+    require(len(payload["nodes"]) > 0, "nodes must not be empty")
+
+    valid_node_classes = {
+        "indoor_air",
+        "outdoor_reference",
+        "outdoor_pm_weather",
+        "low_point_flood",
+        "thermal_scene",
+    }
+    valid_hardware_families = {
+        "bench-air-node",
+        "mast-lite",
+        "weather-pm-mast",
+        "flood-node",
+        "thermal-pod",
+    }
+    valid_location_modes = {"indoor", "sheltered", "outdoor"}
+    valid_transport_modes = {"serial_only", "serial_bridge", "https_push", "mqtt"}
+    valid_power_modes = {"usb_c_mains", "ac_adapter", "poe", "battery", "solar_assist"}
+    valid_calibration_states = {"provisional", "verified", "needs_service", "unsupported"}
+    valid_privacy_modes = {"derived_only", "bounded_internal", "full_frame_internal"}
+
+    node_ids = set()
+    for i, node in enumerate(payload["nodes"]):
+        require_type(node, dict, f"nodes[{i}]")
+        for field in (
+            "node_id",
+            "node_class",
+            "hardware_family",
+            "schema_version",
+            "observation_family",
+            "location_mode",
+            "install_role",
+            "transport_mode",
+            "power_mode",
+            "calibration_state",
+            "installed_at",
+            "last_seen_at",
+            "enabled",
+        ):
+            require(field in node, f"nodes[{i}] missing required field: {field}")
+
+        require_type(node["node_id"], str, f"nodes[{i}].node_id")
+        require(node["node_id"] not in node_ids, f"nodes[{i}].node_id must be unique")
+        node_ids.add(node["node_id"])
+        require(node["node_class"] in valid_node_classes, f"nodes[{i}].node_class invalid")
+        require(node["hardware_family"] in valid_hardware_families, f"nodes[{i}].hardware_family invalid")
+        require_type(node["schema_version"], str, f"nodes[{i}].schema_version")
+        require(node["schema_version"].startswith("rhi."), f"nodes[{i}].schema_version invalid")
+        require_type(node["observation_family"], str, f"nodes[{i}].observation_family")
+        require(node["location_mode"] in valid_location_modes, f"nodes[{i}].location_mode invalid")
+        require_type(node["install_role"], str, f"nodes[{i}].install_role")
+        require(node["transport_mode"] in valid_transport_modes, f"nodes[{i}].transport_mode invalid")
+        require(node["power_mode"] in valid_power_modes, f"nodes[{i}].power_mode invalid")
+        require(node["calibration_state"] in valid_calibration_states, f"nodes[{i}].calibration_state invalid")
+        require_type(node["installed_at"], str, f"nodes[{i}].installed_at")
+        require_type(node["last_seen_at"], str, f"nodes[{i}].last_seen_at")
+        require_type(node["enabled"], bool, f"nodes[{i}].enabled")
+
+        if "firmware_version" in node:
+            require_type(node["firmware_version"], str, f"nodes[{i}].firmware_version")
+        if "privacy_mode" in node:
+            require(node["privacy_mode"] in valid_privacy_modes, f"nodes[{i}].privacy_mode invalid")
+
+
 def validate_operator_access_event(payload):
     required = ["event_id", "occurred_at", "actor", "action", "parcel_id", "data_classes", "justification"]
     for field in required:
@@ -622,6 +695,7 @@ def main():
         ("parcel state", EXAMPLES_DIR / "parcel-state.example.json", validate_parcel_state),
         ("evidence summary", EXAMPLES_DIR / "evidence-summary.example.json", validate_evidence_summary),
         ("sharing settings", EXAMPLES_DIR / "sharing-settings.example.json", validate_sharing_settings),
+        ("node registry", EXAMPLES_DIR / "node-registry.example.json", validate_node_registry),
         ("consent record", EXAMPLES_DIR / "consent-record.example.json", validate_consent_record),
         ("rights request", EXAMPLES_DIR / "rights-request.example.json", validate_rights_request),
         ("shared neighborhood signal", EXAMPLES_DIR / "shared-neighborhood-signal.example.json", validate_shared_neighborhood_signal),

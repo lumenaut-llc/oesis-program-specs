@@ -13,6 +13,11 @@ This spec is optimized for a strong timeline and a phase-1 homeowner product.
 - treat the parcel kit as a coordinated system of nodes, not one all-in-one enclosure
 - avoid requiring every hardware family before the first credible pilot
 
+Supporting specs:
+
+- `../data-model/node-registry-schema.md`
+- `../build-guides/integrated-parcel-kit-bom.md`
+
 ## Core design rule
 
 A parcel may have multiple purpose-built nodes, but it should still behave as one system with:
@@ -230,10 +235,8 @@ What should be singular is:
 
 ## Immediate spec work still needed
 
-- node-registry schema for multi-node parcels
 - canonical auth and provisioning posture for homeowner-run nodes
 - normalized observation schemas for flood, weather/PM, and thermal nodes
-- parcel-kit BOMs by design tier
 - calibration record format shared across node classes
 - install metadata standard that inference can trust
 
