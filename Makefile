@@ -1,10 +1,10 @@
 .PHONY: rhi-demo rhi-validate rhi-check rhi-http-check
 
 rhi-demo:
-	python3 programs/resilient-home-intelligence/software/parcel-platform/scripts/reference_pipeline.py
+	python3 -m rhi.parcel_platform.reference_pipeline
 
 rhi-validate:
-	python3 programs/resilient-home-intelligence/software/ingest-service/scripts/validate_examples.py
+	python3 -m rhi.ingest.validate_examples
 
 rhi-check:
 	./scripts/rhi_smoke_check.sh

@@ -33,6 +33,8 @@ The first concrete ingest contract is `rhi.bench-air.v1`, produced by the bench-
 
 ## Implementation scaffold
 
+The `scripts/*.py` entrypoints are now thin compatibility wrappers around the canonical repo-root `rhi.ingest` package. From `repo/`, prefer `python3 -m rhi.ingest.validate_examples` and the other `python3 -m rhi.ingest.*` commands when writing new runbooks or automation.
+
 The first executable contract check lives in `scripts/validate_examples.py`. It validates the current example payloads in `../../docs/data-model/examples/` against the MVP expectations for:
 - `rhi.bench-air.v1` node observations
 - parcel-state snapshots

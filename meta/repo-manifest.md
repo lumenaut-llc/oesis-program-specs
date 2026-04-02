@@ -23,6 +23,7 @@
 - `programs/resilient-home-intelligence/docs/privacy-governance/permissions-matrix.md`
 - `programs/resilient-home-intelligence/docs/system-overview/README.md`
 - `programs/resilient-home-intelligence/docs/system-overview/canonical-links.md`
+- `programs/resilient-home-intelligence/docs/system-overview/integrated-parcel-system-spec.md`
 - `programs/resilient-home-intelligence/hardware/README.md`
 - `programs/resilient-home-intelligence/hardware/bench-air-node/README.md`
 - `programs/resilient-home-intelligence/hardware/bench-air-node/build-guide.md`

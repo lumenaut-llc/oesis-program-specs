@@ -47,6 +47,8 @@ The first version should do a small number of things well:
 
 ## Implementation scaffold
 
+The `scripts/*.py` entrypoints are now thin compatibility wrappers around the canonical repo-root `rhi.parcel_platform` package. From `repo/`, prefer `python3 -m rhi.parcel_platform.reference_pipeline` and the other `python3 -m rhi.parcel_platform.*` commands for new local operator flows.
+
 The first executable parcel-platform reference lives in `scripts/format_parcel_view.py`. It reads a parcel-state snapshot and emits the homeowner-facing response shape described in `interfaces.md`.
 
 `scripts/serve_parcel_api.py` now exposes the same reference governance loop through local API endpoints, including summary readout, rights-request processing, and retention cleanup.

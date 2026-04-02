@@ -31,6 +31,7 @@ Program-level system narrative and top-level operating model.
 - `data-rights-and-participant-controls-ux-outline.md` defines the participant-facing control model.
 - `network-effect-measurement-methodology.md` defines how to test whether nearby participation really improves the product.
 - `multi-unit-building-operating-model.md` extends the operating model to apartments, condos, and shared buildings.
+- `integrated-parcel-system-spec.md` defines the singular parcel-kit architecture that connects the current hardware families into one end-to-end design.
 - `resilience-hub-operating-model.md` defines how community hubs fit into the network.
 - `household-recommendation-catalog.md` inventories candidate household action guidance.
 - Root-level canonical overview files still contain additional program framing and should be reconciled here over time.

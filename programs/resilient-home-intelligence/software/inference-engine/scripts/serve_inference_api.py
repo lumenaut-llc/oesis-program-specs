@@ -1,107 +1,17 @@
 #!/usr/bin/env python3
 
-import argparse
-import json
-from http import HTTPStatus
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import sys as _sys
+from pathlib import Path as _Path
 
-from infer_parcel_state import InferenceError, infer_parcel_state
+_SOFTWARE_ROOT = _Path(__file__).resolve().parents[2]
+if str(_SOFTWARE_ROOT) not in _sys.path:
+    _sys.path.insert(0, str(_SOFTWARE_ROOT))
 
+from _script_wrapper import export_canonical_module as _export_canonical_module
+from _script_wrapper import run_canonical_main as _run_canonical_main
 
-MODEL_INFO = {
-    "model_id": "hazard-logic-v0",
-    "mode": "rules-based",
-    "status": "active",
-}
-
-
-class InferenceRequestHandler(BaseHTTPRequestHandler):
-    server_version = "RHIInference/0.1"
-
-    def _send_json(self, status: int, payload: dict):
-        body = json.dumps(payload, indent=2, sort_keys=True).encode("utf-8")
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
-
-    def _read_json(self):
-        content_length = int(self.headers.get("Content-Length", "0"))
-        raw = self.rfile.read(content_length)
-        try:
-            return json.loads(raw.decode("utf-8"))
-        except json.JSONDecodeError as exc:
-            raise InferenceError(f"request body: invalid JSON: {exc}") from exc
-
-    def do_GET(self):
-        if self.path == "/v1/inference/health":
-            self._send_json(
-                HTTPStatus.OK,
-                {
-                    "ok": True,
-                    "service": "inference-engine",
-                    "model": MODEL_INFO,
-                },
-            )
-            return
-
-        if self.path == "/v1/inference/models":
-            self._send_json(HTTPStatus.OK, {"models": [MODEL_INFO]})
-            return
-
-        self._send_json(HTTPStatus.NOT_FOUND, {"error": "not_found"})
-
-    def do_POST(self):
-        if self.path != "/v1/inference/parcel-state":
-            self._send_json(HTTPStatus.NOT_FOUND, {"error": "not_found"})
-            return
-
-        computed_at = self.headers.get("X-RHI-Computed-At")
-        try:
-            payload = self._read_json()
-            parcel_state = infer_parcel_state(payload, computed_at=computed_at)
-        except (InferenceError, KeyError) as exc:
-            self._send_json(
-                HTTPStatus.BAD_REQUEST,
-                {
-                    "ok": False,
-                    "error": "invalid_observation",
-                    "detail": str(exc),
-                },
-            )
-            return
-
-        self._send_json(
-            HTTPStatus.ACCEPTED,
-            {
-                "ok": True,
-                "parcel_state": parcel_state,
-            },
-        )
-
-    def log_message(self, format, *args):
-        return
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run a tiny local inference API for normalized observation testing.")
-    parser.add_argument("--host", default="127.0.0.1", help="Host interface to bind.")
-    parser.add_argument("--port", type=int, default=8788, help="Port to listen on.")
-    return parser.parse_args()
-
-
-def main():
-    args = parse_args()
-    server = ThreadingHTTPServer((args.host, args.port), InferenceRequestHandler)
-    print(f"Listening on http://{args.host}:{args.port}")
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        pass
-    finally:
-        server.server_close()
-
+_CANONICAL_MODULE = "rhi.inference.serve_inference_api"
+_export_canonical_module(_CANONICAL_MODULE, globals())
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(_run_canonical_main(_CANONICAL_MODULE))
