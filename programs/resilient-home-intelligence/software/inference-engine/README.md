@@ -37,4 +37,6 @@ The goal is not perfect classification. The goal is a transparent first-pass par
 
 ## Implementation scaffold
 
+The `scripts/*.py` entrypoints are now thin compatibility wrappers around the canonical repo-root `rhi.inference` package. From `repo/`, prefer `python3 -m rhi.inference.infer_parcel_state` or `python3 -m rhi.inference.serve_inference_api` for new execution guidance.
+
 The first executable inference reference lives in `scripts/infer_parcel_state.py`. It reads a normalized observation example, applies intentionally simple rules, and emits a parcel-state snapshot that matches the MVP data contract.

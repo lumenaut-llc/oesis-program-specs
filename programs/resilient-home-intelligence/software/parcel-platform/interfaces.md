@@ -10,6 +10,24 @@
   Return recent parcel-state history.
 - `GET /v1/parcels/{parcel_id}/evidence-summary`
   Return a display-safe summary of evidence sources used by the latest state.
+- `POST /v1/parcels/state/evidence-summary`
+  Build a display-safe evidence summary directly from a parcel-state payload in the reference scaffold.
+- `GET /v1/parcels/{parcel_id}/sharing`
+  Return the current sharing-mode settings, notice versions, and revocation status.
+- `POST /v1/parcels/{parcel_id}/sharing`
+  Update sharing-mode settings with an explicit notice/version reference.
+- `POST /v1/parcels/{parcel_id}/rights/export`
+  Create an export request for homeowner-visible parcel data.
+- `POST /v1/parcels/{parcel_id}/rights/delete`
+  Create a deletion request for account-controlled parcel data.
+- `GET /v1/admin/reference-state/summary`
+  Return the current file-backed sharing, rights-request, and access-log summary used by the reference governance stack.
+- `POST /v1/admin/rights/process-export`
+  Complete a queued export request and write a JSON export bundle in the configured export directory.
+- `POST /v1/admin/rights/process-delete`
+  Complete a queued delete request and remove parcel sharing state from the reference store.
+- `POST /v1/admin/retention/cleanup`
+  Run conservative retention cleanup over the reference rights-request and access-log stores.
 
 ## Internal events / jobs
 
@@ -19,6 +37,10 @@
   Refresh parcel metadata and access rules.
 - `parcel.notification.candidate`
   Future event for noteworthy status changes or sharp confidence shifts.
+- `parcel.sharing.updated`
+  Refresh visibility and downstream sharing enforcement.
+- `parcel.rights_request.created`
+  Track export or deletion workflow state.
 
 ## Data contracts
 
@@ -31,10 +53,29 @@ Primary response shape for current state:
 - `statuses`
 - `confidence`
 - `evidence_mode`
+- `inference_basis`
+- `explanation_payload`
 - `reasons`
 - `hazards`
 - `freshness`
 - `provenance_summary`
+- `data_classes_visible`
+- `sharing_summary`
+
+Primary response shape for evidence summary:
+- `parcel_id`
+- `computed_at`
+- `evidence_mode`
+- `inference_basis`
+- `confidence`
+- `headline`
+- `confidence_band`
+- `top_drivers`
+- `top_limitations`
+- `source_breakdown`
+- `grouped_contributions`
+- `source_modes`
+- `freshness`
 
 Suggested response example:
 
@@ -43,21 +84,58 @@ Suggested response example:
   "parcel_id": "parcel_123",
   "computed_at": "2026-03-30T19:46:00Z",
   "statuses": {
-    "stay": "caution",
-    "enter": "unknown",
-    "escape": "safe",
-    "asset": "caution"
+    "shelter": "unknown",
+    "reentry": "unknown",
+    "egress": "unknown",
+    "asset_risk": "unknown"
   },
-  "confidence": 0.54,
-  "evidence_mode": "local_only",
+  "confidence": 0.30,
+  "evidence_mode": "insufficient",
+  "inference_basis": "insufficient",
+  "explanation_payload": {
+    "headline": "Estimate uses limited local evidence with low parcel certainty.",
+    "basis": {
+      "evidence_mode": "insufficient",
+      "inference_basis": "insufficient",
+      "confidence_band": "low"
+    },
+    "drivers": [
+      "Indoor gas-resistance trend shows a moderate change."
+    ],
+    "limitations": [
+      "The local node is indoor and does not represent parcel-wide outdoor conditions.",
+      "No flood-capable local sensor or public flood context is present."
+    ],
+    "evidence_contributions": [
+      {
+        "contribution_id": "local_gas_trend",
+        "source_class": "local",
+        "source_name": "bench-air-01",
+        "role": "driver",
+        "summary": "Indoor gas-resistance trend shows a moderate change.",
+        "hazards": ["smoke"],
+        "weight": 0.32,
+        "visibility": "homeowner_safe"
+      }
+    ],
+    "source_breakdown": {
+      "local": true,
+      "shared": false,
+      "public": false,
+      "parcel_context": false,
+      "system": true
+    }
+  },
   "reasons": [
-    "Indoor air observations show an abrupt gas-trend change.",
-    "No confirming outdoor or neighborhood evidence is available."
+    "Local gas-resistance trend shows a moderate change, but it is not a direct smoke concentration measurement.",
+    "Current local evidence comes from an indoor node and does not directly represent parcel-wide outdoor conditions.",
+    "No flood-capable local sensor or public flood context is present, so flood-related outputs remain unknown.",
+    "Confidence is limited because the current decision uses sparse single-node evidence."
   ],
   "hazards": {
-    "smoke_probability": 0.42,
-    "flood_probability": 0.05,
-    "heat_probability": 0.27
+    "smoke_probability": 0.12,
+    "flood_probability": 0.00,
+    "heat_probability": 0.02
   },
   "freshness": {
     "latest_observation_at": "2026-03-30T19:45:00Z",
@@ -65,10 +143,20 @@ Suggested response example:
     "stale": false
   },
   "provenance_summary": {
-    "observation_count": 3,
+    "observation_count": 1,
     "source_modes": [
       "homeowner_node"
     ]
+  },
+  "data_classes_visible": [
+    "private_parcel_data",
+    "derived_parcel_state"
+  ],
+  "sharing_summary": {
+    "private_only": true,
+    "network_assist": false,
+    "neighborhood_aggregate": false,
+    "research_or_pilot": false
   }
 }
 ```
@@ -79,3 +167,4 @@ Suggested response example:
 - Should the platform expose hazard probabilities directly, or mostly keep them behind explanation text and status labels?
 - What should trigger a homeowner notification: status transitions, freshness failures, confidence drops, or all three?
 - Which parts of provenance should be hidden or generalized when data comes from shared neighborhood context?
+- Which sharing updates should require step-up confirmation because they materially expand data use?

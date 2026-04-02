@@ -5,3 +5,4 @@
 - How should conflicting evidence be surfaced when local sensors and public feeds disagree?
 - How should parcel-specific features such as basement presence, slope, or defensible space enter the model if they are missing for many parcels?
 - What recomputation cadence is needed when no new evidence arrives but public context changes?
+- Which public context sources should be considered strong enough to move evidence mode from `insufficient` to `local_plus_public`?

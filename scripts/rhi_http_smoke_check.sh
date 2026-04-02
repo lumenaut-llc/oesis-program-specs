@@ -19,15 +19,15 @@ cleanup() {
 trap cleanup EXIT
 
 echo "[rhi-http-check] starting ingest api"
-python3 programs/resilient-home-intelligence/software/ingest-service/scripts/serve_ingest_api.py --host 127.0.0.1 --port 8787 >/tmp/rhi-ingest.log 2>&1 &
+python3 -m rhi.ingest.serve_ingest_api --host 127.0.0.1 --port 8787 >/tmp/rhi-ingest.log 2>&1 &
 INGEST_PID=$!
 
 echo "[rhi-http-check] starting inference api"
-python3 programs/resilient-home-intelligence/software/inference-engine/scripts/serve_inference_api.py --host 127.0.0.1 --port 8788 >/tmp/rhi-inference.log 2>&1 &
+python3 -m rhi.inference.serve_inference_api --host 127.0.0.1 --port 8788 >/tmp/rhi-inference.log 2>&1 &
 INFERENCE_PID=$!
 
 echo "[rhi-http-check] starting parcel-platform api"
-python3 programs/resilient-home-intelligence/software/parcel-platform/scripts/serve_parcel_api.py --host 127.0.0.1 --port 8789 >/tmp/rhi-parcel.log 2>&1 &
+python3 -m rhi.parcel_platform.serve_parcel_api --host 127.0.0.1 --port 8789 >/tmp/rhi-parcel.log 2>&1 &
 PARCEL_PID=$!
 
 sleep 1

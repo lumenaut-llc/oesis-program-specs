@@ -2,6 +2,8 @@
 
 Resilient Home Intelligence is a flagship program inside Open Source DIY Tech.
 
+Read `NOTICE.md` before treating this program as a complete technical open release.
+
 ## Mission
 
 Create homeowner-owned environmental sensing and parcel-level situational intelligence that:
@@ -10,6 +12,8 @@ Create homeowner-owned environmental sensing and parcel-level situational intell
 - preserves private ownership of raw data
 - uses external public data only inside the platform
 - stays modular and open
+
+This program is currently being released in stages. During the public preview, some technical materials remain intentionally held back while release sequencing is completed.
 
 ## Program structure
 
@@ -28,10 +32,10 @@ Create homeowner-owned environmental sensing and parcel-level situational intell
 ## Current MVP outputs
 
 For each parcel:
-- stay status
-- enter status
-- escape status
-- asset status
+- shelter conditions estimate
+- reentry conditions estimate
+- egress conditions estimate
+- asset risk estimate
 - confidence
 - evidence mode
 - reasons
@@ -43,3 +47,12 @@ For each parcel:
 - shared by choice
 - more nodes improve precision, not basic functionality
 - explicit provenance and uncertainty
+
+## Read first
+
+- `NOTICE.md`
+- `legal/ip.md`
+- `legal/GOVERNANCE.md`
+- `docs/privacy-governance/data-ownership.md`
+- `docs/privacy-governance/privacy.md`
+- `docs/release/2026-04-14/NOTICE.md`

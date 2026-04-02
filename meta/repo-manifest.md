@@ -14,8 +14,10 @@
 - `programs/resilient-home-intelligence/README.md`
 - `programs/resilient-home-intelligence/docs/README.md`
 - `programs/resilient-home-intelligence/docs/build-guides/README.md`
+- `programs/resilient-home-intelligence/docs/build-guides/integrated-parcel-kit-bom.md`
 - `programs/resilient-home-intelligence/docs/calibration/README.md`
 - `programs/resilient-home-intelligence/docs/data-model/README.md`
+- `programs/resilient-home-intelligence/docs/data-model/node-registry-schema.md`
 - `programs/resilient-home-intelligence/docs/data-model/parcel-state-schema.md`
 - `programs/resilient-home-intelligence/docs/pilot-playbooks/README.md`
 - `programs/resilient-home-intelligence/docs/pilot-playbooks/first-block-pilot.md`
@@ -23,6 +25,7 @@
 - `programs/resilient-home-intelligence/docs/privacy-governance/permissions-matrix.md`
 - `programs/resilient-home-intelligence/docs/system-overview/README.md`
 - `programs/resilient-home-intelligence/docs/system-overview/canonical-links.md`
+- `programs/resilient-home-intelligence/docs/system-overview/integrated-parcel-system-spec.md`
 - `programs/resilient-home-intelligence/hardware/README.md`
 - `programs/resilient-home-intelligence/hardware/bench-air-node/README.md`
 - `programs/resilient-home-intelligence/hardware/bench-air-node/build-guide.md`

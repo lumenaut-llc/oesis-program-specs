@@ -5,10 +5,10 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
 echo "[rhi-check] validating example payloads"
-python3 programs/resilient-home-intelligence/software/ingest-service/scripts/validate_examples.py >/tmp/rhi-validate.out
+python3 -m rhi.ingest.validate_examples >/tmp/rhi-validate.out
 
 echo "[rhi-check] running reference pipeline"
-python3 programs/resilient-home-intelligence/software/parcel-platform/scripts/reference_pipeline.py >/tmp/rhi-demo.out
+python3 -m rhi.parcel_platform.reference_pipeline >/tmp/rhi-demo.out
 
 echo "[rhi-check] checking pipeline output shape"
 python3 - <<'PY'

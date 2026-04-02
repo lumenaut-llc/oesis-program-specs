@@ -22,6 +22,9 @@
 - docs/pilot-playbooks/
 
 ## Legal
+- NOTICE.md
 - legal/licenses/
 - legal/defensive-publication/
 - legal/contribution-policy/
+- legal/GOVERNANCE.md
+- legal/ip.md

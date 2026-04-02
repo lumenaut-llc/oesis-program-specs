@@ -26,6 +26,7 @@ The first version should do a small number of things well:
 - show the reasons and provenance summary behind it
 - show whether the assessment is based on local evidence, public evidence, or both
 - avoid pretending confidence is higher than it is
+- keep sharing, rights requests, reference audit state, and retention actions inspectable for pilot operations
 
 ## Adjacent systems
 
@@ -34,8 +35,22 @@ The first version should do a small number of things well:
 - privacy and governance rules constrain what neighborhood or external context can be shown
 - shared-map may later consume summarized parcel outputs, but the parcel platform stays parcel-first
 
+## Reference tools
+
+- `scripts/format_parcel_view.py`
+- `scripts/serve_parcel_api.py`
+- `scripts/summarize_reference_state.py`
+- `scripts/admin_reference_state.py`
+- `scripts/process_rights_requests.py`
+- `scripts/export_parcel_bundle.py`
+- `scripts/run_retention_cleanup.py`
+
 ## Implementation scaffold
 
+The `scripts/*.py` entrypoints are now thin compatibility wrappers around the canonical repo-root `rhi.parcel_platform` package. From `repo/`, prefer `python3 -m rhi.parcel_platform.reference_pipeline` and the other `python3 -m rhi.parcel_platform.*` commands for new local operator flows.
+
 The first executable parcel-platform reference lives in `scripts/format_parcel_view.py`. It reads a parcel-state snapshot and emits the homeowner-facing response shape described in `interfaces.md`.
+
+`scripts/serve_parcel_api.py` now exposes the same reference governance loop through local API endpoints, including summary readout, rights-request processing, and retention cleanup.
 
 For a full demo across the current reference stack, use `scripts/reference_pipeline.py`. It runs the raw packet through normalization, inference, and parcel formatting in one command.
