@@ -34,11 +34,7 @@ Define the exact serial payload shape the weather-pm-mast should emit during fir
       "gas_resistance_ohm": 149880
     },
     "sps30": {
-      "present": true,
-      "pm1_ugm3": 7.2,
-      "pm2_5_ugm3": 10.8,
-      "pm4_ugm3": 12.1,
-      "pm10_ugm3": 14.0
+      "present": false
     }
   },
   "derived": {
@@ -63,4 +59,4 @@ The first scaffold supports:
 
 - serial-only bring-up with placeholder timestamps
 - optional Wi-Fi/NTP time sync if credentials are configured
-- PM-first packet output with placeholder PM values until real SPS30 integration is added
+- an `sps30` block that stays `present: false` until real SPS30 transport integration is added
