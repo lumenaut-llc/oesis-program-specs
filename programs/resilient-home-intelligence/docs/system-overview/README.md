@@ -20,6 +20,7 @@ Program-level system narrative and top-level operating model.
 - `product-requirements-phase-1.md` defines the first homeowner-focused product slice.
 - `block-level-operating-model.md` defines how shared block intelligence should work.
 - `integrated-parcel-system-spec.md` defines the unified parcel-kit architecture and cross-node integration rules.
+- `../../media/diagrams/prototype-integration-diagram-pack.md` provides a shared diagram pack for prototype integration, architecture avenues, and design possibilities.
 - `neighborhood-signal-transformation-overview.md` frames the privacy-scoped path from home signals to block intelligence.
 - `recommendation-engine-and-safety-language.md` defines guidance posture and language boundaries.
 - `pilot-success-metrics-and-evaluation.md` defines how early pilots should be judged.

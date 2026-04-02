@@ -3,7 +3,7 @@
 ## Responsibilities
 
 - boot reliably and identify installed sensors
-- sample the environmental stack and PM sensor on a predictable cadence
+- sample the environmental stack on a predictable cadence and only emit PM data after real SPS30 integration
 - emit timestamped JSON packets with node metadata
 - stay backward-compatible with the simpler ingest path where practical
 - surface health telemetry and read failures without hiding them
@@ -39,11 +39,7 @@ Suggested first-build packet:
       "gas_resistance_ohm": 149880
     },
     "sps30": {
-      "present": true,
-      "pm1_ugm3": 7.2,
-      "pm2_5_ugm3": 10.8,
-      "pm4_ugm3": 12.1,
-      "pm10_ugm3": 14.0
+      "present": false
     }
   },
   "derived": {

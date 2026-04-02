@@ -21,4 +21,4 @@ pio run -e weather_pm_mast_serial_json
 
 ## Notes
 
-The first scaffold keeps PM values placeholder-based until a real SPS30 transport integration is added. The purpose is to lock down the packet path, mast workflow, and build system first.
+The first scaffold keeps the `sps30` section present but marked unavailable until a real SPS30 transport integration is added. The purpose is to lock down the packet path, mast workflow, and build system first without fabricating live PM values.
