@@ -66,12 +66,14 @@ This is not a default public packet.
 Start with Packet 1, then add:
 
 1. `preview-execution-plan.md`
-2. `../../system-overview/integrated-parcel-system-spec.md`
-3. `../../data-model/node-registry-schema.md`
-4. `../../build-guides/integrated-parcel-kit-bom.md`
-5. `../../build-guides/parcel-kit-procurement-checklist.md`
-6. `../../build-guides/parcel-installation-checklist.md`
-7. `../../../../../meta/backlog.md`
+2. `implementation-status-matrix.md`
+3. `../../system-overview/integrated-parcel-system-spec.md`
+4. `../../data-model/node-registry-schema.md`
+5. `../../../software/operator-quickstart.md`
+6. `../../build-guides/integrated-parcel-kit-bom.md`
+7. `../../build-guides/parcel-kit-procurement-checklist.md`
+8. `../../build-guides/parcel-installation-checklist.md`
+9. `../../../../../meta/backlog.md`
 
 Rules:
 

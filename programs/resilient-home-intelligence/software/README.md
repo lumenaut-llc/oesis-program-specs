@@ -18,6 +18,15 @@ Read `NOTICE.md` before treating this subtree as a complete released software pa
   Run the current end-to-end reference pipeline from raw node packet to homeowner-facing parcel view.
 - `make rhi-validate`
   Validate the machine-readable example payloads used by the reference scripts.
+- `make rhi-check`
+  Validate examples and the reference pipeline output shape in one smoke check.
+- `make rhi-http-check`
+  Start the local APIs and validate the ingest-to-inference-to-parcel-view HTTP path.
+
+## Operator guide
+
+- `operator-quickstart.md`
+  Short repo-level guide for going from installed nodes to local packet validation, local APIs, and the preview site.
 
 ## Canonical Python layout
 

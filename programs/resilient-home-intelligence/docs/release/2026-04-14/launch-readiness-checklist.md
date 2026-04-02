@@ -9,6 +9,7 @@ Turn the repo's governance, legal, privacy, and claims rules into a practical re
 - assign an owner for each item
 - mark status as `not started`, `in progress`, or `done`
 - do not treat a document as complete unless the corresponding product or operational surface also exists where required
+- use `implementation-status-matrix.md` to separate evidence-backed implementation from docs-only or planned surfaces
 
 ## Governance and legal gates
 

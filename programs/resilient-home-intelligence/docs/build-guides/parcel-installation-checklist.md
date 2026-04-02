@@ -184,6 +184,7 @@ Primary references:
 - `../data-model/node-registry-schema.md`
 - `../data-model/examples/node-registry.example.json`
 - `../system-overview/integrated-parcel-system-spec.md`
+- `../../software/operator-quickstart.md`
 
 ## Acceptance criteria for the first integrated parcel kit
 

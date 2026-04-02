@@ -50,6 +50,7 @@ Start here:
 - `social-posts.md`
 - `landing-page-copy.md`
 - `preview-execution-plan.md`
+- `implementation-status-matrix.md`
 - `site/`
 - `pinned-post-opener.md`
 - `launch-checklist.md`

@@ -35,7 +35,7 @@ Make the current reference implementation dependable enough that docs, demos, an
 ### Next concrete steps
 
 1. Keep `make rhi-validate`, `make rhi-check`, and `make rhi-http-check` green before any release or pilot demo.
-2. Add one short operator README for how to start the reference services from `repo/`.
+2. Use `../../../software/operator-quickstart.md` as the short repo-level operator guide for running the reference services and preview site.
 3. Implement the next observation families after `air.node.snapshot`:
    `flood.low_point.snapshot`, `air.pm_weather.snapshot`, and `thermal.scene.snapshot`.
 4. Bind ingest authorization and parcel binding to the new node-registry object before adding more live node classes.
@@ -114,8 +114,8 @@ Start with the preview packet, then add:
 ### Next concrete steps
 
 1. Use `reviewer-packet-index.md` as the packet selector and cover page.
-2. Assign named owners on the launch-readiness checklist before any public announcement.
-3. Mark which statements are already implemented in product behavior and which are still policy direction.
+2. Use `implementation-status-matrix.md` to mark what is implemented, partial, docs-only, or planned.
+3. Assign named owners on the launch-readiness checklist before any public announcement.
 4. Use the public-preview-scope doc as the approval filter for every site page, screenshot, and social post.
 
 ### Stop-ship rule
@@ -171,4 +171,5 @@ Publish one small page that explains the preview, points people to the right doc
 - confirm the current site scaffold content against governance and claims docs
 - use the reviewer packet index to freeze who gets which packet
 - use the hardware procurement checklist to freeze the Tier 1 and Tier 2 order set
+- use the implementation-status matrix to separate product reality from policy direction
 - decide who owns release, legal/IP, and governance/privacy sign-off
