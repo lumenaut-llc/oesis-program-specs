@@ -3,7 +3,6 @@
 import argparse
 import json
 import sys
-from pathlib import Path
 
 from rhi.common.repo_paths import DOCS_EXAMPLES_DIR
 from rhi.ingest.normalize_packet import normalize_packet

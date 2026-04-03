@@ -22,6 +22,20 @@ Read `NOTICE.md` before treating this subtree as a complete released software pa
   Validate examples and the reference pipeline output shape in one smoke check.
 - `make rhi-http-check`
   Start the local APIs and validate the ingest-to-inference-to-parcel-view HTTP path.
+- `make rhi-test`
+  Run the software regression tests under `programs/resilient-home-intelligence/software/tests/`.
+- `make rhi-compile`
+  Compile the canonical Python modules to catch syntax-level regressions early.
+- `make rhi-lint`
+  Run the configured Ruff checks for the canonical Python modules and software tests.
+- `make rhi-ci`
+  Run the local lint, test, compile, and smoke-check sequence used by CI.
+
+## Local development setup
+
+- From `repo/`, install the lightweight developer dependencies with `python3 -m pip install -e .[dev]`.
+- The repo now carries Python tooling configuration in `pyproject.toml`.
+- GitHub Actions runs `make rhi-ci` on pushes and pull requests from `.github/workflows/python-checks.yml`.
 
 ## Operator guide
 

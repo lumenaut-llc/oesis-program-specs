@@ -36,6 +36,7 @@ sys.path.insert(0, str(PARCEL_SCRIPT_DIR))
 sys.path.insert(0, str(SHARED_SCRIPT_DIR))
 
 normalize_packet = load_module("normalize_packet", INGEST_SCRIPT_DIR / "normalize_packet.py")
+extract_latest_packet = load_module("extract_latest_packet", INGEST_SCRIPT_DIR / "extract_latest_packet.py")
 infer_parcel_state = load_module("infer_parcel_state", INFERENCE_SCRIPT_DIR / "infer_parcel_state.py")
 format_parcel_view = load_module("format_parcel_view", PARCEL_SCRIPT_DIR / "format_parcel_view.py")
 format_evidence_summary = load_module("format_evidence_summary", PARCEL_SCRIPT_DIR / "format_evidence_summary.py")
@@ -314,6 +315,89 @@ class ReferenceGovernanceTests(unittest.TestCase):
             bundle = json.loads(export_path.read_text(encoding="utf-8"))
             self.assertEqual(bundle["rights_requests"][0]["status"], "completed")
 
+    def test_delete_request_processing_keeps_request_submitted_when_sharing_write_fails(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            rights_path = Path(tmpdir) / "rights-store.json"
+            blocked_parent = Path(tmpdir) / "blocked"
+            blocked_parent.write_text("not a directory", encoding="utf-8")
+            sharing_path = blocked_parent / "sharing-store.json"
+
+            rights_store = {
+                "updated_at": "2026-03-30T20:40:00Z",
+                "requests": [
+                    {
+                        "request_id": "rights_delete_parcel_001",
+                        "parcel_id": "parcel_001",
+                        "account_id": "acct_123",
+                        "request_type": "delete",
+                        "status": "submitted",
+                        "created_at": "2026-03-30T20:20:00Z",
+                        "scope": ["private_parcel_data", "derived_parcel_state"],
+                        "requested_from_surface": "parcel_settings_ui",
+                    }
+                ],
+            }
+            rights_path.write_text(json.dumps(rights_store), encoding="utf-8")
+
+            with self.assertRaises(FileExistsError):
+                serve_parcel_api.process_delete_request(
+                    rights_path,
+                    sharing_path,
+                    "rights_delete_parcel_001",
+                )
+
+            updated_rights = json.loads(rights_path.read_text(encoding="utf-8"))
+            self.assertEqual(updated_rights["requests"][0]["status"], "submitted")
+
+    def test_export_request_processing_keeps_request_submitted_when_bundle_write_fails(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            rights_path = Path(tmpdir) / "rights-store.json"
+            access_path = Path(tmpdir) / "access-log.json"
+            blocked_parent = Path(tmpdir) / "blocked"
+            blocked_parent.write_text("not a directory", encoding="utf-8")
+            export_path = blocked_parent / "parcel-export.json"
+
+            sharing_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+            access_path.write_text("[]", encoding="utf-8")
+            rights_store = {
+                "updated_at": "2026-03-30T20:40:00Z",
+                "requests": [
+                    {
+                        "request_id": "rights_export_parcel_001",
+                        "parcel_id": "parcel_001",
+                        "account_id": "acct_123",
+                        "request_type": "export",
+                        "status": "submitted",
+                        "created_at": "2026-03-30T20:20:00Z",
+                        "scope": ["private_parcel_data", "derived_parcel_state"],
+                        "requested_from_surface": "parcel_settings_ui",
+                    }
+                ],
+            }
+            rights_path.write_text(json.dumps(rights_store), encoding="utf-8")
+
+            with self.assertRaises(FileExistsError):
+                serve_parcel_api.process_export_request(
+                    rights_path,
+                    sharing_path,
+                    access_path,
+                    "rights_export_parcel_001",
+                    export_path,
+                )
+
+            updated_rights = json.loads(rights_path.read_text(encoding="utf-8"))
+            self.assertEqual(updated_rights["requests"][0]["status"], "submitted")
+            self.assertFalse(export_path.exists())
+
+    def test_build_rights_request_uses_unique_ids_for_repeat_submissions(self):
+        first = serve_parcel_api.build_rights_request("parcel_001", "export")
+        second = serve_parcel_api.build_rights_request("parcel_001", "export")
+
+        self.assertNotEqual(first["request_id"], second["request_id"])
+        self.assertTrue(first["request_id"].startswith("rights_export_parcel_001_"))
+        self.assertTrue(second["request_id"].startswith("rights_export_parcel_001_"))
+
     def test_retention_cleanup_prunes_old_access_and_completed_export_requests(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             rights_path = Path(tmpdir) / "rights-store.json"
@@ -375,6 +459,36 @@ class ReferenceGovernanceTests(unittest.TestCase):
             updated_access = json.loads(access_path.read_text(encoding="utf-8"))
             self.assertEqual(updated_access, [])
 
+    def test_retention_cleanup_rolls_back_access_log_if_rights_write_fails(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            blocked_parent = Path(tmpdir) / "blocked"
+            blocked_parent.write_text("not a directory", encoding="utf-8")
+            rights_path = blocked_parent / "rights-store.json"
+            access_path = Path(tmpdir) / "access-log.json"
+            original_access_log = [
+                {
+                    "event_id": "access_old",
+                    "occurred_at": "2026-01-01T00:00:00Z",
+                    "actor": "parcel-platform-api",
+                    "action": "view_parcel_state",
+                    "parcel_id": "parcel_001",
+                    "data_classes": ["private_parcel_data"],
+                    "justification": "parcel_view_request",
+                }
+            ]
+            access_path.write_text(json.dumps(original_access_log), encoding="utf-8")
+
+            with self.assertRaises(FileExistsError):
+                run_retention_cleanup.run_cleanup(
+                    rights_store_path=rights_path,
+                    access_log_path=access_path,
+                    retention_days=30,
+                )
+
+            restored_access = json.loads(access_path.read_text(encoding="utf-8"))
+            self.assertEqual(restored_access, original_access_log)
+            self.assertFalse(rights_path.exists())
+
     def test_access_log_appends_are_safe_under_concurrency(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             access_path = Path(tmpdir) / "access-log.json"
@@ -409,6 +523,20 @@ class ReferenceGovernanceTests(unittest.TestCase):
                 {event["parcel_id"] for event in access_events},
                 {f"parcel_{index}" for index in range(12)},
             )
+
+    def test_sharing_lookup_does_not_persist_defaults_for_unknown_parcel(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            sharing_path.write_text(
+                json.dumps({"updated_at": "2026-03-30T20:40:00Z", "parcels": []}),
+                encoding="utf-8",
+            )
+
+            sharing = serve_parcel_api.sharing_from_store(sharing_path, "parcel_new")
+            stored = json.loads(sharing_path.read_text(encoding="utf-8"))
+
+            self.assertEqual(sharing["parcel_id"], "parcel_new")
+            self.assertEqual(stored["parcels"], [])
 
     def test_export_paths_are_confined_to_allowed_roots(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -477,6 +605,26 @@ class ReferenceGovernanceTests(unittest.TestCase):
 
         normalized = normalize_packet.normalize_packet(payload, parcel_id="parcel_demo_001")
         self.assertEqual(normalized["values"], {})
+
+    def test_extract_latest_packet_writes_latest_json_line_to_file(self):
+        serial_log = """
+        booting...
+        # comment
+        {"node_id":"bench-air-01","observed_at":"2026-03-30T19:44:00Z"}
+        noise
+        {"node_id":"bench-air-01","observed_at":"2026-03-30T19:45:00Z","sequence":2}
+        """
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_path = Path(tmpdir) / "latest-packet.json"
+
+            packet = extract_latest_packet.extract_latest_packet(serial_log)
+            extract_latest_packet.write_packet(packet, str(output_path))
+
+            written = output_path.read_text(encoding="utf-8")
+            self.assertTrue(written.endswith("\n"))
+            self.assertEqual(json.loads(written), packet)
+            self.assertEqual(packet["sequence"], 2)
 
     def test_combine_public_contexts_rejects_mixed_parcels(self):
         weather_context = json.loads((DOC_EXAMPLES / "public-context.example.json").read_text(encoding="utf-8"))
