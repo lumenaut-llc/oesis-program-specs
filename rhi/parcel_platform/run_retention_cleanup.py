@@ -6,6 +6,10 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from rhi.common.atomic_io import atomic_write_json as _atomic_write_json
+from rhi.common.atomic_io import read_optional_text as _read_optional_text
+from rhi.common.atomic_io import restore_previous_text as _restore_previous_text
+
 
 def parse_time(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
@@ -19,10 +23,6 @@ def load_optional_json(path: Path, default):
     if not path.exists():
         return default
     return json.loads(path.read_text(encoding="utf-8"))
-
-
-def save_json(path: Path, payload):
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
 
 
 def cleanup_access_log(access_log: list[dict], *, cutoff: datetime) -> tuple[list[dict], int]:
@@ -60,8 +60,17 @@ def run_cleanup(*, rights_store_path: Path, access_log_path: Path, retention_day
     cleaned_rights, rights_removed = cleanup_rights_store(rights_store, cutoff=cutoff)
 
     cleaned_rights["updated_at"] = now_iso()
-    save_json(rights_store_path, cleaned_rights)
-    save_json(access_log_path, cleaned_access)
+    previous_access_content = _read_optional_text(access_log_path)
+
+    _atomic_write_json(access_log_path, cleaned_access)
+    try:
+        _atomic_write_json(rights_store_path, cleaned_rights)
+    except Exception:
+        try:
+            _restore_previous_text(access_log_path, previous_access_content)
+        except Exception as rollback_exc:
+            raise OSError(f"failed to roll back access log after rights-store write failure: {rollback_exc}") from rollback_exc
+        raise
 
     return {
         "ran_at": now_iso(),

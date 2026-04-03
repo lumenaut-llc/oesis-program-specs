@@ -5,12 +5,12 @@ import json
 import sys
 from pathlib import Path
 
-from .serve_parcel_api import (
+from .reference_store import (
     append_access_event,
-    export_bundle_for_parcel,
     list_rights_requests,
     load_sharing_store,
     process_delete_request,
+    process_export_request,
     sharing_from_store,
     update_sharing_store,
 )
@@ -78,8 +78,6 @@ def cmd_process_delete_request(args: argparse.Namespace) -> int:
 
 
 def cmd_process_export_request(args: argparse.Namespace) -> int:
-    from .serve_parcel_api import process_export_request
-
     result = process_export_request(
         Path(args.rights_store).resolve(),
         Path(args.sharing_store).resolve(),

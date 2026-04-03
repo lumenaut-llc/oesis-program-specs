@@ -18,6 +18,26 @@ cleanup() {
 }
 trap cleanup EXIT
 
+wait_for_health() {
+  local service_name="$1"
+  local url="$2"
+  local output_path="$3"
+  local log_path="$4"
+
+  for _ in {1..20}; do
+    if curl -fsS "$url" >"$output_path"; then
+      return 0
+    fi
+    sleep 0.5
+  done
+
+  echo "[rhi-http-check] ${service_name} failed health check: ${url}" >&2
+  if [[ -f "$log_path" ]]; then
+    cat "$log_path" >&2
+  fi
+  return 1
+}
+
 echo "[rhi-http-check] starting ingest api"
 python3 -m rhi.ingest.serve_ingest_api --host 127.0.0.1 --port 8787 >/tmp/rhi-ingest.log 2>&1 &
 INGEST_PID=$!
@@ -30,12 +50,10 @@ echo "[rhi-http-check] starting parcel-platform api"
 python3 -m rhi.parcel_platform.serve_parcel_api --host 127.0.0.1 --port 8789 >/tmp/rhi-parcel.log 2>&1 &
 PARCEL_PID=$!
 
-sleep 1
-
 echo "[rhi-http-check] checking health endpoints"
-curl -s http://127.0.0.1:8787/v1/ingest/health >/tmp/rhi-ingest-health.json
-curl -s http://127.0.0.1:8788/v1/inference/health >/tmp/rhi-inference-health.json
-curl -s http://127.0.0.1:8789/v1/parcel-platform/health >/tmp/rhi-parcel-health.json
+wait_for_health "ingest-service" "http://127.0.0.1:8787/v1/ingest/health" "/tmp/rhi-ingest-health.json" "/tmp/rhi-ingest.log"
+wait_for_health "inference-engine" "http://127.0.0.1:8788/v1/inference/health" "/tmp/rhi-inference-health.json" "/tmp/rhi-inference.log"
+wait_for_health "parcel-platform" "http://127.0.0.1:8789/v1/parcel-platform/health" "/tmp/rhi-parcel-health.json" "/tmp/rhi-parcel.log"
 
 echo "[rhi-http-check] posting node packet to ingest api"
 curl -s -X POST http://127.0.0.1:8787/v1/ingest/node-packets \

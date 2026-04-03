@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "resilient-home-intelligence"
+version = "0.1.0"
+description = "Reference Python services for the Resilient Home Intelligence MVP."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.11,<1.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["rhi*"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+src = [
+  "rhi",
+  "programs/resilient-home-intelligence/software/tests",
+]
+
+[tool.ruff.lint]
+select = ["E9", "F"]

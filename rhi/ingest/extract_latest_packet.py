@@ -5,6 +5,8 @@ import json
 import sys
 from pathlib import Path
 
+from rhi.common.atomic_io import atomic_write_text
+
 from .validate_examples import ValidationError
 
 
@@ -68,7 +70,7 @@ def write_packet(packet: dict, output_value: str):
     if output_value == "-":
         print(serialized)
         return
-    Path(output_value).resolve().write_text(serialized + "\n", encoding="utf-8")
+    atomic_write_text(Path(output_value).resolve(), serialized + "\n")
 
 
 def main() -> int:
