@@ -6,8 +6,13 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from rhi.common.repo_paths import DOCS_EXAMPLES_DIR, INFERENCE_CONFIG_DIR
+from rhi.common.repo_paths import DOCS_EXAMPLES_DIR
 
+from .contracts import InferenceError
+from .contracts import validate_normalized_observation
+from .contracts import validate_parcel_context
+from .contracts import validate_public_context
+from .contracts import validate_shared_neighborhood_signal
 from .context_fusion import build_shared_neighborhood_context as _build_shared_neighborhood_context_impl
 from .context_fusion import combine_public_contexts as _combine_public_contexts_impl
 from .explanation import build_evidence_contributions
@@ -21,12 +26,25 @@ from .local_context import classify_local_context
 from .local_context import find_node_installation
 from .local_context import get_location_mode
 from .local_context import prior_adjustment
+from .policy import CONFIG_DIR
+from .policy import HAZARD_THRESHOLDS
+from .policy import HAZARD_THRESHOLDS_PATH
+from .policy import PUBLIC_CONTEXT_POLICY
+from .policy import PUBLIC_CONTEXT_POLICY_PATH
+from .policy import TRUST_GATES
+from .policy import TRUST_GATES_PATH
+from .policy import get_policy_for_source
+from .policy import load_hazard_thresholds
+from .policy import load_json
+from .policy import load_public_context_policy
+from .policy import load_trust_gates
+from .policy import parse_time
+from .policy import probability_from_gte_bands
+from .policy import probability_from_lt_bands
+from .policy import public_context_age_seconds
+from .policy import public_context_freshness_band
 
 EXAMPLES_DIR = DOCS_EXAMPLES_DIR
-CONFIG_DIR = INFERENCE_CONFIG_DIR
-PUBLIC_CONTEXT_POLICY_PATH = CONFIG_DIR / "public_context_policy.json"
-HAZARD_THRESHOLDS_PATH = CONFIG_DIR / "hazard_thresholds_v0.json"
-TRUST_GATES_PATH = CONFIG_DIR / "trust_gates_v0.json"
 
 __all__ = [
     "EXAMPLES_DIR",
@@ -74,14 +92,6 @@ __all__ = [
 ]
 
 
-class InferenceError(Exception):
-    pass
-
-
-def load_json(path: Path):
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
 def now_iso() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -98,130 +108,6 @@ def status_from_probability(probability: float, *, unknown_floor: float = 0.2) -
     if probability < 0.7:
         return "caution"
     return "unsafe"
-
-
-def parse_time(ts: str) -> datetime:
-    return datetime.fromisoformat(ts.replace("Z", "+00:00"))
-
-
-def validate_normalized_observation(payload: dict):
-    required = [
-        "observation_id",
-        "node_id",
-        "parcel_id",
-        "observed_at",
-        "ingested_at",
-        "observation_type",
-        "values",
-        "health",
-        "provenance",
-    ]
-    for field in required:
-        if field not in payload:
-            raise InferenceError(f"normalized observation missing required field: {field}")
-
-    if payload["observation_type"] != "air.node.snapshot":
-        raise InferenceError("observation_type must be air.node.snapshot")
-
-
-def validate_public_context(payload: dict):
-    required = [
-        "context_id",
-        "source_kind",
-        "source_name",
-        "observed_at",
-        "coverage_mode",
-        "parcel_id",
-        "hazards",
-        "summary",
-    ]
-    for field in required:
-        if field not in payload:
-            raise InferenceError(f"public context missing required field: {field}")
-
-    if payload["source_kind"] != "public_context":
-        raise InferenceError("public context source_kind must be public_context")
-
-
-def validate_parcel_context(payload: dict):
-    required = ["parcel_id", "site_profile", "node_installations", "parcel_priors"]
-    for field in required:
-        if field not in payload:
-            raise InferenceError(f"parcel context missing required field: {field}")
-
-
-def validate_shared_neighborhood_signal(payload: dict):
-    required = ["generated_at", "min_participants", "sharing_settings", "contributions"]
-    for field in required:
-        if field not in payload:
-            raise InferenceError(f"shared neighborhood signal missing required field: {field}")
-
-
-def load_public_context_policy() -> dict:
-    return load_json(PUBLIC_CONTEXT_POLICY_PATH)
-
-
-PUBLIC_CONTEXT_POLICY = load_public_context_policy()
-
-
-def load_hazard_thresholds() -> dict:
-    return load_json(HAZARD_THRESHOLDS_PATH)
-
-
-HAZARD_THRESHOLDS = load_hazard_thresholds()
-
-
-def load_trust_gates() -> dict:
-    return load_json(TRUST_GATES_PATH)
-
-
-TRUST_GATES = load_trust_gates()
-
-
-def get_policy_for_source(source_name: str) -> dict:
-    default_policy = PUBLIC_CONTEXT_POLICY["default_policy"]
-    override = PUBLIC_CONTEXT_POLICY.get("source_overrides", {}).get(source_name, {})
-    return {
-        "fresh_max_age_seconds": override.get("fresh_max_age_seconds", default_policy["fresh_max_age_seconds"]),
-        "aging_max_age_seconds": override.get("aging_max_age_seconds", default_policy["aging_max_age_seconds"]),
-        "stale_max_age_seconds": override.get("stale_max_age_seconds", default_policy["stale_max_age_seconds"]),
-        "hazard_multiplier": default_policy["hazard_multiplier"],
-        "confidence_adjustment": default_policy["confidence_adjustment"],
-    }
-
-
-def probability_from_lt_bands(value: float | None, bands: list[dict], default_probability: float) -> float:
-    if value is None:
-        return default_probability
-    for band in bands:
-        if value < band["lt"]:
-            return band["probability"]
-    return default_probability
-
-
-def probability_from_gte_bands(value: float | None, bands: list[dict], default_probability: float) -> float:
-    if value is None:
-        return default_probability
-    for band in bands:
-        if value >= band["gte"]:
-            return band["probability"]
-    return default_probability
-
-
-def public_context_age_seconds(public_context: dict, *, now: datetime) -> int:
-    return max(0, int((now - parse_time(public_context["observed_at"])).total_seconds()))
-
-
-def public_context_freshness_band(public_context: dict, *, now: datetime) -> str:
-    policy = get_policy_for_source(public_context["source_name"])
-    age_seconds = public_context_age_seconds(public_context, now=now)
-    if age_seconds <= policy["fresh_max_age_seconds"]:
-        return "fresh"
-    if age_seconds <= policy["aging_max_age_seconds"]:
-        return "aging"
-    if age_seconds <= policy["stale_max_age_seconds"]:
-        return "stale"
-    return "expired"
 
 
 def combine_public_contexts(public_contexts: list[dict]) -> dict | None:
