@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumenaut-llc.github.io/resilient-home-intelligence/schemas/house-state.schema.json",
+  "title": "RHI House State",
+  "type": "object",
+  "required": [
+    "parcel_id",
+    "updated_at",
+    "observed_at",
+    "indoor_air",
+    "hvac_state",
+    "device_state"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "parcel_id": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "indoor_air": { "type": "object" },
+    "hvac_state": { "type": "object" },
+    "device_state": { "type": "object" }
+  }
+}

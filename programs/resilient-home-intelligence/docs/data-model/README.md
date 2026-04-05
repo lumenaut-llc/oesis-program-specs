@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Canonical definitions for parcels, nodes, observations, states, permissions, and provenance.
+Canonical definitions for parcels, nodes, observations, states, permissions, provenance, and later-stage support objects.
 
 ## Minimum contents
 
@@ -14,12 +14,26 @@ Canonical definitions for parcels, nodes, observations, states, permissions, and
 
 ## Current status
 
-Parcel-state fields are stubbed in `parcel-state-schema.md`. The first concrete evidence contract should be documented in `node-observation-schema.md` for the bench-air-node MVP.
+The current center of gravity remains the `current v1` observation, parcel-context, and parcel-state contracts.
+
+`v1.5` adds separate support objects for:
+- house state
+- house capability
+- control compatibility
+- intervention events
+- verification outcomes
+
+Those support objects should not be mistaken for a breaking change to the current parcel-state contract.
 
 Machine-readable starter artifacts now live in:
 - `schemas/node-observation.schema.json`
 - `schemas/node-registry.schema.json`
 - `schemas/parcel-state.schema.json`
+- `schemas/house-state.schema.json`
+- `schemas/house-capability.schema.json`
+- `schemas/control-compatibility.schema.json`
+- `schemas/intervention-event.schema.json`
+- `schemas/verification-outcome.schema.json`
 - `schemas/sharing-settings.schema.json`
 - `schemas/consent-record.schema.json`
 - `schemas/rights-request.schema.json`
@@ -33,6 +47,11 @@ Machine-readable starter artifacts now live in:
 - `examples/node-registry.example.json`
 - `examples/normalized-observation.example.json`
 - `examples/parcel-state.example.json`
+- `examples/house-state.example.json`
+- `examples/house-capability.example.json`
+- `examples/control-compatibility.example.json`
+- `examples/intervention-event.example.json`
+- `examples/verification-outcome.example.json`
 - `examples/sharing-settings.example.json`
 - `examples/consent-record.example.json`
 - `examples/rights-request.example.json`

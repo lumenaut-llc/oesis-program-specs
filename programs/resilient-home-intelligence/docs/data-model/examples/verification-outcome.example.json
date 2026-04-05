@@ -1,0 +1,13 @@
+{
+  "verification_id": "verify_001",
+  "parcel_id": "parcel_001",
+  "intervention_id": "intv_001",
+  "evaluated_at": "2026-04-03T19:40:00Z",
+  "metric_name": "indoor_pm25_ugm3",
+  "baseline_value": 42.0,
+  "outcome_value": 19.5,
+  "assessment": "improved",
+  "confidence_band": "medium",
+  "response_window_minutes": 75,
+  "summary": "Indoor PM fell during the verification window after recirculation and purifier use."
+}

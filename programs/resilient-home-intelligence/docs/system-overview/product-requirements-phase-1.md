@@ -1,18 +1,36 @@
-# Product Requirements: Phase 1 Home Resilience Assistant
+# Product Requirements: Current v1 Home Resilience Assistant
 
 ## Purpose
 
-Define the first homeowner product that delivers immediate value with one participating home and no neighborhood dependency.
+Define the current `v1` homeowner product that delivers immediate value with one participating home and no neighborhood dependency.
 
 ## Product statement
 
-The phase-1 product helps a homeowner understand current home and parcel conditions, why those conditions matter, and what actions to consider during environmental disruption.
+The current `v1` product helps a homeowner understand current home and parcel conditions, why those conditions matter, and what actions to consider during environmental disruption.
 
 ## Primary product promise
 
 Useful alone on day one.
 More informative when public context is available.
 Honest about uncertainty.
+Not yet a full parcel adaptation or automation system.
+
+## Version boundary
+
+`current v1` is the parcel sensing and inference baseline.
+
+It should prove:
+- local sensing
+- parcel-state inference
+- confidence, freshness, and provenance
+- private-by-default data handling
+- partial-adoption usefulness
+
+It should not yet claim:
+- intervention verification as a product guarantee
+- ranked retrofit optimization
+- automation compatibility as a core UX promise
+- autonomous protective house behavior
 
 ## Target user
 
@@ -34,7 +52,7 @@ Secondary users:
 - tell me what reasonable actions I should consider now
 - help me prepare before conditions become severe
 
-## In-scope hazards for phase 1
+## In-scope hazards for current v1
 
 - smoke and indoor air burden
 - heat burden
@@ -138,6 +156,14 @@ The product shall capture enough home and parcel context to improve interpretati
 - relevant structure characteristics
 - optional user-specified sensitivities or priorities later
 
+### FR7: Honest stage boundary
+
+The system shall not imply that later-stage adaptation features already exist in the current product.
+
+Examples:
+- recommendations may mention recirculation or filtration if available, but the product should not imply that HVAC state is already being monitored unless that data path actually exists
+- the product may reference future support for intervention verification, but it should not present verification claims as current `v1` functionality
+
 ## Non-functional requirements
 
 ### NFR1: Truthfulness
@@ -164,7 +190,11 @@ The product shall remain usable when:
 
 The product shall avoid overwhelming the user with noisy alerts or complex setup steps.
 
-## Candidate phase-1 recommendations
+### NFR6: Democratic and homeowner-controlled posture
+
+The product shall preserve homeowner ownership, private-by-default handling, and voluntary participation so the network can grow without becoming a centralized household surveillance system.
+
+## Candidate current-v1 recommendations
 
 ### Smoke and air
 
@@ -203,7 +233,7 @@ The product shall avoid overwhelming the user with noisy alerts or complex setup
 - preserve device charging
 - prepare shelter-in-place resources
 
-## Phase-1 data requirements
+## Current-v1 data requirements
 
 - local sensor observations
 - sensor health metadata
@@ -211,6 +241,22 @@ The product shall avoid overwhelming the user with noisy alerts or complex setup
 - home installation context
 - public smoke and weather context where available
 - event history for trend detection
+
+## Minimum bridge after current v1
+
+The next stage after this product is `v1.5`, not a jump directly to automation.
+
+`v1.5` adds:
+- indoor PM2.5
+- indoor temperature and RH
+- HVAC mode, fan state, and recirculation/fresh-air state
+- purifier state
+- backup-power state
+- building and site metadata for orientation, shading, drainage, and filter-path constraints
+- intervention and outcome logging
+- control compatibility inventory
+
+These additions should land as separate support objects instead of breaking the current parcel-state shape.
 
 ## Phase-1 success metrics
 
@@ -228,6 +274,9 @@ The product shall avoid overwhelming the user with noisy alerts or complex setup
 - exact wildfire-front or evacuation prediction
 - medical diagnosis
 - authoritative emergency command language
+- bounded automation or device control
+- verified adaptation-performance scoring
+- parcel-specific retrofit ranking
 
 ## Risks and watchouts
 
@@ -243,3 +292,4 @@ The product shall avoid overwhelming the user with noisy alerts or complex setup
 - neighborhood signal transformation methods
 - additional hardware classes for flood, wind, and other hazards
 - block-level governance and sharing controls
+- `v1.5` support objects for house state, capability, compatibility, intervention, and verification

@@ -16,6 +16,26 @@
   Return the current sharing-mode settings, notice versions, and revocation status.
 - `POST /v1/parcels/{parcel_id}/sharing`
   Update sharing-mode settings with an explicit notice/version reference.
+- `GET /v1/parcels/{parcel_id}/house-state`
+  Return the latest private house-state support object if one exists.
+- `POST /v1/parcels/{parcel_id}/house-state`
+  Upsert the private house-state support object for one parcel.
+- `GET /v1/parcels/{parcel_id}/capabilities`
+  Return the latest private house-capability support object if one exists.
+- `POST /v1/parcels/{parcel_id}/capabilities`
+  Upsert the private house-capability support object for one parcel.
+- `GET /v1/parcels/{parcel_id}/controls`
+  Return the latest private control-compatibility support object if one exists.
+- `POST /v1/parcels/{parcel_id}/controls`
+  Upsert the private control-compatibility support object for one parcel.
+- `GET /v1/parcels/{parcel_id}/interventions`
+  Return private intervention-event records for one parcel.
+- `POST /v1/parcels/{parcel_id}/interventions`
+  Append a private intervention-event record for one parcel.
+- `GET /v1/parcels/{parcel_id}/verification`
+  Return private verification-outcome records for one parcel.
+- `POST /v1/parcels/{parcel_id}/verification`
+  Append a private verification-outcome record for one parcel.
 - `POST /v1/parcels/{parcel_id}/rights/export`
   Create an export request for homeowner-visible parcel data.
 - `POST /v1/parcels/{parcel_id}/rights/delete`
@@ -41,6 +61,12 @@
   Refresh visibility and downstream sharing enforcement.
 - `parcel.rights_request.created`
   Track export or deletion workflow state.
+- `parcel.house_state.updated`
+  Refresh house-state-dependent recommendation or verification views later.
+- `parcel.intervention.logged`
+  Track a bounded action or retrofit event.
+- `parcel.verification.logged`
+  Track the outcome window tied to a prior intervention.
 
 ## Data contracts
 
@@ -61,6 +87,17 @@ Primary response shape for current state:
 - `provenance_summary`
 - `data_classes_visible`
 - `sharing_summary`
+
+`current v1` remains centered on parcel-state.
+`v1.5` support objects stay separate from the state payload so the current contract does not break.
+
+Support-object response shapes:
+
+- `house_state`
+- `house_capability`
+- `control_compatibility`
+- `interventions`
+- `verification_outcomes`
 
 Primary response shape for evidence summary:
 - `parcel_id`
@@ -168,3 +205,5 @@ Suggested response example:
 - What should trigger a homeowner notification: status transitions, freshness failures, confidence drops, or all three?
 - Which parts of provenance should be hidden or generalized when data comes from shared neighborhood context?
 - Which sharing updates should require step-up confirmation because they materially expand data use?
+- Which support-object fields are genuinely required in `v1.5` versus better left optional until live pilots show their value?
+- Which future bounded-control permissions must be separated from ordinary data-sharing controls?

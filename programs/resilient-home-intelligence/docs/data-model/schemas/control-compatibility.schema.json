@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumenaut-llc.github.io/resilient-home-intelligence/schemas/control-compatibility.schema.json",
+  "title": "RHI Control Compatibility",
+  "type": "object",
+  "required": [
+    "parcel_id",
+    "updated_at",
+    "local_controller",
+    "control_surfaces"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "parcel_id": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "local_controller": { "type": "object" },
+    "control_surfaces": { "type": "array" }
+  }
+}

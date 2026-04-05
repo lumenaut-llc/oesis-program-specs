@@ -19,6 +19,9 @@ DEFAULT_RIGHTS_REQUEST = json.loads((EXAMPLES_DIR / "rights-request.example.json
 DEFAULT_SHARING_STORE = json.loads((EXAMPLES_DIR / "sharing-store.example.json").read_text(encoding="utf-8"))
 DEFAULT_RIGHTS_REQUEST_STORE = json.loads((EXAMPLES_DIR / "rights-request-store.example.json").read_text(encoding="utf-8"))
 DEFAULT_EXPORT_BUNDLE = json.loads((EXAMPLES_DIR / "export-bundle.example.json").read_text(encoding="utf-8"))
+DEFAULT_SUPPORT_OBJECT_STORE = {"updated_at": None, "records": []}
+DEFAULT_INTERVENTION_EVENT_STORE = {"updated_at": None, "events": []}
+DEFAULT_VERIFICATION_OUTCOME_STORE = {"updated_at": None, "outcomes": []}
 
 _STORE_LOCKS: dict[Path, threading.RLock] = {}
 _STORE_LOCKS_GUARD = threading.Lock()
@@ -152,6 +155,154 @@ def save_rights_store(path: Path, payload: dict):
         _save_json_store_unlocked(resolved, payload, touch_updated_at=True)
 
 
+def _load_support_store_unlocked(path: Path, *, collection_key: str, default_payload: dict):
+    return _load_json_store_unlocked(path, default_payload)
+
+
+def _load_parcel_support_object(path: Path, parcel_id: str, *, collection_key: str, default_payload: dict) -> dict | None:
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_support_store_unlocked(resolved, collection_key=collection_key, default_payload=default_payload)
+        for record in store[collection_key]:
+            if record.get("parcel_id") == parcel_id:
+                return deepcopy(record)
+        return None
+
+
+def _upsert_parcel_support_object(path: Path, payload: dict, *, collection_key: str, default_payload: dict) -> dict:
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_support_store_unlocked(resolved, collection_key=collection_key, default_payload=default_payload)
+        updated_store = deepcopy(store)
+        replaced = False
+        for i, record in enumerate(updated_store[collection_key]):
+            if record.get("parcel_id") == payload["parcel_id"]:
+                updated_store[collection_key][i] = deepcopy(payload)
+                replaced = True
+                break
+        if not replaced:
+            updated_store[collection_key].append(deepcopy(payload))
+        _save_json_store_unlocked(resolved, updated_store, touch_updated_at=True)
+        return deepcopy(payload)
+
+
+def _list_parcel_support_events(path: Path, parcel_id: str, *, collection_key: str, default_payload: dict) -> list[dict]:
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_support_store_unlocked(resolved, collection_key=collection_key, default_payload=default_payload)
+        return [deepcopy(item) for item in store[collection_key] if item.get("parcel_id") == parcel_id]
+
+
+def _append_parcel_support_event(path: Path, payload: dict, *, collection_key: str, default_payload: dict) -> dict:
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_support_store_unlocked(resolved, collection_key=collection_key, default_payload=default_payload)
+        updated_store = deepcopy(store)
+        updated_store[collection_key].append(deepcopy(payload))
+        _save_json_store_unlocked(resolved, updated_store, touch_updated_at=True)
+        return deepcopy(payload)
+
+
+def _remove_parcel_support_data(path: Path, parcel_id: str, *, collection_key: str, default_payload: dict) -> dict:
+    resolved = path.resolve()
+    with _store_lock(resolved):
+        store = _load_support_store_unlocked(resolved, collection_key=collection_key, default_payload=default_payload)
+        updated_store = deepcopy(store)
+        updated_store[collection_key] = [item for item in updated_store[collection_key] if item.get("parcel_id") != parcel_id]
+        _save_json_store_unlocked(resolved, updated_store, touch_updated_at=True)
+        return deepcopy(store)
+
+
+def load_house_state(path: Path, parcel_id: str) -> dict | None:
+    return _load_parcel_support_object(
+        path,
+        parcel_id,
+        collection_key="records",
+        default_payload=DEFAULT_SUPPORT_OBJECT_STORE,
+    )
+
+
+def upsert_house_state(path: Path, payload: dict) -> dict:
+    return _upsert_parcel_support_object(
+        path,
+        payload,
+        collection_key="records",
+        default_payload=DEFAULT_SUPPORT_OBJECT_STORE,
+    )
+
+
+def load_house_capability(path: Path, parcel_id: str) -> dict | None:
+    return _load_parcel_support_object(
+        path,
+        parcel_id,
+        collection_key="records",
+        default_payload=DEFAULT_SUPPORT_OBJECT_STORE,
+    )
+
+
+def upsert_house_capability(path: Path, payload: dict) -> dict:
+    return _upsert_parcel_support_object(
+        path,
+        payload,
+        collection_key="records",
+        default_payload=DEFAULT_SUPPORT_OBJECT_STORE,
+    )
+
+
+def load_control_compatibility(path: Path, parcel_id: str) -> dict | None:
+    return _load_parcel_support_object(
+        path,
+        parcel_id,
+        collection_key="records",
+        default_payload=DEFAULT_SUPPORT_OBJECT_STORE,
+    )
+
+
+def upsert_control_compatibility(path: Path, payload: dict) -> dict:
+    return _upsert_parcel_support_object(
+        path,
+        payload,
+        collection_key="records",
+        default_payload=DEFAULT_SUPPORT_OBJECT_STORE,
+    )
+
+
+def list_intervention_events(path: Path, parcel_id: str) -> list[dict]:
+    return _list_parcel_support_events(
+        path,
+        parcel_id,
+        collection_key="events",
+        default_payload=DEFAULT_INTERVENTION_EVENT_STORE,
+    )
+
+
+def append_intervention_event(path: Path, payload: dict) -> dict:
+    return _append_parcel_support_event(
+        path,
+        payload,
+        collection_key="events",
+        default_payload=DEFAULT_INTERVENTION_EVENT_STORE,
+    )
+
+
+def list_verification_outcomes(path: Path, parcel_id: str) -> list[dict]:
+    return _list_parcel_support_events(
+        path,
+        parcel_id,
+        collection_key="outcomes",
+        default_payload=DEFAULT_VERIFICATION_OUTCOME_STORE,
+    )
+
+
+def append_verification_outcome(path: Path, payload: dict) -> dict:
+    return _append_parcel_support_event(
+        path,
+        payload,
+        collection_key="outcomes",
+        default_payload=DEFAULT_VERIFICATION_OUTCOME_STORE,
+    )
+
+
 def append_rights_request(path: Path, request: dict):
     resolved = path.resolve()
     with _store_lock(resolved):
@@ -198,7 +349,17 @@ def remove_parcel_from_sharing_store(path: Path, parcel_id: str):
         _save_json_store_unlocked(resolved, store, touch_updated_at=True)
 
 
-def process_delete_request(rights_store_path: Path, sharing_store_path: Path, request_id: str) -> dict:
+def process_delete_request(
+    rights_store_path: Path,
+    sharing_store_path: Path,
+    request_id: str,
+    *,
+    house_state_store_path: Path | None = None,
+    house_capability_store_path: Path | None = None,
+    control_compatibility_store_path: Path | None = None,
+    intervention_event_store_path: Path | None = None,
+    verification_outcome_store_path: Path | None = None,
+) -> dict:
     rights_path = rights_store_path.resolve()
     sharing_path = sharing_store_path.resolve()
     with _store_lock(rights_path):
@@ -207,6 +368,25 @@ def process_delete_request(rights_store_path: Path, sharing_store_path: Path, re
         updated_store = deepcopy(store)
         updated_request = find_rights_request(updated_store, request_id)
         updated_request["status"] = "completed"
+
+        support_backups: list[tuple[Path, dict]] = []
+        support_specs = [
+            (house_state_store_path, "records", DEFAULT_SUPPORT_OBJECT_STORE),
+            (house_capability_store_path, "records", DEFAULT_SUPPORT_OBJECT_STORE),
+            (control_compatibility_store_path, "records", DEFAULT_SUPPORT_OBJECT_STORE),
+            (intervention_event_store_path, "events", DEFAULT_INTERVENTION_EVENT_STORE),
+            (verification_outcome_store_path, "outcomes", DEFAULT_VERIFICATION_OUTCOME_STORE),
+        ]
+        for maybe_path, collection_key, default_payload in support_specs:
+            if maybe_path is None:
+                continue
+            backup = _remove_parcel_support_data(
+                maybe_path.resolve(),
+                request["parcel_id"],
+                collection_key=collection_key,
+                default_payload=default_payload,
+            )
+            support_backups.append((maybe_path.resolve(), backup))
 
         with _store_lock(sharing_path):
             sharing_store = _load_json_store_unlocked(sharing_path, DEFAULT_SHARING_STORE)
@@ -218,6 +398,8 @@ def process_delete_request(rights_store_path: Path, sharing_store_path: Path, re
             try:
                 _save_json_store_unlocked(rights_path, updated_store, touch_updated_at=True)
             except Exception:
+                for backup_path, backup_payload in support_backups:
+                    _atomic_write_json(backup_path, backup_payload)
                 _atomic_write_json(sharing_path, sharing_store)
                 raise
         return deepcopy(updated_request)
@@ -229,6 +411,11 @@ def export_bundle_for_parcel(
     rights_store_path: Path,
     access_log_path: Path,
     parcel_state_path: Path | None = None,
+    house_state_store_path: Path | None = None,
+    house_capability_store_path: Path | None = None,
+    control_compatibility_store_path: Path | None = None,
+    intervention_event_store_path: Path | None = None,
+    verification_outcome_store_path: Path | None = None,
     *,
     sharing_store: dict | None = None,
     rights_store: dict | None = None,
@@ -261,6 +448,28 @@ def export_bundle_for_parcel(
         if payload.get("parcel_id") == parcel_id:
             parcel_state = payload
 
+    house_state = load_house_state(house_state_store_path, parcel_id) if house_state_store_path else deepcopy(DEFAULT_EXPORT_BUNDLE["house_state"])
+    house_capability = (
+        load_house_capability(house_capability_store_path, parcel_id)
+        if house_capability_store_path
+        else deepcopy(DEFAULT_EXPORT_BUNDLE["house_capability"])
+    )
+    control_compatibility = (
+        load_control_compatibility(control_compatibility_store_path, parcel_id)
+        if control_compatibility_store_path
+        else deepcopy(DEFAULT_EXPORT_BUNDLE["control_compatibility"])
+    )
+    intervention_events = (
+        list_intervention_events(intervention_event_store_path, parcel_id)
+        if intervention_event_store_path
+        else deepcopy(DEFAULT_EXPORT_BUNDLE["intervention_events"])
+    )
+    verification_outcomes = (
+        list_verification_outcomes(verification_outcome_store_path, parcel_id)
+        if verification_outcome_store_path
+        else deepcopy(DEFAULT_EXPORT_BUNDLE["verification_outcomes"])
+    )
+
     return {
         "generated_at": now_iso(),
         "parcel_id": parcel_id,
@@ -268,6 +477,11 @@ def export_bundle_for_parcel(
         "rights_requests": rights_requests,
         "access_events": access_events,
         "parcel_state": parcel_state,
+        "house_state": house_state,
+        "house_capability": house_capability,
+        "control_compatibility": control_compatibility,
+        "intervention_events": intervention_events,
+        "verification_outcomes": verification_outcomes,
     }
 
 
@@ -278,6 +492,12 @@ def process_export_request(
     request_id: str,
     output_path: Path,
     parcel_state_path: Path | None = None,
+    *,
+    house_state_store_path: Path | None = None,
+    house_capability_store_path: Path | None = None,
+    control_compatibility_store_path: Path | None = None,
+    intervention_event_store_path: Path | None = None,
+    verification_outcome_store_path: Path | None = None,
 ) -> dict:
     rights_path = rights_store_path.resolve()
     with _store_lock(rights_path):
@@ -293,6 +513,11 @@ def process_export_request(
             rights_store_path,
             access_log_path,
             parcel_state_path=parcel_state_path,
+            house_state_store_path=house_state_store_path,
+            house_capability_store_path=house_capability_store_path,
+            control_compatibility_store_path=control_compatibility_store_path,
+            intervention_event_store_path=intervention_event_store_path,
+            verification_outcome_store_path=verification_outcome_store_path,
             rights_store=updated_store,
         )
         output_path = output_path.resolve()
@@ -378,10 +603,15 @@ __all__ = [
     "find_rights_request",
     "list_rights_requests",
     "load_access_log",
+    "load_control_compatibility",
+    "load_house_capability",
+    "load_house_state",
     "load_rights_store",
     "load_sharing_store",
     "now_iso",
     "parcel_ref_for_id",
+    "append_intervention_event",
+    "append_verification_outcome",
     "process_delete_request",
     "process_export_request",
     "remove_parcel_from_sharing_store",
@@ -391,6 +621,11 @@ __all__ = [
     "save_rights_store",
     "save_sharing_store",
     "sharing_from_store",
+    "list_intervention_events",
+    "list_verification_outcomes",
+    "upsert_control_compatibility",
+    "upsert_house_capability",
+    "upsert_house_state",
     "update_rights_request_status",
     "update_sharing_store",
 ]
