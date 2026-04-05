@@ -64,6 +64,11 @@ def cmd_process_delete_request(args: argparse.Namespace) -> int:
         Path(args.rights_store).resolve(),
         Path(args.sharing_store).resolve(),
         args.request_id,
+        house_state_store_path=Path(args.house_state_store).resolve(),
+        house_capability_store_path=Path(args.house_capability_store).resolve(),
+        control_compatibility_store_path=Path(args.control_compatibility_store).resolve(),
+        intervention_event_store_path=Path(args.intervention_event_store).resolve(),
+        verification_outcome_store_path=Path(args.verification_outcome_store).resolve(),
     )
     append_access_event(
         Path(args.access_log).resolve(),
@@ -84,6 +89,11 @@ def cmd_process_export_request(args: argparse.Namespace) -> int:
         Path(args.access_log).resolve(),
         args.request_id,
         Path(args.output).resolve(),
+        house_state_store_path=Path(args.house_state_store).resolve(),
+        house_capability_store_path=Path(args.house_capability_store).resolve(),
+        control_compatibility_store_path=Path(args.control_compatibility_store).resolve(),
+        intervention_event_store_path=Path(args.intervention_event_store).resolve(),
+        verification_outcome_store_path=Path(args.verification_outcome_store).resolve(),
     )
     append_access_event(
         Path(args.access_log).resolve(),
@@ -102,6 +112,23 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--sharing-store", default="/tmp/rhi-sharing-store.json", help="Path to the JSON sharing store file.")
     parser.add_argument("--rights-store", default="/tmp/rhi-rights-request-store.json", help="Path to the JSON rights-request store file.")
     parser.add_argument("--access-log", default="/tmp/rhi-operator-access-log.json", help="Path to the JSON operator access log file.")
+    parser.add_argument("--house-state-store", default="/tmp/rhi-house-state-store.json", help="Path to the JSON house-state store file.")
+    parser.add_argument("--house-capability-store", default="/tmp/rhi-house-capability-store.json", help="Path to the JSON house-capability store file.")
+    parser.add_argument(
+        "--control-compatibility-store",
+        default="/tmp/rhi-control-compatibility-store.json",
+        help="Path to the JSON control-compatibility store file.",
+    )
+    parser.add_argument(
+        "--intervention-event-store",
+        default="/tmp/rhi-intervention-event-store.json",
+        help="Path to the JSON intervention-event store file.",
+    )
+    parser.add_argument(
+        "--verification-outcome-store",
+        default="/tmp/rhi-verification-outcome-store.json",
+        help="Path to the JSON verification-outcome store file.",
+    )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
 

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumenaut-llc.github.io/resilient-home-intelligence/schemas/intervention-event.schema.json",
+  "title": "RHI Intervention Event",
+  "type": "object",
+  "required": [
+    "intervention_id",
+    "parcel_id",
+    "recorded_at",
+    "hazard_target",
+    "action_kind",
+    "initiated_by",
+    "status",
+    "baseline_window_minutes",
+    "evaluation_window_minutes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "intervention_id": { "type": "string", "minLength": 1 },
+    "parcel_id": { "type": "string", "minLength": 1 },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "hazard_target": { "type": "string", "minLength": 1 },
+    "action_kind": { "type": "string", "minLength": 1 },
+    "initiated_by": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "minLength": 1 },
+    "baseline_window_minutes": { "type": "number", "minimum": 0 },
+    "evaluation_window_minutes": { "type": "number", "minimum": 0 },
+    "notes": { "type": "string" }
+  }
+}

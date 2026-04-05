@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumenaut-llc.github.io/resilient-home-intelligence/schemas/verification-outcome.schema.json",
+  "title": "RHI Verification Outcome",
+  "type": "object",
+  "required": [
+    "verification_id",
+    "parcel_id",
+    "intervention_id",
+    "evaluated_at",
+    "metric_name",
+    "baseline_value",
+    "outcome_value",
+    "assessment",
+    "confidence_band"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "verification_id": { "type": "string", "minLength": 1 },
+    "parcel_id": { "type": "string", "minLength": 1 },
+    "intervention_id": { "type": "string", "minLength": 1 },
+    "evaluated_at": { "type": "string", "format": "date-time" },
+    "metric_name": { "type": "string", "minLength": 1 },
+    "baseline_value": { "type": "number" },
+    "outcome_value": { "type": "number" },
+    "assessment": { "type": "string", "minLength": 1 },
+    "confidence_band": { "type": "string", "minLength": 1 },
+    "response_window_minutes": { "type": "number", "minimum": 0 },
+    "summary": { "type": "string" }
+  }
+}

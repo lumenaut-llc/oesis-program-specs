@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumenaut-llc.github.io/resilient-home-intelligence/schemas/house-capability.schema.json",
+  "title": "RHI House Capability",
+  "type": "object",
+  "required": [
+    "parcel_id",
+    "updated_at",
+    "protective_capacity",
+    "hvac_profile",
+    "site_profile"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "parcel_id": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "protective_capacity": { "type": "object" },
+    "hvac_profile": { "type": "object" },
+    "site_profile": { "type": "object" }
+  }
+}

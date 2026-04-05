@@ -1,0 +1,20 @@
+{
+  "parcel_id": "parcel_001",
+  "updated_at": "2026-04-03T18:20:00Z",
+  "protective_capacity": {
+    "backup_power_available": false,
+    "portable_purifier_present": true,
+    "clean_air_room_ready": false
+  },
+  "hvac_profile": {
+    "system_type": "forced_air",
+    "recirculation_available": true,
+    "filter_size": "16x25x1",
+    "higher_merv_support": "unknown"
+  },
+  "site_profile": {
+    "orientation_class": "southwest_exposed",
+    "shading_posture": "mixed",
+    "drainage_posture": "driveway_low_point_present"
+  }
+}
