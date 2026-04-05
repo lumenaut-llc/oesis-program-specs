@@ -1,0 +1,116 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { repoLinks } from "../lib/repo-links";
+
+const pageLinks = [
+  { href: "index.html", label: "Main release" },
+  { href: "dataset.html", label: "Dataset boundary" },
+  { href: "release-notes.html", label: "Release notes" }
+];
+
+const heroAsideItems = [
+  "What is public now?",
+  "Is all data public?",
+  "Is this emergency guidance?",
+  "How do I build or contribute?"
+];
+
+const faqs = [
+  {
+    question: "Is all project data public now?",
+    answer:
+      "No. The project-controlled v1 dataset may be intentionally public when it is explicitly designated, licensed, and documented. Future participant-contributed parcel-linked data still remains private by default."
+  },
+  {
+    question: "What is actually public in this release?",
+    answer:
+      "Approved governance, privacy, licensing, release, and selected technical materials are public now under asset-specific terms. Not every repo file is automatically a public release asset."
+  },
+  {
+    question: "Is this emergency guidance or a replacement for official alerts?",
+    answer:
+      "No. Parcel-state outputs are estimates or inferences. Official alerts, on-scene conditions, and personal judgment still matter."
+  },
+  {
+    question: "Does open source here also mean open trademark use?",
+    answer:
+      "No. Copyright licenses, data terms, and trademark permissions are separate questions. Use the attached notices and policy docs rather than assuming broad brand rights."
+  },
+  {
+    question: "Can I build the current reference stack?",
+    answer:
+      "Yes, there is a current reference path. Start with the operator quickstart, the checked-in schemas and examples, and the implementation status matrix before assuming every planned surface is already complete."
+  },
+  {
+    question: "Is a patent required for this release?",
+    answer:
+      "No. The current repo posture is an open release with deliberate public disclosure, not a patent-first launch requirement."
+  },
+  {
+    question: "Where should I start if I want to contribute?",
+    answer:
+      "Start with the contribution policy, the public release scope, the dataset release policy, and the release notes. That combination tells you what is public, what is not, and how not to break the boundary."
+  }
+];
+
+const readNextLinks = [
+  { href: repoLinks.ip, label: "IP position" },
+  { href: repoLinks.datasetReleasePolicy, label: "Dataset release policy" },
+  { href: repoLinks.dataOwnership, label: "Data ownership" },
+  { href: repoLinks.privacy, label: "Privacy" },
+  { href: repoLinks.claimsAndLimitations, label: "Claims and limitations" },
+  { href: repoLinks.rootLicenses, label: "Licensing matrix" },
+  { href: repoLinks.operatorQuickstart, label: "Operator quickstart" },
+  { href: "release-notes.html", label: "Release notes" },
+  { href: "dataset.html", label: "Dataset boundary page" }
+];
+---
+
+<SiteLayout
+  title="Resilient Home Intelligence FAQ"
+  description="Frequently asked questions for the Resilient Home Intelligence April 14 open release."
+  ogDescription="Common questions about openness, data boundaries, safety claims, and how to use the release."
+>
+  <Fragment slot="hero">
+    <PageHero
+      eyebrow="FAQ"
+      title="Short answers to the questions people will ask first."
+      lede="This page is the fast path for the recurring questions about openness, data rights, safety claims, licensing, and what the release actually includes."
+      pageLinks={pageLinks}
+      asideLabel="Best use"
+      asideTitle="Send this before sending the whole repo."
+      asideItems={heroAsideItems}
+    />
+  </Fragment>
+
+  <section class="panel">
+    <p class="section-label">FAQ</p>
+    <h2>Common questions</h2>
+    <div class="faq-list">
+      {faqs.map((item) => (
+        <article class="faq-item">
+          <h3>{item.question}</h3>
+          <p>{item.answer}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="panel">
+    <p class="section-label">Read Next</p>
+    <h2>Canonical docs behind these answers</h2>
+    <div class="link-groups">
+      {readNextLinks.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <p>
+      Use the FAQ for the short answer. Use the policy docs for the authoritative
+      answer.
+    </p>
+  </Fragment>
+</SiteLayout>

@@ -2,22 +2,22 @@
 
 ## Purpose
 
-Provide a dependency-ordered checklist for the April 14, 2026 public preview launch.
+Provide a dependency-ordered checklist for the April 14, 2026 open release.
 
-This checklist assumes the current Path B release posture:
+This checklist assumes the current open-release posture:
 
-- non-enabling public preview
-- narrow U.S. filing decision still active or just completed
-- broader enabling open release to follow later
+- approved release materials are public now under asset-specific terms
+- some materials still remain outside release because of privacy, provenance, licensing, or security constraints
+- the project-controlled v1 dataset may be intentionally public, but future participant-contributed parcel-linked data remains private by default
 
 ## Phase 1. Lock the release boundary
 
 Complete these first:
 
-- confirm the project is still on Path B
-- confirm the lean filing candidate excludes shared-neighborhood transforms
-- confirm the preview remains non-enabling
-- confirm no held-back files are included in the public release set
+- confirm the project is publishing under the current open-release posture
+- confirm no non-release files are included in the public release set
+- confirm any intentionally public dataset is explicitly designated, licensed, and documented
+- confirm release copy does not imply that all future parcel-linked data is public
 
 Primary checks:
 
@@ -35,6 +35,7 @@ Confirm these files are reviewed together:
 - `landing-page-copy.md`
 - `../../../legal/GOVERNANCE.md`
 - `../../../legal/ip.md`
+- `../../../legal/dataset-release-policy.md`
 - `../../privacy-governance/data-ownership.md`
 - `../../privacy-governance/privacy.md`
 - `../../privacy-governance/claims-and-safety-language.md`
@@ -42,8 +43,8 @@ Confirm these files are reviewed together:
 Check for:
 
 - consistent use of “private by default” and “shared by choice”
-- no implication that private homeowner data is open data
-- no implication that the preview is the full technical release
+- no implication that future participant-contributed private homeowner data is open data
+- no implication that every repo file is part of the public release
 - no safety or emergency overclaims
 
 ## Phase 3. Lock social and launch copy
@@ -56,39 +57,41 @@ Review:
 
 Confirm:
 
-- the copy is non-enabling
 - the copy points readers to canonical docs
 - the copy does not introduce new legal promises
-- the copy does not mention unreleased technical specifics
+- the copy does not mention non-release technical specifics
+- the copy accurately describes the v1 public-dataset carve-out
 
-## Phase 4. Confirm filing and counsel status
+## Phase 4. Confirm licensing and dataset status
 
-If counsel is involved, confirm:
+Confirm:
 
-- whether the narrow filing is on file, pending, or intentionally skipped
-- whether any preview material still needs to stay held back after counsel feedback
-- whether any wording in `ip.md` needs revision before publication
+- whether the release license matrix still matches the intended public asset split
+- whether any intentionally public dataset has explicit terms, provenance notes, and scope caveats attached
+- whether any wording in `ip.md`, `LICENSES.md`, or the dataset policy needs revision before publication
 
 Primary references:
 
-- `../../../legal/send-to-counsel-checklist.md`
-- `../../../legal/provisional-counsel-cover-email.md`
+- `../../../../../LICENSES.md`
+- `../../../legal/dataset-release-policy.md`
+- `../../../legal/ip.md`
 
 ## Phase 5. Final release package check
 
-Make sure the preview package contains:
+Make sure the release package contains:
 
 - `README.md`
 - `NOTICE.md`
 - `landing-page-copy.md`
 - `social-posts.md`
+- `../../../../../LICENSES.md`
 - governance and privacy docs referenced in the reading order
 
-Make sure the preview package does not contain:
+Make sure the release package does not contain:
 
-- enabling technical method docs intended to stay held back
+- secrets, credentials, or operator-only material
 - detailed hardware design files not yet cleared
-- real homeowner-contributed parcel-linked data
+- future participant-contributed parcel-linked data that has not been separately approved
 - public claims that exceed the claims-and-safety-language standard
 
 ## Phase 6. Publish
@@ -107,16 +110,16 @@ After publication, verify:
 
 - links work
 - the notice points to the correct docs
-- no held-back files are accidentally exposed
+- no non-release files are accidentally exposed
 - social posts match the canonical page
-- no one is summarizing the preview as a complete technical release
+- no one is summarizing the release as if every repo file is public or safety-certified
 
 ## Stop conditions
 
 Pause launch if any of these are true:
 
-- a held-back document is about to be published
-- the filing decision is still unresolved and someone wants to post enabling detail
+- a non-release document is about to be published
+- an intentionally public dataset does not yet have explicit license / provenance notes
 - the public copy implies guaranteed safety or official-alert replacement
 - the privacy docs overstate controls that are not actually available
 
@@ -125,6 +128,6 @@ Pause launch if any of these are true:
 If you only have a short window, do this:
 
 1. Check `public-preview-scope.md`.
-2. Review `NOTICE.md`, `ip.md`, `data-ownership.md`, and `privacy.md`.
+2. Review `NOTICE.md`, `ip.md`, `dataset-release-policy.md`, `data-ownership.md`, and `privacy.md`.
 3. Publish the canonical page first.
 4. Post the pinned post only after that page is live.

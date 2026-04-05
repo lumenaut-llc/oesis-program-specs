@@ -1,0 +1,408 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { repoLinks } from "../lib/repo-links";
+
+const pageLinks = [
+  { href: "#open-release", label: "Open release" },
+  { href: "#get-release", label: "Get the release" },
+  { href: "#data-boundary", label: "Data boundary" },
+  { href: "faq.html", label: "FAQ" },
+  { href: "release-notes.html", label: "Release notes" },
+  { href: "#pathways", label: "Start here" }
+];
+
+const heroActions = [
+  { href: "#open-release", label: "What is public now" },
+  { href: "#get-release", label: "Get the release", variant: "secondary" }
+];
+
+const heroMeta = [
+  "Release target: April 14, 2026",
+  "Site update: April 3, 2026",
+  "Current posture: Open release"
+];
+
+const heroAsideItems = [
+  "Approved software, hardware, docs, and public artifacts are open now.",
+  "The project-controlled v1 dataset may be intentionally public.",
+  "Future participant parcel-linked data stays private by default.",
+  "Outputs are estimates, not guarantees or emergency guidance."
+];
+
+const releaseStatus = [
+  {
+    label: "Software",
+    title: "Open code under clear terms",
+    body:
+      "Approved software and firmware artifacts are public under the current split-license plan rather than being held for filing-sequence reasons."
+  },
+  {
+    label: "Hardware",
+    title: "Open hardware where cleared",
+    body:
+      "The public site can point to approved hardware docs now, while unreleased design-enabling files still stay outside release until cleared."
+  },
+  {
+    label: "Docs",
+    title: "Governance is part of the release",
+    body:
+      "Privacy, ownership, claims, and release-boundary docs are first-class public artifacts, not temporary preview scaffolding."
+  },
+  {
+    label: "Data",
+    title: "Public only when explicitly designated",
+    body:
+      "The project-controlled v1 dataset may be public, but only when it is intentionally designated, licensed, and documented as a release asset."
+  }
+];
+
+const getReleaseCards = [
+  {
+    label: "Release docs",
+    title: "Read the core package",
+    links: [
+      { href: repoLinks.repoHome, label: "GitHub repository" },
+      { href: repoLinks.releaseReadme, label: "Release README" },
+      { href: repoLinks.releaseNotice, label: "Release notice" },
+      { href: repoLinks.programReadme, label: "Program README" }
+    ]
+  },
+  {
+    label: "Policy and licenses",
+    title: "Understand the governing terms",
+    links: [
+      { href: repoLinks.rootLicenses, label: "Licensing matrix" },
+      { href: repoLinks.ip, label: "IP position" },
+      { href: repoLinks.datasetReleasePolicy, label: "Dataset release policy" }
+    ]
+  },
+  {
+    label: "Reference data model",
+    title: "Inspect schemas and examples",
+    links: [
+      { href: repoLinks.nodeObservationSchema, label: "Node observation schema" },
+      { href: repoLinks.parcelStateSchema, label: "Parcel-state schema" },
+      { href: repoLinks.parcelStateExample, label: "Parcel-state example" }
+    ]
+  },
+  {
+    label: "Run locally",
+    title: "Start the reference stack",
+    links: [
+      { href: repoLinks.operatorQuickstart, label: "Operator quickstart" },
+      { href: "release-notes.html", label: "Release notes" },
+      { href: "faq.html", label: "FAQ" }
+    ]
+  }
+];
+
+const dataPublicItems = [
+  "project-controlled v1 field observations",
+  "derived parcel-state outputs tied to the v1 release",
+  "approved public shared snapshots tied to the release package"
+];
+
+const dataPrivateItems = [
+  "future participant parcel-linked data",
+  "household or account-linked records outside the intentional v1 release",
+  "non-cleared third-party and operator-only material"
+];
+
+const pathways = [
+  {
+    label: "Homeowner",
+    title: "Understand the promise",
+    body:
+      "Start with ownership, privacy, and non-claims before reading deeper technical material.",
+    links: [
+      { href: repoLinks.dataOwnership, label: "Data ownership" },
+      { href: repoLinks.privacy, label: "Privacy" },
+      { href: "faq.html", label: "FAQ" }
+    ]
+  },
+  {
+    label: "Builder",
+    title: "Inspect the reference path",
+    body:
+      "Use the release docs, schemas, and operator quickstart to understand what is already runnable and what is still reference-only.",
+    links: [
+      { href: repoLinks.operatorQuickstart, label: "Operator quickstart" },
+      { href: repoLinks.nodeObservationSchema, label: "Observation schema" },
+      { href: "release-notes.html", label: "Release notes" }
+    ]
+  },
+  {
+    label: "Researcher",
+    title: "Understand the data boundary",
+    body:
+      "The main question is not just what is open, but what is intentionally public and under what terms.",
+    links: [
+      { href: "dataset.html", label: "Dataset boundary page" },
+      { href: repoLinks.datasetReleasePolicy, label: "Dataset release policy" },
+      { href: repoLinks.rootLicenses, label: "Licensing matrix" }
+    ]
+  },
+  {
+    label: "Contributor",
+    title: "Contribute without breaking the boundary",
+    body:
+      "Contributions should preserve the private-by-default model, respect the release scope, and avoid accidental publication of non-cleared data.",
+    links: [
+      { href: repoLinks.contributionPolicy, label: "Contribution policy" },
+      { href: repoLinks.publicReleaseScope, label: "Public release scope" },
+      { href: repoLinks.holdbackList, label: "Non-release list" }
+    ]
+  }
+];
+
+const readFirstLinks = [
+  { href: repoLinks.programReadme, label: "Program README" },
+  { href: repoLinks.releaseNotice, label: "Release notice" },
+  { href: repoLinks.dataOwnership, label: "Data ownership" },
+  { href: repoLinks.privacy, label: "Privacy" },
+  { href: repoLinks.claimsAndLimitations, label: "Claims and limitations" },
+  { href: repoLinks.governance, label: "Governance" },
+  { href: repoLinks.datasetReleasePolicy, label: "Dataset release policy" },
+  { href: repoLinks.publicReleaseScope, label: "Public release scope" },
+  { href: repoLinks.ip, label: "IP position" },
+  { href: repoLinks.rootLicenses, label: "Licensing matrix" },
+  { href: repoLinks.contributionPolicy, label: "Contribution policy" },
+  { href: "dataset.html", label: "Dataset boundary page" },
+  { href: "faq.html", label: "FAQ" },
+  { href: "release-notes.html", label: "Release notes" }
+];
+
+const limitations = {
+  safety: [
+    "Outputs are generated from available evidence, not direct certainty.",
+    "Conditions may change faster than the system updates.",
+    "Missing or stale inputs reduce confidence.",
+    "The project does not claim full neighborhood visibility."
+  ],
+  rights: [
+    "Not every repo file is a public release asset.",
+    "This is not a blanket open-data release of future participant parcel-linked data.",
+    "No emergency authority, official alerting, or safety certification is claimed here.",
+    "Rights come from the attached licenses and notices, not from marketing copy alone."
+  ]
+};
+
+const buildCards = [
+  {
+    title: "Read the program docs",
+    body:
+      "Start with the program README and release notice before moving deeper into system details.",
+    href: repoLinks.programReadme,
+    label: "Open the program docs"
+  },
+  {
+    title: "Review the license split",
+    body:
+      "Software, hardware, documentation, and data do not all use the same terms. The license matrix is the canonical entry point.",
+    href: repoLinks.rootLicenses,
+    label: "Open the licensing matrix"
+  },
+  {
+    title: "Follow the latest release notes",
+    body:
+      "Use the release notes page to understand what the current release package contains, what changed, and what still remains outside scope.",
+    href: "release-notes.html",
+    label: "Open the release notes"
+  },
+  {
+    title: "Answer the common questions fast",
+    body:
+      "Use the FAQ when someone needs the short answer on data, safety, openness, licensing, or contribution.",
+    href: "faq.html",
+    label: "Open the FAQ"
+  }
+];
+
+const footerLinks = [
+  { href: "dataset.html", label: "Dataset boundary" },
+  { href: "faq.html", label: "FAQ" },
+  { href: "release-notes.html", label: "Release notes" }
+];
+---
+
+<SiteLayout
+  title="Resilient Home Intelligence Open Release"
+  description="Open release for Resilient Home Intelligence: parcel-first environmental sensing, private by default, shared by choice, and explicit about uncertainty."
+  ogDescription="Open release for Resilient Home Intelligence with clear data boundaries, release notes, and public policy docs."
+>
+  <Fragment slot="hero">
+    <PageHero
+      eyebrow="April 14, 2026 Open Release"
+      title="Homeowner-owned environmental sensing, built parcel first."
+      lede="Resilient Home Intelligence is a modular, homeowner-centered effort to build parcel-level environmental awareness for smoke, flooding and runoff, and heat without forcing homeowners to surrender raw data to a centralized platform."
+      tagline="Private by default. Shared by choice. Open release with clear boundaries."
+      meta={heroMeta}
+      pageLinks={pageLinks}
+      actions={heroActions}
+      asideLabel="Release posture"
+      asideTitle="Public where intentional, private where promised."
+      asideItems={heroAsideItems}
+    />
+  </Fragment>
+
+  <section id="open-release" class="panel">
+    <p class="section-label">Open Release</p>
+    <h2>What is public now</h2>
+    <p>
+      The April 14 release is meant to act like a real public release index, not a
+      teaser page. It points to the public-facing materials that define the
+      project&apos;s current governance, licensing, privacy, and technical posture.
+    </p>
+    <div class="status-grid">
+      {releaseStatus.map((card) => (
+        <article class="status-card">
+          <p class="kicker">{card.label}</p>
+          <h3>{card.title}</h3>
+          <p>{card.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="get-release" class="panel">
+    <p class="section-label">Get The Release</p>
+    <h2>Jump directly into the parts that are actually public</h2>
+    <p class="section-intro">
+      The site should help visitors do something immediately: read the release,
+      inspect the license split, review the data boundary, or run the reference
+      stack locally.
+    </p>
+    <div class="action-card-grid">
+      {getReleaseCards.map((card) => (
+        <article class="action-card">
+          <p class="kicker">{card.label}</p>
+          <h3>{card.title}</h3>
+          <div class="link-stack">
+            {card.links.map((link) => (
+              <a class="text-link" href={link.href}>{link.label}</a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="data-boundary" class="panel panel-accent">
+    <p class="section-label">Data Boundary</p>
+    <h2>One intentional public dataset does not open all future parcel data</h2>
+    <p class="section-intro">
+      The main website clarification is simple: the project-controlled v1 dataset can
+      be public only when it is explicitly designated, licensed, and documented. That
+      carve-out does not overrule the private-by-default promise for future
+      participant data.
+    </p>
+    <div class="dataset-grid">
+      <article class="dataset-card dataset-card-emphasis">
+        <p class="kicker">Public v1 dataset</p>
+        <h3>Intentional, licensed, and documented</h3>
+        <p>
+          A public v1 dataset should ship with explicit open-data terms, provenance,
+          date range, scope notes, and caveats about what is and is not included.
+        </p>
+        <div class="chip-row">
+          <span class="chip">CDLA-Sharing-1.0</span>
+          <span class="chip">Provenance required</span>
+          <span class="chip">Scope notes required</span>
+        </div>
+        <a class="text-link" href="dataset.html">Open the dataset boundary page</a>
+      </article>
+      <article class="dataset-card">
+        <h3>May be public</h3>
+        <ul>
+          {dataPublicItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="dataset-card">
+        <h3>Still private by default</h3>
+        <ul>
+          {dataPrivateItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="pathways" class="panel">
+    <p class="section-label">Start Here</p>
+    <h2>Choose the path that matches why you are here</h2>
+    <div class="pathway-grid">
+      {pathways.map((path) => (
+        <article class="pathway-card">
+          <p class="kicker">{path.label}</p>
+          <h3>{path.title}</h3>
+          <p>{path.body}</p>
+          <div class="link-stack">
+            {path.links.map((link) => (
+              <a class="text-link" href={link.href}>{link.label}</a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="read-first" class="panel">
+    <p class="section-label">Read First</p>
+    <h2>Start with the policy and release docs</h2>
+    <p>
+      If you want the legally important context first, start with these documents
+      before looking for deeper technical detail.
+    </p>
+    <div class="link-groups">
+      {readFirstLinks.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="panel caution">
+    <p class="section-label">What This Does Not Claim</p>
+    <h2>Important limitations and non-claims</h2>
+    <div class="two-column">
+      <article class="status-card">
+        <h3>Safety and certainty</h3>
+        <ul>
+          {limitations.safety.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="status-card">
+        <h3>Publication and rights</h3>
+        <ul>
+          {limitations.rights.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="build" class="panel">
+    <p class="section-label">Build / Review / Contribute</p>
+    <h2>Use the release docs as the entry point</h2>
+    <div class="mini-grid action-grid">
+      {buildCards.map((card) => (
+        <article>
+          <h3>{card.title}</h3>
+          <p>{card.body}</p>
+          <a class="text-link" href={card.href}>{card.label}</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <p>
+      Some materials remain outside release because of licensing, provenance,
+      privacy, security, or operator-use constraints. One intentionally public v1
+      dataset does not make all future parcel-linked data public by default.
+    </p>
+    <div class="footer-links">
+      {footerLinks.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </Fragment>
+</SiteLayout>

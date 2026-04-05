@@ -6,7 +6,9 @@ Define what kinds of data may be published, shared, redistributed, or attached t
 
 ## Governing rule
 
-Open-source code and open hardware do not require open publication of real homeowner-contributed parcel-linked datasets.
+Open-source code and open hardware do not require open publication of all future parcel-linked datasets.
+
+The project may, however, intentionally publish the project-controlled v1 dataset under explicit open-data terms.
 
 ## Dataset categories
 
@@ -33,20 +35,33 @@ Release posture:
 - preserve attribution, notices, and source metadata
 - keep source-specific terms attached
 
-### 3. Real homeowner-contributed data
+### 3. Project-controlled v1 field dataset
 
 Examples:
 - raw sensor observations from parcel devices
 - exact parcel-linked derived histories
-- precise shared hazard contributions
-- account-linked or household-linked telemetry
+- parcel-linked hazard contributions intentionally designated for the public release
+- derived parcel-state outputs tied to the v1 release
 
 Release posture:
-- must not be published openly by default
-- must not be committed to the repository
-- must not be relicensed under a generic open-data scheme
+- may be published openly when the project has clear authority to release it
+- may be committed to the repository or mirrored externally when it is intentionally part of the public release
+- should carry explicit dataset terms, provenance notes, date range, and any caveats about representativeness
+- current recommended public dataset license: `CDLA-Sharing-1.0`
 
-### 4. Pilot or research datasets
+### 4. Future participant-contributed parcel-linked data
+
+Examples:
+- raw sensor observations from other households
+- exact parcel-linked derived histories from future participants
+- account-linked or household-linked telemetry from future deployments
+
+Release posture:
+- not public by default
+- require explicit publication authority and a separate documented decision
+- must not be assumed public merely because the project-controlled v1 dataset is public
+
+### 5. Pilot or research datasets
 
 Examples:
 - bounded program exports for validation
@@ -58,11 +73,10 @@ Release posture:
 
 ## Early-version do-not-release list
 
-- exact parcel geometry tied to real contributed hazard data
-- raw time series from real homes
-- occupancy, vacancy, reentry, or evacuation-adjacent inferences
-- real household identifiers or device identifiers
+- future participant parcel-linked data not explicitly designated for public release
+- household identifiers or account identifiers outside the intentionally released v1 dataset scope
 - neighborhood datasets with low enough participation to enable singling out
+- secrets, credentials, or operator-only records accidentally embedded in dataset exports
 
 ## Release checklist
 
@@ -70,9 +84,11 @@ Before any dataset is published or redistributed, confirm:
 
 - the dataset category is identified
 - the source terms permit the planned release
-- the dataset contains no real parcel-linked homeowner contributions unless explicitly approved
-- the release does not undermine opt-in sharing promises
+- the project has clear authority to publish the dataset
+- if the dataset is parcel-linked, it is either the intentionally public project-controlled v1 dataset or a separately approved later release
+- the release does not undermine future opt-in sharing promises for later participants
 - attribution, provenance, and freshness notes are included where relevant
+- an explicit dataset license is attached
 
 ## MVP recommendation
 
@@ -82,7 +98,8 @@ For early releases, publish only:
 - validators
 - benchmark fixtures
 - public-source reference manifests
+- the project-controlled v1 dataset when intentionally included in the public release package
 
 Avoid publishing:
-- real-world contributed parcel datasets
-- neighborhood hazard maps derived from limited adoption pilots
+- future participant-contributed parcel datasets without a separate explicit decision
+- neighborhood hazard maps derived from limited adoption pilots unless the project intentionally publishes them with clear scope, provenance, and owner authority

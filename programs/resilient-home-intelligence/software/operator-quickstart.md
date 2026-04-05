@@ -55,7 +55,7 @@ What each one proves:
 - `make rhi-http-check`
   starts the local ingest, inference, and parcel APIs and exercises their HTTP path
 
-If any of these fail, stop here before treating the parcel kit or preview site as ready.
+If any of these fail, stop here before treating the parcel kit or release site as ready.
 
 ## Step 2: Validate a real packet from an installed node
 
@@ -144,9 +144,9 @@ make rhi-http-check
 
 Use that when you want a known-good ingest to inference to parcel-view path without hand-copying intermediate JSON.
 
-## Step 6: View the preview site locally
+## Step 6: View the release site locally
 
-The preview site is a static page and does not require a build step.
+The release site now uses Astro instead of plain static HTML.
 
 From:
 
@@ -154,19 +154,27 @@ From:
 cd programs/resilient-home-intelligence/docs/release/2026-04-14/site
 ```
 
-run:
+install dependencies once:
 
 ```bash
-python3 -m http.server 8000
+npm install
 ```
 
-Then visit:
+then run:
 
-```text
-http://127.0.0.1:8000/
+```bash
+npm run dev
 ```
 
-Use this page only as the preview-facing surface.
+Visit the local URL printed by Astro in the terminal.
+
+For a production-style static build, run:
+
+```bash
+npm run build
+```
+
+Use this site only as the public-facing release surface.
 Keep the deeper implementation and packet docs in the controlled-review lane.
 
 ## Recommended first-operator sequence
@@ -179,7 +187,7 @@ For the first integrated parcel kit, use this order:
 4. Validate one real packet from `bench-air-node`.
 5. Validate one real packet from `mast-lite`.
 6. Run `make rhi-http-check`.
-7. Serve the preview site locally and compare its claims against the current working behavior.
+7. Serve the Astro release site locally and compare its claims against the current working behavior.
 
 ## Related docs
 

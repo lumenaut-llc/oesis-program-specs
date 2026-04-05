@@ -1,0 +1,62 @@
+---
+const {
+  eyebrow,
+  title,
+  lede,
+  tagline,
+  meta = [],
+  pageLinks = [],
+  actions = [],
+  asideLabel,
+  asideTitle,
+  asideItems = []
+} = Astro.props;
+---
+
+<header class="hero">
+  <div class="hero-top">
+    <p class="eyebrow">{eyebrow}</p>
+    {pageLinks.length > 0 && (
+      <nav class="top-nav" aria-label="Section links">
+        {pageLinks.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+    )}
+  </div>
+  <div class="hero-grid">
+    <div>
+      <h1>{title}</h1>
+      <p class="lede">{lede}</p>
+      {tagline && <p class="hero-tagline">{tagline}</p>}
+      {meta.length > 0 && (
+        <div class="meta-strip" aria-label="Release metadata">
+          {meta.map((item) => <span>{item}</span>)}
+        </div>
+      )}
+      {actions.length > 0 && (
+        <div class="hero-actions">
+          {actions.map((action) => (
+            <a
+              class={`button ${action.variant === "secondary" ? "button-secondary" : "button-primary"}`}
+              href={action.href}
+            >
+              {action.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+    {(asideTitle || asideItems.length > 0) && (
+      <aside class="hero-aside">
+        {asideLabel && <p class="kicker">{asideLabel}</p>}
+        {asideTitle && <h2>{asideTitle}</h2>}
+        {asideItems.length > 0 && (
+          <ul>
+            {asideItems.map((item) => <li>{item}</li>)}
+          </ul>
+        )}
+      </aside>
+    )}
+  </div>
+</header>

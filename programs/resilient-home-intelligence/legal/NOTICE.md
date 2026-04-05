@@ -2,7 +2,8 @@
 
 ## Purpose
 
-This notice explains how to read the legal subtree during the April 14, 2026 preview phase.
+This notice explains how to read the legal subtree during the April 14, 2026
+open-release period.
 
 ## What this subtree contains
 
@@ -11,8 +12,8 @@ This subtree contains:
 - release-position documents
 - governance and contribution policy materials
 - licensing plans and notices
-- preview-scope and holdback controls
-- internal filing and counsel-preparation materials
+- release-scope and non-release controls
+- internal filing and counsel-preparation materials retained as historical planning artifacts
 
 ## Important boundary
 
@@ -23,10 +24,12 @@ In particular:
 - some files are internal drafting materials for filing or counsel review
 - some files describe intended future licensing direction rather than final granted rights
 - some files are operational release-control documents rather than public-facing policy text
+- some files remain in the repo for historical context rather than as current public release assets
 
 ## Read these first
 
 - `ip.md`
+- `dataset-release-policy.md`
 - `GOVERNANCE.md`
 - `../NOTICE.md`
 

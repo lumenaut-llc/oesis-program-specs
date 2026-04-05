@@ -8,6 +8,8 @@ Read `NOTICE.md` before treating every file in this subtree as public-facing or 
 
 - `GOVERNANCE.md`
 - `ip.md`
+- `dataset-release-policy.md`
+- `v1-patent-decision-memo.md`
 
 ## MVP priorities
 
@@ -16,13 +18,21 @@ Read `NOTICE.md` before treating every file in this subtree as public-facing or 
 - dataset release rules that prevent accidental over-sharing
 - governance artifacts for claims, privacy, and provenance
 
-## Path B release controls
+## Current release controls
 
-For the April 14, 2026 preview-first release path, start with:
+For the current April 14, 2026 open-release posture, start with:
 
 - `ip.md`
 - `public-preview-scope.md`
 - `holdback-list.md`
+- `dataset-release-policy.md`
+- `v1-patent-decision-memo.md`
+
+## Archival Path B materials
+
+The following files remain in this subtree as historical planning artifacts from the
+earlier preview-first / provisional-first release path:
+
 - `provisional-packet-outline.md`
 - `provisional-packet-draft-parcel-state.md`
 - `provisional-figure-captions-parcel-state.md`

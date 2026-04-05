@@ -1,8 +1,10 @@
-# Preview Execution Plan
+# Release Execution Plan
 
 ## Purpose
 
-Turn the existing software, hardware, legal, and release documents into one practical execution sequence for the first credible public preview and first private pilot-ready parcel kit.
+Turn the existing software, hardware, legal, and release documents into one practical
+execution sequence for the April 14 open release and first private pilot-ready
+parcel kit.
 
 ## Outcome target
 
@@ -11,7 +13,7 @@ At the end of this plan, the project should have:
 - a reproducible software reference path
 - a hardware build path that starts simple and scales by parcel tier
 - a clear packet of legal and governance docs to send to reviewers or counsel
-- a simple public-facing webpage that stays within the preview boundary
+- a simple public-facing webpage that stays within the approved release boundary
 
 ## Track 1: Software must run
 
@@ -35,7 +37,7 @@ Make the current reference implementation dependable enough that docs, demos, an
 ### Next concrete steps
 
 1. Keep `make rhi-validate`, `make rhi-check`, and `make rhi-http-check` green before any release or pilot demo.
-2. Use `../../../software/operator-quickstart.md` as the short repo-level operator guide for running the reference services and preview site.
+2. Use `../../../software/operator-quickstart.md` as the short repo-level operator guide for running the reference services and release site.
 3. Implement the next observation families after `air.node.snapshot`:
    `flood.low_point.snapshot`, `air.pm_weather.snapshot`, and `thermal.scene.snapshot`.
 4. Bind ingest authorization and parcel binding to the new node-registry object before adding more live node classes.
@@ -82,13 +84,14 @@ Do not describe a node family as part of the first parcel kit if it still lacks 
 
 Make it trivial to send the correct review packet without improvising which documents matter.
 
-### Core packet for public preview reviewers
+### Core packet for public release reviewers
 
 - `../../../README.md`
 - `NOTICE.md`
 - `../../../legal/GOVERNANCE.md`
 - `../../../legal/ip.md`
 - `../../../legal/public-preview-scope.md`
+- `../../../legal/dataset-release-policy.md`
 - `../../privacy-governance/data-ownership.md`
 - `../../privacy-governance/privacy.md`
 - `../../privacy-governance/claims-and-safety-language.md`
@@ -96,7 +99,7 @@ Make it trivial to send the correct review packet without improvising which docu
 
 ### Core packet for pilot or counsel preparation
 
-Start with the preview packet, then add:
+Start with the public release packet, then add:
 
 - `../../../legal/send-to-counsel-checklist.md`
 - `../../../legal/pilot-and-research-data-agreement-template.md`
@@ -108,7 +111,7 @@ Start with the preview packet, then add:
 ### Minimum done definition
 
 - the website only says what the legal packet supports
-- the legal packet distinguishes preview policy from implemented product behavior
+- the legal packet distinguishes current release policy from implemented product behavior
 - a named owner exists for release, legal/IP, and governance/privacy review
 
 ### Next concrete steps
@@ -116,24 +119,26 @@ Start with the preview packet, then add:
 1. Use `reviewer-packet-index.md` as the packet selector and cover page.
 2. Use `implementation-status-matrix.md` to mark what is implemented, partial, docs-only, or planned.
 3. Assign named owners on the launch-readiness checklist before any public announcement.
-4. Use the public-preview-scope doc as the approval filter for every site page, screenshot, and social post.
+4. Use the current release-scope doc as the approval filter for every site page, screenshot, and social post.
 
 ### Stop-ship rule
 
-Do not send or publish a packet that mixes public-preview material with held-back technical detail.
+Do not send or publish a packet that mixes public release material with non-release
+technical detail.
 
 ## Track 4: Website must be simple, compliant, and useful
 
 ### Goal
 
-Publish one small page that explains the preview, points people to the right documents, and avoids overclaiming.
+Publish one small page that explains the release, points people to the right
+documents, and avoids overclaiming.
 
 ### Required content
 
 - project mission
 - private-by-default and shared-by-choice rule
-- what the preview includes
-- what the preview does not include
+- what the release includes
+- what the release does not include
 - claims and limitations summary
 - links to governance, privacy, data ownership, and release docs
 
@@ -147,23 +152,23 @@ Publish one small page that explains the preview, points people to the right doc
 ### Minimum done definition
 
 - one page works locally without a build step
-- links point to the canonical preview docs
-- the page includes limitation language and preview-scope context
-- the page avoids technical detail that the public-preview-scope doc treats as yellow or red
+- links point to the canonical release docs
+- the page includes limitation language and release-scope context
+- the page avoids technical detail that the current release-scope doc treats as yellow or red
 
 ### Next concrete steps
 
 1. Use the local static page scaffold in `site/`.
 2. Keep the page self-contained and semantic HTML first.
-3. Add links only to documents that are safe and intended for preview readers.
+3. Add links only to documents that are safe and intended for public release readers.
 4. Review the page against the launch-readiness copy gates before publishing.
 
 ## Recommended sequence
 
 1. Keep software checks green.
 2. Lock the Tier 1 and Tier 2 parcel-kit hardware path.
-3. Freeze the preview legal packet and named owners.
-4. Publish the simple preview page.
+3. Freeze the release legal packet and named owners.
+4. Publish the simple release page.
 5. Only after those steps, expand into more node classes or richer public-facing surfaces.
 
 ## What to do this week
