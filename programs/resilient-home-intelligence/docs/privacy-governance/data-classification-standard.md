@@ -25,6 +25,9 @@ Examples:
 - route-specific or ingress/egress-specific annotations
 - exact parcel-level event history
 - occupancy-adjacent inferences, whether explicit or implicit
+- house-state telemetry such as indoor PM, indoor temperature/RH, HVAC mode, recirculation state, purifier state, backup-power state, and window/shade state
+- house capability and compatibility records such as filter-path limits, higher-MERV support, local-controller availability, and control-locality notes
+- intervention and verification histories tied to one parcel
 
 Handling rules:
 - private by default
@@ -124,6 +127,7 @@ For MVP, the platform should use the following model:
 - Every user-facing view must distinguish private, shared, public, and derived content.
 - Every new feature must declare whether it creates a new data class or new use of an existing class.
 - No feature may silently repurpose private parcel data into shared or public outputs.
+- Control configuration or automation eligibility must not be treated as an implied sharing permission.
 
 ## Prohibited shortcuts
 

@@ -2,7 +2,8 @@
 
 ## Purpose
 
-This notice explains how to read the software subtree during the April 14, 2026 preview phase.
+This notice explains how to read the software subtree during the April 14, 2026
+open-release period.
 
 ## Intended license direction
 
@@ -10,25 +11,29 @@ The current intended direction for platform and service software is:
 
 - `AGPLv3-or-later`
 
-Firmware may follow the same direction during preview, subject to final legal review.
+Firmware may follow the same direction during the current release period, subject to
+final legal review.
 
-## Preview boundary
+## Release boundary
 
-During the preview:
+During the current release period:
 
-- some software materials may remain descriptive or partial
-- some technical implementation details may still be held back
+- released software artifacts are public only to the extent their attached licenses and notices say so
+- some software materials may still remain outside release because of secrets, privacy, operator-use, or third-party licensing constraints
 - no separate patent license is granted except where a final release license explicitly provides one
 
 ## Data boundary
 
-Open-source release of software does not convert private homeowner-contributed parcel-linked data into open data.
+Open-source release of software does not convert future participant-contributed private
+parcel-linked data into open data.
 
-Software handling private parcel data remains subject to the project’s data-ownership, privacy, and permissions rules.
+Software handling parcel data remains subject to the project's data-ownership,
+privacy, permissions, and dataset-release rules.
 
 ## Read these first
 
 - `../NOTICE.md`
 - `../legal/ip.md`
+- `../legal/dataset-release-policy.md`
 - `../docs/privacy-governance/data-ownership.md`
 - `../docs/privacy-governance/privacy.md`

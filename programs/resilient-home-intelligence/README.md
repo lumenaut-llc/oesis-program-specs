@@ -2,18 +2,21 @@
 
 Resilient Home Intelligence is a flagship program inside Open Source DIY Tech.
 
-Read `NOTICE.md` before treating this program as a complete technical open release.
+Read `NOTICE.md` before treating every file in this program as a public release asset.
 
 ## Mission
 
 Create homeowner-owned environmental sensing and parcel-level situational intelligence that:
 - works for individual homes
 - improves with neighborhood participation
-- preserves private ownership of raw data
+- preserves owner control of parcel-linked data, including explicit public-release choices
 - uses external public data only inside the platform
 - stays modular and open
 
-This program is currently being released in stages. During the public preview, some technical materials remain intentionally held back while release sequencing is completed.
+The program is now in its April 14, 2026 open-release period. Approved software,
+hardware, documentation, governance materials, and intentionally public datasets may be
+released under asset-specific terms, while some materials remain outside release for
+privacy, provenance, security, or licensing reasons.
 
 ## Program structure
 
@@ -45,6 +48,7 @@ For each parcel:
 - parcel first
 - private by default
 - shared by choice
+- intentionally public datasets must be explicitly designated and licensed
 - more nodes improve precision, not basic functionality
 - explicit provenance and uncertainty
 
@@ -52,6 +56,7 @@ For each parcel:
 
 - `NOTICE.md`
 - `legal/ip.md`
+- `legal/dataset-release-policy.md`
 - `legal/GOVERNANCE.md`
 - `docs/privacy-governance/data-ownership.md`
 - `docs/privacy-governance/privacy.md`

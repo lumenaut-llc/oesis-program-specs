@@ -2,38 +2,43 @@
 
 ## Purpose
 
-This notice explains how to read the Resilient Home Intelligence program materials during the April 14, 2026 preview phase.
+This notice explains how to read the Resilient Home Intelligence program materials
+during the April 14, 2026 open-release period.
 
 ## Program-wide notice
 
-Resilient Home Intelligence is being released in stages.
+Resilient Home Intelligence is being released under a commons-protective open-release
+posture.
 
-During the public preview:
+During the current release period:
 
-- some materials are published as high-level governance, legal, and documentation artifacts
-- some technical materials remain intentionally held back
-- the project is being prepared for a broader commons-protective open release across software, hardware, documentation, and approved public artifacts
+- many governance, legal, documentation, and approved technical materials are public
+- some materials remain outside release because of privacy, provenance, security, or licensing constraints
+- the project-controlled v1 dataset may be intentionally public when it is explicitly designated and licensed
 
 ## Asset-class boundary
 
 Do not assume that:
 
 - one license governs every file in this program
-- preview publication means every technical detail is approved for release
-- private homeowner-contributed parcel-linked data is public or open-licensed
+- one public release artifact means every technical detail is approved for release
+- one public dataset means all future private homeowner-contributed parcel-linked data is public or open-licensed
 
 ## Read these first
 
 - `legal/ip.md`
+- `legal/dataset-release-policy.md`
 - `legal/GOVERNANCE.md`
 - `../../LICENSES.md`
 - `docs/privacy-governance/data-ownership.md`
 - `docs/privacy-governance/privacy.md`
 - `docs/release/2026-04-14/NOTICE.md`
 
-## Held-back materials
+## Non-release materials
 
-Some technical materials may remain outside public release until the filing and release-sequencing process is complete.
+Some materials remain outside public release because they include secrets,
+non-cleared third-party content, unintended personal or operational data, or internal
+historical planning artifacts.
 
 See:
 

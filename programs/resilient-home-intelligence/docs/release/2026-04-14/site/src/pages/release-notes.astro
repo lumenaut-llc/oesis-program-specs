@@ -1,0 +1,183 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { repoLinks } from "../lib/repo-links";
+
+const pageLinks = [
+  { href: "index.html", label: "Main release" },
+  { href: "dataset.html", label: "Dataset boundary" },
+  { href: "faq.html", label: "FAQ" }
+];
+
+const meta = [
+  "Release target: April 14, 2026",
+  "Site update: April 3, 2026",
+  "Version label: 2026.04 open release"
+];
+
+const heroAsideItems = [
+  "Public policy and release docs are first-class assets now.",
+  "The v1 dataset carve-out is explicit.",
+  "Non-release materials are held back for privacy, provenance, or security, not filing sequence."
+];
+
+const timelineItems = [
+  {
+    label: "Before",
+    title: "Preview-first posture",
+    body:
+      "The public site and release copy were written as a limited preview that preserved filing-sequence optionality and emphasized temporary non-enabling boundaries."
+  },
+  {
+    label: "Now",
+    title: "Open-release posture",
+    body:
+      "The public site now acts as a release index for approved software, hardware, governance, privacy, and public-data artifacts under asset-specific terms."
+  }
+];
+
+const included = [
+  {
+    title: "Governance and privacy docs",
+    body:
+      "Ownership, privacy, claims, and release-boundary materials are public release assets and should be treated as part of the main package."
+  },
+  {
+    title: "Split license posture",
+    body:
+      "Software, hardware, docs, and data are governed by a deliberate split license matrix rather than one blanket license."
+  },
+  {
+    title: "Reference schemas and examples",
+    body:
+      "The checked-in schemas and example payloads remain the clearest public reference artifacts for builders and reviewers."
+  },
+  {
+    title: "Public dataset carve-out",
+    body:
+      "The project-controlled v1 dataset may be intentionally public when it is explicitly designated, licensed, and documented."
+  }
+];
+
+const excluded = {
+  out: [
+    "secrets, credentials, and operator-only procedures",
+    "non-cleared third-party material",
+    "future participant parcel-linked data",
+    "files that remain in the repo only as archival counsel / filing materials"
+  ],
+  reasons: [
+    "privacy and singling-out risk",
+    "licensing or provenance constraints",
+    "security or operator-use sensitivity",
+    "historical context rather than current public release value"
+  ]
+};
+
+const nextSteps = [
+  {
+    title: "Understand the public-data boundary",
+    href: "dataset.html",
+    label: "Open the dataset boundary page"
+  },
+  {
+    title: "Answer common questions fast",
+    href: "faq.html",
+    label: "Open the FAQ"
+  },
+  {
+    title: "Inspect the current runnable reference path",
+    href: repoLinks.operatorQuickstart,
+    label: "Open the operator quickstart"
+  },
+  {
+    title: "Review the governing policies",
+    href: repoLinks.ip,
+    label: "Open the IP position"
+  }
+];
+---
+
+<SiteLayout
+  title="Resilient Home Intelligence Release Notes"
+  description="Release notes for the Resilient Home Intelligence April 14 open release."
+  ogDescription="What the April 14 open release includes, what changed, and what remains outside release."
+>
+  <Fragment slot="hero">
+    <PageHero
+      eyebrow="Release Notes"
+      title="Release notes for the April 14, 2026 open release."
+      lede="This page summarizes what the release package includes, what changed from the earlier preview-first posture, and what still remains outside release."
+      meta={meta}
+      pageLinks={pageLinks}
+      asideLabel="Fast read"
+      asideTitle="From teaser posture to release posture."
+      asideItems={heroAsideItems}
+    />
+  </Fragment>
+
+  <section class="panel">
+    <p class="section-label">Summary</p>
+    <h2>What changed</h2>
+    <div class="timeline">
+      {timelineItems.map((item) => (
+        <article class="timeline-item">
+          <p class="kicker">{item.label}</p>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="panel panel-accent">
+    <p class="section-label">Included</p>
+    <h2>What the current release package includes</h2>
+    <div class="status-grid">
+      {included.map((item) => (
+        <article class="status-card">
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="panel">
+    <p class="section-label">Excluded</p>
+    <h2>What still remains outside release</h2>
+    <div class="dataset-grid">
+      <article class="dataset-card">
+        <h3>Still out of scope</h3>
+        <ul>
+          {excluded.out.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="dataset-card">
+        <h3>Why those items stay out</h3>
+        <ul>
+          {excluded.reasons.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel">
+    <p class="section-label">Useful Next Steps</p>
+    <h2>Where to go from here</h2>
+    <div class="action-card-grid">
+      {nextSteps.map((item) => (
+        <article class="action-card">
+          <h3>{item.title}</h3>
+          <a class="text-link" href={item.href}>{item.label}</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <p>
+      The release notes explain what changed. The policy docs explain what governs.
+    </p>
+  </Fragment>
+</SiteLayout>

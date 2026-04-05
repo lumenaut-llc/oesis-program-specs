@@ -2,7 +2,8 @@
 
 ## Purpose
 
-Turn the repo's governance, legal, privacy, and claims rules into a practical release gate for public preview, pilot launch, and later product deployment.
+Turn the repo's governance, legal, privacy, and claims rules into a practical release
+gate for the current public release, pilot launch, and later product deployment.
 
 ## How to use
 
@@ -23,7 +24,7 @@ Until broader stewardship roles are assigned, Liam is acting as:
 ## Latest dry-run evidence
 
 - Controlled review packet dry run on April 1, 2026 resolved all `18` files listed in the current Packet 2 path from `reviewer-packet-index.md`.
-- Operator dry run on April 1, 2026 succeeded for `python3 -m rhi.parcel_platform.reference_pipeline`, `python3 -m rhi.ingest.ingest_packet programs/resilient-home-intelligence/docs/data-model/examples/node-observation.example.json --parcel-id parcel_demo_001`, and preview-site HTTP checks returning `200 OK` for `http://127.0.0.1:8000/`.
+- Operator dry run on April 1, 2026 succeeded for `python3 -m rhi.parcel_platform.reference_pipeline`, `python3 -m rhi.ingest.ingest_packet programs/resilient-home-intelligence/docs/data-model/examples/node-observation.example.json --parcel-id parcel_demo_001`, and release-site HTTP checks returning `200 OK` for `http://127.0.0.1:8000/`.
 
 ## Governance and legal gates
 
@@ -31,7 +32,7 @@ Until broader stewardship roles are assigned, Liam is acting as:
 | --- | --- | --- | --- | --- |
 | Data classes are fixed and referenced by product/API work | Liam (technical) | docs, schemas, APIs | in progress | `make rhi-validate` passes and the reference services use the checked-in example contracts, but broader product/API coverage is still incomplete. |
 | Sharing modes are defined and aligned with UI and policy docs | Liam (governance/privacy) | parcel settings, docs | not started | Sharing schemas and policy docs exist, but there is no full parcel-settings UI yet. |
-| Claims and safety-language standard reviewed against public copy | Liam (release) | site, app, release copy | in progress | The preview site and notice were written against the claims doc, but final release-owner review is still pending. |
+| Claims and safety-language standard reviewed against public copy | Liam (release) | site, app, release copy | in progress | The release site and notice were written against the claims doc, but final release-owner review is still pending. |
 | Licensing split reviewed for software, hardware, docs, and datasets | Liam (legal/IP) | repo root, legal docs | not started | Licensing materials exist, but this review gate is not yet closed. |
 | Dataset release policy applied to all public artifacts | Liam (legal/IP) | repo, releases, pilots | not started | Policy exists, but artifact-by-artifact application is still pending. |
 | Trademark and compatibility language reviewed | Liam (release) | release copy, docs, branding | not started | No completed review evidence yet. |
@@ -82,10 +83,10 @@ Until broader stewardship roles are assigned, Liam is acting as:
 
 | Item | Owner | Surface | Status | Notes |
 | --- | --- | --- | --- | --- |
-| Public copy avoids directive safety language | Liam (release) | README, posts, site | in progress | The preview site and notice align with the claims-and-safety-language doc, but remaining assets still need owner review. |
-| Public copy does not imply complete neighborhood visibility | Liam (release) | site, map copy, posts | in progress | The preview site and shared-map coverage language describe partial coverage, but a full asset review is still pending. |
+| Public copy avoids directive safety language | Liam (release) | README, posts, site | in progress | The release site and notice align with the claims-and-safety-language doc, but remaining assets still need owner review. |
+| Public copy does not imply complete neighborhood visibility | Liam (release) | site, map copy, posts | in progress | The release site and shared-map coverage language describe partial coverage, but a full asset review is still pending. |
 | Public copy distinguishes private, shared, public, and derived information | Liam (governance/privacy) | docs, site, UI | in progress | Core docs and parcel-view fields distinguish major data classes, but broader copy and UI alignment are still incomplete. |
-| Preview copy stays within holdback and publication limits | Liam (legal/IP) | release materials | in progress | The public site stays inside Packet 1 and the reviewer packet isolates deeper material, but formal owner sign-off is still pending. |
+| Release copy stays within current release and publication limits | Liam (legal/IP) | release materials | in progress | The public site stays inside Packet 1 and the reviewer packet isolates deeper material, but formal owner sign-off is still pending. |
 
 ## Stop-ship triggers
 

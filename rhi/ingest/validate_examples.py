@@ -323,6 +323,135 @@ def validate_evidence_summary(payload):
     require_type(freshness["stale"], bool, "freshness.stale")
 
 
+def validate_house_state(payload):
+    required = ["parcel_id", "updated_at", "observed_at", "indoor_air", "hvac_state", "device_state"]
+    for field in required:
+        require(field in payload, f"house state missing required field: {field}")
+
+    require_type(payload["parcel_id"], str, "parcel_id")
+    require_type(payload["updated_at"], str, "updated_at")
+    require_type(payload["observed_at"], str, "observed_at")
+
+    indoor_air = payload["indoor_air"]
+    require_type(indoor_air, dict, "indoor_air")
+    require_number(indoor_air["pm25_ugm3"], "indoor_air.pm25_ugm3", minimum=0)
+    require_number(indoor_air["temperature_c"], "indoor_air.temperature_c")
+    require_number(indoor_air["relative_humidity_pct"], "indoor_air.relative_humidity_pct", minimum=0, maximum=100)
+
+    hvac_state = payload["hvac_state"]
+    require_type(hvac_state, dict, "hvac_state")
+    require(hvac_state["mode"] in {"off", "heat", "cool", "auto", "fan_only", "unknown"}, "hvac_state.mode invalid")
+    require(hvac_state["fan_mode"] in {"auto", "on", "circulate", "unknown"}, "hvac_state.fan_mode invalid")
+    require(hvac_state["air_mode"] in {"recirculate", "fresh", "auto", "unknown"}, "hvac_state.air_mode invalid")
+    require_type(hvac_state["filter_condition"], str, "hvac_state.filter_condition")
+
+    device_state = payload["device_state"]
+    require_type(device_state, dict, "device_state")
+    require(device_state["purifier_state"] in {"on", "off", "auto", "unknown"}, "device_state.purifier_state invalid")
+    require(
+        device_state["backup_power_state"] in {"unavailable", "standby", "active", "unknown"},
+        "device_state.backup_power_state invalid",
+    )
+    require(device_state["window_state"] in {"open", "closed", "mixed", "unknown"}, "device_state.window_state invalid")
+    require(device_state["shade_state"] in {"open", "closed", "partial", "unknown"}, "device_state.shade_state invalid")
+    require(device_state["sump_state"] in {"on", "off", "fault", "unknown"}, "device_state.sump_state invalid")
+
+
+def validate_house_capability(payload):
+    required = ["parcel_id", "updated_at", "protective_capacity", "hvac_profile", "site_profile"]
+    for field in required:
+        require(field in payload, f"house capability missing required field: {field}")
+
+    require_type(payload["parcel_id"], str, "parcel_id")
+    require_type(payload["updated_at"], str, "updated_at")
+    require_type(payload["protective_capacity"], dict, "protective_capacity")
+    require_type(payload["hvac_profile"], dict, "hvac_profile")
+    require_type(payload["site_profile"], dict, "site_profile")
+
+
+def validate_control_compatibility(payload):
+    required = ["parcel_id", "updated_at", "local_controller", "control_surfaces"]
+    for field in required:
+        require(field in payload, f"control compatibility missing required field: {field}")
+
+    require_type(payload["parcel_id"], str, "parcel_id")
+    require_type(payload["updated_at"], str, "updated_at")
+    require_type(payload["local_controller"], dict, "local_controller")
+    require_type(payload["local_controller"]["available"], bool, "local_controller.available")
+    require_type(payload["local_controller"]["controller_type"], str, "local_controller.controller_type")
+    require_type(payload["control_surfaces"], list, "control_surfaces")
+    valid_interface_classes = {"manual", "local_api", "matter", "home_assistant", "cloud_only", "bacnet", "smart_plug", "none"}
+    valid_locality = {"local_only", "cloud_required", "hybrid", "unknown"}
+    valid_tiers = {"advisory_only", "soft_integration", "hard_integration"}
+    for i, surface in enumerate(payload["control_surfaces"]):
+        require_type(surface, dict, f"control_surfaces[{i}]")
+        require_type(surface["control_id"], str, f"control_surfaces[{i}].control_id")
+        require_type(surface["system_type"], str, f"control_surfaces[{i}].system_type")
+        require(surface["interface_class"] in valid_interface_classes, f"control_surfaces[{i}].interface_class invalid")
+        require(surface["locality"] in valid_locality, f"control_surfaces[{i}].locality invalid")
+        require(surface["integration_tier"] in valid_tiers, f"control_surfaces[{i}].integration_tier invalid")
+        require_type(surface["enabled"], bool, f"control_surfaces[{i}].enabled")
+        require_type(surface["override_rule"], str, f"control_surfaces[{i}].override_rule")
+
+
+def validate_intervention_event(payload):
+    required = [
+        "intervention_id",
+        "parcel_id",
+        "recorded_at",
+        "hazard_target",
+        "action_kind",
+        "initiated_by",
+        "status",
+        "baseline_window_minutes",
+        "evaluation_window_minutes",
+    ]
+    for field in required:
+        require(field in payload, f"intervention event missing required field: {field}")
+
+    require_type(payload["intervention_id"], str, "intervention_id")
+    require_type(payload["parcel_id"], str, "parcel_id")
+    require_type(payload["recorded_at"], str, "recorded_at")
+    require_type(payload["hazard_target"], str, "hazard_target")
+    require_type(payload["action_kind"], str, "action_kind")
+    require_type(payload["initiated_by"], str, "initiated_by")
+    require(payload["status"] in {"planned", "attempted", "completed", "failed"}, "status invalid")
+    require_number(payload["baseline_window_minutes"], "baseline_window_minutes", minimum=0)
+    require_number(payload["evaluation_window_minutes"], "evaluation_window_minutes", minimum=0)
+    if "notes" in payload:
+        require_type(payload["notes"], str, "notes")
+
+
+def validate_verification_outcome(payload):
+    required = [
+        "verification_id",
+        "parcel_id",
+        "intervention_id",
+        "evaluated_at",
+        "metric_name",
+        "baseline_value",
+        "outcome_value",
+        "assessment",
+        "confidence_band",
+    ]
+    for field in required:
+        require(field in payload, f"verification outcome missing required field: {field}")
+
+    require_type(payload["verification_id"], str, "verification_id")
+    require_type(payload["parcel_id"], str, "parcel_id")
+    require_type(payload["intervention_id"], str, "intervention_id")
+    require_type(payload["evaluated_at"], str, "evaluated_at")
+    require_type(payload["metric_name"], str, "metric_name")
+    require_number(payload["baseline_value"], "baseline_value")
+    require_number(payload["outcome_value"], "outcome_value")
+    require(payload["assessment"] in {"improved", "no_change", "worsened", "inconclusive"}, "assessment invalid")
+    require(payload["confidence_band"] in {"low", "medium", "high"}, "confidence_band invalid")
+    if "response_window_minutes" in payload:
+        require_number(payload["response_window_minutes"], "response_window_minutes", minimum=0)
+    if "summary" in payload:
+        require_type(payload["summary"], str, "summary")
+
+
 def validate_raw_public_weather(payload):
     required = [
         "source_name",
@@ -611,7 +740,19 @@ def validate_rights_request_store(payload):
 
 
 def validate_export_bundle(payload):
-    required = ["generated_at", "parcel_id", "sharing", "rights_requests", "access_events", "parcel_state"]
+    required = [
+        "generated_at",
+        "parcel_id",
+        "sharing",
+        "rights_requests",
+        "access_events",
+        "parcel_state",
+        "house_state",
+        "house_capability",
+        "control_compatibility",
+        "intervention_events",
+        "verification_outcomes",
+    ]
     for field in required:
         require(field in payload, f"export bundle missing required field: {field}")
     require_type(payload["generated_at"], str, "generated_at")
@@ -626,6 +767,20 @@ def validate_export_bundle(payload):
         require_type(event, dict, f"access_events[{i}]")
         validate_operator_access_event(event)
     require(isinstance(payload["parcel_state"], (dict, type(None))), "parcel_state: expected object or null")
+    if payload["house_state"] is not None:
+        validate_house_state(payload["house_state"])
+    if payload["house_capability"] is not None:
+        validate_house_capability(payload["house_capability"])
+    if payload["control_compatibility"] is not None:
+        validate_control_compatibility(payload["control_compatibility"])
+    require_type(payload["intervention_events"], list, "intervention_events")
+    for i, event in enumerate(payload["intervention_events"]):
+        require_type(event, dict, f"intervention_events[{i}]")
+        validate_intervention_event(event)
+    require_type(payload["verification_outcomes"], list, "verification_outcomes")
+    for i, outcome in enumerate(payload["verification_outcomes"]):
+        require_type(outcome, dict, f"verification_outcomes[{i}]")
+        validate_verification_outcome(outcome)
 
 
 def validate_retention_cleanup_report(payload):
@@ -693,6 +848,11 @@ def main():
         ("raw public smoke", EXAMPLES_DIR / "raw-public-smoke.example.json", validate_raw_public_smoke),
         ("public context", EXAMPLES_DIR / "public-context.example.json", validate_public_context),
         ("parcel state", EXAMPLES_DIR / "parcel-state.example.json", validate_parcel_state),
+        ("house state", EXAMPLES_DIR / "house-state.example.json", validate_house_state),
+        ("house capability", EXAMPLES_DIR / "house-capability.example.json", validate_house_capability),
+        ("control compatibility", EXAMPLES_DIR / "control-compatibility.example.json", validate_control_compatibility),
+        ("intervention event", EXAMPLES_DIR / "intervention-event.example.json", validate_intervention_event),
+        ("verification outcome", EXAMPLES_DIR / "verification-outcome.example.json", validate_verification_outcome),
         ("evidence summary", EXAMPLES_DIR / "evidence-summary.example.json", validate_evidence_summary),
         ("sharing settings", EXAMPLES_DIR / "sharing-settings.example.json", validate_sharing_settings),
         ("node registry", EXAMPLES_DIR / "node-registry.example.json", validate_node_registry),

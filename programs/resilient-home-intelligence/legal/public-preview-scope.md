@@ -1,54 +1,51 @@
-# Public Preview Scope
+# Open Release Scope
 
 ## Purpose
 
-Define what may be published on or before the April 14, 2026 public preview while the project preserves the option to file a narrow U.S. provisional first.
+Define what may be published in the April 14, 2026 open release.
+
+This file keeps its historical path for link stability even though the release posture is no longer a preview-first filing sequence.
 
 This is a release-planning control document, not legal advice.
 
 ## Current release path
 
-- Path B: limited public preview first, enabling technical release after filing decision
-- U.S.-first sequencing assumption: preserving optional narrow filing matters more than preserving foreign rights
-- Default publication rule until filing decision: non-enabling only
+- open publication of the current technical release
+- no active provisional-first sequencing requirement for v1
+- default publication rule: release intentionally, with clear licensing, provenance, and safety-boundary language
 
-## April 14 preview goals
+## April 14 release goals
 
 - make the openness and governance posture public
-- state homeowner data ownership and sharing boundaries
-- show the project mission and hazard scope
-- show high-level modular architecture without teaching reproduction of potentially novel implementation details
-- keep the later full open-source release straightforward after filing
+- state owner control and data-publication boundaries clearly
+- publish the current reference software, hardware documentation, schemas, and technical architecture
+- publish the current v1 dataset when intentionally designated as a public release artifact
+- keep future participant-data decisions and safety claims clearly bounded
 
-## Approved public materials before filing
+## In-scope public materials
 
-The following are generally in scope for the public preview:
+The following are generally in scope for the current release:
 
 - mission, principles, and problem statement
-- high-level architecture overview without implementation-enabling detail
-- preview README and program overview pages
+- technical architecture and system-overview docs
+- program README and release README pages
 - governance, privacy, and data-ownership summaries
 - claims, limitations, and safety-position language
-- prototype photos that do not reveal reproducible internals
-- non-enabling diagrams showing major modules and data classes
-- release roadmap and open-license intent by asset class
+- approved diagrams, packet contracts, schemas, and reference implementation materials
+- prototype photos and hardware documentation approved for release
+- release roadmap and open-license terms by asset class
 - contributor and stewardship posture
+- the project-controlled v1 dataset and clearly related derived artifacts when they carry explicit dataset terms and provenance notes
 
-## Out of scope before filing
+## Out of scope
 
-Do not publish these items before the filing decision unless attorney review says otherwise or the team deliberately switches to open defensive publication instead:
+Do not publish these items as part of the open release:
 
-- schematics
-- PCB layouts or fabrication files
-- detailed CAD source files
-- detailed bills of materials tied to the inventive concept
-- serial or network packet contracts that expose novel implementation structure
-- calibration methods that materially enable reproduction
-- threshold logic or scoring rules tied to parcel inference
-- detailed evidence-weighting methods
-- privacy-preserving neighborhood-sharing implementation details
-- detailed flowcharts that would let a skilled person reproduce the narrow filing candidate
-- source code or configuration that teaches a potentially patentable method not yet filed
+- secrets, credentials, signing material, or internal access endpoints
+- non-cleared third-party content or datasets whose source terms do not permit redistribution
+- personal contact details, operator-only incident details, or admin-only access records not intentionally designated as public artifacts
+- accidental publication of future participant parcel-linked data that is not part of the intentionally released project-controlled v1 dataset
+- claims that the project provides guaranteed safety, official alerts, or emergency authority
 
 ## Green / yellow / red gate
 
@@ -57,33 +54,33 @@ Do not publish these items before the filing decision unless attorney review say
 Publish without additional escalation if the material:
 
 - explains why the project exists
-- explains who controls data
-- explains the difference between private, shared, and public data
-- names system modules at a high level
-- does not reveal a reproducible method
+- explains ownership, licensing, and provenance clearly
+- documents the current reference implementation truthfully
+- includes only assets intentionally selected for public release
+- does not reveal secrets or contradict claims-and-safety limits
 
 ### Yellow
 
 Route for release-owner review before publication if the material:
 
-- describes a method with ordered technical steps
-- includes diagrams with message flow, thresholds, or decision points
+- includes real-world parcel-level v1 data
+- includes exact parcel geometry, timestamps, or field-media context that could surprise readers
 - includes close-up imagery of boards, wiring, or enclosure internals
-- describes how neighborhood contributions are transformed before sharing
-- explains how parcel status is calculated beyond broad concept level
+- redistributes third-party source data
+- could be misunderstood as a safety, certification, or emergency claim
 
 ### Red
 
-Do not publish before filing or express counsel sign-off if the material:
+Do not publish if the material:
 
-- would let a skilled person reproduce the narrow invention candidate
-- discloses a new variation not captured in the provisional packet
-- includes source files, formulas, thresholds, or implementation values tied to the candidate invention
-- exposes real homeowner data or parcel-linked records
+- includes secrets, keys, tokens, or access material
+- includes data that the project does not have authority to release
+- includes personal or operational records not intentionally approved for public release
+- creates a misleading impression about safety, emergency authority, or complete neighborhood visibility
 
-## Canonical preview package
+## Canonical release package
 
-The April 14 preview should point readers to these materials:
+The April 14 release should point readers to these materials:
 
 - program README
 - governance and privacy overview
@@ -91,21 +88,24 @@ The April 14 preview should point readers to these materials:
 - claims and limitations page
 - contribution and stewardship policy
 - release roadmap
+- open-release notice and asset-class licensing matrix
+- dataset release policy for any published v1 dataset
 
 ## Release-owner checklist
 
-Before a preview asset is published, confirm:
+Before a release asset is published, confirm:
 
 - it is classified as green or approved yellow
-- it does not contain real homeowner-contributed data
-- it does not contradict the private-by-default rule
+- it carries the correct license or notice
+- if it is a dataset, it is explicitly identified as public and has provenance attached
+- it does not contradict the owner-control rule for future participant data
 - it does not overclaim accuracy or safety
-- it does not expose withheld technical details
+- it does not expose secrets or non-cleared third-party material
 
-## Trigger to move from preview to full open release
+## Trigger to expand beyond the current release
 
-Move from preview to the technical open release when one of these occurs:
+Expand beyond the current release when one of these occurs:
 
-- the narrow provisional is filed and the released materials stay within that support
-- the team decides not to file and instead chooses open defensive publication
-- attorney review confirms the withheld materials no longer need to be held back
+- more technical assets are intentionally cleared for publication
+- a future participant-data publication policy is explicitly adopted
+- the project decides to publish additional datasets, hardware files, or neighborhood products under revised release terms

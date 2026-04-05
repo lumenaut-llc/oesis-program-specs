@@ -16,9 +16,9 @@ Homeowner data ownership, sharing controls, custody types, and platform rules.
 
 This folder now holds the MVP governance baseline for parcel-first sensing and parcel-awareness.
 
-## Preview-start documents
+## Current release documents
 
-For the April 14, 2026 public preview, start with:
+For the current April 14, 2026 open-release posture, start with:
 
 - `data-ownership.md`
 - `privacy.md`

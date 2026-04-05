@@ -2,7 +2,8 @@
 
 ## Purpose
 
-State the homeowner-facing data ownership and control model for the April 14, 2026 public preview.
+State the homeowner-facing data ownership and control model for the April 14, 2026
+open-release period.
 
 This file is a project policy draft, not legal advice.
 
@@ -22,6 +23,9 @@ This includes, where applicable:
 - parcel-linked device data
 - exact parcel-linked histories associated with that homeowner account
 - parcel metadata or notes supplied by the homeowner
+- house-state telemetry and indoor environmental response data
+- capability, compatibility, and control-locality records for parcel systems
+- intervention and verification histories tied to that parcel
 
 ## What the platform receives
 
@@ -45,18 +49,25 @@ The project draws a hard distinction among:
 - public context from third-party or public sources
 - derived parcel-state outputs
 
-Open-source release of code or documentation does not convert private homeowner data into public data.
+Open-source release of code or documentation does not convert future
+participant-contributed private homeowner data into public data.
+
+The project-controlled v1 dataset may still be intentionally public when it is
+explicitly designated and released under dataset-specific terms.
 
 ## Sharing rule
 
 No parcel-linked data should leave the private parcel context unless the applicable sharing mode allows it.
 
-Working preview rule:
+Current release rule:
 
 - private use is the default
 - network assist is separate opt-in
 - neighborhood aggregate contribution is separate opt-in
 - research or pilot contribution requires separate, explicit opt-in
+
+These sharing modes govern data use and visibility.
+They do not authorize parcel control or automation.
 
 See `permissions-matrix.md`.
 
@@ -68,6 +79,7 @@ Subject to the selected sharing mode and later product terms, the platform may:
 - use selected opt-in signals for internal service operation where the user has enabled that mode
 - use public context to interpret parcel conditions
 - generate derived parcel-state outputs, confidence values, freshness values, and provenance summaries
+- intentionally publish the project-controlled v1 dataset or derived public release artifacts only where the project has clear authority and explicit dataset terms are attached
 
 ## What the platform may not do under the current policy direction
 
@@ -78,6 +90,7 @@ The platform should not:
 - expose exact parcel-linked contributions in public maps
 - represent opt-in shared data as anonymous unless a real standard supports that claim
 - silently repurpose private parcel data into broader sharing modes
+- infer that device compatibility or control capability implies homeowner approval to actuate it
 
 ## Derived outputs
 
@@ -103,9 +116,10 @@ The project therefore intends to support:
 
 See `retention-export-deletion-revocation.md`.
 
-## Preview limitations
+## Release limitations
 
-This preview file states the intended policy posture. It does not guarantee that every control is fully implemented today.
+This file states the intended policy posture. It does not guarantee that every control
+is fully implemented today.
 
 Before any pilot or broader public deployment, the project should confirm:
 
@@ -119,3 +133,4 @@ Before any pilot or broader public deployment, the project should confirm:
 - `permissions-matrix.md`
 - `retention-export-deletion-revocation.md`
 - `privacy.md`
+- `../../legal/dataset-release-policy.md`

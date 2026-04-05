@@ -12,6 +12,11 @@ Define the machine-readable export bundle produced by the reference parcel right
 - `rights_requests`
 - `access_events`
 - `parcel_state`
+- `house_state`
+- `house_capability`
+- `control_compatibility`
+- `intervention_events`
+- `verification_outcomes`
 
 ## Minimum object
 
@@ -22,7 +27,12 @@ Define the machine-readable export bundle produced by the reference parcel right
   "sharing": {},
   "rights_requests": [],
   "access_events": [],
-  "parcel_state": {}
+  "parcel_state": {},
+  "house_state": null,
+  "house_capability": null,
+  "control_compatibility": null,
+  "intervention_events": [],
+  "verification_outcomes": []
 }
 ```
 
@@ -31,3 +41,4 @@ Define the machine-readable export bundle produced by the reference parcel right
 - exports should include parcel-linked data and governance records relevant to the request scope
 - exports should be machine-readable JSON in the reference implementation
 - administrative evidence may remain even after deletion processing, but the export should clearly label what is included
+- `v1.5` support objects remain private parcel data by default and should be exported with the same owner-facing rights posture as other parcel-linked records

@@ -8,6 +8,7 @@ from pathlib import Path
 
 
 PROGRAM_ROOT = Path(__file__).resolve().parents[2]
+WORKSPACE_ROOT = PROGRAM_ROOT.parents[2]
 DOC_EXAMPLES = PROGRAM_ROOT / "docs" / "data-model" / "examples"
 INGEST_SCRIPT_DIR = PROGRAM_ROOT / "software" / "ingest-service" / "scripts"
 INFERENCE_SCRIPT_DIR = PROGRAM_ROOT / "software" / "inference-engine" / "scripts"
@@ -54,6 +55,11 @@ class ReferenceGovernanceTests(unittest.TestCase):
         self.shared_signal = json.loads((DOC_EXAMPLES / "shared-neighborhood-signal.example.json").read_text(encoding="utf-8"))
         self.sharing_store_seed = json.loads((DOC_EXAMPLES / "sharing-store.example.json").read_text(encoding="utf-8"))
         self.rights_store_seed = json.loads((DOC_EXAMPLES / "rights-request-store.example.json").read_text(encoding="utf-8"))
+        self.house_state = json.loads((DOC_EXAMPLES / "house-state.example.json").read_text(encoding="utf-8"))
+        self.house_capability = json.loads((DOC_EXAMPLES / "house-capability.example.json").read_text(encoding="utf-8"))
+        self.control_compatibility = json.loads((DOC_EXAMPLES / "control-compatibility.example.json").read_text(encoding="utf-8"))
+        self.intervention_event = json.loads((DOC_EXAMPLES / "intervention-event.example.json").read_text(encoding="utf-8"))
+        self.verification_outcome = json.loads((DOC_EXAMPLES / "verification-outcome.example.json").read_text(encoding="utf-8"))
 
     def test_parcel_view_includes_sharing_summary_and_data_classes(self):
         view = format_parcel_view.build_parcel_view(self.parcel_state, self.sharing_settings)
@@ -231,6 +237,58 @@ class ReferenceGovernanceTests(unittest.TestCase):
             remaining_ids = [entry["parcel_id"] for entry in updated_sharing["parcels"]]
             self.assertNotIn("parcel_002", remaining_ids)
 
+    def test_delete_request_processing_removes_v15_support_objects(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            rights_path = Path(tmpdir) / "rights-store.json"
+            house_state_path = Path(tmpdir) / "house-state-store.json"
+            house_capability_path = Path(tmpdir) / "house-capability-store.json"
+            control_compatibility_path = Path(tmpdir) / "control-compatibility-store.json"
+            intervention_path = Path(tmpdir) / "intervention-event-store.json"
+            verification_path = Path(tmpdir) / "verification-outcome-store.json"
+
+            sharing_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+            rights_store = {
+                "updated_at": "2026-03-30T20:40:00Z",
+                "requests": [
+                    {
+                        "request_id": "rights_delete_parcel_001",
+                        "parcel_id": "parcel_001",
+                        "account_id": "acct_123",
+                        "request_type": "delete",
+                        "status": "submitted",
+                        "created_at": "2026-03-30T20:20:00Z",
+                        "scope": ["private_parcel_data", "derived_parcel_state"],
+                        "requested_from_surface": "parcel_settings_ui",
+                    }
+                ],
+            }
+            rights_path.write_text(json.dumps(rights_store), encoding="utf-8")
+
+            serve_parcel_api.upsert_house_state(house_state_path, self.house_state)
+            serve_parcel_api.upsert_house_capability(house_capability_path, self.house_capability)
+            serve_parcel_api.upsert_control_compatibility(control_compatibility_path, self.control_compatibility)
+            serve_parcel_api.append_intervention_event(intervention_path, self.intervention_event)
+            serve_parcel_api.append_verification_outcome(verification_path, self.verification_outcome)
+
+            result = serve_parcel_api.process_delete_request(
+                rights_path,
+                sharing_path,
+                "rights_delete_parcel_001",
+                house_state_store_path=house_state_path,
+                house_capability_store_path=house_capability_path,
+                control_compatibility_store_path=control_compatibility_path,
+                intervention_event_store_path=intervention_path,
+                verification_outcome_store_path=verification_path,
+            )
+
+            self.assertEqual(result["status"], "completed")
+            self.assertIsNone(serve_parcel_api.load_house_state(house_state_path, "parcel_001"))
+            self.assertIsNone(serve_parcel_api.load_house_capability(house_capability_path, "parcel_001"))
+            self.assertIsNone(serve_parcel_api.load_control_compatibility(control_compatibility_path, "parcel_001"))
+            self.assertEqual(serve_parcel_api.list_intervention_events(intervention_path, "parcel_001"), [])
+            self.assertEqual(serve_parcel_api.list_verification_outcomes(verification_path, "parcel_001"), [])
+
     def test_export_request_processing_writes_bundle_and_completes_request(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             sharing_path = Path(tmpdir) / "sharing-store.json"
@@ -277,6 +335,72 @@ class ReferenceGovernanceTests(unittest.TestCase):
             self.assertEqual(bundle["parcel_state"]["parcel_id"], "parcel_001")
             updated_rights = json.loads(rights_path.read_text(encoding="utf-8"))
             self.assertEqual(updated_rights["requests"][0]["status"], "completed")
+
+    def test_export_request_processing_includes_v15_support_objects(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sharing_path = Path(tmpdir) / "sharing-store.json"
+            rights_path = Path(tmpdir) / "rights-store.json"
+            access_path = Path(tmpdir) / "access-log.json"
+            export_path = Path(tmpdir) / "parcel-export.json"
+            parcel_state_path = Path(tmpdir) / "parcel-state.json"
+            house_state_path = Path(tmpdir) / "house-state-store.json"
+            house_capability_path = Path(tmpdir) / "house-capability-store.json"
+            control_compatibility_path = Path(tmpdir) / "control-compatibility-store.json"
+            intervention_path = Path(tmpdir) / "intervention-event-store.json"
+            verification_path = Path(tmpdir) / "verification-outcome-store.json"
+
+            sharing_path.write_text(json.dumps(self.sharing_store_seed), encoding="utf-8")
+            access_path.write_text(
+                json.dumps([json.loads((DOC_EXAMPLES / "operator-access-event.example.json").read_text(encoding="utf-8"))]),
+                encoding="utf-8",
+            )
+            parcel_state = dict(self.parcel_state)
+            parcel_state["parcel_id"] = "parcel_001"
+            parcel_state_path.write_text(json.dumps(parcel_state), encoding="utf-8")
+            rights_store = {
+                "updated_at": "2026-03-30T20:40:00Z",
+                "requests": [
+                    {
+                        "request_id": "rights_export_parcel_001",
+                        "parcel_id": "parcel_001",
+                        "account_id": "acct_123",
+                        "request_type": "export",
+                        "status": "submitted",
+                        "created_at": "2026-03-30T20:20:00Z",
+                        "scope": ["private_parcel_data", "derived_parcel_state"],
+                        "requested_from_surface": "parcel_settings_ui",
+                    }
+                ],
+            }
+            rights_path.write_text(json.dumps(rights_store), encoding="utf-8")
+
+            serve_parcel_api.upsert_house_state(house_state_path, self.house_state)
+            serve_parcel_api.upsert_house_capability(house_capability_path, self.house_capability)
+            serve_parcel_api.upsert_control_compatibility(control_compatibility_path, self.control_compatibility)
+            serve_parcel_api.append_intervention_event(intervention_path, self.intervention_event)
+            serve_parcel_api.append_verification_outcome(verification_path, self.verification_outcome)
+
+            result = serve_parcel_api.process_export_request(
+                rights_path,
+                sharing_path,
+                access_path,
+                "rights_export_parcel_001",
+                export_path,
+                parcel_state_path=parcel_state_path,
+                house_state_store_path=house_state_path,
+                house_capability_store_path=house_capability_path,
+                control_compatibility_store_path=control_compatibility_path,
+                intervention_event_store_path=intervention_path,
+                verification_outcome_store_path=verification_path,
+            )
+
+            self.assertEqual(result["status"], "completed")
+            bundle = json.loads(export_path.read_text(encoding="utf-8"))
+            self.assertEqual(bundle["house_state"]["parcel_id"], "parcel_001")
+            self.assertEqual(bundle["house_capability"]["parcel_id"], "parcel_001")
+            self.assertEqual(bundle["control_compatibility"]["parcel_id"], "parcel_001")
+            self.assertEqual(bundle["intervention_events"][0]["intervention_id"], "intv_001")
+            self.assertEqual(bundle["verification_outcomes"][0]["verification_id"], "verify_001")
 
     def test_export_request_processing_uses_completed_status_inside_bundle(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -397,6 +521,19 @@ class ReferenceGovernanceTests(unittest.TestCase):
         self.assertNotEqual(first["request_id"], second["request_id"])
         self.assertTrue(first["request_id"].startswith("rights_export_parcel_001_"))
         self.assertTrue(second["request_id"].startswith("rights_export_parcel_001_"))
+
+    def test_stage_docs_describe_current_v1_and_v15_boundary(self):
+        paths = [
+            WORKSPACE_ROOT / "system-overview.md",
+            WORKSPACE_ROOT / "roadmap.md",
+            WORKSPACE_ROOT / "path-forward-prompt-packet.md",
+            PROGRAM_ROOT / "docs" / "system-overview" / "phase-roadmap.md",
+            PROGRAM_ROOT / "docs" / "system-overview" / "product-requirements-phase-1.md",
+        ]
+        for path in paths:
+            text = path.read_text(encoding="utf-8")
+            self.assertIn("v1.5", text, msg=str(path))
+            self.assertIn("current", text.lower(), msg=str(path))
 
     def test_retention_cleanup_prunes_old_access_and_completed_export_requests(self):
         with tempfile.TemporaryDirectory() as tmpdir:

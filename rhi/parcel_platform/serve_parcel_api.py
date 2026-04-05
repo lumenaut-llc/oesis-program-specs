@@ -11,13 +11,20 @@ from rhi.common.repo_paths import REPO_ROOT
 from .format_evidence_summary import build_evidence_summary
 from .format_parcel_view import ParcelViewError, build_parcel_view, validate_sharing_settings
 from .reference_store import append_access_event
+from .reference_store import append_intervention_event
 from .reference_store import append_rights_request
+from .reference_store import append_verification_outcome
 from .reference_store import build_reference_state_summary
 from .reference_store import build_rights_request
 from .reference_store import clone_default_sharing
 from .reference_store import ensure_path_within_allowed_roots
 from .reference_store import export_bundle_for_parcel
 from .reference_store import find_rights_request
+from .reference_store import list_intervention_events
+from .reference_store import list_verification_outcomes
+from .reference_store import load_control_compatibility
+from .reference_store import load_house_capability
+from .reference_store import load_house_state
 from .reference_store import list_rights_requests
 from .reference_store import load_access_log
 from .reference_store import load_rights_store
@@ -33,15 +40,28 @@ from .reference_store import rights_request_id
 from .reference_store import save_rights_store
 from .reference_store import save_sharing_store
 from .reference_store import sharing_from_store
+from .reference_store import upsert_control_compatibility
+from .reference_store import upsert_house_capability
+from .reference_store import upsert_house_state
 from .reference_store import update_rights_request_status
 from .reference_store import update_sharing_store
 from .run_retention_cleanup import run_cleanup
+from .support_objects import SupportObjectError
+from .support_objects import prepare_intervention_event
+from .support_objects import prepare_verification_outcome
+from .support_objects import validate_control_compatibility
+from .support_objects import validate_house_capability
+from .support_objects import validate_house_state
+from .support_objects import validate_intervention_event
+from .support_objects import validate_verification_outcome
 
 __all__ = [
     "ParcelPlatformRequestHandler",
     "ParcelViewError",
     "append_access_event",
+    "append_intervention_event",
     "append_rights_request",
+    "append_verification_outcome",
     "build_evidence_summary",
     "build_parcel_view",
     "build_reference_state_summary",
@@ -50,6 +70,11 @@ __all__ = [
     "ensure_path_within_allowed_roots",
     "export_bundle_for_parcel",
     "find_rights_request",
+    "list_intervention_events",
+    "list_verification_outcomes",
+    "load_control_compatibility",
+    "load_house_capability",
+    "load_house_state",
     "list_rights_requests",
     "load_access_log",
     "load_rights_store",
@@ -67,6 +92,9 @@ __all__ = [
     "save_rights_store",
     "save_sharing_store",
     "sharing_from_store",
+    "upsert_control_compatibility",
+    "upsert_house_capability",
+    "upsert_house_state",
     "update_rights_request_status",
     "update_sharing_store",
     "validate_sharing_settings",
@@ -79,6 +107,11 @@ class ParcelPlatformRequestHandler(BaseHTTPRequestHandler):
     rights_store_path = None
     access_log_path = None
     export_dir_path = None
+    house_state_store_path = None
+    house_capability_store_path = None
+    control_compatibility_store_path = None
+    intervention_event_store_path = None
+    verification_outcome_store_path = None
     allowed_input_roots = []
 
     def _send_json(self, status: int, payload: dict):
@@ -102,6 +135,23 @@ class ParcelPlatformRequestHandler(BaseHTTPRequestHandler):
 
     def _sharing_for_parcel(self, parcel_id: str) -> dict:
         return sharing_from_store(self.sharing_store_path, parcel_id)
+
+    def _support_object_response(self, *, parcel_id: str, response_key: str, payload, action: str):
+        append_access_event(
+            self.access_log_path,
+            actor="parcel-platform-api",
+            action=action,
+            parcel_id=parcel_id,
+            data_classes=["private_parcel_data"],
+            justification=f"{response_key}_request",
+        )
+        self._send_json(
+            HTTPStatus.OK,
+            {
+                "ok": True,
+                response_key: payload,
+            },
+        )
 
     def do_GET(self):
         if self.path == "/v1/parcel-platform/health":
@@ -177,6 +227,56 @@ class ParcelPlatformRequestHandler(BaseHTTPRequestHandler):
                     "ok": True,
                     "rights_requests": list_rights_requests(self.rights_store_path, parcel_id),
                 },
+            )
+            return
+
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "house-state":
+            parcel_id = parts[2]
+            self._support_object_response(
+                parcel_id=parcel_id,
+                response_key="house_state",
+                payload=load_house_state(self.house_state_store_path, parcel_id),
+                action="view_house_state",
+            )
+            return
+
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "capabilities":
+            parcel_id = parts[2]
+            self._support_object_response(
+                parcel_id=parcel_id,
+                response_key="house_capability",
+                payload=load_house_capability(self.house_capability_store_path, parcel_id),
+                action="view_house_capability",
+            )
+            return
+
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "controls":
+            parcel_id = parts[2]
+            self._support_object_response(
+                parcel_id=parcel_id,
+                response_key="control_compatibility",
+                payload=load_control_compatibility(self.control_compatibility_store_path, parcel_id),
+                action="view_control_compatibility",
+            )
+            return
+
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "interventions":
+            parcel_id = parts[2]
+            self._support_object_response(
+                parcel_id=parcel_id,
+                response_key="interventions",
+                payload=list_intervention_events(self.intervention_event_store_path, parcel_id),
+                action="list_intervention_events",
+            )
+            return
+
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "verification":
+            parcel_id = parts[2]
+            self._support_object_response(
+                parcel_id=parcel_id,
+                response_key="verification_outcomes",
+                payload=list_verification_outcomes(self.verification_outcome_store_path, parcel_id),
+                action="list_verification_outcomes",
             )
             return
 
@@ -287,6 +387,164 @@ class ParcelPlatformRequestHandler(BaseHTTPRequestHandler):
             )
             return
 
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "house-state":
+            parcel_id = parts[2]
+            try:
+                payload = self._read_json()
+                payload["parcel_id"] = parcel_id
+                payload["updated_at"] = now_iso()
+                payload.setdefault("observed_at", payload["updated_at"])
+                validate_house_state(payload)
+                upsert_house_state(self.house_state_store_path, payload)
+                append_access_event(
+                    self.access_log_path,
+                    actor="parcel-platform-api",
+                    action="update_house_state",
+                    parcel_id=parcel_id,
+                    data_classes=["private_parcel_data"],
+                    justification="house_state_update",
+                )
+            except (SupportObjectError, KeyError) as exc:
+                self._send_json(
+                    HTTPStatus.BAD_REQUEST,
+                    {
+                        "ok": False,
+                        "error": "invalid_house_state",
+                        "detail": str(exc),
+                    },
+                )
+                return
+
+            self._send_json(HTTPStatus.OK, {"ok": True, "house_state": load_house_state(self.house_state_store_path, parcel_id)})
+            return
+
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "capabilities":
+            parcel_id = parts[2]
+            try:
+                payload = self._read_json()
+                payload["parcel_id"] = parcel_id
+                payload["updated_at"] = now_iso()
+                validate_house_capability(payload)
+                upsert_house_capability(self.house_capability_store_path, payload)
+                append_access_event(
+                    self.access_log_path,
+                    actor="parcel-platform-api",
+                    action="update_house_capability",
+                    parcel_id=parcel_id,
+                    data_classes=["private_parcel_data"],
+                    justification="house_capability_update",
+                )
+            except (SupportObjectError, KeyError) as exc:
+                self._send_json(
+                    HTTPStatus.BAD_REQUEST,
+                    {
+                        "ok": False,
+                        "error": "invalid_house_capability",
+                        "detail": str(exc),
+                    },
+                )
+                return
+
+            self._send_json(
+                HTTPStatus.OK,
+                {"ok": True, "house_capability": load_house_capability(self.house_capability_store_path, parcel_id)},
+            )
+            return
+
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "controls":
+            parcel_id = parts[2]
+            try:
+                payload = self._read_json()
+                payload["parcel_id"] = parcel_id
+                payload["updated_at"] = now_iso()
+                validate_control_compatibility(payload)
+                upsert_control_compatibility(self.control_compatibility_store_path, payload)
+                append_access_event(
+                    self.access_log_path,
+                    actor="parcel-platform-api",
+                    action="update_control_compatibility",
+                    parcel_id=parcel_id,
+                    data_classes=["private_parcel_data"],
+                    justification="control_compatibility_update",
+                )
+            except (SupportObjectError, KeyError) as exc:
+                self._send_json(
+                    HTTPStatus.BAD_REQUEST,
+                    {
+                        "ok": False,
+                        "error": "invalid_control_compatibility",
+                        "detail": str(exc),
+                    },
+                )
+                return
+
+            self._send_json(
+                HTTPStatus.OK,
+                {
+                    "ok": True,
+                    "control_compatibility": load_control_compatibility(self.control_compatibility_store_path, parcel_id),
+                },
+            )
+            return
+
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "interventions":
+            parcel_id = parts[2]
+            try:
+                payload = self._read_json()
+                prepared = prepare_intervention_event(payload, parcel_id=parcel_id, now_iso=now_iso())
+                validate_intervention_event(prepared)
+                stored = append_intervention_event(self.intervention_event_store_path, prepared)
+                append_access_event(
+                    self.access_log_path,
+                    actor="parcel-platform-api",
+                    action="record_intervention_event",
+                    parcel_id=parcel_id,
+                    data_classes=["private_parcel_data"],
+                    justification="intervention_event_append",
+                )
+            except (SupportObjectError, KeyError) as exc:
+                self._send_json(
+                    HTTPStatus.BAD_REQUEST,
+                    {
+                        "ok": False,
+                        "error": "invalid_intervention_event",
+                        "detail": str(exc),
+                    },
+                )
+                return
+
+            self._send_json(HTTPStatus.CREATED, {"ok": True, "intervention_event": stored})
+            return
+
+        if len(parts) == 4 and parts[:2] == ["v1", "parcels"] and parts[3] == "verification":
+            parcel_id = parts[2]
+            try:
+                payload = self._read_json()
+                prepared = prepare_verification_outcome(payload, parcel_id=parcel_id, now_iso=now_iso())
+                validate_verification_outcome(prepared)
+                stored = append_verification_outcome(self.verification_outcome_store_path, prepared)
+                append_access_event(
+                    self.access_log_path,
+                    actor="parcel-platform-api",
+                    action="record_verification_outcome",
+                    parcel_id=parcel_id,
+                    data_classes=["private_parcel_data"],
+                    justification="verification_outcome_append",
+                )
+            except (SupportObjectError, KeyError) as exc:
+                self._send_json(
+                    HTTPStatus.BAD_REQUEST,
+                    {
+                        "ok": False,
+                        "error": "invalid_verification_outcome",
+                        "detail": str(exc),
+                    },
+                )
+                return
+
+            self._send_json(HTTPStatus.CREATED, {"ok": True, "verification_outcome": stored})
+            return
+
         if len(parts) == 5 and parts[:2] == ["v1", "parcels"] and parts[3] == "rights" and parts[4] in {"export", "delete"}:
             parcel_id = parts[2]
             request_type = parts[4]
@@ -317,6 +575,11 @@ class ParcelPlatformRequestHandler(BaseHTTPRequestHandler):
                     self.rights_store_path,
                     self.sharing_store_path,
                     request_id,
+                    house_state_store_path=self.house_state_store_path,
+                    house_capability_store_path=self.house_capability_store_path,
+                    control_compatibility_store_path=self.control_compatibility_store_path,
+                    intervention_event_store_path=self.intervention_event_store_path,
+                    verification_outcome_store_path=self.verification_outcome_store_path,
                 )
                 append_access_event(
                     self.access_log_path,
@@ -367,6 +630,11 @@ class ParcelPlatformRequestHandler(BaseHTTPRequestHandler):
                     request_id,
                     output_path,
                     parcel_state_path=parcel_state_path,
+                    house_state_store_path=self.house_state_store_path,
+                    house_capability_store_path=self.house_capability_store_path,
+                    control_compatibility_store_path=self.control_compatibility_store_path,
+                    intervention_event_store_path=self.intervention_event_store_path,
+                    verification_outcome_store_path=self.verification_outcome_store_path,
                 )
                 append_access_event(
                     self.access_log_path,
@@ -455,6 +723,27 @@ def parse_args() -> argparse.Namespace:
         default="/tmp/rhi-parcel-exports",
         help="Directory for reference export bundles written by admin export processing endpoints.",
     )
+    parser.add_argument("--house-state-store", default="/tmp/rhi-house-state-store.json", help="Path to the JSON house-state store file.")
+    parser.add_argument(
+        "--house-capability-store",
+        default="/tmp/rhi-house-capability-store.json",
+        help="Path to the JSON house-capability store file.",
+    )
+    parser.add_argument(
+        "--control-compatibility-store",
+        default="/tmp/rhi-control-compatibility-store.json",
+        help="Path to the JSON control-compatibility store file.",
+    )
+    parser.add_argument(
+        "--intervention-event-store",
+        default="/tmp/rhi-intervention-event-store.json",
+        help="Path to the JSON intervention-event store file.",
+    )
+    parser.add_argument(
+        "--verification-outcome-store",
+        default="/tmp/rhi-verification-outcome-store.json",
+        help="Path to the JSON verification-outcome store file.",
+    )
     return parser.parse_args()
 
 
@@ -464,6 +753,11 @@ def main():
     ParcelPlatformRequestHandler.rights_store_path = Path(args.rights_store).resolve()
     ParcelPlatformRequestHandler.access_log_path = Path(args.access_log).resolve()
     ParcelPlatformRequestHandler.export_dir_path = Path(args.export_dir).resolve()
+    ParcelPlatformRequestHandler.house_state_store_path = Path(args.house_state_store).resolve()
+    ParcelPlatformRequestHandler.house_capability_store_path = Path(args.house_capability_store).resolve()
+    ParcelPlatformRequestHandler.control_compatibility_store_path = Path(args.control_compatibility_store).resolve()
+    ParcelPlatformRequestHandler.intervention_event_store_path = Path(args.intervention_event_store).resolve()
+    ParcelPlatformRequestHandler.verification_outcome_store_path = Path(args.verification_outcome_store).resolve()
     ParcelPlatformRequestHandler.allowed_input_roots = [REPO_ROOT.resolve()]
     ParcelPlatformRequestHandler.export_dir_path.mkdir(parents=True, exist_ok=True)
     server = ThreadingHTTPServer((args.host, args.port), ParcelPlatformRequestHandler)
