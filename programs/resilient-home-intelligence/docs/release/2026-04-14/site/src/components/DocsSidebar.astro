@@ -1,0 +1,45 @@
+---
+import { docsNav } from "../data/docs-nav";
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string) {
+  const normalized = currentPath.replace(/\/$/, "").replace(/\.html$/, "");
+  const hrefNormalized = href.replace(/\/$/, "").replace(/\.html$/, "");
+  return normalized === hrefNormalized;
+}
+
+function sectionHasActive(items: { href: string }[]) {
+  return items.some((item) => isActive(item.href));
+}
+---
+
+<nav class="docs-sidebar" aria-label="Documentation">
+  <div class="docs-sidebar-inner">
+    <a class="docs-sidebar-heading" href="/docs">Docs</a>
+    {docsNav.map((section) => (
+      section.items.length > 0 ? (
+        <details class="docs-sidebar-section" open={sectionHasActive(section.items)}>
+          <summary class="docs-sidebar-section-title">{section.title}</summary>
+          <ul class="docs-sidebar-list">
+            {section.items.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={["docs-sidebar-link", { active: isActive(item.href) }]}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : (
+        <div class="docs-sidebar-section">
+          <span class="docs-sidebar-section-title docs-sidebar-section-empty">{section.title}</span>
+        </div>
+      )
+    ))}
+  </div>
+</nav>

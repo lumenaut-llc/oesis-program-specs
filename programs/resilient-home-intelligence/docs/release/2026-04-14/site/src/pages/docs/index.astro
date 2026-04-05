@@ -1,0 +1,33 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import { docsNav } from "../../data/docs-nav";
+---
+
+<DocsLayout
+  title="Documentation - RHI"
+  description="Browse the Resilient Home Intelligence documentation: data model schemas, privacy governance, hardware guides, and system architecture."
+>
+  <h1>Documentation</h1>
+  <p class="docs-content-lede">
+    Canonical definitions for the Resilient Home Intelligence data model, privacy governance,
+    hardware families, and system architecture.
+  </p>
+
+  <div class="docs-hub-grid">
+    {docsNav.filter((s) => s.items.length > 0).map((section) => (
+      <article class="docs-hub-card">
+        <p class="kicker">{section.title}</p>
+        <ul class="docs-hub-links">
+          {section.items.slice(0, 5).map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+          {section.items.length > 5 && (
+            <li class="docs-hub-more">
+              +{section.items.length - 5} more
+            </li>
+          )}
+        </ul>
+      </article>
+    ))}
+  </div>
+</DocsLayout>

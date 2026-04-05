@@ -1,0 +1,75 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+const { schemaPath, examplePath, label = "Schema" } = Astro.props;
+
+const DATA_MODEL_DIR = path.resolve("../../docs/data-model");
+
+let schemaJson = "";
+let exampleJson = "";
+
+if (schemaPath) {
+  try {
+    const fullPath = path.join(DATA_MODEL_DIR, "schemas", schemaPath);
+    schemaJson = fs.readFileSync(fullPath, "utf-8");
+  } catch {
+    schemaJson = "";
+  }
+}
+
+if (examplePath) {
+  try {
+    const fullPath = path.join(DATA_MODEL_DIR, "examples", examplePath);
+    exampleJson = fs.readFileSync(fullPath, "utf-8");
+  } catch {
+    exampleJson = "";
+  }
+}
+
+const hasSchema = schemaJson.length > 0;
+const hasExample = exampleJson.length > 0;
+const hasBoth = hasSchema && hasExample;
+const tabId = `sv-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+{(hasSchema || hasExample) && (
+  <div class="schema-viewer">
+    {hasBoth ? (
+      <div class="schema-tabs">
+        <input
+          type="radio"
+          name={tabId}
+          id={`${tabId}-schema`}
+          class="schema-tab-input"
+          checked
+        />
+        <label for={`${tabId}-schema`} class="schema-tab-label">Schema</label>
+        <input
+          type="radio"
+          name={tabId}
+          id={`${tabId}-example`}
+          class="schema-tab-input"
+        />
+        <label for={`${tabId}-example`} class="schema-tab-label">Example</label>
+
+        <div class="schema-tab-panel" data-tab="schema">
+          <pre><code>{schemaJson}</code></pre>
+        </div>
+        <div class="schema-tab-panel" data-tab="example">
+          <pre><code>{exampleJson}</code></pre>
+        </div>
+      </div>
+    ) : hasSchema ? (
+      <details class="schema-details">
+        <summary class="schema-details-summary">{label}</summary>
+        <pre><code>{schemaJson}</code></pre>
+      </details>
+    ) : (
+      <details class="schema-details">
+        <summary class="schema-details-summary">Example</summary>
+        <pre><code>{exampleJson}</code></pre>
+      </details>
+    )}
+  </div>
+)}

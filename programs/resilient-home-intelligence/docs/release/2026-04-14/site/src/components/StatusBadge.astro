@@ -1,0 +1,17 @@
+---
+const { status = "stable", version } = Astro.props;
+
+const statusColors: Record<string, string> = {
+  stable: "var(--forest)",
+  beta: "var(--accent)",
+  draft: "var(--muted)",
+  deprecated: "#9e3030"
+};
+
+const color = statusColors[status] || "var(--muted)";
+---
+
+<span class="status-badge" style={`--badge-color: ${color}`}>
+  {status}
+  {version && <span class="status-badge-version">{version}</span>}
+</span>
