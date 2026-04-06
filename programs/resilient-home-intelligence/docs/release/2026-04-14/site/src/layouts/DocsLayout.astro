@@ -1,0 +1,43 @@
+---
+import SiteLayout from "./SiteLayout.astro";
+import DocsSidebar from "../components/DocsSidebar.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
+const {
+  title,
+  description,
+  headings = []
+} = Astro.props;
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+const tocHeadings = (headings as Heading[]).filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+<SiteLayout title={title} description={description}>
+  <div class="docs-grid" slot="default">
+    <DocsSidebar />
+    <article class="docs-content">
+      <Breadcrumbs />
+      <slot />
+    </article>
+    {tocHeadings.length > 2 && (
+      <aside class="docs-toc" aria-label="On this page">
+        <p class="docs-toc-title">On this page</p>
+        <nav>
+          <ul>
+            {tocHeadings.map((h) => (
+              <li class:list={[`toc-depth-${h.depth}`]}>
+                <a href={`#${h.slug}`}>{h.text}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    )}
+  </div>
+</SiteLayout>

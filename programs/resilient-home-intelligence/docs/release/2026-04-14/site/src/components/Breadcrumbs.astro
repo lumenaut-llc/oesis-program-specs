@@ -1,0 +1,57 @@
+---
+const currentPath = Astro.url.pathname;
+const segments = currentPath.split("/").filter(Boolean);
+
+const labels: Record<string, string> = {
+  docs: "Docs",
+  "data-model": "Data Model",
+  hardware: "Hardware",
+  privacy: "Privacy & Governance",
+  system: "System Overview",
+  "build-guides": "Build Guides",
+  "pilot-playbooks": "Pilot Playbooks",
+  legal: "Legal",
+  "getting-started": "Getting Started",
+  for: "For"
+};
+
+function segmentLabel(seg: string) {
+  if (labels[seg]) return labels[seg];
+  return seg
+    .replace(/\.html$/, "")
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+interface Crumb {
+  label: string;
+  href: string;
+  current: boolean;
+}
+
+const crumbs: Crumb[] = segments.map((seg, i) => {
+  const href = "/" + segments.slice(0, i + 1).join("/") + (i < segments.length - 1 ? "" : "");
+  return {
+    label: segmentLabel(seg),
+    href,
+    current: i === segments.length - 1
+  };
+});
+---
+
+{crumbs.length > 1 && (
+  <nav class="breadcrumbs" aria-label="Breadcrumbs">
+    <ol>
+      {crumbs.map((crumb, i) => (
+        <li>
+          {crumb.current ? (
+            <span aria-current="page">{crumb.label}</span>
+          ) : (
+            <a href={crumb.href}>{crumb.label}</a>
+          )}
+          {i < crumbs.length - 1 && <span class="breadcrumb-sep" aria-hidden="true">/</span>}
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

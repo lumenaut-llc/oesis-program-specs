@@ -9,15 +9,28 @@ const {
   actions = [],
   asideLabel,
   asideTitle,
-  asideItems = []
+  asideItems = [],
+  versionBar,
+  heroImage
 } = Astro.props;
 ---
+
+{versionBar && (
+  <div class="version-bar">
+    <span class="version-bar-label">{versionBar}</span>
+    {meta.length > 0 && (
+      <div class="version-bar-meta">
+        {meta.map((item) => <span>{item}</span>)}
+      </div>
+    )}
+  </div>
+)}
 
 <header class="hero">
   <div class="hero-top">
     <p class="eyebrow">{eyebrow}</p>
     {pageLinks.length > 0 && (
-      <nav class="top-nav" aria-label="Section links">
+      <nav class="section-nav" aria-label="Page sections">
         {pageLinks.map((link) => (
           <a href={link.href}>{link.label}</a>
         ))}
@@ -29,7 +42,7 @@ const {
       <h1>{title}</h1>
       <p class="lede">{lede}</p>
       {tagline && <p class="hero-tagline">{tagline}</p>}
-      {meta.length > 0 && (
+      {!versionBar && meta.length > 0 && (
         <div class="meta-strip" aria-label="Release metadata">
           {meta.map((item) => <span>{item}</span>)}
         </div>
@@ -47,7 +60,11 @@ const {
         </div>
       )}
     </div>
-    {(asideTitle || asideItems.length > 0) && (
+    {heroImage ? (
+      <div class="hero-image-wrap">
+        <img src={heroImage.src} alt={heroImage.alt || ""} class="hero-image" loading="eager" />
+      </div>
+    ) : (asideTitle || asideItems.length > 0) ? (
       <aside class="hero-aside">
         {asideLabel && <p class="kicker">{asideLabel}</p>}
         {asideTitle && <h2>{asideTitle}</h2>}
@@ -57,6 +74,6 @@ const {
           </ul>
         )}
       </aside>
-    )}
+    ) : null}
   </div>
 </header>

@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "rhi-site",
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["../release/2026-04-14/site/node_modules/astro/astro.js", "dev", "--host", "--root", "../release/2026-04-14/site", "--port", "4321"],
+      "port": 4321,
+      "autoPort": false
+    }
+  ]
+}

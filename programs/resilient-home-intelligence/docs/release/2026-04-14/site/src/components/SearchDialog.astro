@@ -1,0 +1,71 @@
+---
+---
+
+<dialog class="search-dialog" id="search-dialog">
+  <div class="search-dialog-inner">
+    <div class="search-dialog-header">
+      <span class="search-dialog-title">Search docs</span>
+      <button class="search-dialog-close" type="button" aria-label="Close search">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div id="pagefind-container"></div>
+  </div>
+</dialog>
+
+<script is:inline>
+  (function() {
+    var dialog = document.getElementById('search-dialog');
+    var trigger = document.getElementById('search-trigger');
+    var closeBtn = dialog && dialog.querySelector('.search-dialog-close');
+    var loaded = false;
+
+    function openSearch() {
+      if (!dialog) return;
+      dialog.showModal();
+      if (!loaded) {
+        loaded = true;
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/pagefind/pagefind-ui.css';
+        document.head.appendChild(link);
+        var script = document.createElement('script');
+        script.src = '/pagefind/pagefind-ui.js';
+        script.onload = function() {
+          if (window.PagefindUI) {
+            new window.PagefindUI({
+              element: '#pagefind-container',
+              showSubResults: true,
+              showImages: false
+            });
+          }
+          var input = dialog.querySelector('input');
+          if (input) input.focus();
+        };
+        document.head.appendChild(script);
+      } else {
+        var input = dialog.querySelector('input');
+        if (input) input.focus();
+      }
+    }
+
+    if (trigger) trigger.addEventListener('click', openSearch);
+    if (closeBtn) closeBtn.addEventListener('click', function() { dialog.close(); });
+    if (dialog) dialog.addEventListener('click', function(e) {
+      if (e.target === dialog) dialog.close();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        if (dialog && dialog.open) {
+          dialog.close();
+        } else {
+          openSearch();
+        }
+      }
+    });
+  })();
+</script>

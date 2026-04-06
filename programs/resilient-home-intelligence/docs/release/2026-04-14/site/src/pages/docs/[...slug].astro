@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from "astro:content";
+import DocsLayout from "../../layouts/DocsLayout.astro";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("docs", ({ data }) => !data.draft);
+  return docs.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+
+<DocsLayout
+  title={`${entry.data.title} - RHI Docs`}
+  description={entry.data.description || entry.data.title}
+  headings={headings}
+>
+  <h1>{entry.data.title}</h1>
+  {entry.data.description && (
+    <p class="docs-content-lede">{entry.data.description}</p>
+  )}
+  <Content />
+</DocsLayout>
