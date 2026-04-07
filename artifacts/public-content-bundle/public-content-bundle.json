@@ -14,27 +14,27 @@
     "/#diagrams"
   ],
   "approvedSourceRoots": [
-    "programs/open-environmental-sensing-and-inference-system/docs/release/2026-04-14/",
-    "programs/open-environmental-sensing-and-inference-system/docs/privacy-governance/",
-    "programs/open-environmental-sensing-and-inference-system/technical-architecture/",
-    "programs/open-environmental-sensing-and-inference-system/docs/system-overview/",
-    "programs/open-environmental-sensing-and-inference-system/legal/"
+    "docs/release/2026-04-14/",
+    "docs/privacy-governance/",
+    "technical-architecture/",
+    "docs/system-overview/",
+    "legal/"
   ],
   "bundle_version": "2026-04-14",
   "excludedFromPublicNavigation": [
-    "programs/open-environmental-sensing-and-inference-system/docs/release/2026-04-14/reviewer-packet-index.md",
-    "programs/open-environmental-sensing-and-inference-system/docs/release/2026-04-14/publish-internal-map.md",
-    "programs/open-environmental-sensing-and-inference-system/docs/release/2026-04-14/preview-execution-plan.md",
-    "programs/open-environmental-sensing-and-inference-system/docs/release/2026-04-14/launch-readiness-checklist.md",
-    "programs/open-environmental-sensing-and-inference-system/legal/counsel-questions/",
-    "programs/open-environmental-sensing-and-inference-system/legal/provisional-*"
+    "docs/release/2026-04-14/reviewer-packet-index.md",
+    "docs/release/2026-04-14/publish-internal-map.md",
+    "docs/release/2026-04-14/preview-execution-plan.md",
+    "docs/release/2026-04-14/launch-readiness-checklist.md",
+    "legal/counsel-questions/",
+    "legal/provisional-*"
   ],
-  "generated_at": "2026-04-07T22:06:11Z",
-  "legalRoot": "programs/open-environmental-sensing-and-inference-system/legal/",
-  "privacyGovernanceRoot": "programs/open-environmental-sensing-and-inference-system/docs/privacy-governance/",
-  "programRoot": "programs/open-environmental-sensing-and-inference-system/",
-  "releaseRoot": "programs/open-environmental-sensing-and-inference-system/docs/release/2026-04-14/",
+  "generated_at": "2026-04-07T22:28:22Z",
+  "legalRoot": "legal/",
+  "privacyGovernanceRoot": "docs/privacy-governance/",
+  "programRoot": "",
+  "releaseRoot": "docs/release/2026-04-14/",
   "repoBlobBase": "https://github.com/lumenaut-llc/resilient-home-intelligence/blob/main/",
-  "source_commit": "222d32a0c35fec4bdc6e3d9c8e0b62885d333b7a",
+  "source_commit": "a8ab86ab272850387d876ac2c7641fbe17b288c3",
   "source_repo": "oesis-program-specs"
 }

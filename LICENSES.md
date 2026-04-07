@@ -2,6 +2,8 @@
 
 This file is the working licensing matrix for the repository structure and April 14, 2026 preview posture.
 
+For a shorter v1-facing explanation, see `docs/release/2026-04-14/asset-class-license-and-publication-matrix.md`.
+
 It is a project planning document, not legal advice.
 
 ## Recommended split

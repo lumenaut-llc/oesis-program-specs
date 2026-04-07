@@ -2,15 +2,23 @@
 
 ## Purpose
 
-Track the concrete work needed before `oesis/` can move into an `oesis-runtime` repository without bringing the whole `programs/` tree along.
+Record the concrete work that was required before the runtime moved into the
+canonical sibling repository `../oesis-runtime` and stopped depending on the
+specs repository layout.
+
+## Status
+
+Completed. The in-repo runtime mirror has been retired and replaced with a
+migration pointer.
 
 ## Current blockers
 
-The runtime currently reads examples and config directly from the program docs and software-doc tree.
+The runtime originally read examples and config directly from the specs docs
+and software-doc tree.
 
 ### Example payload coupling
 
-These runtime modules currently depend on `programs/open-environmental-sensing-and-inference-system/docs/data-model/examples/` through `oesis.common.repo_paths.DOCS_EXAMPLES_DIR`:
+These runtime modules currently depend on `docs/data-model/examples/` through `oesis.common.repo_paths.DOCS_EXAMPLES_DIR`:
 
 - `oesis/ingest/validate_examples.py`
 - `oesis/ingest/normalize_packet.py`
@@ -31,7 +39,7 @@ These scripts currently read doc-owned examples directly:
 
 Current direct dependency:
 
-- `programs/open-environmental-sensing-and-inference-system/docs/data-model/examples/node-observation.example.json`
+- `docs/data-model/examples/node-observation.example.json`
 
 ### Config coupling
 
@@ -41,9 +49,9 @@ This runtime module currently reads config directly from the software docs tree:
 
 Current config source:
 
-- `programs/open-environmental-sensing-and-inference-system/software/inference-engine/config/public_context_policy.json`
-- `programs/open-environmental-sensing-and-inference-system/software/inference-engine/config/hazard_thresholds_v0.json`
-- `programs/open-environmental-sensing-and-inference-system/software/inference-engine/config/trust_gates_v0.json`
+- `software/inference-engine/config/public_context_policy.json`
+- `software/inference-engine/config/hazard_thresholds_v0.json`
+- `software/inference-engine/config/trust_gates_v0.json`
 
 ## Required boundary changes
 
@@ -59,7 +67,7 @@ Suggested shape:
 - `oesis/assets/examples/`
 - `oesis/assets/config/inference/`
 
-### 2. Stop reading examples from `programs/...`
+### 2. Stop reading examples from the specs tree
 
 Change runtime code so default behavior reads from runtime-owned assets.
 
@@ -90,10 +98,10 @@ It should not assume the monorepo docs tree is present.
 
 The runtime is ready to split when:
 
-- `python3 -m oesis.ingest.validate_examples` works without `programs/`
-- `python3 -m oesis.parcel_platform.reference_pipeline` works without `programs/`
-- `./scripts/oesis_smoke_check.sh` works without `programs/`
-- `./scripts/oesis_http_smoke_check.sh` works without `programs/`
+- `python3 -m oesis.ingest.validate_examples` works without the specs repo tree
+- `python3 -m oesis.parcel_platform.reference_pipeline` works without the specs repo tree
+- `./scripts/oesis_smoke_check.sh` works without the specs repo tree
+- `./scripts/oesis_http_smoke_check.sh` works without the specs repo tree
 - inference config is loaded from runtime-owned assets or an explicit bundle input
 
 ## Suggested implementation order
@@ -102,7 +110,7 @@ The runtime is ready to split when:
 2. Point all default runtime example reads to that loader.
 3. Move inference config reads behind the same runtime-owned boundary.
 4. Update smoke checks to use runtime-owned assets.
-5. Only then move `oesis/` and runtime scripts into `oesis-runtime`.
+5. Only then move the runtime package and scripts into `../oesis-runtime`.
 
 ## Notes
 

@@ -10,8 +10,8 @@ Make the current monorepo easier to navigate by separating:
 
 This plan follows the current boundary model already described in:
 
-- `programs/open-environmental-sensing-and-inference-system/technical-architecture/v0.1/component-boundaries.md`
-- `programs/open-environmental-sensing-and-inference-system/technical-architecture/v0.1/implementation-posture.md`
+- `technical-architecture/v0.1/component-boundaries.md`
+- `technical-architecture/v0.1/implementation-posture.md`
 
 ## Target repos
 
@@ -39,7 +39,14 @@ Purpose:
 
 Primary contents:
 
-- `programs/open-environmental-sensing-and-inference-system/`
+- `PROGRAM.md`, `PROGRAM-NOTICE.md`, and `INDEX.md`
+- `docs/`
+- `technical-architecture/`
+- `architecture/`
+- `hardware/`
+- `software/`
+- `legal/`
+- `media/`
 - `shared/`
 - `meta/`
 - `oesis_build/`
@@ -54,7 +61,7 @@ Purpose:
 
 Primary contents:
 
-- `sites/public-preview/`
+- sibling repo `../oesis-public-site`
 
 ## Ownership rules
 
@@ -124,7 +131,14 @@ Must not own:
 
 ### Move to `oesis-program-specs`
 
-- `programs/open-environmental-sensing-and-inference-system/`
+- `PROGRAM.md`, `PROGRAM-NOTICE.md`, and `INDEX.md`
+- `docs/`
+- `technical-architecture/`
+- `architecture/`
+- `hardware/`
+- `software/`
+- `legal/`
+- `media/`
 - `shared/`
 - `meta/`
 - `oesis_build/`
@@ -135,7 +149,7 @@ Must not own:
 
 ### Move to `oesis-public-site`
 
-- `sites/public-preview/`
+- sibling repo `../oesis-public-site`
 
 ## Cross-repo artifacts
 
@@ -190,13 +204,13 @@ Consumed by:
 ### Phase 0: prepare inside the monorepo
 
 - document target repo boundaries
-- inventory runtime dependencies on `programs/`, `shared/`, `meta/`, and `sites/`
+- inventory runtime dependencies on `docs/`, `technical-architecture/`, `hardware/`, `software/`, `legal/`, `media/`, `shared/`, `meta/`, and `sites/`
 - define bundle formats and ownership rules
 - stop adding new cross-tree relative-path dependencies
 
 ### Phase 1: split `oesis-public-site`
 
-- move `sites/public-preview/` first
+- move the local `sites/public-preview/` app first and then retire it behind a pointer
 - keep content handoff simple at first if necessary
 - replace same-repo assumptions with a public-content bundle
 
@@ -208,9 +222,9 @@ Why first:
 
 ### Phase 2: split `oesis-runtime`
 
-- move `oesis/` and runtime smoke-check scripts
+- move the local `oesis/` runtime tree and smoke-check scripts
 - replace docs-tree example and config reads with runtime-owned assets or a contracts bundle
-- make runtime checks pass without the local `programs/` tree present
+- make runtime checks pass without the local specs repo tree present
 
 ### Phase 3: reframe the remaining repo as `oesis-program-specs`
 
@@ -226,15 +240,16 @@ Why first:
 
 The split is healthy when:
 
-- `oesis-runtime` can run validation and smoke checks without a local `programs/` tree
+- `oesis-runtime` can run validation and smoke checks without a local specs repo tree
 - `oesis-program-specs` can state implementation truth using imported runtime evidence rather than filesystem co-location
 - `oesis-public-site` can build from approved content bundles rather than raw internal docs paths
 - no repo depends on another via relative filesystem traversal
 
-## Near-term working rule
+## Current working rule
 
-Until the split is complete:
+Now that extraction is complete:
 
-- treat `oesis/` as the runtime source of truth
-- treat `programs/.../docs/data-model/`, `technical-architecture/`, `docs/privacy-governance/`, and `legal/` as the specification and policy source of truth
-- treat `sites/public-preview/` as a separate publication surface, even while it still lives in this repo
+- treat sibling repo `../oesis-runtime` as the runtime source of truth
+- treat `docs/data-model/`, `technical-architecture/`, `docs/privacy-governance/`, and `legal/` as the specification and policy source of truth
+- treat sibling repo `../oesis-public-site` as the canonical publication surface
+- treat local `oesis/` and `sites/public-preview/` paths as migration pointers only

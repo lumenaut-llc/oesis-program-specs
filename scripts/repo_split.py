@@ -13,21 +13,21 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-PROGRAM_ROOT = REPO_ROOT / "programs" / "open-environmental-sensing-and-inference-system"
+PROGRAM_ROOT = REPO_ROOT
 DOCS_DATA_MODEL_ROOT = PROGRAM_ROOT / "docs" / "data-model"
 DOCS_EXAMPLES_ROOT = DOCS_DATA_MODEL_ROOT / "examples"
 DOCS_SCHEMAS_ROOT = DOCS_DATA_MODEL_ROOT / "schemas"
 INFERENCE_CONFIG_ROOT = PROGRAM_ROOT / "software" / "inference-engine" / "config"
-SITE_ROOT = REPO_ROOT / "sites" / "public-preview"
-OESIS_ROOT = REPO_ROOT / "oesis"
+RUNTIME_REPO_ROOT = Path(os.environ.get("OESIS_RUNTIME_REPO_DIR", str(REPO_ROOT.parent / "oesis-runtime"))).expanduser().resolve()
+PUBLIC_SITE_REPO_ROOT = Path(os.environ.get("OESIS_PUBLIC_SITE_REPO_DIR", str(REPO_ROOT.parent / "oesis-public-site"))).expanduser().resolve()
 ARTIFACTS_ROOT = REPO_ROOT / "artifacts"
-RUNTIME_ASSETS_ROOT = OESIS_ROOT / "assets"
-RUNTIME_EXAMPLES_ROOT = RUNTIME_ASSETS_ROOT / "examples"
-RUNTIME_INFERENCE_CONFIG_ROOT = RUNTIME_ASSETS_ROOT / "config" / "inference"
-SITE_GENERATED_ROOT = SITE_ROOT / "src" / "generated"
+RUNTIME_REPO_ASSETS_ROOT = RUNTIME_REPO_ROOT / "oesis" / "assets"
+RUNTIME_REPO_EXAMPLES_ROOT = RUNTIME_REPO_ASSETS_ROOT / "examples"
+RUNTIME_REPO_INFERENCE_CONFIG_ROOT = RUNTIME_REPO_ASSETS_ROOT / "config" / "inference"
+PUBLIC_SITE_GENERATED_ROOT = PUBLIC_SITE_REPO_ROOT / "src" / "generated"
 
 PUBLIC_RELEASE_TAG = "2026-04-14"
-PROGRAM_ROOT_REL = "programs/open-environmental-sensing-and-inference-system/"
+PROGRAM_ROOT_REL = ""
 RELEASE_ROOT_REL = f"{PROGRAM_ROOT_REL}docs/release/{PUBLIC_RELEASE_TAG}/"
 PRIVACY_ROOT_REL = f"{PROGRAM_ROOT_REL}docs/privacy-governance/"
 LEGAL_ROOT_REL = f"{PROGRAM_ROOT_REL}legal/"
@@ -118,8 +118,10 @@ def write_text(path: Path, text: str) -> None:
 
 
 def sync_runtime_assets() -> None:
-    copy_tree(DOCS_EXAMPLES_ROOT, RUNTIME_EXAMPLES_ROOT)
-    copy_tree(INFERENCE_CONFIG_ROOT, RUNTIME_INFERENCE_CONFIG_ROOT)
+    if not RUNTIME_REPO_ROOT.exists():
+        raise SystemExit(f"runtime repo not found: {RUNTIME_REPO_ROOT}")
+    copy_tree(DOCS_EXAMPLES_ROOT, RUNTIME_REPO_EXAMPLES_ROOT)
+    copy_tree(INFERENCE_CONFIG_ROOT, RUNTIME_REPO_INFERENCE_CONFIG_ROOT)
 
 
 def build_contracts_bundle(destination: Path) -> Path:
@@ -194,7 +196,9 @@ def build_public_content_bundle(destination: Path) -> Path:
     write_json(destination / "public-content-bundle.json", bundle)
 
     generated_ts = """export const publicContentBundle = %s as const;\n""" % json.dumps(bundle, indent=2)
-    write_text(SITE_GENERATED_ROOT / "publicContentBundle.ts", generated_ts)
+    if not PUBLIC_SITE_REPO_ROOT.exists():
+        raise SystemExit(f"public site repo not found: {PUBLIC_SITE_REPO_ROOT}")
+    write_text(PUBLIC_SITE_GENERATED_ROOT / "publicContentBundle.ts", generated_ts)
     return destination
 
 
@@ -213,12 +217,13 @@ def run_command(command: list[str], *, cwd: Path) -> dict[str, object]:
 def build_runtime_evidence_bundle(destination: Path) -> Path:
     ensure_clean_dir(destination)
 
+    runtime_cwd = RUNTIME_REPO_ROOT if RUNTIME_REPO_ROOT.exists() else REPO_ROOT
     commands = [
         ["make", "oesis-validate"],
         ["make", "oesis-check"],
         ["make", "oesis-http-check"],
     ]
-    results = [run_command(command, cwd=REPO_ROOT) for command in commands]
+    results = [run_command(command, cwd=runtime_cwd) for command in commands]
 
     for result in results:
         command_name = "_".join(result["command"])
@@ -237,6 +242,7 @@ def build_runtime_evidence_bundle(destination: Path) -> Path:
                 "ok": result["ok"],
                 "stdout_log": f"{'_'.join(result['command'])}.stdout.log",
                 "stderr_log": f"{'_'.join(result['command'])}.stderr.log",
+                "cwd": result["cwd"],
             }
             for result in results
         ],
@@ -309,36 +315,17 @@ def write_site_repo_files(destination: Path) -> None:
 
 
 def extract_runtime_repo(destination: Path) -> Path:
-    destination.mkdir(parents=True, exist_ok=True)
-    copy_tree(OESIS_ROOT, destination / "oesis")
-    for pycache_dir in (destination / "oesis").rglob("__pycache__"):
-        shutil.rmtree(pycache_dir)
-    copy_files(
-        [
-            REPO_ROOT / "scripts" / "oesis_smoke_check.sh",
-            REPO_ROOT / "scripts" / "oesis_http_smoke_check.sh",
-        ],
-        destination / "scripts",
+    raise SystemExit(
+        "runtime extraction has already completed; use the canonical sibling repo "
+        f"at {RUNTIME_REPO_ROOT} and refresh it through the bundle/sync commands."
     )
-    write_runtime_repo_files(destination)
-    init_git_repo(destination)
-    return destination
 
 
 def extract_site_repo(destination: Path) -> Path:
-    destination.mkdir(parents=True, exist_ok=True)
-    copy_contents_root = destination
-    for item in SITE_ROOT.iterdir():
-        if should_skip_path(item):
-            continue
-        target = copy_contents_root / item.name
-        if item.is_dir():
-            copy_tree(item, target)
-        else:
-            shutil.copy2(item, target)
-    write_site_repo_files(destination)
-    init_git_repo(destination)
-    return destination
+    raise SystemExit(
+        "site extraction has already completed; use the canonical sibling repo "
+        f"at {PUBLIC_SITE_REPO_ROOT} and refresh it through the public-content bundle."
+    )
 
 
 def parse_args() -> argparse.Namespace:
@@ -390,7 +377,7 @@ def main() -> int:
 
     if args.command == "sync-runtime-assets":
         sync_runtime_assets()
-        print(RUNTIME_ASSETS_ROOT)
+        print(RUNTIME_REPO_ASSETS_ROOT)
         return 0
     if args.command == "build-contracts-bundle":
         destination = build_contracts_bundle(Path(args.destination).resolve())

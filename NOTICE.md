@@ -8,7 +8,8 @@ Do not assume one blanket license applies to every file, dataset, or future rele
 
 ## Repository-wide notice
 
-Open Source DIY Tech and the Resilient Home Intelligence program are being prepared for a staged, commons-protective open release.
+Open Source DIY Tech and the Open Environmental Sensing and Inference System
+program are being prepared for a staged, commons-protective open release.
 
 At the repository level:
 
@@ -20,8 +21,10 @@ At the repository level:
 ## Start with these files
 
 - `LICENSES.md`
-- `programs/resilient-home-intelligence/NOTICE.md`
-- `programs/resilient-home-intelligence/legal/ip.md`
+- `NOTICE.md`
+- `legal/ip.md`
+- `docs/release/2026-04-14/open-source-v1-summary.md`
+- `docs/release/2026-04-14/asset-class-license-and-publication-matrix.md`
 
 ## Important boundary
 

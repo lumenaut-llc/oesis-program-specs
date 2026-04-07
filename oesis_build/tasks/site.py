@@ -7,7 +7,7 @@ SITE_TASK_NAMESPACE = TaskNamespace(
     name="site",
     description="Future shared site-build adapters and publication-safe surfaces.",
     planned_consumers=(
-        "sites/public-preview/",
+        "../oesis-public-site",
         "site-side publication policy consumers",
     ),
 )

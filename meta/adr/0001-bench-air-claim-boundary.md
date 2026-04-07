@@ -2,7 +2,7 @@
 
 - Status: Proposed
 - Date: 2026-03-30
-- Owners: Resilient Home Intelligence
+- Owners: Open Environmental Sensing and Inference System
 - Related workstreams:
   - hardware/bench-air-node
   - software/ingest-service
@@ -12,7 +12,9 @@
 
 ## Context
 
-The bench-air-node is the first concrete evidence producer in the Resilient Home Intelligence repo. It already has a packet schema, firmware notes, and a reference ingest-to-parcel pipeline.
+The bench-air-node is the first concrete evidence producer in the Open
+Environmental Sensing and Inference System repo. It already has a packet
+schema, firmware notes, and a reference ingest-to-parcel pipeline.
 
 That makes it useful as the first end-to-end validation device, but also creates a risk: the system can begin implying parcel-level hazard confidence that the bench-air-node is not capable of supporting by itself.
 

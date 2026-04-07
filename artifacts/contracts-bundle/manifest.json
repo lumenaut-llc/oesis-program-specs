@@ -24,7 +24,7 @@
     "sharing-settings": "examples/sharing-settings.example.json",
     "sharing-store": "examples/sharing-store.example.json"
   },
-  "generated_at": "2026-04-07T21:55:04Z",
+  "generated_at": "2026-04-07T22:28:21Z",
   "schema_version_set": [
     "oesis.bench-air.v1"
   ],
@@ -42,6 +42,6 @@
     "sharing-settings": "schemas/sharing-settings.schema.json",
     "sharing-store": "schemas/sharing-store.schema.json"
   },
-  "source_commit": "222d32a0c35fec4bdc6e3d9c8e0b62885d333b7a",
+  "source_commit": "a8ab86ab272850387d876ac2c7641fbe17b288c3",
   "source_repo": "oesis-program-specs"
 }

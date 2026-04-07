@@ -9,9 +9,9 @@
 - assign named owners to the launch readiness checklist
 - create first public map suppression and thresholding logic
 - create first BOM per subsystem
-- lock the canonical Python implementation tree under `rhi/` and keep docs-facing script paths as compatibility shims
+- keep the canonical Python implementation tree in sibling repo `../oesis-runtime` and keep docs-facing script paths as compatibility shims
 - define the parcel node-registry spec for multi-node household kits
-- add observation families and normalizers for `rhi.flood-node.v1`, `rhi.weather-pm-mast.v1`, and `rhi.thermal-pod.v1`
+- add observation families and normalizers for `oesis.flood-node.v1`, `oesis.weather-pm-mast.v1`, and `oesis.thermal-pod.v1`
 - choose one canonical MVP transport and provisioning flow for all node classes
 
 ## Soon

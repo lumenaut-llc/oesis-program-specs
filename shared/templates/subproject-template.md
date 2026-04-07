@@ -4,11 +4,19 @@
 
 ## Why it matters
 
+## Architecture version
+
+## Current status
+
 ## Standalone value
 
 ## How it connects to the larger system
 
 ## Scope for current version
+
+## Contract surfaces
+
+## Policy dependencies
 
 ## Inputs
 

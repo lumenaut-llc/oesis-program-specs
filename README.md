@@ -27,15 +27,15 @@ This repository now serves as the canonical home for:
 - governance, privacy, and publication controls
 - build and publication support for split-repo workflows
 
-The runnable Python reference services and the public preview site are being
-split into standalone sibling repositories:
+The runnable Python reference services and the public preview site now live as
+standalone sibling repositories:
 
-- `oesis-runtime`
-- `oesis-public-site`
+- `../oesis-runtime`
+- `../oesis-public-site`
 
-During the migration, `oesis/` and `sites/public-preview/` remain as staged
-compatibility mirrors so split tooling and verification can complete without
-interrupting the current repo workflow.
+Operational commands in this repository now proxy to those sibling repos by
+default. The old in-repo runtime and site trees have been retired and replaced
+with migration pointers only.
 
 ## Core principles
 
@@ -49,33 +49,44 @@ interrupting the current repo workflow.
 
 ## Repository map
 
-- `programs/open-environmental-sensing-and-inference-system/` — program docs, architecture, release, legal, and hardware/operator materials
+- `PROGRAM.md` — program overview retained after flattening the old program root
+- `PROGRAM-NOTICE.md` — program-specific notice retained after flattening the old program root
+- `INDEX.md` — program index retained at the repo root
+- `docs/` — system docs, release packet materials, schemas, calibration, and pilot playbooks
+- `technical-architecture/` — versioned technical architecture canon
+- `architecture/` — transitional architecture pointer materials
+- `hardware/` — physical sensor nodes and installation systems
+- `software/` — subsystem docs, wrappers, and operator guides
+- `legal/` — licensing, defensive publication, governance, and contribution policy
+- `media/` — diagrams, renders, and images
 - `oesis_build/` — build and publication support for contracts, release, and split-repo workflows
 - `shared/` — shared standards, templates, and glossary
 - `meta/` — planning, milestones, operating notes, and repo-split execution docs
 - `artifacts/` — generated split artifacts such as contracts, public content, and runtime evidence bundles
-- `scripts/repo_split.py` — split automation for syncing runtime assets, building bundles, and extracting sibling repos
-- `oesis/` — staged compatibility copy of the runtime while `oesis-runtime` is being cut over
-- `sites/public-preview/` — staged compatibility copy of the public site while `oesis-public-site` is being cut over
+- `scripts/repo_split.py` — split automation for syncing runtime assets, building bundles, and producing evidence artifacts for sibling repos
+- `oesis/` — migration pointer to the standalone `../oesis-runtime` repository
+- `sites/public-preview/` — migration pointer to the standalone `../oesis-public-site` repository
 
 ## Split workflow
 
 Use these commands while the split is in progress:
 
+- `make oesis-validate`
+- `make oesis-check`
+- `make oesis-http-check`
+- `make public-site-build`
 - `make repo-split-sync-runtime-assets`
 - `make repo-split-build-contracts-bundle`
 - `make repo-split-build-public-content-bundle`
 - `make repo-split-build-runtime-evidence-bundle`
-- `make repo-split-extract-site`
-- `make repo-split-extract-runtime`
 
 The canonical execution plan lives in `meta/repo-split-plan.md`.
 
 ## Start here
 
 1. Read `NOTICE.md`
-2. Read `programs/open-environmental-sensing-and-inference-system/README.md`
-3. Read `programs/open-environmental-sensing-and-inference-system/docs/release/2026-04-14/open-source-v1-summary.md`
-4. Read `programs/open-environmental-sensing-and-inference-system/technical-architecture/README.md`
+2. Read `PROGRAM.md`
+3. Read `docs/release/2026-04-14/open-source-v1-summary.md`
+4. Read `technical-architecture/README.md`
 5. Read `meta/repo-split-plan.md` if you are working on runtime/site extraction or bundle boundaries
 6. Use `shared/templates/` when starting a new subsystem or document

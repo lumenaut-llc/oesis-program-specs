@@ -5,11 +5,12 @@ This repository is organized around modular, documented subsystems.
 ## Split working rules
 
 - treat this repository as the canonical specs, release, and governance home during the repo split
-- treat `oesis/` as a staged runtime mirror while `oesis-runtime` is being cut over
-- treat `sites/public-preview/` as a staged site mirror while `oesis-public-site` is being cut over
-- do not add new runtime dependencies on `programs/`, `shared/`, `meta/`, or `sites/`
+- treat `../oesis-runtime` as the canonical runtime repository
+- treat `../oesis-public-site` as the canonical public-site repository
+- treat local `oesis/` and `sites/public-preview/` paths as migration pointers only
+- do not add new runtime dependencies on `docs/`, `technical-architecture/`, `hardware/`, `software/`, `legal/`, `media/`, `shared/`, `meta/`, or `sites/`
 - use contracts, public-content, and runtime-evidence bundle boundaries instead of new cross-tree relative-path reads
-- use `scripts/repo_split.py` and the `repo-split-*` make targets when refreshing staged split artifacts or extracted repos
+- use `scripts/repo_split.py` and the `repo-split-*` make targets when refreshing split artifacts or sibling repos
 
 ## Contribution priorities
 
@@ -23,7 +24,7 @@ This repository is organized around modular, documented subsystems.
 
 - update the relevant subsystem README
 - update any affected docs in `docs/`
-- update `programs/open-environmental-sensing-and-inference-system/technical-architecture/` when the current or target architecture version changes
+- update `technical-architecture/` when the current or target architecture version changes
 - add or revise diagrams if the change alters architecture
 - note whether the change affects privacy, governance, or calibration
 - add unresolved questions to the subsystem `open-questions.md`
@@ -41,8 +42,8 @@ The following changes need extra care and should reference the relevant governan
 
 See:
 
-- `programs/open-environmental-sensing-and-inference-system/docs/privacy-governance/`
-- `programs/open-environmental-sensing-and-inference-system/legal/`
+- `docs/privacy-governance/`
+- `legal/`
 
 ## Commit style
 

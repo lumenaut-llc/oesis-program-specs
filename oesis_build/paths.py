@@ -30,14 +30,14 @@ def build_roots(*, release_tag: str = "2026-04-14") -> BuildRoots:
     """Discover the current repository and program roots."""
 
     repo_root = Path(__file__).resolve().parents[1]
-    program_root = repo_root / "programs" / "open-environmental-sensing-and-inference-system"
-    docs_root = program_root / "docs"
-    legal_root = program_root / "legal"
+    program_root = repo_root
+    docs_root = repo_root / "docs"
+    legal_root = repo_root / "legal"
     sites_root = repo_root / "sites"
     public_preview_site_root = sites_root / "public-preview"
     privacy_governance_root = docs_root / "privacy-governance"
     system_overview_root = docs_root / "system-overview"
-    technical_architecture_root = program_root / "technical-architecture"
+    technical_architecture_root = repo_root / "technical-architecture"
     current_public_release_root = docs_root / "release" / release_tag
 
     return BuildRoots(
