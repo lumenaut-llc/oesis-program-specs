@@ -32,12 +32,12 @@ homeowner-centered environmental sensing and parcel-awareness system that:
 
 ## Current governance phase
 
-The project is in a preview-to-open-release transition phase.
+The project is in an active open-release phase.
 
 Current priorities are:
 
-- maintain safe release sequencing during Path B
-- keep preview publication non-enabling where required
+- keep release materials aligned with the current commons-protective open posture
+- keep intentionally public v1 dataset decisions clearly separated from future participant data
 - preserve a coherent open-release structure across software, hardware, docs, and datasets
 - keep data-governance claims aligned with actual controls
 
@@ -49,7 +49,7 @@ Until a broader community governance model is adopted, the project should use na
 
 Responsible for:
 
-- preview and release go / no-go decisions
+- release go / no-go decisions
 - publication scope control
 - coordination across legal, docs, and engineering workstreams
 
@@ -58,8 +58,8 @@ Responsible for:
 Responsible for:
 
 - IP and release position
-- holdback list and preview-scope enforcement
-- attorney escalation and filing coordination
+- non-release list and release-scope enforcement
+- attorney escalation where licensing, patent, or trademark review is still needed
 
 ### Governance / privacy owner
 
@@ -111,8 +111,8 @@ Approval rule:
 
 Examples:
 
-- anything touching held-back materials
-- changes to public preview scope
+- anything touching non-release materials
+- changes to public release scope
 - changes to public licensing statements
 - changes to IP or patent-related wording
 - release of new datasets or public map outputs
@@ -127,16 +127,16 @@ Approval rule:
 The project should not:
 
 - switch private-by-default behavior to opt-out sharing without explicit governance approval
-- publish exact parcel-linked homeowner data in public materials
+- publish future participant exact parcel-linked homeowner data in public materials without explicit approval
 - claim anonymization without a defensible standard
 - market parcel-state outputs as guaranteed safety guidance
-- publish held-back technical details during preview without the required release check
+- publish non-release technical details without the required release check
 
 ## Contributor governance expectations
 
 Contributors should:
 
-- respect the current preview holdback rules
+- respect the current release-scope and non-release rules
 - use the applicable policy docs when changing data, privacy, or claims behavior
 - use the applicable `technical-architecture/` version when changing system boundaries, architecture posture, or subsystem alignment
 - avoid introducing silent new data uses
@@ -150,6 +150,7 @@ See `contribution-policy/README.md`.
 The following documents should be treated as core governance artifacts:
 
 - `ip.md`
+- `dataset-release-policy.md`
 - `GOVERNANCE.md`
 - `../docs/privacy-governance/data-ownership.md`
 - `../docs/privacy-governance/privacy.md`
@@ -163,12 +164,13 @@ Changes to these docs should include:
 - the affected product or release surface
 - whether the change affects public claims, privacy controls, or release scope
 
-## Path B preview rule
+## Release-scope rule
 
-During the preview period:
+During the current release period:
 
 - public materials must stay within `public-preview-scope.md`
-- held-back materials remain governed by `holdback-list.md`
+- non-release materials remain governed by `holdback-list.md`
+- intentionally public datasets must be explicitly designated and licensed
 - public messaging should point users to canonical docs rather than improvise legal or privacy claims on social media
 
 ## Future governance evolution
@@ -185,7 +187,7 @@ Later versions may add:
 
 Escalate before:
 
-- changing the release sequencing in a way that affects patent posture
+- changing the release posture in a way that affects patent, licensing, or trademark posture
 - promising a patent non-assert or trademark permission
-- adopting final public terms for real homeowner data
+- adopting final public terms for future participant-contributed real homeowner data
 - launching public pilots with real participant data

@@ -8,6 +8,8 @@ Turn privacy principles into concrete MVP sharing modes that software policy enf
 
 No parcel-linked data should leave the private parcel context unless a defined sharing mode, purpose, precision, and recipient scope all permit it.
 
+Sharing permission does not grant control permission.
+
 ## Core dimensions
 
 - what is shared
@@ -22,6 +24,12 @@ No parcel-linked data should leave the private parcel context unless a defined s
 - shared data
 - public context
 - derived parcel states
+
+This includes later-stage private parcel data such as:
+- house-state telemetry
+- house capability and control compatibility records
+- intervention history
+- verification history
 
 ## MVP sharing modes
 
@@ -109,3 +117,4 @@ Required constraints:
 - every control must state who can see the shared output
 - every control must be revocable
 - every API carrying shared data must identify the applicable sharing mode
+- any future automation or bounded-control feature must use a separate permission surface from these sharing modes

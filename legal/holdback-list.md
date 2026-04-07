@@ -1,123 +1,106 @@
-# Holdback List
+# Non-Release List
 
 ## Purpose
 
-Track the technical materials that should stay out of the April 14, 2026 public preview unless they are already covered by a filed provisional or the team intentionally switches to full defensive publication.
+Track the materials that should stay out of the April 14, 2026 open release even after the project moved away from the provisional-first path.
 
 This list should be reviewed before any social post, repo publication, talk, demo, diagram release, or media interview.
 
-## Current holdback categories
+## Current non-release categories
 
-### 1. Narrow filing candidate details
+### 1. Secrets and access material
 
-Hold back:
+Do not release:
 
-- the exact statement of the narrow inventive concept
-- ordered method steps beyond high-level concept language
-- novel combinations of parcel priors, local observations, shared neighborhood evidence, and public context
-- implementation variants that materially expand the candidate invention
-
-Why:
-
-- these are the materials most likely to determine whether a provisional meaningfully supports later claims
-
-### 2. Parcel-inference internals
-
-Hold back:
-
-- decision trees or state-machine logic
-- evidence weighting rules
-- confidence scoring logic
-- fallback and degradation logic tied to novelty
-- threshold values
-- conflict-resolution rules between local, shared, and public evidence
+- API keys
+- credentials
+- auth tokens
+- internal admin endpoints
+- operator-only secrets or signing material
 
 Why:
 
-- these can turn a high-level concept into an enabling disclosure
+- these create immediate operational and security risk
 
-### 3. Privacy-preserving sharing mechanics
+### 2. Non-cleared third-party material
 
-Hold back:
+Do not release:
 
-- exact transformation methods for neighborhood contribution
-- aggregation thresholds if they are part of the novel method
-- timing and batching rules if they are central to the invention
-- any algorithmic description that explains how parcel-linked data becomes shared intelligence
-
-Why:
-
-- this is a plausible narrow patent target and should not leak accidentally through governance or API docs
-
-### 4. Hardware implementation files
-
-Hold back:
-
-- full schematics
-- PCB layouts and fabrication outputs
-- detailed enclosure CAD
-- manufacturing drawings
-- board-level closeups that reveal unreleased layouts
-- wiring diagrams that expose withheld architecture
+- third-party datasets whose license does not allow redistribution
+- partner or vendor material not cleared for publication
+- non-public screenshots, photos, or diagrams borrowed from outside sources
+- any material whose provenance is unclear
 
 Why:
 
-- they may disclose unreleased implementation details and are easy to over-share through photos or diagrams
+- the project cannot open what it does not have authority to release
 
-### 5. Software and protocol specifics
+### 3. Non-public personal or operator data
 
-Hold back:
+Do not release:
 
-- source code implementing the narrow filing candidate
-- detailed API contracts that expose withheld methods
-- packet schemas that reveal novel logic or device interactions
-- internal scripts or examples that demonstrate the withheld method end-to-end
-
-Why:
-
-- code and schemas are often more enabling than summary prose
-
-### 6. Calibration and operational methods
-
-Hold back:
-
-- calibration procedures that materially enable reproduction of the candidate invention
-- field tuning procedures tied to the novel inference method
-- exact alerting or state-transition rules
+- personal contact details
+- operator-only access records
+- internal incident-response notes
+- future participant parcel-linked data that is not part of the intentionally published project-controlled v1 dataset
 
 Why:
 
-- these can disclose key practical details even when the main architecture doc looks high-level
+- the open release should be intentional, not accidental
 
-## Allowed substitutes during preview
+### 4. Archival filing and counsel materials
 
-Use these instead of the holdback items:
+Keep internal by default:
 
-- abstract architecture blocks
-- principle-level descriptions
-- prototype photos without internals
-- high-level data-class diagrams
-- problem statement and user-value framing
+- `legal/provisional-*`
+- `legal/send-to-counsel-checklist.md`
+- `legal/counsel-questions/path-b-counsel-questions.md`
+
+Why:
+
+- these are historical internal planning artifacts, not the current release posture
+
+### 5. Misleading safety or scope claims
+
+Do not release:
+
+- copy that implies official alerts or emergency authority
+- copy that implies guaranteed safety
+- copy that implies the project has complete neighborhood visibility
+- copy that implies all future participant data is public by default
+
+Why:
+
+- the project’s core trust boundary still matters in the open-release posture
+
+## Allowed release substitutes and approved public categories
+
+Use these confidently in the current release:
+
+- technical architecture and implementation docs cleared for release
+- hardware build guides and design docs cleared for release
+- source code, schemas, packet contracts, and examples selected for the open release
+- the project-controlled v1 dataset when it carries explicit dataset terms and provenance
 - governance, ownership, and limitation language
 
 ## Review workflow
 
 For each item under consideration:
 
-1. Ask whether it would help a skilled person reproduce the narrow filing candidate.
-2. Ask whether it adds technical detail not already captured in the provisional packet.
-3. Ask whether it contains any real parcel-linked user data.
-4. If any answer is yes, hold it back pending filing or attorney review.
+1. Ask whether the project has authority to publish it.
+2. Ask whether it contains secrets, non-public personal data, or non-cleared third-party content.
+3. Ask whether it is intentionally part of the public v1 dataset or an accidental inclusion.
+4. Ask whether it creates misleading safety or scope claims.
+5. If any answer is problematic, keep it out of the release until fixed or explicitly approved.
 
 ## Status table
 
 Use this table as the live release gate.
 
-| Item | Owner | Status | Covered by provisional packet | Safe for April 14 preview | Notes |
+| Item | Owner | Status | Public release approved | Safe for April 14 release | Notes |
 | --- | --- | --- | --- | --- | --- |
-| Narrow invention summary | Legal/IP owner | pending | no | no | fill after filing decision |
-| Parcel-inference flowchart | Engineering owner | pending | no | no | keep internal unless filed |
-| Neighborhood-sharing transform | Data/governance owner | pending | no | no | likely narrow filing candidate |
-| Hardware design package | Hardware owner | pending | no | no | release after filing or open publication decision |
-| Example packet schemas | Software owner | pending | no | no | keep internal until legal gate clears |
-| High-level architecture diagram | Docs owner | pending | n/a | yes, if non-enabling | remove thresholds and method detail |
+| Secrets and access material | Technical owner | blocked | no | no | never publish |
+| Archival provisional packet docs | Legal/IP owner | internal | no | no | historical planning only |
+| Project-controlled v1 dataset | Release owner | in review | yes, if licensed | yes | publish only with explicit dataset terms and provenance |
+| Reference code and schemas | Software owner | approved | yes | yes | include with asset-class licensing |
+| Hardware build and design docs cleared for release | Hardware owner | approved | yes | yes | keep safety limitations attached |

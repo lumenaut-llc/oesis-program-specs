@@ -2,30 +2,40 @@
 
 ## Purpose
 
-Translate the long-term vision into staged execution from homeowner utility to block-level network effects to city-scale federation.
+Translate the long-term vision into staged execution from the current parcel-sensing baseline to a more serious parcel-first adaptation system.
 
 ## Planning rules
 
 - every phase must deliver standalone value
 - network effects should improve the product, not unlock the entire product
 - new phases should preserve homeowner ownership and private-by-default defaults
+- new phases should preserve decentralized and democratic governance aims rather than drifting into household surveillance
 - claims should stay behind proven technical capability
 - each phase should narrow the hardware, software, and governance surface enough to ship
+- keep control permission separate from data-sharing permission
 
-## Phase 0: Foundation and truthfulness
+## Canonical version map
+
+- `current v1` = Stage A = parcel sensing and inference
+- `v1.5` = Stage B = measurement-to-intervention foundation
+- `v2` = Stage C = bounded adaptation guidance
+- `v2.5` = Stage D = bounded controls and compatibility mapping
+- `v3` = Stage E = parcel adaptation engine
+- `v4` = Stage F = parcel + route + block resilience
+
+## Stage A — Current v1 baseline
 
 ### Goal
 
-Establish the minimum architecture, language, and safety posture required for a credible resilience product.
+Establish a credible parcel-first sensing and inference product that is useful with one home, honest under sparse evidence, and compatible with partial adoption.
 
 ### Outcomes
 
-- canonical parcel-state model
-- evidence-mode language
-- confidence and freshness posture
+- canonical parcel-state model and evidence-mode language
 - basic ingest, normalization, and reference inference pipeline
-- privacy and consent baseline
-- hazard-specific claim boundaries
+- confidence, freshness, and explanation posture
+- privacy, consent, export, and revocation baseline
+- hazard-specific claim boundaries for smoke, pluvial flooding/runoff, and heat
 
 ### Must-have work
 
@@ -34,194 +44,114 @@ Establish the minimum architecture, language, and safety posture required for a 
 - align homeowner-facing language with claims-and-safety rules
 - keep `unknown` and low-confidence outcomes honest
 - define recommendation-language boundaries before shipping action prompts
+- preserve the current parcel-state contract through this stage
 
 ### Exit criteria
 
 - synthetic reference pipeline runs end to end
 - example payloads validate
 - core docs agree on terminology and claim posture
-- MVP hazards are defined conservatively enough for pilots
+- current `v1` is clearly framed as parcel sensing and inference, not full parcel adaptation or automation
 
-## Phase 1: Home resilience assistant
-
-### Goal
-
-Ship a homeowner product that is useful with one home and no neighborhood participation.
-
-### Primary jobs to be done
-
-- tell me what is happening at my home right now
-- tell me how serious it seems
-- tell me why the system thinks that
-- tell me what reasonable next steps to consider
-
-### Initial hazard focus
-
-- wildfire smoke and indoor air burden
-- extreme heat and indoor heat burden
-- flooding and runoff at the parcel edge or low point
-- outage and shelter readiness
-
-### Core user-facing features
-
-- current readiness states
-- confidence and freshness
-- reasons and evidence summaries
-- recommendation cards with conservative language
-- event timeline and change detection
-- alerting for meaningful worsening
-- setup flow for parcel and home context
-
-### Core technical capabilities
-
-- one or more home sensors
-- parcel and structure context capture
-- hazard-specific rules with explicit observability limits
-- safe alert thresholds
-- local-plus-public context fusion
-- homeowner-facing parcel view
-
-### Non-goals
-
-- dense neighborhood inference
-- multi-home coordination
-- city-scale outputs
-- aggressive predictive claims
-
-### Exit criteria
-
-- a single participating home gets recurring value outside major disasters
-- recommendation language is understandable and trustworthy
-- alert volume is manageable
-- users can explain why the system produced the current state
-
-## Phase 2: Block intelligence
+## Stage B — v1.5 measurement-to-intervention foundation
 
 ### Goal
 
-Use nearby participation to materially improve local awareness, timeliness, and spatial resolution.
+Add the minimum new data needed so the platform can evolve from parcel sensing into parcel adaptation without pretending that the adaptation engine already exists.
 
-### Primary jobs to be done
+### Key additions
 
-- tell me whether nearby conditions are worsening before mine do
-- tell me whether my home is an outlier or part of a block-level pattern
-- show me what nearby streets or low points look worse
-- help the block coordinate without exposing everyone’s raw data
+- house-state data such as indoor PM2.5, indoor temperature/RH, HVAC mode, fan state, recirculation/fresh-air state, purifier state, and backup-power state
+- building and site metadata such as orientation, exposure, shading, low points, drainage paths, vent locations, HVAC type, filter path, filter size, and higher-MERV capability
+- intervention and response records such as action logs, outcome logs, and before/after response windows
+- minimal controllability records describing what can be influenced, through which interface class, and whether control is local, cloud-only, or unknown
 
-### Core user-facing features
+### Design rule
 
-- shared block condition layer
-- street-segment and microcell readiness summaries
-- block trend direction and rate-of-change signals
-- neighborhood anomaly detection
-- participation-aware confidence uplift
-- voluntary mutual-aid flags and check-in workflows later
+Keep parcel-state mostly stable in this stage.
+Store the new `v1.5` data in separate support objects rather than overloading the current state contract.
 
-### Core technical capabilities
+### Core success test
 
-- privacy-scoped neighborhood signal transformation
-- neighbor-consensus and disagreement handling
-- microcell or street-segment inference
-- sensor-health and representativeness scoring
-- outdoor-versus-indoor source weighting
-- route and hotspot inference
+Can the platform begin measuring response curves such as outdoor PM versus indoor PM, outdoor heat versus indoor heat response, rainfall versus low-point/access degradation, and action timestamp versus improvement?
 
-### Candidate pilot scenarios
-
-- smoke plume movement across several blocks
-- repeated runoff trouble spots on one street
-- nighttime urban heat pockets
-- outage clusters during a storm
-
-### Non-goals
-
-- raw household telemetry exposure by default
-- citywide institutional dashboards as the primary product
-- exact disaster-front tracking claims
-
-### Exit criteria
-
-- block participation produces measurable improvement over single-home + public-only context
-- privacy defaults remain intelligible and trusted
-- users perceive clear added value from neighbor participation
-
-## Phase 3: Neighborhood resilience network
+## Stage C — v2 bounded adaptation guidance
 
 ### Goal
 
-Federate many blocks into neighborhood-scale resilience intelligence and coordination.
+Turn parcel sensing plus `v1.5` support data into serious engineering guidance without implying autonomous control.
 
-### Primary jobs to be done
+### Core capabilities
 
-- show how conditions vary across several blocks
-- identify recurring neighborhood stress patterns
-- coordinate local adaptation and mutual aid
-- support resilience hubs and trusted community spaces
-
-### Core user-facing features
-
-- neighborhood snapshots
-- corridor and route condition views
-- resilience-hub readiness overlays
-- neighborhood trend history
-- voluntary shared incident boards
-
-### Core technical capabilities
-
-- neighborhood aggregation logic
-- governance controls for community operators
-- escalation paths for shared alerts
-- resilience-hub and shared-space participation models
-
-### Example expansion targets
-
-- schools
-- churches
-- libraries
-- community centers
-- apartment complexes
+- condition model
+- building response model
+- intervention model
+- operational recommendations
+- material implementation recommendations
+- ranked intervention reasoning based on effect size, cost, reversibility, time to implement, confidence, and multi-hazard benefit
 
 ### Exit criteria
 
-- multiple blocks can participate under a common governance model
-- neighborhood insights are useful without becoming household surveillance
+- the platform can recommend which bounded action is most likely to help a parcel and explain why
+- recommendation outputs remain clearly separate from hazard certainty
+- the product is still advisory-first
 
-## Phase 4: Citizen-built smart city federation
+## Stage D — v2.5 bounded controls and compatibility mapping
 
 ### Goal
 
-Allow neighborhoods to contribute consented aggregate intelligence into a city-scale civic layer without surrendering resident ownership.
+Prepare the system to interact with real homes through bounded, low-risk control surfaces and compatibility mapping.
 
-### Primary jobs to be done
+### Core capabilities
 
-- show citywide resilience patterns from bottom-up signals
-- support planning, adaptation, and infrastructure accountability
-- share consented aggregate intelligence with institutions when communities approve
+- controls inventory per parcel
+- compatibility surfaces for local API, Matter, Home Assistant, cloud-only, BACnet, or none
+- local-controller availability and override rules
+- three-tier integration model:
+  - advisory only
+  - soft integration
+  - harder building integration later
 
-### Core user-facing features
+### First automation targets
 
-- federated neighborhood summaries
-- city-scale trend and burden maps
-- infrastructure stress reports
-- resident-owned evidence products for advocacy and planning
-
-### Core technical capabilities
-
-- cross-neighborhood federation
-- common aggregation and privacy standards
-- partner-facing exports and APIs
-- auditability and governance reporting
-
-### Non-goals
-
-- institution-owned raw household data lakes
-- replacing emergency management systems
-- indiscriminate public disclosure of parcel-linked conditions
+- HVAC recirculation during smoke
+- continuous fan mode during smoke
+- purifier activation
+- smart shade lowering during high solar load
+- runoff threshold crossing alerts or bounded relay flows later
 
 ### Exit criteria
 
-- city-scale aggregation remains community-trusted
-- institutions can consume useful outputs without controlling household data
+- every first automation target is reversible, bounded, low-risk, and verifiable
+- failed-control logging and manual override are first-class behaviors
+
+## Stage E — v3 parcel adaptation engine
+
+### Goal
+
+Move from current-state guidance into a real parcel adaptation engine.
+
+### Core capabilities
+
+- time-to-threshold outputs
+- compound hazard logic
+- action-effect memory
+- household capacity modeling
+- repeated-event learning for outdoor-to-indoor response, intervention effectiveness, and parcel-specific degradation/recovery
+
+## Stage F — v4 parcel + route + block resilience
+
+### Goal
+
+Extend beyond the house to route, egress, and shared neighborhood infrastructure resilience while preserving private-by-default household data handling.
+
+### Core capabilities
+
+- parcel layer
+- route and egress layer
+- block and neighborhood weak-point layer
+- community intervention ranking
+- shared infrastructure and refuge planning surfaces
 
 ## Cross-phase enablers
 
@@ -235,6 +165,8 @@ These workstreams should advance continuously across phases:
 - shared terminology and claims discipline
 - local-first and degraded-connectivity behavior
 - partnership and governance models
+- house-state and response-curve quality
+- homeowner override and bounded control governance
 
 ## Suggested sequencing bets
 
@@ -244,6 +176,7 @@ These workstreams should advance continuously across phases:
 - heat burden
 - flooding and runoff
 - outage readiness
+- smoke protection as the first closed loop
 
 ### Strong second-wave bets
 
@@ -254,15 +187,7 @@ These workstreams should advance continuously across phases:
 
 ### Longer-horizon bets
 
-- landslide and debris flow
-- multi-unit building intelligence
+- community investment ranking
 - resilience hubs
 - community evidence and advocacy products
-- city-scale federation
-
-## Open questions
-
-- Which phase-1 features create the strongest everyday retention?
-- Which block-level signals are best shared as aggregates versus bounded raw values?
-- What microcell resolution is technically defensible for each hazard?
-- Which future phases require new hardware classes rather than new inference only?
+- broader federation layers

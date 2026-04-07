@@ -55,7 +55,7 @@ What each one proves:
 - `make oesis-http-check`
   starts the local ingest, inference, and parcel APIs and exercises their HTTP path
 
-If any of these fail, stop here before treating the parcel kit or preview site as ready.
+If any of these fail, stop here before treating the parcel kit or release site as ready.
 
 ## Step 2: Validate a real packet from an installed node
 
@@ -144,7 +144,7 @@ make oesis-http-check
 
 Use that when you want a known-good ingest to inference to parcel-view path without hand-copying intermediate JSON.
 
-## Step 6: View the preview site locally
+## Step 6: View the release site locally
 
 The public preview site now lives in the sibling repository `../oesis-public-site`.
 
@@ -154,18 +154,27 @@ From the parent directory that contains this specs repo, run:
 cd ../oesis-public-site
 ```
 
-run:
+install dependencies once:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then visit:
+then run:
 
 the local Astro dev URL shown in the terminal.
+the local Astro dev URL shown in the terminal.
 
-Use this page only as the preview-facing surface.
+Visit the local URL printed by Astro in the terminal.
+
+For a production-style static build, run:
+
+```bash
+npm run build
+```
+
+Use this site only as the public-facing release surface.
 Keep the deeper implementation and packet docs in the controlled-review lane.
 
 ## Recommended first-operator sequence

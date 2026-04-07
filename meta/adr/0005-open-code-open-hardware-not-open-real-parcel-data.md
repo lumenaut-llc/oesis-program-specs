@@ -1,6 +1,6 @@
 # ADR 0005: Open Code and Hardware, but Not Open Real Parcel-Contributed Data
 
-- Status: Accepted
+- Status: Superseded in part by ADR 0006
 - Date: 2026-03-30
 - Owners: program maintainers
 - Related workstreams: legal, licensing, dataset release, contribution policy

@@ -16,6 +16,19 @@ This document is intentionally expansive. It is meant to stretch the design spac
 - explicit uncertainty
 - resilience before convenience
 
+## Version map
+
+The long-term vision should be interpreted through these staged boundaries:
+
+- `current v1`: parcel sensing and inference
+- `v1.5`: measurement-to-intervention foundation
+- `v2`: bounded adaptation guidance
+- `v2.5`: bounded controls and compatibility mapping
+- `v3`: parcel adaptation engine
+- `v4`: parcel + route + block resilience
+
+The product should not collapse these stages together in user-facing claims.
+
 ## Product thesis
 
 Open Environmental Sensing and Inference System should start as a homeowner
@@ -33,6 +46,11 @@ The system should be able to answer four questions at every scale:
 3. Why does the system believe that?
 4. What reasonable next steps should the person or group consider?
 
+Over time, it should also answer two harder questions:
+
+5. What can this parcel change?
+6. Did that action help?
+
 ## Strategic framing
 
 This project should not be framed as:
@@ -48,6 +66,25 @@ It should be framed as:
 - a neighborhood intelligence layer built from voluntary participation
 - a citizen-controlled civic infrastructure network
 - a platform that turns local sensing into readiness guidance
+- a staged path from parcel sensing to parcel adaptation rather than a sudden leap into automation
+
+## Interpreting the long-term end state
+
+The "self-protective house" vision should be interpreted as increasing measurability, interpretability, controllability, and verified adaptation over time.
+
+It should not be interpreted as:
+- magical architectural movement
+- unsupported automation claims
+- control without verification
+- centralized operator authority over household systems
+
+The disciplined path is:
+- sensing
+- inference
+- intervention ranking
+- bounded control
+- outcome verification
+- gradual adaptation learning
 
 ## Layered model
 
@@ -128,6 +165,10 @@ The system should prefer privacy-scoped derived signals, aggregation, and bounde
 ### Actionable guidance before abstract dashboards
 
 The product should help people decide what to do next, not only show measurements.
+
+### Measurement before control, verification before stronger claims
+
+The project should only expand into stronger control or adaptation claims after it can measure house state, log interventions, and verify whether those actions improved outcomes.
 
 ### Honest uncertainty before overclaiming
 

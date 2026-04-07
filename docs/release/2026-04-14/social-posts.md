@@ -2,9 +2,11 @@
 
 ## Purpose
 
-Provide pre-approved social copy for the April 14, 2026 Path B public preview.
+Provide pre-approved social copy for the April 14, 2026 open release.
 
-These posts are written to be public-facing but non-enabling. Do not add technical detail without checking `legal/public-preview-scope.md`.
+These posts are written to be public-facing and aligned with the current release
+controls. Do not add non-cleared technical, personal, or third-party detail without
+checking `legal/public-preview-scope.md`.
 
 ## Primary post
 
@@ -16,9 +18,10 @@ This project is working toward a parcel-first, homeowner-owned environmental sen
 
 Private by default. Shared by choice. Homeowners should own their raw data.
 
-This preview focuses on governance, data ownership, privacy, and release structure. It is not yet the full technical release.
+This release focuses on governance, data ownership, privacy, and the current public
+technical foundation.
 
-Preview: [link]
+Release: [link]
 
 ## Short post
 
@@ -29,11 +32,14 @@ release framework here: [link]
 
 ## Builder-oriented post
 
-We’re building toward an open, modular environmental sensing system that can work for one home and improve with neighborhood participation without forcing centralized data surrender.
+We’re building an open, modular environmental sensing system that can work for one
+home and improve with neighborhood participation without forcing centralized data
+surrender.
 
-Today’s preview makes the ownership, privacy, governance, and release model public first. Technical release details will follow after final sequencing.
+Today’s release makes the ownership, privacy, governance, and current public technical
+model visible under clear release boundaries.
 
-Preview: [link]
+Release: [link]
 
 ## Press / intro blurb
 
@@ -45,9 +51,10 @@ toward a broader open release across software, hardware, and documentation.
 
 ## Do not add
 
-Do not add these themes to social copy before filing:
+Do not add these themes to social copy:
 
-- reproducible method details
+- secrets, credentials, or operator-only procedures
+- non-cleared third-party data or private parcel-linked data outside the intentional public-release scope
 - internal thresholds
 - hardware schematics or close-up board details
 - packet formats

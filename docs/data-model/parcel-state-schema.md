@@ -4,6 +4,14 @@
 
 Define the canonical parcel-level output produced by the inference engine for homeowner-facing use and downstream mapping.
 
+## Version boundary
+
+This schema represents the current `v1` parcel sensing and inference baseline.
+
+It stays stable through `v1.5` so the repo can add house-state, capability, compatibility, intervention, and verification objects without forcing a breaking parcel-state change.
+
+Narrative aliases such as `stay_safe`, `enter_safe`, `escape_safe`, and `asset_safe` may appear in planning documents, but the current repo keeps the existing field names through at least `v2`.
+
 ## Core status fields
 
 - `shelter_status`
@@ -160,9 +168,26 @@ Suggested initial enum for `inference_basis`:
 - Hazard scores support the parcel-state output but do not replace the homeowner-readable statuses.
 - Every parcel-state snapshot should be traceable back to source observations.
 
+## Planned follow-on additions
+
+`v1.5`:
+- keep parcel-state stable
+- store house-state, capability, compatibility, intervention, and verification data as separate support objects
+
+`v2` and later may add optional presentation summaries such as:
+- bounded recommendations
+- actionability notes
+- recommendation or verification references
+
+Those additions should not erase the current distinction between condition estimate and later-stage adaptation logic.
+
 ## Related docs
 
 - `node-observation-schema.md`
+- `parcel-context-schema.md`
+- `house-state-schema.md`
+- `intervention-event-schema.md`
+- `verification-outcome-schema.md`
 - `explanation-payload-schema.md`
 - `../../software/inference-engine/interfaces.md`
 - `../../software/parcel-platform/README.md`

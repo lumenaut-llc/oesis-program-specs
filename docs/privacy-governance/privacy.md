@@ -2,7 +2,8 @@
 
 ## Purpose
 
-Provide the working privacy notice outline and privacy commitments for the April 14, 2026 public preview.
+Provide the working privacy notice outline and privacy commitments for the April 14,
+2026 open-release period.
 
 This file is a policy draft and planning artifact. It is not legal advice and is not yet a final product privacy notice.
 
@@ -17,6 +18,7 @@ The working privacy posture is:
 - shared by choice
 - explicit provenance and uncertainty
 - no quiet conversion of private parcel data into public data
+- no assumption that one intentionally public v1 dataset makes all future participant data public
 
 ## Data categories covered
 
@@ -67,7 +69,7 @@ The project should not:
 
 The project expects sharing to be separated into distinct modes rather than governed by one blanket consent.
 
-Working preview modes include:
+Working sharing modes include:
 
 - private only
 - network assist
@@ -127,14 +129,15 @@ Current governance direction:
 - test fixtures should use synthetic data where possible
 - deletion or revocation should not be undermined by informal operator copies
 
-## What this preview does not promise
+## What this release posture does not promise
 
-This preview file does not promise that:
+This file does not promise that:
 
 - every privacy control is fully implemented today
 - every jurisdiction-specific privacy requirement has been fully reviewed
 - all shared outputs are anonymous
 - the project will retain data indefinitely
+- any future participant-contributed parcel-linked data is public by default
 
 ## Attorney review triggers
 

@@ -4,6 +4,9 @@
 
 The homeowner-facing parcel application and API surface. It turns parcel-state outputs, evidence summaries, and freshness data into a usable view of conditions at one parcel without hiding uncertainty.
 
+The current `v1` center of gravity remains parcel-state presentation.
+`v1.5` adds separate support-object surfaces for house state, capability, compatibility, intervention history, and verification history without breaking the parcel-state baseline.
+
 ## Current responsibilities
 
 - present the latest parcel-state snapshot
@@ -11,6 +14,7 @@ The homeowner-facing parcel application and API surface. It turns parcel-state o
 - expose freshness, confidence, and evidence mode clearly
 - let a homeowner inspect recent parcel-state history
 - act as the boundary for future notifications and user controls
+- expose separate private support objects for house state, capability, control compatibility, intervention history, and verification history as those records appear
 
 ## Needs from other workstreams
 
@@ -27,6 +31,15 @@ The first version should do a small number of things well:
 - show whether the assessment is based on local evidence, public evidence, or both
 - avoid pretending confidence is higher than it is
 - keep sharing, rights requests, reference audit state, and retention actions inspectable for pilot operations
+
+`v1.5` adds data capture and reference APIs for:
+- house-state support
+- house capability support
+- control compatibility support
+- intervention logging
+- verification logging
+
+Those are separate support objects, not a renaming of the current parcel-state output.
 
 ## Adjacent systems
 

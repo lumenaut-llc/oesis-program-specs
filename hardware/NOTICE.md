@@ -2,7 +2,8 @@
 
 ## Purpose
 
-This notice explains how to read the hardware subtree during the April 14, 2026 preview phase.
+This notice explains how to read the hardware subtree during the April 14, 2026
+open-release period.
 
 ## Intended license direction
 
@@ -10,13 +11,13 @@ The current intended direction for hardware design files is:
 
 - `CERN-OHL-S v2`
 
-## Preview boundary
+## Release boundary
 
-During the preview:
+During the current release period:
 
-- some hardware documentation may be public while design-enabling files remain held back
+- approved hardware artifacts may be public under their attached notices and licenses
 - publication of a build guide or high-level description does not mean every hardware design file is released
-- exact release scope should be checked against the program-level notices and holdback controls
+- exact release scope should be checked against the program-level notices and non-release controls
 
 ## Safety and claims boundary
 
@@ -28,4 +29,5 @@ Nothing in this subtree should be read as a guarantee of safety certification, f
 
 - `../NOTICE.md`
 - `../legal/ip.md`
+- `../legal/public-preview-scope.md`
 - `../docs/privacy-governance/claims-and-safety-language.md`

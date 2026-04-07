@@ -2,7 +2,7 @@
 
 ## Status
 
-Internal controlled-review document for the April 14, 2026 preview.
+Internal controlled-review document for the April 14, 2026 release period.
 
 Use this to separate what is working now from what is only documented, planned, or policy direction.
 
@@ -10,7 +10,7 @@ Do not treat this file as a public-site asset by default.
 
 ## Purpose
 
-The preview packet contains a large amount of high-quality documentation.
+The release packet contains a large amount of high-quality documentation.
 This matrix exists so reviewers do not confuse:
 
 - verified reference behavior
@@ -84,7 +84,7 @@ This matrix reflects the current local reference state after these checks passed
 | Public preview site scaffold | implemented | sibling repo `../oesis-public-site` plus `docs/release/2026-04-14/site/public-content-allowlist.md` | Stable Astro app is separated from release-owned publication controls. | Keep the app, release packet, and publication gate aligned. |
 | Public preview packet | implemented | `NOTICE.md`, release README, governance/privacy docs | Packet is assembled for public-safe preview readers. | Keep the packet aligned with the actual implementation boundary. |
 | Reviewer packet assembly | implemented | `reviewer-packet-index.md` | Controlled packet lanes are now explicit. | Use named release owners to decide who receives which packet. |
-| Counsel packet assembly | implemented | `legal/send-to-counsel-checklist.md` and related filing docs | Counsel handoff path exists. | Fill filing-specific blanks and make the filing decision. |
+| Counsel packet assembly | implemented | `legal/send-to-counsel-checklist.md` and related filing docs | Archival counsel handoff path exists if later needed. | Only use if the project reopens a separate patent/counsel lane. |
 | Pilot packet assembly | implemented | pilot playbooks and pilot/research agreement template | Pilot docs exist for operator and participant review. | Assign named pilot owners and turn packet rules into operating practice. |
 | Launch readiness ownership and completion | docs-only | `launch-readiness-checklist.md` remains mostly `not started` | Gates are documented. | Assign owners, statuses, and evidence. |
 
