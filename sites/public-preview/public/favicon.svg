@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Open Environmental Sensing and Inference System</title>
+  <rect width="64" height="64" rx="14" fill="#f4efe4" />
+  <path d="M12 40 32 18l20 22" fill="none" stroke="#305242" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+  <path d="M20 40V30h24v10" fill="none" stroke="#9d4315" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+  <circle cx="32" cy="39" r="4" fill="#9d4315" />
+</svg>

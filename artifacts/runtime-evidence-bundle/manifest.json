@@ -1,0 +1,36 @@
+{
+  "bundle_version": "2026-04-14",
+  "checks": [
+    {
+      "command": "make oesis-validate",
+      "exit_code": 0,
+      "ok": true,
+      "stderr_log": "make_oesis-validate.stderr.log",
+      "stdout_log": "make_oesis-validate.stdout.log"
+    },
+    {
+      "command": "make oesis-check",
+      "exit_code": 0,
+      "ok": true,
+      "stderr_log": "make_oesis-check.stderr.log",
+      "stdout_log": "make_oesis-check.stdout.log"
+    },
+    {
+      "command": "make oesis-http-check",
+      "exit_code": 0,
+      "ok": true,
+      "stderr_log": "make_oesis-http-check.stderr.log",
+      "stdout_log": "make_oesis-http-check.stdout.log"
+    }
+  ],
+  "generated_at": "2026-04-07T21:55:18Z",
+  "source_commit": "222d32a0c35fec4bdc6e3d9c8e0b62885d333b7a",
+  "source_repo": "oesis-runtime",
+  "supported_surfaces": [
+    "example payload validation",
+    "reference packet-to-parcel pipeline",
+    "local ingest API",
+    "local inference API",
+    "local parcel-platform API"
+  ]
+}

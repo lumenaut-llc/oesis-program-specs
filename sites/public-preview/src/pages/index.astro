@@ -1,0 +1,426 @@
+---
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DiagramGallery from "../components/DiagramGallery.astro";
+import PhaseModel from "../components/PhaseModel.astro";
+import ReleaseRoadmap from "../components/ReleaseRoadmap.astro";
+import v2Diagram from "../content/publicPages/v2_diagram.png";
+import {
+  currentRelease,
+  hardwareSpecSections,
+  informationInfrastructure,
+  phaseModel,
+  publicBoundary,
+  principles,
+  releasedSpecCollections,
+  softwareSpecSections,
+  v1InformationOverview,
+  versionPath
+} from "../data/siteContent";
+import { publicDiagrams } from "../data/diagramContent";
+
+const governanceEntry = await getEntry("publicPages", "governance-and-privacy");
+const diagramsEntry = await getEntry("publicPages", "diagrams");
+
+if (!governanceEntry || !diagramsEntry) {
+  throw new Error("Missing homepage source content for one-page sections.");
+}
+
+const { Content: GovernanceContent } = await render(governanceEntry);
+const { Content: DiagramsContent } = await render(diagramsEntry);
+const featuredDiagrams = publicDiagrams.slice(0, 3);
+---
+
+<BaseLayout
+  title="Open Environmental Sensing and Inference System | Parcel-First Environmental Sensing and Situational Intelligence"
+  description="Public preview for Open Environmental Sensing and Inference System (OESIS): parcel-first environmental sensing and situational intelligence, private by default, shared by choice, and explicit about uncertainty."
+>
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">April 14, 2026 Public Preview</p>
+        <h1>Parcel-first environmental sensing and situational intelligence.</h1>
+        <p class="lede">
+          Version 1 starts with useful single-home parcel awareness. Later versions
+          expand toward block intelligence, neighborhood networks, and city-scale
+          federation without changing the core model: private by default, shared by
+          choice, parcel first.
+        </p>
+        <div class="hero-pill-row" aria-label="Core characteristics">
+          <span class="hero-pill">Parcel-first model</span>
+          <span class="hero-pill">Private by default</span>
+          <span class="hero-pill">Shared by choice</span>
+        </div>
+        <div class="action-row">
+          <a class="button button-primary" href="#hardware-specs">See released specs</a>
+          <a class="button button-secondary" href="#how-it-works">See how it works</a>
+        </div>
+      </div>
+      <aside id="snapshot" class="hero-aside" aria-label="Prototype diagram and current preview snapshot">
+        <figure class="hero-diagram">
+          <img
+            src={v2Diagram.src}
+            alt="Standalone house prototype showing a mast-lite weather and air node, an indoor air node, a flood node, a thermal pod, and a parcel-status platform connection."
+            loading="eager"
+          />
+          <figcaption>
+            Standalone house prototype with a few disciplined sensing points and
+            one parcel-status software brain.
+          </figcaption>
+        </figure>
+        <div class="hero-snapshot-card">
+          <p class="hero-card-kicker">Current preview</p>
+          <div class="hero-stage">
+            <span class="hero-stage-label">{currentRelease.label}</span>
+            <strong>{currentRelease.title}</strong>
+            <span>{currentRelease.scope}</span>
+          </div>
+          <dl class="hero-meta">
+            <div>
+              <dt>Product unit</dt>
+              <dd>{currentRelease.productUnit}</dd>
+            </div>
+            <div>
+              <dt>Release boundary</dt>
+              <dd>{currentRelease.boundary}</dd>
+            </div>
+            <div>
+              <dt>Next unlock</dt>
+              <dd>{currentRelease.nextUnlock}</dd>
+            </div>
+          </dl>
+          <div class="hero-hazards">
+            <span class="hero-card-kicker">Current hazard focus</span>
+            <ul class="hero-tag-list">
+              {currentRelease.hazards.map((hazard) => <li>{hazard}</li>)}
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="panel info-milestone-panel" aria-labelledby="v1-information-heading">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Information milestone</p>
+        <h2 id="v1-information-heading">{v1InformationOverview.title}</h2>
+        <p>{v1InformationOverview.body}</p>
+      </div>
+    </div>
+    <div class="info-pillar-grid">
+      {
+        v1InformationOverview.pillars.map((pillar) => (
+          <article class="info-pillar-card">
+            <span class="info-pillar-label">{pillar.label}</span>
+            <h3>{pillar.title}</h3>
+            <p>{pillar.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="notice-panel">
+    <h2>Public preview only</h2>
+    <p>
+      This release shows the mission, the public boundary, and the first useful
+      slice of the system. It is not the full enabling technical release.
+    </p>
+    <ul>
+      <li>Private by default.</li>
+      <li>Shared by choice.</li>
+      <li>Parcel-state outputs are estimates, not guarantees.</li>
+      <li>Implementation-enabling technical details remain out of scope.</li>
+    </ul>
+  </section>
+
+  <section class="panel facts-panel" aria-labelledby="release-snapshot-heading">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Release snapshot</p>
+        <h2 id="release-snapshot-heading">Current release, framed as a real product step</h2>
+        <p>
+          The public preview is intentionally bounded, but the release still has a
+          concrete scope, product unit, and next expansion path.
+        </p>
+      </div>
+    </div>
+    <div class="fact-grid">
+      <article class="fact-card">
+        <span class="fact-label">Release</span>
+        <strong>{currentRelease.label}</strong>
+        <span>{currentRelease.title}</span>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">Scope</span>
+        <strong>{currentRelease.scope}</strong>
+        <span>First useful slice of the larger system.</span>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">Hazards</span>
+        <strong>{currentRelease.hazards.join(", ")}</strong>
+        <span>Current public-facing hazard focus.</span>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">Product unit</span>
+        <strong>{currentRelease.productUnit}</strong>
+        <span>The homeowner-facing unit of the system.</span>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">Boundary</span>
+        <strong>{currentRelease.boundary}</strong>
+        <span>Public-safe and intentionally non-enabling.</span>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">Next unlock</span>
+        <strong>{currentRelease.nextUnlock}</strong>
+        <span>The next meaningful expansion of the current release.</span>
+      </article>
+    </div>
+  </section>
+
+  <section id="roadmap" class="panel roadmap-panel">
+    <div class="section-head">
+      <div>
+        <h2>Version path</h2>
+        <p>
+          The path below shows the major public milestones. Expand the supporting
+          phase model to see the capability steps that sit between those releases.
+        </p>
+      </div>
+    </div>
+    <ReleaseRoadmap stages={versionPath} />
+    <p class="roadmap-note">
+      This summary arc stays intentionally compressed on the homepage so the page
+      remains readable as a public guide rather than a dense planning document.
+    </p>
+    <details class="disclosure roadmap-disclosure">
+      <summary class="disclosure-summary">
+        <span class="section-kicker">Capability phases</span>
+        <strong>How the product matures between major releases</strong>
+        <span class="disclosure-hint">Expand</span>
+      </summary>
+      <div class="disclosure-body">
+        <p class="phase-model-intro">
+          The major milestones above are the public version arc. The phase model
+          below shows the practical product steps between them, from an
+          instrumented parcel to interior response awareness, sparse shared
+          inference, and eventually federated local systems.
+        </p>
+        <PhaseModel groups={phaseModel} />
+      </div>
+    </details>
+  </section>
+
+  <section class="panel principles-panel">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Operating model</p>
+        <h2>Three rules that hold across every release</h2>
+        <p>
+          The visual story can evolve by version, but these principles stay fixed
+          from single-home utility to larger federated systems.
+        </p>
+      </div>
+    </div>
+    <div class="principles">
+      {
+        principles.map((principle, index) => (
+          <article class="principle">
+            <span class="principle-index">0{index + 1}</span>
+            <h3>{principle.title}</h3>
+            <p>{principle.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="panel information-architecture-panel" aria-labelledby="information-architecture-heading">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Information infrastructure</p>
+        <h2 id="information-architecture-heading">How parcel information is built and bounded</h2>
+        <p>
+          The public site should make the information model legible without exposing
+          scoring logic, thresholds, or withheld internals. These layers explain
+          how signals become parcel guidance.
+        </p>
+      </div>
+    </div>
+    <div class="information-layer-grid">
+      {
+        informationInfrastructure.map((layer) => (
+          <article class="information-layer-card">
+            <span class="information-layer-label">{layer.label}</span>
+            <h3>{layer.title}</h3>
+            <p>{layer.body}</p>
+          </article>
+        ))
+      }
+    </div>
+    <p class="information-architecture-note">
+      The homepage stays high level on purpose: it explains what kinds of
+      information exist, how they are framed, and why they stay bounded without
+      publishing implementation-enabling inference mechanics.
+    </p>
+  </section>
+
+  <details id="boundary" class="panel disclosure">
+    <summary class="disclosure-summary">
+      <span class="section-kicker">Public-safe scope</span>
+      <strong>What is public now, and what is still withheld</strong>
+      <span class="disclosure-hint">Expand</span>
+    </summary>
+    <div class="disclosure-body">
+      <div class="two-column overview-grid">
+        <article class="panel compact-panel boundary-panel boundary-positive">
+          <h2>Public now</h2>
+          <ul>
+            {publicBoundary.publicNow.map((item) => <li><strong>{item.title}:</strong> {item.detail}</li>)}
+          </ul>
+        </article>
+        <article class="panel compact-panel boundary-panel boundary-negative">
+          <h2>Not public now</h2>
+          <ul>
+            {publicBoundary.notPublicNow.map((item) => <li><strong>{item.title}:</strong> {item.detail}</li>)}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </details>
+
+  <details id="how-it-works" class="panel disclosure">
+    <summary class="disclosure-summary">
+      <span class="section-kicker">Concept overview</span>
+      <strong>How the system works</strong>
+      <span class="disclosure-hint">Expand</span>
+    </summary>
+    <div class="disclosure-body">
+      <div class="concept-grid">
+        {
+          featuredDiagrams.map((diagram) => (
+            <article class="concept-card">
+              <h3>{diagram.title}</h3>
+              <p>{diagram.description}</p>
+              <p class="concept-takeaway"><strong>Takeaway:</strong> {diagram.takeaway}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </details>
+
+  <section id="hardware-specs" class="panel specs-panel">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Open specs</p>
+        <h2>Hardware specs</h2>
+        <p>
+          Released hardware docs explain what each node does, why it matters,
+          and where to find the current build and firmware references.
+        </p>
+      </div>
+    </div>
+    <div class="spec-grid">
+      {
+        hardwareSpecSections.map((section) => (
+          <article class="spec-card">
+            <div class="spec-card-head">
+              <span class={`spec-status is-${section.status}`}>{section.status}</span>
+              <h3>{section.name}</h3>
+            </div>
+            <p>{section.whatItDoes}</p>
+            <p class="spec-why"><strong>Why it matters:</strong> {section.whyItMatters}</p>
+            <p class="spec-relevance"><strong>Relevant diagrams:</strong> {section.diagramRelevance.join(", ")}</p>
+            <ul class="spec-link-list">
+              {section.links.map((link) => <li><a href={link.href} target="_blank" rel="noreferrer">{link.label}</a></li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="software-specs" class="panel specs-panel">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Open specs</p>
+        <h2>Software specs</h2>
+        <p>
+          Released software docs explain the evidence pipeline, parcel product
+          surface, inference path, and shared-map layer in approachable terms.
+        </p>
+      </div>
+    </div>
+    <div class="spec-grid">
+      {
+        softwareSpecSections.map((section) => (
+          <article class="spec-card">
+            <div class="spec-card-head">
+              <span class={`spec-status is-${section.status}`}>{section.status}</span>
+              <h3>{section.name}</h3>
+            </div>
+            <p>{section.whatItDoes}</p>
+            <p class="spec-why"><strong>Why it matters:</strong> {section.whyItMatters}</p>
+            <p class="spec-relevance"><strong>Relevant diagrams:</strong> {section.diagramRelevance.join(", ")}</p>
+            <ul class="spec-link-list">
+              {section.links.map((link) => <li><a href={link.href} target="_blank" rel="noreferrer">{link.label}</a></li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="panel specs-panel" aria-labelledby="released-specs-heading">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Released references</p>
+        <h2 id="released-specs-heading">Core released spec collections</h2>
+        <p>
+          These are the main architecture, schema, and build-guide entry points
+          that anchor the current open-release surface.
+        </p>
+      </div>
+    </div>
+    <div class="spec-grid spec-grid-collections">
+      {
+        releasedSpecCollections.map((collection) => (
+          <article class="spec-card">
+            <span class="info-pillar-label">{collection.label}</span>
+            <h3>{collection.title}</h3>
+            <p>{collection.body}</p>
+            <ul class="spec-link-list">
+              {collection.links.map((link) => <li><a href={link.href} target="_blank" rel="noreferrer">{link.label}</a></li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <details id="governance" class="panel disclosure">
+    <summary class="disclosure-summary">
+      <span class="section-kicker">Policy boundary</span>
+      <strong>Governance and privacy</strong>
+      <span class="disclosure-hint">Expand</span>
+    </summary>
+    <div class="disclosure-body prose-panel one-page-prose">
+      <GovernanceContent />
+    </div>
+  </details>
+
+  <details id="diagrams" class="panel disclosure">
+    <summary class="disclosure-summary">
+      <span class="section-kicker">Visual explanation</span>
+      <strong>Diagrams</strong>
+      <span class="disclosure-hint">Expand</span>
+    </summary>
+    <div class="disclosure-body prose-panel one-page-prose">
+      <DiagramsContent />
+      <DiagramGallery />
+    </div>
+  </details>
+</BaseLayout>

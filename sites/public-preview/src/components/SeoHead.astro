@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  imagePath?: string;
+}
+
+const {
+  title,
+  description,
+  imagePath = "/social-card.svg"
+} = Astro.props;
+
+const siteName = "Open Environmental Sensing and Inference System";
+const siteUrl = Astro.site;
+const canonicalUrl = siteUrl ? new URL(Astro.url.pathname, siteUrl).toString() : undefined;
+const socialImageUrl = siteUrl ? new URL(imagePath, siteUrl).toString() : undefined;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="theme-color" content="#9d4315" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+{socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+{socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}

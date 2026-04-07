@@ -1,0 +1,64 @@
+---
+import DiagramGallery from "./DiagramGallery.astro";
+
+interface ReadNextItem {
+  href: string;
+  title: string;
+  body: string;
+}
+
+interface Props {
+  eyebrow: string;
+  heroTitle: string;
+  intro: string;
+  readNext?: ReadNextItem[];
+  showDiagrams?: boolean;
+  Content: any;
+}
+
+const {
+  eyebrow,
+  heroTitle,
+  intro,
+  readNext = [],
+  showDiagrams = false,
+  Content
+} = Astro.props;
+---
+
+<section class="page-intro">
+  <p class="eyebrow">{eyebrow}</p>
+  <div class="section-head page-intro-head">
+    <div>
+      <h1>{heroTitle}</h1>
+      <p class="lede">{intro}</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel prose-panel">
+  <Content />
+</section>
+
+{showDiagrams && <DiagramGallery />}
+
+{
+  readNext.length > 0 && (
+    <section class="panel read-next-panel">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Continue reading</p>
+          <h2>Read next</h2>
+        </div>
+      </div>
+      <div class="link-groups">
+        {readNext.map((item) => (
+          <a class="link-card" href={item.href}>
+            <strong>{item.title}</strong>
+            <span>{item.body}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}

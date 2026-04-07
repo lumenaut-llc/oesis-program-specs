@@ -1,0 +1,40 @@
+---
+interface RoadmapStage {
+  label: string;
+  title: string;
+  body: string;
+  adds: string;
+  releaseWindow: string;
+  status: "current" | "next" | "future";
+}
+
+interface Props {
+  stages: RoadmapStage[];
+}
+
+const { stages } = Astro.props;
+---
+
+<ol class="release-roadmap" aria-label="Release roadmap">
+  {
+    stages.map((stage, index) => (
+      <li
+        class:list={["roadmap-step", `is-${stage.status}`]}
+        aria-current={stage.status === "current" ? "step" : undefined}
+      >
+        <div class="roadmap-rail" aria-hidden="true">
+          <span class="roadmap-bubble">
+            <span class="roadmap-label">{stage.label}</span>
+          </span>
+          {index < stages.length - 1 && <span class="roadmap-line"></span>}
+        </div>
+        <div class="roadmap-copy">
+          <strong>{stage.title}</strong>
+          <span>{stage.body}</span>
+          <small class="roadmap-meta">{stage.releaseWindow}</small>
+          <p class="roadmap-adds">{stage.adds}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>

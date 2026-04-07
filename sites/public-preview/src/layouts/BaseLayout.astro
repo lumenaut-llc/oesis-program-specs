@@ -1,0 +1,73 @@
+---
+import "../styles/site.css";
+import SeoHead from "../components/SeoHead.astro";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const currentPath = Astro.url.pathname;
+const siteNav = [
+  { href: "/#snapshot", label: "Release" },
+  { href: "/#roadmap", label: "Roadmap" },
+  { href: "/#hardware-specs", label: "Hardware" },
+  { href: "/#software-specs", label: "Software" },
+  { href: "/#governance", label: "Governance" },
+  { href: "/#diagrams", label: "Diagrams" }
+];
+const isActivePath = (href: string) =>
+  currentPath === "/" && href === "/#snapshot";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <SeoHead title={title} description={description} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="site-brand" href="/">
+          <span class="site-brand-mark" aria-hidden="true">OESIS</span>
+          <span class="site-brand-copy">
+            <strong>Open Environmental Sensing and Inference System</strong>
+            <span>Parcel-first sensing and situational intelligence</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="nav-links">
+            {
+              siteNav.map((item) => (
+                <li>
+                  <a
+                    class:list={[
+                      "nav-link",
+                      isActivePath(item.href) ? "is-active" : undefined
+                    ]}
+                    aria-current={isActivePath(item.href) ? "page" : undefined}
+                    href={item.href}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </header>
+      <main id="main">
+        <slot />
+      </main>
+      <footer class="footer">
+        <p class="footer-kicker">Public preview boundary</p>
+        <p>
+          Private by default. Shared by choice. Public-facing and intentionally
+          non-enabling.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
