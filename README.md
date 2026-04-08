@@ -9,6 +9,8 @@ compatibility name during the transition.
 
 The Git repository is **`oesis-program-specs`** on GitHub (`lumenaut-llc/oesis-program-specs`), alongside the sibling **`oesis-runtime`** checkout.
 
+**Finishing the remote rename:** If GitHub still lists the old repository name, open **Settings → General → Repository name** on that repo and set it to **`oesis-program-specs`**. GitHub keeps redirects from the old URL for a while. This checkout should use `origin` → `https://github.com/lumenaut-llc/oesis-program-specs.git`; if not, run `git remote set-url origin https://github.com/lumenaut-llc/oesis-program-specs.git`. After the rename, confirm with `git fetch origin` and push (`git push -u origin main` if needed). Update **GitHub Pages** or any external links that still use the old path or `github.io/.../resilient-home-intelligence/...` URLs.
+
 ## Purpose
 
 Open Environmental Sensing and Inference System is a modular, homeowner-owned
