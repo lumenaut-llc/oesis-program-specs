@@ -23,8 +23,8 @@ At the repository level:
 - `LICENSES.md`
 - `NOTICE.md`
 - `legal/ip.md`
-- `docs/release/2026-04-14/open-source-v1-summary.md`
-- `docs/release/2026-04-14/asset-class-license-and-publication-matrix.md`
+- `release/2026-04-14/open-source-v1-summary.md`
+- `release/2026-04-14/asset-class-license-and-publication-matrix.md`
 
 ## Important boundary
 

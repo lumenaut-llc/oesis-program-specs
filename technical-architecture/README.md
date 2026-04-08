@@ -65,11 +65,11 @@ implemented system.
 
 ## What stays outside this directory
 
-- `../docs/data-model/`
+- `../contracts/`
   Formal schemas, examples, and contract definitions.
 - `../software/*/architecture.md`
   Subsystem-local design and responsibilities.
-- `../docs/privacy-governance/` and `../legal/`
+- `../legal/privacy/` and `../legal/`
   Privacy, governance, claims, and release constraints.
 - sibling repo `../oesis-runtime`
   Canonical implementation tree for the current reference services.

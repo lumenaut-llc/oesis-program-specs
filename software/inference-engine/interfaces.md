@@ -25,13 +25,13 @@
 ## Data contracts
 
 Primary input contract:
-- normalized observation records from `docs/data-model/node-observation-schema.md`
-- optional parcel context records from `docs/data-model/parcel-context-schema.md`
-- optional shared neighborhood signal records from `docs/data-model/schemas/shared-neighborhood-signal.schema.json`
-- optional public context records from `docs/data-model/public-context-schema.md`
+- normalized observation records from `contracts/node-observation-schema.md`
+- optional parcel context records from `contracts/parcel-context-schema.md`
+- optional shared neighborhood signal records from `contracts/schemas/shared-neighborhood-signal.schema.json`
+- optional public context records from `contracts/public-context-schema.md`
 
 Primary output contract:
-- parcel-state snapshot defined in `docs/data-model/parcel-state-schema.md`
+- parcel-state snapshot defined in `contracts/parcel-state-schema.md`
 
 Minimum parcel-state output fields:
 - `parcel_id`

@@ -14,27 +14,26 @@
     "/#diagrams"
   ],
   "approvedSourceRoots": [
-    "docs/release/2026-04-14/",
-    "docs/privacy-governance/",
-    "technical-architecture/",
-    "docs/system-overview/",
+    "release/2026-04-14/",
+    "legal/privacy/",
+    "architecture/",
     "legal/"
   ],
   "bundle_version": "2026-04-14",
   "excludedFromPublicNavigation": [
-    "docs/release/2026-04-14/reviewer-packet-index.md",
-    "docs/release/2026-04-14/publish-internal-map.md",
-    "docs/release/2026-04-14/preview-execution-plan.md",
-    "docs/release/2026-04-14/launch-readiness-checklist.md",
+    "release/2026-04-14/reviewer-packet-index.md",
+    "release/2026-04-14/publish-internal-map.md",
+    "release/2026-04-14/preview-execution-plan.md",
+    "release/2026-04-14/launch-readiness-checklist.md",
     "legal/counsel-questions/",
     "legal/provisional-*"
   ],
   "generated_at": "2026-04-07T22:28:22Z",
   "legalRoot": "legal/",
-  "privacyGovernanceRoot": "docs/privacy-governance/",
+  "privacyGovernanceRoot": "legal/privacy/",
   "programRoot": "",
-  "releaseRoot": "docs/release/2026-04-14/",
-  "repoBlobBase": "https://github.com/lumenaut-llc/resilient-home-intelligence/blob/main/",
+  "releaseRoot": "release/2026-04-14/",
+  "repoBlobBase": "https://github.com/lumenaut-llc/oesis-program-specs/blob/main/",
   "source_commit": "a8ab86ab272850387d876ac2c7641fbe17b288c3",
   "source_repo": "oesis-program-specs"
 }

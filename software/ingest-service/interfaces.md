@@ -26,13 +26,13 @@
 
 Primary MVP contract:
 - `oesis.bench-air.v1`
-  Defined in `docs/data-model/node-observation-schema.md`
+  Defined in `contracts/node-observation-schema.md`
 
 First external adapter contract:
 - raw public weather payload
-  Normalized by `scripts/normalize_public_weather_context.py` into the canonical public-context object defined in `docs/data-model/public-context-schema.md`
+  Normalized by `scripts/normalize_public_weather_context.py` into the canonical public-context object defined in `contracts/public-context-schema.md`
 - raw public smoke payload
-  Normalized by `scripts/normalize_public_smoke_context.py` into the canonical public-context object defined in `docs/data-model/public-context-schema.md`
+  Normalized by `scripts/normalize_public_smoke_context.py` into the canonical public-context object defined in `contracts/public-context-schema.md`
 
 Expected minimum request body:
 

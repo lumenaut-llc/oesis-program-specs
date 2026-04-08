@@ -133,7 +133,7 @@ The quickest manual API test uses the checked-in example packet:
 curl -s -X POST http://127.0.0.1:8787/v1/ingest/node-packets \
   -H 'Content-Type: application/json' \
   -H 'X-OESIS-Parcel-Id: parcel_demo_http' \
-  --data-binary @docs/data-model/examples/node-observation.example.json
+  --data-binary @contracts/examples/node-observation.example.json
 ```
 
 For the full API chain, the easiest repeatable command remains:
@@ -192,6 +192,6 @@ For the first integrated parcel kit, use this order:
 ## Related docs
 
 - `README.md`
-- `../docs/build-guides/parcel-kit-procurement-checklist.md`
-- `../docs/build-guides/parcel-installation-checklist.md`
-- `../docs/release/2026-04-14/reviewer-packet-index.md`
+- `../hardware/parcel-kit/parcel-kit-procurement-checklist.md`
+- `../hardware/parcel-kit/parcel-installation-checklist.md`
+- `../release/2026-04-14/reviewer-packet-index.md`

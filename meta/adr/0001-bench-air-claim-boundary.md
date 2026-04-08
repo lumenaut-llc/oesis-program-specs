@@ -8,7 +8,7 @@
   - software/ingest-service
   - software/inference-engine
   - software/parcel-platform
-  - docs/privacy-governance
+  - legal/privacy
 
 ## Context
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://lumenaut-llc.github.io/resilient-home-intelligence/schemas/export-bundle.schema.json",
+  "$id": "https://lumenaut-llc.github.io/oesis-program-specs/schemas/export-bundle.schema.json",
   "title": "OESIS Export Bundle",
   "type": "object",
   "required": [

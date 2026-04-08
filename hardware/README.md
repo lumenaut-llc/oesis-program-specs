@@ -14,6 +14,6 @@ Read `NOTICE.md` before treating this subtree as a complete released hardware de
 
 ## Cross-subsystem reference
 
-Use `../docs/system-overview/integrated-parcel-system-spec.md` as the canonical document for how all current hardware families attach to one parcel, one software stack, and one governance surface.
-Use `../technical-architecture/v0.1/README.md` as the current versioned
+Use `../architecture/system/integrated-parcel-system-spec.md` as the canonical document for how all current hardware families attach to one parcel, one software stack, and one governance surface.
+Use `../architecture/current/README.md` as the current versioned
 reference-architecture entrypoint for the broader system.

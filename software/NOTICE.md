@@ -35,5 +35,5 @@ privacy, permissions, and dataset-release rules.
 - `../NOTICE.md`
 - `../legal/ip.md`
 - `../legal/dataset-release-policy.md`
-- `../docs/privacy-governance/data-ownership.md`
-- `../docs/privacy-governance/privacy.md`
+- `../legal/privacy/data-ownership.md`
+- `../legal/privacy/privacy.md`

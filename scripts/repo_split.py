@@ -14,9 +14,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PROGRAM_ROOT = REPO_ROOT
-DOCS_DATA_MODEL_ROOT = PROGRAM_ROOT / "docs" / "data-model"
-DOCS_EXAMPLES_ROOT = DOCS_DATA_MODEL_ROOT / "examples"
-DOCS_SCHEMAS_ROOT = DOCS_DATA_MODEL_ROOT / "schemas"
+CONTRACTS_ROOT = PROGRAM_ROOT / "contracts"
+CONTRACT_EXAMPLES_ROOT = CONTRACTS_ROOT / "examples"
+CONTRACT_SCHEMAS_ROOT = CONTRACTS_ROOT / "schemas"
 INFERENCE_CONFIG_ROOT = PROGRAM_ROOT / "software" / "inference-engine" / "config"
 RUNTIME_REPO_ROOT = Path(os.environ.get("OESIS_RUNTIME_REPO_DIR", str(REPO_ROOT.parent / "oesis-runtime"))).expanduser().resolve()
 PUBLIC_SITE_REPO_ROOT = Path(os.environ.get("OESIS_PUBLIC_SITE_REPO_DIR", str(REPO_ROOT.parent / "oesis-public-site"))).expanduser().resolve()
@@ -28,10 +28,10 @@ PUBLIC_SITE_GENERATED_ROOT = PUBLIC_SITE_REPO_ROOT / "src" / "generated"
 
 PUBLIC_RELEASE_TAG = "2026-04-14"
 PROGRAM_ROOT_REL = ""
-RELEASE_ROOT_REL = f"{PROGRAM_ROOT_REL}docs/release/{PUBLIC_RELEASE_TAG}/"
-PRIVACY_ROOT_REL = f"{PROGRAM_ROOT_REL}docs/privacy-governance/"
+RELEASE_ROOT_REL = f"{PROGRAM_ROOT_REL}release/{PUBLIC_RELEASE_TAG}/"
+PRIVACY_ROOT_REL = f"{PROGRAM_ROOT_REL}legal/privacy/"
 LEGAL_ROOT_REL = f"{PROGRAM_ROOT_REL}legal/"
-REPO_BLOB_BASE = "https://github.com/lumenaut-llc/resilient-home-intelligence/blob/main/"
+REPO_BLOB_BASE = "https://github.com/lumenaut-llc/oesis-program-specs/blob/main/"
 
 
 def now_iso() -> str:
@@ -120,7 +120,7 @@ def write_text(path: Path, text: str) -> None:
 def sync_runtime_assets() -> None:
     if not RUNTIME_REPO_ROOT.exists():
         raise SystemExit(f"runtime repo not found: {RUNTIME_REPO_ROOT}")
-    copy_tree(DOCS_EXAMPLES_ROOT, RUNTIME_REPO_EXAMPLES_ROOT)
+    copy_tree(CONTRACT_EXAMPLES_ROOT, RUNTIME_REPO_EXAMPLES_ROOT)
     copy_tree(INFERENCE_CONFIG_ROOT, RUNTIME_REPO_INFERENCE_CONFIG_ROOT)
 
 
@@ -128,11 +128,11 @@ def build_contracts_bundle(destination: Path) -> Path:
     ensure_clean_dir(destination)
     schemas_dst = destination / "schemas"
     examples_dst = destination / "examples"
-    copy_tree(DOCS_SCHEMAS_ROOT, schemas_dst)
-    copy_tree(DOCS_EXAMPLES_ROOT, examples_dst)
+    copy_tree(CONTRACT_SCHEMAS_ROOT, schemas_dst)
+    copy_tree(CONTRACT_EXAMPLES_ROOT, examples_dst)
 
-    example_names = sorted(path.name for path in DOCS_EXAMPLES_ROOT.glob("*.json"))
-    schema_names = sorted(path.name for path in DOCS_SCHEMAS_ROOT.glob("*.json"))
+    example_names = sorted(path.name for path in CONTRACT_EXAMPLES_ROOT.glob("*.json"))
+    schema_names = sorted(path.name for path in CONTRACT_SCHEMAS_ROOT.glob("*.json"))
     manifest = {
         "bundle_version": PUBLIC_RELEASE_TAG,
         "generated_at": now_iso(),
@@ -175,8 +175,7 @@ def build_public_content_bundle(destination: Path) -> Path:
         "approvedSourceRoots": [
             RELEASE_ROOT_REL,
             PRIVACY_ROOT_REL,
-            f"{PROGRAM_ROOT_REL}technical-architecture/",
-            f"{PROGRAM_ROOT_REL}docs/system-overview/",
+            f"{PROGRAM_ROOT_REL}architecture/",
             LEGAL_ROOT_REL,
         ],
         "excludedFromPublicNavigation": [

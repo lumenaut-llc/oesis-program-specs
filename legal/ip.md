@@ -92,8 +92,8 @@ The project’s working rule is:
 
 See:
 
-- `../docs/privacy-governance/data-ownership.md`
-- `../docs/privacy-governance/privacy.md`
+- `../legal/privacy/data-ownership.md`
+- `../legal/privacy/privacy.md`
 
 ## Contributor expectations during open release
 

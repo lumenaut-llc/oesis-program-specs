@@ -4,7 +4,7 @@
 
 Define how outside contributors can help with code, docs, hardware, and examples without creating hidden IP, privacy, or safety-governance risk.
 
-For the April 14, 2026 public preview, use `../../docs/release/2026-04-14/contributor-and-review-guide.md` as the short contributor and reviewer entrypoint.
+For the April 14, 2026 public preview, use `../../release/2026-04-14/contributor-and-review-guide.md` as the short contributor and reviewer entrypoint.
 
 ## MVP contribution rules
 
@@ -31,7 +31,7 @@ Patent posture:
 - claims-sensitive UI or copy changes must reference the claims-and-safety-language standard
 - data-model changes must identify whether they affect private, shared, public, derived, or administrative data classes
 - dataset-related contributions must identify source terms and release category
-- architecture-sensitive changes should identify the target `technical-architecture/` version and any affected subsystem `architecture.md`
+- architecture-sensitive changes should identify the target `architecture/` version and any affected subsystem `architecture.md`
 - maintainers should reject contributions that create silent new data uses
 
 ## Contribution paths

@@ -19,8 +19,8 @@ Open Environmental Sensing and Inference System
 - `interfaces.md`
 - `scripts/normalize_public_smoke_context.py`
 - `public-source-metadata-standard.md`
-- `../../docs/data-model/public-context-schema.md`
-- `../../docs/data-model/examples/raw-public-smoke.example.json`
+- `../../contracts/public-context-schema.md`
+- `../../contracts/examples/raw-public-smoke.example.json`
 - `../../legal/licenses/demo-regional-smoke-v1-notice.md`
 
 ## Content
@@ -59,7 +59,7 @@ Example raw payload:
 
 ## Adapter output shape
 
-The adapter emits the canonical public-context object defined in `../../docs/data-model/public-context-schema.md`.
+The adapter emits the canonical public-context object defined in `../../contracts/public-context-schema.md`.
 
 Initial hazard translation rules:
 

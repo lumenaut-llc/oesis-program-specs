@@ -38,7 +38,7 @@ canonical repo-root `oesis.ingest` package. From `repo/`, prefer
 `python3 -m oesis.ingest.validate_examples` and the other
 `python3 -m oesis.ingest.*` commands when writing new runbooks or automation.
 
-The first executable contract check lives in `scripts/validate_examples.py`. It validates the current example payloads in `../../docs/data-model/examples/` against the MVP expectations for:
+The first executable contract check lives in `scripts/validate_examples.py`. It validates the current example payloads in `../../contracts/examples/` against the MVP expectations for:
 - `oesis.bench-air.v1` node observations
 - parcel-state snapshots
 

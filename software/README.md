@@ -46,7 +46,7 @@ Read `NOTICE.md` before treating this subtree as a complete released software pa
 
 New subsystems and major features should:
 
-- identify the target `technical-architecture/` version they align with
+- identify the target `architecture/` version they align with
 - declare their current status relative to that version:
   `implemented`, `partial`, `docs-only`, or `planned`
 - update subsystem `architecture.md` when local design boundaries change

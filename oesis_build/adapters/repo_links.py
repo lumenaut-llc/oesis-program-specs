@@ -14,7 +14,7 @@ class RepoLinkAdapter:
     repo_blob_base: str = field(
         default_factory=lambda: os.environ.get(
             "OESIS_REPO_BLOB_BASE",
-            "https://github.com/lumenaut-llc/resilient-home-intelligence/blob/main/",
+            "https://github.com/lumenaut-llc/oesis-program-specs/blob/main/",
         )
     )
 
@@ -30,9 +30,9 @@ class RepoLinkAdapter:
         return self.repo_link(f"{release_root}/{relative_path}")
 
     def privacy_doc_link(self, relative_path: str) -> str:
-        """Build a blob URL for privacy-governance documents."""
+        """Build a blob URL for privacy documents."""
 
-        privacy_root = self.roots.repo_relative(self.roots.privacy_governance_root)
+        privacy_root = self.roots.repo_relative(self.roots.privacy_root)
         return self.repo_link(f"{privacy_root}/{relative_path}")
 
     def legal_doc_link(self, relative_path: str) -> str:

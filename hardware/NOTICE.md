@@ -30,4 +30,4 @@ Nothing in this subtree should be read as a guarantee of safety certification, f
 - `../NOTICE.md`
 - `../legal/ip.md`
 - `../legal/public-preview-scope.md`
-- `../docs/privacy-governance/claims-and-safety-language.md`
+- `../legal/privacy/claims-and-safety-language.md`

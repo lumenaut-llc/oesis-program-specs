@@ -53,7 +53,7 @@ This draft is meant to reduce blank-page friction. Replace any assumption that i
 10. Where is the earliest written record?
    - likely repo documents covering parcel-state schema, inference-engine architecture, and governance/privacy framing
    - likely candidates:
-     - `repo/docs/data-model/parcel-state-schema.md`
+     - `repo/contracts/parcel-state-schema.md`
      - `repo/software/inference-engine/architecture.md`
      - `governance-and-privacy.md`
    - `[confirm earliest specific artifact]`

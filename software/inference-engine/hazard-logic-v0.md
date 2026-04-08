@@ -20,8 +20,8 @@ Open Environmental Sensing and Inference System
 - `config/hazard_thresholds_v0.json`
 - `config/trust_gates_v0.json`
 - `scripts/infer_parcel_state.py`
-- `../../docs/data-model/parcel-context-schema.md`
-- `../../docs/data-model/evidence-mode-and-observability.md`
+- `../../contracts/parcel-context-schema.md`
+- `../../contracts/evidence-mode-and-observability.md`
 
 ## Content
 

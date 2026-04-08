@@ -19,9 +19,9 @@ Open Environmental Sensing and Inference System
 - `interfaces.md`
 - `scripts/normalize_public_weather_context.py`
 - `public-source-metadata-standard.md`
-- `../../docs/data-model/public-context-schema.md`
-- `../../docs/data-model/examples/raw-public-weather.example.json`
-- `../../docs/data-model/examples/public-context.example.json`
+- `../../contracts/public-context-schema.md`
+- `../../contracts/examples/raw-public-weather.example.json`
+- `../../contracts/examples/public-context.example.json`
 - `../../legal/licenses/demo-regional-weather-v1-notice.md`
 
 ## Content
@@ -64,7 +64,7 @@ Example raw payload:
 
 ## Adapter output shape
 
-The adapter emits the canonical public-context object defined in `../../docs/data-model/public-context-schema.md`.
+The adapter emits the canonical public-context object defined in `../../contracts/public-context-schema.md`.
 
 Initial hazard translation rules:
 

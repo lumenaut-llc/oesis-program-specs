@@ -138,10 +138,10 @@ Contributors should:
 
 - respect the current release-scope and non-release rules
 - use the applicable policy docs when changing data, privacy, or claims behavior
-- use the applicable `technical-architecture/` version when changing system boundaries, architecture posture, or subsystem alignment
+- use the applicable `architecture/` version when changing system boundaries, architecture posture, or subsystem alignment
 - avoid introducing silent new data uses
 - avoid weakening provenance, freshness, uncertainty, export, deletion, or revocation posture without explicit review
-- use `../docs/release/2026-04-14/contributor-and-review-guide.md` as the short v1 decision guide for public-facing contribution and review work
+- use `../release/2026-04-14/contributor-and-review-guide.md` as the short v1 decision guide for public-facing contribution and review work
 
 See `contribution-policy/README.md`.
 
@@ -152,11 +152,11 @@ The following documents should be treated as core governance artifacts:
 - `ip.md`
 - `dataset-release-policy.md`
 - `GOVERNANCE.md`
-- `../docs/privacy-governance/data-ownership.md`
-- `../docs/privacy-governance/privacy.md`
-- `../docs/privacy-governance/permissions-matrix.md`
-- `../docs/privacy-governance/retention-export-deletion-revocation.md`
-- `../docs/privacy-governance/claims-and-safety-language.md`
+- `../legal/privacy/data-ownership.md`
+- `../legal/privacy/privacy.md`
+- `../legal/privacy/permissions-matrix.md`
+- `../legal/privacy/retention-export-deletion-revocation.md`
+- `../legal/privacy/claims-and-safety-language.md`
 
 Changes to these docs should include:
 

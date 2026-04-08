@@ -7,6 +7,8 @@ Open Environmental Sensing and Inference System (`OESIS`) is the canonical
 system name. `Resilient Home Intelligence` (`RHI`) remains a legacy
 compatibility name during the transition.
 
+The Git repository is **`oesis-program-specs`** on GitHub (`lumenaut-llc/oesis-program-specs`), alongside the sibling **`oesis-runtime`** checkout.
+
 ## Purpose
 
 Open Environmental Sensing and Inference System is a modular, homeowner-owned
@@ -49,19 +51,18 @@ with migration pointers only.
 
 ## Repository map
 
-- `PROGRAM.md` — program overview retained after flattening the old program root
-- `PROGRAM-NOTICE.md` — program-specific notice retained after flattening the old program root
-- `INDEX.md` — program index retained at the repo root
-- `docs/` — system docs, release packet materials, schemas, calibration, and pilot playbooks
-- `technical-architecture/` — versioned technical architecture canon
-- `architecture/` — transitional architecture pointer materials
+- `program/` — program overview, notice, and index
+- `architecture/` — canonical architecture home, including current, future, and system narratives
+- `contracts/` — contract docs plus canonical schemas and example payloads
+- `release/` — release packet materials, publication controls, and launch collateral
 - `hardware/` — physical sensor nodes and installation systems
 - `software/` — subsystem docs, wrappers, and operator guides
-- `legal/` — licensing, defensive publication, governance, and contribution policy
+- `legal/` — licensing, defensive publication, governance, contribution policy, and privacy policy
+- `operations/` — pilot playbooks and operational rollout materials
 - `media/` — diagrams, renders, and images
 - `oesis_build/` — build and publication support for contracts, release, and split-repo workflows
 - `shared/` — shared standards, templates, and glossary
-- `meta/` — planning, milestones, operating notes, and repo-split execution docs
+- `meta/` — planning, milestones, operating notes, repo-split execution docs, and contribution guidance
 - `artifacts/` — generated split artifacts such as contracts, public content, and runtime evidence bundles
 - `scripts/repo_split.py` — split automation for syncing runtime assets, building bundles, and producing evidence artifacts for sibling repos
 - `oesis/` — migration pointer to the standalone `../oesis-runtime` repository
@@ -85,8 +86,8 @@ The canonical execution plan lives in `meta/repo-split-plan.md`.
 ## Start here
 
 1. Read `NOTICE.md`
-2. Read `PROGRAM.md`
-3. Read `docs/release/2026-04-14/open-source-v1-summary.md`
-4. Read `technical-architecture/README.md`
+2. Read `program/README.md`
+3. Read `release/2026-04-14/open-source-v1-summary.md`
+4. Read `architecture/README.md`
 5. Read `meta/repo-split-plan.md` if you are working on runtime/site extraction or bundle boundaries
 6. Use `shared/templates/` when starting a new subsystem or document

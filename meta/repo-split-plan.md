@@ -10,8 +10,8 @@ Make the current monorepo easier to navigate by separating:
 
 This plan follows the current boundary model already described in:
 
-- `technical-architecture/v0.1/component-boundaries.md`
-- `technical-architecture/v0.1/implementation-posture.md`
+- `architecture/current/component-boundaries.md`
+- `architecture/current/implementation-posture.md`
 
 ## Target repos
 
@@ -39,18 +39,19 @@ Purpose:
 
 Primary contents:
 
-- `PROGRAM.md`, `PROGRAM-NOTICE.md`, and `INDEX.md`
-- `docs/`
-- `technical-architecture/`
+- `program/`
+- `contracts/`
 - `architecture/`
+- `release/`
 - `hardware/`
 - `software/`
 - `legal/`
+- `operations/`
 - `media/`
 - `shared/`
 - `meta/`
 - `oesis_build/`
-- repo-level docs such as `README.md`, `NOTICE.md`, `CONTRIBUTING.md`, and `LICENSES.md`
+- repo-level docs such as `README.md`, `NOTICE.md`, and `LICENSES.md`, plus `meta/CONTRIBUTING.md`
 
 ### Ownership: `oesis-public-site`
 
@@ -131,20 +132,21 @@ Must not own:
 
 ### Move to `oesis-program-specs`
 
-- `PROGRAM.md`, `PROGRAM-NOTICE.md`, and `INDEX.md`
-- `docs/`
-- `technical-architecture/`
+- `program/`
+- `contracts/`
 - `architecture/`
+- `release/`
 - `hardware/`
 - `software/`
 - `legal/`
+- `operations/`
 - `media/`
 - `shared/`
 - `meta/`
 - `oesis_build/`
 - `README.md`
 - `NOTICE.md`
-- `CONTRIBUTING.md`
+- `meta/CONTRIBUTING.md`
 - `LICENSES.md`
 
 ### Move to `oesis-public-site`
@@ -204,7 +206,7 @@ Consumed by:
 ### Phase 0: prepare inside the monorepo
 
 - document target repo boundaries
-- inventory runtime dependencies on `docs/`, `technical-architecture/`, `hardware/`, `software/`, `legal/`, `media/`, `shared/`, `meta/`, and `sites/`
+- inventory runtime dependencies on `contracts/`, `architecture/`, `release/`, `hardware/`, `software/`, `legal/`, `operations/`, `media/`, `shared/`, `meta/`, and `sites/`
 - define bundle formats and ownership rules
 - stop adding new cross-tree relative-path dependencies
 
@@ -250,6 +252,6 @@ The split is healthy when:
 Now that extraction is complete:
 
 - treat sibling repo `../oesis-runtime` as the runtime source of truth
-- treat `docs/data-model/`, `technical-architecture/`, `docs/privacy-governance/`, and `legal/` as the specification and policy source of truth
+- treat `contracts/`, `architecture/`, `legal/privacy/`, and `legal/` as the specification and policy source of truth
 - treat sibling repo `../oesis-public-site` as the canonical publication surface
 - treat local `oesis/` and `sites/public-preview/` paths as migration pointers only

@@ -71,7 +71,7 @@
 ## Data contracts
 
 Primary input contract:
-- parcel-state snapshot from `docs/data-model/parcel-state-schema.md`
+- parcel-state snapshot from `contracts/parcel-state-schema.md`
 
 Primary response shape for current state:
 - `parcel_id`
