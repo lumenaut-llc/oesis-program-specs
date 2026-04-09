@@ -24,6 +24,8 @@ For build and test planning, treat **`v0.1`** as this narrow executable slice:
 
 Executable checks for this slice live in the sibling runtime repository `../oesis-runtime` (`make oesis-check`, `make oesis-http-check`, `make oesis-accept`).
 
+**Explicitly out of scope** for this frozen executable slice (do not block `v0.1` on these): other observation families (`mast-lite`, `flood-node`, `weather-pm-mast`, `thermal-pod`), a mature shared-map product surface, full consent/rights/revocation UX, or required live Wi-Fi transport from the node (serial capture and local processing are enough). See `v0.1-acceptance-criteria.md` for the software acceptance checklist.
+
 ## Why this file exists
 
 The full `v0.1` architecture includes objects that are `implemented`,

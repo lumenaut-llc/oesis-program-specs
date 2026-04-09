@@ -11,6 +11,13 @@ and what to run to confirm the boundary is healthy.
 This repository (`oesis-program-specs`) holds
 architecture, contracts, legal, release, and operator documentation.
 
+## Architecture mapping (program-specs)
+
+Frozen `v0.1` runtime shape and acceptance are written down under:
+
+- `architecture/current/v0.1-runtime-modules.md`
+- `architecture/current/v0.1-acceptance-criteria.md`
+
 ## Runtime layout (sibling repo)
 
 - **Examples and inference config** — `oesis/assets/examples/` and

@@ -35,12 +35,15 @@ flowchart LR
 
 ## Canonical implementation posture
 
-- sibling repo `../oesis-runtime` is the canonical Python implementation tree for the
-  current reference services
-- `../../software/*/scripts/*.py` remains the compatibility layer for docs,
-  smoke checks, and operator-facing commands
-- `../../software/README.md` and `../../software/operator-quickstart.md` remain
-  the main execution guides
+- Sibling repo **`../oesis-runtime`** is the canonical Python implementation tree
+  for the current reference services (`oesis.*` package).
+- Program-specs **`../../software/`** tree remains the **interface and
+  architecture prose** for ingest, inference, parcel platform, and shared map;
+  runnable entrypoints are invoked from the runtime repo (see
+  `v0.1-runtime-modules.md` and `v0.1-acceptance-criteria.md`).
+- **`../../software/README.md`** and **`../../software/operator-quickstart.md`**
+  remain the main operator-facing execution guides (they proxy or reference
+  `make oesis-*` in the runtime checkout).
 
 ## Stage map
 
@@ -64,6 +67,8 @@ Entry surfaces:
 - `python3 -m oesis.ingest.validate_examples`
 - `python3 -m oesis.ingest.ingest_packet`
 - `python3 -m oesis.ingest.serve_ingest_api`
+
+See also `v0.1-runtime-modules.md` and `v0.1-acceptance-criteria.md`.
 
 ### Canonical observations and context
 
@@ -94,6 +99,7 @@ Entry surfaces:
 
 Entry surfaces:
 
+- `make oesis-accept`
 - `make oesis-check`
 - `make oesis-http-check`
 - `python3 -m oesis.parcel_platform.serve_parcel_api`

@@ -39,11 +39,13 @@ element.
 1. `technical-philosophy.md`
 2. `reference-stack.md`
 3. `minimum-functioning-v0.1.md`
-4. `architecture-object-map.md`
-5. `implementation-posture.md`
-6. `component-boundaries.md`
-7. `milestone-roadmap.md`
-8. `pre-1.0-version-progression.md`
+4. `v0.1-runtime-modules.md` — runtime package map (`../oesis-runtime`)
+5. `v0.1-acceptance-criteria.md` — CLI/HTTP acceptance for the frozen slice
+6. `architecture-object-map.md`
+7. `implementation-posture.md`
+8. `component-boundaries.md`
+9. `milestone-roadmap.md`
+10. `pre-1.0-version-progression.md`
 
 ## Primary source alignment
 
@@ -52,7 +54,7 @@ element.
 - `../../architecture/system/technical-philosophy-and-architecture.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
 - `../../software/README.md`
-- `../../release/v.0.1/implementation-status-matrix.md`
+- `../../release/2026-04-14/implementation-status-matrix.md`
 
 ## Contributor rule
 
