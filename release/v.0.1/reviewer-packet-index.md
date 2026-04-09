@@ -154,6 +154,8 @@ Before sending any packet, confirm:
 
 ## Website rule
 
-The public preview site app in the sibling repo `../oesis-public-site` should
-only link materials from Packet 1 and should continue to use the release-owned
-publication controls under `release/2026-04-14/site/`.
+The public preview site app in the sibling workspace `../../oesis-public-site` should
+only link materials from Packet 1. Publication allowlists and anchors live in that
+repo (`src/data/publicationPolicy.ts`, backed by `src/generated/publicContentBundle.ts`),
+generated from program-specs `../../artifacts/public-content-bundle/public-content-bundle.json`,
+and remain bounded by `../../../legal/public-preview-scope.md`.

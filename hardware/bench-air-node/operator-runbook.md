@@ -10,7 +10,7 @@ Provide the shortest repeatable path from freshly wired bench hardware to a loca
 - SHT45 connected first
 - BME680 ready to add after the first scan passes
 - Arduino IDE or equivalent ESP32 workflow installed
-- local repo available so `python3 scripts/ingest_packet.py` can be run
+- sibling `oesis-runtime` checkout installed (`pip install -e .`) so `python3 -m oesis.ingest.ingest_packet` works
 
 ## Arduino libraries
 
@@ -65,6 +65,7 @@ Optional before flashing:
 
 - copy `firmware/bench_air_node_serial_json/secrets.example.h` to `firmware/bench_air_node_serial_json/secrets.h`
 - fill in your Wi-Fi credentials there if you want real UTC timestamps via NTP
+- optional: set `BENCH_AIR_INGEST_URL` to your ingest service (see **Optional HTTP ingest over Wi‑Fi** below) and `BENCH_AIR_PARCEL_ID` to match your parcel context
 
 Expected boot comments:
 
@@ -82,23 +83,23 @@ Expected packet behavior:
 
 ## Stage 4: validate locally
 
-From `repo/software/ingest-service/` run:
+From the `oesis-runtime` repository root (after `pip install -e .`):
 
 ```bash
-python3 scripts/ingest_packet.py packet.json
+python3 -m oesis.ingest.ingest_packet packet.json --parcel-id parcel_demo_001
 ```
 
 If you prefer stdin:
 
 ```bash
-python3 scripts/ingest_packet.py < packet.json
+python3 -m oesis.ingest.ingest_packet - --parcel-id parcel_demo_001 < packet.json
 ```
 
 If you captured a whole serial monitor log with `#` boot lines, extract the newest packet first:
 
 ```bash
-python3 scripts/extract_latest_packet.py serial.log --output packet.json
-python3 scripts/ingest_packet.py packet.json
+python3 -m oesis.ingest.extract_latest_packet serial.log --output packet.json
+python3 -m oesis.ingest.ingest_packet packet.json --parcel-id parcel_demo_001
 ```
 
 Recommended macOS capture flow:
@@ -108,18 +109,36 @@ cd ../../hardware/bench-air-node/firmware
 ./tools/capture_serial.sh /dev/cu.usbmodem101 serial.log
 ```
 
+Continuous forward (USB serial → reference ingest API, no log file): from `oesis-runtime` root, `pip install -e ".[serial-bridge]"`, start `python3 -m oesis.ingest.serve_ingest_api`, then run `python3 -m oesis.ingest.serial_bridge --serial-port /dev/cu.usbmodem101 --parcel-id parcel_demo_001` (see sibling repo `README.md`).
+
+### Optional HTTP ingest over Wi‑Fi (no USB bridge)
+
+The serial JSON sketch can **POST each packet** to the reference ingest API when Wi‑Fi credentials and ingest URL are set in `secrets.h`:
+
+1. On a machine reachable from the ESP32 (same LAN), run ingest bound to all interfaces, e.g. from `oesis-runtime` root:  
+   `python3 -m oesis.ingest.serve_ingest_api --host 0.0.0.0 --port 8787`
+2. In `secrets.h`, set `BENCH_AIR_WIFI_SSID` / `BENCH_AIR_WIFI_PASSWORD`, `BENCH_AIR_INGEST_URL` to `http://<that-machine-LAN-IP>:8787/v1/ingest/node-packets`, and `BENCH_AIR_PARCEL_ID` to the parcel id you use downstream (must match `X-OESIS-Parcel-Id` expectations).
+3. Flash and open the serial monitor: you should see `# HTTP ingest enabled for POST /v1/ingest/node-packets` after a successful Wi‑Fi connect, plus one JSON line per interval as before.
+
+Notes:
+
+- **Plain HTTP on LAN only** in this reference firmware; HTTPS/TLS is not implemented here.
+- If `BENCH_AIR_INGEST_URL` is set but Wi‑Fi SSID is empty, the sketch disables POST and prints a `#` comment explaining why.
+- Ensure the host firewall allows TCP `8787` from the device. `health.last_error` may show `http_post_failed`, `http_bad_status`, or `wifi_reconnect_failed` when uploads fail.
+- To confirm the service is receiving packets in a browser, open **`http://<ingest-host>:8787/v1/ingest/live`** on the ingest machine (same URL pattern if you use another port).
+
 ## Pass criteria
 
 - scanner finds `0x44` first
 - scanner finds `0x44` plus `0x76` or `0x77` after BME680 is added
 - serial JSON sketch prints one valid packet line every 5 seconds
-- `python3 scripts/ingest_packet.py packet.json` succeeds
+- `python3 -m oesis.ingest.ingest_packet packet.json --parcel-id parcel_demo_001` succeeds
 - normalized output includes `temperature_c_primary`, `relative_humidity_pct_primary`, `pressure_hpa`, and `gas_resistance_ohm`
 
 ## Known first-build limitations
 
 - `observed_at` remains a placeholder if Wi-Fi time sync is not configured or fails
-- Wi-Fi is only used here for optional time sync, not packet transport
+- Wi-Fi is used for optional NTP and, when `BENCH_AIR_INGEST_URL` is set, optional **HTTP POST** to ingest (still no TLS in this sketch)
 - gas resistance is useful for trend inspection, not calibrated AQI
 
 ## If something fails
@@ -127,5 +146,5 @@ cd ../../hardware/bench-air-node/firmware
 - no `0x44`: recheck SHT45 power, solder, and `GPIO8`/`GPIO9` wiring
 - no BME680 address: recheck `SDI` to `SDA`, `SCK` to `SCL`, and power
 - JSON does not validate: copy a full packet line, not a boot comment
-- mixed serial log is messy: run `python3 scripts/extract_latest_packet.py serial.log --output packet.json`
+- mixed serial log is messy: run `python3 -m oesis.ingest.extract_latest_packet serial.log --output packet.json`
 - only one sensor reports `present: false`: inspect that sensor’s solder joints and bus wiring

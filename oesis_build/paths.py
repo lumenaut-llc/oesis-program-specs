@@ -24,7 +24,7 @@ class BuildRoots:
         return path.relative_to(self.repo_root).as_posix()
 
 
-def build_roots(*, release_tag: str = "2026-04-14") -> BuildRoots:
+def build_roots(*, release_tag: str = "v1.0") -> BuildRoots:
     """Discover the current repository and program roots."""
 
     repo_root = Path(__file__).resolve().parents[1]

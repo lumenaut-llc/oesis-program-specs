@@ -4,7 +4,7 @@
 
 Define how outside contributors can help with code, docs, hardware, and examples without creating hidden IP, privacy, or safety-governance risk.
 
-For the April 14, 2026 public preview, use `../../release/2026-04-14/contributor-and-review-guide.md` as the short contributor and reviewer entrypoint.
+For the current public preview packet, use `../../release/v1.0/contributor-and-review-guide.md` as the short contributor and reviewer entrypoint.
 
 ## MVP contribution rules
 

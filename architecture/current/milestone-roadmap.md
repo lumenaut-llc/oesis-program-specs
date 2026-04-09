@@ -19,10 +19,24 @@ Current implementation-aligned milestone roadmap.
 - keep one parcel identity, one ingest path, one inference layer, and one
   parcel-facing view
 - add new hardware families only when they preserve the same system contract
+- do not create a new `v0.x` for every added node or element; reserve new
+  pre-`1.0` versions for accepted capability bundles
 - do not let milestone language outrun the current
   `implemented` / `partial` / `docs-only` / `planned` posture
 - keep privacy, provenance, confidence, and claims boundaries inside every
   milestone definition
+
+## Relationship to pre-1.0 versions
+
+These milestones describe staged growth inside and beyond the current accepted
+slice.
+
+They should not be read as one-version-per-milestone automatically. A milestone
+becomes a new `v0.x` only when it changes the accepted runnable reference slice
+in a way that materially expands the system boundary.
+
+Use `pre-1.0-version-progression.md` to decide when that promotion bar has been
+met.
 
 ## Milestone 1: one parcel, one node
 
@@ -230,5 +244,6 @@ Use it as a separate research lane until:
 - `minimum-functioning-v0.1.md`
 - `implementation-posture.md`
 - `component-boundaries.md`
+- `pre-1.0-version-progression.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
-- `../../release/2026-04-14/implementation-status-matrix.md`
+- `../../release/v.0.1/implementation-status-matrix.md`

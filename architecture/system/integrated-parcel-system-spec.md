@@ -6,7 +6,7 @@ Define the single parcel-level system design that connects the current hardware 
 
 ## Timeline posture
 
-This spec is optimized for a strong timeline and a phase-1 homeowner product.
+This spec is optimized for a strong timeline and a phase-1 single-parcel release.
 
 - keep one canonical Python implementation tree
 - keep existing docs-facing script paths stable

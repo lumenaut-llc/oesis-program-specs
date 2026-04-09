@@ -9,12 +9,7 @@
     "sharing",
     "rights_requests",
     "access_events",
-    "parcel_state",
-    "house_state",
-    "house_capability",
-    "control_compatibility",
-    "intervention_events",
-    "verification_outcomes"
+    "parcel_state"
   ],
   "additionalProperties": false,
   "properties": {
@@ -37,21 +32,6 @@
     },
     "parcel_state": {
       "type": ["object", "null"]
-    },
-    "house_state": {
-      "type": ["object", "null"]
-    },
-    "house_capability": {
-      "type": ["object", "null"]
-    },
-    "control_compatibility": {
-      "type": ["object", "null"]
-    },
-    "intervention_events": {
-      "type": "array"
-    },
-    "verification_outcomes": {
-      "type": "array"
     }
   }
 }

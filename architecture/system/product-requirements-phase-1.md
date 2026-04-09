@@ -2,11 +2,11 @@
 
 ## Purpose
 
-Define the current `v1` homeowner product that delivers immediate value with one participating home and no neighborhood dependency.
+Define the current `v1` single-parcel release that delivers immediate value with one participating home and no neighborhood dependency.
 
 ## Product statement
 
-The current `v1` product helps a homeowner understand current home and parcel conditions, why those conditions matter, and what actions to consider during environmental disruption.
+The current `v1` release helps occupants understand current home and parcel conditions, why those conditions matter, and what actions to consider during environmental disruption.
 
 ## Primary product promise
 

@@ -21,7 +21,7 @@ Program-level system narrative and top-level operating model.
 - `phase-roadmap.md` translates the vision into staged execution.
 - `feature-matrix-by-use-case.md` compares use cases, sensors, outputs, strengths, and constraints.
 - `technical-philosophy-and-architecture.md` defines the top-level technical posture, architectural rules, and current reference implementation shape.
-- `product-requirements-phase-1.md` defines the first homeowner-focused product slice.
+- `product-requirements-phase-1.md` defines the first single-parcel release slice.
 - `block-level-operating-model.md` defines how shared block intelligence should work.
 - `integrated-parcel-system-spec.md` defines the unified parcel-kit architecture and cross-node integration rules.
 - `../../media/diagrams/prototype-integration-diagram-pack.md` provides a shared diagram pack for prototype integration, architecture avenues, and design possibilities.

@@ -17,21 +17,48 @@ PROGRAM_ROOT = REPO_ROOT
 CONTRACTS_ROOT = PROGRAM_ROOT / "contracts"
 CONTRACT_EXAMPLES_ROOT = CONTRACTS_ROOT / "examples"
 CONTRACT_SCHEMAS_ROOT = CONTRACTS_ROOT / "schemas"
+CONTRACT_V10_ROOT = CONTRACTS_ROOT / "v1.0"
+CONTRACT_V10_EXAMPLES_ROOT = CONTRACT_V10_ROOT / "examples"
+CONTRACT_V10_SCHEMAS_ROOT = CONTRACT_V10_ROOT / "schemas"
 INFERENCE_CONFIG_ROOT = PROGRAM_ROOT / "software" / "inference-engine" / "config"
+INFERENCE_CONFIG_V10_ROOT = INFERENCE_CONFIG_ROOT / "v1.0"
 RUNTIME_REPO_ROOT = Path(os.environ.get("OESIS_RUNTIME_REPO_DIR", str(REPO_ROOT.parent / "oesis-runtime"))).expanduser().resolve()
 PUBLIC_SITE_REPO_ROOT = Path(os.environ.get("OESIS_PUBLIC_SITE_REPO_DIR", str(REPO_ROOT.parent / "oesis-public-site"))).expanduser().resolve()
 ARTIFACTS_ROOT = REPO_ROOT / "artifacts"
 RUNTIME_REPO_ASSETS_ROOT = RUNTIME_REPO_ROOT / "oesis" / "assets"
 RUNTIME_REPO_EXAMPLES_ROOT = RUNTIME_REPO_ASSETS_ROOT / "examples"
 RUNTIME_REPO_INFERENCE_CONFIG_ROOT = RUNTIME_REPO_ASSETS_ROOT / "config" / "inference"
+RUNTIME_REPO_V10_ROOT = RUNTIME_REPO_ASSETS_ROOT / "v1.0"
+RUNTIME_REPO_V10_EXAMPLES_ROOT = RUNTIME_REPO_V10_ROOT / "examples"
+RUNTIME_REPO_V10_INFERENCE_CONFIG_ROOT = RUNTIME_REPO_V10_ROOT / "config" / "inference"
 PUBLIC_SITE_GENERATED_ROOT = PUBLIC_SITE_REPO_ROOT / "src" / "generated"
 
-PUBLIC_RELEASE_TAG = "2026-04-14"
+DEFAULT_PUBLIC_RELEASE_TAG = "v1.0"
 PROGRAM_ROOT_REL = ""
-RELEASE_ROOT_REL = f"{PROGRAM_ROOT_REL}release/{PUBLIC_RELEASE_TAG}/"
 PRIVACY_ROOT_REL = f"{PROGRAM_ROOT_REL}legal/privacy/"
 LEGAL_ROOT_REL = f"{PROGRAM_ROOT_REL}legal/"
 REPO_BLOB_BASE = "https://github.com/lumenaut-llc/oesis-program-specs/blob/main/"
+
+
+def release_root_rel(tag: str) -> str:
+    return f"{PROGRAM_ROOT_REL}release/{tag}/"
+
+
+def default_public_release_title(tag: str) -> str:
+    if tag == "v1.0":
+        return "OESIS public preview v1.0 packet"
+    if tag == "2026-04-14":
+        return "April 14, 2026 public preview"
+    return f"OESIS public preview ({tag})"
+
+
+def default_public_release_summary(tag: str) -> str:
+    if tag == "v1.0":
+        return (
+            "Release-scoped public packet and publication boundary for the Astro preview site; "
+            "canonical markdown roots under release/v1.0/."
+        )
+    return "Current release-scoped public packet and publication boundary for the Astro preview site."
 
 
 def now_iso() -> str:
@@ -50,10 +77,24 @@ def copy_tree(src: Path, dst: Path) -> None:
     shutil.copytree(src, dst, dirs_exist_ok=False)
 
 
+def overlay_tree(src: Path, dst: Path) -> None:
+    if not src.exists():
+        return
+    dst.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(src, dst, dirs_exist_ok=True)
+
+
 def copy_files(src_paths: list[Path], dst_dir: Path) -> None:
     dst_dir.mkdir(parents=True, exist_ok=True)
     for src in src_paths:
         shutil.copy2(src, dst_dir / src.name)
+
+
+def copy_root_files(src_dir: Path, dst_dir: Path) -> None:
+    dst_dir.mkdir(parents=True, exist_ok=True)
+    for src in sorted(src_dir.iterdir()):
+        if src.is_file():
+            shutil.copy2(src, dst_dir / src.name)
 
 
 def should_skip_path(path: Path) -> bool:
@@ -117,27 +158,50 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def sync_runtime_assets() -> None:
+def normalize_lane(lane: str) -> str:
+    # Keep the split tooling aligned with the current runtime policy:
+    # one frozen `v0.1` baseline plus one additive future lane until a second
+    # accepted pre-1.0 slice is real enough to justify broader lane support.
+    if lane not in {"v0.1", "v1.0"}:
+        raise SystemExit(f"unsupported lane: {lane}")
+    return lane
+
+
+def sync_runtime_assets(*, lane: str = "v0.1") -> None:
+    lane = normalize_lane(lane)
     if not RUNTIME_REPO_ROOT.exists():
         raise SystemExit(f"runtime repo not found: {RUNTIME_REPO_ROOT}")
-    copy_tree(CONTRACT_EXAMPLES_ROOT, RUNTIME_REPO_EXAMPLES_ROOT)
-    copy_tree(INFERENCE_CONFIG_ROOT, RUNTIME_REPO_INFERENCE_CONFIG_ROOT)
+    if lane == "v0.1":
+        copy_tree(CONTRACT_EXAMPLES_ROOT, RUNTIME_REPO_EXAMPLES_ROOT)
+        ensure_clean_dir(RUNTIME_REPO_INFERENCE_CONFIG_ROOT)
+        copy_root_files(INFERENCE_CONFIG_ROOT, RUNTIME_REPO_INFERENCE_CONFIG_ROOT)
+        return
+
+    ensure_clean_dir(RUNTIME_REPO_V10_EXAMPLES_ROOT)
+    overlay_tree(CONTRACT_V10_EXAMPLES_ROOT, RUNTIME_REPO_V10_EXAMPLES_ROOT)
+    ensure_clean_dir(RUNTIME_REPO_V10_INFERENCE_CONFIG_ROOT)
+    overlay_tree(INFERENCE_CONFIG_V10_ROOT, RUNTIME_REPO_V10_INFERENCE_CONFIG_ROOT)
 
 
-def build_contracts_bundle(destination: Path) -> Path:
+def build_contracts_bundle(destination: Path, *, lane: str = "v0.1") -> Path:
+    lane = normalize_lane(lane)
     ensure_clean_dir(destination)
     schemas_dst = destination / "schemas"
     examples_dst = destination / "examples"
     copy_tree(CONTRACT_SCHEMAS_ROOT, schemas_dst)
     copy_tree(CONTRACT_EXAMPLES_ROOT, examples_dst)
+    if lane == "v1.0":
+        overlay_tree(CONTRACT_V10_SCHEMAS_ROOT, schemas_dst)
+        overlay_tree(CONTRACT_V10_EXAMPLES_ROOT, examples_dst)
 
-    example_names = sorted(path.name for path in CONTRACT_EXAMPLES_ROOT.glob("*.json"))
-    schema_names = sorted(path.name for path in CONTRACT_SCHEMAS_ROOT.glob("*.json"))
+    example_names = sorted(path.name for path in examples_dst.glob("*.json"))
+    schema_names = sorted(path.name for path in schemas_dst.glob("*.json"))
     manifest = {
-        "bundle_version": PUBLIC_RELEASE_TAG,
+        "bundle_version": DEFAULT_PUBLIC_RELEASE_TAG,
         "generated_at": now_iso(),
         "source_repo": "oesis-program-specs",
         "source_commit": git_head(),
+        "lane": lane,
         "examples": {name.removesuffix(".example.json"): f"examples/{name}" for name in example_names},
         "schemas": {name.removesuffix(".schema.json"): f"schemas/{name}" for name in schema_names},
         "schema_version_set": ["oesis.bench-air.v1"],
@@ -145,22 +209,42 @@ def build_contracts_bundle(destination: Path) -> Path:
             "runtime_min_version": "0.1.0",
             "runtime_max_version": None,
         },
+        "source_roots": {
+            "examples": [
+                repo_relative(CONTRACT_EXAMPLES_ROOT),
+                repo_relative(CONTRACT_V10_EXAMPLES_ROOT),
+            ] if lane == "v1.0" else [repo_relative(CONTRACT_EXAMPLES_ROOT)],
+            "schemas": [
+                repo_relative(CONTRACT_SCHEMAS_ROOT),
+                repo_relative(CONTRACT_V10_SCHEMAS_ROOT),
+            ] if lane == "v1.0" else [repo_relative(CONTRACT_SCHEMAS_ROOT)],
+        },
     }
     write_json(destination / "manifest.json", manifest)
     return destination
 
 
-def build_public_content_bundle(destination: Path) -> Path:
+def build_public_content_bundle(
+    destination: Path,
+    *,
+    release_tag: str = DEFAULT_PUBLIC_RELEASE_TAG,
+    release_title: str | None = None,
+    release_summary: str | None = None,
+) -> Path:
     ensure_clean_dir(destination)
 
+    rr = release_root_rel(release_tag)
+    title = release_title if release_title is not None else default_public_release_title(release_tag)
+    summary = release_summary if release_summary is not None else default_public_release_summary(release_tag)
+
     bundle = {
-        "bundle_version": PUBLIC_RELEASE_TAG,
+        "bundle_version": release_tag,
         "generated_at": now_iso(),
         "source_repo": "oesis-program-specs",
         "source_commit": git_head(),
         "repoBlobBase": repo_blob_base(),
         "programRoot": PROGRAM_ROOT_REL,
-        "releaseRoot": RELEASE_ROOT_REL,
+        "releaseRoot": rr,
         "privacyGovernanceRoot": PRIVACY_ROOT_REL,
         "legalRoot": LEGAL_ROOT_REL,
         "approvedAnchors": [
@@ -173,23 +257,23 @@ def build_public_content_bundle(destination: Path) -> Path:
             "/#diagrams",
         ],
         "approvedSourceRoots": [
-            RELEASE_ROOT_REL,
+            rr,
             PRIVACY_ROOT_REL,
             f"{PROGRAM_ROOT_REL}architecture/",
             LEGAL_ROOT_REL,
         ],
         "excludedFromPublicNavigation": [
-            f"{RELEASE_ROOT_REL}reviewer-packet-index.md",
-            f"{RELEASE_ROOT_REL}publish-internal-map.md",
-            f"{RELEASE_ROOT_REL}preview-execution-plan.md",
-            f"{RELEASE_ROOT_REL}launch-readiness-checklist.md",
+            f"{rr}reviewer-packet-index.md",
+            f"{rr}publish-internal-map.md",
+            f"{rr}preview-execution-plan.md",
+            f"{rr}launch-readiness-checklist.md",
             f"{LEGAL_ROOT_REL}counsel-questions/",
             f"{LEGAL_ROOT_REL}provisional-*",
         ],
         "activePublicRelease": {
-            "id": PUBLIC_RELEASE_TAG,
-            "title": "April 14, 2026 public preview",
-            "summary": "Current release-scoped public packet and publication boundary for the Astro preview site.",
+            "id": release_tag,
+            "title": title,
+            "summary": summary,
         },
     }
     write_json(destination / "public-content-bundle.json", bundle)
@@ -230,7 +314,7 @@ def build_runtime_evidence_bundle(destination: Path) -> Path:
         write_text(destination / f"{command_name}.stderr.log", result["stderr"])
 
     manifest = {
-        "bundle_version": PUBLIC_RELEASE_TAG,
+        "bundle_version": DEFAULT_PUBLIC_RELEASE_TAG,
         "generated_at": now_iso(),
         "source_repo": "oesis-runtime",
         "source_commit": git_head(),
@@ -331,13 +415,28 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Utility commands for the OESIS repo split.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    subparsers.add_parser("sync-runtime-assets", help="Copy runtime examples and config into oesis-owned assets.")
+    sync_runtime = subparsers.add_parser(
+        "sync-runtime-assets",
+        help="Copy runtime examples and config into oesis-owned assets.",
+    )
+    sync_runtime.add_argument(
+        "--lane",
+        default="v0.1",
+        choices=("v0.1", "v1.0"),
+        help="Version lane to sync. Defaults to the frozen v0.1 lane.",
+    )
 
     contracts = subparsers.add_parser("build-contracts-bundle", help="Build the contracts bundle artifact.")
     contracts.add_argument(
         "--destination",
         default=str(ARTIFACTS_ROOT / "contracts-bundle"),
         help="Output directory for the contracts bundle.",
+    )
+    contracts.add_argument(
+        "--lane",
+        default="v0.1",
+        choices=("v0.1", "v1.0"),
+        help="Version lane to bundle. Defaults to the frozen v0.1 lane.",
     )
 
     runtime = subparsers.add_parser("build-runtime-evidence-bundle", help="Build the runtime evidence bundle artifact.")
@@ -352,6 +451,21 @@ def parse_args() -> argparse.Namespace:
         "--destination",
         default=str(ARTIFACTS_ROOT / "public-content-bundle"),
         help="Output directory for the public content bundle.",
+    )
+    public.add_argument(
+        "--release-tag",
+        default=DEFAULT_PUBLIC_RELEASE_TAG,
+        help="Release folder name under release/ (default: v1.0).",
+    )
+    public.add_argument(
+        "--release-title",
+        default=None,
+        help="activePublicRelease.title override (default: derived from tag).",
+    )
+    public.add_argument(
+        "--release-summary",
+        default=None,
+        help="activePublicRelease.summary override (default: derived from tag).",
     )
 
     extract_site = subparsers.add_parser("extract-site-repo", help="Create the extracted public-site repository.")
@@ -375,11 +489,11 @@ def main() -> int:
     args = parse_args()
 
     if args.command == "sync-runtime-assets":
-        sync_runtime_assets()
-        print(RUNTIME_REPO_ASSETS_ROOT)
+        sync_runtime_assets(lane=args.lane)
+        print(RUNTIME_REPO_ASSETS_ROOT if args.lane == "v0.1" else RUNTIME_REPO_V10_ROOT)
         return 0
     if args.command == "build-contracts-bundle":
-        destination = build_contracts_bundle(Path(args.destination).resolve())
+        destination = build_contracts_bundle(Path(args.destination).resolve(), lane=args.lane)
         print(destination)
         return 0
     if args.command == "build-runtime-evidence-bundle":
@@ -387,7 +501,12 @@ def main() -> int:
         print(destination)
         return 0
     if args.command == "build-public-content-bundle":
-        destination = build_public_content_bundle(Path(args.destination).resolve())
+        destination = build_public_content_bundle(
+            Path(args.destination).resolve(),
+            release_tag=args.release_tag,
+            release_title=args.release_title,
+            release_summary=args.release_summary,
+        )
         print(destination)
         return 0
     if args.command == "extract-site-repo":

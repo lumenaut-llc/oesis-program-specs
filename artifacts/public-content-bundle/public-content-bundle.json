@@ -1,8 +1,8 @@
 {
   "activePublicRelease": {
-    "id": "2026-04-14",
-    "summary": "Current release-scoped public packet and publication boundary for the Astro preview site.",
-    "title": "April 14, 2026 public preview"
+    "id": "v1.0",
+    "summary": "Release-scoped public packet and publication boundary for the Astro preview site; canonical markdown roots under release/v1.0/.",
+    "title": "OESIS public preview v1.0 packet"
   },
   "approvedAnchors": [
     "/#snapshot",
@@ -14,26 +14,26 @@
     "/#diagrams"
   ],
   "approvedSourceRoots": [
-    "release/2026-04-14/",
+    "release/v1.0/",
     "legal/privacy/",
     "architecture/",
     "legal/"
   ],
-  "bundle_version": "2026-04-14",
+  "bundle_version": "v1.0",
   "excludedFromPublicNavigation": [
-    "release/2026-04-14/reviewer-packet-index.md",
-    "release/2026-04-14/publish-internal-map.md",
-    "release/2026-04-14/preview-execution-plan.md",
-    "release/2026-04-14/launch-readiness-checklist.md",
+    "release/v1.0/reviewer-packet-index.md",
+    "release/v1.0/publish-internal-map.md",
+    "release/v1.0/preview-execution-plan.md",
+    "release/v1.0/launch-readiness-checklist.md",
     "legal/counsel-questions/",
     "legal/provisional-*"
   ],
-  "generated_at": "2026-04-07T22:28:22Z",
+  "generated_at": "2026-04-08T21:30:00Z",
   "legalRoot": "legal/",
   "privacyGovernanceRoot": "legal/privacy/",
   "programRoot": "",
-  "releaseRoot": "release/2026-04-14/",
+  "releaseRoot": "release/v1.0/",
   "repoBlobBase": "https://github.com/lumenaut-llc/oesis-program-specs/blob/main/",
-  "source_commit": "a8ab86ab272850387d876ac2c7641fbe17b288c3",
+  "source_commit": "d5ef94dc97d60ee81fd428d2ddd595bc909dd7a6",
   "source_repo": "oesis-program-specs"
 }

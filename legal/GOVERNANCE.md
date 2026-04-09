@@ -141,7 +141,7 @@ Contributors should:
 - use the applicable `architecture/` version when changing system boundaries, architecture posture, or subsystem alignment
 - avoid introducing silent new data uses
 - avoid weakening provenance, freshness, uncertainty, export, deletion, or revocation posture without explicit review
-- use `../release/2026-04-14/contributor-and-review-guide.md` as the short v1 decision guide for public-facing contribution and review work
+- use `../release/v1.0/contributor-and-review-guide.md` as the short v1 decision guide for public-facing contribution and review work
 
 See `contribution-policy/README.md`.
 

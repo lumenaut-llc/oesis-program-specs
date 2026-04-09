@@ -29,13 +29,30 @@ This matrix exists so reviewers do not confuse:
 - `planned`
   Intentionally on the roadmap, but not yet implemented in the current reference path.
 
+## Version note
+
+This matrix tracks maturity, not release numbering by itself.
+
+Use it together with the versioned architecture docs this way:
+
+- version numbers such as `v0.1` or a future `v0.x` identify accepted product
+  slices
+- status labels identify how complete each surface is within or around those
+  slices
+
+Do not treat every `partial`, `docs-only`, or newly added element as requiring a
+new version number.
+
 ## Current snapshot
 
-This matrix reflects the current local reference state after these checks passed from `repo/`:
+This matrix reflects the current local reference state after these checks passed from the **`oesis-runtime`** checkout (sibling repo; Python **3.11+** per `pyproject.toml`):
 
 - `make oesis-validate`
 - `make oesis-check`
 - `make oesis-http-check`
+- `make oesis-accept`
+
+**2026-04-08 — v0.1 completeness review:** the commands above were re-run successfully on Python 3.11.1, along with `make oesis-v10-accept`, `make oesis-v10-check`, and `make oesis-v10-http-check`. Hardware-side, `python3 -m oesis.ingest.extract_latest_packet` plus `python3 -m oesis.ingest.ingest_packet` were exercised on a synthetic serial log; the bench-air **operator runbook** was aligned to these module entrypoints. See `v0.1-scope-matrix.md`, `v0.1-gap-register.md`, `v0.1-pilot-minimum-subset.md`, `v0.1-osi-diagrams.md` (Mermaid), and `v0.1-osi-diagrams-text.md` (plain text) in this directory for scope, gaps, pilot-tier gates, and OSI layer views of each path.
 
 ## Software and APIs
 
@@ -69,7 +86,7 @@ This matrix reflects the current local reference state after these checks passed
 
 | Surface | Status | Evidence | Current boundary | Next gap |
 | --- | --- | --- | --- | --- |
-| Bench-air-node build path | implemented | build guide, operator runbook, firmware examples | Indoor or sheltered bench node is the current fastest working hardware slice. | Gather more repeatable field and long-run evidence. |
+| Bench-air-node build path | implemented | build guide, operator runbook (ingest via `oesis-runtime` modules), firmware examples, `serial-json-contract.md` aligned with packaged examples | Indoor or sheltered bench node is the current fastest working hardware slice. | Gather more repeatable field and long-run evidence; add named BOM sources when kitting for others. |
 | Mast-lite build and install path | partial | build guide, operator runbook, procurement and installation checklists | First sheltered outdoor node is integrated into the parcel-kit path. | Increase real-world validation and maintenance evidence. |
 | Tier 1 and Tier 2 procurement path | implemented | `parcel-kit-procurement-checklist.md` | A non-author now has a concrete first purchase path. | Convert purchase guidance into named BOM sources and part decisions. |
 | Tier 1 and Tier 2 installation path | implemented | `parcel-installation-checklist.md` | Indoor and sheltered outdoor siting rules are now explicit. | Add real install records and field photos under controlled review. |
@@ -81,7 +98,7 @@ This matrix reflects the current local reference state after these checks passed
 
 | Surface | Status | Evidence | Current boundary | Next gap |
 | --- | --- | --- | --- | --- |
-| Public preview site scaffold | implemented | sibling repo `../oesis-public-site` plus `release/2026-04-14/site/public-content-allowlist.md` | Stable Astro app is separated from release-owned publication controls. | Keep the app, release packet, and publication gate aligned. |
+| Public preview site scaffold | implemented | sibling workspace `../../oesis-public-site` (Astro); publication anchors and exclusions in `src/data/publicationPolicy.ts` and `src/generated/publicContentBundle.ts`, generated from program-specs `artifacts/public-content-bundle/public-content-bundle.json` | The site is its own repo; there is no `release/.../site/` tree in program-specs. | Regenerate the bundle when release roots change; keep `legal/public-preview-scope.md` aligned. |
 | Public preview packet | implemented | `NOTICE.md`, release README, governance/privacy docs | Packet is assembled for public-safe preview readers. | Keep the packet aligned with the actual implementation boundary. |
 | Reviewer packet assembly | implemented | `reviewer-packet-index.md` | Controlled packet lanes are now explicit. | Use named release owners to decide who receives which packet. |
 | Counsel packet assembly | implemented | `legal/send-to-counsel-checklist.md` and related filing docs | Archival counsel handoff path exists if later needed. | Only use if the project reopens a separate patent/counsel lane. |
@@ -96,3 +113,6 @@ Before publishing, sending, or presenting anything:
 2. Pair this matrix with `reviewer-packet-index.md` before sending controlled-review materials.
 3. Do not let a documented policy or schema stand in for product behavior.
 4. Re-run the reference checks before changing any row from `partial` or `docs-only` to `implemented`.
+5. Promote a new `v0.x` only when the accepted runnable slice changes
+   materially and the architecture scope, contract/runtime boundaries, and
+   acceptance evidence have all been updated together.

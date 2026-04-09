@@ -1,6 +1,7 @@
 // Bench air node packet emitter for ESP32-S3.
 // Uses SHT45 and BME680 over I2C on GPIO8/GPIO9 and prints one
 // JSON packet per line for local ingest validation.
+// Optional: HTTP POST the same JSON to a reference ingest service over Wi-Fi.
 
 #include <Arduino.h>
 #include <Wire.h>
@@ -11,6 +12,7 @@
 
 #if __has_include(<WiFi.h>)
 #include <WiFi.h>
+#include <HTTPClient.h>
 #define BENCH_AIR_HAS_WIFI 1
 #else
 #define BENCH_AIR_HAS_WIFI 0
@@ -28,6 +30,14 @@
 #define BENCH_AIR_WIFI_PASSWORD ""
 #endif
 
+#ifndef BENCH_AIR_INGEST_URL
+#define BENCH_AIR_INGEST_URL ""
+#endif
+
+#ifndef BENCH_AIR_PARCEL_ID
+#define BENCH_AIR_PARCEL_ID "parcel_demo_001"
+#endif
+
 static const char* kSchemaVersion = "oesis.bench-air.v1";
 static const char* kNodeId = "bench-air-01";
 static const char* kFirmwareVersion = "0.1.0";
@@ -35,6 +45,8 @@ static const char* kLocationMode = "indoor";
 static const char* kObservedAtPlaceholder = "1970-01-01T00:00:00Z";
 static const char* kWifiSsid = BENCH_AIR_WIFI_SSID;
 static const char* kWifiPassword = BENCH_AIR_WIFI_PASSWORD;
+static const char* kIngestUrl = BENCH_AIR_INGEST_URL;
+static const char* kParcelId = BENCH_AIR_PARCEL_ID;
 static const char* kNtpServer = "pool.ntp.org";
 static const long kGmtOffsetSeconds = 0;
 static const int kDaylightOffsetSeconds = 0;
@@ -44,6 +56,7 @@ static const int kI2cSclPin = 9;
 static const unsigned long kSampleIntervalMs = 5000;
 static const unsigned long kWifiConnectTimeoutMs = 15000;
 static const unsigned long kTimeSyncTimeoutMs = 15000;
+static const uint16_t kHttpPostTimeoutMs = 12000;  // HTTPClient::setTimeout is uint16_t on ESP32
 static const uint8_t kBme680Addresses[] = {0x77, 0x76};
 
 struct Sht45Reading {
@@ -123,28 +136,97 @@ Bme680Reading readBme680() {
   return reading;
 }
 
-void printFloat(float value, int digits = 1) {
-  Serial.print(value, digits);
-}
-
-void printOptionalFloat(bool has_value, float value, int digits = 1) {
-  if (!has_value) {
-    Serial.print("null");
-    return;
-  }
-  printFloat(value, digits);
-}
-
-void printJsonString(const String& value) {
-  Serial.print('"');
+void appendJsonEscaped(String& s, const String& value) {
+  s += '"';
   for (size_t i = 0; i < value.length(); ++i) {
     char c = value.charAt(i);
     if (c == '"' || c == '\\') {
-      Serial.print('\\');
+      s += '\\';
     }
-    Serial.print(c);
+    s += c;
   }
-  Serial.print('"');
+  s += '"';
+}
+
+void appendOptionalFloat(String& s, bool has_value, float value, int digits) {
+  if (!has_value) {
+    s += "null";
+    return;
+  }
+  s += String(value, digits);
+}
+
+String buildPacketJson(const Sht45Reading& sht45, const Bme680Reading& bme680) {
+  float derived_temperature_c = sht45.present ? sht45.temperature_c : bme680.temperature_c;
+  float derived_relative_humidity_pct = sht45.present ? sht45.relative_humidity_pct : bme680.relative_humidity_pct;
+  bool has_primary_temperature = sht45.present || bme680.present;
+  bool has_primary_humidity = sht45.present || bme680.present;
+
+  String out;
+  out.reserve(1800);
+
+  out += "{\"schema_version\":\"";
+  out += kSchemaVersion;
+  out += "\",\"node_id\":\"";
+  out += kNodeId;
+  out += "\",\"observed_at\":\"";
+  out += observed_at;
+  out += "\",\"firmware_version\":\"";
+  out += kFirmwareVersion;
+  out += "\",\"location_mode\":\"";
+  out += kLocationMode;
+  out += "\",\"sensors\":{\"sht45\":{\"present\":";
+  out += sht45.present ? "true" : "false";
+  out += ",\"temperature_c\":";
+  out += String(sht45.temperature_c, 1);
+  out += ",\"relative_humidity_pct\":";
+  out += String(sht45.relative_humidity_pct, 1);
+  out += "},\"bme680\":{\"present\":";
+  out += bme680.present ? "true" : "false";
+  out += ",\"temperature_c\":";
+  out += String(bme680.temperature_c, 1);
+  out += ",\"relative_humidity_pct\":";
+  out += String(bme680.relative_humidity_pct, 1);
+  out += ",\"pressure_hpa\":";
+  out += String(bme680.pressure_hpa, 1);
+  out += ",\"gas_resistance_ohm\":";
+  out += String(bme680.gas_resistance_ohm, 0);
+  out += "}},\"derived\":{\"temperature_c_primary\":";
+  appendOptionalFloat(out, has_primary_temperature, derived_temperature_c, 1);
+  out += ",\"relative_humidity_pct_primary\":";
+  appendOptionalFloat(out, has_primary_humidity, derived_relative_humidity_pct, 1);
+  out += ",\"pressure_hpa\":";
+  appendOptionalFloat(out, bme680.present, bme680.pressure_hpa, 1);
+  out += ",\"voc_trend_source\":";
+  if (bme680.present) {
+    out += "\"gas_resistance_ohm\"";
+  } else {
+    out += "null";
+  }
+  out += "},\"health\":{\"uptime_s\":";
+  out += String(millis() / 1000UL);
+  out += ",\"wifi_connected\":";
+  out += wifi_connected ? "true" : "false";
+  out += ",\"free_heap_bytes\":";
+#ifdef ESP32
+  out += String(ESP.getFreeHeap());
+#else
+  out += "0";
+#endif
+  out += ",\"read_failures_total\":";
+  out += String(read_failures_total);
+  out += ",\"last_error\":";
+  if (last_error.length() == 0) {
+    out += "null";
+  } else {
+    appendJsonEscaped(out, last_error);
+  }
+  out += "}}";
+  return out;
+}
+
+void emitPacketToSerial(const String& json_line) {
+  Serial.println(json_line);
 }
 
 void updateObservedAt() {
@@ -166,72 +248,6 @@ void updateObservedAt() {
   observed_at = buffer;
 }
 
-void emitPacket(const Sht45Reading& sht45, const Bme680Reading& bme680) {
-  float derived_temperature_c = sht45.present ? sht45.temperature_c : bme680.temperature_c;
-  float derived_relative_humidity_pct = sht45.present ? sht45.relative_humidity_pct : bme680.relative_humidity_pct;
-  bool has_primary_temperature = sht45.present || bme680.present;
-  bool has_primary_humidity = sht45.present || bme680.present;
-
-  Serial.print("{\"schema_version\":\"");
-  Serial.print(kSchemaVersion);
-  Serial.print("\",\"node_id\":\"");
-  Serial.print(kNodeId);
-  Serial.print("\",\"observed_at\":\"");
-  Serial.print(observed_at);
-  Serial.print("\",\"firmware_version\":\"");
-  Serial.print(kFirmwareVersion);
-  Serial.print("\",\"location_mode\":\"");
-  Serial.print(kLocationMode);
-  Serial.print("\",\"sensors\":{\"sht45\":{\"present\":");
-  Serial.print(sht45.present ? "true" : "false");
-  Serial.print(",\"temperature_c\":");
-  printFloat(sht45.temperature_c);
-  Serial.print(",\"relative_humidity_pct\":");
-  printFloat(sht45.relative_humidity_pct);
-  Serial.print("},\"bme680\":{\"present\":");
-  Serial.print(bme680.present ? "true" : "false");
-  Serial.print(",\"temperature_c\":");
-  printFloat(bme680.temperature_c);
-  Serial.print(",\"relative_humidity_pct\":");
-  printFloat(bme680.relative_humidity_pct);
-  Serial.print(",\"pressure_hpa\":");
-  printFloat(bme680.pressure_hpa);
-  Serial.print(",\"gas_resistance_ohm\":");
-  printFloat(bme680.gas_resistance_ohm, 0);
-  Serial.print("}},\"derived\":{\"temperature_c_primary\":");
-  printOptionalFloat(has_primary_temperature, derived_temperature_c);
-  Serial.print(",\"relative_humidity_pct_primary\":");
-  printOptionalFloat(has_primary_humidity, derived_relative_humidity_pct);
-  Serial.print(",\"pressure_hpa\":");
-  printOptionalFloat(bme680.present, bme680.pressure_hpa);
-  Serial.print(",\"voc_trend_source\":");
-  if (bme680.present) {
-    Serial.print("\"gas_resistance_ohm\"");
-  } else {
-    Serial.print("null");
-  }
-  Serial.print("},\"health\":{\"uptime_s\":");
-  Serial.print(millis() / 1000UL);
-  Serial.print(",\"wifi_connected\":");
-  Serial.print(wifi_connected ? "true" : "false");
-  Serial.print(",\"free_heap_bytes\":");
-#ifdef ESP32
-  Serial.print(ESP.getFreeHeap());
-#else
-  Serial.print(0);
-#endif
-  Serial.print(",\"read_failures_total\":");
-  Serial.print(read_failures_total);
-  Serial.print(",\"last_error\":");
-  if (last_error.length() == 0) {
-    Serial.print("null");
-  } else {
-    printJsonString(last_error);
-  }
-  Serial.print("}}");
-  Serial.println();
-}
-
 bool beginBme680() {
   for (size_t i = 0; i < sizeof(kBme680Addresses) / sizeof(kBme680Addresses[0]); ++i) {
     uint8_t candidate = kBme680Addresses[i];
@@ -248,21 +264,28 @@ bool beginBme680() {
   return false;
 }
 
-void syncTimeIfConfigured() {
-  if (strlen(kWifiSsid) == 0) {
+void connectWifiAndSyncNtp() {
+#if !BENCH_AIR_HAS_WIFI
+  wifi_connected = false;
+  time_synced = false;
+  if (strlen(kIngestUrl) > 0) {
+    last_error = "wifi_unavailable";
+    Serial.println("# HTTP ingest disabled: Wi-Fi not available in this build");
+  } else {
     Serial.println("# Wi-Fi not configured, using placeholder observed_at");
+  }
+  return;
+#else
+  if (strlen(kWifiSsid) == 0) {
     wifi_connected = false;
     time_synced = false;
+    Serial.println("# Wi-Fi not configured, using placeholder observed_at");
+    if (strlen(kIngestUrl) > 0) {
+      Serial.println("# HTTP ingest disabled: set BENCH_AIR_WIFI_SSID in secrets.h");
+    }
     return;
   }
 
-#if !BENCH_AIR_HAS_WIFI
-  last_error = "wifi_unavailable";
-  Serial.println("# Wi-Fi support unavailable in this build, using placeholder observed_at");
-  wifi_connected = false;
-  time_synced = false;
-  return;
-#else
   WiFi.mode(WIFI_STA);
   WiFi.begin(kWifiSsid, kWifiPassword);
 
@@ -300,8 +323,80 @@ void syncTimeIfConfigured() {
   updateObservedAt();
   Serial.print("# time synced: ");
   Serial.println(observed_at);
+
+  if (strlen(kIngestUrl) > 0) {
+    Serial.println("# HTTP ingest enabled for POST /v1/ingest/node-packets");
+  }
 #endif
 }
+
+#if BENCH_AIR_HAS_WIFI
+void ensureWifiForPost() {
+  if (strlen(kIngestUrl) == 0 || strlen(kWifiSsid) == 0) {
+    return;
+  }
+  if (WiFi.status() == WL_CONNECTED) {
+    wifi_connected = true;
+    return;
+  }
+
+  wifi_connected = false;
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(kWifiSsid, kWifiPassword);
+
+  unsigned long start = millis();
+  while (WiFi.status() != WL_CONNECTED && millis() - start < kWifiConnectTimeoutMs) {
+    delay(200);
+  }
+
+  wifi_connected = WiFi.status() == WL_CONNECTED;
+  if (!wifi_connected) {
+    last_error = "wifi_reconnect_failed";
+  }
+}
+
+void clearHttpLastErrorIfNeeded() {
+  if (last_error == "http_post_failed" || last_error == "http_bad_status" ||
+      last_error == "http_begin_failed" || last_error == "wifi_reconnect_failed") {
+    last_error = "";
+  }
+}
+
+void postIngestIfConfigured(const String& body) {
+  if (strlen(kIngestUrl) == 0 || strlen(kWifiSsid) == 0) {
+    return;
+  }
+
+  ensureWifiForPost();
+  if (WiFi.status() != WL_CONNECTED) {
+    return;
+  }
+
+  HTTPClient http;
+  http.setTimeout(kHttpPostTimeoutMs);
+  if (!http.begin(kIngestUrl)) {
+    last_error = "http_begin_failed";
+    return;
+  }
+
+  http.addHeader("Content-Type", "application/json");
+  http.addHeader("X-OESIS-Parcel-Id", kParcelId);
+
+  int code = http.POST(body);
+  if (code == 202) {
+    clearHttpLastErrorIfNeeded();
+  } else if (code > 0) {
+    last_error = "http_bad_status";
+  } else {
+    last_error = "http_post_failed";
+  }
+  http.end();
+}
+#else
+void postIngestIfConfigured(const String& body) {
+  (void)body;
+}
+#endif
 
 void setup() {
   Serial.begin(115200);
@@ -314,7 +409,7 @@ void setup() {
   Serial.print(" SCL=GPIO");
   Serial.println(kI2cSclPin);
   Serial.println("# using Adafruit SHT4x and BME680 libraries");
-  syncTimeIfConfigured();
+  connectWifiAndSyncNtp();
 
   sht45_present = sht4.begin(&Wire);
   if (sht45_present) {
@@ -353,6 +448,12 @@ void loop() {
 
   last_sample_ms = now;
 
+#if BENCH_AIR_HAS_WIFI
+  wifi_connected = (WiFi.status() == WL_CONNECTED);
+#else
+  wifi_connected = false;
+#endif
+
   Sht45Reading sht45 = readSht45();
   Bme680Reading bme680 = readBme680();
   updateObservedAt();
@@ -363,5 +464,7 @@ void loop() {
     last_error = "";
   }
 
-  emitPacket(sht45, bme680);
+  String packet = buildPacketJson(sht45, bme680);
+  emitPacketToSerial(packet);
+  postIngestIfConfigured(packet);
 }

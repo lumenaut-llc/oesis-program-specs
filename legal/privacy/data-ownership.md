@@ -75,7 +75,7 @@ See `permissions-matrix.md`.
 
 Subject to the selected sharing mode and later product terms, the platform may:
 
-- use private parcel data to provide the homeowner’s parcel view and related product operation
+- use private parcel data to provide the homeowner’s parcel view and related platform operation
 - use selected opt-in signals for internal service operation where the user has enabled that mode
 - use public context to interpret parcel conditions
 - generate derived parcel-state outputs, confidence values, freshness values, and provenance summaries

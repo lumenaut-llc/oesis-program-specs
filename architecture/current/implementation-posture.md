@@ -33,6 +33,17 @@ The current local reference posture is anchored by:
 These checks are the minimum evidence for calling a surface implemented in the
 current reference path.
 
+## Version versus status
+
+Keep these concepts separate:
+
+- `v0.x` version labels describe accepted product slices
+- `implemented`, `partial`, `docs-only`, and `planned` describe maturity within
+  or around those slices
+
+A new `partial` node lane or documented boundary does not automatically justify
+promoting a new `v0.x`.
+
 ## Current coverage
 
 ### Implemented
@@ -65,7 +76,11 @@ current reference path.
 `v0.1` architecture claims should not outrun the implementation-status
 classification used in:
 
-- `../../release/2026-04-14/implementation-status-matrix.md`
+- `../../release/v.0.1/implementation-status-matrix.md`
 
 If a surface is only `partial`, `docs-only`, or `planned`, the architecture
 should say so.
+
+If a broader accepted runnable slice is promoted later, update the versioned
+architecture documents and the evidence set together rather than treating status
+changes alone as a version bump.

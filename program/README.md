@@ -64,11 +64,11 @@ For each parcel:
 - `NOTICE.md`
 - `../architecture/README.md`
 - `../architecture/current/README.md`
-- `../release/2026-04-14/open-source-v1-summary.md`
-- `../release/2026-04-14/asset-class-license-and-publication-matrix.md`
+- `../release/v1.0/open-source-v1-summary.md`
+- `../release/v1.0/asset-class-license-and-publication-matrix.md`
 - `../legal/ip.md`
 - `../legal/dataset-release-policy.md`
 - `../legal/GOVERNANCE.md`
 - `../legal/privacy/data-ownership.md`
 - `../legal/privacy/privacy.md`
-- `../release/2026-04-14/NOTICE.md`
+- `../release/v1.0/NOTICE.md`

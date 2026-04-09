@@ -1,5 +1,5 @@
 {
-  "bundle_version": "2026-04-14",
+  "bundle_version": "v1.0",
   "checks": [
     {
       "command": "make oesis-validate",
@@ -26,8 +26,8 @@
       "stdout_log": "make_oesis-http-check.stdout.log"
     }
   ],
-  "generated_at": "2026-04-07T22:28:23Z",
-  "source_commit": "a8ab86ab272850387d876ac2c7641fbe17b288c3",
+  "generated_at": "2026-04-08T21:30:00Z",
+  "source_commit": "d5ef94dc97d60ee81fd428d2ddd595bc909dd7a6",
   "source_repo": "oesis-runtime",
   "supported_surfaces": [
     "example payload validation",

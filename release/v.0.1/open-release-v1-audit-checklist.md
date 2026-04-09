@@ -62,6 +62,6 @@ V1 is ready only if an outside reader can understand:
 - `open-source-v1-summary.md`
 - `asset-class-license-and-publication-matrix.md`
 - `contributor-and-review-guide.md`
-- `site/public-content-allowlist.md`
+- `../../oesis-public-site/src/data/publicationPolicy.ts` (and generated `src/generated/publicContentBundle.ts`; source payload: `../../artifacts/public-content-bundle/public-content-bundle.json`)
 - `../../../legal/public-preview-scope.md`
 - `../../../legal/holdback-list.md`

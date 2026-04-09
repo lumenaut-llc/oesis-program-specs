@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Provide the canonical home for architecture across the program.
+Provide the canonical home for versioned architecture across the program.
 
 This directory now combines:
 
@@ -18,7 +18,7 @@ executable code.
 
 ### `current/`
 
-The current truthful reference architecture.
+The frozen truthful reference architecture for `v0.1`.
 
 Use `current/` for:
 
@@ -28,9 +28,12 @@ Use `current/` for:
 - current component boundaries and ownership rules
 - the current implementation-aligned milestone sequence
 
+Treat `current/` as the default current-truth lane for contributors, reviewers,
+and runtime-aligned documentation.
+
 ### `future/`
 
-The debated target architecture.
+The debated target architecture for `v1.0`.
 
 Use `future/` for:
 
@@ -38,6 +41,9 @@ Use `future/` for:
 - proposed boundary or topology changes
 - open questions and tradeoffs
 - decisions under discussion
+
+Treat `future/` as explicit proposal space. It should stay clearly separate from
+what is already implemented or accepted in the frozen `v0.1` lane.
 
 ### `system/`
 
@@ -64,8 +70,37 @@ Cross-version architecture debates and decision scaffolding.
 6. `current/implementation-posture.md`
 7. `current/component-boundaries.md`
 8. `current/milestone-roadmap.md`
-9. `decisions/debate-map.md`
-10. `future/README.md` when you want the debated target lane
+9. `current/pre-1.0-version-progression.md`
+10. `decisions/debate-map.md`
+11. `future/README.md` when you want the debated target lane
+
+## Version mapping
+
+Use these names consistently:
+
+- `current/` = frozen `v0.1`
+- `future/` = debated `v1.0`
+- `decisions/` = cross-version doctrine and debate scaffolding
+
+## Pre-1.0 policy
+
+Use pre-`1.0` version numbers for accepted capability bundles, not for every
+individual node, element, or partial implementation step.
+
+That means:
+
+- keep `v0.1` as the accepted current baseline until a broader runnable slice is
+  explicitly promoted
+- use milestones and implementation-status tracking for incremental compatible
+  growth inside the current lane
+- create a new `v0.x` only when the accepted reference slice changes in a way
+  that materially expands the runnable system boundary
+- keep `v1.0` for the point where the system is materially broader than the
+  narrow first working slice
+
+The older `../technical-architecture/` tree remains as a transitional pointer.
+When there is any ambiguity, prefer the `current/` and `future/` entrypoints in
+this directory.
 
 ## What stays outside this directory
 

@@ -15,6 +15,13 @@ Current reference architecture.
 Use this version when you need the architecture that matches the present
 implementation boundary rather than future proposals.
 
+This directory is the frozen `v0.1` lane. New future-looking architecture work
+should go to `../future/` instead of mutating these current-truth files.
+
+Pre-`1.0` growth should normally be tracked through milestones and status
+classification rather than a new version number for every added node or
+element.
+
 ## Scope
 
 `v0.1` covers:
@@ -36,6 +43,7 @@ implementation boundary rather than future proposals.
 5. `implementation-posture.md`
 6. `component-boundaries.md`
 7. `milestone-roadmap.md`
+8. `pre-1.0-version-progression.md`
 
 ## Primary source alignment
 
@@ -44,4 +52,16 @@ implementation boundary rather than future proposals.
 - `../../architecture/system/technical-philosophy-and-architecture.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
 - `../../software/README.md`
-- `../../release/2026-04-14/implementation-status-matrix.md`
+- `../../release/v.0.1/implementation-status-matrix.md`
+
+## Contributor rule
+
+If a change describes what is implemented, accepted, or currently runnable, it
+belongs here.
+
+If a change describes a target architecture, future boundary, or debated
+expansion, it belongs in `../future/`.
+
+If a change is incremental but still compatible with the current accepted slice,
+prefer updating milestone and implementation-posture docs before proposing a new
+`v0.x`.

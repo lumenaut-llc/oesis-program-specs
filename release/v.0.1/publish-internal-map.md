@@ -3,7 +3,9 @@
 ## Purpose
 
 Give one folder-by-folder view of what should be treated as public-release material
-versus internal-only material for the April 14, 2026 open release.
+versus internal-only material around the April 14, 2026 open release. The **canonical**
+public preview packet root in-repo is now `release/v1.0/`; this `release/v.0.1/` tree
+holds the prior April preview materials and extended reviewer packet.
 
 This file is a release-control aid. It is not legal advice.
 
@@ -14,7 +16,7 @@ notices and claims/privacy rules:
 
 - `README.md`
 - `NOTICE.md`
-- `release/2026-04-14/`
+- `release/v1.0/` (canonical public packet); `release/v.0.1/` (prior April preview / extended packet)
 - `legal/privacy/`
 - `legal/ip.md`
 - `legal/GOVERNANCE.md`
@@ -63,7 +65,8 @@ April 14 release:
 | --- | --- | --- |
 | `repo/README.md`, `repo/NOTICE.md`, `repo/LICENSES.md` | publish | core entry points |
 | `README.md`, `NOTICE.md` | publish | core program entry points |
-| `release/2026-04-14/` | publish | canonical preview set |
+| `release/v1.0/` | publish | canonical public preview set |
+| `release/v.0.1/` | publish (archived packet) | April 2026 preview materials; reviewer index and matrices |
 | `legal/privacy/` | publish | public governance posture |
 | `legal/ip.md` | publish | preview IP position |
 | `legal/GOVERNANCE.md` | publish | project governance posture |

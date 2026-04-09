@@ -54,7 +54,7 @@ Each source used by an adapter should have a completed notice or equivalent reco
 - adapter docs must name the source metadata record they depend on
 - source metadata must be reviewed before a feed is used in product logic
 - source freshness and source quality limits must be translated into adapter or inference policy
-- the homeowner-facing product must distinguish public context from homeowner-contributed evidence
+- the parcel view must distinguish public context from homeowner-contributed evidence
 
 ## MVP rule
 

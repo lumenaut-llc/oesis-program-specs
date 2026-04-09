@@ -54,8 +54,8 @@ with migration pointers only.
 ## Repository map
 
 - `program/` — program overview, notice, and index
-- `architecture/` — canonical architecture home, including current, future, and system narratives
-- `contracts/` — contract docs plus canonical schemas and example payloads
+- `architecture/` — canonical architecture home, including frozen `current/` (`v0.1`), debated `future/` (`v1.0`), and system narratives
+- `contracts/` — frozen `v0.1` contract docs plus additive `v1.0/` schema/example deltas
 - `release/` — release packet materials, publication controls, and launch collateral
 - `hardware/` — physical sensor nodes and installation systems
 - `software/` — subsystem docs, wrappers, and operator guides
@@ -85,11 +85,25 @@ Use these commands while the split is in progress:
 
 The canonical execution plan lives in `meta/repo-split-plan.md`.
 
+## Version lanes
+
+Use these repo surfaces as the default architecture-and-contract entrypoints:
+
+- `architecture/current/` — frozen `v0.1` current truth
+- `architecture/future/` — debated `v1.0` target lane
+- `contracts/examples/` and `contracts/schemas/` — frozen `v0.1` default contract surface
+- `contracts/v1.0/` — additive `v1.0` contract deltas and future-lane notes
+
+The older `technical-architecture/` tree remains as a transitional pointer, but
+contributors should treat `architecture/current/` and `architecture/future/` as
+the canonical current-vs-future split.
+
 ## Start here
 
 1. Read `NOTICE.md`
 2. Read `program/README.md`
-3. Read `release/2026-04-14/open-source-v1-summary.md`
+3. Read `release/v1.0/open-source-v1-summary.md`
 4. Read `architecture/README.md`
-5. Read `meta/repo-split-plan.md` if you are working on runtime/site extraction or bundle boundaries
-6. Use `shared/templates/` when starting a new subsystem or document
+5. Read `architecture/current/README.md` for the frozen `v0.1` lane or `architecture/future/README.md` for the debated `v1.0` lane
+6. Read `meta/repo-split-plan.md` if you are working on runtime/site extraction or bundle boundaries
+7. Use `shared/templates/` when starting a new subsystem or document

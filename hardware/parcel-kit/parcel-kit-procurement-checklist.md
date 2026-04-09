@@ -152,7 +152,7 @@ Procurement and build docs are not automatically public-preview-safe.
 Before sharing photos, diagrams, or detailed purchase bundles outside the core implementation group, check:
 
 - `../../legal/public-preview-scope.md`
-- `../release/2026-04-14/reviewer-packet-index.md`
+- `../release/v.0.1/reviewer-packet-index.md`
 
 Do not assume close-up internals, wiring layouts, or integrated-kit details belong on the public preview site.
 

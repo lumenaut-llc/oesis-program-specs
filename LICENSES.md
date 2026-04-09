@@ -2,7 +2,7 @@
 
 This file is the working licensing matrix for the repository structure and April 14, 2026 open-release posture.
 
-For a shorter v1-facing explanation, see `release/2026-04-14/asset-class-license-and-publication-matrix.md`.
+For a shorter v1-facing explanation, see `release/v1.0/asset-class-license-and-publication-matrix.md`.
 
 It is a project planning document, not legal advice.
 

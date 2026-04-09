@@ -13,9 +13,9 @@ Read `NOTICE.md` before treating every file in this subtree as public-facing or 
 
 For the April 14, 2026 public preview, pair those files with:
 
-- `../release/2026-04-14/open-source-v1-summary.md`
-- `../release/2026-04-14/asset-class-license-and-publication-matrix.md`
-- `../release/2026-04-14/contributor-and-review-guide.md`
+- `../release/v1.0/open-source-v1-summary.md`
+- `../release/v1.0/asset-class-license-and-publication-matrix.md`
+- `../release/v1.0/contributor-and-review-guide.md`
 
 ## MVP priorities
 

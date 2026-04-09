@@ -29,11 +29,11 @@ Do not assume that:
 - `../legal/dataset-release-policy.md`
 - `../legal/GOVERNANCE.md`
 - `../LICENSES.md`
-- `../release/2026-04-14/open-source-v1-summary.md`
-- `../release/2026-04-14/asset-class-license-and-publication-matrix.md`
+- `../release/v1.0/open-source-v1-summary.md`
+- `../release/v1.0/asset-class-license-and-publication-matrix.md`
 - `../legal/privacy/data-ownership.md`
 - `../legal/privacy/privacy.md`
-- `../release/2026-04-14/NOTICE.md`
+- `../release/v1.0/NOTICE.md`
 
 ## Non-release materials
 

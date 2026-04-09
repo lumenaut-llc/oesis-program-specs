@@ -126,7 +126,7 @@ Why this matters:
 
 - the system design is inseparable from the privacy design
 - shared intelligence should be derived and bounded
-- public context supports the parcel product without replacing homeowner control
+- public context supports the parcel platform without replacing homeowner control
 
 ## Diagram 5: Prototype evolution path
 
@@ -145,7 +145,7 @@ Recommended interpretation:
 - move from one-home value to network effects in stages
 - keep each step operationally honest and understandable
 
-## Diagram 6: Homeowner product surface
+## Diagram 6: Parcel view surface
 
 ```mermaid
 flowchart TB
@@ -165,7 +165,7 @@ flowchart TB
 
 What this anchors:
 
-- the product should feel like one parcel experience, not a collection of device dashboards
+- the parcel view should feel like one parcel experience, not a collection of device dashboards
 - device details support interpretation, but the homeowner-facing unit is still the parcel
 
 ## Architecture avenues
@@ -368,7 +368,7 @@ Best for:
 If the team wants the highest-value follow-up work, build these next:
 
 1. a polished parcel-kit topology diagram for onboarding
-2. a parcel twin UI diagram for the homeowner product
+2. a parcel twin UI diagram for the parcel view
 3. a node-registry lifecycle diagram for implementation planning
 4. an internal-only provisioning and auth diagram
 5. a pilot deployment diagram showing one parcel, one block, and one shared-map boundary
@@ -379,7 +379,7 @@ Current best overall direction:
 
 - system architecture: modular parcel kit
 - prototype lane: Tier 2 integrated parcel kit
-- product surface: parcel dashboard first, with a timeline second
+- primary surface: parcel dashboard first, with a timeline second
 - explanatory visual language: public-safe executive set plus a deeper internal ops set
 
 That gives the project one coherent prototype story without pretending every sensor should live in one chassis or every future phase should be built before the first pilot.

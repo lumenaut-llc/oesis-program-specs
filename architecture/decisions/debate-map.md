@@ -35,13 +35,13 @@ This file is a cross-version doctrine layer.
 
 Use it alongside:
 
-- `v0.1/architecture-object-map.md`
-- `v0.1/minimum-functioning-v0.1.md`
-- `v1.0/proposed-architecture.md`
-- `v1.0/open-questions.md`
+- `../current/architecture-object-map.md`
+- `../current/minimum-functioning-v0.1.md`
+- `../future/proposed-architecture.md`
+- `../future/open-questions.md`
 
-Use `v0.1` files for current truth.
-Use `v1.0` files for debated target architecture.
+Use `current/` files for frozen `v0.1` truth.
+Use `future/` files for debated `v1.0` target architecture.
 Use this file for the tensions that influence both.
 
 ## Debate 1: parcel-first vs field-first

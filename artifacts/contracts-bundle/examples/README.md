@@ -1,6 +1,7 @@
 # Data Model Examples
 
-These JSON example payloads are intended as implementation scaffolding for the first MVP contracts.
+These JSON example payloads are the frozen `v0.1` default example surface for
+the current accepted contract lane.
 
 - `node-observation.example.json`
   Example of a raw node packet from `oesis.bench-air.v1`.
@@ -10,16 +11,6 @@ These JSON example payloads are intended as implementation scaffolding for the f
   Example of the canonical observation object emitted by the ingest boundary.
 - `parcel-state.example.json`
   Example of a homeowner-facing parcel-state snapshot after inference.
-- `house-state.example.json`
-  Example of the separate `v1.5` house-state support object for indoor conditions and current operating state.
-- `house-capability.example.json`
-  Example of the separate `v1.5` house-capability support object for protective capacity and physical limits.
-- `control-compatibility.example.json`
-  Example of the separate `v1.5` control-compatibility support object for interface classes and control locality.
-- `intervention-event.example.json`
-  Example of a `v1.5` intervention record for a bounded operational action.
-- `verification-outcome.example.json`
-  Example of a `v1.5` verification record tied to an intervention window.
 - `parcel-context.example.json`
   Example of parcel installation context and parcel priors supplied to inference.
 - `public-context.example.json`
@@ -31,4 +22,8 @@ These JSON example payloads are intended as implementation scaffolding for the f
 - `shared-neighborhood-signal.example.json`
   Example of a delayed, thresholded neighborhood signal object derived from opt-in shared contributions.
 
-These examples should evolve with the prose contracts and the matching JSON Schema files in `../schemas/`.
+These examples should stay aligned with the prose contracts and the matching
+JSON Schema files in `../schemas/`.
+
+If a future lane needs a changed or additive example, add it under
+`../v1.0/examples/` instead of rewriting the files in this directory.

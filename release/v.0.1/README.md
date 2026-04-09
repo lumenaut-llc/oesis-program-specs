@@ -70,8 +70,7 @@ Start here:
 - `preview-execution-plan.md`
 - `implementation-status-matrix.md`
 - `../../../architecture/`
-- `site/` (release-owned publication controls)
-- sibling repo `../oesis-public-site` (stable Astro app)
+- sibling workspace `../../oesis-public-site` (stable Astro app and in-repo publication policy: `src/data/publicationPolicy.ts`, generated bundle)
 - `pinned-post-opener.md`
 - `launch-checklist.md`
 - `publish-internal-map.md`

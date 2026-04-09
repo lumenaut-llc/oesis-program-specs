@@ -28,12 +28,12 @@ The following node families remain planned extensions to the reference services:
 - `weather-pm-mast`
 - `thermal-pod`
 
-## Run from the repo root
+## Run from the runtime repo root
 
-All commands below assume you start in:
+All commands below assume you start in the **`oesis-runtime`** repository root (sibling to this `oesis-program-specs` checkout):
 
 ```bash
-cd repo
+cd /path/to/oesis-runtime
 ```
 
 ## Step 1: Confirm the reference stack is healthy
@@ -125,6 +125,8 @@ curl -s http://127.0.0.1:8788/v1/inference/health
 curl -s http://127.0.0.1:8789/v1/parcel-platform/health
 ```
 
+Operator-only: with ingest on port `8787`, open **`http://127.0.0.1:8787/v1/ingest/live`** to see the last accepted normalized observation (polls in-memory state; see `oesis-runtime` README). Use **`GET /v1/ingest/debug/last`** for JSON.
+
 ## Step 5: Post a packet into the local APIs
 
 The quickest manual API test uses the checked-in example packet:
@@ -194,4 +196,4 @@ For the first integrated parcel kit, use this order:
 - `README.md`
 - `../hardware/parcel-kit/parcel-kit-procurement-checklist.md`
 - `../hardware/parcel-kit/parcel-installation-checklist.md`
-- `../release/2026-04-14/reviewer-packet-index.md`
+- `../release/v.0.1/reviewer-packet-index.md`

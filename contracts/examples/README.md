@@ -1,6 +1,7 @@
 # Data Model Examples
 
-These JSON example payloads are intended as implementation scaffolding for the first MVP contracts.
+These JSON example payloads are the frozen `v0.1` default example surface for
+the current accepted contract lane.
 
 - `node-observation.example.json`
   Example of a raw node packet from `oesis.bench-air.v1`.
@@ -21,4 +22,8 @@ These JSON example payloads are intended as implementation scaffolding for the f
 - `shared-neighborhood-signal.example.json`
   Example of a delayed, thresholded neighborhood signal object derived from opt-in shared contributions.
 
-These examples should evolve with the prose contracts and the matching JSON Schema files in `../schemas/`.
+These examples should stay aligned with the prose contracts and the matching
+JSON Schema files in `../schemas/`.
+
+If a future lane needs a changed or additive example, add it under
+`../v1.0/examples/` instead of rewriting the files in this directory.

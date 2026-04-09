@@ -16,6 +16,14 @@ Canonical contract definitions for parcels, nodes, observations, states, permiss
 
 The current center of gravity remains the `current v1` observation, parcel-context, and parcel-state contracts.
 
+For version lanes in this repository:
+
+- `schemas/` and `examples/` are the frozen `v0.1` default contract surface
+- `v1.0/` is the additive target lane for future schema/example deltas
+
+Do not silently replace the root `schemas/` or `examples/` files when proposing
+future-lane changes. Add new or overridden assets under `v1.0/` instead.
+
 `v1.5` adds separate support objects for:
 - house state
 - house capability
@@ -61,6 +69,13 @@ Machine-readable starter artifacts now live in:
 - `examples/rights-request-store.example.json`
 - `examples/export-bundle.example.json`
 - `examples/retention-cleanup-report.example.json`
+
+## Parallel lane rule
+
+Use the root paths when you mean the accepted `v0.1` baseline.
+
+Use `v1.0/` when you need future-lane notes, schema deltas, or example deltas
+that must remain separate from the frozen default contract set.
 
 ## Related workstreams
 

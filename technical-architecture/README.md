@@ -2,15 +2,24 @@
 
 ## Purpose
 
-Provide the canonical home for versioned technical architecture across the
-program.
+Provide a transitional pointer to the canonical versioned architecture home
+across the program.
 
 This canon now uses the system name Open Environmental Sensing and Inference
 System (`OESIS`). `Resilient Home Intelligence` (`RHI`) remains a legacy
 compatibility name during the transition, especially in implementation-facing
 identifiers that have not yet been migrated.
 
-This directory separates:
+The canonical contributor entrypoints now live under:
+
+- `../architecture/current/` for frozen `v0.1`
+- `../architecture/future/` for debated `v1.0`
+- `../architecture/decisions/` for cross-version doctrine and debates
+
+This directory keeps the older version labels as a reading aid, but it no
+longer defines the primary on-disk architecture split.
+
+It still separates:
 
 - current truthful architecture
 - debated future architecture
@@ -36,6 +45,10 @@ Use `v0.1/` for:
 `v0.1` should stay aligned with what is actually runnable, documented, and
 verifiable today.
 
+If the project later promotes `v0.2`, `v0.3`, or another pre-`1.0` slice, those
+versions should represent accepted capability bundles rather than every added
+node, schema field, or partial element.
+
 ### `v1.0`
 
 The debated target architecture.
@@ -50,7 +63,13 @@ Use `v1.0/` for:
 `v1.0` is proposal space. It must not be written as if it were already the
 implemented system.
 
+Use milestone and implementation-status tracking for smaller compatible growth
+before promoting a new pre-`1.0` version.
+
 ## Reading order
+
+Prefer the `../architecture/` entrypoints first. Use the files below only when
+you specifically want the older `technical-architecture/` pointer view.
 
 1. `v0.1/README.md`
 2. `v0.1/technical-philosophy.md`
@@ -60,8 +79,9 @@ implemented system.
 6. `v0.1/implementation-posture.md`
 7. `v0.1/component-boundaries.md`
 8. `v0.1/milestone-roadmap.md`
-9. `debate-map.md`
-10. `v1.0/README.md` when you want the debated target lane
+9. `../architecture/current/pre-1.0-version-progression.md`
+10. `debate-map.md`
+11. `v1.0/README.md` when you want the debated target lane
 
 ## What stays outside this directory
 
@@ -87,5 +107,5 @@ Future subsystems and major features should follow these rules:
 
 ## Transitional path
 
-The older `../architecture/` directory remains as a transitional pointer while
-the repo migrates to this versioned structure.
+This directory now acts as the transitional pointer while the canonical
+current-versus-future architecture split lives in `../architecture/`.
