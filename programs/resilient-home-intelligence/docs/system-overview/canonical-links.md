@@ -13,6 +13,7 @@ Tracked equivalents and deeper in-repo sources of truth live here:
 - `phase-roadmap.md` for the capability-stage roadmap
 - `deployment-maturity-ladder.md` for the hardware and operations overlay
 - `architecture-gaps-by-stage.md` for stage placement of operational architecture gaps
+- `../../../../meta/starter-package/` for tracked bootstrap and prompt files that used to exist only in the outer workspace package
 
 The outer starter-package files currently include:
 

@@ -20,6 +20,7 @@ This folder now holds the MVP governance baseline for parcel-first sensing and p
 
 For the current v0.1 open-release posture, start with:
 
+- `governance-and-privacy-summary.md`
 - `data-ownership.md`
 - `privacy.md`
 - `data-classification-standard.md`

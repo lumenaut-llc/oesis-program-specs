@@ -10,10 +10,16 @@
 - `meta/backlog.md`
 - `meta/milestones/README.md`
 - `meta/milestones/phase-0-foundation.md`
+- `meta/starter-package/README.md`
+- `meta/starter-package/chat-prompts.md`
+- `meta/starter-package/path-forward-prompt-packet.md`
+- `meta/starter-package/project-instructions.md`
+- `meta/starter-package/repo-skeleton.md`
 - `programs/resilient-home-intelligence/INDEX.md`
 - `programs/resilient-home-intelligence/README.md`
 - `programs/resilient-home-intelligence/docs/README.md`
 - `programs/resilient-home-intelligence/docs/build-guides/README.md`
+- `programs/resilient-home-intelligence/docs/build-guides/procurement-and-bom.csv`
 - `programs/resilient-home-intelligence/docs/build-guides/field-hardening-checklist.md`
 - `programs/resilient-home-intelligence/docs/build-guides/integrated-parcel-kit-bom.md`
 - `programs/resilient-home-intelligence/docs/build-guides/pilot-field-kit.md`
@@ -27,6 +33,7 @@
 - `programs/resilient-home-intelligence/docs/pilot-playbooks/README.md`
 - `programs/resilient-home-intelligence/docs/pilot-playbooks/first-block-pilot.md`
 - `programs/resilient-home-intelligence/docs/privacy-governance/README.md`
+- `programs/resilient-home-intelligence/docs/privacy-governance/governance-and-privacy-summary.md`
 - `programs/resilient-home-intelligence/docs/privacy-governance/permissions-matrix.md`
 - `programs/resilient-home-intelligence/docs/system-overview/README.md`
 - `programs/resilient-home-intelligence/docs/system-overview/architecture-gaps-by-stage.md`
@@ -93,6 +100,7 @@
 - `programs/resilient-home-intelligence/software/shared-map/open-questions.md`
 - `shared/README.md`
 - `shared/glossary/README.md`
+- `shared/glossary/resilient-home-intelligence.md`
 - `shared/skills/lean-directory-audit/SKILL.md`
 - `shared/skills/lean-directory-audit/agents/openai.yaml`
 - `shared/skills/lean-directory-audit/references/review-rubric.md`
