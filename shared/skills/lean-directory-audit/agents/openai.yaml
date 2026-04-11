@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lean Directory Audit"
+  short_description: "Audit repo layout for clutter and overlap"
+  default_prompt: "Use $lean-directory-audit to review this directory for unnecessary files, duplication, and unclear boundaries."

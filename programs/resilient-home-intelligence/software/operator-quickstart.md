@@ -151,7 +151,7 @@ The release site now uses Astro instead of plain static HTML.
 From:
 
 ```bash
-cd programs/resilient-home-intelligence/docs/release/2026-04-14/site
+cd programs/resilient-home-intelligence/docs/release/v0.1/site
 ```
 
 install dependencies once:
@@ -194,4 +194,4 @@ For the first integrated parcel kit, use this order:
 - `README.md`
 - `../docs/build-guides/parcel-kit-procurement-checklist.md`
 - `../docs/build-guides/parcel-installation-checklist.md`
-- `../docs/release/2026-04-14/reviewer-packet-index.md`
+- `../docs/release/v0.1/reviewer-packet-index.md`

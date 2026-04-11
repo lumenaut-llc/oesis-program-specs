@@ -4,6 +4,33 @@
 
 The first flood-node build should optimize for one thing: a repeatable dry reference at a documented low point. Do not try to solve parcel-wide flood inference on the first hardware pass.
 
+## Current maturity
+
+Default posture: experimental field prototype below a general `deployment maturity v1.0` claim.
+
+## Required now
+
+- rigid mount
+- documented dry reference
+- field marker or staff gauge posture
+- enclosure posture that avoids becoming the flooded low point itself
+- local logging or buffering posture for event review
+
+## Add later
+
+- stronger surge and power protection
+- tamper or tilt detection
+- more formal replacement and recalibration workflow
+
+## Field-ready boundary
+
+Do not describe this node as stronger parcel evidence until geometry, zero reference, and service posture are documented for the parcel.
+
+## Serviceability notes
+
+- treat mount drift as a service issue, not a minor nuisance
+- keep geometry notes with the parcel record
+
 ## Required tools
 
 - soldering iron and solder

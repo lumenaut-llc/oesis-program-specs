@@ -38,6 +38,11 @@ The current `v1` contract stays intentionally small.
 
 `v1.5` should extend this context with optional fields that support building response, intervention planning, and later compatibility mapping without breaking the baseline contract.
 
+## Current implementation boundary
+
+This doc describes the current parcel-context baseline plus planned deployment-maturity extensions.
+The current machine-readable examples should still be treated as the implemented contract.
+
 ## Minimum parcel-context object
 
 ```json
@@ -213,6 +218,30 @@ Useful fields:
 
 Optional list of rooms, facades, low points, or route segments that repeatedly matter for interpretation.
 
+## Planned deployment-maturity extensions
+
+To keep the current parcel-context baseline small, the repo may later split richer installation and service facts into a dedicated deployment-metadata companion object.
+
+Future installation extensions likely include:
+
+- `mount_type`
+- `orientation_class`
+- `sun_exposure_class`
+- `airflow_exposure_class`
+- `enclosure_revision`
+- `power_source_type`
+- `storage_type`
+- `maintenance_status`
+- `last_maintenance_at`
+- `install_photo_refs`
+
+Future deployment-quality handling may also add:
+
+- `deployment_quality_class`
+- `deployment_quality_reasons`
+
+These fields are valuable for trust and field operations, but they should not silently inflate the current implemented parcel-context contract.
+
 ## Interpretation rules
 
 - A node reading is a point observation, not a parcel-wide condition.
@@ -235,3 +264,10 @@ Optional list of rooms, facades, low points, or route segments that repeatedly m
 - canopy and shade context
 - drainage-path annotations
 - install-photo references
+- explicit deployment-quality metadata
+
+## Related docs
+
+- `deployment-metadata-schema.md`
+- `node-registry-schema.md`
+- `../build-guides/parcel-installation-checklist.md`

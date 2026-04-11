@@ -2,8 +2,8 @@
 
 ## Purpose
 
-Turn the April 14, 2026 public-facing site into something that reads like a serious
-open project rather than a vague prototype landing page.
+Turn the v0.1 public-facing site into something that reads like a serious open
+project rather than a vague prototype landing page.
 
 This file is the working website and repo-display standard for v1. It should be read
 together with:
@@ -91,13 +91,18 @@ The site should not present every hardware or software lane as equally mature.
 
 Use the current implementation matrix as the source of truth:
 
+- capability stages describe product scope
+- deployment maturity describes how field-hardened a hardware lane is
+
+If the internal standards mention `v0.1`, `v1.0`, `v1.5`, or `v2.0` for hardware maturity, they should be labeled as deployment maturity so they are not confused with the product roadmap.
+
 ### Hardware maturity labels
 
-- `bench-air-node` — buildable now
-- `mast-lite` — early outdoor prototype
-- `flood-node` — experimental field prototype
-- `weather-pm-mast` — second-wave / partial
-- `thermal-pod` — exploratory / R&D
+- `bench-air-node` — `deployment maturity v0.1` by default; do not silently upgrade it to field-ready without the documented field-hardening bundle
+- `mast-lite` — early `deployment maturity v1.0` target, but not field-ready by default
+- `flood-node` — experimental field prototype until geometry and low-point discipline are documented
+- `weather-pm-mast` — second-wave node with a `deployment maturity v1.5` target
+- `thermal-pod` — exploratory / R&D lane below a general field-ready claim
 
 ### Software maturity labels
 
@@ -164,6 +169,7 @@ Each hardware module page should show:
 - what it is
 - why it exists
 - current maturity
+- whether the maturity label refers to capability stage or deployment maturity
 - BOM
 - wiring or connection guidance
 - source design files in editable form where available
@@ -182,6 +188,17 @@ Each hardware module card on the site should also show:
 - outputs
 - standalone value
 - network value
+
+Hardware cards should not use field-ready language unless the repo has documented:
+
+- protected power posture
+- local buffering or durable storage
+- serviceable wiring
+- enclosure support posture
+- physical identity label
+- service access posture
+- install notes tied back to the parcel record
+- spare-parts posture for active node families
 
 ## Software page standard
 

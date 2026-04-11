@@ -23,6 +23,26 @@ Translate the long-term vision into staged execution from the current parcel-sen
 - `v3` = Stage E = parcel adaptation engine
 - `v4` = Stage F = parcel + route + block resilience
 
+Use `architecture-gaps-by-stage.md` as the companion document for deciding which
+missing operational surfaces belong in capability stages and deployment maturity,
+without confusing those axes with public release labels such as `v0.1`.
+
+## Deployment maturity overlay
+
+The program also uses a separate deployment maturity ladder.
+It should be read as a hardware and operational overlay, not as a renumbering of the capability stages above.
+
+- `deployment maturity v0.1`
+  bench prototype and first bring-up
+- `deployment maturity v1.0`
+  first field-hardened parcel kit
+- `deployment maturity v1.5`
+  trust, calibration, maintenance, and device-operations hardening
+- `deployment maturity v2.0`
+  decision-policy and adaptation support on top of a hardened evidence path
+
+This means a node family can be architecturally in scope for `current v1` while still being only `deployment maturity v0.1` or an early `deployment maturity v1.0` target.
+
 ## Stage A — Current v1 baseline
 
 ### Goal
@@ -36,11 +56,13 @@ Establish a credible parcel-first sensing and inference product that is useful w
 - confidence, freshness, and explanation posture
 - privacy, consent, export, and revocation baseline
 - hazard-specific claim boundaries for smoke, pluvial flooding/runoff, and heat
+- explicit distinction between bench-grade hardware and the first field-hardened parcel kit
 
 ### Must-have work
 
 - finalize home, parcel, observation, and parcel-state data contracts
 - document what current node classes can and cannot support
+- document the shared field-hardening bundle required before any node is called deployed or field-ready
 - align homeowner-facing language with claims-and-safety rules
 - keep `unknown` and low-confidence outcomes honest
 - define recommendation-language boundaries before shipping action prompts
@@ -52,6 +74,7 @@ Establish a credible parcel-first sensing and inference product that is useful w
 - example payloads validate
 - core docs agree on terminology and claim posture
 - current `v1` is clearly framed as parcel sensing and inference, not full parcel adaptation or automation
+- the repo can say which hardware lanes are `deployment maturity v0.1`, early `deployment maturity v1.0`, or still below a deployable threshold
 
 ## Stage B — v1.5 measurement-to-intervention foundation
 
@@ -157,6 +180,7 @@ Extend beyond the house to route, egress, and shared neighborhood infrastructure
 
 These workstreams should advance continuously across phases:
 
+- deployment maturity and field-hardening discipline
 - recommendation engine posture
 - privacy and consent tooling
 - sensor-health scoring

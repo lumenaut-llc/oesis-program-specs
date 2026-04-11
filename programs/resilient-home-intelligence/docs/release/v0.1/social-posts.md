@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Provide pre-approved social copy for the April 14, 2026 open release.
+Provide pre-approved social copy for the v0.1 open release.
 
 These posts are written to be public-facing and aligned with the current release
 controls. Do not add non-cleared technical, personal, or third-party detail without
@@ -10,8 +10,8 @@ checking `legal/public-preview-scope.md`.
 
 ## Primary post
 
-Today we’re publicly sharing the April 14 open release for Resilient Home
-Intelligence, part of Open Source DIY Tech.
+Today we’re publicly sharing the v0.1 open release for Resilient Home Intelligence,
+part of Open Source DIY Tech.
 
 This project is working toward a parcel-first, homeowner-owned environmental sensing system for smoke, pluvial flooding/runoff, and heat.
 
@@ -24,7 +24,7 @@ Release: [link]
 
 ## Short post
 
-We’re sharing the April 14 open release for Resilient Home Intelligence: a
+We’re sharing the v0.1 open release for Resilient Home Intelligence: a
 homeowner-owned, parcel-first environmental sensing project. Private by default.
 Shared by choice. Start with the governance and release framework here: [link]
 

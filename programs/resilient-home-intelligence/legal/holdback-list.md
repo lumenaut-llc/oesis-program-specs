@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Track the materials that should stay out of the April 14, 2026 open release even after the project moved away from the provisional-first path.
+Track the materials that should stay out of the v0.1 open release even after the project moved away from the provisional-first path.
 
 This list should be reviewed before any social post, repo publication, talk, demo, diagram release, or media interview.
 
@@ -97,7 +97,7 @@ For each item under consideration:
 
 Use this table as the live release gate.
 
-| Item | Owner | Status | Public release approved | Safe for April 14 release | Notes |
+| Item | Owner | Status | Public release approved | Safe for v0.1 release | Notes |
 | --- | --- | --- | --- | --- | --- |
 | Secrets and access material | Technical owner | blocked | no | no | never publish |
 | Archival provisional packet docs | Legal/IP owner | internal | no | no | historical planning only |

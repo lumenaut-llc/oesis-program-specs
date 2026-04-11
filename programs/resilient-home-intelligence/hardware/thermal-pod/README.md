@@ -30,6 +30,12 @@ Even without the full neighborhood platform, this subsystem can provide:
 - derived metrics only, no raw thermal frame persistence
 - JSON line output over stdout or local log
 
+## Current maturity
+
+Default posture: separate R&D lane below a general `deployment maturity v1.0` claim.
+
+This node should not inherit the deployability label of the rest of the parcel kit just because it can emit derived metrics.
+
 ## Inputs
 
 - low-resolution thermal frame from the MLX90640
@@ -63,6 +69,30 @@ Even without the full neighborhood platform, this subsystem can provide:
 - basic ingest path on the software side
 - privacy-governance alignment for derived-only telemetry
 - a fixed-view installation plan
+
+## Required now
+
+- stable Pi 5 power posture
+- high-endurance storage posture
+- fixed-view geometry documented in the install notes
+- thermal hood or aperture posture that is repeatable
+- clear privacy-safe derived-only operating mode
+
+## Add later
+
+- clean shutdown or backup power posture
+- RTC or stronger timing posture if replay quality becomes important
+- richer masking and scene-stability tooling
+
+## Field-ready boundary
+
+Do not describe the thermal pod as field-ready until the repo documents stable power, durable storage, clean shutdown posture, thermal isolation, and repeatable field-of-view geometry as standard requirements.
+
+## Serviceability notes
+
+- treat mount drift as a service event, not a minor nuisance
+- keep the hood, aperture, and storage posture inspectable
+- keep spare storage and power parts for any active pilot pod
 
 ## Next milestones
 

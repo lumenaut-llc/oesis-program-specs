@@ -3,7 +3,7 @@
 ## Purpose
 
 This notice explains how to read the Resilient Home Intelligence program materials
-during the April 14, 2026 open-release period.
+during the v0.1 open-release period.
 
 ## Program-wide notice
 
@@ -32,7 +32,7 @@ Do not assume that:
 - `../../LICENSES.md`
 - `docs/privacy-governance/data-ownership.md`
 - `docs/privacy-governance/privacy.md`
-- `docs/release/2026-04-14/NOTICE.md`
+- `docs/release/v0.1/NOTICE.md`
 
 ## Non-release materials
 

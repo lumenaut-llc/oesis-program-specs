@@ -4,6 +4,33 @@
 
 Build a PM-first outdoor mast node around an ESP32-S3 DevKitC-1, one SPS30, one SHT45, and one BME680. The first-build goal is a stable particulate and environmental mast prototype before wind and rain mechanics are added.
 
+## Current maturity
+
+Default posture: second-wave node with a `deployment maturity v1.5` target rather than a default `deployment maturity v1.0` requirement.
+
+## Required now
+
+- stable 5V PM power posture
+- deliberate airflow and splash posture
+- mast-mount and enclosure service posture
+- local buffering or durable storage if the node will be described as deployed
+- maintenance and cleaning posture for the PM path
+
+## Add later
+
+- wind and rain interface posture
+- removable service module for the PM lane
+- stronger maintenance counters and device-health posture
+
+## Field-ready boundary
+
+Do not describe this node as field-ready unless the repo documents the PM power path, airflow path, interface posture, buffering, and service-module posture.
+
+## Serviceability notes
+
+- particulate maintenance is part of the node definition
+- keep airflow and splash decisions documented alongside the install record
+
 ## Required tools
 
 - soldering iron with fine tip

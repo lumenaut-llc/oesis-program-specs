@@ -15,6 +15,8 @@ Cross-link index for all hardware build guides and installation notes.
 - `integrated-parcel-kit-bom.md` defines the first parcel-kit BOM by deployment tier.
 - `parcel-kit-procurement-checklist.md` defines what to buy now for Tier 1 and Tier 2 parcel kits.
 - `parcel-installation-checklist.md` defines where and how to place the first parcel-kit nodes.
+- `field-hardening-checklist.md` defines the shared support bundle required before a node is described as deployed or field-ready.
+- `pilot-field-kit.md` defines the supporting parts and spares needed around the active parcel nodes.
 
 ## Related workstreams
 

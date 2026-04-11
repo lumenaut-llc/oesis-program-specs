@@ -16,6 +16,15 @@ This version covers the bench-air-node MVP and establishes the minimum structure
 - health telemetry
 - provenance-friendly raw payload retention
 
+## Current implementation boundary
+
+This markdown doc includes:
+
+- the currently implemented `rhi.bench-air.v1` contract
+- planned deployment-maturity extensions that are not yet part of the machine-readable schema
+
+The current reference ingest path should be treated as implemented only for the fields already shown in the machine-readable examples and validation path.
+
 ## Raw packet contract
 
 Required top-level fields:
@@ -128,8 +137,51 @@ Suggested canonical shape after ingest:
 - Missing sensor values must be explicit, not silently omitted because of read errors.
 - Future schemas should extend by version, not by changing the meaning of existing fields in place.
 
+## Planned maturity extensions
+
+The following extensions are intentionally documented here as planned fields, not as part of the current machine-readable contract.
+
+### Packet identity and replay control
+
+Future node families should have a clearer answer for:
+
+- `packet_id`
+- stronger `sequence`
+- explicit replay or buffered-upload markers
+- `recorded_at`, `received_at`, and `processed_at` when timing quality matters
+
+### Buffer and storage state
+
+Future health blocks may add:
+
+- `storage_state`
+- `buffer_fill_pct`
+- `buffer_oldest_at`
+- `buffer_drop_count`
+
+### Power and connectivity health
+
+Future health blocks may add:
+
+- `supply_voltage_v`
+- `power_source_state`
+- `signal_quality`
+- `rssi_dbm`
+
+### Boot, config, and calibration lineage
+
+Future packet or provenance blocks may add:
+
+- `boot_reason`
+- `config_version`
+- `calibration_version`
+- `correction_model_version`
+
+These extensions matter for deployment maturity and measurement trust, but they should land as versioned schema additions rather than silent edits to `rhi.bench-air.v1`.
+
 ## Related docs
 
 - `parcel-state-schema.md`
+- `node-health-schema.md`
 - `../../software/ingest-service/interfaces.md`
 - `../../hardware/bench-air-node/firmware-notes.md`

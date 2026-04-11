@@ -2,8 +2,8 @@
 
 ## Status
 
-Internal handoff index for the April 14, 2026 open release and related controlled
-review packets.
+Internal handoff index for the v0.1 open release and related controlled review
+packets.
 
 Do not treat this file itself as a public landing page.
 

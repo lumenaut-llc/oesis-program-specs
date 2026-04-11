@@ -1,8 +1,8 @@
-# April 14, 2026 Launch Checklist
+# v0.1 Launch Checklist
 
 ## Purpose
 
-Provide a dependency-ordered checklist for the April 14, 2026 open release.
+Provide a dependency-ordered checklist for the v0.1 open release.
 
 This checklist assumes the current open-release posture:
 
@@ -11,7 +11,7 @@ This checklist assumes the current open-release posture:
 - the project-controlled v1 dataset may be intentionally public, but future participant-contributed parcel-linked data remains private by default
 
 ## Phase 1. Lock the release boundary
-
+a
 Complete these first:
 
 - confirm the project is publishing under the current open-release posture

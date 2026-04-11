@@ -15,6 +15,10 @@ Canonical definitions for parcels, nodes, observations, states, permissions, pro
 ## Current status
 
 The current center of gravity remains the `current v1` observation, parcel-context, and parcel-state contracts.
+Those machine-readable contracts describe the current implemented reference path.
+
+The repo also now carries draft deployment-maturity companion docs for node health, deployment metadata, and device lifecycle events.
+Those draft docs are intentionally separate from the current schemas so the docs do not imply the reference code already persists them.
 
 `v1.5` adds separate support objects for:
 - house state
@@ -62,6 +66,12 @@ Machine-readable starter artifacts now live in:
 - `examples/export-bundle.example.json`
 - `examples/retention-cleanup-report.example.json`
 
+Draft deployment-maturity companion docs now live in:
+
+- `node-health-schema.md`
+- `deployment-metadata-schema.md`
+- `device-event-schema.md`
+
 ## Related workstreams
 
 - hardware node design
@@ -71,7 +81,6 @@ Machine-readable starter artifacts now live in:
 
 ## Next docs to add
 
-- `node-observation-schema.md`
 - provenance summary model
 - sharing settings model
 - consent record model

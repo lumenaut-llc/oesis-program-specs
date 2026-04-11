@@ -32,6 +32,12 @@ Even without neighborhood sharing, this subsystem gives a parcel owner useful lo
 - optional wind speed, wind direction, and rainfall after the PM-first build is stable
 - JSON packet output over serial and/or Wi-Fi
 
+## Current maturity
+
+Default posture: second-wave node with a `deployment maturity v1.5` target rather than a default `deployment maturity v1.0` requirement.
+
+This lane raises the bar for power, airflow, maintenance, buffering, and serviceability relative to `mast-lite`.
+
 ## Inputs
 
 - ambient sheltered or mast-mounted outdoor air
@@ -68,6 +74,30 @@ Even without neighborhood sharing, this subsystem gives a parcel owner useful lo
 - basic ingest path on the software side
 - mast-lite learnings for outdoor enclosure and siting
 - serial JSON contract for first-build bring-up
+
+## Required now
+
+- stable 5V PM power posture
+- deliberate airflow and splash posture for the SPS30
+- mast mounting and enclosure service posture
+- local buffering or durable local storage
+- maintenance and cleaning posture for the particulate lane
+
+## Add later
+
+- wind and rain interface posture
+- removable service module for the PM path
+- stronger device-health and maintenance counters
+
+## Field-ready boundary
+
+Do not describe `weather-pm-mast` as field-ready unless the repo documents the PM power path, weather-interface posture, airflow path, local buffering, physical label, and service-module posture for the active configuration.
+
+## Serviceability notes
+
+- particulate maintenance is part of the node, not an optional later consideration
+- keep airflow and splash decisions documented alongside the install record
+- maintain spare controller, PM path, and enclosure support parts for active parcels
 
 ## Next milestones
 

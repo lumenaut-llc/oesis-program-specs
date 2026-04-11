@@ -2,7 +2,7 @@
 
 ## Status
 
-Internal controlled-review document for the April 14, 2026 release period.
+Internal controlled-review document for the v0.1 release period.
 
 Use this to separate what is working now from what is only documented, planned, or policy direction.
 
@@ -17,6 +17,12 @@ This matrix exists so reviewers do not confuse:
 - reference-only admin or governance utilities
 - hardware build readiness
 - policy direction that is not yet product behavior
+
+This matrix also separates:
+
+- architectural inclusion
+- runnable reference behavior
+- deployment maturity and field-hardening readiness
 
 ## Status key
 
@@ -36,6 +42,15 @@ This matrix reflects the current local reference state after these checks passed
 - `make rhi-validate`
 - `make rhi-check`
 - `make rhi-http-check`
+
+## Deployment maturity note
+
+The repo now uses a separate deployment maturity overlay in addition to the capability roadmap.
+In this matrix:
+
+- `implemented` means the reference path or hardware bring-up path exists
+- `implemented` does not automatically mean `deployment maturity v1.0`
+- a documented hardware lane may still be below a field-hardened deployed posture
 
 ## Software and APIs
 
@@ -69,19 +84,19 @@ This matrix reflects the current local reference state after these checks passed
 
 | Surface | Status | Evidence | Current boundary | Next gap |
 | --- | --- | --- | --- | --- |
-| Bench-air-node build path | implemented | build guide, operator runbook, firmware examples | Indoor or sheltered bench node is the current fastest working hardware slice. | Gather more repeatable field and long-run evidence. |
-| Mast-lite build and install path | partial | build guide, operator runbook, procurement and installation checklists | First sheltered outdoor node is integrated into the parcel-kit path. | Increase real-world validation and maintenance evidence. |
-| Tier 1 and Tier 2 procurement path | implemented | `parcel-kit-procurement-checklist.md` | A non-author now has a concrete first purchase path. | Convert purchase guidance into named BOM sources and part decisions. |
-| Tier 1 and Tier 2 installation path | implemented | `parcel-installation-checklist.md` | Indoor and sheltered outdoor siting rules are now explicit. | Add real install records and field photos under controlled review. |
-| Flood-node hardware path | partial | flood-node build/runbook/calibration docs | Hardware path exists, but it is not part of the default first kit. | Add low-point install records and software observation support. |
-| Weather-pm-mast hardware path | partial | weather-pm-mast docs and firmware lane | Second-wave hardware lane exists. | Complete contracts and maintenance path before making it critical-path hardware. |
-| Thermal-pod hardware path | partial | thermal-pod docs | Separate R&D lane exists. | Resolve privacy, retention, and usefulness questions before folding it into the parcel kit. |
+| Bench-air-node build path | implemented | build guide, operator runbook, firmware examples | Indoor or sheltered bench node is the current fastest working hardware slice, but the default posture is still `deployment maturity v0.1`. | Document fixed harness, stable enclosure or stand, identity label, and local logging posture before using stronger deployed language. |
+| Mast-lite build and install path | partial | build guide, operator runbook, procurement and installation checklists | First sheltered outdoor node is integrated into the parcel-kit path, but not yet field-hardened by default. | Close the field-hardening bundle around protected power, buffering, connectorized wiring, enclosure support, and serviceability. |
+| Tier 1 and Tier 2 procurement path | docs-only | `parcel-kit-procurement-checklist.md` | A non-author now has a documented first purchase path, but the repo has not yet proven it through named BOM decisions or completed parcel builds. | Convert purchase guidance into named BOM sources and part decisions. |
+| Tier 1 and Tier 2 installation path | docs-only | `parcel-installation-checklist.md` | Indoor and sheltered outdoor siting rules are documented, including the new field-hardening gate for deployed language. | Add real install records and field photos under controlled review. |
+| Flood-node hardware path | partial | flood-node build/runbook/calibration docs | Hardware path exists, but it remains a parcel-specific experimental field lane rather than a general deployed module. | Add rigid geometry, field marker, and low-point documentation discipline plus software observation support. |
+| Weather-pm-mast hardware path | partial | weather-pm-mast docs and firmware lane | Second-wave hardware lane exists, but it should be treated as a `deployment maturity v1.5` target rather than a default pilot requirement. | Complete PM power, airflow, interface, buffering, and maintenance posture before making it critical-path hardware. |
+| Thermal-pod hardware path | partial | thermal-pod docs | Separate R&D lane exists and should stay below general field-ready language. | Resolve privacy, retention, power, storage, and scene-geometry questions before folding it into the parcel kit. |
 
 ## Release, legal, and public surfaces
 
 | Surface | Status | Evidence | Current boundary | Next gap |
 | --- | --- | --- | --- | --- |
-| Public release site scaffold | implemented | `docs/release/2026-04-14/site/` | Static release page works locally with no build step. | Run a final copy review against named owners and release gates. |
+| Public release site scaffold | implemented | `docs/release/v0.1/site/` | Static release page works locally with no build step. | Run a final copy review against named owners and release gates. |
 | Public release packet | implemented | `NOTICE.md`, release README, governance/privacy docs | Packet is assembled for public release readers. | Keep the packet aligned with the actual implementation boundary. |
 | Reviewer packet assembly | implemented | `reviewer-packet-index.md` | Controlled packet lanes are now explicit. | Use named release owners to decide who receives which packet. |
 | Counsel packet assembly | implemented | `legal/send-to-counsel-checklist.md` and related filing docs | Archival counsel handoff path exists if later needed. | Only use if the project reopens a separate patent/counsel lane. |
@@ -95,4 +110,5 @@ Before publishing, sending, or presenting anything:
 1. Confirm the surface is marked `implemented` or that the audience understands it is only `partial`, `docs-only`, or `planned`.
 2. Pair this matrix with `reviewer-packet-index.md` before sending controlled-review materials.
 3. Do not let a documented policy or schema stand in for product behavior.
-4. Re-run the reference checks before changing any row from `partial` or `docs-only` to `implemented`.
+4. Do not let architectural inclusion stand in for field-hardened readiness.
+5. Re-run the reference checks before changing any row from `partial` or `docs-only` to `implemented`.

@@ -11,7 +11,10 @@ Read `NOTICE.md` before treating this subtree as a complete released hardware de
 - prefer stable, documented modules over custom boards in v0.x
 - keep each node useful on its own
 - publish calibration and maintenance notes alongside build steps
+- distinguish bench prototypes from field-ready nodes with an explicit deployment maturity label
+- treat field-hardening parts as part of the node, not as optional support gear once a node is described as deployed
 
 ## Cross-subsystem reference
 
 Use `../docs/system-overview/integrated-parcel-system-spec.md` as the canonical document for how all current hardware families attach to one parcel, one software stack, and one governance surface.
+Use `../docs/system-overview/deployment-maturity-ladder.md` and `../docs/build-guides/field-hardening-checklist.md` as the canonical references for when a node family is still `deployment maturity v0.1` versus ready to target `deployment maturity v1.0` or above.

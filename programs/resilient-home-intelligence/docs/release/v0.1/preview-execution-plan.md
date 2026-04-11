@@ -3,7 +3,7 @@
 ## Purpose
 
 Turn the existing software, hardware, legal, and release documents into one practical
-execution sequence for the April 14 open release and first private pilot-ready
+execution sequence for the v0.1 open release and first private pilot-ready
 parcel kit.
 
 ## Outcome target

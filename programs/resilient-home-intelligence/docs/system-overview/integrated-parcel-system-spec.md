@@ -19,6 +19,7 @@ Supporting specs:
 - `../build-guides/integrated-parcel-kit-bom.md`
 - `../build-guides/parcel-kit-procurement-checklist.md`
 - `../build-guides/parcel-installation-checklist.md`
+- `deployment-maturity-ladder.md`
 
 ## Core design rule
 
@@ -37,12 +38,22 @@ In fact, the current hardware rules explicitly argue against that when placement
 
 ## Recommended integrated parcel kit
 
+## Capability stage versus deployment maturity
+
+This spec follows the current capability roadmap, but it also uses the deployment maturity overlay.
+
+- capability stages describe what the parcel platform can do
+- deployment maturity describes whether a node family is still a bench prototype, a first field-hardened kit, or a later trust-hardened lane
+
+When this spec uses `v0.1`, `v1.0`, `v1.5`, or `v2.0` below, it refers to deployment maturity unless it explicitly says capability stage.
+
 ### Tier 1: fastest useful parcel kit
 
 - `bench-air-node` as the required indoor evidence node
 - public weather and smoke context through the existing software path
 
 This is the fastest end-to-end homeowner slice.
+It is primarily a `deployment maturity v0.1` slice: strong for bench proof, packet contracts, and homeowner-local evidence, but not the same as a fully field-hardened parcel kit.
 
 ### Tier 2: first full home-and-parcel kit
 
@@ -51,6 +62,7 @@ This is the fastest end-to-end homeowner slice.
 - optional `flood-node` only on parcels where runoff is operationally relevant
 
 This should be the default integrated design for the first strong-timeline pilot.
+It is the first honest `deployment maturity v1.0` target, because it introduces the field-hardening bundle needed to call the parcel kit deployed rather than merely buildable.
 
 ### Tier 3: richer outdoor parcel kit
 
@@ -59,12 +71,14 @@ This should be the default integrated design for the first strong-timeline pilot
 - keep `flood-node` as an optional hazard module
 
 This is the better second-wave parcel kit after the simpler outdoor node is stable.
+It is better treated as a `deployment maturity v1.5` target, because the PM mast raises the bar for power design, airflow, maintenance, local buffering, and serviceability.
 
 ### Separate R&D lane
 
 - `thermal-pod`
 
 The thermal pod should remain a separate research and privacy-reviewed lane until its contract, usefulness, and retention posture are clearer.
+It should not inherit a deployability claim from the rest of the parcel kit.
 
 ## Hardware role map
 
@@ -104,6 +118,8 @@ Minimum registry fields:
 - `installed_at`
 - `last_seen_at`
 
+The registry is also where the repo should eventually attach deployment-maturity facts such as enclosure revision, service posture, storage class, and replacement history rather than quietly leaving those decisions out of the architecture.
+
 ### Evidence transport layer
 
 For timeline compression, the recommended MVP transport decision is:
@@ -112,6 +128,13 @@ For timeline compression, the recommended MVP transport decision is:
 - HTTPS push into the ingest API for live operation
 
 That keeps bring-up simple while converging all live nodes onto one operational path.
+
+For `deployment maturity v1.0` and above, the transport layer also needs a documented answer for:
+
+- local buffering or durable local storage
+- replay and dedupe semantics
+- field identity labels and service posture
+- basic power and enclosure protection expectations
 
 ### Software path
 
@@ -127,6 +150,9 @@ That keeps bring-up simple while converging all live nodes onto one operational 
 - `programs/resilient-home-intelligence/software/*/scripts/*.py` remains in place as a compatibility layer for docs, smoke checks, and operator-facing commands.
 - The implemented reference path fully covers bench-air packet validation and normalization, public weather and smoke adapters, parcel inference, parcel-platform governance flows, and shared-map aggregation.
 - `mast-lite`, `weather-pm-mast`, `flood-node`, and `thermal-pod` are already part of the singular parcel-kit architecture, but their family-specific normalized observation families remain planned extensions to the current Python package.
+
+That means architecture inclusion does not imply field-hardened readiness.
+Several node families are architecturally present before they are honest to call deployed.
 
 ## System surfaces
 
@@ -206,6 +232,18 @@ What should be singular is:
 - calibration records
 - homeowner-facing parcel outputs
 
+### Do require a field-hardening bundle before using deployed language
+
+No node should be described in the docs as deployed or field-ready unless the repo documents:
+
+- protected power posture
+- local buffering or durable storage posture
+- serviceable wiring and connector posture
+- enclosure support parts and moisture posture
+- physical node identity label
+- service access posture
+- spare-parts posture for active node families
+
 ## Strong-timeline sequencing
 
 ### Phase 1 shipping lane
@@ -215,21 +253,29 @@ What should be singular is:
 - parcel-state inference
 - parcel-platform UI and rights controls
 
+This is primarily a `deployment maturity v0.1` lane with selective movement toward `deployment maturity v1.0` documentation.
+
 ### Phase 1.5 integrated parcel lane
 
 - add `mast-lite`
 - use one parcel registry record to bind indoor and outdoor nodes
 - expose source-aware evidence summaries in the parcel view
 
+This is the first meaningful `deployment maturity v1.0` lane.
+
 ### Hazard-module lane
 
 - add `flood-node` only for parcels where runoff is a real use case
 - keep flood evidence conservative and low-point scoped
 
+Flood maturity should remain parcel-specific until rigid mount, zero reference, and field marker discipline are documented.
+
 ### Second-wave outdoor lane
 
 - graduate from `mast-lite` to `weather-pm-mast`
 - add PM-specific normalization and inference only after the simpler outdoor lane is stable
+
+This is better treated as a `deployment maturity v1.5` target than a default `v1.0` requirement.
 
 ### Research lane
 
@@ -241,6 +287,8 @@ What should be singular is:
 - normalized observation schemas for flood, weather/PM, and thermal nodes
 - calibration record format shared across node classes
 - install metadata standard that inference can trust
+- shared field-hardening checklist used across node families
+- explicit maturity labeling so controlled-review docs do not overstate deployability
 
 ## Recommended implementation decisions
 

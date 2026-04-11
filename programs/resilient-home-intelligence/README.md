@@ -13,10 +13,25 @@ Create homeowner-owned environmental sensing and parcel-level situational intell
 - uses external public data only inside the platform
 - stays modular and open
 
-The program is now in its April 14, 2026 open-release period. Approved software,
+The program is now in its v0.1 open-release period. Approved software,
 hardware, documentation, governance materials, and intentionally public datasets may be
 released under asset-specific terms, while some materials remain outside release for
 privacy, provenance, security, or licensing reasons.
+
+## Version framing
+
+Keep these labels separate:
+
+- `v0.1` = the current public release label
+- `current v1`, `v1.5`, `v2`, `v2.5`, `v3`, `v4` = capability stages
+- `deployment maturity v0.1`, `v1.0`, `v1.5`, `v2.0` = hardware and operations maturity
+
+For the tracked architecture and roadmap docs inside this repo, start with:
+
+- `docs/system-overview/README.md`
+- `docs/system-overview/phase-roadmap.md`
+- `docs/system-overview/architecture-gaps-by-stage.md`
+- `docs/system-overview/deployment-maturity-ladder.md`
 
 ## Program structure
 
@@ -60,4 +75,4 @@ For each parcel:
 - `legal/GOVERNANCE.md`
 - `docs/privacy-governance/data-ownership.md`
 - `docs/privacy-governance/privacy.md`
-- `docs/release/2026-04-14/NOTICE.md`
+- `docs/release/v0.1/NOTICE.md`

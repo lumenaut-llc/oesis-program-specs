@@ -4,6 +4,33 @@
 
 Build a sheltered outdoor parcel node around an ESP32-S3 DevKitC-1 with an SHT45 in a radiation-shielded position and a BME680 in a vented enclosure zone. The first-build goal is a stable sheltered outdoor prototype that preserves the bench-air packet contract while adding enclosure and siting discipline.
 
+## Current maturity
+
+Default posture: early `deployment maturity v1.0` target, but not field-ready by default.
+
+## Required now
+
+- vented enclosure with moisture posture
+- connectorized or otherwise stable wiring
+- cable-gland and strain-relief posture
+- sheltered placement discipline
+- local buffering or storage plan if the node will be described as deployed
+
+## Add later
+
+- stronger watchdog and device-health posture
+- improved radio and antenna posture for hard sites
+- richer maintenance workflow
+
+## Field-ready boundary
+
+Do not describe a mast-lite install as field-ready unless the shared field-hardening checklist is satisfied for the active parcel.
+
+## Serviceability notes
+
+- preserve enclosure access after mounting
+- document vent, gland, and cable-routing choices in the install record
+
 ## Required tools
 
 - soldering iron with fine tip

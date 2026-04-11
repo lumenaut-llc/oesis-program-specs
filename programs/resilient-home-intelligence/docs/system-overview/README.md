@@ -16,6 +16,8 @@ Program-level system narrative and top-level operating model.
 
 - `vision-and-use-cases.md` expands the long-term product direction from smart home to smart block to citizen-owned smart city.
 - `phase-roadmap.md` translates the vision into staged execution.
+- `architecture-gaps-by-stage.md` maps operational-architecture gaps onto capability stages and the deployment-maturity overlay while keeping public release labels such as `v0.1` separate from that stage map.
+- `deployment-maturity-ladder.md` defines the separate deployability overlay used for hardware and operational readiness.
 - `feature-matrix-by-use-case.md` compares use cases, sensors, outputs, strengths, and constraints.
 - `product-requirements-phase-1.md` defines the first homeowner-focused product slice.
 - `block-level-operating-model.md` defines how shared block intelligence should work.

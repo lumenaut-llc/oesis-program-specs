@@ -4,6 +4,11 @@
 
 Define the parcel-scoped registry object that binds one or more physical nodes to one parcel, one software stack, and one homeowner-facing product surface.
 
+## Current implementation boundary
+
+This doc describes the current parcel-scoped registry baseline plus planned deployment-maturity extensions.
+The current machine-readable starter artifact remains the implemented baseline.
+
 ## Core fields
 
 - `updated_at`
@@ -68,6 +73,37 @@ Optional fields:
 - `enabled: false` means the node remains historically known but should not be treated as active evidence.
 - `privacy_mode` is optional and primarily relevant to node classes such as `thermal-pod`.
 
+## Planned maturity extensions
+
+The following fields are good candidates for a later registry version, but they should not be treated as implemented merely because they are documented here.
+
+### Physical identity and provisioning
+
+- `device_label`
+- `label_code`
+- `provisioning_state`
+- `claimed_at`
+
+### Service and protection posture
+
+- `storage_class`
+- `power_protection_class`
+- `service_access_mode`
+- `enclosure_revision`
+
+### Version and trust lineage
+
+- `config_version`
+- `calibration_version`
+- `correction_model_version`
+- `maintenance_state`
+
+### Replacement lifecycle
+
+- `retired_at`
+- `replacement_for_node_id`
+- `replacement_node_id`
+
 ## Why this object matters
 
 The integrated parcel design depends on multiple specialized nodes behaving like one system.
@@ -82,6 +118,8 @@ The node registry is the bridge between:
 ## Related docs
 
 - `node-observation-schema.md`
+- `deployment-metadata-schema.md`
+- `device-event-schema.md`
 - `parcel-context-schema.md`
 - `sharing-settings-schema.md`
 - `../system-overview/integrated-parcel-system-spec.md`

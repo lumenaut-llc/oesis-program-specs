@@ -1,7 +1,6 @@
-# April 14, 2026 Open Release Notice
+# v0.1 Open Release Notice
 
-This release is the April 14, 2026 open-release package for Resilient Home
-Intelligence.
+This release is the v0.1 open-release package for Resilient Home Intelligence.
 
 ## Important release limits
 

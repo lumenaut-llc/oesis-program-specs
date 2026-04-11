@@ -35,6 +35,13 @@ The bench air node is an evidence producer, not a parcel-state engine. Its respo
 - shared I2C bus
 - JSON packet output over serial and/or Wi-Fi
 
+## Current maturity
+
+Default posture: `deployment maturity v0.1`
+
+This node is the default bench and first-bring-up lane.
+It becomes a `deployment maturity v1.0` candidate only when the repo documents the shared field-hardening bundle for the specific install, including a fixed harness, stable mount or enclosure posture, physical identity label, and a clear local logging or buffering posture.
+
 ## Inputs
 
 - ambient air near the install location
@@ -68,6 +75,31 @@ The bench air node is an evidence producer, not a parcel-state engine. Its respo
 - documentation templates
 - basic ingest path on the software side
 - serial JSON contract for first-build bring-up
+
+## Required now
+
+- short stable wiring harness
+- known-good USB power and data path
+- documented `node_id`
+- documented install bias notes
+
+## Add later
+
+- fixed carrier or more stable small-board posture
+- simple vented enclosure or stand
+- local buffering or logging path
+- stronger provisioning and status posture
+
+## Field-ready boundary
+
+Do not describe this node as field-ready by default.
+It crosses into a `deployment maturity v1.0` claim only when the repo documents the field-hardening bundle for the specific install.
+
+## Serviceability notes
+
+- keep the controller and sensors accessible for inspection and reflash
+- use a physical node label once the node leaves pure bench use
+- keep at least one spare controller and one spare sensing path for any active field deployment
 
 ## Next milestones
 

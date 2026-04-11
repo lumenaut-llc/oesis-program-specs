@@ -3,18 +3,18 @@
 ## Purpose
 
 Give one folder-by-folder view of what should be treated as public-release material
-versus internal-only material for the April 14, 2026 open release.
+versus internal-only material for the v0.1 open release.
 
 This file is a release-control aid. It is not legal advice.
 
 ## Public release by default
 
-These areas are part of the intended April 14 public release surface, subject to the
+These areas are part of the intended v0.1 public release surface, subject to the
 notices and claims/privacy rules:
 
 - `README.md`
 - `NOTICE.md`
-- `docs/release/2026-04-14/`
+- `docs/release/v0.1/`
 - `docs/privacy-governance/`
 - `legal/ip.md`
 - `legal/GOVERNANCE.md`
@@ -49,7 +49,7 @@ filing process:
 ## Internal until separately cleared
 
 These areas may eventually become public, but should not be assumed public in the
-April 14 release:
+v0.1 release:
 
 - detailed hardware design files not yet cleared for release
 - detailed inference logic, thresholds, and scoring materials
@@ -59,11 +59,11 @@ April 14 release:
 
 ## Folder summary
 
-| Folder or file set | Default status for April 14 release | Notes |
+| Folder or file set | Default status for v0.1 release | Notes |
 | --- | --- | --- |
 | `repo/README.md`, `repo/NOTICE.md`, `repo/LICENSES.md` | publish | core entry points |
 | `programs/resilient-home-intelligence/README.md`, `NOTICE.md` | publish | core program entry points |
-| `programs/resilient-home-intelligence/docs/release/2026-04-14/` | publish | canonical release set |
+| `programs/resilient-home-intelligence/docs/release/v0.1/` | publish | canonical release set |
 | `programs/resilient-home-intelligence/docs/privacy-governance/` | publish | public governance posture |
 | `programs/resilient-home-intelligence/legal/ip.md` | publish | current IP position |
 | `programs/resilient-home-intelligence/legal/GOVERNANCE.md` | publish | project governance posture |

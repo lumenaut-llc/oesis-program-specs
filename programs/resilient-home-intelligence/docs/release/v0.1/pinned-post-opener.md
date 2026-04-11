@@ -14,7 +14,7 @@ Start here: [link]
 
 ## Short version
 
-We’ve published the April 14 open release for Resilient Home Intelligence: a
+We’ve published the v0.1 open release for Resilient Home Intelligence: a
 parcel-first, homeowner-centered environmental sensing project. Private by default.
 Shared by choice. Governance and release docs here: [link]
 

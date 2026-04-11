@@ -7,8 +7,8 @@ export const repoLinks = {
   repoHome: REPO_BASE,
   rootLicenses: repoBlob("LICENSES.md"),
   programReadme: repoBlob("programs/resilient-home-intelligence/README.md"),
-  releaseReadme: repoBlob("programs/resilient-home-intelligence/docs/release/2026-04-14/README.md"),
-  releaseNotice: repoBlob("programs/resilient-home-intelligence/docs/release/2026-04-14/NOTICE.md"),
+  releaseReadme: repoBlob("programs/resilient-home-intelligence/docs/release/v0.1/README.md"),
+  releaseNotice: repoBlob("programs/resilient-home-intelligence/docs/release/v0.1/NOTICE.md"),
   nodeObservationSchema: repoBlob(
     "programs/resilient-home-intelligence/docs/data-model/schemas/node-observation.schema.json"
   ),

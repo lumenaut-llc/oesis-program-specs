@@ -30,6 +30,12 @@ Even without the full neighborhood platform, this subsystem gives a parcel owner
 - analog-read bring-up path with install-specific calibration constants
 - JSON packet output over serial and/or Wi-Fi
 
+## Current maturity
+
+Default posture: experimental field prototype below a general `deployment maturity v1.0` claim.
+
+This node can be valuable early, but it should remain parcel-specific until the repo documents rigid geometry, zero reference, and repeatable service posture.
+
 ## Inputs
 
 - measured sensor-to-surface distance at the runoff low point
@@ -64,6 +70,30 @@ Even without the full neighborhood platform, this subsystem gives a parcel owner
 - basic ingest path on the software side
 - parcel context documenting the runoff low point
 - serial JSON contract for first-build bring-up
+
+## Required now
+
+- rigid mount that preserves geometry
+- documented dry reference
+- field marker or staff gauge posture
+- enclosure posture that stays above likely splash or standing water
+- local buffering or logging posture for event review
+
+## Add later
+
+- tamper or tilt detection
+- stronger surge and power protection
+- more formal calibration and replacement workflow
+
+## Field-ready boundary
+
+Do not describe the flood node as stronger parcel evidence unless mount angle, zero reference, field marker posture, and service geometry are all documented for the parcel.
+
+## Serviceability notes
+
+- inspect for debris, splash residue, and mount drift after storms
+- keep geometry notes with the parcel record, not just in informal field memory
+- maintain a spare controller and a spare ranging path for active flood parcels
 
 ## Next milestones
 

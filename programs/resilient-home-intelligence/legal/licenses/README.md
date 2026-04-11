@@ -14,9 +14,9 @@ Define the licensing structure for code, hardware, documentation, and datasets w
 - approved public shared-dataset snapshots: dataset-specific terms, potentially including ODbL where appropriate
 - real homeowner-contributed parcel-linked data: separate contractual/data-governance treatment, not a blanket open license
 
-## Preview-phase note
+## Release note
 
-For the April 14, 2026 preview, this split expresses intended release direction.
+For the v0.1 release, this split expresses intended release direction.
 
 It does not mean:
 
@@ -32,7 +32,7 @@ It does not mean:
 
 ## Why this split changed
 
-The repo earlier used a more permissive MVP recommendation. The current preview direction is intentionally more commons-protective:
+The repo earlier used a more permissive MVP recommendation. The current release direction is intentionally more commons-protective:
 
 - stronger copyleft for platform code
 - reciprocal open-hardware terms for hardware design files

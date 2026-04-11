@@ -3,7 +3,7 @@
 ## Purpose
 
 Define the stewardship, decision-making, and change-control model for the Resilient
-Home Intelligence project during the April 14, 2026 open-release period.
+Home Intelligence project during the v0.1 open-release period.
 
 This file is a project governance draft, not legal advice.
 

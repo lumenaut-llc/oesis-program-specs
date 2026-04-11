@@ -1,6 +1,6 @@
 # Licensing plan
 
-This file is the working licensing matrix for the repository structure and April 14, 2026 open-release posture.
+This file is the working licensing matrix for the repository structure and v0.1 open-release posture.
 
 It is a project planning document, not legal advice.
 
@@ -17,7 +17,7 @@ It is a project planning document, not legal advice.
 
 ## Current release note
 
-During the current April 14 release:
+During the current v0.1 release:
 
 - this matrix describes the intended public license split for approved release artifacts
 - archival provisional-planning materials remain internal and are not public release assets by default

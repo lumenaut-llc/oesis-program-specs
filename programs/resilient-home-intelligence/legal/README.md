@@ -20,7 +20,7 @@ Read `NOTICE.md` before treating every file in this subtree as public-facing or 
 
 ## Current release controls
 
-For the current April 14, 2026 open-release posture, start with:
+For the current v0.1 open-release posture, start with:
 
 - `ip.md`
 - `public-preview-scope.md`

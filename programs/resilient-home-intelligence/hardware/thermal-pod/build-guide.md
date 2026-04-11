@@ -4,6 +4,32 @@
 
 The first thermal-pod build should optimize for a stable fixed scene and derived metrics only. Do not treat the first version as a general-purpose thermal camera product.
 
+## Current maturity
+
+Default posture: separate R&D lane below a general `deployment maturity v1.0` claim.
+
+## Required now
+
+- stable Pi 5 power posture
+- high-endurance storage posture
+- repeatable hood or aperture geometry
+- fixed-view install notes
+
+## Add later
+
+- clean shutdown or backup power posture
+- stronger timing posture
+- richer masking and scene-stability tooling
+
+## Field-ready boundary
+
+Do not describe the thermal pod as field-ready unless the repo documents stable power, durable storage, clean shutdown posture, thermal isolation, and repeatable field-of-view geometry.
+
+## Serviceability notes
+
+- keep the hood, aperture, and storage posture inspectable
+- treat mount drift as a service event
+
 ## Required tools
 
 - screwdriver set

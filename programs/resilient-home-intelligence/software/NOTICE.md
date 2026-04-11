@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This notice explains how to read the software subtree during the April 14, 2026
+This notice explains how to read the software subtree during the v0.1
 open-release period.
 
 ## Intended license direction

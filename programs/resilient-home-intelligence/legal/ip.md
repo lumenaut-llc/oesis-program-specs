@@ -2,7 +2,7 @@
 
 ## Purpose
 
-State the project's current intellectual-property and release posture for the April 14, 2026 open-release period.
+State the project's current intellectual-property and release posture for the v0.1 open-release period.
 
 This file is a project policy draft and release-planning statement. It is not legal advice.
 
