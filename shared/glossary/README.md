@@ -13,3 +13,6 @@ Primary terms:
 - private data
 - shared data
 - external context
+
+Program-specific glossary:
+- `resilient-home-intelligence.md`

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This notice explains how to read the system and reference-material subtree during the April 14, 2026
+This notice explains how to read the system and reference-material subtree during the v0.1
 open-release period.
 
 ## Intended license direction
@@ -30,8 +30,8 @@ If a document appears to conflict with those governance docs, escalate the confl
 ## Read these first
 
 - `../NOTICE.md`
-- `../legal/ip.md`
-- `../legal/dataset-release-policy.md`
-- `../legal/privacy/data-ownership.md`
-- `../legal/privacy/privacy.md`
-- `../legal/privacy/claims-and-safety-language.md`
+- `../../legal/ip.md`
+- `../../legal/dataset-release-policy.md`
+- `../../legal/privacy/data-ownership.md`
+- `../../legal/privacy/privacy.md`
+- `../../legal/privacy/claims-and-safety-language.md`

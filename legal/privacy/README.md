@@ -18,8 +18,9 @@ This folder now holds the MVP governance baseline for parcel-first sensing and p
 
 ## Current release documents
 
-For the current April 14, 2026 open-release posture, start with:
+For the current v0.1 open-release posture, start with:
 
+- `governance-and-privacy-summary.md`
 - `data-ownership.md`
 - `privacy.md`
 - `data-classification-standard.md`

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Provide pre-approved social copy for the April 14, 2026 open release.
+Provide pre-approved social copy for the v0.1 open release.
 
 These posts are written to be public-facing and aligned with the current release
 controls. Do not add non-cleared technical, personal, or third-party detail without
@@ -26,7 +26,7 @@ Release: [link]
 ## Short post
 
 We’re sharing the first public preview for Open Environmental Sensing and
-Inference System: a homeowner-owned, parcel-first environmental sensing
+Inference System (`OESIS`): a homeowner-owned, parcel-first environmental sensing
 project. Private by default. Shared by choice. Start with the governance and
 release framework here: [link]
 

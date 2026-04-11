@@ -14,6 +14,12 @@ Companion checklist:
 The parcel kit is one system, but not one physical box.
 Use specialized nodes where placement requirements differ, then unify them through one parcel identity, one node registry, and one software path.
 
+This guide also follows the deployment maturity overlay:
+
+- `deployment maturity v0.1` for bench prototypes and first bring-up
+- `deployment maturity v1.0` for the first field-hardened parcel kit
+- `deployment maturity v1.5` for stronger device-operations and trust hardening
+
 ## Shared non-hardware system parts
 
 Every tier assumes these system parts exist:
@@ -25,11 +31,25 @@ Every tier assumes these system parts exist:
 - one ingest endpoint path
 - one local validation path through `make oesis-check`
 
+## Shared field-hardening bundle
+
+No node should be described as deployed or field-ready unless the active parcel kit also includes a documented answer for these categories:
+
+| Category | Required posture |
+| --- | --- |
+| power and protection | protected power entry, polarity discipline, and outdoor transient posture where relevant |
+| local buffering and storage | ring buffer, FRAM, microSD, or other durable local history posture |
+| serviceable wiring | connectorized or otherwise stable wiring, strain relief, and cable routing |
+| enclosure support | cable glands, venting, moisture posture, and corrosion-aware hardware where relevant |
+| identity and service | physical label, service access posture, and visible service status if practical |
+| spares and replacement | one spare controller and one spare sensing path for active fielded families |
+
 ## Tier 1: Fastest useful parcel kit
 
 ### Goal
 
 Deliver useful single-home value on the shortest timeline.
+This is primarily a `deployment maturity v0.1` lane.
 
 ### Hardware BOM
 
@@ -54,12 +74,14 @@ Deliver useful single-home value on the shortest timeline.
 - fastest pilot
 - indoor smoke and heat focus
 - minimal hardware risk
+- strong fit for bench proof and software validation before field-hardening the parcel kit
 
 ## Tier 2: First integrated parcel kit
 
 ### Goal
 
 Add outdoor parcel context without waiting for the richer mast build.
+This is the first honest `deployment maturity v1.0` target.
 
 ### Additional hardware BOM
 
@@ -71,6 +93,10 @@ Add outdoor parcel context without waiting for the richer mast build.
 | 1 | second BME680 breakout | outdoor pressure and gas-trend support |
 | 1 | vented enclosure and shield hardware | preserve airflow and survivability |
 | 1 | basic mount or eave hardware | stabilize sheltered outdoor placement |
+| 2 | local buffering or storage parts | one answer per active controller before calling the parcel kit deployed |
+| 1 set | protected power and connector parts | fuse, polarity, terminal, and connector posture for active lanes |
+| 1 set | cable glands, venting, and strain relief parts | part of the node, not afterthought support gear |
+| 2 | physical node labels | required for install and service discipline |
 
 ### Integration requirements
 
@@ -102,6 +128,7 @@ Add outdoor parcel context without waiting for the richer mast build.
 | 1 | MB7389 ultrasonic range sensor | low-point depth evidence |
 | 1 | weather-resistant enclosure | splash-aware housing |
 | 1 | fixed mounting bracket | must preserve repeatable geometry |
+| 1 | field marker or staff gauge | required for honest geometry and repeatable reference checks |
 
 ### Additional integration requirements
 
@@ -110,12 +137,14 @@ Add outdoor parcel context without waiting for the richer mast build.
 | 1 | runoff low-point install record | part of parcel context and registry meaning |
 | 1 | dry-reference measurement | required before stronger interpretation |
 | 1 | conservative flood observation family | keep point evidence distinct from parcel-wide claims |
+| 1 | geometry-stability check | do not treat the node as stronger parcel evidence until mount drift is controlled |
 
 ## Tier 3: Rich outdoor upgrade
 
 ### Goal
 
 Promote the outdoor leg from `mast-lite` to `weather-pm-mast` after the simpler kit is stable.
+Treat this as a `deployment maturity v1.5` target unless the PM and weather support hardware are already documented and provisioned.
 
 ### Additional hardware BOM
 
@@ -124,6 +153,8 @@ Promote the outdoor leg from `mast-lite` to `weather-pm-mast` after the simpler 
 | 1 | `weather-pm-mast` build | richer outdoor evidence path |
 | 1 | SPS30 | particulate sensing |
 | 1 | mast hardware and enclosure upgrades | exposure-ready mounting |
+| 1 | stable 5V PM power path | required for honest PM-first field behavior |
+| 1 | interface posture for wind and rain hardware | RJ11 or equivalent wiring discipline when those lanes are added |
 | optional | wind and rain components | only after PM-first stability |
 
 ### Replacement rule
@@ -167,6 +198,7 @@ Do not fold the thermal pod into the default integrated parcel kit until the der
 - 1 `mast-lite`
 - 1 parcel node-registry record
 - 1 shared `https_push` transport posture
+- 1 shared field-hardening bundle covering power, buffering, connectors, enclosure support, labels, and spares
 - optional `flood-node` only on the right parcels
 
 That is the best balance between singular system design, truthful hazard coverage, and timeline pressure.

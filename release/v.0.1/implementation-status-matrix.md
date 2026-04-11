@@ -2,7 +2,7 @@
 
 ## Status
 
-Internal controlled-review document for the April 14, 2026 release period.
+Internal controlled-review document for the v0.1 release period.
 
 Use this to separate what is working now from what is only documented, planned, or policy direction.
 
@@ -17,6 +17,12 @@ This matrix exists so reviewers do not confuse:
 - reference-only admin or governance utilities
 - hardware build readiness
 - policy direction that is not yet product behavior
+
+This matrix also separates:
+
+- architectural inclusion
+- runnable reference behavior
+- deployment maturity and field-hardening readiness
 
 ## Status key
 
@@ -54,6 +60,15 @@ This matrix reflects the current local reference state after these checks passed
 
 **2026-04-08 — v0.1 completeness review:** the commands above were re-run successfully on Python 3.11.1, along with `make oesis-v10-accept`, `make oesis-v10-check`, and `make oesis-v10-http-check`. Hardware-side, `python3 -m oesis.ingest.extract_latest_packet` plus `python3 -m oesis.ingest.ingest_packet` were exercised on a synthetic serial log; the bench-air **operator runbook** was aligned to these module entrypoints. See `v0.1-scope-matrix.md`, `v0.1-gap-register.md`, `v0.1-pilot-minimum-subset.md`, `v0.1-osi-diagrams.md` (Mermaid), and `v0.1-osi-diagrams-text.md` (plain text) in this directory for scope, gaps, pilot-tier gates, and OSI layer views of each path.
 
+## Deployment maturity note
+
+The repo now uses a separate deployment maturity overlay in addition to the capability roadmap.
+In this matrix:
+
+- `implemented` means the reference path or hardware bring-up path exists
+- `implemented` does not automatically mean `deployment maturity v1.0`
+- a documented hardware lane may still be below a field-hardened deployed posture
+
 ## Software and APIs
 
 | Surface | Status | Evidence | Current boundary | Next gap |
@@ -86,13 +101,13 @@ This matrix reflects the current local reference state after these checks passed
 
 | Surface | Status | Evidence | Current boundary | Next gap |
 | --- | --- | --- | --- | --- |
-| Bench-air-node build path | implemented | build guide, operator runbook (ingest via `oesis-runtime` modules), firmware examples, `serial-json-contract.md` aligned with packaged examples | Indoor or sheltered bench node is the current fastest working hardware slice. | Gather more repeatable field and long-run evidence; add named BOM sources when kitting for others. |
-| Mast-lite build and install path | partial | build guide, operator runbook, procurement and installation checklists | First sheltered outdoor node is integrated into the parcel-kit path. | Increase real-world validation and maintenance evidence. |
-| Tier 1 and Tier 2 procurement path | implemented | `parcel-kit-procurement-checklist.md` | A non-author now has a concrete first purchase path. | Convert purchase guidance into named BOM sources and part decisions. |
-| Tier 1 and Tier 2 installation path | implemented | `parcel-installation-checklist.md` | Indoor and sheltered outdoor siting rules are now explicit. | Add real install records and field photos under controlled review. |
-| Flood-node hardware path | partial | flood-node build/runbook/calibration docs | Hardware path exists, but it is not part of the default first kit. | Add low-point install records and software observation support. |
-| Weather-pm-mast hardware path | partial | weather-pm-mast docs and firmware lane | Second-wave hardware lane exists. | Complete contracts and maintenance path before making it critical-path hardware. |
-| Thermal-pod hardware path | partial | thermal-pod docs | Separate R&D lane exists. | Resolve privacy, retention, and usefulness questions before folding it into the parcel kit. |
+| Bench-air-node build path | implemented | build guide, operator runbook (ingest via `oesis-runtime` modules), firmware examples, `serial-json-contract.md` aligned with packaged examples | Indoor or sheltered bench node is the current fastest working hardware slice, but the default posture is still `deployment maturity v0.1`. | Document fixed harness, stable enclosure or stand, identity label, and local logging posture before using stronger deployed language; gather more repeatable field evidence. |
+| Mast-lite build and install path | partial | build guide, operator runbook, procurement and installation checklists | First sheltered outdoor node is integrated into the parcel-kit path, but not yet field-hardened by default. | Close the field-hardening bundle around protected power, buffering, connectorized wiring, enclosure support, and serviceability. |
+| Tier 1 and Tier 2 procurement path | docs-only | `parcel-kit-procurement-checklist.md` | A non-author now has a documented first purchase path, but the repo has not yet proven it through named BOM decisions or completed parcel builds. | Convert purchase guidance into named BOM sources and part decisions. |
+| Tier 1 and Tier 2 installation path | docs-only | `parcel-installation-checklist.md` | Indoor and sheltered outdoor siting rules are documented, including the field-hardening gate for deployed language. | Add real install records and field photos under controlled review. |
+| Flood-node hardware path | partial | flood-node build/runbook/calibration docs | Hardware path exists, but it is not part of the default first kit and remains a parcel-specific experimental field lane. | Add low-point install records, rigid geometry and marker discipline, and software observation support. |
+| Weather-pm-mast hardware path | partial | weather-pm-mast docs and firmware lane | Second-wave hardware lane exists; treat as a `deployment maturity v1.5` target rather than a default pilot requirement. | Complete PM power, airflow, interface, buffering, and maintenance posture before making it critical-path hardware. |
+| Thermal-pod hardware path | partial | thermal-pod docs | Separate R&D lane exists and should stay below general field-ready language. | Resolve privacy, retention, power, storage, and usefulness questions before folding it into the parcel kit. |
 
 ## Release, legal, and public surfaces
 
@@ -112,7 +127,6 @@ Before publishing, sending, or presenting anything:
 1. Confirm the surface is marked `implemented` or that the audience understands it is only `partial`, `docs-only`, or `planned`.
 2. Pair this matrix with `reviewer-packet-index.md` before sending controlled-review materials.
 3. Do not let a documented policy or schema stand in for product behavior.
-4. Re-run the reference checks before changing any row from `partial` or `docs-only` to `implemented`.
-5. Promote a new `v0.x` only when the accepted runnable slice changes
-   materially and the architecture scope, contract/runtime boundaries, and
-   acceptance evidence have all been updated together.
+4. Do not let architectural inclusion stand in for field-hardened readiness.
+5. Re-run the reference checks before changing any row from `partial` or `docs-only` to `implemented`.
+6. Promote a new `v0.x` only when the accepted runnable slice changes materially and the architecture scope, contract/runtime boundaries, and acceptance evidence have all been updated together.

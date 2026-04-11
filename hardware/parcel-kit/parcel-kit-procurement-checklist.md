@@ -22,6 +22,7 @@ Standardize aggressively for the first parcel kit:
 - use the same ESP32-S3 controller family in both nodes
 - use the same SHT45 and BME680 sensor pairing in both nodes
 - use USB power for first bring-up on both nodes
+- do not treat USB bring-up parts alone as a deployed `deployment maturity v1.0` parcel kit
 - defer richer outdoor, flood, and thermal hardware until the first indoor and sheltered-outdoor pair is stable
 
 ## Before ordering
@@ -31,6 +32,9 @@ Confirm these decisions first:
 - Tier target:
   `Tier 1` if the goal is fastest indoor proof and software validation
   `Tier 2` if the goal is the first integrated parcel kit with indoor and sheltered-outdoor coverage
+- Maturity target:
+  `deployment maturity v0.1` for bench proof only
+  `deployment maturity v1.0` if the node will be described as deployed or field-ready
 - Controller choice:
   one ESP32-S3 DevKitC-1 variant with 3.3 V logic for every first-wave node
 - Sensor stack:
@@ -65,6 +69,9 @@ Recommended strong-timeline spares:
 - one extra USB data cable
 - extra header pins and short jumper wires
 
+This purchase list is enough for bench proof.
+It is not enough by itself to call the node field-ready.
+
 ## Tier 2 add-on purchase list
 
 Buy these items in addition to the Tier 1 purchase list before starting `mast-lite`:
@@ -84,6 +91,26 @@ Optional for later, not first purchase:
 - UV sensor for `mast-lite`
 - upgraded outdoor power path
 - richer mast hardware that belongs with `weather-pm-mast`
+
+## Shared field-hardening purchase list
+
+Buy these before describing any active first-wave node as deployed:
+
+| Recommended buy qty | Item | Why it is needed |
+| --- | --- | --- |
+| 1 set per active outdoor lane | fuse, transient, and polarity parts | protected power posture for outdoor or semi-outdoor nodes |
+| 1 per active controller | local buffering or durable storage path | outage-aware local evidence retention |
+| 1 strategy | JST, screw-terminal, or locking connector posture | move beyond loose long-term jumper wiring |
+| 1 set per enclosure | cable glands, vent plugs or membrane vents, desiccant | moisture and airflow support |
+| 1 set per node | physical labels or QR labels | install, registry, and service identity |
+| 1 spare per active family | spare controller | replacement and failure recovery |
+| 1 spare per active family | spare primary sensing path | reduce downtime during service or drift investigation |
+
+Conditional add-ons by lane:
+
+- `weather-pm-mast`: stable 5V PM power path, RJ11 or equivalent weather-sensor interface parts, mast airflow and service parts
+- `flood-node`: rigid mount hardware, field marker or staff gauge, geometry-check tools
+- `thermal-pod`: high-endurance storage, stable Pi 5 power, clean shutdown posture
 
 ## Shared purchasing checks
 
@@ -137,6 +164,7 @@ Before calling the hardware purchase complete, confirm:
 - the parcel node-registry record is ready or updated for the purchased nodes
 - serial packet output matches the expected family contract
 - local ingest validation succeeds for each node before any live transport work
+- the field-hardening bundle has a concrete part choice for any node that will be described as deployed
 
 Primary software and system references:
 
@@ -152,7 +180,7 @@ Procurement and build docs are not automatically public-preview-safe.
 Before sharing photos, diagrams, or detailed purchase bundles outside the core implementation group, check:
 
 - `../../legal/public-preview-scope.md`
-- `../release/v.0.1/reviewer-packet-index.md`
+- `../../release/v.0.1/reviewer-packet-index.md`
 
 Do not assume close-up internals, wiring layouts, or integrated-kit details belong on the public preview site.
 

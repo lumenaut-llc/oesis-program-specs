@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Draft copy for the April 14, 2026 open-release landing page.
+Draft copy for the v0.1 open-release landing page.
 
 This copy is written to be public-facing and aligned with the project's current
 open-release posture.

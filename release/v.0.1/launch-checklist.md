@@ -1,8 +1,8 @@
-# April 14, 2026 Launch Checklist
+# v0.1 Launch Checklist
 
 ## Purpose
 
-Provide a dependency-ordered checklist for the April 14, 2026 open release.
+Provide a dependency-ordered checklist for the v0.1 open release.
 
 This checklist assumes the current open-release posture:
 

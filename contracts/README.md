@@ -15,6 +15,10 @@ Canonical contract definitions for parcels, nodes, observations, states, permiss
 ## Current status
 
 The current center of gravity remains the `current v1` observation, parcel-context, and parcel-state contracts.
+Those machine-readable contracts describe the current implemented reference path.
+
+The repo also now carries draft deployment-maturity companion docs for node health, deployment metadata, and device lifecycle events.
+Those draft docs are intentionally separate from the current schemas so the docs do not imply the reference code already persists them.
 
 For version lanes in this repository:
 
@@ -77,6 +81,14 @@ Use the root paths when you mean the accepted `v0.1` baseline.
 Use `v1.0/` when you need future-lane notes, schema deltas, or example deltas
 that must remain separate from the frozen default contract set.
 
+## Deployment-maturity companion schemas
+
+Draft deployment-maturity companion docs live under `artifacts/contracts-bundle/`:
+
+- `../artifacts/contracts-bundle/node-health-schema.md`
+- `../artifacts/contracts-bundle/deployment-metadata-schema.md`
+- `../artifacts/contracts-bundle/device-event-schema.md`
+
 ## Related workstreams
 
 - hardware node design
@@ -86,7 +98,6 @@ that must remain separate from the frozen default contract set.
 
 ## Next docs to add
 
-- `node-observation-schema.md`
 - provenance summary model
 - sharing settings model
 - consent record model

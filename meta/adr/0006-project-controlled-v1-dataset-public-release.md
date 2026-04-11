@@ -13,7 +13,7 @@ release of real parcel-linked household data.
 
 That rule still makes sense for future participant-contributed parcel-linked data.
 However, the current v1 dataset is project-controlled and is being intentionally
-considered as part of the public April 14, 2026 release.
+considered as part of the public v0.1 release.
 
 The repo needs an explicit decision that preserves the private-by-default posture for
 future participants while allowing the project-controlled v1 dataset to be published

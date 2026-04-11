@@ -3,20 +3,20 @@
 ## Purpose
 
 Give one folder-by-folder view of what should be treated as public-release material
-versus internal-only material around the April 14, 2026 open release. The **canonical**
-public preview packet root in-repo is now `release/v1.0/`; this `release/v.0.1/` tree
-holds the prior April preview materials and extended reviewer packet.
+versus internal-only material for the v0.1 open release. The **canonical**
+public preview packet root in-repo is `release/v1.0/`; this `release/v.0.1/` tree
+holds prior preview materials and the extended reviewer packet.
 
 This file is a release-control aid. It is not legal advice.
 
 ## Public release by default
 
-These areas are part of the intended April 14 public release surface, subject to the
+These areas are part of the intended v0.1 public release surface, subject to the
 notices and claims/privacy rules:
 
 - `README.md`
 - `NOTICE.md`
-- `release/v1.0/` (canonical public packet); `release/v.0.1/` (prior April preview / extended packet)
+- `release/v1.0/` (canonical public packet); `release/v.0.1/` (prior preview / extended packet)
 - `legal/privacy/`
 - `legal/ip.md`
 - `legal/GOVERNANCE.md`
@@ -51,7 +51,7 @@ filing process:
 ## Internal until separately cleared
 
 These areas may eventually become public, but should not be assumed public in the
-April 14 release:
+v0.1 release:
 
 - detailed hardware design files not yet cleared for release
 - detailed inference logic, thresholds, and scoring materials
@@ -61,12 +61,12 @@ April 14 release:
 
 ## Folder summary
 
-| Folder or file set | Default status for April 14 release | Notes |
+| Folder or file set | Default status for v0.1 release | Notes |
 | --- | --- | --- |
 | `repo/README.md`, `repo/NOTICE.md`, `repo/LICENSES.md` | publish | core entry points |
 | `README.md`, `NOTICE.md` | publish | core program entry points |
 | `release/v1.0/` | publish | canonical public preview set |
-| `release/v.0.1/` | publish (archived packet) | April 2026 preview materials; reviewer index and matrices |
+| `release/v.0.1/` | publish (archived packet) | preview materials; reviewer index and matrices |
 | `legal/privacy/` | publish | public governance posture |
 | `legal/ip.md` | publish | preview IP position |
 | `legal/GOVERNANCE.md` | publish | project governance posture |
@@ -76,7 +76,6 @@ April 14 release:
 | `legal/public-preview-scope.md` | internal | release-control doc |
 | `software/` | mixed | README / notice can be public, detailed internals need review |
 | `hardware/` | mixed | README / notice can be public, design-enabling files need review |
-| `architecture/` | mixed | review for public-safe scope, implementation detail, and system narratives |
 | `contracts/` | mixed | review for method detail and release scope |
 
 ## Practical rule
@@ -91,4 +90,4 @@ If a file exists mainly to:
 - `launch-checklist.md`
 - `NOTICE.md`
 - `social-posts.md`
-- `../../../legal/ip.md`
+- `../../legal/ip.md`

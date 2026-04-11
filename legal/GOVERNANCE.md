@@ -3,8 +3,8 @@
 ## Purpose
 
 Define the stewardship, decision-making, and change-control model for the Open
-Environmental Sensing and Inference System project during the April 14, 2026
-preview phase and the transition to broader open release.
+Environmental Sensing and Inference System (`OESIS`) project during the v0.1
+open-release period and the transition to broader open release.
 
 This file is a project governance draft, not legal advice.
 

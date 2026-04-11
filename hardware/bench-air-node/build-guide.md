@@ -4,6 +4,37 @@
 
 Build a USB-powered indoor air node around an ESP32-S3 DevKitC-1 with one SHT45 breakout and one BME680 breakout on the same I2C bus. The first-build goal is a stable bench prototype that proves basic wiring, I2C detection, and repeatable sensor reads before any enclosure or transport complexity is added.
 
+## Current maturity
+
+Default posture: `deployment maturity v0.1`
+
+Use this guide as the bench and first-bring-up path.
+Do not read it as a field-ready guide unless the install also satisfies the shared field-hardening checklist.
+
+## Required now
+
+- short stable wiring
+- known-good USB power and data path
+- documented `node_id`
+- simple physical stability so the sensing stack is not flopping loose on the bench
+
+## Add later
+
+- fixed harness or small carrier posture
+- simple enclosure or stand
+- local buffering or logging posture
+- physical label once the node leaves pure bench use
+
+## Field-ready boundary
+
+This guide alone does not make the node field-ready.
+Use `../../docs/build-guides/field-hardening-checklist.md` before describing a bench-air install as deployed.
+
+## Serviceability notes
+
+- keep the controller and sensors accessible for inspection and reflash
+- keep one spare controller and one spare sensing path for any active field deployment
+
 ## Required tools
 
 - soldering iron with fine tip

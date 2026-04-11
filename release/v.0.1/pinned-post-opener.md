@@ -15,7 +15,7 @@ Start here: [link]
 ## Short version
 
 We’ve published the first public preview for Open Environmental Sensing and
-Inference System: a parcel-first, homeowner-centered environmental sensing
+Inference System (`OESIS`): a parcel-first, homeowner-centered environmental sensing
 project. Private by default. Shared by choice. Governance and preview docs
 here: [link]
 

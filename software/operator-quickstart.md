@@ -163,11 +163,6 @@ npm install
 npm run dev
 ```
 
-then run:
-
-the local Astro dev URL shown in the terminal.
-the local Astro dev URL shown in the terminal.
-
 Visit the local URL printed by Astro in the terminal.
 
 For a production-style static build, run:

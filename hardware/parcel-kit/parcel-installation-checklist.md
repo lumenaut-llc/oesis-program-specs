@@ -25,6 +25,18 @@ One parcel can have multiple nodes, but the install must still behave like one s
 
 Do not mount hardware before the parcel identity, node IDs, and intended install roles are clear.
 
+## Deployment maturity rule
+
+Do not describe a node as deployed or field-ready unless the install also documents:
+
+- protected power posture
+- local buffering or storage posture
+- serviceable wiring and connector posture
+- enclosure support posture
+- physical node identity label
+- service access posture
+- spare or replacement posture for the active family
+
 ## Before leaving the bench
 
 Confirm these are already true:
@@ -72,11 +84,15 @@ Use `bench-air-node` as the indoor reference node for the parcel.
 
 - `node_id`
 - `parcel_id`
+- physical label or QR label state
 - `location_mode: indoor`
 - `install_role: indoor_reference`
 - room or area description
 - approximate mounting or shelf height
 - nearby bias sources such as windows, vents, appliances, or doors
+- power path posture
+- local buffering or storage posture
+- service access notes
 
 ### First on-site checks
 
@@ -109,11 +125,15 @@ Use `mast-lite` as the first sheltered outdoor reference node for the same parce
 
 - `node_id`
 - `parcel_id`
+- physical label or QR label state
 - `location_mode: sheltered`
 - `install_role: parcel_edge_reference`
 - mount type such as eave, porch, or bracket
 - SHT45 shield position and airflow notes
 - enclosure position relative to walls and reflected-heat surfaces
+- cable-gland and vent posture
+- local buffering or storage posture
+- power protection posture
 
 ### First on-site checks
 
@@ -146,6 +166,7 @@ Use this section only if the parcel truly has an operationally meaningful runoff
 
 - `node_id`
 - `parcel_id`
+- physical label or QR label state
 - `location_mode: outdoor`
 - `install_role: runoff_low_point`
 - low-point description
@@ -154,6 +175,8 @@ Use this section only if the parcel truly has an operationally meaningful runoff
 - mount angle
 - target surface description
 - install photos and notes kept with the node record
+- field marker or staff gauge posture
+- enclosure placement relative to splash and standing water
 
 ### First on-site checks
 
@@ -172,6 +195,7 @@ After installation, update the parcel-scoped node registry with:
 - `power_mode`
 - `enabled`
 - `last_seen_at` after the first live packet arrives
+- service and label notes where the active maturity target requires them
 
 Also keep:
 
@@ -196,6 +220,7 @@ Treat the install as complete only when:
 - the node registry binds both nodes to one parcel
 - each installed node has at least one validated packet path
 - install notes explain the chosen siting and known bias risks
+- the shared field-hardening bundle is documented for any node being described as deployed
 
 ## Legal and public-preview boundary
 
@@ -204,6 +229,6 @@ Installation notes are implementation material, not default public-preview mater
 Before sharing install photos, wiring layouts, or close-up mounting details outside the core implementation group, check:
 
 - `../../legal/public-preview-scope.md`
-- `../release/v.0.1/reviewer-packet-index.md`
+- `../../release/v.0.1/reviewer-packet-index.md`
 
 The public preview site should not imply that every documented install practice is already a polished consumer deployment path.

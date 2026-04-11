@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define what may be published in the April 14, 2026 open release.
+Define what may be published in the v0.1 open release.
 
 This file keeps its historical path for link stability even though the release posture is no longer a preview-first filing sequence.
 
@@ -14,7 +14,7 @@ This is a release-planning control document, not legal advice.
 - no active provisional-first sequencing requirement for v1
 - default publication rule: release intentionally, with clear licensing, provenance, and safety-boundary language
 
-## April 14 release goals
+## v0.1 release goals
 
 - make the openness and governance posture public
 - state owner control and data-publication boundaries clearly
@@ -80,7 +80,7 @@ Do not publish if the material:
 
 ## Canonical release package
 
-The April 14 release should point readers to these materials:
+The v0.1 release should point readers to these materials:
 
 - program README
 - governance and privacy overview

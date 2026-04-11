@@ -32,6 +32,12 @@ Even without neighborhood sharing, this node gives a single parcel owner useful 
 - shared I2C bus
 - JSON packet output over serial and/or Wi-Fi
 
+## Current maturity
+
+Default posture: early `deployment maturity v1.0` target, but not field-ready by default.
+
+This node is the first outdoor critical-path lane for the parcel kit, which means enclosure, mounting, buffering, and serviceability are part of the node definition rather than optional extras.
+
 ## Inputs
 
 - ambient sheltered outdoor air near the install location
@@ -66,6 +72,30 @@ Even without neighborhood sharing, this node gives a single parcel owner useful 
 - basic ingest path on the software side
 - sheltered outdoor mounting assumptions
 - serial JSON contract for first-build bring-up
+
+## Required now
+
+- protected outdoor or semi-outdoor power posture
+- vented enclosure with cable-gland and moisture posture
+- connectorized or otherwise stable sensor leads
+- local buffering or durable storage posture
+- sheltered siting discipline documented in install notes
+
+## Add later
+
+- stronger watchdog and device-health posture
+- external antenna options where enclosure placement hurts radio quality
+- richer calibration and maintenance logging
+
+## Field-ready boundary
+
+Do not call `mast-lite` field-ready unless the repo documents protected power, cable glands, venting, connectorized wiring, local buffering, physical label, and sheltered install discipline for the active parcel.
+
+## Serviceability notes
+
+- keep enclosure access practical after mounting
+- document vent, gland, and cable-routing choices in the install record
+- keep one spare controller and one spare environmental sensing path for active parcels
 
 ## Next milestones
 

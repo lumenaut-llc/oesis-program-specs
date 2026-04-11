@@ -1,7 +1,8 @@
-# April 14, 2026 Open Release Notice
+# v0.1 Open Release Notice
 
 This release is a public preview of the Open Environmental Sensing and
-Inference System legal, governance, and documentation foundation.
+Inference System (`OESIS`) legal, governance, and documentation foundation
+for the v0.1 open-release period.
 
 ## Important release limits
 
@@ -35,12 +36,12 @@ Inference System legal, governance, and documentation foundation.
 
 ## Read these first
 
-- `../../../legal/ip.md`
-- `../../../legal/dataset-release-policy.md`
-- `../../privacy-governance/data-ownership.md`
-- `../../privacy-governance/privacy.md`
-- `../../privacy-governance/claims-and-safety-language.md`
-- `../../../legal/public-preview-scope.md`
+- `../../legal/ip.md`
+- `../../legal/dataset-release-policy.md`
+- `../../legal/privacy/data-ownership.md`
+- `../../legal/privacy/privacy.md`
+- `../../legal/privacy/claims-and-safety-language.md`
+- `../../legal/public-preview-scope.md`
 
 ## Contact / escalation
 

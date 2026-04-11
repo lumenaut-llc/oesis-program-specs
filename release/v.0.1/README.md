@@ -1,9 +1,10 @@
-# April 14, 2026 Open Release
+# v0.1 Open Release
 
 ## Status
 
 This release is a public preview of the legal, governance, and documentation
-foundation for Open Environmental Sensing and Inference System.
+foundation for Open Environmental Sensing and Inference System (`OESIS`) during
+the v0.1 open-release period.
 
 It publishes the current governance, privacy, documentation, and approved technical
 release materials under the project's current commons-protective release posture.
@@ -27,8 +28,8 @@ planning artifacts.
 
 See:
 
-- `../../../legal/public-preview-scope.md`
-- `../../../legal/holdback-list.md`
+- `../../legal/public-preview-scope.md`
+- `../../legal/holdback-list.md`
 
 ## Current release posture
 
@@ -43,19 +44,19 @@ See:
 
 Start here:
 
-1. `../../../README.md`
+1. `../../README.md`
 2. `NOTICE.md`
 3. `open-source-v1-summary.md`
 4. `asset-class-license-and-publication-matrix.md`
 5. `contributor-and-review-guide.md`
-6. `../../../architecture/current/README.md`
-7. `../../privacy-governance/README.md`
-8. `../../privacy-governance/claims-and-safety-language.md`
-9. `../../../legal/GOVERNANCE.md`
-10. `../../../legal/dataset-release-policy.md`
-11. `../../../legal/ip.md`
-12. `../../../legal/contribution-policy/README.md`
-13. `../../../LICENSES.md`
+6. `../../architecture/current/README.md`
+7. `../../legal/privacy/README.md`
+8. `../../legal/privacy/claims-and-safety-language.md`
+9. `../../legal/GOVERNANCE.md`
+10. `../../legal/dataset-release-policy.md`
+11. `../../legal/ip.md`
+12. `../../legal/contribution-policy/README.md`
+13. `../../LICENSES.md`
 
 ## Release assets
 
@@ -66,10 +67,9 @@ Start here:
 - `open-release-v1-audit-checklist.md`
 - `social-posts.md`
 - `landing-page-copy.md`
-- `../../../architecture/`
+- `../../architecture/`
 - `preview-execution-plan.md`
 - `implementation-status-matrix.md`
-- `../../../architecture/`
 - sibling workspace `../../oesis-public-site` (stable Astro app and in-repo publication policy: `src/data/publicationPolicy.ts`, generated bundle)
 - `pinned-post-opener.md`
 - `launch-checklist.md`

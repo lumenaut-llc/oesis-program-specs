@@ -19,6 +19,8 @@ Program-level system narrative and top-level operating model.
 - `../../architecture/future/README.md` is the debated target-architecture slice.
 - `vision-and-use-cases.md` expands the long-term product direction from smart home to smart block to citizen-owned smart city.
 - `phase-roadmap.md` translates the vision into staged execution.
+- `architecture-gaps-by-stage.md` maps operational-architecture gaps onto capability stages and the deployment-maturity overlay while keeping public release labels such as `v0.1` separate from that stage map.
+- `deployment-maturity-ladder.md` defines the separate deployability overlay used for hardware and operational readiness.
 - `feature-matrix-by-use-case.md` compares use cases, sensors, outputs, strengths, and constraints.
 - `technical-philosophy-and-architecture.md` defines the top-level technical posture, architectural rules, and current reference implementation shape.
 - `product-requirements-phase-1.md` defines the first single-parcel release slice.

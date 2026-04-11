@@ -3,7 +3,7 @@
 ## Purpose
 
 This notice explains how to read the Open Environmental Sensing and Inference
-System program materials during the April 14, 2026 preview phase.
+System (`OESIS`) program materials during the v0.1 open-release period.
 
 ## Program-wide notice
 

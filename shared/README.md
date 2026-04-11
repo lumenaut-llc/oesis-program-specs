@@ -1,3 +1,3 @@
 # Shared
 
-Shared standards, templates, naming, and cross-cutting references.
+Shared standards, templates, naming, reusable skills, and cross-cutting references.

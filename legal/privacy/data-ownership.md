@@ -2,7 +2,7 @@
 
 ## Purpose
 
-State the homeowner-facing data ownership and control model for the April 14, 2026
+State the homeowner-facing data ownership and control model for the v0.1
 open-release period.
 
 This file is a project policy draft, not legal advice.

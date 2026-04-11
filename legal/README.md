@@ -26,7 +26,7 @@ For the April 14, 2026 public preview, pair those files with:
 
 ## Current release controls
 
-For the current April 14, 2026 open-release posture, start with:
+For the current v0.1 open-release posture, start with:
 
 - `ip.md`
 - `public-preview-scope.md`
