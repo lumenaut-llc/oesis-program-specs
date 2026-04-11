@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This directory is the **canonical public preview packet root** for the v1.0-aligned cut of program-specs: governance copy, release controls, and pointers to technical acceptance. It supersedes path-based references to `release/2026-04-14/` in build tooling and publication bundles.
+This directory is the **canonical v1.0 public release packet root** for the current cut of program-specs: governance copy, release controls, open-release summaries, and pointers to technical acceptance. It supersedes path-based references to `release/2026-04-14/` in build tooling and publication bundles.
 
 The earlier **April preview** materials remain archived under `release/v.0.1/` for history and diff review.
 
@@ -17,16 +17,25 @@ The earlier **April preview** materials remain archived under `release/v.0.1/` f
 1. [`v1.0-scope.md`](v1.0-scope.md) — in scope, out of scope, PRD honesty table  
 2. [`v1.0-acceptance-spec.md`](v1.0-acceptance-spec.md) — how to verify the reference stack  
 3. [`v1.0-product-surface.md`](v1.0-product-surface.md) — planned product surfaces (app, alerts, timeline)  
-4. Prior preview context: [`../v.0.1/README.md`](../v.0.1/README.md)  
-5. Implementation evidence: [`../v.0.1/implementation-status-matrix.md`](../v.0.1/implementation-status-matrix.md) (refresh or fork when v1.0 rows change)
+4. [`open-source-v1-summary.md`](open-source-v1-summary.md) — canonical v1 open-release explanation  
+5. [`asset-class-license-and-publication-matrix.md`](asset-class-license-and-publication-matrix.md) — asset-class licensing and publication map  
+6. [`contributor-and-review-guide.md`](contributor-and-review-guide.md) — contribution and review path  
+7. [`open-release-v1-audit-checklist.md`](open-release-v1-audit-checklist.md) — readiness checklist  
+8. Prior preview context: [`../v.0.1/README.md`](../v.0.1/README.md)  
+9. Implementation evidence: [`../v.0.1/implementation-status-matrix.md`](../v.0.1/implementation-status-matrix.md) (refresh or fork when v1.0 rows change)
 
 ## Publication
 
 - Machine-readable allowlist roots: `artifacts/public-content-bundle/public-content-bundle.json` (regenerated via `make repo-split-build-public-content-bundle` from program-specs).  
 - Public Astro app: sibling workspace `../../oesis-public-site` (`src/data/publicationPolicy.ts`, `src/generated/publicContentBundle.ts`).  
 - Human policy: `legal/public-preview-scope.md`.
+- Human release-readiness checklist: `open-release-v1-audit-checklist.md`.
 
 ## Related
 
-- `NOTICE.md` and open-release summaries under `../v.0.1/` until v1.0-specific copies are added  
+- `NOTICE.md`
+- `open-source-v1-summary.md`
+- `asset-class-license-and-publication-matrix.md`
+- `contributor-and-review-guide.md`
+- `open-release-v1-audit-checklist.md`
 - `legal/holdback-list.md`

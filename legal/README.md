@@ -16,6 +16,7 @@ For the April 14, 2026 public preview, pair those files with:
 - `../release/v1.0/open-source-v1-summary.md`
 - `../release/v1.0/asset-class-license-and-publication-matrix.md`
 - `../release/v1.0/contributor-and-review-guide.md`
+- `../release/v1.0/open-release-v1-audit-checklist.md`
 
 ## MVP priorities
 

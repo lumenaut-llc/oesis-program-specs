@@ -10,6 +10,8 @@
 - `meta/backlog.md`
 - `meta/milestones/README.md`
 - `meta/milestones/phase-0-foundation.md`
+- `meta/print/README.md`
+- `meta/print/bundle_v01_technical.py`
 - `meta/starter-package/README.md`
 - `meta/starter-package/chat-prompts.md`
 - `meta/starter-package/path-forward-prompt-packet.md`

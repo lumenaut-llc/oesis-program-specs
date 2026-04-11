@@ -13,7 +13,7 @@ The repository is open by asset class and by approved release surface, not by as
 That means:
 
 - public code, docs, and hardware will use clear open terms by asset class
-- some technical materials remain held back during the preview phase
+- some materials still remain outside release even during the current open-release period
 - real homeowner-contributed parcel-linked data is not a normal contribution target
 - privacy, claims, and release-scope controls still apply to open contributions
 
@@ -46,36 +46,36 @@ These require maintainer review plus governance or privacy review:
 
 Required references:
 
-- `../../privacy-governance/data-ownership.md`
-- `../../privacy-governance/privacy.md`
-- `../../privacy-governance/permissions-matrix.md`
-- `../../privacy-governance/retention-export-deletion-revocation.md`
-- `../../privacy-governance/claims-and-safety-language.md`
+- `../../legal/privacy/data-ownership.md`
+- `../../legal/privacy/privacy.md`
+- `../../legal/privacy/permissions-matrix.md`
+- `../../legal/privacy/retention-export-deletion-revocation.md`
+- `../../legal/privacy/claims-and-safety-language.md`
 
 ## Release-sensitive contributions
 
 These require release-owner review and legal or IP review before merge or publication:
 
-- anything touching held-back technical materials
-- changes to public preview scope
+- anything touching non-release technical materials
+- changes to public release scope
 - changes to public licensing statements
 - new public dataset releases or public map outputs
 - changes that could be read as a patent grant, trademark permission, or publication approval for withheld materials
 
 Required references:
 
-- `../../../legal/ip.md`
-- `../../../legal/public-preview-scope.md`
-- `../../../legal/holdback-list.md`
-- `../../../legal/GOVERNANCE.md`
+- `../../legal/ip.md`
+- `../../legal/public-preview-scope.md`
+- `../../legal/holdback-list.md`
+- `../../legal/GOVERNANCE.md`
 
 ## Hard red lines
 
 Do not merge or publish these through normal contribution paths:
 
-- real homeowner-contributed parcel-linked hazard data
+- future participant-contributed parcel-linked hazard data
 - exact household locations, secrets, or live credentials
-- held-back source code, formulas, thresholds, packet contracts, or reproducible internals
+- non-release source code, formulas, thresholds, packet contracts, or reproducible internals
 - marketing or UI claims that imply guaranteed safety, certainty, or emergency authority
 - changes that flip private-by-default behavior into opt-out sharing
 - third-party datasets or scrape-derived data with unclear rights
@@ -95,8 +95,8 @@ If the answer to questions 2 through 4 is yes, escalate beyond ordinary maintain
 Outside reviewers should be able to verify:
 
 - the project uses a visible asset-class licensing model
-- the preview surface is intentionally defined
-- held-back materials are explicitly called out rather than silently omitted
+- the current release surface is intentionally defined
+- non-release materials are explicitly called out rather than silently omitted
 - data rights are separated from source-code openness
 - contributor expectations are understandable without private context
 
