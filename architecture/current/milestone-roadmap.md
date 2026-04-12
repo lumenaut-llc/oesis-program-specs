@@ -51,7 +51,7 @@ evidence node.
 - one versioned packet lineage
 - one ingest acceptance and normalization path
 - one parcel inference path
-- one homeowner-facing parcel view
+- one dwelling-facing parcel view
 - public weather and smoke context through the current software lane
 
 ### Build requirements
@@ -68,7 +68,7 @@ evidence node.
 - the packet validates and normalizes through the ingest boundary
 - inference combines local evidence with parcel context and current public
   context
-- parcel platform renders a homeowner-readable parcel answer with explanation
+- parcel platform renders a parcel operator-readable parcel answer with explanation
 - one parcel receives useful output without neighborhood participation
 
 ### Current posture

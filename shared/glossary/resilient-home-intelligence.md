@@ -16,7 +16,7 @@ The baseline expectation for a parcel before fresh sensor evidence is applied. B
 Observations from a healthy sensor node directly associated with a parcel.
 
 ## Shared evidence
-Observations or derived signals that a homeowner has opted to contribute to the neighborhood or shared intelligence layer.
+Observations or derived signals that a parcel operator has opted to contribute to the neighborhood or shared intelligence layer.
 
 ## External public data
 Regional or public context sources integrated inside the platform, such as weather, flood, smoke, and terrain data.
@@ -54,7 +54,7 @@ The usefulness of a subproject or hardware build even if it is not connected to 
 The additional usefulness created when a build contributes to or benefits from the larger shared intelligence layer.
 
 ## Private owner data
-Data visible only to the homeowner unless they explicitly choose to share it.
+Data visible only to the parcel operator unless they explicitly choose to share it.
 
 ## Shared neighborhood layer
 The common condition field built from opt-in shared data plus external public context.

@@ -19,10 +19,10 @@ Control permission is separate from data-sharing permission.
 
 ## Ownership principles
 
-- homeowners own their raw node data
-- homeowners should be able to see their private exact parcel situation
-- homeowners should choose what they share into the neighborhood intelligence layer
-- sharing should improve collective intelligence without forcing homeowners to expose everything
+- parcel operators own their raw node data
+- parcel operators should be able to see their private exact parcel situation
+- parcel operators should choose what they share into the neighborhood intelligence layer
+- sharing should improve collective intelligence without forcing parcel operators to expose everything
 - community coordination should not become a pretext for household surveillance or operator overreach
 
 ## Data categories
@@ -71,7 +71,7 @@ Examples:
 
 ## Sharing dimensions
 
-A homeowner should be able to scope sharing by:
+A parcel operator should be able to scope sharing by:
 
 - what is shared
 - where it is shared at what precision
@@ -83,7 +83,7 @@ A homeowner should be able to scope sharing by:
 
 ### Private
 
-Only the homeowner sees the data.
+Only the parcel operator sees the data.
 
 ### Network assist
 
@@ -118,7 +118,7 @@ Every important displayed condition or status should be traceable to:
 
 ## Rights and controls
 
-Homeowners should eventually have:
+Parcel operators should eventually have:
 
 - access to their raw data
 - visibility into what is being shared
@@ -126,7 +126,7 @@ Homeowners should eventually have:
 - export capability
 - delete or revoke controls where practical
 - clear visibility into which control paths exist at the parcel and whether any automation is enabled
-- a homeowner override posture that remains separate from neighborhood data-sharing choices
+- a parcel operator override posture that remains separate from neighborhood data-sharing choices
 
 ## System trust rules
 

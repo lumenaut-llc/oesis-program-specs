@@ -32,7 +32,7 @@ Typical traits:
 
 First field-hardened parcel kit.
 
-This is the minimum maturity required before calling a node deployed or field-ready for the first homeowner parcel kit.
+This is the minimum maturity required before calling a node deployed or field-ready for the first parcel operator parcel kit.
 
 Required bundle:
 

@@ -23,7 +23,7 @@ Open Environmental Sensing and Inference System
 
 ## Why this payload exists
 
-The repo already carries homeowner-readable `reasons` and a compact `provenance_summary`, but mixed-source parcel inference now needs a more structured object for:
+The repo already carries parcel operator-readable `reasons` and a compact `provenance_summary`, but mixed-source parcel inference now needs a more structured object for:
 
 - explanation UI rendering
 - audit and debugging
@@ -58,7 +58,7 @@ The repo already carries homeowner-readable `reasons` and a compact `provenance_
       "summary": "Indoor gas-resistance trend shows a moderate change.",
       "hazards": ["smoke"],
       "weight": 0.32,
-      "visibility": "homeowner_safe"
+      "visibility": "dwelling_safe"
     },
     {
       "contribution_id": "public_demo_regional_smoke_v1",
@@ -68,7 +68,7 @@ The repo already carries homeowner-readable `reasons` and a compact `provenance_
       "summary": "Regional smoke context suggests modest smoke concern.",
       "hazards": ["smoke"],
       "weight": 0.48,
-      "visibility": "homeowner_safe",
+      "visibility": "dwelling_safe",
       "freshness_band": "fresh"
     }
   ],

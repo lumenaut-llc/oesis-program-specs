@@ -27,7 +27,7 @@ The parcel should stay the primary:
 
 - decision object
 - ownership and permission surface
-- homeowner-facing explanation surface
+- dwelling-facing explanation surface
 
 But the system should reason across multiple scales underneath parcel
 conclusions.

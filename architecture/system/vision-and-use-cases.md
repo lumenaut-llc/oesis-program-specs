@@ -8,7 +8,7 @@ block, neighborhood, and city-scale deployment.
 
 This document is intentionally expansive. It is meant to stretch the design space beyond the current MVP while preserving the project's core principles:
 
-- homeowner-owned data
+- dwelling-scale data
 - private by default
 - shared by choice
 - useful for one home
@@ -31,7 +31,7 @@ The product should not collapse these stages together in user-facing claims.
 
 ## Product thesis
 
-Open Environmental Sensing and Inference System should start as a homeowner
+Open Environmental Sensing and Inference System should start as a parcel operator
 resilience system, grow into block-level shared intelligence, and eventually
 support citizen-built smart cities.
 
@@ -62,7 +62,7 @@ This project should not be framed as:
 
 It should be framed as:
 
-- a homeowner-owned resilience system
+- a dwelling-scale resilience system
 - a neighborhood intelligence layer built from voluntary participation
 - a citizen-controlled civic infrastructure network
 - a platform that turns local sensing into readiness guidance
@@ -415,7 +415,7 @@ Block and neighborhood value:
 #### Evidence for claims or disputes
 
 - create time-stamped household condition records
-- support homeowner evidence during insurance or landlord disputes
+- support parcel operator evidence during insurance or landlord disputes
 
 Important note:
 
@@ -568,7 +568,7 @@ This broader vision implies future work in:
 
 ## Open questions
 
-- Which use cases create the strongest day-one homeowner pull?
+- Which use cases create the strongest day-one parcel operator pull?
 - Which use cases create the clearest network effect at block scale?
 - Which use cases require new hardware classes?
 - Which use cases should stay out of scope to avoid surveillance drift?

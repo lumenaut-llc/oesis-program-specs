@@ -36,7 +36,7 @@ It should not yet claim:
 
 Primary user:
 
-- a homeowner or renter who wants home-specific resilience guidance during smoke, heat, flood, freeze, or outage conditions
+- a parcel operator or renter who wants home-specific resilience guidance during smoke, heat, flood, freeze, or outage conditions
 
 Secondary users:
 
@@ -111,7 +111,7 @@ The system shall generate current readiness states from:
 
 ### FR2: Conservative recommendation engine
 
-The system shall provide homeowner-readable next-step recommendations tied to current state and evidence mode.
+The system shall provide parcel operator-readable next-step recommendations tied to current state and evidence mode.
 
 Recommendations should:
 
@@ -190,9 +190,9 @@ The product shall remain usable when:
 
 The product shall avoid overwhelming the user with noisy alerts or complex setup steps.
 
-### NFR6: Democratic and homeowner-controlled posture
+### NFR6: Democratic and operator-controlled posture
 
-The product shall preserve homeowner ownership, private-by-default handling, and voluntary participation so the network can grow without becoming a centralized household surveillance system.
+The product shall preserve parcel stewardship, private-by-default handling, and voluntary participation so the network can grow without becoming a centralized household surveillance system.
 
 ## Candidate current-v1 recommendations
 

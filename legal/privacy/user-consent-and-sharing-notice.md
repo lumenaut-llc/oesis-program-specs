@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Provide the MVP baseline for how sharing choices and parcel-linked data use should be explained to homeowners before data leaves the private parcel context.
+Provide the MVP baseline for how sharing choices and parcel-linked data use should be explained to parcel operators before data leaves the private parcel context.
 
 ## Governing rule
 

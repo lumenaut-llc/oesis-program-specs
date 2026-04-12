@@ -151,7 +151,7 @@ Neighborhood conditions
 
 ### Section helper text
 
-This view shows delayed, aggregated neighborhood-level conditions. Participation is partial, and visible conditions may include both shared homeowner signals and public context.
+This view shows delayed, aggregated neighborhood-level conditions. Participation is partial, and visible conditions may include both shared parcel operator signals and public context.
 
 ### Coverage notice
 

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define the canonical record created when a homeowner enables or revokes a sharing mode tied to parcel-linked data.
+Define the canonical record created when a parcel operator enables or revokes a sharing mode tied to parcel-linked data.
 
 ## Core fields
 

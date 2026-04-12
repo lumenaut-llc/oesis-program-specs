@@ -30,7 +30,7 @@ A parcel may have multiple purpose-built nodes, but it should still behave as on
 - one node registry
 - one ingest path
 - one inference engine
-- one homeowner-facing parcel view
+- one dwelling-facing parcel view
 - one privacy and sharing policy surface
 
 This is the singular design.
@@ -53,8 +53,8 @@ When this spec uses `v0.1`, `v1.0`, `v1.5`, or `v2.0` below, it refers to deploy
 - `bench-air-node` as the required indoor evidence node
 - public weather and smoke context through the existing software path
 
-This is the fastest end-to-end homeowner slice.
-It is primarily a `deployment maturity v0.1` slice: strong for bench proof, packet contracts, and homeowner-local evidence, but not the same as a fully field-hardened parcel kit.
+This is the fastest end-to-end parcel operator slice.
+It is primarily a `deployment maturity v0.1` slice: strong for bench proof, packet contracts, and parcel operator-local evidence, but not the same as a fully field-hardened parcel kit.
 
 ### Tier 2: first full home-and-parcel kit
 
@@ -85,7 +85,7 @@ It should not inherit a deployability claim from the rest of the parcel kit.
 
 | Node class | Current hardware | Placement | Primary role | MVP critical path |
 | --- | --- | --- | --- | --- |
-| Indoor air node | `bench-air-node` | indoor or sheltered | homeowner-local smoke and heat evidence | yes |
+| Indoor air node | `bench-air-node` | indoor or sheltered | parcel operator-local smoke and heat evidence | yes |
 | Outdoor reference node | `mast-lite` | sheltered outdoor | parcel-edge weather and air context | yes |
 | Rich outdoor mast | `weather-pm-mast` | outdoor mast | PM and fuller outdoor mechanics | no, second wave |
 | Low-point flood node | `flood-node` | runoff low point | depth and rise-rate evidence | optional by parcel |
@@ -142,7 +142,7 @@ For `deployment maturity v1.0` and above, the transport layer also needs a docum
 1. node emits versioned packet
 2. ingest binds packet to parcel and normalizes it
 3. inference combines node evidence with parcel context and public context
-4. parcel platform renders homeowner-facing condition estimates
+4. parcel platform renders dwelling-facing condition estimates
 5. shared-map publication remains optional and policy-gated
 
 ## Current reference-implementation boundary
@@ -157,7 +157,7 @@ Several node families are architecturally present before they are honest to call
 
 ## System surfaces
 
-### Homeowner parcel surface
+### Parcel operator parcel surface
 
 - one parcel-state output
 - one parcel-view summary
@@ -231,7 +231,7 @@ What should be singular is:
 - transport expectations
 - normalized observation families
 - calibration records
-- homeowner-facing parcel outputs
+- dwelling-facing parcel outputs
 
 ### Do require a field-hardening bundle before using deployed language
 
@@ -284,7 +284,7 @@ This is better treated as a `deployment maturity v1.5` target than a default `v1
 
 ## Immediate spec work still needed
 
-- canonical auth and provisioning posture for homeowner-run nodes
+- canonical auth and provisioning posture for parcel operator-run nodes
 - normalized observation schemas for flood, weather/PM, and thermal nodes
 - calibration record format shared across node classes
 - install metadata standard that inference can trust

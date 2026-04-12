@@ -25,7 +25,7 @@ The current intended sequencing is:
 - keep released materials in the commons under clear open terms
 - make the current release clear enough to function as a real public disclosure
 - distinguish intentionally public v1 release artifacts from future participant data that is not automatically public
-- avoid implying that future private homeowner data becomes open just because the project is open source
+- avoid implying that future private parcel-linked data becomes open just because the project is open source
 - avoid overpromising patent grants, non-asserts, or trademark permissions before legal review
 
 ## What is public now
@@ -81,11 +81,11 @@ See `../LICENSES.md` for the current working license matrix.
 
 ## Data-rights clarification
 
-Open-source licensing for code, hardware, or documentation does not change the ownership or privacy posture of homeowner-contributed parcel-linked data.
+Open-source licensing for code, hardware, or documentation does not change the ownership or privacy posture of participant-contributed parcel-linked data.
 
 The project’s working rule is:
 
-- homeowners own their raw parcel-linked data
+- parcel operators own their raw parcel-linked data
 - sharing outside the private parcel context is opt-in
 - the project-controlled v1 dataset may be intentionally published under explicit open-data terms
 - future participant-contributed parcel-linked datasets still require separate review and are not made public by default

@@ -15,7 +15,7 @@ Read `NOTICE.md` before treating this subtree as a complete released software pa
 ## Reference commands
 
 - `make oesis-demo`
-  Run the current end-to-end reference pipeline from raw node packet to homeowner-facing parcel view.
+  Run the current end-to-end reference pipeline from raw node packet to dwelling-facing parcel view.
 - `make oesis-validate`
   Validate the machine-readable example payloads used by the reference scripts.
 - `make oesis-check`

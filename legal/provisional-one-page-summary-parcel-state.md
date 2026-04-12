@@ -27,7 +27,7 @@ Regional feeds and raw sensor dashboards do not reliably answer parcel-level que
 
 ## Core claimed idea in plain language
 
-For a target parcel, the system assembles evidence from different source classes, applies parcel-specific evaluation for one or more hazards, determines what kinds of sources materially supported the result, and emits a parcel-state object containing homeowner-readable statuses plus confidence, evidence mode, freshness, reasons, and provenance summary.
+For a target parcel, the system assembles evidence from different source classes, applies parcel-specific evaluation for one or more hazards, determines what kinds of sources materially supported the result, and emits a parcel-state object containing parcel operator-readable statuses plus confidence, evidence mode, freshness, reasons, and provenance summary.
 
 ## Example output fields
 

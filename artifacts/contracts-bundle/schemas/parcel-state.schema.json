@@ -196,7 +196,7 @@
               "visibility": {
                 "type": "string",
                 "enum": [
-                  "homeowner_safe",
+                  "dwelling_safe",
                   "internal_only"
                 ]
               },

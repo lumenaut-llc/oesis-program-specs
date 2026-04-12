@@ -39,7 +39,7 @@ Map major use cases to likely sensors, core outputs, likely deployment scale, an
 
 ## Recommended phase-1 feature cluster
 
-These use cases have the best mix of homeowner value, technical feasibility, and long-term network upside:
+These use cases have the best mix of parcel operator value, technical feasibility, and long-term network upside:
 
 - wildfire smoke
 - indoor air health

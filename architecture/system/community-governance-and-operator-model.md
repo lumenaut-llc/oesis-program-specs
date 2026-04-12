@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define how neighborhood-scale participation, stewardship, and limited operator roles should work without undermining homeowner ownership or private-by-default defaults.
+Define how neighborhood-scale participation, stewardship, and limited operator roles should work without undermining parcel stewardship or private-by-default defaults.
 
 ## Why governance is a core system component
 

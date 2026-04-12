@@ -19,7 +19,7 @@ added.
 ### One parcel, one system
 
 Multiple purpose-built nodes may exist, but they should still collapse into one
-parcel identity, one ingest path, one inference engine, one homeowner-facing
+parcel identity, one ingest path, one inference engine, one dwelling-facing
 parcel view, and one privacy/sharing surface.
 
 ### Modular hardware, coherent parcel behavior
@@ -35,7 +35,7 @@ The architecture keeps clear separation between:
 - collection and ingest transport
 - normalized observations
 - inferred parcel-state outputs
-- homeowner presentation
+- parcel operator presentation
 - shared neighborhood outputs
 
 ### Collection first for evidence availability

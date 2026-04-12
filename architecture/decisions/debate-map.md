@@ -63,7 +63,7 @@ underlying hazards do not naturally stop at parcel lines.
 
 ### What the parcel-first side gets right
 
-- matches the homeowner's decision surface
+- matches the parcel operator's decision surface
 - gives the product a clear primary object
 - provides a clean permissions and ownership boundary
 - keeps the system directly useful to a specific household
@@ -81,7 +81,7 @@ If parcel-first is overdone, the product may imply sharper certainty than the
 evidence supports.
 
 If field-first is overdone, the product may become too abstract and stop
-answering the homeowner's core question.
+answering the parcel operator's core question.
 
 ### Provisional project stance
 
@@ -193,7 +193,7 @@ during outages, and maintenance burden.
 
 ### What the local-first side gets right
 
-- stronger alignment with homeowner ownership
+- stronger alignment with parcel stewardship
 - better resilience when connectivity is degraded
 - lower dependency on a central operator
 - potentially stronger privacy posture
@@ -211,7 +211,7 @@ If local-first is overdone too early, the project may drown in operational
 complexity.
 
 If cloud-first is overdone, the project may drift away from its decentralized
-and homeowner-owned values.
+and dwelling-scale values.
 
 ### Provisional project stance
 
@@ -285,7 +285,7 @@ depends on shared intelligence under partial adoption.
 ### What the standalone side gets right
 
 - easier adoption and learning
-- clearer value for a single homeowner
+- clearer value for a single parcel operator
 - less fragile bootstrapping
 - stronger educational and open-source utility
 
@@ -328,7 +328,7 @@ private by default and sharing by choice.
 
 ### What the private exact side gets right
 
-- aligns with homeowner control and trust
+- aligns with parcel operator control and trust
 - reduces surveillance risk
 - preserves the legitimacy of participation
 - keeps exact parcel conditions appropriately protected
@@ -345,7 +345,7 @@ private by default and sharing by choice.
 If private exactness dominates without abstraction design, the network layer
 becomes weak or symbolic.
 
-If sharing dominates, the platform stops being homeowner-owned in any
+If sharing dominates, the platform stops being dwelling-scale in any
 meaningful sense.
 
 ### Provisional project stance
@@ -355,7 +355,7 @@ Prefer derived, generalized, or cell-level contributions over exposing exact raw
 parcel truth.
 Retain exact raw owner data as private by default.
 
-## Debate 8: homeowner tool vs civic infrastructure
+## Debate 8: parcel operator tool vs civic infrastructure
 
 Version pressure: primarily `v1.0`
 
@@ -371,7 +371,7 @@ Affected objects:
 The system can be built as a household product, a neighborhood intelligence
 layer, or eventually a form of community infrastructure.
 
-### What the homeowner tool side gets right
+### What the parcel operator tool side gets right
 
 - strong immediate user value
 - clearer UX priorities
@@ -387,7 +387,7 @@ layer, or eventually a form of community infrastructure.
 
 ### Risk if overdone
 
-If the project is treated only as a homeowner tool, it may underbuild the
+If the project is treated only as a parcel operator tool, it may underbuild the
 shared intelligence layer that makes it distinctive.
 
 If it is treated too early as civic infrastructure, it may acquire governance
@@ -395,7 +395,7 @@ and reliability expectations it cannot yet meet.
 
 ### Provisional project stance
 
-Start as a strong homeowner tool with community-aware architecture.
+Start as a strong parcel operator tool with community-aware architecture.
 Allow the system to grow toward neighborhood infrastructure only as governance,
 quality controls, and operational maturity justify it.
 
@@ -544,7 +544,7 @@ infrastructure becomes unsafe.
 
 - keeps the system anchored to the home
 - supports straightforward local sensing and explanation
-- fits the homeowner's immediate mental model
+- fits the parcel operator's immediate mental model
 
 ### What the route side gets right
 
@@ -635,7 +635,7 @@ understandable answers.
 
 - trust requires inspectability
 - uncertainty and source mix matter
-- homeowners should be able to challenge the system when needed
+- parcel operators should be able to challenge the system when needed
 
 ### Risk if overdone
 
@@ -748,7 +748,7 @@ When a new design question appears, test it against these checks:
 4. Does it preserve explanation, confidence, and evidence mode?
 5. Does it keep the system modular enough to evolve without becoming
    fragmented?
-6. Does it improve homeowner agency rather than weakening it?
+6. Does it improve parcel operator agency rather than weakening it?
 
 ## Current meta-stance
 
@@ -759,7 +759,7 @@ The project should currently bias toward:
 - modularity over monolith lock-in
 - privacy by default over incidental exposure
 - useful partial adoption over all-or-nothing dependency
-- homeowner value first, with neighborhood intelligence growing on top
+- parcel operator value first, with neighborhood intelligence growing on top
 
 ## Likely next decisions to formalize
 

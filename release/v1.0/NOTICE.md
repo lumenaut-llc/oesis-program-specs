@@ -13,7 +13,7 @@ Inference System legal, governance, and documentation foundation.
 
 - private by default
 - shared by choice
-- homeowners should own their raw parcel-linked data
+- parcel operators should own their raw parcel-linked data
 - one intentionally public v1 dataset does not make all future participant parcel-linked data public
 - parcel-state outputs are estimates or inferences, not guarantees
 
@@ -29,7 +29,7 @@ Inference System legal, governance, and documentation foundation.
 
 ## What this release does not do
 
-- it does not convert future participant-contributed private homeowner data into open data
+- it does not convert future participant-contributed private parcel-linked data into open data
 - it does not grant rights in withheld materials beyond what applicable notices expressly say
 - it does not present the project as emergency-grade guidance or an official alerting authority
 

@@ -25,7 +25,7 @@
 ## Data contracts
 
 - shared-map outputs should carry coarse spatial identifiers rather than exact parcel geometry
-- every payload should identify whether a visible layer comes from shared homeowner contributions, public context, or both
+- every payload should identify whether a visible layer comes from shared parcel operator contributions, public context, or both
 - payloads should include delay/freshness metadata suitable for user-facing disclaimers
 - payloads should not include exact contributing parcel identifiers or raw observation refs
 

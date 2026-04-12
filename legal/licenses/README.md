@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define the licensing structure for code, hardware, documentation, and datasets without undermining homeowner data ownership or privacy commitments.
+Define the licensing structure for code, hardware, documentation, and datasets without undermining parcel-linked data stewardship or privacy commitments.
 
 ## Working split
 
@@ -12,7 +12,7 @@ Define the licensing structure for code, hardware, documentation, and datasets w
 - documentation/specifications/governance text: CC BY-SA 4.0
 - synthetic examples and test datasets: CDLA Permissive 2.0, CC BY 4.0, or other dataset-specific approved terms
 - approved public shared-dataset snapshots: dataset-specific terms, potentially including ODbL where appropriate
-- real homeowner-contributed parcel-linked data: separate contractual/data-governance treatment, not a blanket open license
+- real participant-contributed parcel-linked data: separate contractual/data-governance treatment, not a blanket open license
 
 ## Release note
 
@@ -22,7 +22,7 @@ It does not mean:
 
 - every asset class is already publicly released
 - held-back technical files are approved for publication
-- private homeowner data becomes open because the project is open source
+- private parcel-linked data becomes open because the project is open source
 
 ## Rules
 

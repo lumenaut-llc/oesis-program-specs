@@ -14,7 +14,7 @@ This node is the fastest way to turn the program from concept into repeatable ev
 - packet timing and schema
 - local health telemetry
 - ingest-service expectations
-- homeowner-readable parcel evidence inputs
+- parcel operator-readable parcel evidence inputs
 
 ## Standalone value
 

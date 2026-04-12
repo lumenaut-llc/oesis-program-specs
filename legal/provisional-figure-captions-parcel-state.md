@@ -18,18 +18,18 @@ Show the end-to-end location of the candidate invention inside the broader syste
 
 ### Suggested visual elements
 
-- homeowner-controlled node or nodes
+- operator-controlled node or nodes
 - ingest service
 - normalized observation store
 - parcel metadata / parcel prior store
 - optional public-context input
 - inference engine
 - parcel-state snapshot output
-- parcel platform / homeowner-facing view
+- parcel platform / dwelling-facing view
 
 ### Draft caption
 
-Figure 1 illustrates an example system in which one or more homeowner-controlled nodes provide environmental observations that are normalized by an ingest service and combined with parcel context and optional public context to produce a parcel-state snapshot for a target parcel. The parcel-state snapshot may include one or more homeowner-readable condition outputs, confidence, evidence mode, reasons, freshness, and provenance summary. The parcel platform may present the parcel-state snapshot without recomputing the hazard logic in the presentation layer.
+Figure 1 illustrates an example system in which one or more operator-controlled nodes provide environmental observations that are normalized by an ingest service and combined with parcel context and optional public context to produce a parcel-state snapshot for a target parcel. The parcel-state snapshot may include one or more parcel operator-readable condition outputs, confidence, evidence mode, reasons, freshness, and provenance summary. The parcel platform may present the parcel-state snapshot without recomputing the hazard logic in the presentation layer.
 
 ### Draft annotation notes
 
@@ -126,7 +126,7 @@ Show the output object structure at a level sufficient to support the filing wit
 
 ### Draft caption
 
-Figure 5 illustrates an example parcel-state snapshot generated for a target parcel. The parcel-state snapshot may include homeowner-readable condition outputs, a confidence value, an evidence-mode value, reasons, hazard-supporting values, freshness information, and a provenance summary identifying at least part of the evidence basis for the result. The parcel-state snapshot may be stored, served by an API, or rendered in a homeowner-facing parcel view.
+Figure 5 illustrates an example parcel-state snapshot generated for a target parcel. The parcel-state snapshot may include parcel operator-readable condition outputs, a confidence value, an evidence-mode value, reasons, hazard-supporting values, freshness information, and a provenance summary identifying at least part of the evidence basis for the result. The parcel-state snapshot may be stored, served by an API, or rendered in a dwelling-facing parcel view.
 
 ### Draft annotation notes
 

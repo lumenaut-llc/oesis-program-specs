@@ -9,7 +9,7 @@ For the current public preview packet, use `../../release/v1.0/contributor-and-r
 ## MVP contribution rules
 
 - contributors may submit code, documentation, hardware designs, test fixtures, schemas, and synthetic examples
-- contributors should not submit real homeowner-contributed parcel-linked data through normal repository contribution paths
+- contributors should not submit real participant-contributed parcel-linked data through normal repository contribution paths
 - contributors should not include secrets, exact household locations, live credentials, or unreviewed third-party datasets
 - safety, privacy, and claims-sensitive changes require maintainer review before merge
 

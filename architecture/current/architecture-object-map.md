@@ -188,7 +188,7 @@ Main sources:
 Status: `implemented`
 
 Role:
-- presentation objects for homeowner-facing and operator-safe interpretation
+- presentation objects for dwelling-facing and operator-safe interpretation
 - separates product-safe summaries from lower-level parcel-state internals
 
 Current `v0.1` use:

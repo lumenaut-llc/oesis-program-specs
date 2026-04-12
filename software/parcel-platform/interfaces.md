@@ -37,7 +37,7 @@
 - `POST /v1/parcels/{parcel_id}/verification`
   Append a private verification-outcome record for one parcel.
 - `POST /v1/parcels/{parcel_id}/rights/export`
-  Create an export request for homeowner-visible parcel data.
+  Create an export request for parcel operator-visible parcel data.
 - `POST /v1/parcels/{parcel_id}/rights/delete`
   Create a deletion request for account-controlled parcel data.
 - `GET /v1/admin/reference-state/summary`
@@ -152,7 +152,7 @@ Suggested response example:
         "summary": "Indoor gas-resistance trend shows a moderate change.",
         "hazards": ["smoke"],
         "weight": 0.32,
-        "visibility": "homeowner_safe"
+        "visibility": "dwelling_safe"
       }
     ],
     "source_breakdown": {
@@ -182,7 +182,7 @@ Suggested response example:
   "provenance_summary": {
     "observation_count": 1,
     "source_modes": [
-      "homeowner_node"
+      "dwelling_node"
     ]
   },
   "data_classes_visible": [
@@ -200,9 +200,9 @@ Suggested response example:
 
 ## Open questions
 
-- How much raw evidence detail should a homeowner see before the UI becomes noisy or misleading?
+- How much raw evidence detail should a parcel operator see before the UI becomes noisy or misleading?
 - Should the platform expose hazard probabilities directly, or mostly keep them behind explanation text and status labels?
-- What should trigger a homeowner notification: status transitions, freshness failures, confidence drops, or all three?
+- What should trigger a parcel operator notification: status transitions, freshness failures, confidence drops, or all three?
 - Which parts of provenance should be hidden or generalized when data comes from shared neighborhood context?
 - Which sharing updates should require step-up confirmation because they materially expand data use?
 - Which support-object fields are genuinely required in `v1.5` versus better left optional until live pilots show their value?

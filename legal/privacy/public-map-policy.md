@@ -44,4 +44,4 @@ Any shared map release should be reviewed for:
 Any shared map should disclose:
 - that participation is partial
 - that visible conditions may be delayed or aggregated
-- that public context and homeowner-contributed signals are not the same thing
+- that public context and participant-contributed signals are not the same thing

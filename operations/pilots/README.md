@@ -7,7 +7,7 @@ How to plan, deploy, and learn from a first pilot block.
 ## Minimum contents
 
 - pilot goals and success metrics
-- homeowner onboarding and notice flow
+- parcel operator onboarding and notice flow
 - sharing-mode choices used in the pilot
 - incident and escalation paths
 - data handling and publication boundaries

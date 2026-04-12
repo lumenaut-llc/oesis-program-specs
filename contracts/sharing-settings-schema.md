@@ -33,7 +33,7 @@ Define the canonical parcel-linked sharing settings object used by the parcel pl
 ## Design rules
 
 - `private_only` should be true when no outbound sharing mode is enabled.
-- activation of any non-private mode should reference the notice version shown to the homeowner
+- activation of any non-private mode should reference the notice version shown to the parcel operator
 - settings should be understandable in the parcel UI without legal translation
 - revocation state should be visible so users do not think a prior setting is still active
 

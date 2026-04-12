@@ -14,9 +14,9 @@ Today we’re publicly sharing the governance, ownership, and openness
 foundation for Open Environmental Sensing and Inference System (`OESIS`), part
 of Open Source DIY Tech.
 
-This project is working toward a parcel-first, homeowner-owned environmental sensing system for smoke, pluvial flooding/runoff, and heat.
+This project is working toward a parcel-first, dwelling-scale environmental sensing system for smoke, pluvial flooding/runoff, and heat.
 
-Private by default. Shared by choice. Homeowners should own their raw data.
+Private by default. Shared by choice. Parcel operators should own their raw data.
 
 This release focuses on governance, data ownership, privacy, and the current public
 technical foundation.
@@ -26,7 +26,7 @@ Release: [link]
 ## Short post
 
 We’re sharing the first public preview for Open Environmental Sensing and
-Inference System (`OESIS`): a homeowner-owned, parcel-first environmental sensing
+Inference System (`OESIS`): a dwelling-scale, parcel-first environmental sensing
 project. Private by default. Shared by choice. Start with the governance and
 release framework here: [link]
 
@@ -43,9 +43,9 @@ Release: [link]
 
 ## Press / intro blurb
 
-Open Environmental Sensing and Inference System is a homeowner-centered
+Open Environmental Sensing and Inference System is a parcel operator-centered
 environmental sensing effort focused on parcel-level situational awareness for
-smoke, flooding/runoff, and heat. The project is designed around homeowner
+smoke, flooding/runoff, and heat. The project is designed around parcel operator
 ownership of raw data, opt-in sharing, explicit uncertainty, and a staged path
 toward a broader open release across software, hardware, and documentation.
 

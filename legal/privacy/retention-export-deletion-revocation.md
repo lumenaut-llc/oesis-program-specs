@@ -2,11 +2,11 @@
 
 ## Purpose
 
-Define the minimum lifecycle rules for homeowner-contributed data and parcel-linked outputs in the MVP.
+Define the minimum lifecycle rules for participant-contributed data and parcel-linked outputs in the MVP.
 
 ## Governing rule
 
-If the platform promises homeowner ownership and sharing by choice, it must support practical exit, review, and control mechanisms rather than treating those ideas as branding language.
+If the platform promises parcel stewardship and sharing by choice, it must support practical exit, review, and control mechanisms rather than treating those ideas as branding language.
 
 ## Retention baseline
 
@@ -15,11 +15,11 @@ The MVP should adopt category-based retention rather than indefinite storage.
 ### Private parcel data
 
 Default rule:
-- retain fine-grained raw observations only as long as needed for product operation, troubleshooting, calibration review, and homeowner history features
+- retain fine-grained raw observations only as long as needed for product operation, troubleshooting, calibration review, and parcel operator history features
 
 MVP policy target:
 - define a default retention window for high-resolution raw observations
-- allow the homeowner to keep a longer private history only through an explicit setting
+- allow the parcel operator to keep a longer private history only through an explicit setting
 - avoid indefinite retention of raw packets by default
 
 ### Shared data
@@ -40,7 +40,7 @@ Default rule:
 ### Derived parcel states
 
 Default rule:
-- retain a homeowner-visible recent history
+- retain a parcel operator-visible recent history
 - do not imply a permanent safety record unless the product actually supports it
 
 ### Administrative and governance records
@@ -50,8 +50,8 @@ Default rule:
 
 ## Export rules
 
-Homeowners should be able to export:
-- their raw homeowner-contributed observations
+Parcel operators should be able to export:
+- their raw participant-contributed observations
 - parcel metadata they supplied
 - major derived parcel-state history tied to their account
 - current sharing settings and recent settings history
@@ -67,7 +67,7 @@ The MVP does not need perfect export breadth on day one, but it should not lock 
 ## Deletion rules
 
 Deletion should cover:
-- account profile data tied to the homeowner
+- account profile data tied to the parcel operator
 - private parcel-linked raw data stored by the service
 - parcel associations controlled by that account
 - future access to household-facing parcel-state history for the deleted account

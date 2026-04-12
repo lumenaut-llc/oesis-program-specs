@@ -53,7 +53,7 @@ The following product rules apply:
 - Bench-air gas-resistance values must be treated as anomaly or trend signals, not direct smoke concentration.
 - Indoor or sheltered bench-air readings must not be presented as equivalent to parcel-wide outdoor conditions.
 - When bench-air evidence is the only available local input, parcel-state outputs should bias toward `unknown` or low-confidence estimates unless public context and parcel context materially support a stronger claim.
-- Homeowner-facing language must describe bench-air as one evidence layer, not as parcel truth.
+- Parcel operator-facing language must describe bench-air as one evidence layer, not as parcel truth.
 - Reference implementations may demonstrate pipeline behavior, but they must not be mistaken for production-valid hazard logic.
 
 ## Consequences

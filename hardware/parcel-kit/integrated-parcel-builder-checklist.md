@@ -144,9 +144,9 @@ ingest, inference, parcel UX, and governance.
 
 ### Parcel UX acceptance checks
 
-- a homeowner can tell what is happening now
-- a homeowner can tell why the answer was produced
-- a homeowner can tell how current and how confident the answer is
+- a parcel operator can tell what is happening now
+- a parcel operator can tell why the answer was produced
+- a parcel operator can tell how current and how confident the answer is
 
 ## Governance and data model
 

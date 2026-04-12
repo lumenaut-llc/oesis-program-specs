@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define the parcel-scoped registry object that binds one or more physical nodes to one parcel, one software stack, and one homeowner-facing parcel view.
+Define the parcel-scoped registry object that binds one or more physical nodes to one parcel, one software stack, and one dwelling-facing parcel view.
 
 ## Current implementation boundary
 

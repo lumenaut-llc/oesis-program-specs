@@ -12,14 +12,14 @@ Project name: Resilient Home Intelligence
 Parent project: Open Source DIY Tech
 
 Mission:
-Build a homeowner-owned environmental sensing and parcel-safety platform that helps determine conditions at a specific house while becoming more precise when nearby homes also participate.
+Build a dwelling-scale environmental sensing and parcel-safety platform that helps determine conditions at a specific house while becoming more precise when nearby homes also participate.
 
 Core framing:
 - This is not just a sensor dashboard.
 - It is a parcel-first situational platform.
 - The parcel is the main object, not the sensor.
 - Sensors, nearby shared observations, and public feeds are evidence layers used to compute parcel-level conditions and statuses.
-- Homeowners own their raw data.
+- Parcel operators own their raw data.
 - Sharing is opt-in.
 - The system must work under partial adoption: every parcel gets a status, but confidence and precision improve as more nodes participate.
 - The first hazards in scope are smoke, pluvial flooding/runoff, and heat.
@@ -39,12 +39,12 @@ This section intentionally describes the baseline before the recent expansion to
 
 ### v1 baseline concept
 
-The current v1 baseline is primarily a homeowner-owned environmental sensing and parcel-awareness platform that:
+The current v1 baseline is primarily a dwelling-scale environmental sensing and parcel-awareness platform that:
 - combines parcel priors, local sensors if present, nearby shared sensors if present, and external public data integrated only inside the platform
 - computes parcel-level conditions/statuses for smoke, pluvial flooding/runoff, and heat
 - distinguishes observed vs inferred states
 - shows confidence and provenance
-- keeps homeowner raw data private by default
+- keeps parcel operator raw data private by default
 - allows opt-in sharing into a neighborhood intelligence layer
 
 ### v1 baseline outputs per parcel
@@ -143,7 +143,7 @@ It is original in synthesis.
 The distinctive combination is:
 - parcel-first reasoning
 - partial-adoption operation
-- homeowner-owned raw data
+- parcel operator-held raw data
 - opt-in neighborhood sharing
 - multi-hazard scope across smoke, flood, and heat
 - house-specific derived statuses rather than just maps or raw sensor dashboards
@@ -193,7 +193,7 @@ That is the bridge from parcel sensing to parcel adaptation.
 A stronger future framing is:
 
 This is not only an environmental sensing platform.  
-It is an open, parcel-first climate adaptation operating system that helps households and neighborhoods sense, interpret, and act under changing local conditions while preserving homeowner data ownership and supporting shared resilience without forced centralization.
+It is an open, parcel-first climate adaptation operating system that helps households and neighborhoods sense, interpret, and act under changing local conditions while preserving parcel-linked data stewardship and supporting shared resilience without forced centralization.
 
 But this stronger framing should not replace the baseline overnight.  
 It should emerge through staged capability growth.
@@ -585,14 +585,14 @@ After that:
 Do not lose these principles as the system becomes more ambitious:
 - private by default
 - shared by choice
-- homeowners own raw data
+- parcel operators own raw data
 - platform should distinguish private, shared, public, and derived layers
 - uncertainty must remain visible
 - the system should retain local-first value where possible
 - some functionality should remain useful without full cloud dependence
 - the system should support user agency, not black-box dependence
 
-The long-term adaptation engine should still be evaluated against the democratic and homeowner-controlled goals, not only against technical performance.
+The long-term adaptation engine should still be evaluated against the democratic and operator-controlled goals, not only against technical performance.
 
 ---
 
@@ -664,7 +664,7 @@ Be harsh and specific. Do not just help me dream bigger. Pressure-test whether t
 
 ## 15. Shorter version if needed
 
-I have a current baseline v1 for a homeowner-owned, parcel-first environmental sensing and parcel-awareness platform focused on smoke, flood/runoff, and heat. It combines parcel priors, local sensors if present, nearby shared sensors if present, and external public data integrated only inside the platform. It is private by default, supports opt-in sharing, and works under partial adoption.
+I have a current baseline v1 for a dwelling-scale, parcel-first environmental sensing and parcel-awareness platform focused on smoke, flood/runoff, and heat. It combines parcel priors, local sensors if present, nearby shared sensors if present, and external public data integrated only inside the platform. It is private by default, supports opt-in sharing, and works under partial adoption.
 
 I want to map a realistic path from that baseline v1 to a much more serious long-term adaptation system that can eventually guide material implementation, bounded control actions, and verified parcel-level protection. The key shift discussed is that the system should not only collect hazard data, but also house-state data, intervention logs, response/verification data, and actuation-compatibility data.
 
@@ -676,4 +676,4 @@ Please evaluate whether the staged path from baseline parcel sensing to parcel a
 
 If you need a single-sentence anchor for the whole file, use this:
 
-The path forward is to evolve from a parcel-first sensing and inference platform into a parcel-first adaptation system by adding the minimum data and control structure needed to model hazards, house state, available interventions, and verified outcomes without losing homeowner ownership, decentralization, or technical honesty.
+The path forward is to evolve from a parcel-first sensing and inference platform into a parcel-first adaptation system by adding the minimum data and control structure needed to model hazards, house state, available interventions, and verified outcomes without losing parcel stewardship, decentralization, or technical honesty.

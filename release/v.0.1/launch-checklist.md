@@ -43,7 +43,7 @@ Confirm these files are reviewed together:
 Check for:
 
 - consistent use of “private by default” and “shared by choice”
-- no implication that future participant-contributed private homeowner data is open data
+- no implication that future participant-contributed private parcel-linked data is open data
 - no implication that every repo file is part of the public release
 - no safety or emergency overclaims
 

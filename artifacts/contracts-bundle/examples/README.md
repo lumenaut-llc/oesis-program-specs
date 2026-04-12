@@ -10,7 +10,7 @@ the current accepted contract lane.
 - `normalized-observation.example.json`
   Example of the canonical observation object emitted by the ingest boundary.
 - `parcel-state.example.json`
-  Example of a homeowner-facing parcel-state snapshot after inference.
+  Example of a dwelling-facing parcel-state snapshot after inference.
 - `parcel-context.example.json`
   Example of parcel installation context and parcel priors supplied to inference.
 - `public-context.example.json`

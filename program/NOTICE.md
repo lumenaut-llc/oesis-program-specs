@@ -21,7 +21,7 @@ Do not assume that:
 
 - one license governs every file in this program
 - one public release artifact means every technical detail is approved for release
-- one public dataset means all future private homeowner-contributed parcel-linked data is public or open-licensed
+- one public dataset means all future private participant-contributed parcel-linked data is public or open-licensed
 
 ## Read these first
 

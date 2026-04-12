@@ -9,7 +9,7 @@ environments.
 ## Why multi-unit matters
 
 Many residents do not live in detached homes.
-If the project only fits single-parcel homeowners, it leaves out:
+If the project only fits single-parcel parcel operators, it leaves out:
 
 - renters
 - apartment residents

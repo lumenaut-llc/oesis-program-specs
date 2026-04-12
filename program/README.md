@@ -10,7 +10,7 @@ Read `NOTICE.md` before treating this program as a complete technical open relea
 
 ## Mission
 
-Create homeowner-owned environmental sensing and parcel-level situational intelligence that:
+Create dwelling-scale environmental sensing and parcel-level situational intelligence that:
 - works for individual homes
 - improves with neighborhood participation
 - preserves owner control of parcel-linked data, including explicit public-release choices

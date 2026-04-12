@@ -14,7 +14,7 @@ For this preview, `v1` means:
 - public materials point to canonical governance, privacy, and release docs
 - each asset class has a clear intended license direction
 - contributors and reviewers can tell what is public now versus what remains held back
-- private homeowner-contributed parcel-linked data is not swept into the open-release story
+- private participant-contributed parcel-linked data is not swept into the open-release story
 
 This is not yet the full enabling technical open release.
 
@@ -50,7 +50,7 @@ During the preview period, the project is not treating the following as part of 
 - detailed privacy-preserving neighborhood-sharing mechanics
 - full schematics, PCB layouts, fabrication files, or detailed CAD tied to withheld internals
 - calibration and tuning procedures that materially enable reproduction
-- real homeowner-contributed parcel-linked datasets
+- real participant-contributed parcel-linked datasets
 
 See:
 
@@ -68,7 +68,7 @@ Current working direction:
 - hardware design files: `CERN-OHL-S v2`
 - documentation and governance text: `CC BY-SA 4.0`
 - synthetic datasets and test fixtures: dataset-specific terms approved for release
-- real homeowner-contributed parcel-linked data: not open by default
+- real participant-contributed parcel-linked data: not open by default
 
 See:
 
@@ -81,7 +81,7 @@ Open release of code, hardware, or docs does not mean:
 
 - all technical materials are already public
 - all files in the repository are under one identical license
-- private homeowner data becomes open data
+- private parcel-linked data becomes open data
 - preview publication grants rights in withheld materials
 - the project is claiming emergency authority, guaranteed safety, or official alerts
 
@@ -91,7 +91,7 @@ Contributors and reviewers should be able to answer these questions before publi
 
 1. Is the material inside the public preview scope?
 2. Does it expose held-back technical detail?
-3. Does it include or imply rights to real homeowner-contributed parcel-linked data?
+3. Does it include or imply rights to real participant-contributed parcel-linked data?
 4. Does it match the governing asset-class license or notice?
 5. Does it preserve the project's claims, privacy, and governance boundaries?
 

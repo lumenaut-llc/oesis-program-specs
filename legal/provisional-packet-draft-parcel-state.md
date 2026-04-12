@@ -29,17 +29,17 @@ This is planning support, not legal advice.
 
 ## Section 1. Problem Statement
 
-Conventional environmental information systems often operate at coarse regional scales, depend on centralized sensing, or present generalized alerts that do not resolve conditions at the level of an individual parcel. A homeowner deciding whether shelter conditions, reentry conditions, egress conditions, or asset-risk conditions are degraded often has a mix of incomplete sources: one or more private nodes on the parcel, parcel-specific context such as node placement or structure characteristics, and delayed or low-resolution public context such as weather, smoke, or flood feeds. Existing tools tend either to expose raw readings without parcel-specific interpretation or to present simplified guidance without making the provenance and uncertainty of the result explicit.
+Conventional environmental information systems often operate at coarse regional scales, depend on centralized sensing, or present generalized alerts that do not resolve conditions at the level of an individual parcel. A parcel operator deciding whether shelter conditions, reentry conditions, egress conditions, or asset-risk conditions are degraded often has a mix of incomplete sources: one or more private nodes on the parcel, parcel-specific context such as node placement or structure characteristics, and delayed or low-resolution public context such as weather, smoke, or flood feeds. Existing tools tend either to expose raw readings without parcel-specific interpretation or to present simplified guidance without making the provenance and uncertainty of the result explicit.
 
 The technical gap addressed here is not merely collecting more observations. The gap is generating a parcel-level condition state from heterogeneous evidence sources while preserving source boundaries, degrading gracefully under sparse evidence, and explicitly indicating the mode of evidence used to produce the result. In practical terms, the system should remain useful for a single-home deployment and still distinguish between a result based on direct local observations and a result based partly or entirely on public context.
 
-This problem matters because a parcel can differ materially from surrounding conditions due to structure type, orientation, topography, drainage behavior, microclimate, or node placement. A homeowner-facing system therefore benefits from a parcel-specific state-generation method that can combine locally observed evidence, parcel metadata, and public context, while preserving confidence and explanation outputs rather than collapsing all conditions into a single unsupported label.
+This problem matters because a parcel can differ materially from surrounding conditions due to structure type, orientation, topography, drainage behavior, microclimate, or node placement. A dwelling-facing system therefore benefits from a parcel-specific state-generation method that can combine locally observed evidence, parcel metadata, and public context, while preserving confidence and explanation outputs rather than collapsing all conditions into a single unsupported label.
 
 ## Section 2. Narrow Invention Summary
 
-The candidate invention is a computer-implemented method for generating parcel-level environmental condition states by assembling an evidence set for a target parcel from local observations, parcel-specific context, and optional public context, applying parcel-specific context and hazard-specific evaluation logic, and producing a parcel-state snapshot that includes one or more homeowner-readable status outputs, at least one confidence value, and at least one explicit evidence-mode indicator describing whether the result was derived from local observations, local observations plus public context, public context only, or insufficient evidence.
+The candidate invention is a computer-implemented method for generating parcel-level environmental condition states by assembling an evidence set for a target parcel from local observations, parcel-specific context, and optional public context, applying parcel-specific context and hazard-specific evaluation logic, and producing a parcel-state snapshot that includes one or more parcel operator-readable status outputs, at least one confidence value, and at least one explicit evidence-mode indicator describing whether the result was derived from local observations, local observations plus public context, public context only, or insufficient evidence.
 
-In one implementation, the method accepts normalized observations from one or more homeowner-controlled nodes associated with a parcel, parcel context describing the parcel or node placement, and optional public hazard context. The method groups evidence by hazard domain, evaluates freshness and source quality, computes hazard-supporting scores or probabilities, maps those results into parcel-level status fields, and emits explanation content that identifies why the status was assigned and what evidence classes contributed. The method further downgrades confidence or returns an `unknown`-type output when evidence is stale, sparse, conflicting, or absent.
+In one implementation, the method accepts normalized observations from one or more operator-controlled nodes associated with a parcel, parcel context describing the parcel or node placement, and optional public hazard context. The method groups evidence by hazard domain, evaluates freshness and source quality, computes hazard-supporting scores or probabilities, maps those results into parcel-level status fields, and emits explanation content that identifies why the status was assigned and what evidence classes contributed. The method further downgrades confidence or returns an `unknown`-type output when evidence is stale, sparse, conflicting, or absent.
 
 This candidate differs from ordinary sensor dashboards and regional alert overlays because it does not merely display raw node values or public feed values. It generates a parcel-state object with explicit provenance-aware outputs, source-mode labeling, and graceful degradation logic so the same system can operate under direct-local or public-context-supported conditions without representing all results as equally certain.
 
@@ -49,7 +49,7 @@ The candidate invention sits inside the broader Open Environmental Sensing and
 Inference System, which includes hardware sensor nodes, an ingest service, an
 inference engine, a parcel platform, and shared neighborhood views. For
 purposes of this draft, the focus is the parcel-state generation method
-performed after ingest normalization and before homeowner presentation.
+performed after ingest normalization and before parcel operator presentation.
 
 Relevant system modules are:
 
@@ -59,7 +59,7 @@ Relevant system modules are:
 - a parcel platform that presents the resulting parcel-state view
 - optional shared-map or neighborhood layers, which are outside this narrow filing
 
-The candidate begins when normalized observations and parcel context are available for a target parcel. The candidate ends when a parcel-state snapshot is produced for storage, API use, or homeowner display.
+The candidate begins when normalized observations and parcel context are available for a target parcel. The candidate ends when a parcel-state snapshot is produced for storage, API use, or parcel operator display.
 
 For this candidate, likely conventional background elements include:
 
@@ -75,7 +75,7 @@ Candidate material for the narrow filing is more likely to include:
 - use of parcel priors or parcel context in hazard evaluation
 - explicit evidence-mode classification tied to the available source classes
 - confidence degradation and `unknown` behavior based on freshness, sparsity, or conflict
-- generation of a parcel-state object that carries both homeowner-readable statuses and provenance-aware explanation outputs
+- generation of a parcel-state object that carries both parcel operator-readable statuses and provenance-aware explanation outputs
 
 For this draft, neighborhood-sharing transforms and shared-evidence aggregation are intentionally excluded from the narrow filing candidate.
 
@@ -91,7 +91,7 @@ Pre-existing context about the parcel used in interpretation, including by examp
 
 ### Local evidence
 
-Observations originating from one or more homeowner-controlled devices, sensors, or other direct parcel-linked sources associated with the target parcel.
+Observations originating from one or more operator-controlled devices, sensors, or other direct parcel-linked sources associated with the target parcel.
 
 ### Shared evidence
 
@@ -129,7 +129,7 @@ Human-readable or machine-readable content identifying at least part of the basi
 
 ### Overview
 
-The method generates a parcel-state snapshot for a target parcel by gathering available evidence, separating that evidence by source class and hazard domain, evaluating the evidence in light of parcel context, producing hazard-supporting outputs, and then mapping those outputs into homeowner-readable parcel condition states with confidence, freshness, and evidence-mode metadata.
+The method generates a parcel-state snapshot for a target parcel by gathering available evidence, separating that evidence by source class and hazard domain, evaluating the evidence in light of parcel context, producing hazard-supporting outputs, and then mapping those outputs into parcel operator-readable parcel condition states with confidence, freshness, and evidence-mode metadata.
 
 ### Step 1. Receive or retrieve parcel inputs
 
@@ -140,7 +140,7 @@ The system receives or retrieves, for a target parcel:
 - optional public context relevant to one or more hazards
 - hazard-specific evaluation parameters, rules, thresholds, or model settings
 
-Inputs may arrive event-driven after a new observation, on a scheduled recomputation cycle, or in response to a homeowner request for the latest parcel state.
+Inputs may arrive event-driven after a new observation, on a scheduled recomputation cycle, or in response to a parcel operator request for the latest parcel state.
 
 ### Step 2. Assemble hazard-specific evidence sets
 
@@ -185,7 +185,7 @@ This step produces one or more supporting values such as:
 
 ### Step 5. Determine evidence mode
 
-The system assigns an evidence mode for the parcel-state result based on which source classes materially contributed to the determination. The evidence mode is not merely a hidden internal flag; it is carried into the output so downstream systems and homeowners can distinguish a locally grounded result from a shared or public-context result.
+The system assigns an evidence mode for the parcel-state result based on which source classes materially contributed to the determination. The evidence mode is not merely a hidden internal flag; it is carried into the output so downstream systems and parcel operators can distinguish a locally grounded result from a shared or public-context result.
 
 Example evidence-mode logic may include:
 
@@ -210,7 +210,7 @@ Where degradation crosses a threshold, the output may remain or become `unknown`
 
 ### Step 7. Map supporting outputs into parcel-state fields
 
-The system maps the hazard-supporting outputs into one or more homeowner-readable status fields. In current project language, these may include:
+The system maps the hazard-supporting outputs into one or more parcel operator-readable status fields. In current project language, these may include:
 
 - shelter conditions estimate
 - reentry conditions estimate

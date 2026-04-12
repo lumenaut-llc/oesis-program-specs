@@ -67,7 +67,7 @@ This is primarily a `deployment maturity v0.1` lane.
 | --- | --- | --- |
 | 1 | ingest service path | serial validation first, HTTPS push later |
 | 1 | inference engine path | uses local plus public evidence |
-| 1 | parcel-platform view | one homeowner-facing parcel surface |
+| 1 | parcel-platform view | one dwelling-facing parcel surface |
 
 ### When to choose it
 
@@ -108,7 +108,7 @@ This is the first honest `deployment maturity v1.0` target.
 
 ### When to choose it
 
-- first full homeowner pilot
+- first full parcel operator pilot
 - need indoor versus outdoor distinction
 - want one coherent parcel kit without PM mast complexity
 

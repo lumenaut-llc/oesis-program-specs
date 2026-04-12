@@ -20,7 +20,7 @@ For build and test planning, treat **`v0.1`** as this narrow executable slice:
 - **One parcel** — one `parcel_id` and one parcel-context bundle in the reference path.
 - **One bench-air node** — one `oesis.bench-air.v1` observation path (default fixture: `bench-air-01`).
 - **One software path** — ingest → normalized observation, combined with parcel and public context → inference → parcel view (evidence summary included on the offline reference pipeline).
-- **One parcel view** — one coherent homeowner-facing status surface.
+- **One parcel view** — one coherent dwelling-facing status surface.
 
 Executable checks for this slice live in the sibling runtime repository `../oesis-runtime` (`make oesis-check`, `make oesis-http-check`, `make oesis-accept`).
 
@@ -76,7 +76,7 @@ Status in current reference path: `implemented`
 
 Role:
 - act as the primary decision anchor
-- give the system a concrete homeowner-facing scope
+- give the system a concrete dwelling-facing scope
 
 Status in current reference path: `implemented`
 

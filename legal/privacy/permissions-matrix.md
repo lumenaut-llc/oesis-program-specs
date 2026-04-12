@@ -36,11 +36,11 @@ This includes later-stage private parcel data such as:
 ### Mode 1. Private only
 
 Purpose:
-- homeowner monitoring and parcel-local interpretation
+- parcel operator monitoring and parcel-local interpretation
 
 Allowed:
-- raw parcel observations visible to the homeowner
-- exact parcel-state history visible to the homeowner
+- raw parcel observations visible to the parcel operator
+- exact parcel-state history visible to the parcel operator
 - public context used inside the parcel product
 
 Not allowed:
@@ -97,7 +97,7 @@ Required constraints:
 
 | Mode | Default | Data leaving private parcel context | Precision | Recipients | Timing | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| Private only | on | none beyond service operation | exact parcel, owner view only | homeowner and approved household roles | near-current | baseline mode |
+| Private only | on | none beyond service operation | exact parcel, owner view only | parcel operator and approved household roles | near-current | baseline mode |
 | Network assist | off | selected internal-use signals | internal service scope only | platform operator only | near-current or batch | no cross-household visibility |
 | Neighborhood aggregate contribution | off | delayed derived indicators, coarse summaries | neighborhood cell, block, or similar coarse unit | participating users via shared layer | delayed or batched | requires thresholding |
 | Research or pilot contribution | off | documented subset only | least detailed level that meets study need | named pilot or research operators | batch or bounded event window | separate consent required |

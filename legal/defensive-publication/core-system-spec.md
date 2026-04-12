@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Describe the parcel-first homeowner-owned network architecture in enough detail to function as a real public technical disclosure.
+Describe the parcel-first dwelling-scale network architecture in enough detail to function as a real public technical disclosure.
 
 ## Sections to complete
 

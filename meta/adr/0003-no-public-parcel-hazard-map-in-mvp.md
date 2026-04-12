@@ -13,13 +13,13 @@ The project needs an explicit decision about whether MVP includes a public parce
 
 ## Decision
 
-MVP will not include a public parcel-by-parcel hazard map based on real homeowner-contributed data.
+MVP will not include a public parcel-by-parcel hazard map based on real participant-contributed data.
 
 Early shared-map behavior is limited to:
 - coarse spatial units
 - delayed or batched updates
 - thresholded aggregate outputs
-- clear distinction between shared homeowner contributions and public context
+- clear distinction between shared parcel operator contributions and public context
 
 MVP also prohibits:
 - exact parcel markers for real contributed hazard data

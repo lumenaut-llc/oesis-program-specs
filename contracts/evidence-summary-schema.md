@@ -51,7 +51,7 @@ Open Environmental Sensing and Inference System
     "system": []
   },
   "source_modes": [
-    "homeowner_node"
+    "dwelling_node"
   ],
   "freshness": {
     "latest_observation_at": "2026-03-30T19:45:00Z",
@@ -79,5 +79,5 @@ Open Environmental Sensing and Inference System
 ## Design rules
 
 - Evidence summary is derived from parcel-state and should not invent new inference.
-- The shape should stay safe for homeowner-facing UI by default.
+- The shape should stay safe for dwelling-facing UI by default.
 - Grouping and ordering should remain stable as new contribution types are added.

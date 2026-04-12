@@ -94,7 +94,7 @@ Optional attachment:
 
 Do not send until these are true:
 
-- no real homeowner data is included
+- no real parcel-linked data is included
 - no unnecessary technical detail is attached beyond what you want reviewed
 - all files are marked internal if needed
 - the packet consistently says U.S.-first and preview-before-open-release

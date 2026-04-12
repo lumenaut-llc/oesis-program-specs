@@ -14,7 +14,7 @@ That means:
 
 - public code, docs, and hardware will use clear open terms by asset class
 - some materials still remain outside release even during the current open-release period
-- real homeowner-contributed parcel-linked data is not a normal contribution target
+- real participant-contributed parcel-linked data is not a normal contribution target
 - privacy, claims, and release-scope controls still apply to open contributions
 
 ## Ordinary contributions

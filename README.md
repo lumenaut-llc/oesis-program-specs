@@ -13,7 +13,7 @@ The Git repository is **`oesis-program-specs`** on GitHub (`lumenaut-llc/oesis-p
 
 ## Purpose
 
-Open Environmental Sensing and Inference System is a modular, homeowner-owned
+Open Environmental Sensing and Inference System is a modular, dwelling-scale
 environmental sensing and parcel-awareness initiative. It combines:
 
 - physical sensor builds

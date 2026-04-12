@@ -2,7 +2,7 @@
 
 ## Summary
 
-The ingest service is the trust boundary between raw evidence producers and the rest of the platform. It receives packets from homeowner-owned nodes and selected public feeds, checks whether the payloads are structurally valid and current enough to use, converts them into canonical observation objects, and publishes those observations for downstream reasoning.
+The ingest service is the trust boundary between raw evidence producers and the rest of the platform. It receives packets from dwelling-associated nodes and selected public feeds, checks whether the payloads are structurally valid and current enough to use, converts them into canonical observation objects, and publishes those observations for downstream reasoning.
 
 In `v0.1`, this is also the practical home/platform collection boundary. The
 first meaning of network is getting node data into this ingest path reliably

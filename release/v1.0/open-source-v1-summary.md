@@ -14,7 +14,7 @@ For the current `v1.0` release:
 - public materials point to canonical governance, privacy, and release docs
 - each asset class has a clear intended or attached license direction
 - contributors and reviewers can tell what is public now versus what remains outside release
-- private homeowner-contributed parcel-linked data is not swept into the open-release story
+- private participant-contributed parcel-linked data is not swept into the open-release story
 
 This is the current open-release surface for v1, not a blanket release of every future artifact.
 
@@ -93,7 +93,7 @@ Contributors and reviewers should be able to answer these questions before publi
 
 1. Is the material inside the current public release scope?
 2. Does it expose any non-release or held-back technical detail?
-3. Does it include or imply rights to real homeowner-contributed parcel-linked data?
+3. Does it include or imply rights to real participant-contributed parcel-linked data?
 4. Does it match the governing asset-class license or notice?
 5. Does it preserve the project's claims, privacy, and governance boundaries?
 

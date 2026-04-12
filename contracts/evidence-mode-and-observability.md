@@ -64,7 +64,7 @@ These values remain acceptable for MVP use because they are easy to explain in t
 
 `local_only`
 
-- The current parcel-state estimate is based only on homeowner-local evidence.
+- The current parcel-state estimate is based only on parcel operator-local evidence.
 - This does not mean the state is directly observed across the whole parcel.
 - Confidence should remain limited if the available local evidence is weakly representative, indoor-only, stale, or single-source.
 
@@ -116,4 +116,4 @@ Confidence may increase when:
 
 ## Future evolution
 
-If the current enum becomes too coarse, the repo may later add a separate machine-facing `observability_mode` or `inference_basis` field while preserving the simpler homeowner-facing `evidence_mode`.
+If the current enum becomes too coarse, the repo may later add a separate machine-facing `observability_mode` or `inference_basis` field while preserving the simpler dwelling-facing `evidence_mode`.

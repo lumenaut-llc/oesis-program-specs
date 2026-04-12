@@ -7,7 +7,7 @@
 
 ## Context
 
-The project is building a parcel-first environmental sensing and parcel-awareness platform that combines private homeowner data, shared neighborhood signals, public context, and derived parcel-level estimates.
+The project is building a parcel-first environmental sensing and parcel-awareness platform that combines private parcel-linked data, shared neighborhood signals, public context, and derived parcel-level estimates.
 
 Without a hard architectural decision, future product work could blur these categories, weaken trust, and create avoidable privacy and consumer-protection risk. The repo now has governance docs that define these classes, but the decision should also be recorded as a durable architecture choice.
 
@@ -17,7 +17,7 @@ The platform adopts a private-by-default parcel data model.
 
 This means:
 - private parcel data, shared data, public context, derived parcel states, and administrative records are distinct classes
-- raw homeowner-contributed parcel-linked data is private by default
+- raw participant-contributed parcel-linked data is private by default
 - non-private sharing requires an explicit sharing mode and consent record
 - product and API design must preserve class distinctions rather than hiding them behind one blended output
 - new features may not silently repurpose private parcel data into shared or public outputs

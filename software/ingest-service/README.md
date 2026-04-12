@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The service layer that accepts node packets and external data feeds, validates them, normalizes them into canonical observations, and makes them available to downstream parcel inference and homeowner-facing tools.
+The service layer that accepts node packets and external data feeds, validates them, normalizes them into canonical observations, and makes them available to downstream parcel inference and dwelling-facing tools.
 
 ## Current responsibilities
 

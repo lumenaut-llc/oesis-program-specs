@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The homeowner-facing parcel application and API surface. It turns parcel-state outputs, evidence summaries, and freshness data into a usable view of conditions at one parcel without hiding uncertainty.
+The dwelling-facing parcel application and API surface. It turns parcel-state outputs, evidence summaries, and freshness data into a usable view of conditions at one parcel without hiding uncertainty.
 
 The current `v1` center of gravity remains parcel-state presentation.
 `v1.5` adds separate support-object surfaces for house state, capability, compatibility, intervention history, and verification history without breaking the parcel-state baseline.
@@ -12,7 +12,7 @@ The current `v1` center of gravity remains parcel-state presentation.
 - present the latest parcel-state snapshot
 - explain why the current status was produced
 - expose freshness, confidence, and evidence mode clearly
-- let a homeowner inspect recent parcel-state history
+- let a parcel operator inspect recent parcel-state history
 - act as the boundary for future notifications and user controls
 - expose separate private support objects for house state, capability, control compatibility, intervention history, and verification history as those records appear
 
@@ -65,7 +65,7 @@ canonical repo-root `oesis.parcel_platform` package. From `repo/`, prefer
 `python3 -m oesis.parcel_platform.reference_pipeline` and the other
 `python3 -m oesis.parcel_platform.*` commands for new local operator flows.
 
-The first executable parcel-platform reference lives in `scripts/format_parcel_view.py`. It reads a parcel-state snapshot and emits the homeowner-facing response shape described in `interfaces.md`.
+The first executable parcel-platform reference lives in `scripts/format_parcel_view.py`. It reads a parcel-state snapshot and emits the dwelling-facing response shape described in `interfaces.md`.
 
 `scripts/serve_parcel_api.py` now exposes the same reference governance loop through local API endpoints, including summary readout, rights-request processing, and retention cleanup.
 

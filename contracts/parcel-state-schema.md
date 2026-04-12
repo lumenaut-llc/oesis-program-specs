@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define the canonical parcel-level output produced by the inference engine for homeowner-facing use and downstream mapping.
+Define the canonical parcel-level output produced by the inference engine for dwelling-facing use and downstream mapping.
 
 ## Version boundary
 
@@ -90,7 +90,7 @@ Suggested initial enum for `inference_basis`:
         "summary": "Indoor gas-resistance trend shows a moderate change.",
         "hazards": ["smoke"],
         "weight": 0.32,
-        "visibility": "homeowner_safe"
+        "visibility": "dwelling_safe"
       },
       {
         "contribution_id": "local_siting_limit",
@@ -100,7 +100,7 @@ Suggested initial enum for `inference_basis`:
         "summary": "Current local evidence comes from an indoor node and does not directly represent parcel-wide outdoor conditions.",
         "hazards": ["smoke", "heat", "flood"],
         "weight": 0.72,
-        "visibility": "homeowner_safe"
+        "visibility": "dwelling_safe"
       }
     ],
     "source_breakdown": {
@@ -130,7 +130,7 @@ Suggested initial enum for `inference_basis`:
   "provenance_summary": {
     "observation_count": 1,
     "source_modes": [
-      "homeowner_node"
+      "dwelling_node"
     ],
     "observation_refs": [
       "obs_example_0001"
@@ -146,7 +146,7 @@ Suggested initial enum for `inference_basis`:
 - `reasons`
   Human-readable explanation fragments suitable for UI and audit logs.
 - `inference_basis`
-  Machine-facing evidence-composition field that distinguishes mixed-source combinations more precisely than the homeowner-facing `evidence_mode`.
+  Machine-facing evidence-composition field that distinguishes mixed-source combinations more precisely than the dwelling-facing `evidence_mode`.
 - `explanation_payload`
   Structured explanation object for UI composition, notification drafting, and audit support.
   Its `drivers` and `limitations` should be derived from weighted `evidence_contributions`, not maintained as unrelated text lists.
@@ -160,12 +160,12 @@ Suggested initial enum for `inference_basis`:
 
 ## Design rules
 
-- Parcel-state outputs must remain understandable to a homeowner.
+- Parcel-state outputs must remain understandable to a parcel operator.
 - Status labels should frame conditions and risk, not imply emergency authorization or guarantees.
 - Confidence should fall when evidence is sparse, stale, or conflicting.
 - Inference should produce `unknown` when evidence quality is too weak for a stronger claim.
-- `evidence_mode` may remain a coarse homeowner-facing summary while `inference_basis` carries the exact source composition for backend use.
-- Hazard scores support the parcel-state output but do not replace the homeowner-readable statuses.
+- `evidence_mode` may remain a coarse dwelling-facing summary while `inference_basis` carries the exact source composition for backend use.
+- Hazard scores support the parcel-state output but do not replace the parcel operator-readable statuses.
 - Every parcel-state snapshot should be traceable back to source observations.
 
 ## Planned follow-on additions

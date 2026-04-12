@@ -39,7 +39,7 @@ flowchart LR
     P["Public context"] --> B
     C["Parcel context and node registry"] --> D["Parcel inference"]
     B --> D
-    D --> E["Homeowner parcel view"]
+    D --> E["Parcel operator parcel view"]
     D --> F["Policy-gated shared map"]
     D --> G["Exports, rights, and governance flows"]
 ```
@@ -67,7 +67,7 @@ flowchart TB
     P["Public weather and smoke context"] --> E["Single inference engine"]
     I --> E
     R --> E
-    E --> V["Single homeowner parcel view"]
+    E --> V["Single dwelling parcel view"]
     E --> S["Optional shared-map aggregation"]
 ```
 
@@ -112,7 +112,7 @@ flowchart TB
     C["User-selected shared contributions"] --> D["Shared neighborhood signals"]
     E["Public external data"] --> F["Public context lane"]
 
-    B --> G["Homeowner controls\nconsent\nrights requests"]
+    B --> G["Parcel operator controls\nconsent\nrights requests"]
     D --> H["Coarse shared-map outputs"]
     F --> B
     D --> B
@@ -126,7 +126,7 @@ Why this matters:
 
 - the system design is inseparable from the privacy design
 - shared intelligence should be derived and bounded
-- public context supports the parcel platform without replacing homeowner control
+- public context supports the parcel platform without replacing parcel operator control
 
 ## Diagram 5: Prototype evolution path
 
@@ -166,7 +166,7 @@ flowchart TB
 What this anchors:
 
 - the parcel view should feel like one parcel experience, not a collection of device dashboards
-- device details support interpretation, but the homeowner-facing unit is still the parcel
+- device details support interpretation, but the dwelling-facing unit is still the parcel
 
 ## Architecture avenues
 
@@ -305,7 +305,7 @@ Pattern:
 - readiness cards, confidence, freshness, reasons, next steps
 
 Best for:
-- immediate homeowner comprehension
+- immediate parcel operator comprehension
 - the current phase-1 product direction
 
 #### Parcel twin view
@@ -345,7 +345,7 @@ Best for:
 Use:
 - parcel-kit topology
 - node role maps
-- homeowner and operator surface maps
+- parcel operator and operator surface maps
 
 Best for:
 - internal alignment

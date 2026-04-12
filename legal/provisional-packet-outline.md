@@ -35,7 +35,7 @@ Capture:
 
 - what practical problem exists in current regional, centralized, or coarse-grained systems
 - why parcel-level interpretation matters
-- why homeowner control and partial-adoption utility matter
+- why parcel operator control and partial-adoption utility matter
 - what specific technical gap the narrow invention addresses
 
 ## Section 2. Narrow invention summary

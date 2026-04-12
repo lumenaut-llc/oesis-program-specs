@@ -32,4 +32,4 @@ canonical repo-root `oesis.shared_map` package. From `repo/`, prefer
 `python3 -m oesis.shared_map.aggregate_shared_map` or
 `python3 -m oesis.shared_map.serve_shared_map_api` for new runbooks.
 
-`scripts/serve_shared_map_api.py` exposes both the homeowner-safe map tile surface and an operator-facing inspection surface for validating threshold suppression against the configured sharing store.
+`scripts/serve_shared_map_api.py` exposes both the parcel operator-safe map tile surface and an operator-facing inspection surface for validating threshold suppression against the configured sharing store.

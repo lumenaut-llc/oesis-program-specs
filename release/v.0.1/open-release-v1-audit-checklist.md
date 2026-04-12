@@ -12,7 +12,7 @@ V1 is ready only if an outside reader can understand:
 - what is intentionally held back
 - what terms apply to each public asset class
 - how contributors should participate safely
-- why private homeowner-contributed parcel-linked data is not part of the blanket open story
+- why private participant-contributed parcel-linked data is not part of the blanket open story
 
 ## Repository and notice checks
 
@@ -26,7 +26,7 @@ V1 is ready only if an outside reader can understand:
 - [ ] `LICENSES.md` still matches the intended asset-class release direction.
 - [ ] Public-facing docs describe software, hardware, docs, and data as separate asset classes where applicable.
 - [ ] Public-facing docs do not imply that held-back materials are already licensed for public use.
-- [ ] Public-facing docs do not imply that private homeowner-contributed data is open data.
+- [ ] Public-facing docs do not imply that private participant-contributed data is open data.
 - [ ] Any more specific notices remain consistent with the asset-class matrix.
 
 ## Scope and holdback checks
@@ -34,7 +34,7 @@ V1 is ready only if an outside reader can understand:
 - [ ] Public preview pages stay inside `../../../legal/public-preview-scope.md`.
 - [ ] Held-back materials listed in `../../../legal/holdback-list.md` are not linked from public entrypoints.
 - [ ] Public materials do not disclose implementation-enabling methods, thresholds, or withheld internals.
-- [ ] Public materials do not expose real homeowner-contributed parcel-linked records.
+- [ ] Public materials do not expose real participant-contributed parcel-linked records.
 
 ## Governance and contribution checks
 

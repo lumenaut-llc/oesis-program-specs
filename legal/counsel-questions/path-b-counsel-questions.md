@@ -35,7 +35,7 @@ Why it matters:
 
 Questions:
 
-- Do the current homeowner-ownership and private-by-default statements overpromise relative to what the software can actually support in MVP form?
+- Do the current parcel operator-ownership and private-by-default statements overpromise relative to what the software can actually support in MVP form?
 - Are the sharing modes clear enough to avoid implying anonymization or public-data rights where they do not exist?
 - What additional disclosures are needed before any real pilot or neighborhood-sharing deployment?
 

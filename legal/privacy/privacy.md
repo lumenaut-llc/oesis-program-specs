@@ -10,7 +10,7 @@ This file is a policy draft and planning artifact. It is not legal advice and is
 ## Privacy posture
 
 Open Environmental Sensing and Inference System is designed around a
-parcel-first, homeowner-controlled data model.
+parcel-first, operator-controlled data model.
 
 The working privacy posture is:
 
@@ -36,9 +36,9 @@ See `data-classification-standard.md`.
 
 Depending on the deployment and enabled features, the project may collect or process:
 
-- raw environmental observations from homeowner-controlled devices
+- raw environmental observations from operator-controlled devices
 - exact parcel-linked device and deployment metadata
-- homeowner-supplied parcel notes or configuration
+- parcel operator-supplied parcel notes or configuration
 - sharing settings and consent records
 - derived parcel-state outputs such as confidence, evidence mode, freshness, and reasons
 - public context used to interpret parcel conditions
@@ -48,15 +48,15 @@ Depending on the deployment and enabled features, the project may collect or pro
 
 The working purposes are:
 
-- provide parcel-level monitoring and interpretation for the homeowner
+- provide parcel-level monitoring and interpretation for the parcel operator
 - maintain product operation, debugging, and security
-- apply the homeowner’s selected sharing settings
+- apply the parcel operator’s selected sharing settings
 - generate neighborhood aggregate views only where an opt-in mode permits it
 - support bounded research or pilot activity only where separately authorized
 
 ## Private-by-default rule
 
-Exact parcel-linked raw data should remain in the private parcel context unless the homeowner affirmatively enables a sharing mode that allows a broader use.
+Exact parcel-linked raw data should remain in the private parcel context unless the parcel operator affirmatively enables a sharing mode that allows a broader use.
 
 The project should not:
 
@@ -92,7 +92,7 @@ The system may use public or third-party context such as weather, smoke, flood, 
 
 When public context is used:
 
-- the source should be distinguished from homeowner-contributed data
+- the source should be distinguished from participant-contributed data
 - source freshness and provenance should be preserved where practical
 - the product should not imply parcel-exact local verification when only broad public context is available
 
@@ -112,8 +112,8 @@ Derived parcel-state outputs should:
 
 The project intends to support practical user control over parcel-linked data, including:
 
-- access to key homeowner-contributed records
-- export of homeowner-contributed records and major parcel-state history
+- access to key participant-contributed records
+- export of participant-contributed records and major parcel-state history
 - deletion of private parcel-linked data subject to stated exceptions
 - revocation of future sharing permissions
 
@@ -143,7 +143,7 @@ This file does not promise that:
 
 Privacy or data counsel review is strongly recommended before:
 
-- public pilots using real homeowner data
+- public pilots using real parcel-linked data
 - research data collection beyond ordinary product operation
 - any public map release using participant data
 - finalizing a public privacy notice or terms of use

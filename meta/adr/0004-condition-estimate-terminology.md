@@ -9,7 +9,7 @@
 
 Early terminology such as `stay_safe`, `enter_safe`, and `escape_safe` can sound like emergency instructions or certified safety determinations. That language creates reliance risk and overstates what parcel sensing plus public context can responsibly support, especially under sparse evidence, stale inputs, or partial adoption.
 
-The system still needs homeowner-readable outputs, but they should not sound like guarantees or official authorization.
+The system still needs parcel operator-readable outputs, but they should not sound like guarantees or official authorization.
 
 ## Decision
 
@@ -39,7 +39,7 @@ Costs:
 - keep safety wording and rely on disclaimers
   Rejected because disclaimers alone do not undo the force of directive labels.
 - remove parcel status outputs entirely
-  Rejected because homeowners still need understandable synthesized outputs.
+  Rejected because parcel operators still need understandable synthesized outputs.
 
 ## Follow-up work
 

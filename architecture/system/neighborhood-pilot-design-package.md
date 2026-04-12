@@ -42,7 +42,7 @@ Best pilot hazards:
 
 These are strong because they combine:
 
-- practical homeowner value
+- practical parcel operator value
 - visible local variation
 - plausible neighborhood network lift
 

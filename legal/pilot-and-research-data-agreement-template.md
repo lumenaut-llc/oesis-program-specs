@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Provide a baseline checklist for pilot or research programs that touch homeowner-contributed parcel-linked data.
+Provide a baseline checklist for pilot or research programs that touch participant-contributed parcel-linked data.
 
 ## Required sections
 

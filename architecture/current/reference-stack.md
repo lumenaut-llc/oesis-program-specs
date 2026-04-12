@@ -16,7 +16,7 @@ The current reference stack follows this path:
 1. hardware nodes and selected public feeds produce raw evidence
 2. ingest validates and normalizes evidence into canonical observations
 3. inference combines observations with parcel and public context
-4. parcel platform renders the homeowner-facing parcel view
+4. parcel platform renders the dwelling-facing parcel view
 5. shared-map outputs remain optional and policy-gated
 
 ```mermaid

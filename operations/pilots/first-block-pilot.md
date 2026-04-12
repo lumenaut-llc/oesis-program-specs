@@ -16,7 +16,7 @@ Validate parcel-level usefulness under partial adoption.
 - confidence quality
 - node uptime
 - installation effort
-- homeowner comprehension / trust
+- parcel operator comprehension / trust
 
 ## Governance minimums for this pilot
 

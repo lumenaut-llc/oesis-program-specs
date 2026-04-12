@@ -37,7 +37,7 @@ If those six answers are not obvious, the site is still under-explaining.
 
 For v1, the site should present the project as:
 
-- parcel-first homeowner environmental sensing
+- parcel-first parcel operator environmental sensing
 - open release with clear asset-class licensing
 - private by default and shared by choice
 - prototype / experimental rather than safety-authoritative
@@ -81,7 +81,7 @@ The front page should communicate, near the top:
 
 Recommended v1 framing:
 
-- mission: parcel-first homeowner environmental sensing and parcel awareness
+- mission: parcel-first parcel operator environmental sensing and parcel awareness
 - current hazard scope: smoke, pluvial flooding / runoff, heat
 - current maturity: prototype / experimental / not a substitute for official alerts
 
@@ -228,7 +228,7 @@ This should be first-class and linked from the homepage.
 
 It should clearly show:
 
-- homeowners own raw data
+- parcel operators own raw data
 - private by default
 - sharing is opt-in
 - what can be shared

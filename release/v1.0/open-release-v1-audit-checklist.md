@@ -12,7 +12,7 @@ V1 is ready only if an outside reader can understand:
 - what is intentionally outside release
 - what terms apply to each public asset class
 - how contributors should participate safely
-- why private homeowner-contributed parcel-linked data is not part of the blanket open story
+- why private participant-contributed parcel-linked data is not part of the blanket open story
 
 ## Repository and notice checks
 
@@ -34,7 +34,7 @@ V1 is ready only if an outside reader can understand:
 - [ ] Public release pages stay inside `../../legal/public-preview-scope.md`.
 - [ ] Non-release materials listed in `../../legal/holdback-list.md` are not linked from public entrypoints.
 - [ ] Public materials do not disclose implementation-enabling methods, thresholds, or excluded internals.
-- [ ] Public materials do not expose real homeowner-contributed parcel-linked records unless intentionally designated and licensed as a public dataset.
+- [ ] Public materials do not expose real participant-contributed parcel-linked records unless intentionally designated and licensed as a public dataset.
 
 ## Governance and contribution checks
 

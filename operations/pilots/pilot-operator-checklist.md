@@ -39,5 +39,5 @@ Provide a minimum operator checklist for running a first pilot block without ad 
 
 - remove exact parcel-linked contributed data from public outputs
 - verify no map, chart, or table singles out one household
-- distinguish public context from homeowner-contributed evidence
+- distinguish public context from participant-contributed evidence
 - avoid implying broader coverage or accuracy than the pilot actually achieved

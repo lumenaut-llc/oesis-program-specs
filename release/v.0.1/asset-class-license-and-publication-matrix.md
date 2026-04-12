@@ -23,7 +23,7 @@ This matrix is a release guide, not legal advice.
 | Synthetic examples and test fixtures | synthetic docs, examples, benchmarks, demo fixtures | Public now if clearly synthetic and rights-clean | Dataset-specific approved terms such as `CDLA Permissive 2.0` or `CC BY 4.0` | Mark synthetic examples clearly so they are not confused with real parcel-linked data. |
 | Redistributed public reference datasets | upstream public weather, smoke, map, or hazard sources | Public only under upstream source terms and pass-through notices | Upstream source terms | Do not relabel third-party data as project-owned open data. |
 | Approved public shared-dataset snapshots | future released derived snapshots | Case-by-case only | Dataset-specific terms, potentially including `ODbL` where actually appropriate | Requires separate review before publication. |
-| Real homeowner-contributed parcel-linked data | private parcel observations, parcel-linked history, household-linked outputs | Not public in v1 | Not covered by a blanket open-data license | Privacy and ownership controls override any broad reading of "open source." |
+| Real participant-contributed parcel-linked data | private parcel observations, parcel-linked history, household-linked outputs | Not public in v1 | Not covered by a blanket open-data license | Privacy and ownership controls override any broad reading of "open source." |
 | Held-back technical materials | withheld code, detailed methods, thresholds, packet contracts, detailed CAD | Not public in v1 | No public grant beyond applicable notices | Governed by `../../../legal/public-preview-scope.md` and `../../../legal/holdback-list.md`. |
 | Names, logos, and branding | project names, marks, visual identity | Public reference only unless separately granted | No trademark or branding license unless expressly stated | Open copyright licensing does not imply trademark permission. |
 
@@ -32,7 +32,7 @@ This matrix is a release guide, not legal advice.
 Use these rules when classifying a file or folder:
 
 1. If the file contains held-back technical detail, it is not part of the public v1 surface even if the surrounding folder is public.
-2. If the file contains real homeowner-contributed parcel-linked data, it is not part of the general open-release story.
+2. If the file contains real participant-contributed parcel-linked data, it is not part of the general open-release story.
 3. If the file depends on upstream third-party data, keep the upstream terms attached and visible.
 4. If a more specific file notice exists, that notice controls.
 5. If no final per-file license is attached yet, treat `LICENSES.md` as the intended asset-class direction rather than a blanket legal grant.

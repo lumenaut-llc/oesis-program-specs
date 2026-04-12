@@ -14,13 +14,13 @@ Provide fast visual drafts for the parcel-state generation candidate so the team
 
 ```mermaid
 flowchart LR
-    A["Homeowner-controlled node(s)"] --> B["Ingest service"]
+    A["Parcel operator-controlled node(s)"] --> B["Ingest service"]
     B --> C["Normalized observation store"]
     C --> F["Inference engine"]
     D["Parcel metadata / parcel priors"] --> F
     G["Optional public context"] --> F
     F --> H["Parcel-state snapshot"]
-    H --> I["Parcel platform / homeowner view"]
+    H --> I["Parcel platform / parcel view"]
 ```
 
 Notes:

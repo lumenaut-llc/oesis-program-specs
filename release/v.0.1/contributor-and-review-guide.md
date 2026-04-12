@@ -14,7 +14,7 @@ That means:
 
 - public code, docs, and hardware will use clear open terms by asset class
 - some technical materials remain held back during the preview phase
-- real homeowner-contributed parcel-linked data is not a normal contribution target
+- real participant-contributed parcel-linked data is not a normal contribution target
 - privacy, claims, and release-scope controls still apply to open contributions
 
 ## Ordinary contributions
@@ -73,7 +73,7 @@ Required references:
 
 Do not merge or publish these through normal contribution paths:
 
-- real homeowner-contributed parcel-linked hazard data
+- real participant-contributed parcel-linked hazard data
 - exact household locations, secrets, or live credentials
 - held-back source code, formulas, thresholds, packet contracts, or reproducible internals
 - marketing or UI claims that imply guaranteed safety, certainty, or emergency authority

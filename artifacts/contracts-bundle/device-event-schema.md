@@ -51,7 +51,7 @@ The current docs talk about device identity, install state, and health, but they
 
 ## Design rules
 
-- use events for lifecycle and service traceability, not for homeowner-facing hazard statements
+- use events for lifecycle and service traceability, not for dwelling-facing hazard statements
 - keep event types explicit and versionable
 - link device events to trust and maintenance posture without pretending the current reference path already stores them
 

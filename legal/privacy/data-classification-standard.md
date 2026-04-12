@@ -13,7 +13,7 @@ The platform must keep private parcel data, shared data, public context, derived
 ### 1. Private parcel data
 
 Definition:
-Data linked to one parcel, household, or device deployment that is not shared by default beyond the homeowner account and necessary service operations.
+Data linked to one parcel, household, or device deployment that is not shared by default beyond the parcel operator account and necessary service operations.
 
 Examples:
 - raw sensor observations
@@ -34,12 +34,12 @@ Handling rules:
 - highest sensitivity class in the product
 - must not be exposed in public APIs or public map layers
 - must not be used for advertising, lead scoring, insurance profiling, or unrelated analytics
-- access limited to the homeowner, authorized household roles, and narrowly approved service operations
+- access limited to the parcel operator, authorized household roles, and narrowly approved service operations
 
 ### 2. Shared data
 
 Definition:
-Data a homeowner affirmatively elects to contribute beyond private parcel use under a documented sharing mode.
+Data a parcel operator affirmatively elects to contribute beyond private parcel use under a documented sharing mode.
 
 Examples:
 - delayed hazard indicators
@@ -70,7 +70,7 @@ Examples:
 
 Handling rules:
 - store source, timestamp, freshness, and license metadata
-- clearly distinguish from homeowner-contributed data
+- clearly distinguish from participant-contributed data
 - do not imply local verification when the source is regional or delayed
 
 ### 4. Derived parcel states
@@ -115,11 +115,11 @@ Handling rules:
 
 For MVP, the platform should use the following model:
 
-- homeowners own and control the raw sensor data they contribute from their parcel deployments
-- the platform receives a limited operating license to process that data for the service the homeowner enabled
-- shared contributions are governed by the specific sharing mode selected by the homeowner
+- parcel operators own and control the raw sensor data they contribute from their parcel deployments
+- the platform receives a limited operating license to process that data for the service the parcel operator enabled
+- shared contributions are governed by the specific sharing mode selected by the parcel operator
 - public context remains subject to the underlying source license and attribution rules
-- derived parcel states are platform-generated outputs about the homeowner's parcel, but they do not erase the homeowner's rights in the underlying raw data
+- derived parcel states are platform-generated outputs about the parcel operator's parcel, but they do not erase the parcel operator's rights in the underlying raw data
 
 ## Data-class handling requirements
 

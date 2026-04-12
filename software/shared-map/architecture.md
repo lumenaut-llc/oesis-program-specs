@@ -46,5 +46,5 @@ The shared map is the neighborhood condition layer, not a public parcel surveill
 
 - revealing the likely identity of a contributing parcel
 - implying full neighborhood visibility under partial adoption
-- mixing public context and homeowner-contributed signals without distinction
+- mixing public context and participant-contributed signals without distinction
 - exposing map timestamps or counts that enable singling out

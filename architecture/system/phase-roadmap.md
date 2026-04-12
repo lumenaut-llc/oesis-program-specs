@@ -8,7 +8,7 @@ Translate the long-term vision into staged execution from the current parcel-sen
 
 - every phase must deliver standalone value
 - network effects should improve the product, not unlock the entire product
-- new phases should preserve homeowner ownership and private-by-default defaults
+- new phases should preserve parcel stewardship and private-by-default defaults
 - new phases should preserve decentralized and democratic governance aims rather than drifting into household surveillance
 - claims should stay behind proven technical capability
 - each phase should narrow the hardware, software, and governance surface enough to ship
@@ -63,7 +63,7 @@ Establish a credible parcel-first sensing and inference product that is useful w
 - finalize home, parcel, observation, and parcel-state data contracts
 - document what current node classes can and cannot support
 - document the shared field-hardening bundle required before any node is called deployed or field-ready
-- align homeowner-facing language with claims-and-safety rules
+- align dwelling-facing language with claims-and-safety rules
 - keep `unknown` and low-confidence outcomes honest
 - define recommendation-language boundaries before shipping action prompts
 - preserve the current parcel-state contract through this stage
@@ -190,7 +190,7 @@ These workstreams should advance continuously across phases:
 - local-first and degraded-connectivity behavior
 - partnership and governance models
 - house-state and response-curve quality
-- homeowner override and bounded control governance
+- parcel operator override and bounded control governance
 
 ## Suggested sequencing bets
 

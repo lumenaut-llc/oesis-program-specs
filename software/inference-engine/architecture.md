@@ -2,7 +2,7 @@
 
 ## Summary
 
-The inference engine consumes normalized observations and produces parcel-state snapshots. It should remain separate from ingest so raw evidence handling, schema validation, and transport concerns do not get mixed with hazard reasoning. The engine evaluates each parcel using available evidence, computes hazard-specific probabilities or scores, and then maps those into homeowner-readable statuses with confidence and explanation payloads.
+The inference engine consumes normalized observations and produces parcel-state snapshots. It should remain separate from ingest so raw evidence handling, schema validation, and transport concerns do not get mixed with hazard reasoning. The engine evaluates each parcel using available evidence, computes hazard-specific probabilities or scores, and then maps those into parcel operator-readable statuses with confidence and explanation payloads.
 
 The engine should produce condition estimates rather than implied safety authorizations, and it should preserve enough provenance for audit without leaking private parcel detail into downstream shared surfaces.
 
@@ -66,6 +66,6 @@ The engine should produce condition estimates rather than implied safety authori
 - hiding uncertainty behind a single status label
 - mixing hazard scoring rules with presentation logic
 - failing to represent stale evidence clearly
-- allowing public feeds to overwhelm homeowner-owned local evidence without explanation
+- allowing public feeds to overwhelm dwelling-scale local evidence without explanation
 - letting shared-neighborhood evidence affect parcel outputs without preserving source distinctions
 - letting stale public context continue to influence parcel outputs as if it were current

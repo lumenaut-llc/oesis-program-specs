@@ -2,22 +2,23 @@
 
 ## Purpose
 
-Draft copy for the v0.1 open-release landing page.
+Draft copy for the **April 14, 2026** open-release period (v0.1 packet materials and
+public-facing pages such as `oesis-public-site`).
 
 This copy is written to be public-facing and aligned with the project's current
-open-release posture.
+open-release posture and [`program/README.md`](../../program/README.md).
 
 ## Hero
 
 ### Headline
 
-Homeowner-owned environmental sensing, built parcel first.
+Parcel operator-owned environmental sensing, built parcel first.
 
 ### Subhead
 
 Open Environmental Sensing and Inference System (`OESIS`) is a modular,
-homeowner-centered effort to build parcel-level environmental awareness for
-smoke, flooding/runoff, and heat without forcing homeowners to surrender raw
+parcel operator-centered effort to build parcel-level environmental awareness for
+smoke, flooding/runoff, and heat without forcing parcel operators to surrender raw
 data to a centralized platform.
 
 ### Primary CTA
@@ -47,9 +48,9 @@ public under asset-specific terms.
 
 The project aims to generate parcel-level condition estimates instead of relying only on coarse regional signals.
 
-### Homeowner controlled
+### Parcel operator controlled
 
-Parcel-linked data remains homeowner-controlled rather than automatically becoming
+Parcel-linked data remains operator-controlled rather than automatically becoming
 public or platform-owned. The project-controlled v1 dataset may be intentionally
 public when explicitly designated and licensed, but future participant data is not
 made public by default.

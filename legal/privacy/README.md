@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Homeowner data ownership, sharing controls, custody types, and platform rules.
+Parcel operator data ownership, sharing controls, custody types, and platform rules.
 
 ## Minimum contents
 

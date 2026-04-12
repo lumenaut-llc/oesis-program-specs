@@ -11,11 +11,11 @@ This file is a project governance draft, not legal advice.
 ## Mission
 
 Open Environmental Sensing and Inference System exists to build a modular,
-homeowner-centered environmental sensing and parcel-awareness system that:
+parcel operator-centered environmental sensing and parcel-awareness system that:
 
 - works for a single home
 - improves with neighborhood participation
-- keeps raw homeowner data private by default
+- keeps raw parcel-linked data private by default
 - supports opt-in sharing rather than forced centralization
 - stays technically honest about evidence, uncertainty, and limitations
 - is released in a way that is difficult to enclosure-capture
@@ -127,7 +127,7 @@ Approval rule:
 The project should not:
 
 - switch private-by-default behavior to opt-out sharing without explicit governance approval
-- publish future participant exact parcel-linked homeowner data in public materials without explicit approval
+- publish future participant exact parcel-linked parcel-linked data in public materials without explicit approval
 - claim anonymization without a defensible standard
 - market parcel-state outputs as guaranteed safety guidance
 - publish non-release technical details without the required release check
@@ -189,5 +189,5 @@ Escalate before:
 
 - changing the release posture in a way that affects patent, licensing, or trademark posture
 - promising a patent non-assert or trademark permission
-- adopting final public terms for future participant-contributed real homeowner data
+- adopting final public terms for future participant-contributed real parcel-linked data
 - launching public pilots with real participant data

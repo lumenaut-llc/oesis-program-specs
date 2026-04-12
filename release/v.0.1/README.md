@@ -12,7 +12,7 @@ release materials under the project's current commons-protective release posture
 ## What this release is for
 
 - explain the project mission and architecture at a high level
-- make the homeowner-ownership and private-by-default model public
+- make the parcel operator-ownership and private-by-default model public
 - document the intended open-source and open-hardware direction
 - document the intentionally public v1 dataset carve-out and its boundaries
 - show the system scope for smoke, pluvial flooding/runoff, and heat
@@ -33,7 +33,7 @@ See:
 
 ## Current release posture
 
-- homeowner-owned raw data remains a core rule
+- parcel operator-held raw data remains a core rule
 - private by default and shared by choice remains a core rule
 - the project-controlled v1 dataset may be intentionally public when explicitly licensed and designated
 - future participant-contributed parcel-linked data is still not public by default

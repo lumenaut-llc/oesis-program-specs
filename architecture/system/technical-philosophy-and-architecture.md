@@ -40,7 +40,7 @@ coherent technical system with:
 - one node registry
 - one ingest path
 - one inference engine
-- one homeowner-facing parcel view
+- one dwelling-facing parcel view
 - one privacy and sharing policy surface
 
 The architecture should converge many device roles into one parcel-level
@@ -63,7 +63,7 @@ The system should keep a strict separation between:
 - raw packets and external feeds
 - normalized observations
 - inferred parcel-state outputs
-- homeowner presentation
+- parcel operator presentation
 - shared neighborhood outputs
 
 Each stage exists for a reason.
@@ -177,11 +177,11 @@ This layer should:
 Inference is where reasoning belongs.
 It should not be spread across ingest, UI, or map publication layers.
 
-### Layer 6. Homeowner parcel surface
+### Layer 6. Parcel operator parcel surface
 
 The parcel platform is the primary product surface.
 
-Its job is to turn parcel-state outputs into a homeowner-readable, inspectable
+Its job is to turn parcel-state outputs into a parcel operator-readable, inspectable
 experience with:
 
 - current parcel status
@@ -254,7 +254,7 @@ The current reference stack follows this technical path:
 1. nodes emit versioned packets
 2. ingest binds packets to parcel identity and normalizes them
 3. inference combines parcel evidence with parcel and public context
-4. parcel platform renders the homeowner-facing parcel view
+4. parcel platform renders the dwelling-facing parcel view
 5. shared-map publication remains optional and policy-gated
 
 Current implementation posture:

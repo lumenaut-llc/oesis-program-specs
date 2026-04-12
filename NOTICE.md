@@ -16,7 +16,7 @@ At the repository level:
 - software, hardware, documentation, and datasets may have different governing licenses or notices
 - some materials are public preview artifacts only
 - some technical materials may remain held back pending release sequencing or legal review
-- real homeowner-contributed parcel-linked data is not made open by default
+- real participant-contributed parcel-linked data is not made open by default
 
 ## Start with these files
 
@@ -28,7 +28,7 @@ At the repository level:
 
 ## Important boundary
 
-Open-source publication of code, hardware designs, or documentation does not convert private homeowner-contributed parcel-linked data into open data.
+Open-source publication of code, hardware designs, or documentation does not convert private participant-contributed parcel-linked data into open data.
 
 ## Preview-phase rule
 

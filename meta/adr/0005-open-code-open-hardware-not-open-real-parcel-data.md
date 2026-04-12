@@ -7,20 +7,20 @@
 
 ## Context
 
-The project aims to be open-source and commons-oriented, but real homeowner-contributed parcel-linked sensing data carries privacy, singling-out, and downstream misuse risk. A blanket open-data posture would conflict with the project's private-by-default and opt-in-sharing commitments.
+The project aims to be open-source and commons-oriented, but real participant-contributed parcel-linked sensing data carries privacy, singling-out, and downstream misuse risk. A blanket open-data posture would conflict with the project's private-by-default and opt-in-sharing commitments.
 
 The repo needs an explicit decision separating openness of code and hardware from openness of real-world household data.
 
 ## Decision
 
-The project will keep software, hardware designs, documentation, schemas, and synthetic examples open, while not treating real homeowner-contributed parcel-linked datasets as open by default.
+The project will keep software, hardware designs, documentation, schemas, and synthetic examples open, while not treating real participant-contributed parcel-linked datasets as open by default.
 
 Working posture:
 - software source and service components: open license
 - hardware design files: open hardware license
 - documentation, governance text, and schemas: open documentation license
 - synthetic examples and fixtures: open dataset terms
-- real homeowner-contributed parcel-linked data: governed separately and not published under a blanket repository-wide open-data license
+- real participant-contributed parcel-linked data: governed separately and not published under a blanket repository-wide open-data license
 
 ## Consequences
 

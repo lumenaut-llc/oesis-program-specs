@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define the canonical request object for homeowner export and deletion workflows.
+Define the canonical request object for parcel operator export and deletion workflows.
 
 ## Core fields
 
