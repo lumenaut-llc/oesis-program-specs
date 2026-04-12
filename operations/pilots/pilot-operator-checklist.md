@@ -41,3 +41,12 @@ Provide a minimum operator checklist for running a first pilot block without ad 
 - verify no map, chart, or table singles out one household
 - distinguish public context from participant-contributed evidence
 - avoid implying broader coverage or accuracy than the pilot actually achieved
+
+## Measurement and evaluation
+
+Use `../../architecture/current/measurement-and-kpis-v0.1.md` for **which KPI
+families** apply in the field: **technical validity** (uptime, freshness, stale
+handling) and **governance value** (sharing, export, revocation, access logs)
+where the product actually enforces them. **Network**, **functional/adaptation**,
+and multi-scale metrics belong to **later milestones** or explicit pilot
+hypotheses—see `../../08-kpi-framework.md` for the full catalog.

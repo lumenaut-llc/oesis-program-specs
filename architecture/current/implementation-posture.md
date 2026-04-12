@@ -11,7 +11,8 @@ Current reference implementation posture.
 
 ## Canonical homes
 
-- sibling repo `../oesis-runtime`
+- sibling repo `../../../oesis-runtime` (program-specs checkout and runtime
+  checkout are siblings under the same parent directory)
   Canonical implementation tree for the current reference services.
 - `../../../../oesis_build/`
   Canonical build-foundation implementation tree.
@@ -33,6 +34,12 @@ The current local reference posture is anchored by:
 These checks are the minimum evidence for calling a surface implemented in the
 current reference path.
 
+**Field or pilot “deployed” is not the same thing.** Install and operations
+credibility come from pilot playbooks, operator checklists, and rows in the
+implementation status matrix—not from Makefile targets alone. Keep deployment
+claims aligned with what is repeatable and evidenced outside the dev reference
+path.
+
 ## Version versus status
 
 Keep these concepts separate:
@@ -40,11 +47,40 @@ Keep these concepts separate:
 - `v0.x` version labels describe accepted product slices
 - `implemented`, `partial`, `docs-only`, and `planned` describe maturity within
   or around those slices
+- **Program phase**, **reference-runtime asset lane**, and **public or marketing**
+  release naming are also distinct; see `../../program/README.md` and
+  `../../00-version-labels-and-lanes.md`
 
 A new `partial` node lane or documented boundary does not automatically justify
 promoting a new `v0.x`.
 
+## Near-term blueprint posture
+
+Sensing and hardware expansion order (aligned with
+`../../05-revised-architecture-blueprint.md`):
+
+- bench-air first
+- mast-lite second
+- flood optional
+- thermal deferred
+- weather + PM later
+
+Classifications below should stay consistent with that ordering and with
+`../../release/v.0.1/implementation-status-matrix.md`.
+
+**Ingest and temporal integrity** (normalization, receipt timing, buffering,
+replay, dedupe, staleness) are part of the **truth model** for the reference
+path—not optional polish beneath **`implemented`** claims.
+
+For **program-phase `v0.1`**, the narrow-slice object set in `05` (parcel, packet,
+normalized observation, parcel context, parcel state, parcel view, evidence
+summary) is satisfied when the reference pipeline and contracts honor those
+boundaries; see `architecture-object-map.md` for the enumerated model.
+
 ## Current coverage
+
+The lists below summarize posture; the **matrix** remains authoritative for
+status.
 
 ### Implemented
 
@@ -54,6 +90,12 @@ promoting a new `v0.x`.
 - local inference API
 - local parcel-platform API
 - bench-air packet normalization
+
+Parcel-facing condition estimates (for example shelter, reentry, egress, and
+asset risk) are **functional interpretation** of fused evidence. **`implemented`**
+here means the reference inference and parcel-platform path produces them with
+confidence, evidence mode, and reasons—not that every governance or presentation
+surface is complete.
 
 ### Partial
 
@@ -71,6 +113,15 @@ promoting a new `v0.x`.
 - thermal scene observation family
 - public parcel-resolution map support
 
+## Posture discipline
+
+- Do not promote **shared neighborhood** surfaces to **`implemented`** until
+  **collection, ingest, and parcel-private** reasoning are credible on the
+  reference path (`technical-philosophy.md`, `milestone-roadmap.md`).
+- Do not claim **governance** execution beyond what the runtime and product
+  **enforce**; keep documentation aligned with `partial` and `docs-only` rows in
+  the matrix.
+
 ## Alignment rule
 
 `v0.1` architecture claims should not outrun the implementation-status
@@ -84,3 +135,14 @@ should say so.
 If a broader accepted runnable slice is promoted later, update the versioned
 architecture documents and the evidence set together rather than treating status
 changes alone as a version bump.
+
+## Related docs
+
+- `../../program/README.md`
+- `../../00-version-labels-and-lanes.md`
+- `../../05-revised-architecture-blueprint.md`
+- `../../09-phasing-v0.1-v1.0-v1.5.md`
+- `technical-philosophy.md`
+- `milestone-roadmap.md`
+- `architecture-object-map.md`
+- `measurement-and-kpis-v0.1.md`

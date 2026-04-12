@@ -14,10 +14,17 @@ Current reference stack.
 The current reference stack follows this path:
 
 1. hardware nodes and selected public feeds produce raw evidence
-2. ingest validates and normalizes evidence into canonical observations
+2. ingest validates and normalizes evidence into canonical observations,
+   including receipt timing, lineage, and freshness—**temporal integrity** is part
+   of the truth model (`05` §2), not optional plumbing
 3. inference combines observations with parcel and public context
 4. parcel platform renders the dwelling-facing parcel view
 5. shared-map outputs remain optional and policy-gated
+
+This path is the **runnable slice** of the layered blueprint in
+`../../05-revised-architecture-blueprint.md` (sensing → ingest → context → state
+estimation / functional fields → presentation, plus optional shared/governance
+surfaces). Enumerated objects: `architecture-object-map.md`.
 
 ```mermaid
 flowchart LR
@@ -33,10 +40,14 @@ flowchart LR
   SharedMap --> SharedMapDocs[SharedMapArchitecture]
 ```
 
+**OptionalSharedMap** sits on the **policy-gated** shared / governance boundary
+(`05` §6–7); it is not part of the narrow parcel-private minimum path.
+
 ## Canonical implementation posture
 
-- Sibling repo **`../oesis-runtime`** is the canonical Python implementation tree
-  for the current reference services (`oesis.*` package).
+- Sibling repo **`../../../oesis-runtime`** (checkout sibling to this program-specs
+  repo) is the canonical Python implementation tree for the current reference
+  services (`oesis.*` package); see `implementation-posture.md` canonical homes.
 - Program-specs **`../../software/`** tree remains the **interface and
   architecture prose** for ingest, inference, parcel platform, and shared map;
   runnable entrypoints are invoked from the runtime repo (see
@@ -60,6 +71,10 @@ flowchart LR
 - `../../software/ingest-service/architecture.md`
 - `../../software/ingest-service/README.md`
 - `../../contracts/README.md`
+
+Normalization and ingest behavior should treat **timing, receipts, dedupe/replay,
+and staleness** as core truth surfaces, consistent with `../../05-revised-architecture-blueprint.md`
+§2 and `implementation-posture.md`.
 
 Entry surfaces:
 

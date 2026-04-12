@@ -16,6 +16,24 @@ This document is intentionally expansive. It is meant to stretch the design spac
 - explicit uncertainty
 - resilience before convenience
 
+## Problem and opportunity (summary)
+
+Many people can see **regional** hazard information or buy **isolated** sensors,
+but still lack a trustworthy, **parcel-grounded** read that answers what is
+likely true **here**, how sure the system is, what evidence supports it, and
+what that means for staying, leaving, reentering, or protecting assets.
+
+Longer term, the gap is a **durable local adaptation evidence base**: how hazards
+show up at the parcel, how routes and structures respond, what interventions
+help, and where neighborhood weak points actually are—without forcing parcel
+operators to surrender raw parcel-linked data.
+
+The opportunity is a **parcel-first, multi-hazard, private-by-default**
+intelligence layer between coarse public systems and consumer devices—**useful
+under partial adoption** and aligned with official systems rather than replacing
+them. Strong framing: a locally grounded **climate and disaster intelligence
+layer**. Full argument: `../../02-problem-opportunity-and-market-gap.md`.
+
 ## Version map
 
 The long-term vision should be interpreted through these staged boundaries:
@@ -28,6 +46,18 @@ The long-term vision should be interpreted through these staged boundaries:
 - `v4`: parcel + route + block resilience
 
 The product should not collapse these stages together in user-facing claims.
+
+**These labels are vision staging, not program-phase or runtime labels.** Executable
+phasing (`v0.1` narrow slice, `v1.0` fielded target, `v1.5` measurement-to-intervention
+bridge, optional runtime asset lanes, and marketing “v1.0”) lives in
+`../../program/README.md`, `../../00-version-labels-and-lanes.md`, and
+`../../09-phasing-v0.1-v1.0-v1.5.md`. Do not read `current v1` here as identical to
+program-phase `v1.0` or a public release name.
+
+Rough intuition only: vision **`current v1`** overlaps the **parcel-first truth**
+territory of narrow program-phase **`v0.1`** through early **`v1.0`**-style fielding;
+vision **`v1.5`+** tracks **intervention, control, and verification** themes that
+program-phase **`v1.5`** and later milestones formalize elsewhere.
 
 ## Product thesis
 
@@ -152,6 +182,26 @@ Typical outputs:
 - civic planning data products
 - community adaptation evidence
 
+## Network-of-networks posture
+
+The long-term network may be a **network-of-networks**, not one giant pooled mesh:
+
+- **Owner-controlled clusters** exchange **derived** signals (confidence surfaces,
+  event flags, anomaly summaries, coarse cell-level gradients, route or corridor
+  status)—not unrestricted raw parcel telemetry pooling by default.
+- **Adjacent-cluster peering** and **overlap zones** can raise confidence when
+  signals agree within tolerance; **disagreement** stays visible as uncertainty.
+- **Event-mode federation** can temporarily broaden **time-bounded** sharing during
+  smoke, flood, heat, or similar stress.
+- **Corridor and topology** (same choke point, drainage path, wind channel, utility
+  corridor) matter alongside geographic distance for cross-network value.
+- In **outages or disasters**, nearby clusters may exchange **minimal** derived
+  signals **locally**, then reconcile when backhaul returns.
+- **Value-of-information** placement: add sensing where it most reduces uncertainty
+  across **parcels, routes, or lifelines**—not only where no sensor exists.
+
+Expanded concepts: `../../06-network-of-networks-concepts.md`.
+
 ## Product principles
 
 ### Immediate utility before network dependency
@@ -183,6 +233,36 @@ The system must clearly separate:
 ### Resilience before convenience automation
 
 The first priority is helping people adapt to disruption, degradation, and recovery.
+
+## Information-layer and recovery target
+
+North star: build the best **evidence-to-impact** system, not merely the largest
+sensor count. Optimize **measurement accuracy**, **local recency**, **spatial
+relevance**, and **decision usefulness** together (`../../07-information-layer-and-functional-recovery.md`).
+
+**Evidence hierarchy:** direct local observation → nearby shared observation →
+external public context → modeled or inferred state → verified impact or outcome.
+
+**Observed conditions vs impacts:** separate what the environment appears to be
+doing (e.g. smoke burden) from **impact** states (e.g. route closure, power loss,
+shelter degradation).
+
+**Assimilation posture:** think in terms of a **continuously updated** state estimate
+per parcel or shared cell—value, uncertainty, freshness, evidence mix, and likely
+direction—not only a feed plus a rules engine. **Timing integrity** (measured,
+transmitted, ingested, fused, decision-relevant horizon) is a first-class quality
+dimension.
+
+**Functional and recovery intelligence:** beyond “what hazard?” and “what parcel
+status?”—what **functions** are impaired, which **dependencies** matter (transport,
+energy, communications, drainage, water, cooling/refuge), what is degrading, and
+what **recovery path** looks plausible. **Social vulnerability** should inform
+**community** prioritization and planning layers, not drive private parcel inference
+directly.
+
+Hazard, functional, and response-state separation: `../../functional-state-and-response-model.md`,
+`../../05-revised-architecture-blueprint.md`. This section describes **target**
+capability; frozen scope and claims remain in `../current/` and release materials.
 
 ## Use-case map
 

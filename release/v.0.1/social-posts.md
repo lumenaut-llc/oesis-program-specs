@@ -11,8 +11,7 @@ checking `legal/public-preview-scope.md`.
 ## Primary post
 
 Today we’re publicly sharing the governance, ownership, and openness
-foundation for Open Environmental Sensing and Inference System (`OESIS`), part
-of Open Source DIY Tech.
+foundation for Open Environmental Sensing and Inference System (`OESIS`).
 
 This project is working toward a parcel-first, dwelling-scale environmental sensing system for smoke, pluvial flooding/runoff, and heat.
 

@@ -3,7 +3,7 @@
 ## Primary version
 
 Today we’re publicly sharing the preview foundation for Open Environmental
-Sensing and Inference System (`OESIS`), part of Open Source DIY Tech.
+Sensing and Inference System (`OESIS`).
 
 This is a parcel operator-centered, parcel-first environmental sensing project for smoke, flooding/runoff, and heat. The core rule set is simple: private by default, shared by choice, and explicit about uncertainty.
 

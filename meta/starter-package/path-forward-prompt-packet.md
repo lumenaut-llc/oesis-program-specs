@@ -1,4 +1,4 @@
-# Resilient Home Intelligence — Path Forward Prompt Packet
+# Open Environmental Sensing and Inference System (OESIS) — Path Forward Prompt Packet
 
 Use this file as a prompt packet for another chat.
 
@@ -8,8 +8,8 @@ It is designed to help a fresh chat evaluate the path from the current v1 baseli
 
 ## 1. Project identity
 
-Project name: Resilient Home Intelligence  
-Parent project: Open Source DIY Tech
+Canonical program name: Open Environmental Sensing and Inference System (OESIS)  
+Legacy compatibility name: Resilient Home Intelligence (RHI)
 
 Mission:
 Build a dwelling-scale environmental sensing and parcel-safety platform that helps determine conditions at a specific house while becoming more precise when nearby homes also participate.

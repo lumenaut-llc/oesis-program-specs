@@ -1,8 +1,8 @@
-Project name: Open Source DIY Tech — Resilient Home Intelligence
+Project name: Open Environmental Sensing and Inference System (OESIS)
 
 Use these instructions as the shared context for all chats in this project.
 
-This project is for a dwelling-scale environmental sensing and parcel-safety platform inside Open Source DIY Tech.
+This project is for a dwelling-scale environmental sensing and parcel-safety platform under the OESIS program. Resilient Home Intelligence (RHI) is a legacy compatibility name during the transition.
 It is meant to become a decentralized, democratic, parcel-first climate adaptation system over time, but the current implementation scope remains staged and technically conservative.
 
 Core principles:

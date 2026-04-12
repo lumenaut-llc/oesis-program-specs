@@ -9,6 +9,15 @@ more concrete terms.
 
 Debate draft.
 
+## Lane context
+
+This file debates **program-phase `v1.0`**-style target architecture (and adjacent
+future), not the frozen **`v0.1`** reference slice in `../current/`. Executable
+phase and lane vocabulary: `../../program/README.md`,
+`../../00-version-labels-and-lanes.md`, `../../09-phasing-v0.1-v1.0-v1.5.md`.
+Staged delivery toward this target: `../current/milestone-roadmap.md`. Long-term
+product vision: `../system/vision-and-use-cases.md`.
+
 ## Initial framing
 
 `v1.0` should answer questions such as:
@@ -71,6 +80,86 @@ operational scale before being reduced into parcel consequences.
 The parcel state remains the final product-facing answer, but should more
 explicitly show how parcel, neighborhood, route, and public context contributed.
 
+## Federation and network-of-networks
+
+Long-term federation may follow **network-of-networks** patterns rather than one
+pooled mesh:
+
+- **Owner-controlled clusters** peer with **adjacent** clusters using **derived**
+  boundary signals—not unrestricted raw parcel pooling by default.
+- **Overlap zones** raise confidence when independent networks agree within
+  tolerance; **disagreement** remains a visible uncertainty signal.
+- **Event-mode** sharing can **time-bound** broader derived exchange during smoke,
+  flood, heat, or similar stress.
+- **Corridor and topology** (drainage path, utility corridor, wind channel, choke
+  point) matter alongside geographic distance.
+- In **outages or disasters**, clusters may exchange **minimal** derived signals
+  **locally**, then reconcile when backhaul returns.
+
+Detail: `../../06-network-of-networks-concepts.md`. Internet-style **routing and
+peering** framing: `../../10-outside-concepts-and-technology-pull-forward.md` §1.
+
+## Information-layer and functional-recovery target
+
+Target the best **evidence-to-impact** system: optimize **accuracy**, **local
+recency**, **spatial relevance**, and **decision usefulness** together
+(`../../07-information-layer-and-functional-recovery.md`).
+
+- **Continuous state estimates** at parcel, segment, and shared-cell granularity:
+  value, **uncertainty**, **freshness**, **evidence mix**, likely direction—not
+  only feeds plus rules.
+- **Functional and lifeline** reasoning: impaired functions, **dependencies**
+  (transport, energy, communications, drainage, water, cooling/refuge),
+  degradation trajectory, and plausible **recovery paths**—not only hazard labels
+  reduced to parcels.
+- **Observed conditions** vs **validated impacts** stay separable at scale.
+- **Social vulnerability** informs **community** prioritization layers, not
+  private parcel inference directly.
+
+Object split (hazard / functional / response): `../../functional-state-and-response-model.md`,
+`../../05-revised-architecture-blueprint.md`.
+
+## Outside concepts (synthesis)
+
+Patterns worth **native** debate vocabulary (full detail in `../../10-outside-concepts-and-technology-pull-forward.md`):
+
+- **Zero trust:** every cross-parcel or cross-network use is **explicitly
+  authorized** and **trust-scored** (freshness, calibration, sharing scope,
+  evidence quality)—governance as technical behavior, not policy-only copy.
+- **Public-health style surveillance:** **sentinel** placement, **event
+  definitions**, escalation detection, **intervention impact** tracking over
+  time—moving beyond “sensor dashboard.”
+- **Federated computation:** local or cluster-local summaries; shared layers
+  exchange **aggregated** updates where policy allows—**private-by-computation**
+  where feasible, not only private-by-policy.
+- **Bounded operational twins:** parcel, route-segment, drainage-path, or
+  shared-asset twins holding state, uncertainty, dependencies, failure modes,
+  interventions, and outcome history—**operational**, not full-scene novelty.
+- **Observability / event architecture:** linked events across normalize → infer
+  → confidence change → sharing decision; **explanation graphs** and **replay**
+  that strengthen provenance-first outputs.
+
+**Caution:** outside ideas should **sharpen** design and trust—not stack into
+novelty theater; adopt incrementally with phase discipline.
+
+## Technology pull-forward (non-commitments)
+
+Timing and rationale: `../../10-outside-concepts-and-technology-pull-forward.md`.
+Nothing here changes frozen **`v0.1`** claims without `../current/implementation-posture.md`
+and the implementation status matrix.
+
+- **Pull forward early:** OpenTelemetry-style tracing along ingest → normalize →
+  inference → parcel view; **CloudEvents**-style envelopes for observation/state
+  changes; **DuckDB + Parquet** for replay, export, and research-safe bundles.
+- **Pull forward soon after:** **Home Assistant / Matter** compatibility **inventory**
+  (compatibility layer, not a control commitment); **MQTT 5** as optional
+  transport after HTTP paths are clean; **OGC SensorThings** at **adapter**
+  edges for interoperability without capturing the internal core model.
+- **Pull forward later:** PMTiles for shared/public map surfaces where policy
+  allows; **federated learning** only after data-quality and governance mature;
+  **decentralized mesh as primary transport** only if justified—degraded-mode
+  exchange can stay narrower first.
+
 ## Non-negotiable target rules
 
 - do not treat parcel boundaries as physical hazard boundaries
@@ -89,3 +178,9 @@ Relative to `v0.1`, the target architecture implies:
 - more explicit neighborhood and route-aware reasoning surfaces
 - stronger product treatment of inferred-neighbor and inferred-regional support
 - clearer contracts for how shared and public evidence affect parcel outputs
+- **trust-scored** cross-cluster and cross-parcel signal paths aligned with
+  federation and zero-trust posture
+- **event lineage** and observability hooks that support explanation, replay, and
+  audit without weakening privacy defaults
+- **adapter-first** interoperability (MQTT, SensorThings, civic exchange) that
+  does not replace the parcel-first internal model

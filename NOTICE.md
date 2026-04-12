@@ -8,8 +8,8 @@ Do not assume one blanket license applies to every file, dataset, or future rele
 
 ## Repository-wide notice
 
-Open Source DIY Tech and the Open Environmental Sensing and Inference System
-program are being prepared for a staged, commons-protective open release.
+The Open Environmental Sensing and Inference System (`OESIS`) program is being
+prepared for a staged, commons-protective open release.
 
 At the repository level:
 

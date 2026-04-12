@@ -1,7 +1,7 @@
-# Open Source DIY Tech — Open Environmental Sensing and Inference System
+# Open Environmental Sensing and Inference System (program-specs)
 
 This repository is the program-definition and release home for the Open
-Environmental Sensing and Inference System program inside Open Source DIY Tech.
+Environmental Sensing and Inference System (`OESIS`) program.
 
 Open Environmental Sensing and Inference System (`OESIS`) is the canonical
 system name. `Resilient Home Intelligence` (`RHI`) remains a legacy

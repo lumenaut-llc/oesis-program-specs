@@ -15,6 +15,33 @@ and how implemented each object is in the current reference stack.
 If you need the narrower answer to "what must work for a functioning first
 version," read `minimum-functioning-v0.1.md` alongside this file.
 
+## Relationship to layered blueprint (`05`)
+
+The seven layers in `../../05-revised-architecture-blueprint.md` map onto this
+object map as follows (this file is the **enumerated** model; `05` names the
+**canonical layer titles**):
+
+| `05` layer | Objects in this map |
+| ---------- | ------------------- |
+| 1. Sensing and capture | **1** Sensor node, **2** Packet / raw evidence (plus device time and health as node/packet concerns) |
+| 2. Ingest and temporal integrity | **3** Collection / ingest boundary, **4** Normalized observation (receipt, lineage, timing, replay, dedupe, buffering as part of the truth model) |
+| 3. Context and trust | **5** Parcel context, **6** Node registry, **7** Public context; route/access context stays parcel-adjacent, not a full route engine |
+| 4. State estimation | **9** Parcel state (fused hazard-oriented estimate, confidence, evidence mode, provenance) |
+| 5. Impact and functional state | **9** Parcel state (shelter, reentry, egress, asset risk and related fields as **functional** interpretation—see note under **§9**) |
+| 6. Governance and sharing | **8** Shared neighborhood signal, **11** Rights / sharing / export / audit |
+| 7. Presentation and operations | **10** Parcel view / evidence summary; optional shared-map presentation is policy-gated via **§8** surfaces |
+
+**Program-phase minimal objects (`05`):** the narrow **`v0.1`** list in `05` (parcel,
+packet, normalized observation, parcel context, parcel state, parcel view,
+evidence summary) matches the **core** of **§1–5, 9–10** here (sensing through
+context, plus parcel state and presentation). **`v1.0`**
+adds explicit emphasis on **registry**, installation/trust metadata, **shared**
+signal maturity, **functional state** as a clearer split, and history—consistent
+with statuses here (**§6** `docs-only`, **§8** `partial`, and matrix rows).
+**`v1.5`** response and verification objects are planned in
+`../../functional-state-and-response-model.md` and `../../09-phasing-v0.1-v1.0-v1.5.md`,
+not first-class rows in this `v0.1` map.
+
 ## Object model
 
 ### 1. Sensor node
@@ -62,6 +89,9 @@ Role:
 - move node data from the device into the trusted ingest surface
 - preserve receipt truth, delivery visibility, and transport freshness
 - separate evidence availability from later inference and parcel conclusion logic
+- carry **ingest receipt**, **packet lineage**, and transport-side **buffering /
+  replay / dedupe** posture as part of the truth model (`05` §2), not as optional
+  plumbing
 
 Current `v0.1` use:
 - node-to-home/platform collection is already real in the current reference path
@@ -83,6 +113,8 @@ Role:
 - canonical evidence object after ingest
 - stable downstream input to inference
 - primary bridge between packet contracts and parcel-state derivation
+- anchor **temporal integrity**: `measured_at` / `received_at` / `processed_at`,
+  freshness windows, and stale-data handling as architecture, not polish (`05` §2)
 
 Current `v0.1` use:
 - normalization is implemented for the current bench-air lineage
@@ -174,6 +206,13 @@ Role:
 - parcel-level condition estimate output
 - carries confidence, evidence mode, freshness, hazards, and explanation payload
 
+**Hazard vs functional vs response (`05`):** the parcel-state contract **compresses**
+what the blueprint separates as **hazard-oriented** estimates and **functional**
+meaning (shelter, reentry, egress, asset risk, access/utility framing). **Response
+state**—actions taken, verification, controllability—is **out of scope** for the
+narrow **`v0.1`** slice; see `../../functional-state-and-response-model.md` and
+program-phase **`v1.5`** in `../../09-phasing-v0.1-v1.0-v1.5.md`.
+
 Current `v0.1` use:
 - parcel-state generation is central to the current reference path
 - this is the core output where the current architecture lands conclusions
@@ -218,6 +257,10 @@ Main sources:
 - `../../software/parcel-platform/README.md`
 
 ## Layered view
+
+The grouping below is the **object-map** shorthand for navigation. **Canonical
+layer names and purposes** are in `../../05-revised-architecture-blueprint.md`
+(see Relationship table above).
 
 ### Observation layer
 
@@ -276,3 +319,11 @@ This object map uses the same status vocabulary as:
 
 Do not let architecture prose imply that a `partial`, `docs-only`, or `planned`
 object is already a complete product/runtime surface.
+
+## Blueprint and phasing references
+
+- `../../05-revised-architecture-blueprint.md` — seven-layer model and hazard /
+  functional / response split
+- `../../functional-state-and-response-model.md` — bridge toward response and
+  verification objects
+- `../../09-phasing-v0.1-v1.0-v1.5.md` — when objects mature by program phase

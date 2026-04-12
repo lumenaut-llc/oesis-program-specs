@@ -13,7 +13,8 @@ Current reference boundary map.
 
 ### Canonical implementation
 
-- sibling repo `../oesis-runtime`
+- sibling **`oesis-runtime`** checkout (`../../../oesis-runtime` from this file;
+  **`../oesis-runtime`** from the program-specs repository root)
 
 This is the current executable truth for the reference services.
 
@@ -55,7 +56,8 @@ These materials constrain what the architecture may do and claim.
 - inference reasons about parcel state but should not become the UI layer
 - parcel platform presents parcel state but should not recompute inference
 - shared-map stays downstream of parcel-private reasoning and policy-gated
-- docs-facing wrappers should not become competing implementations of the sibling runtime repo `../oesis-runtime`
+- docs-facing wrappers should not become competing implementations of the sibling
+  **`oesis-runtime`** checkout (see **Canonical implementation** above)
 
 ## Version rule
 

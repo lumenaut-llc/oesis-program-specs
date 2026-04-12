@@ -12,6 +12,25 @@ It stays stable through `v1.5` so the repo can add house-state, capability, comp
 
 Narrative aliases such as `stay_safe`, `enter_safe`, `escape_safe`, and `asset_safe` may appear in planning documents, but the current repo keeps the existing field names through at least `v2`.
 
+## Hazard, functional, and response (conceptual)
+
+This contract **compresses** what the layered blueprint separates as **hazard-oriented**
+reasoning and **functional / operational** meaning:
+
+- **`hazards`** (e.g. smoke, flood, heat probabilities) and fused environmental
+  estimates support **hazard state**—what the environment is believed to be doing,
+  with confidence and evidence discipline.
+- **`shelter_status`**, **`reentry_status`**, **`egress_status`**, and
+  **`asset_risk_status`** express **functional** interpretation: what those
+  conditions mean for shelter, movement, and asset exposure at parcel scope—not
+  official alerts or guarantees.
+
+**Response state** (actions taken, interventions, verification, adaptation
+learning) is **not** carried in this object. Program-phase **`v1.5`** and later add
+**separate support objects** (house state, intervention events, verification
+outcomes) so response quality does not inflate hazard confidence. See **Planned
+follow-on additions** below and `../functional-state-and-response-model.md`.
+
 ## Core status fields
 
 - `shelter_status`
@@ -183,11 +202,15 @@ Those additions should not erase the current distinction between condition estim
 
 ## Related docs
 
+- `../functional-state-and-response-model.md` — hazard / functional / response split by phase
+- `../05-revised-architecture-blueprint.md` — layered model and impact / functional layer
+- `../09-phasing-v0.1-v1.0-v1.5.md` — when objects mature by program phase
+- `../architecture/current/architecture-object-map.md` — enumerated objects (parcel state §9)
 - `node-observation-schema.md`
 - `parcel-context-schema.md`
 - `house-state-schema.md`
 - `intervention-event-schema.md`
 - `verification-outcome-schema.md`
 - `explanation-payload-schema.md`
-- `../../software/inference-engine/interfaces.md`
-- `../../software/parcel-platform/README.md`
+- `../software/inference-engine/interfaces.md`
+- `../software/parcel-platform/README.md`

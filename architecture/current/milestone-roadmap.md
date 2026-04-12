@@ -5,13 +5,38 @@
 Define the practical delivery sequence implied by the current truthful
 reference architecture.
 
-This file translates the current `v0.1` architecture into milestones that can
+This file translates the current **reference** architecture into milestones that can
 be used for planning, acceptance, and scope control without pretending later
-surfaces are already implemented.
+surfaces are already implemented. The narrow **program-phase `v0.1`** slice is the
+anchor; later milestones stage growth toward **`v1.0`**-style breadth (see
+Relationship to program phases).
 
 ## Status
 
 Current implementation-aligned milestone roadmap.
+
+## Relationship to program phases
+
+Milestone numbers describe **delivery order** on the reference architecture. They do
+not mean every milestone sits inside the **narrow program-phase `v0.1`** slice in
+`../../09-phasing-v0.1-v1.0-v1.5.md`.
+
+- **Program-phase `v0.1`** (narrow executable reference slice) aligns with
+  **Milestone 1** and the frozen near-term sentence in `technical-philosophy.md`:
+  one parcel, one bench-air lineage, one ingest path, one inference path, one parcel
+  view.
+- **Program-phase `v1.0`** (first broader fielded parcel-intelligence target—indoor
+  plus outdoor kit, stronger trust surfaces, optional hazard expansion, limited shared
+  signal) is what **Milestones 2–5** move toward. Promoting a new accepted pre-`1.0`
+  slice still follows `pre-1.0-version-progression.md`; a milestone is not
+  automatically one version bump.
+- **Program-phase `v1.5`** (measurement-to-intervention bridge) is **not** split into
+  milestones in this file. Plan and objects: `../../09-phasing-v0.1-v1.0-v1.5.md` and
+  `../../functional-state-and-response-model.md`.
+
+**Milestone 3 (flood)** and **Milestone 4 (richer outdoor)** are **staged** on the path
+toward `v1.0` breadth. In `09`, they are **out** of the narrow `v0.1` **core**; they
+belong here as **later** milestones, not as claims about today's minimal slice.
 
 ## Planning rules
 
@@ -25,6 +50,15 @@ Current implementation-aligned milestone roadmap.
   `implemented` / `partial` / `docs-only` / `planned` posture
 - keep privacy, provenance, confidence, and claims boundaries inside every
   milestone definition
+- keep **program phase**, **reference-runtime lane**, and **public or marketing
+  release** language distinct; see `../../program/README.md` and
+  `../../00-version-labels-and-lanes.md`
+- do not describe **route**, **block**, or **neighborhood** logic as operational
+  before milestones and implementation posture support it
+- do not describe **adaptation** or **intervention** behavior as supported before
+  program-phase `v1.5`-style planning is reflected in specs and implementation
+- do not describe **governance execution** as complete while sharing, consent, and
+  revocation surfaces remain mostly partial or docs-only
 
 ## Relationship to pre-1.0 versions
 
@@ -238,6 +272,10 @@ Use it as a separate research lane until:
 
 ## Alignment references
 
+- `../../program/README.md` — mission, long-term direction, phase labels
+- `../../00-version-labels-and-lanes.md` — phases, runtime lanes, marketing naming
+- `../../09-phasing-v0.1-v1.0-v1.5.md` — full `v0.1` / `v1.0` / `v1.5` framing
+- `../../functional-state-and-response-model.md` — `v1.5` bridge objects (reference)
 - `README.md`
 - `technical-philosophy.md`
 - `reference-stack.md`

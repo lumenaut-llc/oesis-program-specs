@@ -31,8 +31,7 @@ Review governance and data ownership
 
 ## Intro section
 
-Open Environmental Sensing and Inference System is part of Open Source DIY Tech.
-The project is designed so a single home can benefit on its own, while
+Open Environmental Sensing and Inference System (`OESIS`) is designed so a single home can benefit on its own, while
 neighborhood participation can improve precision and confidence over time. The
 system is built around a simple rule set: private by default, shared by choice,
 explicit about uncertainty, and intended for a broader commons-protective open
@@ -41,6 +40,16 @@ release.
 This open release makes the current governance, data ownership, privacy posture,
 IP/release boundaries, approved technical materials, and high-level project direction
 public under asset-specific terms.
+
+## North star (long-term direction)
+
+Over the long term, the program aims for a trustworthy, parcel-grounded
+**information layer** for **preparedness**, **disaster relief**, and **climate and
+infrastructure resilience**—combining local observations, parcel and public
+context, and optional neighborhood evidence. The **parcel remains the anchor**
+for ownership and decisions; it is not the final boundary of a multi-scale
+resilience story. Public framing should **complement** official alerts and
+on-scene judgment, not replace them.
 
 ## What makes it different
 

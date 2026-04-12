@@ -22,7 +22,9 @@ For build and test planning, treat **`v0.1`** as this narrow executable slice:
 - **One software path** — ingest → normalized observation, combined with parcel and public context → inference → parcel view (evidence summary included on the offline reference pipeline).
 - **One parcel view** — one coherent dwelling-facing status surface.
 
-Executable checks for this slice live in the sibling runtime repository `../oesis-runtime` (`make oesis-check`, `make oesis-http-check`, `make oesis-accept`).
+Executable checks for this slice live in the sibling **`oesis-runtime`** checkout
+(`../../../oesis-runtime` from this file; `../oesis-runtime` from the program-specs
+repo root): `make oesis-check`, `make oesis-http-check`, `make oesis-accept`.
 
 **Explicitly out of scope** for this frozen executable slice (do not block `v0.1` on these): other observation families (`mast-lite`, `flood-node`, `weather-pm-mast`, `thermal-pod`), a mature shared-map product surface, full consent/rights/revocation UX, or required live Wi-Fi transport from the node (serial capture and local processing are enough). See `v0.1-acceptance-criteria.md` for the software acceptance checklist.
 
