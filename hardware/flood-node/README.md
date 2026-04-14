@@ -4,6 +4,8 @@
 
 A dedicated low-point parcel node that measures surface distance and inferred water depth where runoff matters operationally.
 
+Taxonomy: **geography-gated** hazard module — attach when parcel runoff context justifies it, not a universal default. See `../../architecture/system/node-taxonomy.md`.
+
 ## Why it matters
 
 This node is the flood-specific complement to the other environmental builds. It lets the project validate:
@@ -35,6 +37,17 @@ Even without the full neighborhood platform, this subsystem gives a parcel owner
 Default posture: experimental field prototype below a general `deployment maturity v1.0` claim.
 
 This node can be valuable early, but it should remain parcel-specific until the repo documents rigid geometry, zero reference, and repeatable service posture.
+
+## Software implementation status
+
+The hardware serial-JSON contract for this node (`serial-json-contract.md`) is
+architecturally defined, but the corresponding software observation family
+(`flood.low_point.snapshot`) is **not yet implemented** in the ingest path. The
+ingest service currently normalizes only `oesis.bench-air.v1` packets. Flood-node
+packets emitted by built hardware will be valid JSON but cannot be ingested or
+used for parcel-state inference until the flood observation family is implemented.
+
+See `../../release/v.0.1/implementation-status-matrix.md` for current status.
 
 ## Inputs
 
@@ -105,6 +118,11 @@ Do not describe the flood node as stronger parcel evidence unless mount angle, z
 ## Open questions
 
 See `open-questions.md` for unresolved decisions on sensor interface choice, mount geometry, and how much of the depth calibration should live in firmware versus parcel context.
+
+## Parcel kit integration
+
+- BOM and purchase posture: `../parcel-kit/integrated-parcel-kit-bom.md` (Optional hazard module: Flood) and `../parcel-kit/parcel-kit-procurement-checklist.md` (optional node families + conditional add-ons).
+- Default Tier 1–2 kit does **not** require this node; add only when the parcel has a meaningful runoff low point.
 
 ## Key docs
 

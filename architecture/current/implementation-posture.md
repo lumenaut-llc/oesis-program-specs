@@ -48,8 +48,8 @@ Keep these concepts separate:
 - `implemented`, `partial`, `docs-only`, and `planned` describe maturity within
   or around those slices
 - **Program phase**, **reference-runtime asset lane**, and **public or marketing**
-  release naming are also distinct; see `../../program/README.md` and
-  `../../00-version-labels-and-lanes.md`
+  release naming are also distinct; see `../../program/v0.1/README.md` and
+  `../../program/operating-packet/00-version-labels-and-lanes.md`
 
 A new `partial` node lane or documented boundary does not automatically justify
 promoting a new `v0.x`.
@@ -57,7 +57,7 @@ promoting a new `v0.x`.
 ## Near-term blueprint posture
 
 Sensing and hardware expansion order (aligned with
-`../../05-revised-architecture-blueprint.md`):
+`../../program/operating-packet/05-revised-architecture-blueprint.md`):
 
 - bench-air first
 - mast-lite second
@@ -66,7 +66,8 @@ Sensing and hardware expansion order (aligned with
 - weather + PM later
 
 Classifications below should stay consistent with that ordering and with
-`../../release/v.0.1/implementation-status-matrix.md`.
+`../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`,
+filesystem path `v.0.1/`).
 
 **Ingest and temporal integrity** (normalization, receipt timing, buffering,
 replay, dedupe, staleness) are part of the **truth model** for the reference
@@ -113,6 +114,20 @@ surface is complete.
 - thermal scene observation family
 - public parcel-resolution map support
 
+### Governance execution status
+
+The technical philosophy treats governance as an architecture input, and contract
+schemas exist for consent, sharing, rights, and revocation. In the current `v0.1`
+reference path, governance surfaces have the following enforcement reality:
+
+- **Sharing settings and consent records**: schema defined, `docs-only` in runtime — no runtime enforcement gate prevents data flow without consent
+- **Rights requests and revocation**: schema and utility defined, `partial` — request logging works but revocation does not block downstream surfaces
+- **Provenance summary in parcel-state**: `implemented` structurally — source-type labels (local, public, shared) appear in output but are not filtered by sharing policy
+- **Private-by-default posture**: enforced by architecture convention (no sharing API exposed in v0.1 pilot), not by runtime governance check
+
+Until governance surfaces reach `implemented` status in the matrix, do not
+describe data access as "gated by consent" or sharing as "policy-enforced."
+
 ## Posture discipline
 
 - Do not promote **shared neighborhood** surfaces to **`implemented`** until
@@ -127,7 +142,7 @@ surface is complete.
 `v0.1` architecture claims should not outrun the implementation-status
 classification used in:
 
-- `../../release/v.0.1/implementation-status-matrix.md`
+- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
 
 If a surface is only `partial`, `docs-only`, or `planned`, the architecture
 should say so.
@@ -138,10 +153,10 @@ changes alone as a version bump.
 
 ## Related docs
 
-- `../../program/README.md`
-- `../../00-version-labels-and-lanes.md`
-- `../../05-revised-architecture-blueprint.md`
-- `../../09-phasing-v0.1-v1.0-v1.5.md`
+- `../../program/v0.1/README.md`
+- `../../program/operating-packet/00-version-labels-and-lanes.md`
+- `../../program/operating-packet/05-revised-architecture-blueprint.md`
+- `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`
 - `technical-philosophy.md`
 - `milestone-roadmap.md`
 - `architecture-object-map.md`

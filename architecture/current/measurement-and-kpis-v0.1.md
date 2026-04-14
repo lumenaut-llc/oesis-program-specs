@@ -9,15 +9,16 @@ that relates to acceptance checks—without duplicating the full KPI catalog.
 ## Status
 
 Current reference **measurement posture**. Detailed KPI suggestions remain in the
-root packet `../../08-kpi-framework.md`.
+root packet `../../program/operating-packet/08-kpi-framework.md`.
 
 This document **complements** `implementation-posture.md` and
-`../../release/v.0.1/implementation-status-matrix.md`; it does not override
+`../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`,
+filesystem path `v.0.1/`); it does not override
 status classifications or acceptance commands.
 
 ## KPI families (summary)
 
-Full lists and definitions: `../../08-kpi-framework.md`.
+Full lists and definitions: `../../program/operating-packet/08-kpi-framework.md`.
 
 1. **Technical validity** — Trustworthy evidence: uptime, packet completeness,
    ingest latency, QA pass rates, stale data rate, outputs with provenance and
@@ -39,14 +40,19 @@ Full lists and definitions: `../../08-kpi-framework.md`.
 
 ## Emphasis by program phase
 
-Aligned with `../../09-phasing-v0.1-v1.0-v1.5.md`:
+Aligned with `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`:
 
 - **Narrow `v0.1`:** prioritize **§1 Technical validity** and **§2 Decision
   usefulness** for the reference path. Prove the pipeline and parcel view are
   honest, fresh enough, and explainable.
 - **§3 Network value:** apply only where **shared / neighborhood** surfaces are
   **real** (`partial` or better); do not assume mature federation or dense
-  adoption in success criteria for the minimal slice.
+  adoption in success criteria for the minimal slice. Note:
+  `shared-neighborhood-signal-schema.json` exists in the `v0.1` contract set and
+  shared-map API is `partial` in the implementation matrix, but the phasing doc
+  does **not** list shared signals as a `v0.1` core goal. Treat network-value KPIs
+  as applicable to pilot evaluation where shared surfaces happen to exist, not as
+  `v0.1` acceptance gates.
 - **§4 Functional / adaptation:** **pilots**, research, and **`v1.5`** planning—not
   required gates for `make oesis-accept` / `v0.1-acceptance-criteria.md`.
 - **§5 Governance:** measure **only** what the runtime and product **actually
@@ -83,16 +89,16 @@ Overlap:
 ## Multi-scale extensions (later)
 
 When route, block, and lifeline reasoning mature, extend measurement per
-`../../08-kpi-framework.md` (“Multi-scale extensions”) and
-`../../07-information-layer-and-functional-recovery.md` /
-`../../06-network-of-networks-concepts.md`. Do not treat those as **`v0.1`**
+`../../program/operating-packet/08-kpi-framework.md` (“Multi-scale extensions”) and
+`../../program/operating-packet/07-information-layer-and-functional-recovery.md` /
+`../../program/operating-packet/06-network-of-networks-concepts.md`. Do not treat those as **`v0.1`**
 release gates while architecture remains `docs-only` or `planned` for those
 surfaces.
 
 ## Related docs
 
-- `../../08-kpi-framework.md` — full KPI catalog
+- `../../program/operating-packet/08-kpi-framework.md` — full KPI catalog
 - `v0.1-acceptance-criteria.md` — frozen software acceptance
 - `implementation-posture.md` — implemented / partial / planned truth
 - `milestone-roadmap.md` — when milestones unlock new measurement
-- `../../release/v.0.1/implementation-status-matrix.md` — status authority
+- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`) — status authority

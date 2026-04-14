@@ -1,5 +1,15 @@
 # Technical Philosophy v0.1
 
+## Lane
+
+This document is the `current/` lane version of this topic.
+
+Use it for the frozen `v0.1` technical philosophy that matches current
+reference-truth claims.
+
+If you need the broader system-wide technical posture that spans versioned
+lanes, use `../system/technical-philosophy-and-architecture.md`.
+
 ## Purpose
 
 State the current technical philosophy that shapes the OESIS reference
@@ -46,6 +56,13 @@ The architecture keeps clear separation between:
 - parcel operator presentation
 - shared neighborhood outputs
 
+**Parcel-state is an inference output object.** It is allowed to carry inference
+configuration (applied priors, foil paths, contrastive explanations) because
+these are products of the inference stage, not raw evidence or presentation
+logic. The boundary being preserved is between *observation-layer evidence* and
+*inference-layer conclusions*—not between inference internals and inference
+outputs. Response-state objects (intervention, verification) remain separate.
+
 ### Collection first for evidence availability
 
 In `v0.1`, network primarily means getting node data into the home/platform
@@ -88,7 +105,7 @@ one inference path, one parcel view
 Everything broader is downstream. The next broader program-phase target (`v1.0`,
 field-hardened parcel kit and related trust surfaces) stages in the reference
 runtime as an optional `v1.0` asset lane merged over this baseline. Phase and lane
-vocabulary: `../../program/README.md`, `../../00-version-labels-and-lanes.md`.
+vocabulary: `../../program/v0.1/README.md`, `../../program/operating-packet/00-version-labels-and-lanes.md`.
 
 ## Phase discipline
 
@@ -104,7 +121,7 @@ Guardrails against common failure modes:
 - Adding **hardware families** faster than the reference path stabilizes for one
   lineage.
 - Treating **parcel-first** as **parcel-only**, contradicting the stated
-  parcel-first, multi-scale direction (see `../../program/README.md`).
+  parcel-first, multi-scale direction (see `../../program/v0.1/README.md`).
 - Claiming **deployment or field** maturity beyond what is **repeatable and
   checkable** (reference acceptance paths and implementation posture should stay
   ahead of narrative).
@@ -114,9 +131,9 @@ overview and thesis framing; do not invent competing shorthand.
 
 ## Related docs
 
-- `../../program/README.md` — program mission, long-term direction, phase labels
-- `../../00-version-labels-and-lanes.md` — glossary for phases and runtime lanes
-- `../../04-architecture-review-keep-dangerous-change-now.md` — expanded keep /
+- `../../program/v0.1/README.md` — program mission, long-term direction, phase labels
+- `../../program/operating-packet/00-version-labels-and-lanes.md` — glossary for phases and runtime lanes
+- `../../program/operating-packet/04-architecture-review-keep-dangerous-change-now.md` — expanded keep /
   dangerous / change-now review
 - `../../architecture/system/technical-philosophy-and-architecture.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`

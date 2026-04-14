@@ -1,6 +1,6 @@
 # Phasing: v0.1, v1.0, v1.5
 
-**Canonical incorporation:** Phase summary → [`program/README.md`](program/README.md); milestones ↔ phases → [`architecture/current/milestone-roadmap.md`](architecture/current/milestone-roadmap.md); reading order → [`architecture/current/README.md`](architecture/current/README.md). This file keeps the detailed phasing narrative.
+**Canonical incorporation:** Phase summary → [`program/v0.1/README.md`](../README.md); milestones ↔ phases → [`architecture/current/milestone-roadmap.md`](../../architecture/current/milestone-roadmap.md); reading order → [`architecture/current/README.md`](../../architecture/current/README.md). This file keeps the detailed phasing narrative.
 
 ## Why the phasing matters
 
@@ -103,11 +103,20 @@ Program milestones already describe the next hardware step as **indoor plus shel
 
 Can we produce a more trustworthy parcel state from a real parcel kit and limited shared evidence?
 
-## `v1.5` — measurement-to-intervention bridge
+## `v1.5` — measurement-to-intervention bridge (capability stage, not a promoted runnable slice)
+
+This is a **capability stage** in the `version-and-promotion-matrix.md` sense,
+not a separately promoted program phase like `v0.1` or `v0.2`. It describes a
+class of product behavior (house-state, intervention, verification) that may be
+delivered within program-phase `v1.0` or later, depending on promotion timing.
 
 ### Core goal
 
-Prevent the system from dead-ending into a parcel-status dashboard by adding the minimum extra objects needed to model response, intervention, and verification.
+Prevent the system from dead-ending into a parcel-status dashboard by adding the minimum extra surfaces needed to model the relationship between outdoor hazards, house operating state, interventions, and measured outcomes.
+
+### Core rule
+
+Collect the minimum data needed to model the relationship between outdoor hazards, house operating state, available interventions, and resulting outcomes.
 
 ### Why this phase
 
@@ -115,28 +124,22 @@ The source bundle is explicit that **`v1.5`** is the first minimum bridge into *
 
 ### What gets added
 
-#### House-state objects
-- indoor PM
-- indoor temperature / RH
-- HVAC mode
-- fan / recirculation state
-- purifier state
-- backup power state
-- window/shade state where available
+#### House-state and bridge surfaces
+- `indoor-response-node` for indoor PM2.5, indoor temperature, and indoor RH
+- `power-outage-node` for mains status and backup-power state
+- `equipment-state-adapter` for HVAC mode, fan state, recirculation versus fresh-air state, purifier state, and window/shade or sump/drain equipment state where relevant
+- building-and-site metadata surface for orientation, roof type or color, shading condition, tree canopy, impervious area, low points, drainage paths, vent locations, filter path, filter size, and higher-MERV support
 
-#### Intervention objects
-- intervention event
-- manual action log
-- bounded recommendation log
-- action timestamp
-- action target
+#### Intervention surfaces
+- `action-log` for what the household, building, or bounded recommendation path actually did
+- action target, action timestamp, actor, and intended reason
+- bounded recommendation log where the product suggested, but did not necessarily execute, a response
 
-#### Verification objects
-- before/after outcome window
-- response curve
-- verification result
-- effect-size estimate
-- confidence ceiling from evidence quality
+#### Verification surfaces
+- `outcome-log` / response-verification surface for before/after windows
+- measured outcome summaries tied to the action window
+- response curves such as outdoor PM to indoor PM or outdoor heat to indoor heat burden
+- verification result, effect-size estimate, and confidence ceiling from evidence quality
 
 #### Trust support objects
 - node health object
@@ -150,6 +153,8 @@ The source bundle is explicit that **`v1.5`** is the first minimum bridge into *
 - integration class
 - local / cloud / manual-only flag
 
+In this stage, compatibility objects should stay coarse and descriptive. A full controls-compatibility inventory still belongs later.
+
 ### Outputs
 
 - parcel condition
@@ -158,16 +163,44 @@ The source bundle is explicit that **`v1.5`** is the first minimum bridge into *
 - verification result
 - response history summary
 
+### What this phase is proving
+
+This phase proves that the product can model response, not only exposure.
+
+It should be able to begin answering:
+- how outdoor PM translates to indoor PM in this house
+- how outdoor heat translates to indoor heat burden in this house
+- what happens when HVAC switches to recirculate
+- what happens when a purifier runs
+- what happens to usability and access when water depth rises at a low point
+- whether a given action actually helped
+
+### Minimum closed loop
+
+At least one product path should support:
+
+`hazard -> house state -> action -> measured outcome`
+
+without pretending that every action is automated or that the system already has a mature adaptation engine.
+
 ### What still stays out
 
 - full automation platform
+- mature adaptation engine
 - full route/block resilience engine
 - broad neighborhood planning suite
 - full civic infrastructure dashboard
+- full controls-compatibility inventory and bounded-controls execution semantics
 
-### Success question
+### Exit criteria
 
-Can we model what the house did, what could be done, and whether it helped?
+The stage counts as successful when the system can capture the minimum house-state and intervention surfaces needed for before/after reasoning.
+
+At minimum, it should be able to produce one honest closed-loop chain of:
+
+`hazard -> house state -> action -> measured outcome`
+
+with evidence-quality limits carried through to the outcome interpretation.
 
 ## Operational rule for all phases
 
