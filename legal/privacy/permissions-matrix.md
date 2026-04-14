@@ -27,7 +27,8 @@ Sharing permission does not grant control permission.
 
 This includes later-stage private parcel data such as:
 - house-state telemetry
-- house capability and control compatibility records
+- house capability and read-side equipment-state records
+- later control-compatibility records where the product reaches bounded-controls stages
 - intervention history
 - verification history
 

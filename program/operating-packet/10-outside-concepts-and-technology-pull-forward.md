@@ -1,6 +1,6 @@
 # Outside Concepts and Technology Pull-Forward
 
-**Canonical incorporation:** Synthesis → [`architecture/future/proposed-architecture.md`](architecture/future/proposed-architecture.md). This file keeps the outside-concept catalog and pull-forward timing.
+**Canonical incorporation:** Synthesis → [`architecture/v1.0/proposed-architecture.md`](../../architecture/v1.0/proposed-architecture.md). This file keeps the outside-concept catalog and pull-forward timing.
 
 ## Why import ideas from outside the field
 

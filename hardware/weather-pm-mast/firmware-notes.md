@@ -8,6 +8,10 @@
 - stay backward-compatible with the simpler ingest path where practical
 - surface health telemetry and read failures without hiding them
 
+This firmware should justify its extra complexity with genuinely richer outdoor
+PM and weather evidence. It should not exist merely as a fancier replacement for
+`mast-lite` when the simpler lane is still sufficient.
+
 ## Sampling cadence
 
 - default PM-first mast cadence: every 15 seconds

@@ -37,11 +37,11 @@ Use it alongside:
 
 - `../current/architecture-object-map.md`
 - `../current/minimum-functioning-v0.1.md`
-- `../future/proposed-architecture.md`
-- `../future/open-questions.md`
+- `../v1.0/proposed-architecture.md`
+- `../v1.0/open-questions.md`
 
 Use `current/` files for frozen `v0.1` truth.
-Use `future/` files for debated `v1.0` target architecture.
+Use `v1.0/` files for debated `v1.0` target architecture.
 Use this file for the tensions that influence both.
 
 ## Debate 1: parcel-first vs field-first

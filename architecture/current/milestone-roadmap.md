@@ -19,7 +19,7 @@ Current implementation-aligned milestone roadmap.
 
 Milestone numbers describe **delivery order** on the reference architecture. They do
 not mean every milestone sits inside the **narrow program-phase `v0.1`** slice in
-`../../09-phasing-v0.1-v1.0-v1.5.md`.
+`../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`.
 
 - **Program-phase `v0.1`** (narrow executable reference slice) aligns with
   **Milestone 1** and the frozen near-term sentence in `technical-philosophy.md`:
@@ -31,8 +31,8 @@ not mean every milestone sits inside the **narrow program-phase `v0.1`** slice i
   slice still follows `pre-1.0-version-progression.md`; a milestone is not
   automatically one version bump.
 - **Program-phase `v1.5`** (measurement-to-intervention bridge) is **not** split into
-  milestones in this file. Plan and objects: `../../09-phasing-v0.1-v1.0-v1.5.md` and
-  `../../functional-state-and-response-model.md`.
+  milestones in this file. Plan and objects: `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md` and
+  `../../program/operating-packet/functional-state-and-response-model.md`.
 
 **Milestone 3 (flood)** and **Milestone 4 (richer outdoor)** are **staged** on the path
 toward `v1.0` breadth. In `09`, they are **out** of the narrow `v0.1` **core**; they
@@ -51,8 +51,8 @@ belong here as **later** milestones, not as claims about today's minimal slice.
 - keep privacy, provenance, confidence, and claims boundaries inside every
   milestone definition
 - keep **program phase**, **reference-runtime lane**, and **public or marketing
-  release** language distinct; see `../../program/README.md` and
-  `../../00-version-labels-and-lanes.md`
+  release** language distinct; see `../../program/v0.1/README.md` and
+  `../../program/operating-packet/00-version-labels-and-lanes.md`
 - do not describe **route**, **block**, or **neighborhood** logic as operational
   before milestones and implementation posture support it
 - do not describe **adaptation** or **intervention** behavior as supported before
@@ -272,10 +272,10 @@ Use it as a separate research lane until:
 
 ## Alignment references
 
-- `../../program/README.md` — mission, long-term direction, phase labels
-- `../../00-version-labels-and-lanes.md` — phases, runtime lanes, marketing naming
-- `../../09-phasing-v0.1-v1.0-v1.5.md` — full `v0.1` / `v1.0` / `v1.5` framing
-- `../../functional-state-and-response-model.md` — `v1.5` bridge objects (reference)
+- `../../program/v0.1/README.md` — mission, long-term direction, phase labels
+- `../../program/operating-packet/00-version-labels-and-lanes.md` — phases, runtime lanes, marketing naming
+- `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md` — full `v0.1` / `v1.0` / `v1.5` framing
+- `../../program/operating-packet/functional-state-and-response-model.md` — `v1.5` bridge objects (reference)
 - `README.md`
 - `technical-philosophy.md`
 - `reference-stack.md`
@@ -284,4 +284,4 @@ Use it as a separate research lane until:
 - `component-boundaries.md`
 - `pre-1.0-version-progression.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
-- `../../release/v.0.1/implementation-status-matrix.md`
+- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)

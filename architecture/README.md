@@ -31,19 +31,39 @@ Use `current/` for:
 Treat `current/` as the default current-truth lane for contributors, reviewers,
 and runtime-aligned documentation.
 
-### `future/`
+### `v1.0/`
 
-The debated target architecture for `v1.0`.
+The debated target architecture lane (proposal space) as an explicit version
+directory.
 
-Use `future/` for:
+Use `v1.0/` for:
 
 - architectural goals beyond the current reference stack
 - proposed boundary or topology changes
 - open questions and tradeoffs
 - decisions under discussion
 
-Treat `future/` as explicit proposal space. It should stay clearly separate from
+Treat `v1.0/` as explicit proposal space. It should stay clearly separate from
 what is already implemented or accepted in the frozen `v0.1` lane.
+
+### `v1.5/`
+
+Bridge-stage architecture notes for the measurement-to-intervention foundation.
+
+Use `v1.5/` for:
+
+- house-state and verification models
+- closed-loop bridge definitions
+- `v1.5`-specific architecture notes that are more precise than cross-version
+  system narratives
+
+### `future/`
+
+Redirect-only compatibility lane for older links into the debated target
+architecture.
+
+Use `future/` only as a compatibility pointer. New debated target-lane content
+belongs in `v1.0/`.
 
 ### `system/`
 
@@ -71,15 +91,20 @@ Cross-version architecture debates and decision scaffolding.
 7. `current/component-boundaries.md`
 8. `current/milestone-roadmap.md`
 9. `current/pre-1.0-version-progression.md`
-10. `decisions/debate-map.md`
-11. `future/README.md` when you want the debated target lane
+10. `system/version-and-promotion-matrix.md`
+11. `system/node-taxonomy.md`
+12. `decisions/debate-map.md`
+13. `v1.0/README.md` when you want the debated target lane
+14. `v1.5/README.md` when you want the bridge-stage lane
 
 ## Version mapping
 
 Use these names consistently:
 
 - `current/` = frozen `v0.1`
-- `future/` = debated `v1.0`
+- `v1.0/` = debated `v1.0`
+- `v1.5/` = measurement-to-intervention bridge lane
+- `future/` = redirect-only alias for older `v1.0` links
 - `decisions/` = cross-version doctrine and debate scaffolding
 
 ## Pre-1.0 policy
@@ -99,8 +124,8 @@ That means:
   narrow first working slice
 
 The older `../technical-architecture/` tree remains as a transitional pointer.
-When there is any ambiguity, prefer the `current/` and `future/` entrypoints in
-this directory.
+When there is any ambiguity, prefer the explicit versioned entrypoints in this
+directory: `current/`, `v1.0/`, and `v1.5/`.
 
 ## What stays outside this directory
 

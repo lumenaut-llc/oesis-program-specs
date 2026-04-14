@@ -32,4 +32,9 @@
 ## Open questions
 
 - Which coarse spatial unit is safest and still useful for early pilots?
+
+  > **Recommended direction:** Use a grid cell large enough that minimum 3 participating parcels are required before any condition is shown. Census block groups or equivalent-sized hexagonal cells are a reasonable starting point. Exact size should be tuned during pilot to balance utility against singling-out risk.
+
 - How should coverage be communicated without leaking low-participation counts?
+
+  > **Recommended direction:** Display 'insufficient coverage' for cells below the participation threshold rather than showing zero or empty states that imply absence. Never display exact participant counts. Every shared-map view should carry a persistent banner: 'Neighborhood conditions are delayed, approximate, and based on limited participation.'

@@ -131,6 +131,8 @@ Examples:
 ## Related docs
 
 - `integrated-parcel-system-spec.md`
+- `version-and-promotion-matrix.md`
+- `node-taxonomy.md`
 - `sensor-placement-and-representativeness-guide.md`
-- `../build-guides/field-hardening-checklist.md`
-- `../build-guides/pilot-field-kit.md`
+- `../../hardware/parcel-kit/field-hardening-checklist.md`
+- `../../hardware/parcel-kit/pilot-field-kit.md`

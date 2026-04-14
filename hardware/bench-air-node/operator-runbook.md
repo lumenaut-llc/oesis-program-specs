@@ -4,6 +4,23 @@
 
 Provide the shortest repeatable path from freshly wired bench hardware to a locally validated normalized observation.
 
+## What this runbook proves
+
+This runbook proves the minimum indoor evidence path for the parcel-first
+system:
+
+- the bench node emits a valid `oesis.bench-air.v1` packet
+- the local ingest path can normalize that packet
+- one parcel can receive indoor or sheltered evidence from a real device
+
+It does **not** prove the later bridge surfaces yet:
+
+- indoor PM2.5 response sensing
+- power / outage state
+- equipment-state capture
+- action logging
+- outcome verification
+
 ## Before you start
 
 - ESP32-S3 DevKitC-1 wired with `GPIO8` as `SDA` and `GPIO9` as `SCL`

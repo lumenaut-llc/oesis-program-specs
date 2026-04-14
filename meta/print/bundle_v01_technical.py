@@ -32,7 +32,7 @@ CORE_SOURCES = [
 EXTRA_SOURCES_SPECS = [
     "architecture/system/technical-philosophy-and-architecture.md",
     "architecture/system/integrated-parcel-system-spec.md",
-    "software/README.md",
+    "software/v0.1/README.md",
     "release/v.0.1/implementation-status-matrix.md",
     "software/operator-quickstart.md",
 ]

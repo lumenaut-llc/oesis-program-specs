@@ -18,24 +18,34 @@
   Update sharing-mode settings with an explicit notice/version reference.
 - `GET /v1/parcels/{parcel_id}/house-state`
   Return the latest private house-state support object if one exists.
+  **Status: planned** — capability-stage v1.5 bridge surface; no runtime implementation.
 - `POST /v1/parcels/{parcel_id}/house-state`
   Upsert the private house-state support object for one parcel.
+  **Status: planned** — capability-stage v1.5 bridge surface; no runtime implementation.
 - `GET /v1/parcels/{parcel_id}/capabilities`
   Return the latest private house-capability support object if one exists.
+  **Status: planned** — capability-stage v1.5 bridge surface; no runtime implementation.
 - `POST /v1/parcels/{parcel_id}/capabilities`
   Upsert the private house-capability support object for one parcel.
+  **Status: planned** — capability-stage v1.5 bridge surface; no runtime implementation.
 - `GET /v1/parcels/{parcel_id}/controls`
   Return the latest private control-compatibility support object if one exists.
+  **Status: planned** — draft capture under v1.5; full inventory is v2.5.
 - `POST /v1/parcels/{parcel_id}/controls`
   Upsert the private control-compatibility support object for one parcel.
+  **Status: planned** — draft capture under v1.5; full inventory is v2.5.
 - `GET /v1/parcels/{parcel_id}/interventions`
   Return private intervention-event records for one parcel.
+  **Status: planned** — capability-stage v1.5 bridge surface; no runtime implementation.
 - `POST /v1/parcels/{parcel_id}/interventions`
   Append a private intervention-event record for one parcel.
+  **Status: planned** — capability-stage v1.5 bridge surface; no runtime implementation.
 - `GET /v1/parcels/{parcel_id}/verification`
   Return private verification-outcome records for one parcel.
+  **Status: planned** — capability-stage v1.5 bridge surface; no runtime implementation.
 - `POST /v1/parcels/{parcel_id}/verification`
   Append a private verification-outcome record for one parcel.
+  **Status: planned** — capability-stage v1.5 bridge surface; no runtime implementation.
 - `POST /v1/parcels/{parcel_id}/rights/export`
   Create an export request for parcel operator-visible parcel data.
 - `POST /v1/parcels/{parcel_id}/rights/delete`
@@ -89,13 +99,15 @@ Primary response shape for current state:
 - `sharing_summary`
 
 `current v1` remains centered on parcel-state.
-`v1.5` support objects stay separate from the state payload so the current contract does not break.
+**Capability stage `v1.5` bridge** support objects stay separate from the state payload so the current contract does not break.
+
+**Staging note:** `house_capability` and related fields target **coarse / read-side** equipment and capability hints. **`control_compatibility`** may hold **draft** records early, but the **full compatibility inventory** (interface classes, integration tiers, bounded-control policy) is primarily **`v2.5`** — see `../../architecture/system/architecture-gaps-by-stage.md`.
 
 Support-object response shapes:
 
 - `house_state`
 - `house_capability`
-- `control_compatibility`
+- `control_compatibility` (draft-optional under `v1.5`; complete inventory posture under `v2.5`)
 - `interventions`
 - `verification_outcomes`
 
@@ -201,9 +213,33 @@ Suggested response example:
 ## Open questions
 
 - How much raw evidence detail should a parcel operator see before the UI becomes noisy or misleading?
+
+  > **Recommended direction:** Statuses plus short explanations as the default view. Confidence bands (low/medium/high) rather than numeric probabilities. Raw evidence detail available in the evidence-summary endpoint for advanced users or pilot operators.
+
 - Should the platform expose hazard probabilities directly, or mostly keep them behind explanation text and status labels?
+
+  > **Recommended direction:** Keep probabilities behind explanation text and status labels for the dwelling-facing UI. Expose numeric probabilities only in the evidence-summary for advanced users. Never show raw probabilities without accompanying explanation.
+
 - What should trigger a parcel operator notification: status transitions, freshness failures, confidence drops, or all three?
+
+  > **Recommended direction:** Status transitions and freshness failures for v0.1. Confidence drops are too noisy until the inference engine has stable thresholds. Add confidence-drop notifications in v1.0 after pilot calibration.
+
 - Which parts of provenance should be hidden or generalized when data comes from shared neighborhood context?
+
+  > **Recommended direction:** Hide contributing parcel identifiers and exact observation timestamps from shared context. Show only the aggregate signal type, cell identifier, and delay metadata. Provenance must never enable singling out a contributing parcel.
+
 - Which sharing updates should require step-up confirmation because they materially expand data use?
-- Which support-object fields are genuinely required in `v1.5` versus better left optional until live pilots show their value?
+
+  > **Recommended direction:** Any transition that moves data from private-only to neighborhood-aggregate or research/pilot sharing should require explicit step-up confirmation with a notice version reference. Narrowing sharing should not require step-up.
+
+- Which support-object fields are genuinely required in the **`v1.5` bridge** versus better left optional until live pilots show their value?
+
+  > **Recommended direction:** House-state first (it has the clearest standalone value for recommendation content). Intervention and verification timelines only after house-state proves useful in at least one pilot. Keep all bridge fields optional until pilot evidence justifies requiring them.
+
+- When does **`control_compatibility`** graduate from optional draft capture to **`v2.5`**-complete inventory requirements?
+
+  > **Recommended direction:** Keep invisible in the parcel UI until v2.5. Draft capture is an API-level concern for pilot operators, not a user-facing feature. Graduate to complete inventory only when integration tiers and bounded-control policy are defined.
+
 - Which future bounded-control permissions must be separated from ordinary data-sharing controls?
+
+  > **Recommended direction:** Any permission that could trigger a physical action (HVAC mode change, fan activation, shade control) must be separated from data-sharing controls and governed by its own consent and audit path. This separation is a v2.5+ concern and should not be conflated with current sharing settings.

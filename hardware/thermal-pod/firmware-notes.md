@@ -9,6 +9,9 @@ The first thermal-pod software should:
 - report basic health and timing status
 - make privacy posture explicit in the packet
 
+It should remain explicitly derived-only. It is not a shortcut to occupant
+tracking, raw-frame storage, or default parcel-kit functionality.
+
 ## Sampling cadence
 
 - start with a slow readable cadence such as every `10` seconds

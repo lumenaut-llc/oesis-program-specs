@@ -18,7 +18,7 @@ Open Environmental Sensing and Inference System
 - `architecture.md`
 - `hazard-logic-v0.md`
 - `config/public_context_policy.json`
-- `scripts/infer_parcel_state.py`
+- `python3 -m oesis.inference.infer_parcel_state` (in `oesis-runtime`)
 - `../ingest-service/public-source-metadata-standard.md`
 
 ## Content

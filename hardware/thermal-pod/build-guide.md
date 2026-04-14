@@ -8,6 +8,11 @@ The first thermal-pod build should optimize for a stable fixed scene and derived
 
 Default posture: separate R&D lane below a general `deployment maturity v1.0` claim.
 
+**Program posture:** this guide remains a **research- and privacy-gated** lane.
+It should stay outside the default first integrated pilot until privacy,
+retention, and operational usefulness are clearer. See
+`../../architecture/system/node-taxonomy.md`.
+
 ## Required now
 
 - stable Pi 5 power posture

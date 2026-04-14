@@ -1,5 +1,16 @@
 # Technical Architecture v0.1
 
+## Lane
+
+This directory is the `current/` lane.
+
+Use it for the frozen `v0.1` reference architecture and other current-truth
+docs that should match accepted runnable scope.
+
+If you need debated target-lane architecture, use `../v1.0/`.
+If you need bridge-stage architecture notes, use `../v1.5/`.
+If you need cross-version narrative and operating-model framing, use `../system/`.
+
 ## Purpose
 
 Define the current truthful reference architecture for Open Environmental
@@ -21,7 +32,7 @@ Use this version when you need the architecture that matches the present
 implementation boundary rather than future proposals.
 
 This directory is the frozen `v0.1` lane. New future-looking architecture work
-should go to `../future/` instead of mutating these current-truth files.
+should go to `../v1.0/` instead of mutating these current-truth files.
 
 Pre-`1.0` growth should normally be tracked through milestones and status
 classification rather than a new version number for every added node or
@@ -48,17 +59,17 @@ Files in this directory are **frozen current reference** architecture. Program
 mission, phase vocabulary, thesis, layered blueprint, and long-horizon framing are
 authored **alongside** them (repo root and `program/`):
 
-- `../../program/README.md` — mission, long-term direction, phase label summary
-- `../../00-version-labels-and-lanes.md` — program phases, runtime lanes, marketing naming
-- `../../09-phasing-v0.1-v1.0-v1.5.md` — full `v0.1` / `v1.0` / `v1.5` narrative
-- `../../01-core-thesis-and-framing.md` — thesis and wording guardrails
-- `../../05-revised-architecture-blueprint.md` — layered model and near-term sensing order
-- `../../07-information-layer-and-functional-recovery.md` — information-layer target
-- `../../functional-state-and-response-model.md` — bridge toward response / verification
+- `../../program/v0.1/README.md` — mission, long-term direction, phase label summary
+- `../../program/operating-packet/00-version-labels-and-lanes.md` — program phases, runtime lanes, marketing naming
+- `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md` — full `v0.1` / `v1.0` / `v1.5` narrative
+- `../../program/operating-packet/01-core-thesis-and-framing.md` — thesis and wording guardrails
+- `../../program/operating-packet/05-revised-architecture-blueprint.md` — layered model and near-term sensing order
+- `../../program/operating-packet/07-information-layer-and-functional-recovery.md` — information-layer target
+- `../../program/operating-packet/functional-state-and-response-model.md` — bridge toward response / verification
   objects (`v1.5`-era planning)
-- `../../04-architecture-review-keep-dangerous-change-now.md` — expanded keep /
+- `../../program/operating-packet/04-architecture-review-keep-dangerous-change-now.md` — expanded keep /
   dangerous / change review (judgments also summarized in `technical-philosophy.md`)
-- `../../08-kpi-framework.md` — detailed KPI catalog (posture in
+- `../../program/operating-packet/08-kpi-framework.md` — detailed KPI catalog (posture in
   `measurement-and-kpis-v0.1.md`)
 
 **Phase ↔ milestone mapping** lives in `milestone-roadmap.md` in this directory.
@@ -82,13 +93,14 @@ authored **alongside** them (repo root and `program/`):
 
 `v0.1` should stay aligned with:
 
-- `../../program/README.md`
-- `../../09-phasing-v0.1-v1.0-v1.5.md`
+- `../../program/v0.1/README.md`
+- `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`
 - `../../architecture/system/technical-philosophy-and-architecture.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
-- `../../software/README.md`
-- `../../release/v.0.1/implementation-status-matrix.md`
-- `../../08-kpi-framework.md`
+- `../../software/v0.1/README.md`
+- `../../release/v.0.1/implementation-status-matrix.md` (release label
+  `v0.1`, filesystem path `v.0.1/`)
+- `../../program/operating-packet/08-kpi-framework.md`
 
 ## Contributor rule
 
@@ -96,7 +108,7 @@ If a change describes what is implemented, accepted, or currently runnable, it
 belongs here.
 
 If a change describes a target architecture, future boundary, or debated
-expansion, it belongs in `../future/`.
+expansion, it belongs in `../v1.0/`.
 
 If a change is incremental but still compatible with the current accepted slice,
 prefer updating milestone and implementation-posture docs before proposing a new

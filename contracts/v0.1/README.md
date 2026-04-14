@@ -2,7 +2,18 @@
 
 ## Purpose
 
-Canonical contract definitions for parcels, nodes, observations, states, permissions, provenance, and later-stage support objects.
+Canonical contract definitions for parcels, nodes, observations, states,
+permissions, provenance, and baseline sharing surfaces.
+
+## Lane contract
+
+- **Baseline lane**: `v0.1/schemas/` and `v0.1/examples/` are the frozen
+  `v0.1` contract surface.
+- **Additive lanes**: `v1.0/` and `v1.5/` hold forward contract deltas by lane.
+- **Compatibility policy**: when contract docs move, keep redirect stubs for
+  high-traffic old links until migration is complete.
+- **Canonical mapping**: contract lanes must align with
+  `../../architecture/system/version-and-promotion-matrix.md`.
 
 ## Minimum contents
 
@@ -22,32 +33,40 @@ Those draft docs are intentionally separate from the current schemas so the docs
 
 For version lanes in this repository:
 
-- `schemas/` and `examples/` are the frozen `v0.1` default contract surface
+- `v0.1/schemas/` and `v0.1/examples/` are the frozen `v0.1` default contract
+  surface
 - `v1.0/` is the additive target lane for future schema/example deltas
+- `v1.5/` is the additive bridge-stage lane for measurement-to-intervention
+  contract deltas
 
-Do not silently replace the root `schemas/` or `examples/` files when proposing
-future-lane changes. Add new or overridden assets under `v1.0/` instead.
+Do not silently replace the `v0.1/schemas/` or `v0.1/examples/` files when
+proposing future-lane changes. Add new or overridden assets under `v1.0/` or `v1.5/`
+instead, depending on which version lane the change belongs to.
 
 `v1.5` adds separate support objects for:
 - house state
-- house capability
-- control compatibility
+- indoor-response and outage evidence surfaces
+- coarse house capability and **read-side** equipment-state signals
+- equipment-state observation snapshots
+- per-signal source provenance records
 - intervention events
 - verification outcomes
+- building/site metadata extensions needed for response interpretation
+
+**`v2.5`** is the primary stage for a full **controls-compatibility inventory** (interface classes, integration tiers, control-policy versioning). Draft `control-compatibility` schema files may exist for forward compatibility; they should not be read as “compatibility mapping is operationally complete” in `v1.5`.
 
 Those support objects should not be mistaken for a breaking change to the current parcel-state contract.
 
-Machine-readable starter artifacts now live in:
+See `../../architecture/system/node-taxonomy.md` and `../../architecture/system/version-and-promotion-matrix.md`.
+
+Machine-readable starter artifacts for the frozen `v0.1` lane include:
 - `schemas/node-observation.schema.json`
 - `schemas/node-registry.schema.json`
+- `schemas/parcel-context.schema.json`
 - `schemas/parcel-state.schema.json`
-- `schemas/house-state.schema.json`
-- `schemas/house-capability.schema.json`
-- `schemas/control-compatibility.schema.json`
-- `schemas/intervention-event.schema.json`
-- `schemas/verification-outcome.schema.json`
 - `schemas/sharing-settings.schema.json`
 - `schemas/consent-record.schema.json`
+- `schemas/consent-store.schema.json`
 - `schemas/rights-request.schema.json`
 - `schemas/shared-neighborhood-signal.schema.json`
 - `schemas/sharing-store.schema.json`
@@ -58,14 +77,11 @@ Machine-readable starter artifacts now live in:
 - `examples/node-observation.example.json`
 - `examples/node-registry.example.json`
 - `examples/normalized-observation.example.json`
+- `examples/parcel-context.example.json`
 - `examples/parcel-state.example.json`
-- `examples/house-state.example.json`
-- `examples/house-capability.example.json`
-- `examples/control-compatibility.example.json`
-- `examples/intervention-event.example.json`
-- `examples/verification-outcome.example.json`
 - `examples/sharing-settings.example.json`
 - `examples/consent-record.example.json`
+- `examples/consent-store.example.json`
 - `examples/rights-request.example.json`
 - `examples/shared-neighborhood-signal.example.json`
 - `examples/sharing-store.example.json`
@@ -74,20 +90,63 @@ Machine-readable starter artifacts now live in:
 - `examples/export-bundle.example.json`
 - `examples/retention-cleanup-report.example.json`
 
+## Baseline narrative docs
+
+Canonical baseline contract docs in this lane:
+
+- `node-observation-schema.md`
+- `node-registry-schema.md`
+- `parcel-context-schema.md`
+- `parcel-state-schema.md`
+- `public-context-schema.md`
+- `evidence-mode-and-observability.md`
+- `evidence-summary-schema.md`
+- `explanation-payload-schema.md`
+- `sharing-settings-schema.md`
+- `consent-record-schema.md`
+- `rights-request-schema.md`
+- `consent-store-schema.md`
+- `sharing-store-schema.md`
+- `operator-access-event-schema.md`
+- `export-bundle-schema.md`
+- `retention-cleanup-report-schema.md`
+- `shared-neighborhood-signal-schema.md`
+
+Bridge-stage artifacts for house state, intervention, and verification belong in
+`../v1.5/` and should not be treated as part of the frozen `v0.1` default
+contract lane.
+
+If compatibility copies of those artifacts remain in `v0.1/` paths during
+migration, they are explicitly non-baseline and should not gate `v0.1`
+acceptance checks.
+
+Draft controls-compatibility artifacts should be treated as forward-lane
+material staged primarily for `v2.5`, even if compatibility files temporarily
+exist in baseline paths for transition reasons.
+
+The current parcel-first baseline now also includes:
+
+- auditable parcel priors in `parcel-context`
+- structured divergence records in `parcel-state`
+- public-only foil outputs and contrastive explanations in `parcel-state`
+
 ## Parallel lane rule
 
-Use the root paths when you mean the accepted `v0.1` baseline.
+Use the `v0.1/` paths when you mean the accepted `v0.1` baseline.
 
-Use `v1.0/` when you need future-lane notes, schema deltas, or example deltas
-that must remain separate from the frozen default contract set.
+Use `v1.0/` when you need broader target-lane notes, schema deltas, or example
+deltas that must remain separate from the frozen default contract set.
+
+Use `v1.5/` when the delta is specific to the bridge from hazard description
+into house-state, action, and measured outcome reasoning.
 
 ## Deployment-maturity companion schemas
 
 Draft deployment-maturity companion docs live under `artifacts/contracts-bundle/`:
 
-- `../artifacts/contracts-bundle/node-health-schema.md`
-- `../artifacts/contracts-bundle/deployment-metadata-schema.md`
-- `../artifacts/contracts-bundle/device-event-schema.md`
+- `../../artifacts/contracts-bundle/node-health-schema.md`
+- `../../artifacts/contracts-bundle/deployment-metadata-schema.md`
+- `../../artifacts/contracts-bundle/device-event-schema.md`
 
 ## Related workstreams
 
@@ -99,12 +158,3 @@ Draft deployment-maturity companion docs live under `artifacts/contracts-bundle/
 ## Next docs to add
 
 - provenance summary model
-- sharing settings model
-- consent record model
-- rights request model
-- shared neighborhood signal model
-- sharing store model
-- operator access event model
-- rights request store model
-- export bundle model
-- retention cleanup report model

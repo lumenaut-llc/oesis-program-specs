@@ -50,3 +50,9 @@ Before promoting a new pre-`1.0` version such as `v0.2`, require:
 
 If those conditions are not met, keep the work inside the current accepted lane
 and track it through milestones and status posture.
+
+## Related docs
+
+- `../system/version-and-promotion-matrix.md` — how accepted slices relate to capability stages and deployment maturity
+- `../system/node-taxonomy.md` — hardware and v1.5 bridge surfaces referenced by widening slices
+- `../system/integrated-parcel-system-spec.md` — tiered parcel kit design

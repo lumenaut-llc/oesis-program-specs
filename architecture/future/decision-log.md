@@ -1,21 +1,7 @@
-# Decision Log v1.0
+# Redirect
 
-## Purpose
+This legacy path now maps to:
 
-Record architecture decisions as the debated target architecture becomes more
-concrete.
+- canonical body: `../v1.0/decision-log.md`
 
-## Status
-
-Debate draft.
-
-## Entry template
-
-- Decision:
-- Date:
-- Status:
-- Why:
-- Affected versions:
-- Affected subsystem docs:
-- Affected contracts:
-- Affected governance or policy docs:
+Do not author new content in `architecture/future/`.

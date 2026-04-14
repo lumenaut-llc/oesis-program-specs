@@ -1,5 +1,15 @@
 # Phase Roadmap
 
+## Lane
+
+This document is the `system/` lane version of this topic.
+
+Use it for cross-version stage framing, program execution sequencing, and the
+relationship between capability stages and deployment maturity.
+
+If you need the debated target-lane roadmap wording, use
+`../v1.0/phase-roadmap.md`.
+
 ## Purpose
 
 Translate the long-term vision into staged execution from the current parcel-sensing baseline to a more serious parcel-first adaptation system.
@@ -26,6 +36,11 @@ Translate the long-term vision into staged execution from the current parcel-sen
 Use `architecture-gaps-by-stage.md` as the companion document for deciding which
 missing operational surfaces belong in capability stages and deployment maturity,
 without confusing those axes with public release labels such as `v0.1`.
+
+For **promotion discipline** (current truth vs next promotion vs later stages) and the **node taxonomy**, use:
+
+- `version-and-promotion-matrix.md`
+- `node-taxonomy.md`
 
 ## Deployment maturity overlay
 
@@ -82,12 +97,18 @@ Establish a credible parcel-first sensing and inference product that is useful w
 
 Add the minimum new data needed so the platform can evolve from parcel sensing into parcel adaptation without pretending that the adaptation engine already exists.
 
+### Core rule
+
+Collect the minimum data needed to model the relationship between outdoor hazards, house operating state, available interventions, and resulting outcomes.
+
 ### Key additions
 
-- house-state data such as indoor PM2.5, indoor temperature/RH, HVAC mode, fan state, recirculation/fresh-air state, purifier state, and backup-power state
-- building and site metadata such as orientation, exposure, shading, low points, drainage paths, vent locations, HVAC type, filter path, filter size, and higher-MERV capability
-- intervention and response records such as action logs, outcome logs, and before/after response windows
-- minimal controllability records describing what can be influenced, through which interface class, and whether control is local, cloud-only, or unknown
+- `indoor-response-node` for indoor PM2.5, indoor temperature, and indoor RH
+- `power-outage-node` for mains status and backup-power state
+- `equipment-state-adapter` for HVAC mode, fan state, recirculation/fresh-air state, purifier state, window or shade state where relevant, and sump/drain equipment state where relevant
+- building and site metadata such as orientation, roof type or color, shading, tree canopy, impervious area, low points, drainage paths, vent locations, filter path, filter size, and higher-MERV support
+- intervention and response records such as `action-log`, `outcome-log`, and before/after response windows
+- **read-side** equipment-state and coarse capability hints (what exists / what is observed), without requiring a full **controls-compatibility inventory** — that inventory (interface classes, integration tiers, policy versioning) is primarily **Stage D / `v2.5`**
 
 ### Design rule
 
@@ -97,6 +118,27 @@ Store the new `v1.5` data in separate support objects rather than overloading th
 ### Core success test
 
 Can the platform begin measuring response curves such as outdoor PM versus indoor PM, outdoor heat versus indoor heat response, rainfall versus low-point/access degradation, and action timestamp versus improvement?
+
+### What this stage proves
+
+This stage proves that the product can model response, not just exposure.
+
+It should start to answer:
+
+- how outdoor PM translates to indoor PM in this house
+- how outdoor heat translates to indoor heat burden in this house
+- what happens when HVAC switches to recirculate
+- what happens when a purifier runs
+- what happens to usability and access when water depth rises at a low point
+- whether a given action actually helped
+
+### Exit criteria
+
+The minimum bar is one honest closed-loop chain of:
+
+`hazard -> house state -> action -> measured outcome`
+
+with evidence-quality limits carried into the outcome interpretation and without implying that all controls are automated.
 
 ## Stage C — v2 bounded adaptation guidance
 

@@ -8,6 +8,10 @@
 - surface health telemetry and read failures without hiding them
 - stay simple enough to port later into `mast-lite`
 
+This firmware should stay evidence-oriented. It should not attempt to encode
+parcel-state decisions, intervention advice, or verification logic in the node
+itself.
+
 ## Sampling cadence
 
 - default bench cadence: every 15 seconds
@@ -97,3 +101,11 @@ The first firmware scaffold for this contract lives in `firmware/bench_air_node_
 - lightweight anomaly flags for rapid smoke or heat changes
 - BLE or captive-portal provisioning
 - signed packets if node identity assurance becomes important
+
+Later `v1.5` bridge additions should generally appear as new packet families or
+support objects rather than overloading this baseline firmware with:
+
+- indoor PM2.5 response sensing
+- household equipment-state
+- action logging
+- outcome verification

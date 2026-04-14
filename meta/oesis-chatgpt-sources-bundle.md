@@ -9,18 +9,18 @@
 ## How to use this file
 
 - **Canonical naming:** Open Environmental Sensing and Inference System (**OESIS**) is the system name; **Resilient Home Intelligence (RHI)** is a legacy compatibility name. Some older starter text still says "RHI" first.
-- **Authority order:** `architecture/current/` (frozen v0.1) and `release/v.0.1/implementation-status-matrix.md` override aspirational roadmap text when the question is "what exists today."
+- **Authority order:** `architecture/current/` (frozen v0.1) and `release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`) override aspirational roadmap text when the question is "what exists today."
 - **Terminology:** This bundle uses **dwelling** / **dwelling-associated** / **dwelling-scale** for physical scope; **parcel operator** for agency, rights, and stewardship; **participant-contributed** for parcel-linked data from people; contract enums **`dwelling_node`** and **`dwelling_safe`** for provenance visibility in examples and schemas.
 - **Version vocabulary:** **Open-release / packet `v1.0`** (`release/v1.0/`) is not the same as **pre-1.0 reference slices** (`v0.1`, `v0.2`, … in `architecture/current/`), **product roadmap stages** (`current v1` through `v4` in starter/path-forward), or **`deployment maturity v1.0` / `v2.0`** (hardware/ops in `architecture/system/`). See `integrated-parcel-system-spec.md` and `deployment-maturity-ladder.md` in this bundle.
 - **Do not over-claim:** Treat a capability as shipped only if the implementation matrix marks it `implemented` (or you have separate runtime evidence).
 - **Public site stack erratum:** Several program-specs files still say the sibling public site is **Astro**. The **`oesis-public-site`** repo has migrated to **Next.js 15** (see that repo's `NEXTJS-MIGRATION.md`). Publication allowlists still live under `src/data/publicationPolicy.ts` and generated `src/generated/publicContentBundle.ts`.
-- **Cross-reference note:** `architecture/current/README.md` aligns primary implementation status with `release/v.0.1/implementation-status-matrix.md` (older snapshots in this bundle may still mention a dated release folder).
+- **Cross-reference note:** `architecture/current/README.md` aligns primary implementation status with `release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`; older snapshots in this bundle may still mention a dated release folder).
 
 ## Bundled files (in order)
 
 1. `README.md`
 2. `NOTICE.md`
-3. `program/README.md`
+3. `program/v0.1/README.md`
 4. `shared/glossary/resilient-home-intelligence.md`
 5. `release/v1.0/README.md`
 6. `release/v1.0/NOTICE.md`
@@ -32,8 +32,8 @@
 12. `release/v1.0/contributor-and-review-guide.md`
 13. `release/v1.0/open-release-v1-audit-checklist.md`
 14. `LICENSES.md`
-15. `release/v.0.1/implementation-status-matrix.md`
-16. `contracts/README.md`
+15. `release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
+16. `contracts/v0.1/README.md`
 17. `contracts/node-registry-schema.md`
 18. `contracts/node-observation-schema.md`
 19. `contracts/parcel-context-schema.md`
@@ -56,11 +56,11 @@
 36. `architecture/system/phase-roadmap.md`
 37. `architecture/system/architecture-gaps-by-stage.md`
 38. `architecture/decisions/debate-map.md`
-39. `architecture/future/README.md`
-40. `architecture/future/goals-and-deltas.md`
-41. `architecture/future/proposed-architecture.md`
-42. `architecture/future/open-questions.md`
-43. `architecture/future/decision-log.md`
+39. `architecture/v1.0/README.md`
+40. `architecture/v1.0/goals-and-deltas.md`
+41. `architecture/v1.0/proposed-architecture.md`
+42. `architecture/v1.0/open-questions.md`
+43. `architecture/v1.0/decision-log.md`
 
 ---
 
@@ -126,8 +126,8 @@ with migration pointers only.
 ## Repository map
 
 - `program/` — program overview, notice, and index
-- `architecture/` — canonical architecture home, including frozen `current/` (`v0.1`), debated `future/` (`v1.0`), and system narratives
-- `contracts/` — frozen `v0.1` contract docs plus additive `v1.0/` schema/example deltas
+- `architecture/` — canonical architecture home, including frozen `current/` (`v0.1`), explicit version lanes such as `v1.0/` and `v1.5/`, redirect-only `future/`, and system narratives
+- `contracts/` — frozen `v0.1` contract docs plus additive `v1.0/` and `v1.5/` lanes
 - `release/` — release packet materials, publication controls, and launch collateral
 - `hardware/` — physical sensor nodes and installation systems
 - `software/` — subsystem docs, wrappers, and operator guides
@@ -162,21 +162,21 @@ The canonical execution plan lives in `meta/repo-split-plan.md`.
 Use these repo surfaces as the default architecture-and-contract entrypoints:
 
 - `architecture/current/` — frozen `v0.1` current truth
-- `architecture/future/` — debated `v1.0` target lane
-- `contracts/examples/` and `contracts/schemas/` — frozen `v0.1` default contract surface
+- `architecture/v1.0/` — debated `v1.0` target lane
+- `contracts/v0.1/examples/` and `contracts/v0.1/schemas/` — frozen `v0.1` default contract surface
 - `contracts/v1.0/` — additive `v1.0` contract deltas and future-lane notes
 
 The older `technical-architecture/` tree remains as a transitional pointer, but
-contributors should treat `architecture/current/` and `architecture/future/` as
+contributors should treat `architecture/current/` and `architecture/v1.0/` as
 the canonical current-vs-future split.
 
 ## Start here
 
 1. Read `NOTICE.md`
-2. Read `program/README.md`
+2. Read `program/v0.1/README.md`
 3. Read `release/v1.0/open-source-v1-summary.md`
 4. Read `architecture/README.md`
-5. Read `architecture/current/README.md` for the frozen `v0.1` lane or `architecture/future/README.md` for the debated `v1.0` lane
+5. Read `architecture/current/README.md` for the frozen `v0.1` lane or `architecture/v1.0/README.md` for the debated `v1.0` lane
 6. Read `meta/repo-split-plan.md` if you are working on runtime/site extraction or bundle boundaries
 7. Use `shared/templates/` when starting a new subsystem or document
 
@@ -230,7 +230,7 @@ Questions about final licensing, patent grants, trademark permissions, or datase
 
 ---
 
-## File: program/README.md
+## File: program/v0.1/README.md
 
 # Open Environmental Sensing and Inference System
 
@@ -720,7 +720,7 @@ See:
 
 - `../../README.md`
 - `../../NOTICE.md`
-- `../../program/README.md`
+- `../../program/v0.1/README.md`
 - `../../legal/privacy/data-ownership.md`
 - `../../legal/privacy/privacy.md`
 - `../../legal/privacy/claims-and-safety-language.md`
@@ -836,7 +836,7 @@ This matrix is a release guide, not legal advice.
 | Firmware | `hardware/*/firmware/` | Public when intentionally included in the release surface | `AGPLv3-or-later` unless final review selects a narrower copyleft software license | Treat firmware like software for release-scope review and provenance checks. |
 | Hardware design files | node READMEs, build guides, wiring, calibration, firmware notes, released CAD/docs | Public when intentionally included in the release surface | `CERN-OHL-S v2` | Hardware design packages are open only to the extent the released files and notices make clear. |
 | Documentation and governance text | `README.md`, `program/`, `architecture/`, `release/`, `legal/` | Public when intentionally included in the release surface | `CC BY-SA 4.0` | Public docs should point to canonical policy and scope documents rather than improvised summaries. |
-| Synthetic examples and test fixtures | `contracts/examples/`, examples in `oesis-runtime`, synthetic fixtures | Public when clearly synthetic and rights-clean | Dataset-specific approved terms such as `CDLA Permissive 2.0`, `CC BY 4.0`, or another approved release term | Keep synthetic examples clearly marked so they are not confused with real parcel-linked data. |
+| Synthetic examples and test fixtures | `contracts/v0.1/examples/`, examples in `oesis-runtime`, synthetic fixtures | Public when clearly synthetic and rights-clean | Dataset-specific approved terms such as `CDLA Permissive 2.0`, `CC BY 4.0`, or another approved release term | Keep synthetic examples clearly marked so they are not confused with real parcel-linked data. |
 | Project-controlled v1 dataset and approved public snapshots | intentionally designated dataset bundles | Public only when explicitly designated and licensed | Dataset-specific terms such as `CDLA-Sharing-1.0` | A dataset becomes public because it is intentionally released under explicit terms, not because the rest of the project is open. |
 | Redistributed public reference datasets | upstream weather, smoke, map, or hazard sources | Public only under upstream source terms and pass-through notices | Upstream source terms | Do not relabel third-party data as project-owned open data. |
 | Future participant-contributed parcel-linked datasets | future parcel operator or pilot participant data | Not public by default | Not covered by a blanket repository-wide open-data license | Privacy and ownership controls override any broad reading of \"open source.\" |
@@ -1012,7 +1012,7 @@ V1 is ready only if an outside reader can understand:
 
 - [ ] Root `README.md` points to the current v1 public-release summary.
 - [ ] Root `NOTICE.md` points to the current asset-class licensing and release-boundary docs.
-- [ ] Program-level `program/README.md` and `program/NOTICE.md` point to the same canonical v1 summary.
+- [ ] Program-level `program/v0.1/README.md` and `program/NOTICE.md` point to the same canonical v1 summary.
 - [ ] No top-level README or notice implies one blanket license governs every file.
 
 ## Licensing checks
@@ -1260,7 +1260,7 @@ Before publishing, sending, or presenting anything:
 
 ---
 
-## File: contracts/README.md
+## File: contracts/v0.1/README.md
 
 # Contracts
 
@@ -2802,7 +2802,7 @@ Use this version when you need the architecture that matches the present
 implementation boundary rather than future proposals.
 
 This directory is the frozen `v0.1` lane. New future-looking architecture work
-should go to `../future/` instead of mutating these current-truth files.
+should go to `../v1.0/` instead of mutating these current-truth files.
 
 Pre-`1.0` growth should normally be tracked through milestones and status
 classification rather than a new version number for every added node or
@@ -2839,7 +2839,7 @@ element.
 
 - `../../architecture/system/technical-philosophy-and-architecture.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
-- `../../software/README.md`
+- `../../software/v0.1/README.md`
 - `../../release/v.0.1/implementation-status-matrix.md`
 
 ## Contributor rule
@@ -2848,7 +2848,7 @@ If a change describes what is implemented, accepted, or currently runnable, it
 belongs here.
 
 If a change describes a target architecture, future boundary, or debated
-expansion, it belongs in `../future/`.
+expansion, it belongs in `../v1.0/`.
 
 If a change is incremental but still compatible with the current accepted slice,
 prefer updating milestone and implementation-posture docs before proposing a new
@@ -2979,7 +2979,7 @@ flowchart LR
   architecture prose** for ingest, inference, parcel platform, and shared map;
   runnable entrypoints are invoked from the runtime repo (see
   `v0.1-runtime-modules.md` and `v0.1-acceptance-criteria.md`).
-- **`../../software/README.md`** and **`../../software/operator-quickstart.md`**
+- **`../../software/v0.1/README.md`** and **`../../software/operator-quickstart.md`**
   remain the main operator-facing execution guides (they proxy or reference
   `make oesis-*` in the runtime checkout).
 
@@ -2997,7 +2997,7 @@ flowchart LR
 
 - `../../software/ingest-service/architecture.md`
 - `../../software/ingest-service/README.md`
-- `../../contracts/README.md`
+- `../../contracts/v0.1/README.md`
 
 Entry surfaces:
 
@@ -3010,7 +3010,7 @@ See also `v0.1-runtime-modules.md` and `v0.1-acceptance-criteria.md`.
 
 ### Canonical observations and context
 
-- `../../contracts/README.md`
+- `../../contracts/v0.1/README.md`
 - `../../contracts/public-context-schema.md`
 - `../../contracts/parcel-context-schema.md`
 - `../../contracts/node-registry-schema.md`
@@ -3651,8 +3651,8 @@ Current `v0.1` use:
 - this is one of the strongest current boundaries in the stack
 
 Main sources:
-- `../../contracts/README.md`
-- `../../contracts/examples/normalized-observation.example.json`
+- `../../contracts/v0.1/README.md`
+- `../../contracts/v0.1/examples/normalized-observation.example.json`
 - `../../software/ingest-service/architecture.md`
 
 ### 5. Parcel context
@@ -3775,7 +3775,7 @@ Current `v0.1` use:
 - important product surfaces are still partial or docs-only
 
 Main sources:
-- `../../contracts/schemas/`
+- `../../contracts/v0.1/schemas/`
 - `../../release/v.0.1/implementation-status-matrix.md`
 - `../../software/parcel-platform/README.md`
 
@@ -5214,11 +5214,11 @@ Use it alongside:
 
 - `../current/architecture-object-map.md`
 - `../current/minimum-functioning-v0.1.md`
-- `../future/proposed-architecture.md`
-- `../future/open-questions.md`
+- `../v1.0/proposed-architecture.md`
+- `../v1.0/open-questions.md`
 
 Use `current/` files for frozen `v0.1` truth.
-Use `future/` files for debated `v1.0` target architecture.
+Use `v1.0/` files for debated `v1.0` target architecture.
 Use this file for the tensions that influence both.
 
 ## Debate 1: parcel-first vs field-first
@@ -5952,7 +5952,7 @@ next:
 
 ---
 
-## File: architecture/future/README.md
+## File: architecture/v1.0/README.md
 
 # Technical Architecture v1.0
 
@@ -6002,7 +6002,7 @@ contract/runtime direction, keep it here.
 
 ---
 
-## File: architecture/future/goals-and-deltas.md
+## File: architecture/v1.0/goals-and-deltas.md
 
 # Goals And Deltas v1.0
 
@@ -6034,7 +6034,7 @@ Debate draft.
 
 ---
 
-## File: architecture/future/proposed-architecture.md
+## File: architecture/v1.0/proposed-architecture.md
 
 # Proposed Architecture v1.0
 
@@ -6131,7 +6131,7 @@ Relative to `v0.1`, the target architecture implies:
 
 ---
 
-## File: architecture/future/open-questions.md
+## File: architecture/v1.0/open-questions.md
 
 # Open Questions v1.0
 
@@ -6165,7 +6165,7 @@ Debate draft.
 
 ---
 
-## File: architecture/future/decision-log.md
+## File: architecture/v1.0/decision-log.md
 
 # Decision Log v1.0
 

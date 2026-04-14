@@ -4,6 +4,13 @@
 
 Provide a minimal ESP32 bring-up sketch set for the weather-pm-mast so the PM-first outdoor node can be validated before full wind and rain mechanics are added.
 
+## Staging role
+
+This firmware is for the richer second-wave outdoor lane, not the first-kit
+baseline. Use it after `mast-lite` is already stable and there is a real reason
+to add PM-driven outdoor smoke evidence and more detailed exposed weather
+mechanics.
+
 ## Current contents
 
 - `weather_pm_mast_i2c_scanner/weather_pm_mast_i2c_scanner.ino`

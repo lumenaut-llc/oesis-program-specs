@@ -4,6 +4,21 @@
 
 This runbook covers the first flood-node bring-up from bench wiring to a validated local packet.
 
+## What this runbook proves
+
+This runbook proves the low-point flood evidence lane only:
+
+- the node can emit repeatable low-point distance / depth packets
+- the local ingest path can accept that packet family
+- the parcel can gain point-specific runoff evidence where it is actually needed
+
+It does **not** prove:
+
+- parcel-wide flood truth
+- route or chokepoint status
+- sump / pump state
+- intervention effectiveness after flood actions
+
 ## Step 1: Bench wire the node
 
 - power the ESP32 over USB-C
@@ -38,16 +53,16 @@ Use the helper in `firmware/tools/capture_serial.sh` to save a `serial.log`.
 
 ## Step 5: Extract the newest packet
 
-From `software/ingest-service`:
+From `oesis-runtime` repo root:
 
 ```bash
-python3 scripts/extract_latest_packet.py /path/to/serial.log --output packet.json
+python3 -m oesis.ingest.extract_latest_packet /path/to/serial.log --output packet.json
 ```
 
 ## Step 6: Validate the packet locally
 
 ```bash
-python3 scripts/ingest_packet.py packet.json
+python3 -m oesis.ingest.ingest_packet packet.json
 ```
 
 You should see a normalized observation printed to stdout.

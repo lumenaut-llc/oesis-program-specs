@@ -10,6 +10,10 @@ The first flood-node firmware should:
 - emit one JSON packet per line for local ingest testing
 - report health and calibration state clearly
 
+It should stay narrowly focused on low-point runoff evidence. It should not try
+to infer parcel-wide flood truth, route status, or equipment-state from the node
+itself.
+
 ## Sampling cadence
 
 - default sample interval: every `5` seconds

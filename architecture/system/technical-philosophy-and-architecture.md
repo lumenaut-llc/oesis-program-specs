@@ -1,5 +1,15 @@
 # Technical Philosophy And Architecture
 
+## Lane
+
+This document is the `system/` lane version of this topic.
+
+Use it for the broader technical posture and architecture doctrine that spans
+versioned lanes.
+
+If you need the frozen current-truth philosophy for the accepted `v0.1`
+reference slice, use `../current/technical-philosophy.md`.
+
 ## Purpose
 
 Define the canonical technical philosophy for Open Environmental Sensing and
@@ -15,7 +25,7 @@ The current versioned architecture canon now lives under:
 
 - `../../architecture/README.md`
 - `../../architecture/current/technical-philosophy.md`
-- `../../architecture/future/README.md`
+- `../../architecture/v1.0/README.md`
 
 ## Technical philosophy
 
@@ -218,8 +228,8 @@ logic.
 
 For the current MVP reference stack, sibling repo `../oesis-runtime` is the
 canonical Python implementation tree.
-Docs-facing script entrypoints may remain as compatibility wrappers, but new
-implementation work should land in the canonical tree first.
+Implementation work and executable entrypoints should remain in the canonical
+runtime tree.
 
 ### One canonical data contract per boundary
 
@@ -260,8 +270,6 @@ The current reference stack follows this technical path:
 Current implementation posture:
 
 - sibling repo `../oesis-runtime` is the canonical Python implementation tree
-- `software/*/scripts/*.py` remains a compatibility layer for docs and operator
-  flows
 - `Makefile` provides stable human-facing task entrypoints
 - the public preview site is a controlled presentation surface, not the owner of
   canonical technical truth

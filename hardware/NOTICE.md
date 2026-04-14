@@ -11,6 +11,10 @@ The current intended direction for hardware design files is:
 
 - `CERN-OHL-S v2`
 
+The full license text is in `LICENSE` in this directory.
+
+Firmware source under `hardware/` (for example in `*/firmware/`) follows the program’s **software** license direction (**GNU AGPL v3 or later**); see `../software/LICENSE` and `../LICENSES.md`. The **CERN-OHL-S-2.0** text in `LICENSE` here governs **hardware design** materials (documentation of builds, wiring, mechanical design intent, and related design artifacts) in this subtree unless a more specific file notice says otherwise.
+
 ## Release boundary
 
 During the current release period:

@@ -6,6 +6,13 @@ Turn the parcel-kit BOM into a practical buying and receiving checklist for the 
 
 This document is optimized for a strong timeline and a first integrated parcel kit that a non-author can assemble with minimal guesswork.
 
+## Implementation status (tiers vs promotions)
+
+- **Tier 1** aligns with **current truth** / program-phase **`v0.1`**: fastest indoor proof with `bench-air-node`.
+- **Tier 2** is the **next promotion** target (**program-phase `v0.2`**): `bench-air-node` + `mast-lite`. Treat Tier 2 as **promoted** only when `../../architecture/current/pre-1.0-version-progression.md` criteria and field-hardening evidence are satisfied — not merely when parts are ordered.
+
+See `../../architecture/system/version-and-promotion-matrix.md` and `../../architecture/system/node-taxonomy.md`.
+
 ## Scope
 
 This checklist covers:
@@ -170,7 +177,7 @@ Primary software and system references:
 
 - `../../architecture/current/README.md`
 - `../data-model/node-registry-schema.md`
-- `../system-overview/integrated-parcel-system-spec.md`
+- `../../architecture/system/integrated-parcel-system-spec.md`
 - `../../../../Makefile`
 
 ## Legal and release handoff notes
@@ -180,9 +187,23 @@ Procurement and build docs are not automatically public-preview-safe.
 Before sharing photos, diagrams, or detailed purchase bundles outside the core implementation group, check:
 
 - `../../legal/public-preview-scope.md`
-- `../../release/v.0.1/reviewer-packet-index.md`
+- `../../release/v.0.1/reviewer-packet-index.md` (release label `v0.1`, filesystem path `v.0.1/`)
 
 Do not assume close-up internals, wiring layouts, or integrated-kit details belong on the public preview site.
+
+## Optional node families (when you deliberately build them)
+
+Tier 1 and Tier 2 above stay the default first purchase. When a parcel **needs** flood, richer outdoor PM/weather, or thermal R&D anyway, use these together:
+
+| Node | BOM section | Build and run docs |
+| --- | --- | --- |
+| `flood-node` | `integrated-parcel-kit-bom.md` — “Optional hazard module: Flood” | `../flood-node/README.md`, `../flood-node/build-guide.md`, `../flood-node/operator-runbook.md` |
+| `weather-pm-mast` | `integrated-parcel-kit-bom.md` — “Tier 3: Rich outdoor upgrade” | `../weather-pm-mast/README.md`, `../weather-pm-mast/build-guide.md`, `../weather-pm-mast/operator-runbook.md` |
+| `thermal-pod` | `integrated-parcel-kit-bom.md` — “Separate R&D lane: Thermal” | `../thermal-pod/README.md`, `../thermal-pod/build-guide.md`, `../thermal-pod/operator-runbook.md` |
+
+Also apply **Shared field-hardening purchase list** and the **Conditional add-ons by lane** rows in this file before calling any of these deployed.
+
+**Software honesty:** canonical reference ingest for `flood.low_point.snapshot`, `air.pm_weather.snapshot`, and `thermal.scene.snapshot` may lag the hardware docs. Treat serial JSON bring-up and contract validation as the first gate; confirm the sibling `oesis-runtime` path before assuming end-to-end parcel inference.
 
 ## Do not buy these by default yet
 

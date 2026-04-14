@@ -20,6 +20,9 @@ At the repository level:
 
 ## Start with these files
 
+- `LICENSE` (default terms for most documentation and specifications: CC BY-SA 4.0)
+- `software/LICENSE` (GNU AGPL v3 for software in that subtree, including scripts)
+- `hardware/LICENSE` (CERN-OHL-S-2.0 for hardware design materials in that subtree)
 - `LICENSES.md`
 - `NOTICE.md`
 - `legal/ip.md`

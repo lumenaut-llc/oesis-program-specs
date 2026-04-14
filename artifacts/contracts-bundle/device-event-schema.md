@@ -59,4 +59,4 @@ The current docs talk about device identity, install state, and health, but they
 
 - `node-health-schema.md`
 - `node-registry-schema.md`
-- `../system-overview/deployment-maturity-ladder.md`
+- `../../architecture/system/deployment-maturity-ladder.md`

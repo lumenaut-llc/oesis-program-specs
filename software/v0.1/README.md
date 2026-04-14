@@ -4,6 +4,18 @@ The software stack turns private observations, shared signals, and external cont
 
 Read `NOTICE.md` before treating this subtree as a complete released software package.
 
+## Lane contract
+
+- **Baseline lane**: root subsystem docs in `../` (`ingest-service/`,
+  `inference-engine/`, `parcel-platform/`, `shared-map/`) describe the accepted
+  current software posture.
+- **Lane index role**: this `v0.1/` directory provides baseline entrypoints and
+  compatibility mapping to those canonical baseline docs.
+- **Additive lanes**: `v1.0/` and `v1.5/` carry explicit forward-lane software
+  deltas.
+- **Canonical implementation mapping**: runtime code truth stays in sibling
+  `../../oesis-runtime`; this subtree is documentation-only posture.
+
 ## Top-level concerns
 
 - permissions and ownership
@@ -25,15 +37,22 @@ Read `NOTICE.md` before treating this subtree as a complete released software pa
 
 ## Operator guide
 
-- `operator-quickstart.md`
+- `../operator-quickstart.md`
   Short repo-level guide for going from installed nodes to local packet validation, local APIs, and the preview site.
+
+## Baseline subsystem entrypoints
+
+- `../inference-engine/README.md`
+- `../ingest-service/README.md`
+- `../parcel-platform/README.md`
+- `../shared-map/README.md`
 
 ## Canonical Python layout
 
-- sibling repo `../oesis-runtime` is the canonical Python implementation tree for the current MVP services.
+- sibling repo `../../oesis-runtime` is the canonical Python implementation tree for the current MVP services.
 - `scripts/rhi_*.sh` remains as a legacy command compatibility layer during the migration.
-- `software/*/scripts/` stays in place as a compatibility layer for docs, runbooks, and existing operator commands.
-- New implementation work should land in `../oesis-runtime` first, then flow through the docs-facing script entrypoints.
+- runnable software entrypoints belong in `../../oesis-runtime` only.
+- new implementation work should land in `../../oesis-runtime` first and remain there.
 - From the `repo/` directory, prefer direct module execution for new runbooks and automation:
   - `python3 -m oesis.ingest.validate_examples`
   - `python3 -m oesis.parcel_platform.reference_pipeline`
@@ -46,10 +65,13 @@ Read `NOTICE.md` before treating this subtree as a complete released software pa
 
 New subsystems and major features should:
 
+- read `../../architecture/system/version-and-promotion-matrix.md` and `../../architecture/system/node-taxonomy.md` so **program-phase** slices, **capability stages** (`v1.5` vs `v2.5` for control compatibility), and **deployment maturity** are not conflated
 - identify the target `architecture/` version they align with
+- prefer explicit versioned documentation lanes such as `v1.0/` and `v1.5/`
+  when writing forward-looking software docs
 - declare their current status relative to that version:
   `implemented`, `partial`, `docs-only`, or `planned`
 - update subsystem `architecture.md` when local design boundaries change
 - update contracts, schemas, and examples when a boundary changes
-- keep implementation truth in `../oesis-runtime` rather than creating competing
-  implementations in docs-facing wrappers
+- keep implementation truth in `../../oesis-runtime` rather than creating competing
+  implementations in this docs repository

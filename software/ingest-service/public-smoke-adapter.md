@@ -17,10 +17,10 @@ Open Environmental Sensing and Inference System
 - `README.md`
 - `architecture.md`
 - `interfaces.md`
-- `scripts/normalize_public_smoke_context.py`
+- `python3 -m oesis.ingest.normalize_public_smoke_context` (in `oesis-runtime`)
 - `public-source-metadata-standard.md`
 - `../../contracts/public-context-schema.md`
-- `../../contracts/examples/raw-public-smoke.example.json`
+- `../../contracts/v0.1/examples/raw-public-smoke.example.json`
 - `../../legal/licenses/demo-regional-smoke-v1-notice.md`
 
 ## Content

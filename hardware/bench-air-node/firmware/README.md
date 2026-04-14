@@ -4,6 +4,19 @@
 
 Provide a minimal ESP32 bring-up sketch that emits the agreed `oesis.bench-air.v1` packet shape over serial before sensor-library integration and network transport are added.
 
+## Staging role
+
+This firmware is the smallest current-truth bring-up path for the parcel-sensing
+baseline. It is meant to prove the indoor evidence lineage for **program-phase
+`v0.1`**.
+
+It is not yet the firmware for the later bridge surfaces such as:
+
+- indoor PM2.5 response sensing
+- power / outage state
+- equipment-state capture
+- action or verification records
+
 ## Current contents
 
 - `bench_air_node_i2c_scanner/bench_air_node_i2c_scanner.ino`

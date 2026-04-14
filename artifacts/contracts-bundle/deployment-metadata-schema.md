@@ -73,4 +73,4 @@ That keeps the reference pipeline honest, but it leaves many field-operations fa
 
 - `parcel-context-schema.md`
 - `node-registry-schema.md`
-- `../build-guides/parcel-installation-checklist.md`
+- `../../hardware/parcel-kit/parcel-installation-checklist.md`

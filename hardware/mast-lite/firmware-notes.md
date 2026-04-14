@@ -8,6 +8,10 @@
 - preserve continuity with the bench-air ingest contract
 - surface health telemetry and read failures without hiding them
 
+This firmware should remain the simple outdoor reference lane. It should not try
+to absorb richer PM mechanics from `weather-pm-mast` or later `v1.5` bridge
+objects such as indoor-response sensing, equipment-state, or verification.
+
 ## Sampling cadence
 
 - default sheltered outdoor cadence: every 15 seconds
@@ -84,3 +88,7 @@ The exact line-oriented payload target is documented in `serial-json-contract.md
 - local ring buffer for intermittent outdoor connectivity
 - enclosure temperature compensation notes if needed
 - eventual promotion into weather-pm-mast packet extensions
+
+The later smoke closed loop should build around this firmware as the outdoor
+condition trigger, then add separate indoor-response, equipment-state, action,
+and verification surfaces rather than overloading the `mast-lite` packet.

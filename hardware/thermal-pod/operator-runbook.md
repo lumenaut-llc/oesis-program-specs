@@ -4,6 +4,17 @@
 
 This runbook covers the first thermal-pod bring-up from Pi wiring to a validated derived-metrics packet.
 
+## What this runbook proves
+
+This runbook proves only the privacy-preserving derived thermal lane:
+
+- the pod can emit derived thermal metrics
+- the workflow can validate a derived-only packet
+- no raw frame needs to travel in the normal packet path
+
+It does **not** make this node part of the default parcel kit, and it does
+not by itself justify route, adaptation, or occupant-protection claims.
+
 ## Step 1: Prepare the Raspberry Pi
 
 - boot the Pi
@@ -49,10 +60,10 @@ python3 thermal_pod_serial_json.py --once > packet.json
 
 ## Step 6: Validate with local ingest tools
 
-From `software/ingest-service`:
+From `oesis-runtime` repo root:
 
 ```bash
-python3 scripts/ingest_packet.py /path/to/packet.json
+python3 -m oesis.ingest.ingest_packet /path/to/packet.json
 ```
 
 If the generic ingest path does not yet recognize this schema, keep the packet as a recorded example for the next contract pass.

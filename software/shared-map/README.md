@@ -4,6 +4,13 @@
 
 The neighborhood condition layer and parcel/cell visualization surface.
 
+## Stage placement
+
+This subsystem is intentionally **later** than the narrow parcel-sensing
+baseline. It should be treated as a staged shared-resilience surface that grows
+after the parcel-first evidence path is honest. It is not the center of the
+`v0.1` or `v0.2` product slice.
+
 ## Current responsibilities
 
 - define inputs
@@ -22,14 +29,16 @@ The neighborhood condition layer and parcel/cell visualization surface.
 
 ## Reference tools
 
-- `scripts/aggregate_shared_map.py`
-- `scripts/serve_shared_map_api.py`
+- `python3 -m oesis.shared_map.aggregate_shared_map`
+- `python3 -m oesis.shared_map.serve_shared_map_api`
 
 ## Implementation scaffold
 
-The `scripts/*.py` entrypoints are now thin compatibility wrappers around the
-canonical repo-root `oesis.shared_map` package. From `repo/`, prefer
+Executable shared-map entrypoints live in the sibling `oesis-runtime`
+repository. From that repo root, prefer
 `python3 -m oesis.shared_map.aggregate_shared_map` or
 `python3 -m oesis.shared_map.serve_shared_map_api` for new runbooks.
 
-`scripts/serve_shared_map_api.py` exposes both the parcel operator-safe map tile surface and an operator-facing inspection surface for validating threshold suppression against the configured sharing store.
+`python3 -m oesis.shared_map.serve_shared_map_api` exposes both the parcel
+operator-safe map tile surface and an operator-facing inspection surface for
+validating threshold suppression against the configured sharing store.

@@ -65,6 +65,26 @@ The contract is intentionally modest:
 - `rise_rate_cm_per_hr`: change in derived depth over time
 - `calibration_state`: `provisional` until field validation is complete
 
+## What this contract can and cannot mean
+
+This contract is intentionally low-point scoped.
+
+It can support:
+
+- depth at one documented low point
+- rise / recession behavior over time
+- parcel-specific runoff interpretation when installation geometry is trusted
+
+It should **not** be treated as:
+
+- parcel-wide flood truth from one sensor alone
+- route or community flooding evidence by itself
+- pump-state or action-verification evidence by itself
+
+Later bridge and route/community stages may combine this packet family with
+equipment-state, action logs, and route surfaces, but that is outside the first
+contract boundary.
+
 ## Health fields
 
 - `uptime_s`: seconds since boot

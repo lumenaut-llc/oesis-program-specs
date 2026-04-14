@@ -32,7 +32,7 @@ The opportunity is a **parcel-first, multi-hazard, private-by-default**
 intelligence layer between coarse public systems and consumer devices—**useful
 under partial adoption** and aligned with official systems rather than replacing
 them. Strong framing: a locally grounded **climate and disaster intelligence
-layer**. Full argument: `../../02-problem-opportunity-and-market-gap.md`.
+layer**. Full argument: `../../program/operating-packet/02-problem-opportunity-and-market-gap.md`.
 
 ## Version map
 
@@ -50,8 +50,8 @@ The product should not collapse these stages together in user-facing claims.
 **These labels are vision staging, not program-phase or runtime labels.** Executable
 phasing (`v0.1` narrow slice, `v1.0` fielded target, `v1.5` measurement-to-intervention
 bridge, optional runtime asset lanes, and marketing “v1.0”) lives in
-`../../program/README.md`, `../../00-version-labels-and-lanes.md`, and
-`../../09-phasing-v0.1-v1.0-v1.5.md`. Do not read `current v1` here as identical to
+`../../program/v0.1/README.md`, `../../program/operating-packet/00-version-labels-and-lanes.md`, and
+`../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`. Do not read `current v1` here as identical to
 program-phase `v1.0` or a public release name.
 
 Rough intuition only: vision **`current v1`** overlaps the **parcel-first truth**
@@ -200,7 +200,7 @@ The long-term network may be a **network-of-networks**, not one giant pooled mes
 - **Value-of-information** placement: add sensing where it most reduces uncertainty
   across **parcels, routes, or lifelines**—not only where no sensor exists.
 
-Expanded concepts: `../../06-network-of-networks-concepts.md`.
+Expanded concepts: `../../program/operating-packet/06-network-of-networks-concepts.md`.
 
 ## Product principles
 
@@ -238,7 +238,7 @@ The first priority is helping people adapt to disruption, degradation, and recov
 
 North star: build the best **evidence-to-impact** system, not merely the largest
 sensor count. Optimize **measurement accuracy**, **local recency**, **spatial
-relevance**, and **decision usefulness** together (`../../07-information-layer-and-functional-recovery.md`).
+relevance**, and **decision usefulness** together (`../../program/operating-packet/07-information-layer-and-functional-recovery.md`).
 
 **Evidence hierarchy:** direct local observation → nearby shared observation →
 external public context → modeled or inferred state → verified impact or outcome.
@@ -260,8 +260,8 @@ what **recovery path** looks plausible. **Social vulnerability** should inform
 **community** prioritization and planning layers, not drive private parcel inference
 directly.
 
-Hazard, functional, and response-state separation: `../../functional-state-and-response-model.md`,
-`../../05-revised-architecture-blueprint.md`. This section describes **target**
+Hazard, functional, and response-state separation: `../../program/operating-packet/functional-state-and-response-model.md`,
+`../../program/operating-packet/05-revised-architecture-blueprint.md`. This section describes **target**
 capability; frozen scope and claims remain in `../current/` and release materials.
 
 ## Use-case map

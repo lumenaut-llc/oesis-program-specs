@@ -4,6 +4,8 @@
 
 A scene-level sensing pod that uses a thermal array and publishes derived thermal metrics instead of raw frames.
 
+Taxonomy: **research- or privacy-gated** node — outside default pilot until contract and retention posture are stronger. See `../../architecture/system/node-taxonomy.md`.
+
 ## Why it matters
 
 This node is the project’s first step into area-based sensing rather than single-point measurements. It lets the project validate:
@@ -35,6 +37,19 @@ Even without the full neighborhood platform, this subsystem can provide:
 Default posture: separate R&D lane below a general `deployment maturity v1.0` claim.
 
 This node should not inherit the deployability label of the rest of the parcel kit just because it can emit derived metrics.
+
+## Software implementation status
+
+The hardware serial-JSON contract for this node (`serial-json-contract.md`) is
+architecturally defined, but the corresponding software observation family
+(`thermal.scene.snapshot`) is **not yet implemented** in the ingest path. The
+ingest service currently normalizes only `oesis.bench-air.v1` packets.
+Thermal-pod packets emitted by built hardware will be valid JSON but cannot be
+ingested or used for parcel-state inference until the thermal observation family
+is implemented. Additionally, privacy and retention posture must be resolved
+before this observation family enters the default pipeline.
+
+See `../../release/v.0.1/implementation-status-matrix.md` for current status.
 
 ## Inputs
 
@@ -104,6 +119,11 @@ Do not describe the thermal pod as field-ready until the repo documents stable p
 ## Open questions
 
 See `open-questions.md` for unresolved decisions on masking, retention, and what derived thermal fields are worth keeping.
+
+## Parcel kit integration
+
+- BOM and posture: `../parcel-kit/integrated-parcel-kit-bom.md` (Separate R&D lane: Thermal) and `../parcel-kit/parcel-kit-procurement-checklist.md` (optional node families).
+- Keep outside the default integrated pilot bundle until privacy, retention, and usefulness boundaries are closed.
 
 ## Key docs
 

@@ -28,11 +28,54 @@ Primary MVP contract:
 - `oesis.bench-air.v1`
   Defined in `contracts/node-observation-schema.md`
 
+Shared-lineage contract:
+- `oesis.bench-air.v1` from `mast-lite`
+  Same packet family with outdoor or sheltered install metadata. Treat
+  end-to-end use in the widened parcel kit as part of **program-phase `v0.2`**
+  promotion rather than proof of a separate current-truth contract by itself.
+
+Planned next bridge contracts:
+- indoor-response observation family
+  Future `v1.5` bridge input for indoor PM2.5, indoor temperature, and indoor
+  RH. This is a priority addition for response modeling, but not part of the
+  current implemented MVP contract set yet.
+  Minimum useful fields should include:
+  - `observed_at`
+  - `parcel_id` or parcel-resolvable `node_id`
+  - `pm25_ugm3`
+  - `temperature_c`
+  - `relative_humidity_pct`
+  - quality / health flags
+- power-state observation family
+  Future `v1.5` bridge input for mains up/down and backup-power posture.
+  Minimum useful fields should include:
+  - `observed_at`
+  - `mains_state`
+  - `backup_power_present`
+  - `backup_power_active`
+  - optional richer battery / generator posture later
+- equipment-state snapshot family
+  Future `v1.5` support input for HVAC mode, fan, recirculation, purifier,
+  window/shade, or pump state where available.
+  Minimum useful fields should include:
+  - `captured_at`
+  - `hvac_mode`
+  - `fan_state`
+  - `air_source_mode` or recirculation vs fresh-air state
+  - purifier / shade / pump state where applicable
+
+Planned next bridge support events:
+- action-log entry
+  Record what the house or household did, such as switching to recirculation,
+  starting a purifier, lowering shades, or activating backup power.
+- outcome / verification record
+  Record whether conditions improved afterward over a bounded response window.
+
 First external adapter contract:
 - raw public weather payload
-  Normalized by `scripts/normalize_public_weather_context.py` into the canonical public-context object defined in `contracts/public-context-schema.md`
+  Normalized by `python3 -m oesis.ingest.normalize_public_weather_context` into the canonical public-context object defined in `contracts/public-context-schema.md`
 - raw public smoke payload
-  Normalized by `scripts/normalize_public_smoke_context.py` into the canonical public-context object defined in `contracts/public-context-schema.md`
+  Normalized by `python3 -m oesis.ingest.normalize_public_smoke_context` into the canonical public-context object defined in `contracts/public-context-schema.md`
 
 Expected minimum request body:
 
@@ -105,6 +148,17 @@ First normalized public-context shape:
 ## Open questions
 
 - Should initial auth rely on shared API keys, signed packets, or a trusted private network boundary?
+
+  > **Recommended direction:** Private-network-only for v0.1 (serial extract or local HTTP). Shared-secret API key for v1.0 live deployment. Per-node tokens with rotation for v1.5+.
+
 - How long should raw packets be retained once normalized observations exist?
+
+  > **Recommended direction:** Retain raw packets for 90 days post-normalization for audit and debugging. Prune after 90 days unless a retention hold is in effect.
+
 - Should the ingest service enrich packets with parcel mapping immediately, or leave that join to downstream consumers?
+
+  > **Recommended direction:** Leave the parcel join to downstream consumers. Ingest should record node_id and let the parcel-platform or inference engine resolve the mapping. This keeps ingest stateless with respect to parcel topology.
+
 - What freshness threshold should cause a packet to be accepted but marked stale versus rejected outright?
+
+  > **Recommended direction:** Accept packets up to 24 hours old but flag any packet older than 15 minutes as stale in the normalized observation's health object. Never reject solely on age — late data is better than lost data for audit purposes.

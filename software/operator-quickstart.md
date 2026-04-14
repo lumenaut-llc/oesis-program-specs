@@ -22,11 +22,56 @@ The current reference software path fully supports:
 - example public weather and smoke context
 - parcel-state inference and parcel-view formatting
 
+**Staging note:** this quickstart is intentionally wider than the narrow **program-phase `v0.1`** current-truth slice because it also covers the **next-promotion** two-node kit (`bench-air-node` + `mast-lite`). Treat successful local use of both nodes as evidence toward **program-phase `v0.2`**, not as automatic proof that the slice is already promoted. See `../architecture/system/version-and-promotion-matrix.md`.
+
 The following node families remain planned extensions to the reference services:
 
+- `indoor-response-node`
+- `power-outage-node`
 - `flood-node`
 - `weather-pm-mast`
+- `freeze-node`
 - `thermal-pod`
+
+The following **non-node support surfaces** are part of the product taxonomy and
+the **`v1.5`** bridge, but are not yet the center of the current quickstart:
+
+- equipment-state capture
+- action logging
+- outcome / response verification
+- richer building-and-site metadata for response modeling
+
+That means this guide still takes you through parcel sensing and inference first.
+It does **not** yet claim a full smoke closed-loop path of outdoor PM -> indoor
+PM -> action -> verified outcome, even though that is the priority next proof
+target in the newer staged product direction.
+
+## What this guide proves today vs later
+
+What this guide proves today:
+
+- the parcel-first ingest -> inference -> parcel-view path works
+- a single parcel can combine indoor and sheltered-outdoor evidence
+- the product can stay honest about evidence mode, confidence, and provenance
+
+What this guide does **not** prove yet:
+
+- indoor PM-based response verification
+- outage continuity tracking
+- HVAC / purifier / shade / pump state capture
+- action logging and measured outcome verification
+- bounded controls or compatibility inventory
+
+Those later surfaces belong to the **`v1.5`** bridge and beyond.
+
+Minimum future bridge additions needed before the first serious smoke
+closed-loop proof:
+
+- indoor PM2.5 plus indoor temperature / RH
+- equipment-state capture for recirculation, fan, and purifier posture
+- action logging for what changed
+- outcome / verification records over a bounded response window such as 30-90
+  minutes
 
 ## Run from the runtime repo root
 
@@ -135,7 +180,7 @@ The quickest manual API test uses the checked-in example packet:
 curl -s -X POST http://127.0.0.1:8787/v1/ingest/node-packets \
   -H 'Content-Type: application/json' \
   -H 'X-OESIS-Parcel-Id: parcel_demo_http' \
-  --data-binary @contracts/examples/node-observation.example.json
+  --data-binary @oesis/assets/v0.1/examples/node-observation.example.json
 ```
 
 For the full API chain, the easiest repeatable command remains:
@@ -163,9 +208,9 @@ npm install
 npm run dev
 ```
 
-Visit the local URL printed by Astro in the terminal.
+Visit the local URL printed by Next.js in the terminal.
 
-For a production-style static build, run:
+For a production-style build, run:
 
 ```bash
 npm run build
@@ -176,7 +221,7 @@ Keep the deeper implementation and packet docs in the controlled-review lane.
 
 ## Recommended first-operator sequence
 
-For the first integrated parcel kit, use this order:
+For the first integrated parcel kit (**the `v0.2` promotion target**), use this order:
 
 1. Finish hardware build and siting using the parcel build guides.
 2. Run `make oesis-validate`.
@@ -191,4 +236,4 @@ For the first integrated parcel kit, use this order:
 - `README.md`
 - `../hardware/parcel-kit/parcel-kit-procurement-checklist.md`
 - `../hardware/parcel-kit/parcel-installation-checklist.md`
-- `../release/v.0.1/reviewer-packet-index.md`
+- `../release/v.0.1/reviewer-packet-index.md` (release label `v0.1`, filesystem path `v.0.1/`)

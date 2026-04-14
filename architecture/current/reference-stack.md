@@ -22,7 +22,7 @@ The current reference stack follows this path:
 5. shared-map outputs remain optional and policy-gated
 
 This path is the **runnable slice** of the layered blueprint in
-`../../05-revised-architecture-blueprint.md` (sensing → ingest → context → state
+`../../program/operating-packet/05-revised-architecture-blueprint.md` (sensing → ingest → context → state
 estimation / functional fields → presentation, plus optional shared/governance
 surfaces). Enumerated objects: `architecture-object-map.md`.
 
@@ -52,7 +52,7 @@ flowchart LR
   architecture prose** for ingest, inference, parcel platform, and shared map;
   runnable entrypoints are invoked from the runtime repo (see
   `v0.1-runtime-modules.md` and `v0.1-acceptance-criteria.md`).
-- **`../../software/README.md`** and **`../../software/operator-quickstart.md`**
+- **`../../software/v0.1/README.md`** and **`../../software/operator-quickstart.md`**
   remain the main operator-facing execution guides (they proxy or reference
   `make oesis-*` in the runtime checkout).
 
@@ -70,10 +70,10 @@ flowchart LR
 
 - `../../software/ingest-service/architecture.md`
 - `../../software/ingest-service/README.md`
-- `../../contracts/README.md`
+- `../../contracts/v0.1/README.md`
 
 Normalization and ingest behavior should treat **timing, receipts, dedupe/replay,
-and staleness** as core truth surfaces, consistent with `../../05-revised-architecture-blueprint.md`
+and staleness** as core truth surfaces, consistent with `../../program/operating-packet/05-revised-architecture-blueprint.md`
 §2 and `implementation-posture.md`.
 
 Entry surfaces:
@@ -87,7 +87,7 @@ See also `v0.1-runtime-modules.md` and `v0.1-acceptance-criteria.md`.
 
 ### Canonical observations and context
 
-- `../../contracts/README.md`
+- `../../contracts/v0.1/README.md`
 - `../../contracts/public-context-schema.md`
 - `../../contracts/parcel-context-schema.md`
 - `../../contracts/node-registry-schema.md`

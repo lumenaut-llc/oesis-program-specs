@@ -35,7 +35,7 @@ See:
 
 - `../../README.md`
 - `../../NOTICE.md`
-- `../../program/README.md`
+- `../../program/v0.1/README.md`
 - `../../legal/privacy/data-ownership.md`
 - `../../legal/privacy/privacy.md`
 - `../../legal/privacy/claims-and-safety-language.md`

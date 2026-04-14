@@ -49,6 +49,22 @@ The contract intentionally excludes raw thermal frames from the normal packet pa
 - `install_role`: use `fixed_scene`
 - `privacy_mode`: keep `derived_only` in the first build
 
+## What this contract is for
+
+This contract exists for derived scene-level thermal context only.
+
+It is appropriate for:
+
+- scene spread and hot-fraction trends
+- fixed-view thermal monitoring
+- privacy-preserving experimentation with area-based sensing
+
+It is **not** appropriate for:
+
+- raw-frame collection in the normal path
+- person-identifying thermal workflows
+- default parcel-kit claims
+
 ## Derived fields
 
 - `scene_min_c`: coolest pixel-equivalent value in the frame

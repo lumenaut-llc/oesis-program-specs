@@ -4,6 +4,18 @@
 
 Provide the shortest repeatable path from first weather-pm-mast wiring to a locally validated PM-first normalized observation.
 
+## What this runbook proves
+
+This runbook proves the richer second-wave outdoor lane:
+
+- the mast can emit a weather + PM packet family
+- the local workflow can validate that richer packet shape
+- the parcel can gain more detailed outdoor smoke / weather mechanics when the
+  simpler `mast-lite` lane is no longer enough
+
+It should not be read as the default first-kit path. This is the upgrade lane
+after the simpler sheltered-outdoor node is already stable.
+
 ## Stage 1: environmental bench scan
 
 1. Flash `firmware/weather_pm_mast_i2c_scanner/weather_pm_mast_i2c_scanner.ino`
@@ -17,17 +29,17 @@ Provide the shortest repeatable path from first weather-pm-mast wiring to a loca
 
 ## Stage 3: local ingest validation
 
-From `repo/software/ingest-service/`:
+From `oesis-runtime` repo root:
 
 ```bash
-python3 scripts/ingest_packet.py packet.json
+python3 -m oesis.ingest.ingest_packet packet.json
 ```
 
 If you captured a full serial log:
 
 ```bash
-python3 scripts/extract_latest_packet.py serial.log --output packet.json
-python3 scripts/ingest_packet.py packet.json
+python3 -m oesis.ingest.extract_latest_packet serial.log --output packet.json
+python3 -m oesis.ingest.ingest_packet packet.json
 ```
 
 ## Stage 4: mast move

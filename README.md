@@ -53,9 +53,9 @@ with migration pointers only.
 
 ## Repository map
 
-- `program/` — program overview, notice, and index
-- `architecture/` — canonical architecture home, including frozen `current/` (`v0.1`), debated `future/` (`v1.0`), and system narratives
-- `contracts/` — frozen `v0.1` contract docs plus additive `v1.0/` schema/example deltas
+- `program/` — program overview, notice, and index; numbered narrative packet in `program/operating-packet/`
+- `architecture/` — canonical architecture home, including frozen `current/` (`v0.1`), explicit version lanes such as `v1.0/` and `v1.5/`, transitional `future/`, and system narratives
+- `contracts/` — frozen `v0.1` contract docs plus additive `v1.0/` and `v1.5/` lanes
 - `release/` — release packet materials, publication controls, and launch collateral
 - `hardware/` — physical sensor nodes and installation systems
 - `software/` — subsystem docs, wrappers, and operator guides
@@ -90,20 +90,34 @@ The canonical execution plan lives in `meta/repo-split-plan.md`.
 Use these repo surfaces as the default architecture-and-contract entrypoints:
 
 - `architecture/current/` — frozen `v0.1` current truth
-- `architecture/future/` — debated `v1.0` target lane
-- `contracts/examples/` and `contracts/schemas/` — frozen `v0.1` default contract surface
+- `architecture/v1.0/` — explicit versioned debated `v1.0` target lane
+- `architecture/v1.5/` — explicit bridge-stage architecture notes
+- `architecture/future/` — transitional compatibility lane for older `v1.0` links
+- `contracts/v0.1/examples/` and `contracts/v0.1/schemas/` — frozen `v0.1` default contract surface
 - `contracts/v1.0/` — additive `v1.0` contract deltas and future-lane notes
+- `contracts/v1.5/` — additive bridge-stage contract deltas
 
-The older `technical-architecture/` tree remains as a transitional pointer, but
-contributors should treat `architecture/current/` and `architecture/future/` as
-the canonical current-vs-future split.
+The older `technical-architecture/` tree remains as a transitional pointer.
+For explicit versioned architecture, prefer `architecture/current/`,
+`architecture/v1.0/`, and `architecture/v1.5/`.
+
+## Licensing
+
+This repository uses **split licenses by asset class** (not one blanket file for every path). See [`NOTICE.md`](NOTICE.md) and [`LICENSES.md`](LICENSES.md) for the full matrix.
+
+- Root [`LICENSE`](LICENSE): **CC BY-SA 4.0** for most documentation and specifications outside the subtrees below.
+- [`software/LICENSE`](software/LICENSE): **GNU AGPL v3** for software in `software/` (including scripts and tests).
+- [`hardware/LICENSE`](hardware/LICENSE): **CERN-OHL-S-2.0** for hardware design materials in `hardware/`.
+
+Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Start here
 
-1. Read `NOTICE.md`
-2. Read `program/README.md`
+1. Read `NOTICE.md`, `LICENSES.md`, and the [`LICENSE`](LICENSE) files noted above
+2. Read `program/v0.1/README.md`
 3. Read `release/v1.0/open-source-v1-summary.md`
 4. Read `architecture/README.md`
-5. Read `architecture/current/README.md` for the frozen `v0.1` lane or `architecture/future/README.md` for the debated `v1.0` lane
+5. Read `architecture/current/README.md` for the frozen `v0.1` lane, `architecture/v1.0/README.md` for the debated `v1.0` lane, or `architecture/v1.5/README.md` for the bridge-stage lane
 6. Read `meta/repo-split-plan.md` if you are working on runtime/site extraction or bundle boundaries
-7. Use `shared/templates/` when starting a new subsystem or document
+7. Read `architecture/system/version-and-promotion-matrix.md` and `architecture/system/node-taxonomy.md` for promotion labels, hardware taxonomy, and v1.5 bridge planning
+8. Use `shared/templates/` when starting a new subsystem or document

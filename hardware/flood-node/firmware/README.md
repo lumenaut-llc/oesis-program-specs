@@ -12,6 +12,12 @@
 3. build and flash `flood_node_serial_json`
 4. capture a real packet and validate it with the ingest scripts
 
+## Staging role
+
+This firmware is for a geography-gated low-point hazard module. It should only
+be used where parcel runoff context justifies it and should not be treated as
+part of the default `v0.1` or `v0.2` kit path.
+
 ## Optional Wi-Fi time sync
 
 Copy `flood_node_serial_json/secrets.example.h` to `flood_node_serial_json/secrets.h` and fill in credentials if you want real UTC timestamps via NTP.

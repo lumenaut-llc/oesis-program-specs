@@ -70,7 +70,7 @@ Start here:
 - `../../architecture/`
 - `preview-execution-plan.md`
 - `implementation-status-matrix.md`
-- sibling workspace `../../oesis-public-site` (stable Astro app and in-repo publication policy: `src/data/publicationPolicy.ts`, generated bundle)
+- sibling workspace `../../oesis-public-site` (stable Next.js app and in-repo publication policy: `src/data/publicationPolicy.ts`, generated bundle)
 - `pinned-post-opener.md`
 - `launch-checklist.md`
 - `publish-internal-map.md`

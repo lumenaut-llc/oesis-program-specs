@@ -8,6 +8,54 @@ Build a sheltered outdoor parcel node around an ESP32-S3 DevKitC-1 with an SHT45
 
 Default posture: early `deployment maturity v1.0` target, but not field-ready by default.
 
+**Program posture:** this build guide supports the sheltered-outdoor half of the
+**program-phase `v0.2`** next-promotion parcel kit. Building the node does not
+by itself prove that the widened slice is promoted; field-hardening, runtime
+behavior, and evidence still need to line up. See
+`../../architecture/system/version-and-promotion-matrix.md`.
+
+This guide still covers only the first outdoor critical-path lane. The newer
+taxonomy also names `indoor-response-node` and `power-outage-node` as priority
+**`v1.5`** additions, but those bridge surfaces are outside the build boundary
+of this file.
+
+## What this build actually proves
+
+This build proves the first honest outdoor evidence lane for the parcel kit:
+
+- sheltered outdoor temperature, humidity, pressure, and trend context
+- outdoor siting, enclosure, and serviceability discipline
+- shared packet lineage between indoor and sheltered-outdoor nodes
+- first two-node parcel evidence composition for the same parcel
+
+It does **not** yet prove:
+
+- direct PM-based smoke confirmation
+- richer wind and rainfall mechanics
+- indoor response or occupant protection outcomes
+- outage continuity or backup-power posture
+
+## Why this remains ahead of weather-pm-mast
+
+`mast-lite` should stay ahead of `weather-pm-mast` in the first integrated kit
+because the product still needs the simplest outdoor critical-path node before a
+richer mast lane. This build is about establishing the parcel-edge reference
+surface with the smallest viable outdoor hardware burden.
+
+## How this build connects to the first closed loop
+
+Under the newer staged product direction, this node is the outdoor half of the
+first serious smoke-protection closed loop:
+
+- outdoor conditions from `mast-lite` now
+- later indoor PM / temperature / RH from `indoor-response-node`
+- later equipment-state such as recirculation, fan, and purifier status
+- later action / outcome verification over a bounded response window
+
+That means this guide should be read as the outdoor evidence prerequisite for
+the later **hazard → house state → action → verified outcome** chain, not as a
+complete adaptation build by itself.
+
 ## Required now
 
 - vented enclosure with moisture posture

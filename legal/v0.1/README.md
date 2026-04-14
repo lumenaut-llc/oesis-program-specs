@@ -4,6 +4,17 @@ This folder holds licensing, contribution, defensive publication, and governance
 
 Read `NOTICE.md` before treating every file in this subtree as public-facing or final.
 
+## Lane contract
+
+- **Baseline lane**: `v0.1/` legal docs are the active policy and governance
+  posture.
+- **Additive lanes**: create explicit version directories only when legal terms
+  or publication controls materially diverge by release lane.
+- **Compatibility policy**: if files are moved to versioned legal lanes, keep
+  short redirect stubs for old links.
+- **Canonical mapping**: legal/publication labeling should stay consistent with
+  `../../release/v0.1/README.md` and `../../architecture/system/version-and-promotion-matrix.md`.
+
 ## Core governance docs
 
 - `GOVERNANCE.md`
@@ -13,10 +24,10 @@ Read `NOTICE.md` before treating every file in this subtree as public-facing or 
 
 For the April 14, 2026 public preview, pair those files with:
 
-- `../release/v1.0/open-source-v1-summary.md`
-- `../release/v1.0/asset-class-license-and-publication-matrix.md`
-- `../release/v1.0/contributor-and-review-guide.md`
-- `../release/v1.0/open-release-v1-audit-checklist.md`
+- `../../release/v1.0/open-source-v1-summary.md`
+- `../../release/v1.0/asset-class-license-and-publication-matrix.md`
+- `../../release/v1.0/contributor-and-review-guide.md`
+- `../../release/v1.0/open-release-v1-audit-checklist.md`
 
 ## MVP priorities
 

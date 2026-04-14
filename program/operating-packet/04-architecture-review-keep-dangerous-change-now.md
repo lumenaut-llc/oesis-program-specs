@@ -1,6 +1,6 @@
 # Architecture review: keep, dangerous, change now
 
-**Canonical incorporation:** Judgments are embedded in [`architecture/current/technical-philosophy.md`](architecture/current/technical-philosophy.md), [`architecture/current/milestone-roadmap.md`](architecture/current/milestone-roadmap.md), and [`architecture/current/implementation-posture.md`](architecture/current/implementation-posture.md). This file keeps the scored review.
+**Canonical incorporation:** Judgments are embedded in [`architecture/current/technical-philosophy.md`](../../architecture/current/technical-philosophy.md), [`architecture/current/milestone-roadmap.md`](../../architecture/current/milestone-roadmap.md), and [`architecture/current/implementation-posture.md`](../../architecture/current/implementation-posture.md). This file keeps the scored review.
 
 ## Overall verdict
 

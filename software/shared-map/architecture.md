@@ -4,6 +4,10 @@
 
 The shared map is the neighborhood condition layer, not a public parcel surveillance tool. It should present coarse, delayed, thresholded shared conditions without revealing which specific parcel contributed a real hazard signal.
 
+This is a later-stage surface relative to the parcel-first baseline. It should
+not be described as though route, block, or neighborhood resilience are already
+core current-v1 product behavior.
+
 ## Core objects
 
 - neighborhood cell summary

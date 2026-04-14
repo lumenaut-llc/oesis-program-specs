@@ -1,6 +1,6 @@
 # Functional state and response model
 
-**Canonical incorporation:** Contract-level narrative → [`contracts/parcel-state-schema.md`](contracts/parcel-state-schema.md) and [`architecture/current/architecture-object-map.md`](architecture/current/architecture-object-map.md) (parcel state §9); phasing table aligns with [`09-phasing-v0.1-v1.0-v1.5.md`](09-phasing-v0.1-v1.0-v1.5.md).
+**Canonical incorporation:** Contract-level narrative → [`contracts/parcel-state-schema.md`](../../contracts/parcel-state-schema.md) and [`architecture/current/architecture-object-map.md`](../../architecture/current/architecture-object-map.md) (parcel state §9); phasing table aligns with [`09-phasing-v0.1-v1.0-v1.5.md`](09-phasing-v0.1-v1.0-v1.5.md).
 
 This note defines how **hazard state**, **functional state**, and **response state** relate to each other and to **`parcel state`** over program phases. It is a **runtime-adjacent architecture brief**. JSON shapes, field names, and normative contracts remain canonical in **`oesis-program-specs`** (for example `contracts/parcel-state-schema.md` and related artifacts).
 
@@ -23,6 +23,12 @@ What hazard-related conditions **mean operationally** for the dwelling and parce
 ### Response state
 
 What **actions** are available, **taken**, or **verified**, and whether outcomes **changed** measurable conditions: interventions, logs, before/after windows, verification results, and (later) response history. This is where **adaptation learning** begins; it must not **inflate** hazard confidence by itself.
+
+In `v1.5`, the minimum useful response chain is:
+
+`hazard -> house state -> action -> measured outcome`
+
+That is the bridge from descriptive parcel intelligence to the first honest parcel-specific response model.
 
 ## Flow
 
@@ -53,6 +59,7 @@ Aligns with [`09-phasing-v0.1-v1.0-v1.5.md`](09-phasing-v0.1-v1.0-v1.5.md) and t
 
 - **`v1.5`** additions (house state, interventions, device events, node health) should live in **separate support objects** or extensions **documented against** the core parcel-state contract, rather than overloading core fields in ways that confuse **hazard** confidence with **response** quality.
 - **Functional state** should not claim **verified** outcomes; **response state** owns verification and effect-size language subject to evidence quality ceilings.
+- **`v1.5`** is not just “better local sensing.” Its minimum purpose is to connect outdoor hazard, house operating state, intervention, and measured outcome well enough for before/after reasoning.
 
 ## Non-goals (here)
 
@@ -64,3 +71,4 @@ Aligns with [`09-phasing-v0.1-v1.0-v1.5.md`](09-phasing-v0.1-v1.0-v1.5.md) and t
 
 - [`07-information-layer-and-functional-recovery.md`](07-information-layer-and-functional-recovery.md) — evidence-to-impact and functional recovery framing
 - [`00-version-labels-and-lanes.md`](00-version-labels-and-lanes.md) — naming for runtime lanes vs program phases
+- [`architecture/v1.5/house-state-and-verification-model.md`](../../architecture/v1.5/house-state-and-verification-model.md) — minimum bridge surfaces and exit criteria

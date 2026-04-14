@@ -19,7 +19,7 @@ Open Environmental Sensing and Inference System
 - `interfaces.md`
 - `config/hazard_thresholds_v0.json`
 - `config/trust_gates_v0.json`
-- `scripts/infer_parcel_state.py`
+- `python3 -m oesis.inference.infer_parcel_state` (in `oesis-runtime`)
 - `../../contracts/parcel-context-schema.md`
 - `../../contracts/evidence-mode-and-observability.md`
 
@@ -162,7 +162,7 @@ Example reasoning posture:
 
 ## Required changes to the reference scaffold
 
-The initial scaffold in `scripts/infer_parcel_state.py` is useful for demonstrating data flow, but it should be revised so that:
+The initial scaffold in `python3 -m oesis.inference.infer_parcel_state` is useful for demonstrating data flow, but it should be revised so that:
 
 - bench-air gas resistance does not behave like smoke concentration
 - flood probability is not inferred from a generic `outdoor` location mode alone

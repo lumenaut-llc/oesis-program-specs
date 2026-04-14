@@ -1,20 +1,20 @@
 # Next docs to write
 
-**Canonical incorporation:** Schedule backlog items into [`architecture/current/`](architecture/current/), [`operations/`](operations/), or contracts as work is prioritized; use [`architecture/current/README.md`](architecture/current/README.md) for the current reading order.
+**Canonical incorporation:** Schedule backlog items into [`architecture/current/`](../../architecture/current/), [`operations/`](../../operations/), or contracts as work is prioritized; use [`architecture/current/README.md`](../../architecture/current/README.md) for the current reading order.
 
 ## Completed in this folder
 
 - [`06-network-of-networks-concepts.md`](06-network-of-networks-concepts.md)
 - [`08-kpi-framework.md`](08-kpi-framework.md)
 - [`functional-state-and-response-model.md`](functional-state-and-response-model.md)
+- [`architecture/v1.5/house-state-and-verification-model.md`](../../architecture/v1.5/house-state-and-verification-model.md)
 
 ## Still recommended
 
 1. `trust-and-temporal-integrity-model.md`
 2. `v0.1-boundary-and-non-goals.md`
 3. `v1.0-parcel-kit-architecture.md`
-4. `v1.5-house-state-and-verification-model.md`
-5. `lifelines-and-dependencies-model.md`
+4. `lifelines-and-dependencies-model.md`
 
 ## Best immediate next moves
 

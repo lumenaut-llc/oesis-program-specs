@@ -158,7 +158,7 @@ documents, and avoids overclaiming.
 
 ### Next concrete steps
 
-1. Use the stable Astro app in the sibling workspace `../../oesis-public-site`.
+1. Use the stable Next.js app in the sibling workspace `../../oesis-public-site`.
 2. Keep publication boundaries in that site repo (`src/data/publicationPolicy.ts` and the generated bundle; regenerate from program-specs `../../artifacts/public-content-bundle/public-content-bundle.json` when needed).
 3. Add links only to documents that are safe and intended for preview readers.
 4. Review the page against the launch-readiness copy gates before publishing.

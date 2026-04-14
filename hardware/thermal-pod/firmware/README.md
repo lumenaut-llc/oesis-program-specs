@@ -4,6 +4,12 @@
 
 This node uses a Raspberry Pi and Python rather than an ESP32 firmware upload flow.
 
+## Staging role
+
+This is a research- and privacy-gated software path. It is useful for derived
+scene-level thermal experimentation, but it should stay outside the default
+parcel-kit baseline and outside the first `v0.2` promotion target.
+
 ## Files
 
 - `thermal_pod_frame_probe.py`

@@ -1,6 +1,6 @@
 # Information layer and functional recovery
 
-**Canonical incorporation:** Information-layer and recovery framing → [`architecture/system/vision-and-use-cases.md`](architecture/system/vision-and-use-cases.md) and [`architecture/future/proposed-architecture.md`](architecture/future/proposed-architecture.md). This file keeps the full formulation.
+**Canonical incorporation:** Information-layer and recovery framing → [`architecture/system/vision-and-use-cases.md`](../../architecture/system/vision-and-use-cases.md) and [`architecture/v1.0/proposed-architecture.md`](../../architecture/v1.0/proposed-architecture.md). This file keeps the full formulation.
 
 ## Best approach
 

@@ -6,6 +6,40 @@ The inference engine consumes normalized observations and produces parcel-state 
 
 The engine should produce condition estimates rather than implied safety authorizations, and it should preserve enough provenance for audit without leaking private parcel detail into downstream shared surfaces.
 
+The current parcel-first direction also requires the engine to preserve three
+distinct reasoning surfaces inside the parcel-state output:
+
+- parcel metadata priors that shape baseline expectations
+- local-versus-public divergence records that expose hyperlocal mismatch
+- contrastive fact-versus-foil explanations showing what local evidence changed
+
+The current-truth reference path is still the narrow parcel-sensing baseline.
+Support for `mast-lite` as a meaningful second local evidence source belongs to
+the widened two-node kit and should be described as **program-phase `v0.2`**
+when promoted, not as though the accepted baseline already expanded. Later
+**`v1.5`** bridge objects such as house state, action logs, and verification
+remain separate support surfaces rather than additions to the current
+parcel-state contract.
+
+The next serious product step after that widened kit is the **measurement-to-
+intervention bridge**. For inference, that means learning to reason over:
+
+- outdoor hazard evidence
+- indoor response evidence
+- household operating state
+- action records
+- measured outcome windows
+
+without collapsing those later surfaces back into the current parcel-state
+baseline.
+
+The first serious closed-loop target should be smoke protection:
+
+- outdoor evidence
+- indoor PM / temperature / RH response
+- bounded household action such as recirculation + fan + purifier
+- measured improvement over a bounded response window such as 30–90 minutes
+
 ## Core objects
 
 - normalized observation
@@ -14,6 +48,9 @@ The engine should produce condition estimates rather than implied safety authori
 - hazard score or probability
 - parcel-state snapshot
 - explanation payload
+- divergence record
+- public-only counterfactual
+- contrastive explanation
 - provenance summary
 
 ## Inputs
@@ -24,6 +61,8 @@ The engine should produce condition estimates rather than implied safety authori
 - optional shared neighborhood signals when the parcel's sharing mode and policy allow them
 - optional public context such as weather or smoke layers
 - hazard-specific thresholds or model parameters
+- versioned parcel-prior rule configuration
+- versioned divergence-threshold configuration
 - policy constraints on whether shared neighborhood evidence is allowed for the parcel's active sharing mode
 
 ## Outputs
@@ -31,16 +70,31 @@ The engine should produce condition estimates rather than implied safety authori
 - parcel-state snapshots
 - hazard-specific supporting scores
 - explanation payloads for UI and auditability
+- parcel-prior application summaries
+- divergence records with persistence and confidence
+- public-only foil outputs for audit and verification
+- contrastive explanations with verification placeholders
 - confidence and freshness values
 - source-mode metadata suitable for provenance summaries
+
+Later bridge and response outputs should remain separate first-class records,
+for example:
+
+- response-window comparisons
+- intervention recommendations
+- verification results
+
+Those should sit beside parcel-state rather than being hidden inside it.
 
 ## Internal modules
 
 - parcel evidence assembler
 - hazard scoring module
+- parcel-prior resolver
+- divergence classifier
 - uncertainty and freshness evaluator
 - status mapper
-- explanation generator
+- contrastive explanation generator
 - parcel-state persistence writer
 - provenance sanitizer for downstream presentation layers
 
@@ -67,5 +121,9 @@ The engine should produce condition estimates rather than implied safety authori
 - mixing hazard scoring rules with presentation logic
 - failing to represent stale evidence clearly
 - allowing public feeds to overwhelm dwelling-scale local evidence without explanation
+- hiding hyperlocal divergence inside a fused score instead of preserving it as evidence
+- letting parcel metadata influence outcomes without exposing which factors changed the baseline
 - letting shared-neighborhood evidence affect parcel outputs without preserving source distinctions
 - letting stale public context continue to influence parcel outputs as if it were current
+- adding action or control logic before the system can verify whether conditions
+  actually improved

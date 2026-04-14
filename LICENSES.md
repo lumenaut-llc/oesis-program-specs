@@ -6,6 +6,8 @@ For a shorter v1-facing explanation, see `release/v1.0/asset-class-license-and-p
 
 It is a project planning document, not legal advice.
 
+Full license texts for this repository are in the root `LICENSE` file (default documentation and specifications), `software/LICENSE` (software subtree), and `hardware/LICENSE` (hardware subtree).
+
 ## Recommended split
 
 - platform and service software: AGPLv3-or-later

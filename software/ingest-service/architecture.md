@@ -8,6 +8,24 @@ In `v0.1`, this is also the practical home/platform collection boundary. The
 first meaning of network is getting node data into this ingest path reliably
 enough for parcel reasoning to begin.
 
+The accepted current-truth slice is still centered on the `bench-air-node`
+path. `mast-lite` shares that packet lineage, but treating the two-node indoor +
+sheltered-outdoor path as a promoted baseline is a **program-phase `v0.2`**
+question tied to architecture, runtime behavior, and evidence together rather
+than docs alone. See `../../architecture/system/version-and-promotion-matrix.md`.
+
+The next important ingest expansion is **not** merely more outdoor weather
+hardware. The next meaningful bridge surfaces are:
+
+- indoor-response observations
+- power-state observations
+- equipment-state snapshots
+- action-log events
+- outcome / verification records
+
+Those are the ingest-side prerequisites for moving from parcel sensing toward
+the later **hazard → house state → action → verified outcome** chain.
+
 ## Core objects
 
 - raw packet
@@ -31,6 +49,14 @@ enough for parcel reasoning to begin.
 - ingest acknowledgements or error responses
 - dead-letter or quarantine records for invalid payloads
 - freshness and health summaries for downstream consumers
+
+Planned next bridge outputs should also include support-object persistence or
+event publication for:
+
+- indoor PM / temperature / RH observations
+- mains / backup-power posture
+- HVAC / purifier / recirculation / similar equipment state
+- action and verification records tied to later response windows
 
 ## Internal modules
 

@@ -28,6 +28,8 @@ The first MVP should support parcel inference from a small evidence set:
 
 The goal is not perfect classification. The goal is a transparent first-pass parcel state with explicit uncertainty and reasons.
 
+Sheltered-outdoor **`mast-lite`** observations share the bench-air packet contract; treating them as first-class evidence across ingest, trust, and parcel view is part of **program-phase `v0.2`** when promoted — see `../../architecture/system/version-and-promotion-matrix.md`.
+
 ## Adjacent systems
 
 - ingest service delivers normalized observations
@@ -37,9 +39,12 @@ The goal is not perfect classification. The goal is a transparent first-pass par
 
 ## Implementation scaffold
 
-The `scripts/*.py` entrypoints are now thin compatibility wrappers around the
-canonical repo-root `oesis.inference` package. From `repo/`, prefer
+Executable inference entrypoints live in the sibling `oesis-runtime`
+repository. From that repo root, prefer
 `python3 -m oesis.inference.infer_parcel_state` or
 `python3 -m oesis.inference.serve_inference_api` for new execution guidance.
 
-The first executable inference reference lives in `scripts/infer_parcel_state.py`. It reads a normalized observation example, applies intentionally simple rules, and emits a parcel-state snapshot that matches the MVP data contract.
+The first executable inference reference is
+`python3 -m oesis.inference.infer_parcel_state`. It reads a normalized
+observation example, applies intentionally simple rules, and emits a parcel-state
+snapshot that matches the MVP data contract.

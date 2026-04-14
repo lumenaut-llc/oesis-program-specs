@@ -1,5 +1,17 @@
 # System Overview
 
+## Lane
+
+This directory is the `system/` lane.
+
+Use it for cross-version narrative, operating-model, roadmap, and doctrine
+framing that should not be mistaken for frozen current truth or a debated
+target-lane spec.
+
+If you need frozen current-truth architecture, use `../current/`.
+If you need debated target-lane architecture, use `../v1.0/`.
+If you need narrow bridge-stage architecture notes, use `../v1.5/`.
+
 ## Purpose
 
 Program-level system narrative and top-level operating model.
@@ -16,7 +28,9 @@ Program-level system narrative and top-level operating model.
 
 - `../../architecture/README.md` is the sibling versioned technical architecture canon.
 - `../../architecture/current/README.md` is the current truthful reference-architecture slice.
-- `../../architecture/future/README.md` is the debated target-architecture slice.
+- `../../architecture/v1.0/README.md` is the explicit versioned debated target-architecture slice.
+- `../../architecture/v1.5/README.md` is the explicit bridge-stage architecture slice.
+- `../../architecture/future/README.md` remains a redirect-only compatibility lane for older target-architecture links.
 - `vision-and-use-cases.md` expands the long-term product direction from smart home to smart block to citizen-owned smart city.
 - `phase-roadmap.md` translates the vision into staged execution.
 - `architecture-gaps-by-stage.md` maps operational-architecture gaps onto capability stages and the deployment-maturity overlay while keeping public release labels such as `v0.1` separate from that stage map.
@@ -26,6 +40,8 @@ Program-level system narrative and top-level operating model.
 - `product-requirements-phase-1.md` defines the first single-parcel release slice.
 - `block-level-operating-model.md` defines how shared block intelligence should work.
 - `integrated-parcel-system-spec.md` defines the unified parcel-kit architecture and cross-node integration rules.
+- `version-and-promotion-matrix.md` maps program-phase promotions, capability stages, deployment maturity, and implementation status.
+- `node-taxonomy.md` lists current, next-promotion, geography-gated, research-gated, and v1.5 bridge evidence surfaces.
 - `../../media/diagrams/prototype-integration-diagram-pack.md` provides a shared diagram pack for prototype integration, architecture avenues, and design possibilities.
 - `neighborhood-signal-transformation-overview.md` frames the privacy-scoped path from home signals to block intelligence.
 - `recommendation-engine-and-safety-language.md` defines guidance posture and language boundaries.

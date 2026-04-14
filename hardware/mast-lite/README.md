@@ -38,6 +38,8 @@ Default posture: early `deployment maturity v1.0` target, but not field-ready by
 
 This node is the first outdoor critical-path lane for the parcel kit, which means enclosure, mounting, buffering, and serviceability are part of the node definition rather than optional extras.
 
+**Program posture:** `mast-lite` is part of the **next promotion** integrated kit (**program-phase `v0.2`**) together with `bench-air-node`. It is **not** the same as **current truth** until that slice is promoted. In the reference runtime, shared-lineage normalization may remain **partial** until promotion — see `../../architecture/system/integrated-parcel-system-spec.md` (observation family map) and `../../architecture/system/version-and-promotion-matrix.md`.
+
 ## Inputs
 
 - ambient sheltered outdoor air near the install location

@@ -4,6 +4,11 @@
 
 Turn the first parcel kit from a bench build into a repeatable field installation with enough documentation to support software binding, later troubleshooting, and truthful claims.
 
+## Implementation status
+
+- **Tier 1** matches the narrow **program-phase `v0.1`** reference path.
+- **Tier 2** supports the **`v0.2`** promotion (indoor + sheltered outdoor). Completing Tier 2 install steps does not by itself prove runtime normalization or promotion — track **implementation status** separately (`../../architecture/system/version-and-promotion-matrix.md`).
+
 ## Scope
 
 This checklist covers:
@@ -208,7 +213,7 @@ Primary references:
 - `../../architecture/current/README.md`
 - `../data-model/node-registry-schema.md`
 - `../data-model/examples/node-registry.example.json`
-- `../system-overview/integrated-parcel-system-spec.md`
+- `../../architecture/system/integrated-parcel-system-spec.md`
 - `../../software/operator-quickstart.md`
 
 ## Acceptance criteria for the first integrated parcel kit
@@ -229,6 +234,6 @@ Installation notes are implementation material, not default public-preview mater
 Before sharing install photos, wiring layouts, or close-up mounting details outside the core implementation group, check:
 
 - `../../legal/public-preview-scope.md`
-- `../../release/v.0.1/reviewer-packet-index.md`
+- `../../release/v.0.1/reviewer-packet-index.md` (release label `v0.1`, filesystem path `v.0.1/`)
 
 The public preview site should not imply that every documented install practice is already a polished consumer deployment path.

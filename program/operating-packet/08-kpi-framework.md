@@ -1,6 +1,6 @@
 # KPI framework
 
-**Canonical incorporation:** Measurement posture for the frozen slice → [`architecture/current/measurement-and-kpis-v0.1.md`](architecture/current/measurement-and-kpis-v0.1.md); pilots → [`operations/pilots/pilot-operator-checklist.md`](operations/pilots/pilot-operator-checklist.md). This file keeps the full KPI catalog.
+**Canonical incorporation:** Measurement posture for the frozen slice → [`architecture/current/measurement-and-kpis-v0.1.md`](../../architecture/current/measurement-and-kpis-v0.1.md); pilots → [`operations/pilots/pilot-operator-checklist.md`](../../operations/pilots/pilot-operator-checklist.md). This file keeps the full KPI catalog.
 
 ## 1. Technical validity
 

@@ -18,7 +18,7 @@ V1 is ready only if an outside reader can understand:
 
 - [ ] Root `README.md` points to the current v1 public-release summary.
 - [ ] Root `NOTICE.md` points to the current asset-class licensing and release-boundary docs.
-- [ ] Program-level `program/README.md` and `program/NOTICE.md` point to the same canonical v1 summary.
+- [ ] Program-level `program/v0.1/README.md` and `program/NOTICE.md` point to the same canonical v1 summary.
 - [ ] No top-level README or notice implies one blanket license governs every file.
 
 ## Licensing checks

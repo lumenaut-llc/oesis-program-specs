@@ -49,4 +49,4 @@ families** apply in the field: **technical validity** (uptime, freshness, stale
 handling) and **governance value** (sharing, export, revocation, access logs)
 where the product actually enforces them. **Network**, **functional/adaptation**,
 and multi-scale metrics belong to **later milestones** or explicit pilot
-hypotheses—see `../../08-kpi-framework.md` for the full catalog.
+hypotheses—see `../../program/operating-packet/08-kpi-framework.md` for the full catalog.

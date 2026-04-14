@@ -60,7 +60,7 @@ It is also the primary surface for showing sharing choices, consent state, and p
 - The current parcel view should update quickly when a new parcel-state snapshot is available.
 - History can tolerate slower retrieval as long as the latest state stays responsive.
 - The platform should make staleness obvious rather than quietly serving old results.
-- Sharing setting changes and revocations should take effect quickly and be visible to the parcel operator without ambiguity.
+- Sharing setting changes should take effect promptly where the implementation supports them. **Revocation and some governance paths may remain partial or docs-only** until later accepted slices; do not assume sub-second or fully verified revocation behavior unless implementation status and release materials say so (see `../../architecture/system/version-and-promotion-matrix.md`).
 
 ## Risks
 

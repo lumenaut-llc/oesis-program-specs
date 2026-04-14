@@ -11,6 +11,43 @@ Default posture: `deployment maturity v0.1`
 Use this guide as the bench and first-bring-up path.
 Do not read it as a field-ready guide unless the install also satisfies the shared field-hardening checklist.
 
+**Program posture:** this is the smallest **current-truth** hardware build for the
+parcel-sensing baseline and the indoor anchor for **program-phase `v0.1`**.
+It remains the first build before the sheltered-outdoor `mast-lite` lane. The
+later **`v1.5`** bridge additions named in the product taxonomy
+(`indoor-response-node`, `power-outage-node`, equipment-state, action/outcome
+verification) are **not** covered by this guide yet.
+
+## What this build actually proves
+
+This build proves the minimum indoor evidence path for the parcel-first system:
+
+- stable sensor bring-up
+- repeatable packet emission
+- parcel-local indoor or sheltered evidence
+- first end-to-end ingest → normalized observation → parcel-state flow
+
+It does **not** yet prove:
+
+- outdoor parcel-edge conditions
+- direct PM-based smoke observation
+- household equipment-state awareness
+- intervention tracking
+- outcome verification
+
+## How this build fits the next stages
+
+This guide is still the right first hardware step even under the newer product
+direction. The later bridge toward adaptation depends on having a stable indoor
+evidence lineage before adding more complex house-state surfaces.
+
+In the newer staged product scope, the closest follow-on roles are:
+
+- `mast-lite` for sheltered outdoor reference conditions in **`v0.2`**
+- later `indoor-response-node` for indoor PM2.5 + temperature + RH in **`v1.5`**
+- later equipment-state and action/outcome surfaces that explain what the house
+  did while indoor conditions were changing
+
 ## Required now
 
 - short stable wiring
@@ -28,7 +65,7 @@ Do not read it as a field-ready guide unless the install also satisfies the shar
 ## Field-ready boundary
 
 This guide alone does not make the node field-ready.
-Use `../../docs/build-guides/field-hardening-checklist.md` before describing a bench-air install as deployed.
+Use `../parcel-kit/field-hardening-checklist.md` before describing a bench-air install as deployed.
 
 ## Serviceability notes
 

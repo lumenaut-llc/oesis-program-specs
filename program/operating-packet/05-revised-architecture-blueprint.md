@@ -1,15 +1,24 @@
 # Revised architecture blueprint
 
-**Canonical incorporation:** Layer ↔ object mapping → [`architecture/current/architecture-object-map.md`](architecture/current/architecture-object-map.md) and [`architecture/current/reference-stack.md`](architecture/current/reference-stack.md); near-term posture → [`architecture/current/implementation-posture.md`](architecture/current/implementation-posture.md). This file keeps the full seven-layer blueprint.
+**Canonical incorporation:** Layer ↔ object mapping → [`architecture/current/architecture-object-map.md`](../../architecture/current/architecture-object-map.md) and [`architecture/current/reference-stack.md`](../../architecture/current/reference-stack.md); near-term posture → [`architecture/current/implementation-posture.md`](../../architecture/current/implementation-posture.md). This file keeps the full seven-layer blueprint.
 
 ## Versioning cleanup
 
-How these names map to **this repository’s lanes** (frozen default vs optional overlay) is spelled out in [`00-version-labels-and-lanes.md`](00-version-labels-and-lanes.md). In short: program phase `v1.0` here matches the **runtime `v1.0` asset lane**, not a separate `v0.2` lane.
+How these names map to the repo’s accepted slices, capability stages, and
+runtime lanes is spelled out in [`00-version-labels-and-lanes.md`](00-version-labels-and-lanes.md)
+and the canonical matrix at [`architecture/system/version-and-promotion-matrix.md`](../../architecture/system/version-and-promotion-matrix.md).
+In short:
+
+- `v0.1` = narrow accepted reference slice
+- `v0.2` = next accepted two-node parcel-kit promotion
+- runtime `v1.0` lane = optional additive asset lane, not the same thing as `v0.2`
+- capability `v1.5` = measurement-to-intervention bridge
 
 Keep these labels separate:
 
 - `v0.1` = narrow executable reference slice
-- `v1.0` = first broader fielded parcel-intelligence architecture target
+- `v0.2` = next accepted parcel-kit promotion
+- `v1.0` = first materially broader system than the first narrow slice
 - `v1.5` = measurement-to-intervention bridge
 
 Do not collapse these into one label. The project is strongest when the executable slice, the architecture target, and the later bridge stage are spoken about distinctly.
@@ -73,12 +82,22 @@ Objects:
 - local evidence
 - shared evidence
 - external public context
+- divergence record
+- parcel-prior application
+- public-only foil path
+- contrastive explanation
 - fused hazard state
 - confidence
 - evidence mode
 - provenance summary
 
 This should remain rules-first and evidence-first in the near term.
+
+It should also remain parcel-first in a specific technical sense:
+
+- local-versus-public mismatch is a primary signal, not just a trust penalty
+- parcel metadata should shape explicit priors before fusion
+- fused outputs should carry a fact-versus-foil explanation surface for audit
 
 ### 5. Impact and functional state layer
 
@@ -148,6 +167,13 @@ That split keeps the baseline simple while creating a clean bridge to later resp
 - parcel view
 - evidence summary
 
+The current parcel-state lane may already include additive audit fields for:
+
+- parcel-prior application
+- divergence records
+- public-only counterfactuals
+- contrastive explanations
+
 ### `v1.0`
 - all of the above
 - node registry
@@ -160,19 +186,24 @@ That split keeps the baseline simple while creating a clean bridge to later resp
 ### `v1.5`
 - all of the above
 - house state
+- indoor-response and outage evidence
+- coarse house capability / equipment-state support
 - intervention event
 - verification outcome
-- control compatibility
+- building-and-site response metadata
 - node health
 - deployment metadata object
 - device event history
-- response-curve memory
+- response-window and verification support
+
+Full control compatibility and bounded-controls inventory should be treated as a
+later stage rather than part of the minimum bridge.
 
 ## One-line stage definitions
 
 - `v0.1`: Can we honestly produce a parcel view from one observation path?
 - `v1.0`: Can we produce a more trustworthy parcel state from a real parcel kit and limited shared evidence?
-- `v1.5`: Can we model what the house did, what could be done, and whether it helped?
+- `v1.5`: Can we produce one honest `hazard -> house state -> action -> measured outcome` loop?
 
 ## Functional state and response (dedicated note)
 

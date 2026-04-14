@@ -9,6 +9,8 @@ Define the minimum shared hardware and installation posture required before a no
 Field-hardening is part of the node.
 It is not optional support gear once the docs use deployed language.
 
+**Promotion context:** meeting this checklist is part of claiming **`deployment maturity v1.0`** for a node or kit. Program-phase **`v0.2`** (bench-air + mast-lite) requires that promotion story to be real, not aspirational — see `../../architecture/system/version-and-promotion-matrix.md` and `../../architecture/current/pre-1.0-version-progression.md`.
+
 ## Shared checklist
 
 ### Power and protection
@@ -89,4 +91,4 @@ It is not optional support gear once the docs use deployed language.
 - `pilot-field-kit.md`
 - `integrated-parcel-kit-bom.md`
 - `parcel-installation-checklist.md`
-- `../system-overview/deployment-maturity-ladder.md`
+- `../../architecture/system/deployment-maturity-ladder.md`

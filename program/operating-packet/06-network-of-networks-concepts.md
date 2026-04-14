@@ -1,6 +1,6 @@
 # Network-of-networks concepts
 
-**Canonical incorporation:** Federation posture → [`architecture/system/vision-and-use-cases.md`](architecture/system/vision-and-use-cases.md) and [`architecture/future/proposed-architecture.md`](architecture/future/proposed-architecture.md). This file keeps the concept catalog.
+**Canonical incorporation:** Federation posture → [`architecture/system/vision-and-use-cases.md`](../../architecture/system/vision-and-use-cases.md) and [`architecture/v1.0/proposed-architecture.md`](../../architecture/v1.0/proposed-architecture.md). This file keeps the concept catalog.
 
 ## Core idea
 

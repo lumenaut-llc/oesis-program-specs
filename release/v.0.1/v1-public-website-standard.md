@@ -280,9 +280,9 @@ To fully meet this standard, the public site should still add or improve:
 - a public sample parcel card showing status, confidence, evidence mode, and reasons
 - stronger repo-community-health visibility if the missing standard files are not yet present
 
-## Astro implementation direction
+## Next.js implementation direction
 
-The Astro site should use this file as a content standard for future work.
+The Next.js site should use this file as a content standard for future work.
 
 Practical follow-up components:
 

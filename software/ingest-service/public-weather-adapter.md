@@ -17,11 +17,11 @@ Open Environmental Sensing and Inference System
 - `README.md`
 - `architecture.md`
 - `interfaces.md`
-- `scripts/normalize_public_weather_context.py`
+- `python3 -m oesis.ingest.normalize_public_weather_context` (in `oesis-runtime`)
 - `public-source-metadata-standard.md`
 - `../../contracts/public-context-schema.md`
-- `../../contracts/examples/raw-public-weather.example.json`
-- `../../contracts/examples/public-context.example.json`
+- `../../contracts/v0.1/examples/raw-public-weather.example.json`
+- `../../contracts/v0.1/examples/public-context.example.json`
 - `../../legal/licenses/demo-regional-weather-v1-notice.md`
 
 ## Content

@@ -6,7 +6,7 @@ open program described in this repository.
 `Resilient Home Intelligence` (`RHI`) remains a legacy compatibility name during
 the transition.
 
-Read `NOTICE.md` before treating this program as a complete technical open release.
+Read `../../NOTICE.md` before treating this program as a complete technical open release.
 
 OESIS is **parcel-first** and **multi-scale** by design: it starts at the dwelling and
 parcel, and is meant to grow toward route, block, and broader coordination without
@@ -43,40 +43,63 @@ sensing → inference → functional interpretation → intervention and verific
 route, block, and community lifeline–scale resilience intelligence
 
 Deeper framing of the information-layer target and functional recovery lives in
-`../architecture/system/vision-and-use-cases.md` and related system architecture docs.
+`../../architecture/system/vision-and-use-cases.md` and related system architecture docs.
+
+## Lane contract
+
+- **Baseline lane**: `v0.1/` program docs describe the active program baseline and
+  framing.
+- **Additive lanes**: use `../operating-packet/` for narrative packet deltas and
+  lane-specific framing that should not silently rewrite baseline claims.
+- **Compatibility policy**: when packet paths move, keep redirect stubs or index
+  updates so older links still resolve.
+- **Canonical mapping**: program labels must remain aligned with
+  `../../architecture/system/version-and-promotion-matrix.md`.
 
 ## Program phase labels (summary)
 
 These labels describe **program and execution posture**, not interchangeable marketing
-tags:
+tags. They are **not** the same as **capability stages** (`current v1`, `v1.5`, …) or
+**deployment maturity** per node family — see `../../architecture/system/version-and-promotion-matrix.md`.
 
 - **Program phase `v0.1`** — narrow executable reference slice; frozen truth in
-  `../architecture/current/`.
-- **Program phase `v1.0`** — first broader fielded parcel-intelligence architecture
-  target; staged in the reference runtime as an optional `v1.0` asset lane over the
-  `v0.1` baseline where applicable.
-- **Program phase `v1.5`** — measurement-to-intervention bridge; roadmap posture, not a
-  separate runtime overlay today.
+  `../../architecture/current/`.
+- **Program phase `v0.2`** — **next accepted runnable promotion** after `v0.1`: first
+  widened parcel-kit slice with stable indoor plus sheltered outdoor operation
+  (`bench-air-node` + `mast-lite`), with explicit promotion criteria in
+  `../../architecture/current/pre-1.0-version-progression.md`. Not synonymous with “done”
+  because docs exist; requires contract/runtime boundary and evidence per that doc.
+- **Program phase `v1.0`** — first materially broader fielded system than the first
+  narrow slice (see pre-1.0 progression); also used for the **runtime contract lane**
+  `contracts/v1.0/` over the frozen `v0.1` baseline; architecture now also exposes an
+  explicit `../../architecture/v1.0/` lane beside the transitional `../../architecture/future/`
+  path — keep those meanings distinct from marketing “1.0” labels.
+- **Capability stage `v1.5`** — measurement-to-intervention **foundation** (house-state,
+  action/outcome logs, read-side equipment signals); explicit bridge-stage lanes now
+  exist under `../../architecture/v1.5/`, `../../contracts/v1.5/`, `../../software/v1.5/`, and
+  `../../hardware/v1.5/`; roadmap and contracts may be draft;
+  full **controls-compatibility inventory** is primarily **`v2.5`**.
 - **Public or marketing “v1.0”** — website, release, or grant language; do not assume it
-  matches program-phase `v1.0` or the runtime `v1.0` lane unless release materials say so
+  matches program-phase lanes or the runtime `v1.0` contract lane unless release materials say so
   explicitly.
 
-Informal **`v0.2`** is deprecated shorthand for “the next slice after `v0.1`.” Prefer
-the phase and lane language above. Canonical glossary: `../00-version-labels-and-lanes.md`.
+Canonical glossary (`program/operating-packet/`): `../operating-packet/00-version-labels-and-lanes.md`. Full promotion matrix:
+`../../architecture/system/version-and-promotion-matrix.md`. Node and evidence taxonomy:
+`../../architecture/system/node-taxonomy.md`.
 
-Full phasing narrative: `../09-phasing-v0.1-v1.0-v1.5.md`. Delivery sequence tied to the
-current reference stack: `../architecture/current/milestone-roadmap.md`.
+Full phasing narrative: `../operating-packet/09-phasing-v0.1-v1.0-v1.5.md`. Delivery sequence tied to the
+current reference stack: `../../architecture/current/milestone-roadmap.md`.
 
 ## Program structure
 
-- `../architecture/` — canonical architecture home for current, future, and system narratives
-- `../hardware/` — physical sensor nodes and installation systems
-- `../software/` — ingest, parcel platform, inference, and maps
-- `../contracts/` — contract docs, schemas, and example payloads
-- `../release/` — release packet materials and publication controls
-- `../legal/` — licensing, defensive publication, governance, and contribution policy
-- `../operations/` — pilot playbooks and operational materials
-- `../media/` — diagrams, renders, and images
+- `../../architecture/` — canonical architecture home for current, future, and system narratives
+- `../../hardware/` — physical sensor nodes and installation systems
+- `../../software/` — ingest, parcel platform, inference, and maps
+- `../../contracts/` — contract docs, schemas, and example payloads
+- `../../release/` — release packet materials and publication controls
+- `../../legal/` — licensing, defensive publication, governance, and contribution policy
+- `../../operations/` — pilot playbooks and operational materials
+- `../../media/` — diagrams, renders, and images
 
 ## Current MVP hazards
 
@@ -106,15 +129,17 @@ For each parcel:
 
 ## Read first
 
-- `NOTICE.md`
-- `../architecture/README.md`
-- `../architecture/current/README.md`
-- `../09-phasing-v0.1-v1.0-v1.5.md` — program phase framing (v0.1, v1.0, v1.5)
-- `../release/v1.0/open-source-v1-summary.md`
-- `../release/v1.0/asset-class-license-and-publication-matrix.md`
-- `../legal/ip.md`
-- `../legal/dataset-release-policy.md`
-- `../legal/GOVERNANCE.md`
-- `../legal/privacy/data-ownership.md`
-- `../legal/privacy/privacy.md`
-- `../release/v1.0/NOTICE.md`
+- `../../NOTICE.md`
+- `../../architecture/README.md`
+- `../../architecture/current/README.md`
+- `../../architecture/system/version-and-promotion-matrix.md` — current truth vs next promotion vs capability stages
+- `../../architecture/system/node-taxonomy.md` — hardware and v1.5 bridge surfaces
+- `../operating-packet/09-phasing-v0.1-v1.0-v1.5.md` — program phase framing (v0.1, v1.0, v1.5)
+- `../../release/v1.0/open-source-v1-summary.md`
+- `../../release/v1.0/asset-class-license-and-publication-matrix.md`
+- `../../legal/ip.md`
+- `../../legal/dataset-release-policy.md`
+- `../../legal/GOVERNANCE.md`
+- `../../legal/privacy/data-ownership.md`
+- `../../legal/privacy/privacy.md`
+- `../../release/v1.0/NOTICE.md`

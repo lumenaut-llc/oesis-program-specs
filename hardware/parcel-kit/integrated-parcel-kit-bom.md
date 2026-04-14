@@ -9,6 +9,8 @@ Companion checklist:
 - `parcel-kit-procurement-checklist.md`
 - `parcel-installation-checklist.md`
 
+Tier labels here are **build tiers**, not automatic proof of program-phase promotion. See `../../architecture/system/version-and-promotion-matrix.md` (current truth vs next promotion) and `../../architecture/system/node-taxonomy.md`.
+
 ## Governing rule
 
 The parcel kit is one system, but not one physical box.

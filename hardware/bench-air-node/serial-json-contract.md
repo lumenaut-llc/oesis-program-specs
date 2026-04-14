@@ -63,6 +63,26 @@ During first-build bring-up it is fine to print a few human-readable boot messag
 - `bme680`: pressure and gas-trend source, plus secondary temp and humidity
 - `wifi_connected`: `false` is expected for serial-only bring-up
 
+## What this contract can and cannot mean
+
+This contract is the baseline indoor or sheltered evidence contract.
+
+It is appropriate for:
+
+- indoor temperature and humidity evidence
+- pressure context
+- gas-trend anomaly detection
+- device-health and packet-timing validation
+
+It is **not** sufficient by itself for:
+
+- direct PM2.5 measurement
+- direct smoke concentration claims
+- house-response verification
+
+The later `v1.5` bridge will need additional packet families or support objects
+for indoor PM2.5, equipment state, actions, and measured outcomes.
+
 If Wi-Fi credentials are configured for time sync, `wifi_connected` may be `true` even when packets are still only being inspected over serial.
 
 ## First-build fallback for time
@@ -92,7 +112,7 @@ This is the shape the serial monitor should show on a single line:
 ## Local check path
 
 1. Copy one emitted JSON line into a file such as `packet.json`
-2. Run `python3 scripts/ingest_packet.py packet.json` from `software/ingest-service/`
+2. Run `python3 -m oesis.ingest.ingest_packet packet.json` from `oesis-runtime` repo root
 3. Confirm the normalized observation prints successfully
 
 If that command succeeds, the packet shape is good enough for the local ingest scaffold.

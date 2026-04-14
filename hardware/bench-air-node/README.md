@@ -28,6 +28,8 @@ Even without neighborhood sharing, the node gives a single parcel owner useful l
 
 The bench air node is an evidence producer, not a parcel-state engine. Its responsibility is to publish trustworthy raw and lightly processed readings with provenance so downstream services can combine them with other evidence layers. In the MVP, this node primarily informs smoke and heat-related parcel reasoning while also exercising the ingest path used by later weather, mast, and flood hardware.
 
+Staging reference: this family is **current-truth** hardware for **program-phase `v0.1`**; see `../../architecture/system/node-taxonomy.md` and `../../architecture/system/version-and-promotion-matrix.md`.
+
 ## Scope for current version
 
 - ESP32-S3 development board

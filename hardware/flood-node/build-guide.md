@@ -8,6 +8,32 @@ The first flood-node build should optimize for one thing: a repeatable dry refer
 
 Default posture: experimental field prototype below a general `deployment maturity v1.0` claim.
 
+**Program posture:** this is a **geography-gated hazard module**, not part of
+the default `v0.1` current-truth slice or the first `v0.2` two-node parcel kit.
+Build it only where parcel runoff context justifies a dedicated low-point lane.
+See `../../architecture/system/node-taxonomy.md`.
+
+## What this build actually adds
+
+This build is for parcels where runoff or pooling is operationally important.
+Its role is to add **low-point evidence**, not to redefine the entire product as
+a flood-only system.
+
+When it is justified, this node adds:
+
+- low-point depth evidence
+- rise-rate evidence over time
+- repeatable geometry for later parcel-specific flood interpretation
+
+It still does **not** provide:
+
+- parcel-wide flood truth from one reading
+- route/chokepoint awareness by itself
+- pump-state or action verification by itself
+
+Those later capabilities require the broader `v1.5` bridge and still-later
+route/community surfaces.
+
 ## Required now
 
 - rigid mount

@@ -109,11 +109,23 @@ In this matrix:
 | Weather-pm-mast hardware path | partial | weather-pm-mast docs and firmware lane | Second-wave hardware lane exists; treat as a `deployment maturity v1.5` target rather than a default pilot requirement. | Complete PM power, airflow, interface, buffering, and maintenance posture before making it critical-path hardware. |
 | Thermal-pod hardware path | partial | thermal-pod docs | Separate R&D lane exists and should stay below general field-ready language. | Resolve privacy, retention, power, storage, and usefulness questions before folding it into the parcel kit. |
 
+## Bridge and response-layer objects (capability-stage v1.5+)
+
+| Surface | Status | Evidence | Current boundary | Next gap |
+| --- | --- | --- | --- | --- |
+| House-state support object | planned | `contracts/v1.0/schemas/house-state.schema.json` (forward-compatibility placement) | Schema and example exist; no runtime API surface. | Implement parcel-platform endpoints (`/house-state`) and pilot validation. |
+| House-capability support object | planned | `contracts/v1.5/schemas/house-capability.schema.json` | Schema and example exist; no runtime API surface. | Implement parcel-platform endpoints (`/capabilities`) and pilot validation. |
+| Intervention-event record | planned | `contracts/v1.5/schemas/intervention-event.schema.json` | Schema and example exist; no runtime API surface. | Implement parcel-platform endpoints (`/interventions`) and pilot validation. |
+| Verification-outcome record | planned | `contracts/v1.5/schemas/verification-outcome.schema.json` | Schema and example exist; no runtime API surface. | Implement parcel-platform endpoints (`/verification`) and pilot validation. |
+| Equipment-state-observation | planned | `contracts/v1.0/schemas/equipment-state-observation.schema.json` (forward-compatibility placement) | Schema and example exist; no ingest or runtime surface. | Implement observation family and ingest normalization path. |
+| Source-provenance-record | planned | `contracts/v1.0/schemas/source-provenance-record.schema.json` (forward-compatibility placement) | Schema and example exist; no runtime surface. | Implement provenance tracking in the ingest and inference paths. |
+| Control-compatibility | planned | `contracts/v1.5/schemas/control-compatibility.schema.json` | Schema and example exist; draft capture may begin under v1.5 bridge. | Full compatibility inventory is a v2.5 deliverable — see `../../architecture/system/architecture-gaps-by-stage.md`. |
+
 ## Release, legal, and public surfaces
 
 | Surface | Status | Evidence | Current boundary | Next gap |
 | --- | --- | --- | --- | --- |
-| Public preview site scaffold | implemented | sibling workspace `../../oesis-public-site` (Astro); publication anchors and exclusions in `src/data/publicationPolicy.ts` and `src/generated/publicContentBundle.ts`, generated from program-specs `artifacts/public-content-bundle/public-content-bundle.json` | The site is its own repo; there is no `release/.../site/` tree in program-specs. | Regenerate the bundle when release roots change; keep `legal/public-preview-scope.md` aligned. |
+| Public preview site scaffold | implemented | sibling workspace `../../oesis-public-site` (Next.js 15); publication anchors and exclusions in `src/data/publicationPolicy.ts` and `src/generated/publicContentBundle.ts`, generated from program-specs `artifacts/public-content-bundle/public-content-bundle.json` | The site is its own repo; there is no `release/.../site/` tree in program-specs. | Regenerate the bundle when release roots change; keep `legal/public-preview-scope.md` aligned. |
 | Public preview packet | implemented | `NOTICE.md`, release README, governance/privacy docs | Packet is assembled for public-safe preview readers. | Keep the packet aligned with the actual implementation boundary. |
 | Reviewer packet assembly | implemented | `reviewer-packet-index.md` | Controlled packet lanes are now explicit. | Use named release owners to decide who receives which packet. |
 | Counsel packet assembly | implemented | `legal/send-to-counsel-checklist.md` and related filing docs | Archival counsel handoff path exists if later needed. | Only use if the project reopens a separate patent/counsel lane. |

@@ -60,3 +60,18 @@ The first scaffold supports:
 - serial-only bring-up with placeholder timestamps
 - optional Wi-Fi/NTP time sync if credentials are configured
 - an `sps30` block that stays `present: false` until real SPS30 transport integration is added
+
+## Expected PM-first expansion
+
+Once the SPS30 path is truly integrated, the packet should grow beyond the
+placeholder `present: false` block and include explicit particulate outputs such
+as:
+
+- `pm1_ugm3`
+- `pm25_ugm3`
+- `pm4_ugm3`
+- `pm10_ugm3`
+
+That is the detail that makes this contract materially different from
+`mast-lite`: a richer outdoor smoke-evidence surface rather than only sheltered
+weather context.

@@ -58,6 +58,20 @@ Define the exact serial payload shape the mast-lite node should emit during firs
 - keep the SHT45 as the primary temperature and humidity source
 - keep the BME680 as pressure and gas-trend support
 
+## What this contract adds relative to bench-air
+
+This contract keeps the same packet lineage as `bench-air-node` but changes the
+interpretation surface:
+
+- it is intended for parcel-edge sheltered or outdoor reference conditions
+- it improves outdoor heat and weather context for the parcel
+- it still does **not** provide direct PM-based smoke evidence
+
+That distinction matters for the later smoke-response bridge: `mast-lite` can be
+the outdoor condition trigger, but the later closed loop still needs indoor PM,
+equipment-state, and verification surfaces to say whether the house actually
+protected occupants.
+
 ## Current firmware behavior
 
 The first firmware scaffold supports:
@@ -68,5 +82,5 @@ The first firmware scaffold supports:
 ## Local check path
 
 1. Copy one emitted JSON line into `packet.json`
-2. Run `python3 scripts/ingest_packet.py packet.json` from `software/ingest-service/`
+2. Run `python3 -m oesis.ingest.ingest_packet packet.json` from `oesis-runtime` repo root
 3. Confirm the normalized observation prints successfully

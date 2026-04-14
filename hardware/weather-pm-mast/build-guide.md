@@ -8,6 +8,28 @@ Build a PM-first outdoor mast node around an ESP32-S3 DevKitC-1, one SPS30, one 
 
 Default posture: second-wave node with a `deployment maturity v1.5` target rather than a default `deployment maturity v1.0` requirement.
 
+**Program posture:** this is a second-wave outdoor lane after the simpler
+`mast-lite` path is stable. It should be treated as an upgrade beyond the
+`v0.2` two-node parcel kit, not as part of the current-truth baseline or a
+requirement for the first integrated promotion. See
+`../../architecture/system/node-taxonomy.md`.
+
+## What this build actually adds
+
+Relative to `mast-lite`, this build is for richer outdoor mechanics where the
+parcel really benefits from them:
+
+- PM-based outdoor smoke evidence
+- more detailed exposed outdoor weather behavior
+- a better platform for wind / rain expansion later
+
+It is appropriate when the simpler outdoor lane is already stable and the next
+question is not merely “what is the sheltered parcel edge like?” but “do we
+need richer outdoor PM and weather mechanics at this parcel or geography?”
+
+It should not be used to skip the simpler two-node parcel kit when that kit has
+not yet been proven.
+
 ## Required now
 
 - stable 5V PM power posture

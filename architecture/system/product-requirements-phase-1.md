@@ -1,5 +1,15 @@
 # Product Requirements: Current v1 Home Resilience Assistant
 
+## Lane
+
+This document is the `system/` lane version of this topic.
+
+Use it for cross-version and current-release product framing around the present
+`current v1` parcel-sensing baseline.
+
+If you need the debated target-lane version of this topic, use
+`../v1.0/product-requirements-phase-1.md`.
+
 ## Purpose
 
 Define the current `v1` single-parcel release that delivers immediate value with one participating home and no neighborhood dependency.
@@ -95,6 +105,9 @@ The product should let the user inspect:
 
 - local observations
 - public context used
+- parcel priors applied
+- where local conditions diverged from regional baseline
+- what the public-only path would have concluded
 - missing evidence
 - stale evidence
 
@@ -108,6 +121,12 @@ The system shall generate current readiness states from:
 - parcel and home context
 - optional public context
 - explicit freshness and confidence logic
+
+The system shall also preserve, inside the parcel-state output:
+
+- parcel-prior application details
+- local-versus-public divergence records
+- a public-only counterfactual path for explanation and later scoring
 
 ### FR2: Conservative recommendation engine
 
@@ -127,6 +146,9 @@ The system shall identify when conditions are:
 - improving
 - stable
 - stale or unknown
+
+For hazards with public baseline context, the system shall also identify when
+local parcel conditions materially diverge from the regional baseline.
 
 ### FR4: Alerting
 
@@ -177,6 +199,13 @@ The product shall default to private household data handling and make any sharin
 ### NFR3: Explainability
 
 Every major state shall be accompanied by enough explanation for a user to understand the result.
+
+For any parcel state influenced by public context, the explanation should be able
+to answer:
+
+- what public data alone would have concluded
+- what local parcel evidence changed
+- which parcel metadata priors shaped the baseline expectation
 
 ### NFR4: Graceful degradation
 
@@ -249,14 +278,19 @@ The next stage after this product is `v1.5`, not a jump directly to automation.
 `v1.5` adds:
 - indoor PM2.5
 - indoor temperature and RH
+- mains status and backup-power state
 - HVAC mode, fan state, and recirculation/fresh-air state
 - purifier state
-- backup-power state
+- window / shade state where relevant
+- sump / drain equipment state where relevant
 - building and site metadata for orientation, shading, drainage, and filter-path constraints
 - intervention and outcome logging
-- control compatibility inventory
+- coarse house capability and equipment-state support objects
 
-These additions should land as separate support objects instead of breaking the current parcel-state shape.
+Full control-compatibility inventory belongs later with bounded-controls work
+rather than in the minimum `v1.5` bridge.
+
+These additions should land as separate support objects instead of breaking the current parcel-state shape, with the goal of enabling one honest `hazard -> house state -> action -> measured outcome` loop rather than implying a mature automation system.
 
 ## Phase-1 success metrics
 
@@ -265,6 +299,7 @@ These additions should land as separate support objects instead of breaking the 
 - alert precision is acceptable to pilot users
 - users report value during both routine and elevated conditions
 - the product remains useful even without neighbor participation
+- the system can quantify whether local evidence improved prediction quality versus the public-only baseline
 
 ## Explicit non-goals
 
@@ -292,4 +327,5 @@ These additions should land as separate support objects instead of breaking the 
 - neighborhood signal transformation methods
 - additional hardware classes for flood, wind, and other hazards
 - block-level governance and sharing controls
-- `v1.5` support objects for house state, capability, compatibility, intervention, and verification
+- `v1.5` support objects for house state, coarse capability / equipment state, intervention, and verification
+- later `v2.5` control-compatibility inventory and bounded-controls policy

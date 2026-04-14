@@ -57,7 +57,7 @@ Primary contents:
 
 Purpose:
 
-- own the Astro-based public preview site
+- own the Next.js-based public preview site
 - keep frontend build and deployment separate from runtime and release docs
 
 Primary contents:

@@ -1,5 +1,15 @@
 # Architecture Gaps By Stage
 
+## Lane
+
+This document is the `system/` lane version of this topic.
+
+Use it for cross-version gap placement, public-version mapping, and the
+relationship between capability stages and deployment maturity.
+
+If you need the debated target-lane gap placement, use
+`../v1.0/architecture-gaps-by-stage.md`.
+
 ## Purpose
 
 Place the major missing operational-architecture surfaces into the project's
@@ -79,6 +89,7 @@ the capability stages.
 | field-hardening and deployment quality | `current v1` plus deployment maturity | a parcel claim depends on where and how the node was installed |
 | node health, deployment metadata, and device event history | `v1.5` | these are support objects that should not break the core parcel-state contract |
 | measurement-trust and maintenance-informed trust penalties | `v1.5` | stronger trust needs separate support objects and calibration posture |
+| observed equipment / house-state signals (read-side HVAC, fan, purifier, backup power, sump) | `v1.5` | bridge objects for response curves; not the same as a full compatibility inventory |
 | custody execution and transformation provenance | `current v1` baseline, stronger in `v2` | private-by-default must be technically real before higher-stage sharing grows |
 | decision-policy layer above hazard inference | `v2` | guidance should be separate from sensing and hazard estimation |
 | compatibility mapping and bounded controls | `v2.5` | control surfaces should wait until the advisory and policy layers are clear |
@@ -195,9 +206,19 @@ flag:
 `v1.5` should also hold:
 
 - house-state support objects
-- house capability and control-compatibility records
+- `indoor-response-node` inputs for indoor PM2.5, indoor temperature, and indoor RH
+- `power-outage-node` inputs for mains and backup-power posture
+- **read-side** equipment-state signals (for example HVAC mode, fan, recirculation vs fresh air, purifier, backup-power posture, sump/pump where available)
+- building-and-site metadata needed to interpret response (orientation, shading, low points, drainage, vents, filter path, higher-MERV support)
+- coarse **house-capability** summaries where they describe what exists, not a full integration matrix
 - intervention events
 - verification outcomes
+
+The minimum proof target is one honest before/after loop of:
+
+`hazard -> house state -> action -> measured outcome`
+
+**Split for honesty:** a full **controls-compatibility inventory** (interface classes such as Matter, Home Assistant, BACnet, smart plugs; integration tiers; control-policy versioning) is primarily **`v2.5`**, not `v1.5`. Draft schema files may exist for forward compatibility, but `v1.5` should not be read as “compatibility mapping is operationally complete.”
 
 These are the minimum additional objects needed so the architecture can evolve
 toward adaptation without pretending that the adaptation engine already exists.
@@ -233,7 +254,7 @@ should become first-class surfaces.
 
 ### Gaps that first belong here
 
-- compatibility inventory by parcel and interface class
+- **compatibility inventory by parcel and interface class** (this is the primary home for the full inventory; `v1.5` may hold drafts or coarse capability hints only)
 - advisory-only versus soft-integration versus harder-integration tiers
 - failed-control and manual-override logging
 - clearer device config and control-policy versioning
@@ -331,7 +352,9 @@ That prevents two common failures:
 
 - `phase-roadmap.md`
 - `deployment-maturity-ladder.md`
+- `version-and-promotion-matrix.md`
+- `node-taxonomy.md`
 - `integrated-parcel-system-spec.md`
-- `../data-model/README.md`
-- `../build-guides/field-hardening-checklist.md`
-- `../build-guides/pilot-field-kit.md`
+- `../../contracts/v0.1/README.md`
+- `../../hardware/parcel-kit/field-hardening-checklist.md`
+- `../../hardware/parcel-kit/pilot-field-kit.md`

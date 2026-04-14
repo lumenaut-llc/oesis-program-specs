@@ -4,6 +4,8 @@
 
 A more complete parcel mast that adds particulate sensing and first local weather mechanics on top of the simpler outdoor node pattern.
 
+Taxonomy: **second-wave / geography-justified** outdoor module after `mast-lite` is stable — see `../../architecture/system/node-taxonomy.md`.
+
 ## Why it matters
 
 This node is the bridge from basic parcel-edge weather evidence into richer smoke and storm context. It lets the project validate:
@@ -37,6 +39,18 @@ Even without neighborhood sharing, this subsystem gives a parcel owner useful lo
 Default posture: second-wave node with a `deployment maturity v1.5` target rather than a default `deployment maturity v1.0` requirement.
 
 This lane raises the bar for power, airflow, maintenance, buffering, and serviceability relative to `mast-lite`.
+
+## Software implementation status
+
+The hardware serial-JSON contract for this node (`serial-json-contract.md`) is
+architecturally defined, but the corresponding software observation family
+(`air.pm_weather.snapshot`) is **not yet implemented** in the ingest path. The
+ingest service currently normalizes only `oesis.bench-air.v1` packets.
+Weather-pm-mast packets emitted by built hardware will be valid JSON but cannot
+be ingested or used for parcel-state inference until the PM/weather observation
+family is implemented.
+
+See `../../release/v.0.1/implementation-status-matrix.md` for current status.
 
 ## Inputs
 
@@ -109,6 +123,11 @@ Do not describe `weather-pm-mast` as field-ready unless the repo documents the P
 ## Open questions
 
 See `open-questions.md` for unresolved decisions on PM-first versus full weather-first scope, mast mechanics sequencing, and field maintenance expectations.
+
+## Parcel kit integration
+
+- BOM and purchase posture: `../parcel-kit/integrated-parcel-kit-bom.md` (Tier 3: Rich outdoor upgrade) and `../parcel-kit/parcel-kit-procurement-checklist.md` (optional node families + conditional add-ons).
+- Treat as an upgrade after `mast-lite` is stable, not a prerequisite for the first integrated pilot.
 
 ## Key docs
 

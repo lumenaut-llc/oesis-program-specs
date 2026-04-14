@@ -11,7 +11,7 @@ current parcel-first delivery lane.
 
 ## Status
 
-Current builder checklist for the `v0.1` and first integrated parcel-kit lane.
+Current builder checklist spanning **program-phase `v0.1`** (Tier 1) and the **next promotion** integrated kit (**`v0.2`**, Tier 2). For how “current truth,” “next promotion,” and capability stages differ, read `../../architecture/system/version-and-promotion-matrix.md` and `../../architecture/system/node-taxonomy.md`.
 
 ## Use this checklist for
 
@@ -196,6 +196,6 @@ ingest, inference, parcel UX, and governance.
 - `README.md`
 - `parcel-kit-procurement-checklist.md`
 - `parcel-installation-checklist.md`
-- `../system-overview/integrated-parcel-system-spec.md`
+- `../../architecture/system/integrated-parcel-system-spec.md`
 - `../../architecture/current/milestone-roadmap.md`
 - `../../architecture/current/minimum-functioning-v0.1.md`

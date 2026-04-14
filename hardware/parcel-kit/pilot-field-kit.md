@@ -4,7 +4,9 @@
 
 Define the minimum field kit needed to support the first integrated parcel pilot without pretending the pilot can rely on ad hoc bench hardware alone.
 
-## Base parcel kit
+## Base parcel kit (Tier 2 / `v0.2` promotion target)
+
+The following describes the **two-node integrated pilot**, not the narrower **program-phase `v0.1`** reference slice (bench-air only). Treat this as the hardware you bring when pursuing **program-phase `v0.2`**: indoor + sheltered outdoor with registry, validation, and field-hardening evidence per `../../architecture/current/pre-1.0-version-progression.md` and `../../architecture/system/version-and-promotion-matrix.md`.
 
 - 1 `bench-air-node`
 - 1 `mast-lite`

@@ -4,6 +4,22 @@
 
 Provide the shortest repeatable path from first mast-lite wiring to a locally validated normalized observation.
 
+## What this runbook proves
+
+This runbook proves the first sheltered-outdoor evidence lane for the parcel
+kit:
+
+- the node emits the shared-lineage `oesis.bench-air.v1` packet shape
+- the local ingest path can accept that sheltered-outdoor packet
+- one parcel can combine indoor and sheltered-outdoor node evidence
+
+It does **not** yet prove:
+
+- direct PM-based smoke confirmation
+- indoor response or occupant protection outcomes
+- outage continuity
+- action / verification loops
+
 ## Before you start
 
 - ESP32-S3 DevKitC-1 wired with `GPIO8` as `SDA` and `GPIO9` as `SCL`
@@ -26,17 +42,17 @@ Provide the shortest repeatable path from first mast-lite wiring to a locally va
 
 ## Stage 3: local ingest validation
 
-From `repo/software/ingest-service/`:
+From `oesis-runtime` repo root:
 
 ```bash
-python3 scripts/ingest_packet.py packet.json
+python3 -m oesis.ingest.ingest_packet packet.json
 ```
 
 If you captured a full serial log:
 
 ```bash
-python3 scripts/extract_latest_packet.py serial.log --output packet.json
-python3 scripts/ingest_packet.py packet.json
+python3 -m oesis.ingest.extract_latest_packet serial.log --output packet.json
+python3 -m oesis.ingest.ingest_packet packet.json
 ```
 
 ## Stage 4: sheltered outdoor move

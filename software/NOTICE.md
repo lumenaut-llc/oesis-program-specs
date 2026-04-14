@@ -11,6 +11,8 @@ The current intended direction for platform and service software is:
 
 - `AGPLv3-or-later`
 
+The full license text for code and other software-licensed material in this subtree is in `LICENSE` in this directory.
+
 Firmware may follow the same direction during the current release period, subject to
 final legal review.
 
