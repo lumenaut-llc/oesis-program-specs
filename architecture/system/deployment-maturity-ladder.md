@@ -128,6 +128,29 @@ Examples:
 - `deployment maturity v1.0` is about honest deployability, not adaptation guidance
 - `deployment maturity v1.5` improves trust and device operations, but does not replace capability stage `v1.5`
 
+## Maintenance and deployment prioritization
+
+The following table ranks sensing surfaces by deployment friction versus
+decision value. Use it to sequence which surfaces to build, enable, or
+defer.
+
+| Surface | Friction | Decision value | Priority |
+| --- | --- | --- | --- |
+| Bench-air indoor node | Low (USB power, no install) | High (first parcel evidence) | Build first |
+| Thermal slope inference | Zero (computed from existing sensor) | Medium (HVAC state at low confidence) | Enable immediately |
+| IO ratio baseline | Zero (computed from existing sensors) | High (smoke loop outcome prediction) | Enable immediately |
+| Smart thermostat adapter | Low (cloud API, no hardware) | High (HVAC state at high confidence) | Add when available |
+| Mast-lite outdoor node | Medium (mounting, weather protection) | High (outdoor/indoor divergence) | Add for v1.0 |
+| Outage sensor | Medium (battery, fallback radio) | High (cross-cuts all three loops) | Add for v1.5 |
+| CT clamp circuit monitor | High (panel access, electrician) | High (HVAC + sump at high confidence) | Add selectively |
+| Flood node | High (site-specific install, calibration) | Medium (geography-gated) | Add only when justified |
+| Weather-pm-mast | High (mast, airflow, maintenance) | Medium (second-wave outdoor) | Defer |
+| Thermal pod | Very high (privacy, calibration, R&D) | Low (research-gated) | Defer |
+
+**Design rule:** never add a higher-friction surface before all
+lower-friction surfaces that provide equal or greater decision value are
+stable.
+
 ## Related docs
 
 - `integrated-parcel-system-spec.md`

@@ -59,9 +59,35 @@ It is to collect the minimum surfaces needed to model how the house responds to 
 | `indoor-response-node` | Hardware family (planned) | Indoor PM2.5, indoor temperature, indoor RH — lets the system see whether the house is buffering occupants from outdoor forcing |
 | `power-outage-node` | Hardware family or adapter (planned) | Mains up/down and backup-power posture — continuity and resilience floor during disruption |
 | `equipment-state-adapter` | Non-node or adapter surface | Read-side HVAC mode, fan, recirculation vs fresh air, purifier, shade/window, sump/pump where available |
+| `circuit-monitor` | Hardware family (planned) | Non-invasive current-draw monitoring node using split-core CT clamps and PZEM-004T/016. Monitors HVAC and sump pump circuits for operating state, power draw, and cycle timing. Equipment-state adapter that feeds `hvac_mode`, `sump_state`, `equipment_running`, and power draw data into house-state at HIGH confidence. Optional equipment-state module -- not part of default Tier 1-2 parcel kit. See `../../hardware/circuit-monitor/README.md` |
 | `action-log` | Support object | Household or building actions (mode changes, purifier run, drain clearing, barrier install, backup activation) with timestamps and targets |
 | `outcome-log` / response verification | Support object | Whether actions improved observed conditions over defined windows (for example 30–90 minutes for smoke-related PM response) |
 | `building-and-site-metadata-surface` | Parcel-context extensions | Orientation, roof/color, shading, tree canopy, impervious area, low points, drainage, vents, filter path — part of response interpretation, not decorative metadata |
+
+**Tiered acquisition model for house-state fields:**
+
+Equipment operating state can be acquired at three fidelity tiers. Each tier maps
+to a `source_kind` in the `equipment-state-observation` contract. Higher tiers
+take priority when available, but lower tiers ensure every parcel has at least
+some equipment-state signal.
+
+- **Tier 1 (passive inference):** thermal slope inference from existing indoor
+  temperature sensor -- zero additional hardware, LOW confidence. Uses observed
+  indoor temperature slope versus expected passive thermal behavior to classify
+  HVAC mode. Cannot distinguish recirculate from fresh-air mode. See
+  `../../software/inference-engine/thermal-slope-inference.md`.
+- **Tier 2 (adapter integration):** cloud API adapters for Ecobee, Nest,
+  Sensibo, Honeywell, and similar smart thermostats -- no new hardware if the
+  homeowner already has a compatible device, HIGH confidence but cloud-dependent.
+  Produces `source_kind: "adapter_derived"`.
+- **Tier 3 (direct measurement):** CT clamp circuit-monitor node -- highest
+  fidelity, no cloud dependency, HIGH confidence. Produces
+  `source_kind: "direct_measurement"`. Optional hardware add-on for parcels
+  where equipment-state fidelity is critical (for example smoke-protect
+  verification).
+
+The inference engine adapter registry evaluates sources in descending tier order
+and uses the freshest high-confidence source available for each parcel.
 
 **First closed-loop priority (spec direction):** smoke protection — outdoor PM, indoor PM, smoke-protect posture, bounded actions such as recirculation / fan / purifier, then verify indoor PM response over a bounded time window.
 

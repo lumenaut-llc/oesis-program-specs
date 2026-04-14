@@ -206,3 +206,56 @@ Smoke protection is the best first proof path:
 
 This is narrow enough to ship honestly and strong enough to prove that the
 product is learning from parcel-specific response.
+
+## Second closed loop: flood protection
+
+Flood protection is the second proof path after smoke. It differs from the
+smoke loop in two important ways: verification is event-based rather than
+continuous, and the primary metric is response timing rather than
+environmental improvement.
+
+> **Note:** the flood loop is deferred until the flood observation family is
+> implemented in the ingest path. The specification is included now for
+> architectural completeness.
+
+### Trigger
+
+Water contact sensor at the lowest at-risk point, cross-referenced with local
+precipitation and upstream gage trend.
+
+### House state inputs
+
+- `sump_pump_operational` -- is the sump pump functional and powered
+- `power_state` -- mains and backup power status (sump depends on power)
+- `drainage_last_cleared` -- date or staleness of last drainage maintenance
+- `egress_points_accessible` -- whether exits and low-point paths are clear
+
+### Actions
+
+| Action | Timing |
+| --- | --- |
+| `verify_sump_operational` | Immediate |
+| `move_critical_assets` | Within 30 minutes |
+| `document_water_entry_point` | Within 60 minutes |
+| `check_egress` | Immediate if water is rising |
+
+### Verification
+
+Verification is event-based, not continuous. The system records whether
+actions were taken and what the outcome was per event, rather than
+monitoring a rolling metric window.
+
+Key metrics:
+
+- `time_to_first_action_minutes` -- elapsed time from trigger to first
+  logged intervention
+- `damage_reported` -- boolean indicating whether damage was reported for
+  the event
+
+### Key difference from smoke
+
+The smoke loop measures continuous environmental improvement (indoor PM
+drops over a 45-minute window). The flood loop measures discrete response
+timing and binary damage outcome. This reflects the nature of the hazard:
+smoke burden is gradual and reversible through intervention, while flood
+damage is threshold-based and largely irreversible once water enters.

@@ -95,6 +95,26 @@ When route, block, and lifeline reasoning mature, extend measurement per
 release gates while architecture remains `docs-only` or `planned` for those
 surfaces.
 
+## Closed-loop verification KPIs (v1.5+)
+
+> **Note:** these KPIs apply from `v1.5` onward. They are not `v0.1`
+> acceptance criteria but are included here for forward planning so the
+> measurement framework is coherent across phases.
+
+| KPI | Definition |
+| --- | --- |
+| `loops_triggered` | Total hazard events where the system generated a recommendation. |
+| `loops_with_action_logged` | Subset of `loops_triggered` where an `intervention-event` was recorded. |
+| `loops_with_verified_outcome` | Subset of `loops_triggered` where a `verification-outcome` was recorded within the response window. |
+| `loop_completion_ratio` | `loops_with_verified_outcome` / `loops_triggered`. |
+| `target_delta_met_ratio` | Proportion of verified loops where the expected improvement was achieved. |
+
+Null or confounded loops still count in `loops_triggered`. The metric
+measures system coverage, not just success. A low `loop_completion_ratio`
+may indicate instrumentation gaps, operator dropout, or hazard events that
+resolve before action is possible -- all of which are useful signals for
+product improvement.
+
 ## Related docs
 
 - `../../program/operating-packet/08-kpi-framework.md` — full KPI catalog

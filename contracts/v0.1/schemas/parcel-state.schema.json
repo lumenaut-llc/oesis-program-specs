@@ -231,6 +231,13 @@
         "$ref": "#/$defs/contrastiveExplanation"
       }
     },
+    "local_value_summary": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Concise statement of what local node evidence contributed that public context alone could not provide. Null when no local evidence exists or local evidence agrees with public context."
+    },
     "closed_loop_summary": {
       "type": "object",
       "additionalProperties": true

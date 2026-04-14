@@ -336,6 +336,16 @@ minimum-functioning definition.
   Short reference block pointing to the evidence used for the decision.
   It may optionally include `support_object_refs` when later bridge support
   objects are present alongside the baseline parcel-state evaluation.
+- `local_value_summary`
+  Optional top-level string that concisely states what the local node
+  contributed that public context alone could not provide.
+  Example: `"Local PM2.5 (47 ug/m3) is 22 ug/m3 higher than regional estimate, consistent with localized smoke accumulation at this parcel."`
+  If no local node evidence exists or local evidence agrees with public
+  context, this field should be null or state
+  `"Local evidence consistent with regional data; no novel parcel-specific signal detected."`
+  This field makes the differentiation between parcel-first and regional
+  reasoning immediately visible without requiring consumers to parse nested
+  `contrastive_explanations`.
 
 ## Design rules
 

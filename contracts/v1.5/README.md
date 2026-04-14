@@ -25,18 +25,25 @@ frozen root `v0.1` contract surface or overloading the additive `v1.0` lane.
 
 ## Initial contents
 
+Narrative docs:
 - `house-state-schema.md`
 - `house-capability-schema.md`
 - `equipment-state-observation-schema.md`
 - `source-provenance-record-schema.md`
 - `intervention-event-schema.md`
 - `verification-outcome-schema.md`
+
+JSON schemas:
 - `schemas/house-state.schema.json`
+- `schemas/house-capability.schema.json`
 - `schemas/equipment-state-observation.schema.json`
 - `schemas/source-provenance-record.schema.json`
 - `schemas/intervention-event.schema.json`
 - `schemas/verification-outcome.schema.json`
+
+Examples:
 - `examples/house-state.example.json`
+- `examples/house-capability.example.json`
 - `examples/equipment-state-observation.example.json`
 - `examples/source-provenance-record.example.json`
 - `examples/intervention-event.example.json`

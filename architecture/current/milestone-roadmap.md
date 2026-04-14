@@ -8,8 +8,8 @@ reference architecture.
 This file translates the current **reference** architecture into milestones that can
 be used for planning, acceptance, and scope control without pretending later
 surfaces are already implemented. The narrow **program-phase `v0.1`** slice is the
-anchor; later milestones stage growth toward **`v1.0`**-style breadth (see
-Relationship to program phases).
+anchor; later milestones stage growth toward **program-phase `v1.0`**-style breadth
+(see Relationship to program phases).
 
 ## Status
 
@@ -35,7 +35,7 @@ not mean every milestone sits inside the **narrow program-phase `v0.1`** slice i
   `../../program/operating-packet/functional-state-and-response-model.md`.
 
 **Milestone 3 (flood)** and **Milestone 4 (richer outdoor)** are **staged** on the path
-toward `v1.0` breadth. In `09`, they are **out** of the narrow `v0.1` **core**; they
+toward program-phase `v1.0` breadth. In `09`, they are **out** of the narrow `v0.1` **core**; they
 belong here as **later** milestones, not as claims about today's minimal slice.
 
 ## Planning rules

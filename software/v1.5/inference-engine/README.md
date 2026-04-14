@@ -10,3 +10,5 @@ See:
 
 - `architecture.md`
 - `interfaces.md`
+- `derived-house-state-fields.md`
+- `thermal-slope-inference.md`

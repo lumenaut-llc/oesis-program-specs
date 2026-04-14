@@ -58,6 +58,9 @@ Current `v0.1` use:
 - mast-lite is partially supported through the current shared packet lineage
 - other node families exist in architecture and hardware docs but are not all
   implemented in the current reference software path
+- circuit-monitor is a planned v1.5 node family for non-invasive CT clamp
+  current-draw monitoring of HVAC and sump circuits; see
+  `../../architecture/system/node-taxonomy.md`
 
 Main sources:
 - `../../hardware/bench-air-node/README.md`
@@ -304,6 +307,12 @@ capability-stage `v1.5` and exist here for architectural completeness. JSON
 schemas and examples are present in `contracts/v0.1/schemas/` for structural
 validation, but their design authority lives in `contracts/v1.5/` and
 `../../architecture/v1.5/house-state-and-verification-model.md`.
+
+Full contract triples (narrative doc + JSON schema + example) for all six objects
+are in `../../contracts/v1.5/`. See `../../contracts/v1.5/README.md` for the
+complete listing. Parcel-platform API endpoints for these objects are documented
+in `../../software/parcel-platform/interfaces.md` with `Status: planned`
+annotations.
 
 - house state — indoor response and power-state snapshot (`planned`)
 - intervention event — action taken during a hazard event (`planned`)

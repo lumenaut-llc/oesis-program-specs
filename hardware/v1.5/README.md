@@ -10,6 +10,7 @@ foundation.
 - `indoor-response-node`
 - `power-outage-node`
 - `equipment-state-adapter`
+- `circuit-monitor`
 
 These are the minimum additional physical or adapter surfaces needed to connect
 parcel conditions to house response.
@@ -25,6 +26,7 @@ standalone nodes.
 - `indoor-response-node/README.md`
 - `power-outage-node/README.md`
 - `equipment-state-adapter.md`
+- `circuit-monitor/README.md`
 
 ## Design rule
 
