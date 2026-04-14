@@ -8,7 +8,7 @@ The reference runtime uses a stateless POST pattern where the caller supplies
 a parcel-state payload and receives formatted output. This avoids requiring
 persistent state in the parcel-platform service.
 
-- `POST /v1/parcel-platform/parcel-view`
+- `POST /v1/parcels/state/view`
   Build a dwelling-facing parcel view from a parcel-state payload.
 - `POST /v1/parcels/state/evidence-summary`
   Build a display-safe evidence summary directly from a parcel-state payload.
