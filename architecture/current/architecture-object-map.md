@@ -17,7 +17,7 @@ version," read `minimum-functioning-v0.1.md` alongside this file.
 
 ## Relationship to layered blueprint (`05`)
 
-The seven layers in `../../05-revised-architecture-blueprint.md` map onto this
+The seven layers in `../../program/operating-packet/05-revised-architecture-blueprint.md` map onto this
 object map as follows (this file is the **enumerated** model; `05` names the
 **canonical layer titles**):
 
@@ -39,7 +39,7 @@ adds explicit emphasis on **registry**, installation/trust metadata, **shared**
 signal maturity, **functional state** as a clearer split, and history—consistent
 with statuses here (**§6** `docs-only`, **§8** `partial`, and matrix rows).
 **`v1.5`** response and verification objects are planned in
-`../../functional-state-and-response-model.md` and `../../09-phasing-v0.1-v1.0-v1.5.md`,
+`../../program/operating-packet/functional-state-and-response-model.md` and `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`,
 not first-class rows in this `v0.1` map.
 
 ## Object model
@@ -121,8 +121,8 @@ Current `v0.1` use:
 - this is one of the strongest current boundaries in the stack
 
 Main sources:
-- `../../contracts/README.md`
-- `../../contracts/examples/normalized-observation.example.json`
+- `../../contracts/v0.1/README.md`
+- `../../contracts/v0.1/examples/normalized-observation.example.json`
 - `../../software/ingest-service/architecture.md`
 
 ### 5. Parcel context
@@ -160,7 +160,7 @@ Current `v0.1` use:
 Main sources:
 - `../../contracts/node-registry-schema.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
-- `../../release/v.0.1/implementation-status-matrix.md`
+- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
 
 ### 7. Public context
 
@@ -195,7 +195,7 @@ Current `v0.1` use:
 Main sources:
 - `../../contracts/shared-neighborhood-signal-schema.md`
 - `../../software/shared-map/architecture.md`
-- `../../release/v.0.1/implementation-status-matrix.md`
+- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
 
 ### 9. Parcel state
 
@@ -210,8 +210,8 @@ Role:
 what the blueprint separates as **hazard-oriented** estimates and **functional**
 meaning (shelter, reentry, egress, asset risk, access/utility framing). **Response
 state**—actions taken, verification, controllability—is **out of scope** for the
-narrow **`v0.1`** slice; see `../../functional-state-and-response-model.md` and
-program-phase **`v1.5`** in `../../09-phasing-v0.1-v1.0-v1.5.md`.
+narrow **`v0.1`** slice; see `../../program/operating-packet/functional-state-and-response-model.md` and
+program-phase **`v1.5`** in `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`.
 
 Current `v0.1` use:
 - parcel-state generation is central to the current reference path
@@ -252,14 +252,14 @@ Current `v0.1` use:
 - important product surfaces are still partial or docs-only
 
 Main sources:
-- `../../contracts/schemas/`
-- `../../release/v.0.1/implementation-status-matrix.md`
+- `../../contracts/v0.1/schemas/`
+- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
 - `../../software/parcel-platform/README.md`
 
 ## Layered view
 
 The grouping below is the **object-map** shorthand for navigation. **Canonical
-layer names and purposes** are in `../../05-revised-architecture-blueprint.md`
+layer names and purposes** are in `../../program/operating-packet/05-revised-architecture-blueprint.md`
 (see Relationship table above).
 
 ### Observation layer
@@ -297,6 +297,28 @@ layer names and purposes** are in `../../05-revised-architecture-blueprint.md`
 - operator access events
 - retention cleanup reports
 
+### Response and verification layer (capability-stage `v1.5` bridge)
+
+These objects are **not** part of the `v0.1` decision layer. They belong to
+capability-stage `v1.5` and exist here for architectural completeness. JSON
+schemas and examples are present in `contracts/v0.1/schemas/` for structural
+validation, but their design authority lives in `contracts/v1.5/` and
+`../../architecture/v1.5/house-state-and-verification-model.md`.
+
+- house state — indoor response and power-state snapshot (`planned`)
+- intervention event — action taken during a hazard event (`planned`)
+- verification outcome — measured before/after result (`planned`)
+- equipment-state observation — read-side HVAC/fan/purifier signals (`planned`)
+- source provenance record — per-signal freshness and audit trail (`planned`)
+- house capability — coarse physical equipment inventory (`planned`)
+
+### Controls layer (capability-stage `v2.5`)
+
+- control compatibility — endpoint inventory with integration class (`planned`)
+
+See `../../architecture/system/node-taxonomy.md` for capability-stage placement
+and `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md` for phasing.
+
 ## `v0.1` rule of interpretation
 
 The parcel is the primary decision object, but not the only architecture object.
@@ -315,15 +337,15 @@ implemented in the current stack.
 
 This object map uses the same status vocabulary as:
 
-- `../../release/v.0.1/implementation-status-matrix.md`
+- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
 
 Do not let architecture prose imply that a `partial`, `docs-only`, or `planned`
 object is already a complete product/runtime surface.
 
 ## Blueprint and phasing references
 
-- `../../05-revised-architecture-blueprint.md` — seven-layer model and hazard /
+- `../../program/operating-packet/05-revised-architecture-blueprint.md` — seven-layer model and hazard /
   functional / response split
-- `../../functional-state-and-response-model.md` — bridge toward response and
+- `../../program/operating-packet/functional-state-and-response-model.md` — bridge toward response and
   verification objects
-- `../../09-phasing-v0.1-v1.0-v1.5.md` — when objects mature by program phase
+- `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md` — when objects mature by program phase
