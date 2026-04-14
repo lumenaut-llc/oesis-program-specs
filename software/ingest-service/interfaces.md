@@ -4,12 +4,25 @@
 
 - `POST /v1/ingest/node-packets`
   Accept a single node packet payload plus optional transport metadata.
+  Requires `X-OESIS-Parcel-Id` header for node-to-parcel binding.
 - `POST /v1/ingest/node-batch`
   Optional future batch endpoint for buffered offline uploads.
 - `GET /v1/ingest/health`
   Report service health and current schema support.
 - `GET /v1/ingest/schemas`
   Return supported packet schema versions and deprecation status.
+
+## Development / debug endpoints
+
+These endpoints support development and operator debugging. They are not part
+of the production contract and may be removed or gated in deployment.
+
+- `GET /v1/ingest/debug/last`
+  Return the last accepted normalized observation as JSON (in-memory, not
+  persisted). Useful for verifying ingest behavior during serial capture.
+- `GET /v1/ingest/live`
+  Browser-friendly HTML dashboard showing the last accepted packet with
+  auto-refresh. Useful during hardware bring-up and field installation.
 
 ## Internal events / jobs
 

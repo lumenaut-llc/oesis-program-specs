@@ -242,6 +242,24 @@
       "type": "object",
       "additionalProperties": true
     },
+    "versioning": {
+      "type": "object",
+      "description": "Runtime versioning metadata including API version, runtime lane, and supported lanes."
+    },
+    "action_logs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Structured action log entries derived from intervention-event inputs. Present when v1.5 bridge objects are supplied."
+    },
+    "outcome_records": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Structured outcome records derived from verification-outcome inputs. Present when v1.5 bridge objects are supplied."
+    },
     "freshness": {
       "type": "object",
       "required": [
@@ -297,6 +315,11 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "runtime_lane": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Runtime lane that produced this parcel-state (e.g., v0.1, v0.2)."
         }
       }
     }

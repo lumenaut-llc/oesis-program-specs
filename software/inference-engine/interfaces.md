@@ -2,14 +2,42 @@
 
 ## Public API surfaces
 
+### Stateless inference (reference implementation)
+
+The reference runtime uses a stateless POST pattern where the caller supplies
+all inputs (normalized observation, parcel context, public context, optional
+support objects) and receives a computed parcel-state in response. This avoids
+requiring persistent state in the inference service.
+
+- `POST /v1/inference/parcel-state`
+  Compute a parcel-state snapshot from a normalized observation and optional
+  context inputs. Accepts JSON body with normalized observation plus optional
+  `parcel_context`, `public_context`, `shared_neighborhood_signal`,
+  `house_state`, `house_capability`, `equipment_state_observation`,
+  `source_provenance_record`, `intervention_event`, and
+  `verification_outcome` fields.
+- `GET /v1/inference/health`
+  Report service health, active model versions, and current runtime lane.
+- `GET /v1/inference/models`
+  Return active hazard model versions or threshold sets, including
+  public-context policy versions when applicable.
+
+### Stateful inference (future production target)
+
+When the system has persistent observation storage and a parcel registry, the
+following RESTful endpoints should wrap the stateless inference with caching
+and history:
+
 - `GET /v1/parcels/{parcel_id}/state`
   Return the latest parcel-state snapshot for the parcel.
 - `GET /v1/parcels/{parcel_id}/state/history`
   Return prior parcel-state snapshots and freshness metadata.
 - `POST /v1/inference/recompute/{parcel_id}`
   Trigger an explicit recompute for one parcel.
-- `GET /v1/inference/models`
-  Return active hazard model versions or threshold sets, including public-context policy versions when applicable.
+
+These endpoints are not yet implemented in the reference runtime. They require
+observation persistence, node registry binding, and parcel-context lookup —
+all of which are v0.4+ scope.
 
 ## Internal events / jobs
 

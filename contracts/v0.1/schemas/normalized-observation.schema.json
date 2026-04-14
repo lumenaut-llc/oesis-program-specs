@@ -93,6 +93,10 @@
     },
     "raw_packet": {
       "type": "object"
+    },
+    "versioning": {
+      "type": "object",
+      "description": "Runtime versioning metadata including API version, runtime lane, and supported lanes."
     }
   }
 }

@@ -2,6 +2,25 @@
 
 ## Public API surfaces
 
+### Stateless reference endpoints (reference implementation)
+
+The reference runtime uses a stateless POST pattern where the caller supplies
+a parcel-state payload and receives formatted output. This avoids requiring
+persistent state in the parcel-platform service.
+
+- `POST /v1/parcel-platform/parcel-view`
+  Build a dwelling-facing parcel view from a parcel-state payload.
+- `POST /v1/parcels/state/evidence-summary`
+  Build a display-safe evidence summary directly from a parcel-state payload.
+- `GET /v1/parcel-platform/health`
+  Report service health and current runtime lane.
+
+### Stateful RESTful endpoints (future production target)
+
+When the system has persistent parcel-state storage and a parcel registry,
+the following endpoints should wrap the stateless formatting with lookup
+and caching:
+
 - `GET /v1/parcels/{parcel_id}`
   Return parcel metadata needed by the UI.
 - `GET /v1/parcels/{parcel_id}/state`
@@ -10,8 +29,9 @@
   Return recent parcel-state history.
 - `GET /v1/parcels/{parcel_id}/evidence-summary`
   Return a display-safe summary of evidence sources used by the latest state.
-- `POST /v1/parcels/state/evidence-summary`
-  Build a display-safe evidence summary directly from a parcel-state payload in the reference scaffold.
+
+These endpoints are not yet implemented in the reference runtime. They require
+observation persistence and parcel-state caching — v0.4+ scope.
 - `GET /v1/parcels/{parcel_id}/sharing`
   Return the current sharing-mode settings, notice versions, and revocation status.
 - `POST /v1/parcels/{parcel_id}/sharing`
