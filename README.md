@@ -7,9 +7,12 @@ Open Environmental Sensing and Inference System (`OESIS`) is the canonical
 system name. `Resilient Home Intelligence` (`RHI`) remains a legacy
 compatibility name during the transition.
 
-The Git repository is **`oesis-program-specs`** on GitHub (`lumenaut-llc/oesis-program-specs`), alongside the sibling **`oesis-runtime`** checkout.
-
-**Finishing the remote rename:** If GitHub still lists the old repository name, open **Settings → General → Repository name** on that repo and set it to **`oesis-program-specs`**. GitHub keeps redirects from the old URL for a while. This checkout should use `origin` → `https://github.com/lumenaut-llc/oesis-program-specs.git`; if not, run `git remote set-url origin https://github.com/lumenaut-llc/oesis-program-specs.git`. After the rename, confirm with `git fetch origin` and push (`git push -u origin main` if needed). Update **GitHub Pages** or any external links that still use the old path or `github.io/.../resilient-home-intelligence/...` URLs.
+The Git repository is **`oesis-program-specs`** on GitHub
+([`lumenaut-llc/oesis-program-specs`](https://github.com/lumenaut-llc/oesis-program-specs)),
+alongside the sibling
+[`oesis-runtime`](https://github.com/lumenaut-llc/oesis_runtime) and
+[`oesis-public-site`](https://github.com/lumenaut-llc/oesis_public_site)
+repositories.
 
 ## Purpose
 
@@ -24,22 +27,21 @@ environmental sensing and parcel-awareness initiative. It combines:
 
 The system is designed so each parcel can receive parcel-level condition estimates even with partial sensor adoption. More participating nodes can improve precision and confidence, but they do not unlock basic functionality.
 
-This repository now serves as the canonical home for:
+This repository is the canonical home for:
 
 - architecture and system definitions
 - schemas, examples, and release packet materials
 - governance, privacy, and publication controls
 - build and publication support for split-repo workflows
 
-The runnable Python reference services and the public preview site now live as
+The runnable Python reference services and the public preview site live in
 standalone sibling repositories:
 
-- `../oesis-runtime`
-- `../oesis-public-site`
+- [`oesis-runtime`](https://github.com/lumenaut-llc/oesis_runtime) — reference Flask services (ingest, inference, parcel-platform)
+- [`oesis-public-site`](https://github.com/lumenaut-llc/oesis_public_site) — Next.js public preview site
 
-Operational commands in this repository now proxy to those sibling repos by
-default. The old in-repo runtime and site trees have been retired and replaced
-with migration pointers only.
+Operational commands in this repository proxy to those sibling repos via the
+Makefile.
 
 ## Core principles
 
@@ -66,24 +68,22 @@ with migration pointers only.
 - `shared/` — shared standards, templates, and glossary
 - `meta/` — planning, milestones, operating notes, repo-split execution docs, and contribution guidance
 - `artifacts/` — generated split artifacts such as contracts, public content, and runtime evidence bundles
-- `scripts/repo_split.py` — split automation for syncing runtime assets, building bundles, and producing evidence artifacts for sibling repos
-- `oesis/` — migration pointer to the standalone `../oesis-runtime` repository
-- `sites/public-preview/` — migration pointer to the standalone `../oesis-public-site` repository
 
-## Split workflow
+## Cross-repo workflows
 
-Use these commands while the split is in progress:
+This repository's Makefile proxies validation and build commands to the
+sibling `oesis-runtime` and `oesis-public-site` checkouts:
 
-- `make oesis-validate`
-- `make oesis-check`
-- `make oesis-http-check`
-- `make public-site-build`
-- `make repo-split-sync-runtime-assets`
-- `make repo-split-build-contracts-bundle`
-- `make repo-split-build-public-content-bundle`
-- `make repo-split-build-runtime-evidence-bundle`
+- `make oesis-validate` — run runtime example validation
+- `make oesis-check` — run runtime contract checks
+- `make oesis-http-check` — run runtime HTTP endpoint checks
+- `make public-site-build` — build the public preview site
+- `make repo-split-sync-runtime-assets` — sync spec assets into the runtime
+- `make repo-split-build-contracts-bundle` — produce the contracts bundle
+- `make repo-split-build-public-content-bundle` — produce the public-content bundle
+- `make repo-split-build-runtime-evidence-bundle` — produce the evidence bundle
 
-The canonical execution plan lives in `meta/repo-split-plan.md`.
+Background on the repo split is in `meta/repo-split-plan.md`.
 
 ## Version lanes
 
@@ -97,7 +97,6 @@ Use these repo surfaces as the default architecture-and-contract entrypoints:
 - `contracts/v1.0/` — additive `v1.0` contract deltas and future-lane notes
 - `contracts/v1.5/` — additive bridge-stage contract deltas
 
-The older `technical-architecture/` tree remains as a transitional pointer.
 For explicit versioned architecture, prefer `architecture/current/`,
 `architecture/v1.0/`, and `architecture/v1.5/`.
 
