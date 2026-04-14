@@ -23,3 +23,9 @@ The v1.0 product surface and scope docs do not require these schemas. They are
 here so the v1.5 bridge lane can evolve them additively from a v1.0 baseline
 rather than forking from v0.1. See `../../v1.5/README.md` for their primary
 architectural home.
+
+**Measurement-trust contracts** (v1.0 deliverables — these compose per-signal
+quality factors into parcel-level trust assessment):
+
+- `trust-score.schema.json`
+- `deployment-metadata.schema.json`

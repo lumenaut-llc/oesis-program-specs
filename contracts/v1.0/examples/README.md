@@ -14,3 +14,7 @@ Current `v1.0` additive example files:
 - `consent-store.example.json`
 - `sharing-settings.example.json`
 - `sharing-store.example.json`
+- `network-assist-signal.example.json`
+- `research-data-export.example.json`
+- `trust-score.example.json`
+- `deployment-metadata.example.json`

@@ -50,6 +50,12 @@ Provide the additive `v1.0` contract lane without mutating the frozen
 - `examples/sharing-store.example.json`
 - `examples/network-assist-signal.example.json`
 - `examples/research-data-export.example.json`
+- `trust-score-schema.md`
+- `deployment-metadata-schema.md`
+- `schemas/trust-score.schema.json`
+- `schemas/deployment-metadata.schema.json`
+- `examples/trust-score.example.json`
+- `examples/deployment-metadata.example.json`
 
 ## Current posture
 
