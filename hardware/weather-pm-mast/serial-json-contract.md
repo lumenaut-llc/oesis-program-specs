@@ -63,15 +63,43 @@ The first scaffold supports:
 
 ## Expected PM-first expansion
 
-Once the SPS30 path is truly integrated, the packet should grow beyond the
-placeholder `present: false` block and include explicit particulate outputs such
-as:
+Once the SPS30 driver is integrated, the `sps30` block should expand to:
 
-- `pm1_ugm3`
-- `pm25_ugm3`
-- `pm4_ugm3`
-- `pm10_ugm3`
+```json
+"sps30": {
+  "present": true,
+  "pm1_ugm3": 3.2,
+  "pm25_ugm3": 8.7,
+  "pm4_ugm3": 10.1,
+  "pm10_ugm3": 11.4,
+  "typical_particle_size_um": 1.8
+}
+```
 
-That is the detail that makes this contract materially different from
+| Field | Unit | Description |
+|---|---|---|
+| `pm1_ugm3` | ug/m3 | Mass concentration PM1.0 |
+| `pm25_ugm3` | ug/m3 | Mass concentration PM2.5 |
+| `pm4_ugm3` | ug/m3 | Mass concentration PM4.0 |
+| `pm10_ugm3` | ug/m3 | Mass concentration PM10 |
+| `typical_particle_size_um` | um | Typical particle size |
+
+The SPS30 communicates over I2C (address `0x69`) or UART. The I2C path is
+preferred for this build since the I2C bus is already used for SHT45 and
+BME680. The sensor requires 5V power and a 10-second measurement startup
+before readings stabilize.
+
+**Integration checklist for the SPS30 contributor:**
+
+1. Add the Sensirion SPS30 library to `platformio.ini` lib_deps
+2. Initialize the SPS30 in `setup()` after the I2C bus is configured
+3. Call `sps30_start_measurement()` and wait for the first valid reading
+4. Read mass concentration values in `loop()` alongside SHT45 and BME680
+5. Populate the `sps30` block with `"present": true` and all five fields
+6. Add `sps30_init_failed` to the error reporting path if the sensor is
+   not detected at boot
+7. Update `derived` to include a `pm25_ugm3` field for direct smoke evidence
+
+This is the detail that makes this contract materially different from
 `mast-lite`: a richer outdoor smoke-evidence surface rather than only sheltered
 weather context.

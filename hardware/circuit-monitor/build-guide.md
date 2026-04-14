@@ -158,6 +158,8 @@ The exact first-build serial payload target is defined in `serial-json-contract.
 ## Links to related docs
 
 - `README.md`
+- `wiring.md`
+- `calibration.md`
 - `firmware-notes.md`
 - `serial-json-contract.md`
 - `operator-runbook.md`
