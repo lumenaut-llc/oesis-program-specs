@@ -15,10 +15,20 @@ It is not optional support gear once the docs use deployed language.
 
 ### Power and protection
 
-- documented power source for the node
+- documented power source for the node (see `power-source-guide.md`)
 - fuse or equivalent protected power posture where relevant
 - reverse-polarity posture where relevant
 - surge or transient posture for outdoor power entry
+
+**Verification steps:**
+
+- [ ] measured idle and peak current draw documented for the specific node build
+- [ ] fuse or polyfuse rating matches peak draw with at least 50% margin
+- [ ] power entry sealed against weather for outdoor nodes (IP67 cable gland or equivalent)
+- [ ] cable routing avoids drip paths into enclosure (drip loop present for outdoor runs)
+- [ ] power-loss behavior documented: does the node reboot cleanly, or is data at risk?
+- [ ] USB adapter rating confirmed sufficient for peak draw (see power-source-guide.md for budgets)
+- [ ] cable jacket rated for UV exposure if outdoor run is not inside conduit or under cover
 
 ### Local buffering and storage
 

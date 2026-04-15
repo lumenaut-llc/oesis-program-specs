@@ -118,6 +118,19 @@ Do not describe a mast-lite install as field-ready unless the shared field-harde
 7. Route cables to avoid drip paths into the enclosure.
 8. Mount the enclosure and sensor assembly in a sheltered outdoor location before long-run testing.
 
+## Power entry
+
+For sheltered outdoor deployment, power must be routed from an indoor source through a weatherproof cable path.
+
+- **Source:** USB 5V from a standard wall adapter (1A minimum) located indoors.
+- **Cable routing:** USB-C cable routes through a wall penetration or window pass-through to the sheltered mounting position. Form a drip loop before the cable enters the enclosure.
+- **Gland:** use an IP67-rated cable gland at the enclosure entry. The gland must grip the cable jacket, not individual conductors.
+- **Protection:** a 500 mA polyfuse on the 5V line is recommended before the cable exits the indoor zone.
+- **Strain relief:** secure the cable inside the enclosure so connector forces do not stress the USB port or solder joints.
+- **Power-loss behavior:** the ESP32-S3 reboots cleanly on power restoration. Observation gaps during outages are tracked by freshness scoring in the runtime.
+
+For detailed power budgets and protection rationale, see `../parcel-kit/power-source-guide.md`.
+
 ## Wiring notes
 
 - Both sensors share the same I2C bus.
