@@ -37,10 +37,12 @@ EXTRA_SOURCES_SPECS = [
     "software/operator-quickstart.md",
 ]
 
+# Hardware docs have moved to oesis-hardware repo.
+# When --bench-air is used, attempt to load from sibling checkout.
 BENCH_AIR_SOURCES = [
-    "hardware/bench-air-node/README.md",
-    "hardware/bench-air-node/build-guide.md",
-    "hardware/bench-air-node/operator-runbook.md",
+    "../oesis-hardware/bench-air-node/README.md",
+    "../oesis-hardware/bench-air-node/build-guide.md",
+    "../oesis-hardware/bench-air-node/operator-runbook.md",
 ]
 
 

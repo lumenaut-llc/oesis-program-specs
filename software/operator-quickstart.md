@@ -234,6 +234,6 @@ For the first integrated parcel kit (**the `v0.2` promotion target**), use this 
 ## Related docs
 
 - `README.md`
-- `../hardware/parcel-kit/parcel-kit-procurement-checklist.md`
-- `../hardware/parcel-kit/parcel-installation-checklist.md`
+- [`parcel-kit/parcel-kit-procurement-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-kit-procurement-checklist.md)
+- [`parcel-kit/parcel-installation-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-installation-checklist.md)
 - `../release/v0.1/reviewer-packet-index.md` (release label `v0.1`, filesystem path `v0.1/`)

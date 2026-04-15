@@ -39,4 +39,4 @@ how that public label relates to:
 - `../../architecture/v1.5/README.md`
 - `../../contracts/v1.5/README.md`
 - `../../software/v1.5/README.md`
-- `../../hardware/v1.5/README.md`
+- [`v1.5/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v1.5/README.md)

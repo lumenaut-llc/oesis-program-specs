@@ -59,7 +59,7 @@ It is to collect the minimum surfaces needed to model how the house responds to 
 | `indoor-response-node` | Hardware family (planned) | Indoor PM2.5, indoor temperature, indoor RH — lets the system see whether the house is buffering occupants from outdoor forcing |
 | `power-outage-node` | Hardware family or adapter (planned) | Mains up/down and backup-power posture — continuity and resilience floor during disruption |
 | `equipment-state-adapter` | Non-node or adapter surface | Read-side HVAC mode, fan, recirculation vs fresh air, purifier, shade/window, sump/pump where available |
-| `circuit-monitor` | Hardware family (implemented) | Non-invasive current-draw monitoring node using split-core CT clamps and PZEM-004T/016. Monitors HVAC and sump pump circuits for operating state, power draw, and cycle timing. Equipment-state adapter that feeds `hvac_mode`, `sump_state`, `equipment_running`, and power draw data into house-state at HIGH confidence. Optional equipment-state module -- not part of default Tier 1-2 parcel kit. See `../../hardware/circuit-monitor/README.md` |
+| `circuit-monitor` | Hardware family (implemented) | Non-invasive current-draw monitoring node using split-core CT clamps and PZEM-004T/016. Monitors HVAC and sump pump circuits for operating state, power draw, and cycle timing. Equipment-state adapter that feeds `hvac_mode`, `sump_state`, `equipment_running`, and power draw data into house-state at HIGH confidence. Optional equipment-state module -- not part of default Tier 1-2 parcel kit. See [`circuit-monitor/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/circuit-monitor/README.md) |
 | `action-log` | Support object | Household or building actions (mode changes, purifier run, drain clearing, barrier install, backup activation) with timestamps and targets |
 | `outcome-log` / response verification | Support object | Whether actions improved observed conditions over defined windows (for example 30–90 minutes for smoke-related PM response) |
 | `building-and-site-metadata-surface` | Parcel-context extensions | Orientation, roof/color, shading, tree canopy, impervious area, low points, drainage, vents, filter path — part of response interpretation, not decorative metadata |
@@ -130,4 +130,4 @@ Prefer public data, shared reports, and selected instrumentation over universal 
 - `architecture-gaps-by-stage.md`
 - `phase-roadmap.md`
 - `../../contracts/parcel-context-schema.md`
-- `../../hardware/v0.1/README.md`
+- [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/README.md)

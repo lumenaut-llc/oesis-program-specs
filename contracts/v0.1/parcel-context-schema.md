@@ -18,7 +18,7 @@ Open Environmental Sensing and Inference System
 - `parcel-state-schema.md`
 - `house-state-schema.md`
 - `house-capability-schema.md`
-- `../../hardware/bench-air-node/README.md`
+- [`bench-air-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/README.md)
 - `../../software/inference-engine/interfaces.md`
 
 ## Why this schema exists
@@ -359,4 +359,4 @@ These fields are valuable for trust and field operations, but they should not si
 - `node-registry-schema.md`
 - `../../architecture/system/node-taxonomy.md`
 - `../../architecture/system/version-and-promotion-matrix.md`
-- `../../hardware/parcel-kit/parcel-installation-checklist.md`
+- [`parcel-kit/parcel-installation-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-installation-checklist.md)

@@ -31,5 +31,5 @@ flood response logic, sump pump monitoring, or intervention verification.
 ## Related
 
 - `../v0.2/` — v0.2 baseline (two-node kit)
-- `../../hardware/flood-node/` — flood-node hardware specifications
+- [`flood-node/`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/flood-node/) — flood-node hardware specifications
 - `../../architecture/current/milestone-roadmap.md` — milestone 3 maps to v0.3

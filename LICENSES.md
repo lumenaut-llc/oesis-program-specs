@@ -6,7 +6,7 @@ For a shorter v1-facing explanation, see `release/v1.0/asset-class-license-and-p
 
 It is a project planning document, not legal advice.
 
-Full license texts for this repository are in the root `LICENSE` file (default documentation and specifications), `software/LICENSE` (software subtree), and `hardware/LICENSE` (hardware subtree).
+Full license texts for this repository are in the root `LICENSE` file (default documentation and specifications) and `software/LICENSE` (software subtree). Hardware designs are licensed under CERN-OHL-S v2 in the separate [oesis-hardware](https://github.com/lumenaut-llc/oesis-hardware) repository; a copy of the license text is retained at `hardware/LICENSE` for reference.
 
 ## Recommended split
 

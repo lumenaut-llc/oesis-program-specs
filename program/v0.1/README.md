@@ -77,7 +77,7 @@ tags. They are **not** the same as **capability stages** (`current v1`, `v1.5`, 
 - **Capability stage `v1.5`** — measurement-to-intervention **foundation** (house-state,
   action/outcome logs, read-side equipment signals); explicit bridge-stage lanes now
   exist under `../../architecture/v1.5/`, `../../contracts/v1.5/`, `../../software/v1.5/`, and
-  `../../hardware/v1.5/`; roadmap and contracts may be draft;
+  [`v1.5/`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v1.5/); roadmap and contracts may be draft;
   full **controls-compatibility inventory** is primarily **`v2.5`**.
 - **Public or marketing “v1.0”** — website, release, or grant language; do not assume it
   matches program-phase lanes or the runtime `v1.0` contract lane unless release materials say so
@@ -93,7 +93,7 @@ current reference stack: `../../architecture/current/milestone-roadmap.md`.
 ## Program structure
 
 - `../../architecture/` — canonical architecture home for current, future, and system narratives
-- `../../hardware/` — physical sensor nodes and installation systems
+- [``](https://github.com/lumenaut-llc/oesis-hardware/blob/main/) — physical sensor nodes and installation systems
 - `../../software/` — ingest, parcel platform, inference, and maps
 - `../../contracts/` — contract docs, schemas, and example payloads
 - `../../release/` — release packet materials and publication controls

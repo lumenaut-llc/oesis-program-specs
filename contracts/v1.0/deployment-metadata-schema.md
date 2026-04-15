@@ -141,5 +141,5 @@ should trigger a trust penalty.
   says how)
 - `../../artifacts/contracts-bundle/deployment-metadata-schema.md` (original
   draft this contract formalizes)
-- `../../hardware/parcel-kit/parcel-installation-checklist.md` (field
+- [`parcel-kit/parcel-installation-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-installation-checklist.md) (field
   procedure that produces deployment metadata)

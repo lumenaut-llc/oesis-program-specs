@@ -63,8 +63,8 @@ Current `v0.1` use:
   `../../architecture/system/node-taxonomy.md`
 
 Main sources:
-- `../../hardware/bench-air-node/README.md`
-- `../../hardware/mast-lite/README.md`
+- [`bench-air-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/README.md)
+- [`mast-lite/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/mast-lite/README.md)
 - `../../contracts/node-registry-schema.md`
 
 ### 2. Packet / raw evidence
@@ -82,7 +82,7 @@ Current `v0.1` use:
 Main sources:
 - `../../contracts/node-observation-schema.md`
 - `../../software/ingest-service/interfaces.md`
-- `../../hardware/bench-air-node/serial-json-contract.md`
+- [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/serial-json-contract.md)
 
 ### 3. Collection path / home-platform ingest boundary
 

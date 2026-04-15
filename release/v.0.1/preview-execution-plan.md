@@ -69,8 +69,8 @@ Make the physical system feel like a tiered kit, not a maze of unrelated prototy
 ### Next concrete steps
 
 1. Treat `bench-air-node` plus `mast-lite` as the first integrated parcel kit.
-2. Use `../../hardware/parcel-kit/parcel-kit-procurement-checklist.md` as the explicit purchase gate for Tier 1 and Tier 2 builds.
-3. Use `../../hardware/parcel-kit/parcel-installation-checklist.md` for:
+2. Use [`parcel-kit/parcel-kit-procurement-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-kit-procurement-checklist.md) as the explicit purchase gate for Tier 1 and Tier 2 builds.
+3. Use [`parcel-kit/parcel-installation-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-installation-checklist.md) for:
    indoor reference siting, sheltered outdoor siting, and flood-node low-point documentation.
 4. Keep `weather-pm-mast` and `thermal-pod` out of the critical path until their contracts and maintenance overhead are ready.
 

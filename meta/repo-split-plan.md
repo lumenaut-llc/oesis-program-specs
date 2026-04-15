@@ -247,11 +247,43 @@ The split is healthy when:
 - `oesis-public-site` can build from approved content bundles rather than raw internal docs paths
 - no repo depends on another via relative filesystem traversal
 
+## Phase 5: Hardware split (complete)
+
+**Decision:** Extract `hardware/` into standalone `oesis-hardware` repository.
+
+**Rationale:**
+- 155 files including 11 Arduino sketches and 2 Python firmware scripts — actual executable code, not specifications
+- Separate license (CERN-OHL-S-2.0) from the rest of the repo
+- Different audience (hardware builders) and change cadence from software architecture
+- Zero coupling to oesis-runtime (runtime only validates `hardware_family` enum fields)
+
+**What moved:**
+- All node families: bench-air-node, mast-lite, flood-node, weather-pm-mast, thermal-pod, circuit-monitor
+- Cross-node resources: parcel-kit (BOMs, checklists, power guide)
+- Version lane directories: v0.1 through v1.5
+- Calibration reference
+
+**What stayed:**
+- `hardware/LICENSE` (CERN-OHL-S-2.0 text, referenced by LICENSES.md)
+- `hardware/README.md` (redirect stub pointing to oesis-hardware)
+
+**Cross-reference approach:** All ~100 relative markdown links from specs into hardware converted to GitHub URLs (`https://github.com/lumenaut-llc/oesis-hardware/blob/main/...`). Outbound references from hardware docs to specs also converted to GitHub URLs.
+
+**Result:** Four-repo structure:
+
+| Repo | Identity | License |
+|------|----------|---------|
+| oesis-program-specs | Architecture, contracts, governance, release | CC BY-SA 4.0 / AGPL-3.0 |
+| oesis-runtime | Python reference services | AGPL-3.0 |
+| oesis-hardware | Sensor node specs, firmware, BOMs | CERN-OHL-S-2.0 / AGPL-3.0 |
+| oesis-public-site | Public preview website | AGPL-3.0 |
+
 ## Current working rule
 
 Now that extraction is complete:
 
 - treat sibling repo `../oesis-runtime` as the runtime source of truth
+- treat sibling repo `../oesis-hardware` as the hardware specification and firmware source of truth
 - treat `contracts/`, `architecture/`, `legal/privacy/`, and `legal/` as the specification and policy source of truth
 - treat sibling repo `../oesis-public-site` as the canonical publication surface
 - treat local `oesis/` and `sites/public-preview/` paths as migration pointers only

@@ -5,11 +5,11 @@
 - [execution-plan.md](execution-plan.md) — unified build sequence from v0.1 through v1.5
 
 ## Hardware
-- ../hardware/bench-air-node/
-- ../hardware/mast-lite/
-- ../hardware/weather-pm-mast/
-- ../hardware/flood-node/
-- ../hardware/thermal-pod/
+- https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/
+- https://github.com/lumenaut-llc/oesis-hardware/blob/main/mast-lite/
+- https://github.com/lumenaut-llc/oesis-hardware/blob/main/weather-pm-mast/
+- https://github.com/lumenaut-llc/oesis-hardware/blob/main/flood-node/
+- https://github.com/lumenaut-llc/oesis-hardware/blob/main/thermal-pod/
 
 ## Software
 - ../software/parcel-platform/
@@ -19,8 +19,8 @@
 
 ## Program Material
 - ../architecture/
-- ../hardware/parcel-kit/
-- ../hardware/calibration/
+- https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/
+- https://github.com/lumenaut-llc/oesis-hardware/blob/main/calibration/
 - ../contracts/
 - ../legal/privacy/
 - ../operations/pilots/

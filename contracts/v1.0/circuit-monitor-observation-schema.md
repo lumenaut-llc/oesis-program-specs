@@ -15,7 +15,7 @@ in the current runtime and the schema evolution should follow the v1.0 baseline.
 ## Raw packet contract
 
 The hardware serial-json-contract is the authoritative source for packet shape:
-`../../hardware/circuit-monitor/serial-json-contract.md`
+[`circuit-monitor/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/circuit-monitor/serial-json-contract.md)
 
 ### Discriminator
 
@@ -94,7 +94,7 @@ pipeline at HIGH confidence (`source_kind: "direct_measurement"`).
 
 ## Related docs
 
-- `../../hardware/circuit-monitor/serial-json-contract.md` — authoritative packet shape
-- `../../hardware/circuit-monitor/README.md` — build guide entry point
+- [`circuit-monitor/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/circuit-monitor/serial-json-contract.md) — authoritative packet shape
+- [`circuit-monitor/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/circuit-monitor/README.md) — build guide entry point
 - `../../architecture/system/node-taxonomy.md` — taxonomy placement
 - `schemas/equipment-state-observation.schema.json` — equipment-state schema

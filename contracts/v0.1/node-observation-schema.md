@@ -25,7 +25,7 @@ schema version. It produces the same packet structure and normalizes to the same
 
 The runtime does not require a separate schema for mast-lite. The inference
 engine treats mast-lite observations identically to bench-air observations
-except for install metadata. See `../../hardware/mast-lite/serial-json-contract.md`.
+except for install metadata. See [`mast-lite/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/mast-lite/serial-json-contract.md).
 
 ### Other schemas
 - explicit schema versioning
@@ -228,4 +228,4 @@ objects**, not by silently overloading `oesis.bench-air.v1`.
 - `parcel-state-schema.md`
 - `node-health-schema.md`
 - `../../software/ingest-service/interfaces.md`
-- `../../hardware/bench-air-node/firmware-notes.md`
+- [`bench-air-node/firmware-notes.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/firmware-notes.md)

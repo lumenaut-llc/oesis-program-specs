@@ -43,13 +43,14 @@ standalone system before the next stage begins.
 
 ## Repositories
 
-OESIS is split across three repositories:
+OESIS is split across four repositories:
 
 | Repository | What it contains | License |
 |---|---|---|
-| **[oesis-program-specs](https://github.com/lumenaut-llc/oesis-program-specs)** (this repo) | Architecture, contracts, schemas, hardware specs, release materials, governance | CC BY-SA 4.0 / AGPL-3.0 / CERN-OHL-S-2.0 ([details](#licensing)) |
-| **[oesis-runtime](https://github.com/lumenaut-llc/oesis_runtime)** | Python reference services: ingest, inference, parcel-platform | AGPL-3.0 |
-| **[oesis-public-site](https://github.com/lumenaut-llc/oesis_public_site)** | Next.js public preview site | AGPL-3.0 |
+| **[oesis-program-specs](https://github.com/lumenaut-llc/oesis-program-specs)** (this repo) | Architecture, contracts, schemas, release materials, governance | CC BY-SA 4.0 / AGPL-3.0 ([details](#licensing)) |
+| **[oesis-runtime](https://github.com/lumenaut-llc/oesis-runtime)** | Python reference services: ingest, inference, parcel-platform | AGPL-3.0 |
+| **[oesis-hardware](https://github.com/lumenaut-llc/oesis-hardware)** | Sensor node specs, build guides, firmware, BOMs | CERN-OHL-S-2.0 / AGPL-3.0 |
+| **[oesis-public-site](https://github.com/lumenaut-llc/oesis-public-site)** | Public preview website | AGPL-3.0 |
 
 ## Quick start
 
@@ -118,7 +119,7 @@ later lanes add multi-node kits:
 | **weather-PM-mast** | Outdoor particulate matter and weather | future |
 | **thermal-pod** | Scene-level thermal imaging (Pi + MLX90640) | future |
 
-Hardware specs, BOMs, and installation guides are in [`hardware/`](hardware/).
+Hardware specs, BOMs, and installation guides are in [`hardware/`](https://github.com/lumenaut-llc/oesis-hardware).
 
 ## How the pipeline works
 
@@ -178,7 +179,7 @@ for promotion criteria and the full version model.
 | `architecture/` | Frozen v0.1 architecture, versioned lanes (v1.0, v1.5), system narratives |
 | `contracts/` | JSON schemas, examples, and narrative docs per contract object |
 | `release/` | Release packet materials per lane (v0.1 through v1.5) |
-| `hardware/` | Sensor node specs, BOMs, installation systems |
+| `hardware/` | Redirect stub — content moved to [oesis-hardware](https://github.com/lumenaut-llc/oesis-hardware) |
 | `software/` | Subsystem interface docs and operator guides |
 | `legal/` | Licensing, governance, privacy policy, contribution policy |
 | `operations/` | Pilot playbooks and operational rollout materials |

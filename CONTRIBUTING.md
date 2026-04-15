@@ -22,8 +22,8 @@ for response timelines and scope.
 | --- | --- | --- |
 | Root, `architecture/`, `contracts/`, `program/`, `release/`, `legal/`, `operations/` | Documentation and specifications | CC BY-SA 4.0 ([`LICENSE`](LICENSE)) |
 | `software/` | Reference code and tests | GNU AGPL v3 ([`software/LICENSE`](software/LICENSE)) |
-| `hardware/` | Design files, wiring, build guides | CERN-OHL-S-2.0 ([`hardware/LICENSE`](hardware/LICENSE)) |
-| `hardware/**/firmware/` | Firmware source | GNU AGPL v3 (per [`LICENSES.md`](LICENSES.md)) |
+| [`oesis-hardware`](https://github.com/lumenaut-llc/oesis-hardware) | Design files, wiring, build guides | CERN-OHL-S-2.0 |
+| `oesis-hardware/**/firmware/` | Firmware source | GNU AGPL v3 (per [`LICENSES.md`](LICENSES.md)) |
 
 If a file has a more specific notice or license statement, that statement
 controls (see [`NOTICE.md`](NOTICE.md)).
@@ -31,7 +31,9 @@ controls (see [`NOTICE.md`](NOTICE.md)).
 ### Sibling repositories
 
 The runnable Python reference implementation lives in
-**[oesis-runtime](https://github.com/lumenaut-llc/oesis-runtime)**. The public
+**[oesis-runtime](https://github.com/lumenaut-llc/oesis-runtime)**. Hardware
+specifications, build guides, and firmware live in
+**[oesis-hardware](https://github.com/lumenaut-llc/oesis-hardware)**. The public
 preview site lives in
 **[oesis-public-site](https://github.com/lumenaut-llc/oesis-public-site)**.
 

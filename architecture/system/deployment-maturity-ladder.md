@@ -157,5 +157,5 @@ stable.
 - `version-and-promotion-matrix.md`
 - `node-taxonomy.md`
 - `sensor-placement-and-representativeness-guide.md`
-- `../../hardware/parcel-kit/field-hardening-checklist.md`
-- `../../hardware/parcel-kit/pilot-field-kit.md`
+- [`parcel-kit/field-hardening-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/field-hardening-checklist.md)
+- [`parcel-kit/pilot-field-kit.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/pilot-field-kit.md)

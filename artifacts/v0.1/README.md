@@ -11,8 +11,8 @@ schemas, and examples elsewhere in the repository.
   `v1.5/`) when bundles diverge by lane.
 - **Compatibility lanes**: when artifact paths move, keep short redirect stubs
   or index pointers so old links still resolve.
-- **Canonical source of truth**: `architecture/`, `contracts/`, `hardware/`,
-  `software/`, and `release/` remain normative; `artifacts/` is derivative.
+- **Canonical source of truth**: `architecture/`, `contracts/`,
+  `software/`, `release/`, and [oesis-hardware](https://github.com/lumenaut-llc/oesis-hardware) remain normative; `artifacts/` is derivative.
 
 ## Mutation rule
 

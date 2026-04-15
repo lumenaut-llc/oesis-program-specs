@@ -124,4 +124,4 @@ The node registry is the bridge between:
 - `parcel-context-schema.md`
 - `sharing-settings-schema.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
-- `../../hardware/parcel-kit/integrated-parcel-kit-bom.md`
+- [`parcel-kit/integrated-parcel-kit-bom.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/integrated-parcel-kit-bom.md)
