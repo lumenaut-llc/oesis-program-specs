@@ -1,5 +1,9 @@
 # Program Index
 
+## Execution Plan
+
+- [execution-plan.md](execution-plan.md) — unified build sequence from v0.1 through v1.5
+
 ## Hardware
 - ../hardware/bench-air-node/
 - ../hardware/mast-lite/
