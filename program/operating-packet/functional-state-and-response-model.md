@@ -1,6 +1,6 @@
 # Functional state and response model
 
-**Canonical incorporation:** Contract-level narrative → [`contracts/parcel-state-schema.md`](../../contracts/parcel-state-schema.md) and [`architecture/current/architecture-object-map.md`](../../architecture/current/architecture-object-map.md) (parcel state §9); phasing table aligns with [`09-phasing-v0.1-v1.0-v1.5.md`](09-phasing-v0.1-v1.0-v1.5.md).
+**Canonical incorporation:** Contract-level narrative → [`contracts/v0.1/parcel-state-schema.md`](../../contracts/v0.1/parcel-state-schema.md) and [`architecture/current/architecture-object-map.md`](../../architecture/current/architecture-object-map.md) (parcel state §9); phasing table aligns with [`09-phasing-v0.1-v1.0-v1.5.md`](09-phasing-v0.1-v1.0-v1.5.md).
 
 This note defines how **hazard state**, **functional state**, and **response state** relate to each other and to **`parcel state`** over program phases. It is a **runtime-adjacent architecture brief**. JSON shapes, field names, and normative contracts remain canonical in **`oesis-program-specs`** (for example `contracts/parcel-state-schema.md` and related artifacts).
 

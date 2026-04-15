@@ -37,8 +37,8 @@ Attach only when parcel risk, region, and use case justify them. None of these a
 
 | Identifier | Role | Typical staging |
 | --- | --- | --- |
-| `flood-node` | Low-point runoff depth and rise-rate evidence | Optional hazard module; `deployment maturity` and normalization still planned for dedicated flood observation family |
-| `weather-pm-mast` | Richer outdoor PM, wind, rainfall | Second-wave outdoor lane after `mast-lite` is stable; higher ops burden |
+| `flood-node` | Low-point runoff depth and rise-rate evidence | Optional hazard module; ingest normalization implemented (`flood.low_point.snapshot`), inference integration pending |
+| `weather-pm-mast` | Richer outdoor PM, wind, rainfall | Second-wave outdoor lane; ingest normalization implemented (`air.pm.snapshot`), inference integration pending |
 | `freeze-node` | Cold-climate pipe-risk and exposed-space thermal evidence | Planned geography module; not required for warm-climate pilots |
 
 ## Research- or privacy-gated hardware
@@ -59,7 +59,7 @@ It is to collect the minimum surfaces needed to model how the house responds to 
 | `indoor-response-node` | Hardware family (planned) | Indoor PM2.5, indoor temperature, indoor RH — lets the system see whether the house is buffering occupants from outdoor forcing |
 | `power-outage-node` | Hardware family or adapter (planned) | Mains up/down and backup-power posture — continuity and resilience floor during disruption |
 | `equipment-state-adapter` | Non-node or adapter surface | Read-side HVAC mode, fan, recirculation vs fresh air, purifier, shade/window, sump/pump where available |
-| `circuit-monitor` | Hardware family (planned) | Non-invasive current-draw monitoring node using split-core CT clamps and PZEM-004T/016. Monitors HVAC and sump pump circuits for operating state, power draw, and cycle timing. Equipment-state adapter that feeds `hvac_mode`, `sump_state`, `equipment_running`, and power draw data into house-state at HIGH confidence. Optional equipment-state module -- not part of default Tier 1-2 parcel kit. See `../../hardware/circuit-monitor/README.md` |
+| `circuit-monitor` | Hardware family (implemented) | Non-invasive current-draw monitoring node using split-core CT clamps and PZEM-004T/016. Monitors HVAC and sump pump circuits for operating state, power draw, and cycle timing. Equipment-state adapter that feeds `hvac_mode`, `sump_state`, `equipment_running`, and power draw data into house-state at HIGH confidence. Optional equipment-state module -- not part of default Tier 1-2 parcel kit. See `../../hardware/circuit-monitor/README.md` |
 | `action-log` | Support object | Household or building actions (mode changes, purifier run, drain clearing, barrier install, backup activation) with timestamps and targets |
 | `outcome-log` / response verification | Support object | Whether actions improved observed conditions over defined windows (for example 30–90 minutes for smoke-related PM response) |
 | `building-and-site-metadata-surface` | Parcel-context extensions | Orientation, roof/color, shading, tree canopy, impervious area, low points, drainage, vents, filter path — part of response interpretation, not decorative metadata |
