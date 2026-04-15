@@ -42,7 +42,11 @@ are not part of the frozen `v0.1` acceptance surface:
 - `equipment-state-observation.example.json`
 - `source-provenance-record.example.json`
 - `intervention-event.example.json`
+- `intervention-event-flood.example.json`
+- `intervention-event-heat.example.json`
 - `verification-outcome.example.json`
+- `verification-outcome-flood.example.json`
+- `verification-outcome-heat.example.json`
 - `control-compatibility.example.json`
 
 Treat these as later-lane material (`v1.5` bridge support, and `v2.5` for full

@@ -15,22 +15,18 @@
   ],
   "approvedSourceRoots": [
     "release/v1.0/",
-    "legal/privacy/",
-    "architecture/",
-    "legal/"
+    "architecture/"
   ],
   "bundle_version": "v1.0",
   "excludedFromPublicNavigation": [
     "release/v1.0/reviewer-packet-index.md",
     "release/v1.0/publish-internal-map.md",
     "release/v1.0/preview-execution-plan.md",
-    "release/v1.0/launch-readiness-checklist.md",
-    "legal/counsel-questions/",
-    "legal/provisional-*"
+    "release/v1.0/launch-readiness-checklist.md"
   ],
   "generated_at": "2026-04-08T21:30:00Z",
-  "legalRoot": "legal/",
-  "privacyGovernanceRoot": "legal/privacy/",
+  "legalRoot": "",
+  "privacyGovernanceRoot": "",
   "programRoot": "",
   "releaseRoot": "release/v1.0/",
   "repoBlobBase": "https://github.com/lumenaut-llc/oesis-program-specs/blob/main/",
