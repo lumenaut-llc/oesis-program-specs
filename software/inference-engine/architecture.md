@@ -61,11 +61,12 @@ computation:
 - `air.node.snapshot` — from bench-air-node and mast-lite
 - `equipment.circuit.snapshot` — from circuit-monitor (auto-derived into
   `equipment_state_observation` for house-state bridge)
-
-Other observation types (`air.pm.snapshot` from weather-pm-mast,
-`flood.low_point.snapshot` from flood-node) are normalized by the ingest service
-but not yet consumed by the inference engine. Integration into parcel-state
-reasoning is a future step.
+- `air.pm.snapshot` — from weather-pm-mast; outdoor PM2.5 feeds smoke
+  probability via `outdoor_pm25_bands`, temperature and gas resistance feed
+  existing heat and smoke paths
+- `flood.low_point.snapshot` — from flood-node; water depth and rise rate
+  feed flood probability via config-driven bands, with a provisional
+  calibration penalty
 
 ## Inputs
 

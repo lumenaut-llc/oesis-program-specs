@@ -37,8 +37,8 @@ Attach only when parcel risk, region, and use case justify them. None of these a
 
 | Identifier | Role | Typical staging |
 | --- | --- | --- |
-| `flood-node` | Low-point runoff depth and rise-rate evidence | Optional hazard module; ingest normalization implemented (`flood.low_point.snapshot`), inference integration pending |
-| `weather-pm-mast` | Richer outdoor PM, wind, rainfall | Second-wave outdoor lane; ingest normalization implemented (`air.pm.snapshot`), inference integration pending |
+| `flood-node` | Low-point runoff depth and rise-rate evidence | Optional hazard module; ingest and inference implemented (`flood.low_point.snapshot`) |
+| `weather-pm-mast` | Richer outdoor PM, wind, rainfall | Second-wave outdoor lane; ingest and inference implemented (`air.pm.snapshot`) |
 | `freeze-node` | Cold-climate pipe-risk and exposed-space thermal evidence | Planned geography module; not required for warm-climate pilots |
 
 ## Research- or privacy-gated hardware
