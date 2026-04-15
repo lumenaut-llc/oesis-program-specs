@@ -2,26 +2,51 @@
 
 `v0.3` is a promotion lane marker for the first flood-capable runtime.
 
-## Hardware posture
+## Sign-off sentence
 
-- Inherit baseline hardware docs from `../v0.1/`.
-- Add files here only if a `v0.3`-specific hardware delta is explicitly accepted.
-- Until such a delta exists, this directory is intentionally lightweight.
+**v0.3** means: flood-node observations normalized through canonical ingest,
+flood conditions reflected in parcel-state — without claiming response logic,
+sump monitoring, or intervention surfaces.
 
-## What v0.3 means for hardware
+## Hardware scope
 
-- `flood-node` promoted to accepted reference hardware for flood-capable parcels
-- Flood-node deployment, calibration, and field-hardening posture documented
-- Three-node kit integration validated
+| Surface | Status | Notes |
+|---------|--------|-------|
+| bench-air-node | Implemented (v0.1) | Carries forward |
+| mast-lite | Partial (v0.2 target) | Carries forward |
+| flood-node (low-point sensing) | Partial | Hardware contract exists; build guide exists; independent reproduction not confirmed |
+| weather-pm-mast | Deferred | Second-wave hardware |
+| circuit-monitor | Deferred to v1.5 | |
+
+## Blockers (from gap register)
+
+| ID | Gap | Status |
+|----|-----|--------|
+| V03-G5 | Flood-node independent build reproduction | Partial — build guide exists; not independently confirmed |
+| V03-G6 | Flood-node calibration: dry reference and depth derivation | Provisional — calibration documented but not field-validated |
+| V03-G7 | Flood-node field deployment context | Defer — not required for bench testing |
+
+## Key acceptance criteria
+
+- **AC-5**: Flood-node independent bring-up — second operator produces functioning
+  node emitting valid serial JSON with distance sensor readings and derived water depth
+- **AC-1**: Flood packet normalization — flood-specific fields preserved through ingest
+
+## Non-goals
+
+- Sump pump monitoring or equipment-state observation
+- Flood intervention logic or response verification
+- Weather-PM or thermal observation families
 
 ## How to use this lane
 
-- For current work, use `../v0.1/` and the root-level node family directories.
-- Add files in this lane only when a concrete `v0.3` hardware delta is accepted.
-- Do not copy `v0.1` files here by default.
+- Inherit baseline hardware docs from `../v0.1/`.
+- Add files here only if a `v0.3`-specific hardware delta is explicitly accepted.
 
 ## Related
 
 - `../v0.2/README.md`
 - `../../release/v0.3/README.md`
+- `../../release/v0.3/v0.3-scope-matrix.md`
+- `../../release/v0.3/v0.3-gap-register.md`
 - `../flood-node/README.md`

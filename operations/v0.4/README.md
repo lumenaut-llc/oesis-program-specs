@@ -2,25 +2,40 @@
 
 `v0.4` is a promotion lane marker for multi-node registry and evidence composition.
 
-## Operations posture
-
-- Inherit baseline operations docs from `../v0.1/`.
-- Add files here only if a `v0.4`-specific operations delta is explicitly accepted.
-- Until such a delta exists, this directory is intentionally lightweight.
-
 ## What v0.4 means for operations
 
 - Node lifecycle operations (register, bind, disable, replace, retire)
-- Installation metadata capture workflows
-- Deployment maturity verification procedures
+- Installation metadata capture workflows (mount type, height, orientation,
+  exposure, power source)
+- Deployment maturity verification procedures (bench-grade vs field-ready)
+
+## Key operational acceptance criteria
+
+- **AC-1**: Node lifecycle exercised — register, bind, disable, replace, retire
+  for a multi-node parcel; retired nodes excluded from inference
+- **AC-2**: Installation metadata — operator submits structured deployment metadata
+  linked to node installation records
+- **AC-4**: Deployment-quality flags visible to operator in parcel view
+
+## Operational gaps
+
+| ID | Gap | Status |
+|----|-----|--------|
+| V04-G1 | Node registry lifecycle: full end-to-end flow | Partial — schema exists; not exercised |
+| V04-G2 | Installation metadata capture surface (CLI, form, or API) | Docs-only — no capture path |
+
+## Non-goals
+
+- Full trust scoring operations (v1.0)
+- Governance enforcement operations (v0.5)
 
 ## How to use this lane
 
-- For current work, use `../v0.1/` and `../pilots/`.
-- Add files in this lane only when a concrete `v0.4` operations delta is accepted.
-- Do not copy `v0.1` files here by default.
+- Inherit baseline operations docs from `../v0.1/`.
+- Add files here only if a `v0.4`-specific operations delta is explicitly accepted.
 
 ## Related
 
 - `../v0.3/README.md`
 - `../../release/v0.4/README.md`
+- `../../release/v0.4/v0.4-acceptance-criteria.md`

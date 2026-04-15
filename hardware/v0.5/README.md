@@ -2,25 +2,34 @@
 
 `v0.5` is a promotion lane marker for operational governance enforcement.
 
-## Hardware posture
+## Sign-off sentence
+
+**v0.5** means: governance enforced as runtime behavior — consent gates sharing,
+revocation stops it, retention has owners, export produces auditable output.
+
+## Hardware scope
+
+v0.5 is a software and governance slice. **No new hardware is introduced.**
+
+All v0.4 hardware carries forward unchanged. Hardware impact at this slice is
+limited to:
+
+- Node provenance and installation records available for retention and export
+- Hardware deployment metadata supports governance audit trails
+
+## How to use this lane
 
 - Inherit baseline hardware docs from `../v0.1/`.
 - Add files here only if a `v0.5`-specific hardware delta is explicitly accepted.
 - Until such a delta exists, this directory is intentionally lightweight.
 
-## What v0.5 means for hardware
+## Carry-forward gaps
 
-- No major new hardware families at this slice
-- Hardware deployment metadata supports governance audit trails
-- Node provenance and installation records available for retention and export
-
-## How to use this lane
-
-- For current work, use `../v0.1/` and the root-level node family directories.
-- Add files in this lane only when a concrete `v0.5` hardware delta is accepted.
-- Do not copy `v0.1` files here by default.
+- V05-G12: Mast-lite field-hardening (deferred from v0.2, track for v1.0)
+- V05-G13: Named BOM vendors (carry-forward, track for v1.0)
 
 ## Related
 
 - `../v0.4/README.md`
 - `../../release/v0.5/README.md`
+- `../../release/v0.5/v0.5-scope-matrix.md`
