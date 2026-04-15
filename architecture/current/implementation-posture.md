@@ -1,13 +1,13 @@
-# Implementation Posture v0.1
+# Implementation Posture
 
 ## Purpose
 
 Tie the current architecture to the current executable and documented reference
-state.
+state across all runtime lanes.
 
 ## Status
 
-Current reference implementation posture.
+Current reference implementation posture. Updated 2026-04-15.
 
 ## Canonical homes
 
@@ -25,20 +25,29 @@ Current reference implementation posture.
 
 ## Current execution evidence
 
-The current local reference posture is anchored by:
+The reference posture is anchored by lane-specific acceptance commands:
 
-- `make oesis-validate`
-- `make oesis-check`
-- `make oesis-http-check`
+| Command | Result | What it proves |
+|---------|--------|----------------|
+| `make oesis-validate` | **PASS** | Schema validation (v0.1) |
+| `make oesis-check` | **PASS** | Offline reference pipeline (v0.1) |
+| `make oesis-http-check` | untested | HTTP smoke test (v0.1) |
+| `make oesis-accept` | **PASS** | v0.1 baseline acceptance |
+| `make oesis-v02-accept` | **PASS** | v0.2: indoor + outdoor (2 nodes) |
+| `make oesis-v03-accept` | **PASS** | v0.3: flood-capable (3 nodes) |
+| `make oesis-v04-accept` | **PASS** | v0.4: multi-node registry lifecycle |
+| `make oesis-v05-accept` | **PASS** | v0.5: governance enforcement |
+| `make oesis-v10-accept` | **PASS** | v1.0: extended support objects |
 
-These checks are the minimum evidence for calling a surface implemented in the
-current reference path.
+**Acceptance test caveat:** These tests are structural smoke tests. They verify
+that pipelines execute without error and output data structures contain required
+fields. They do **not** assert inference value correctness, behavioral edge
+cases, or HTTP-level governance enforcement. See
+`../../program/execution-plan.md` for detailed coverage analysis.
 
-**Field or pilot “deployed” is not the same thing.** Install and operations
+**Field or pilot "deployed" is not the same thing.** Install and operations
 credibility come from pilot playbooks, operator checklists, and rows in the
-implementation status matrix—not from Makefile targets alone. Keep deployment
-claims aligned with what is repeatable and evidenced outside the dev reference
-path.
+implementation status matrix—not from Makefile targets alone.
 
 ## Version versus status
 
@@ -51,114 +60,126 @@ Keep these concepts separate:
   release naming are also distinct; see `../../program/v0.1/README.md` and
   `../../program/operating-packet/00-version-labels-and-lanes.md`
 
-A new `partial` node lane or documented boundary does not automatically justify
-promoting a new `v0.x`.
+## Current coverage by lane
 
-## Near-term blueprint posture
+### v0.1 — Baseline (implemented)
 
-Sensing and hardware expansion order (aligned with
-`../../program/operating-packet/05-revised-architecture-blueprint.md`):
+- Example payload validation
+- Reference packet-to-parcel pipeline (ingest → inference → parcel view)
+- Local ingest API, inference API, parcel-platform API
+- Bench-air packet normalization
+- Parcel-state with confidence, evidence mode, reasons, freshness, provenance
+- Private-by-default architectural boundary
 
-- bench-air first
-- mast-lite second
-- flood optional
-- thermal deferred
-- weather + PM later
+### v0.2 — Two-node kit (implemented)
 
-Classifications below should stay consistent with that ordering and with
-`../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`,
-filesystem path `v0.1/`).
+- Mast-lite packet normalization (shared lineage with outdoor metadata)
+- Two-node parcel context (node_installations for indoor + outdoor)
+- Evidence source mix tracking (evidence_source_nodes populated)
+- Two-source inference combination
 
-**Ingest and temporal integrity** (normalization, receipt timing, buffering,
-replay, dedupe, staleness) are part of the **truth model** for the reference
-path—not optional polish beneath **`implemented`** claims.
+### v0.3 — Flood-capable runtime (implemented)
 
-For **program-phase `v0.1`**, the narrow-slice object set in `05` (parcel, packet,
-normalized observation, parcel context, parcel state, parcel view, evidence
-summary) is satisfied when the reference pipeline and contracts honor those
-boundaries; see `architecture-object-map.md` for the enumerated model.
+- Flood packet normalization (`normalize_flood_packet.py`, 14-field validation)
+- Flood condition derivation (water_depth_cm, rise_rate_cm_per_hr, calibration_state)
+- Three-node registry binding (indoor + outdoor + flood)
+- Flood hazard thresholds configuration
 
-## Current coverage
+### v0.4 — Registry lifecycle + evidence composition (implemented)
 
-The lists below summarize posture; the **matrix** remains authoritative for
-status.
+- Node registry lifecycle: load, validate calibration state, filter active, bind metadata
+- Calibration state enforcement (provisional, verified, recently_calibrated)
+- Multi-node evidence composition with source diversity tracking
+- Evidence contributions with individual weights in explanation payload
 
-### Implemented
+### v0.5 — Governance enforcement (implemented)
 
-- example payload validation
-- reference packet-to-parcel pipeline
-- local ingest API
-- local inference API
-- local parcel-platform API
-- bench-air packet normalization
-- circuit-monitor packet normalization and equipment-state bridge
-- weather-pm-mast packet normalization
-- flood-node packet normalization
+- Consent store: append-only JSON with atomic writes and thread-safe persistence
+- Sharing store: operator-configurable preferences
+- Data class governance: 14 classes with explicit sharing rules; 9 structurally private
+- Consent enforcement: query-time eligibility checks (scope, data_classes, custody_tier, revoked_at)
+- Revocation: mark-not-delete semantics; `revoked_at` stops future sharing
+- Retention cleanup: time-based pruning with audit metrics
+- Export bundle generation: parcel export with metadata
+- Rights request processing: delete request execution with audit trail
+- Operator access logging: events with actor, action, justification
+- Shared map aggregation: consent-gated with minimum participation threshold (k-anonymity)
 
-Parcel-facing condition estimates (for example shelter, reentry, egress, and
-asset risk) are **functional interpretation** of fused evidence. **`implemented`**
-here means the reference inference and parcel-platform path produces them with
-confidence, evidence mode, and reasons—not that every governance or presentation
-surface is complete.
+### v1.0 — Extended support objects (implemented, structural)
 
-### Partial
+- House state as inference input (fallback PM2.5 from indoor response)
+- House capability influence on smoke probability
+- Intervention event tracking (action logs with verification windows)
+- Verification outcome adjustment (+0.03 smoke probability if worsened, +0.02 confidence)
+- Closed-loop summaries with PM2.5 delta tracking
+- Contrastive explanations (public-only counterfactual)
+- Divergence analysis (local vs public disagreement)
+- All v0.5 governance inherited and tested
 
-- mast-lite through the current shared packet lineage
-- rights request, export, retention, and operator-access utilities
-- shared-map aggregate API
-- several hardware build/install lanes beyond the smallest indoor slice
+### Additional normalization (implemented)
 
-### Docs-only or planned
+- Circuit-monitor packet normalization and equipment-state bridge
+- Weather-PM-mast packet normalization
 
-- richer sharing-settings and consent surfaces
-- revocation as a product guarantee
-- thermal scene observation family (only remaining unimplemented observation family)
-- public parcel-resolution map support
+### Not implemented
 
-### Governance execution status
+- Trust scoring computation (5-factor model: fixture only, no compute function)
+- Append-only observation/state history (snapshot-oriented)
+- Ingest authorization for live nodes
+- Wi-Fi transport with TLS
+- Live public weather/smoke feeds (uses fixtures)
+- Thermal scene observation family
+- Installation metadata guided input surface
+- Sharing settings product UI
+- User-facing evidence view (beyond JSON)
 
-The technical philosophy treats governance as an architecture input, and contract
-schemas exist for consent, sharing, rights, and revocation. In the current `v0.1`
-reference path, governance surfaces have the following enforcement reality:
+### Hardware posture
 
-- **Sharing settings and consent records**: schema defined, `docs-only` in runtime — no runtime enforcement gate prevents data flow without consent
-- **Rights requests and revocation**: schema and utility defined, `partial` — request logging works but revocation does not block downstream surfaces
-- **Provenance summary in parcel-state**: `implemented` structurally — source-type labels (local, public, shared) appear in output but are not filtered by sharing policy
-- **Private-by-default posture**: enforced by architecture convention (no sharing API exposed in v0.1 pilot), not by runtime governance check
+- bench-air-node: implemented (deployment maturity v0.1 bench)
+- mast-lite: build guide exists; independent reproduction not confirmed
+- flood-node: build guide exists; independent reproduction not confirmed; provisional calibration only
+- weather-pm-mast: hardware lane documented; not independently built
+- thermal-pod: R&D lane; not part of critical path
 
-Until governance surfaces reach `implemented` status in the matrix, do not
-describe data access as "gated by consent" or sharing as "policy-enforced."
+## Governance execution status
+
+The v0.5 and v1.0 runtime lanes implement governance as **runtime behavior**:
+
+- **Consent enforcement**: implemented — DATA_CLASS_GOVERNANCE dictionary enforces sharing rules at query time; structurally private classes rejected on consent grant
+- **Revocation**: implemented — `revoked_at` timestamp stops future sharing; shared-map suppresses revoked parcels
+- **Retention**: implemented — time-based cleanup with auditable reports
+- **Export**: implemented — bundle generation with metadata
+- **Access logging**: implemented — all consent/revocation/rights operations logged
+- **Private-by-default**: enforced at both architectural convention and runtime governance level
+
+**Caveat:** Governance enforcement is tested at the store/API level in acceptance
+tests. HTTP-level enforcement (ensuring API responses respect consent) has not
+been tested.
 
 ## Posture discipline
 
 - Do not promote **shared neighborhood** surfaces to **`implemented`** until
   **collection, ingest, and parcel-private** reasoning are credible on the
-  reference path (`technical-philosophy.md`, `milestone-roadmap.md`).
-- Do not claim **governance** execution beyond what the runtime and product
-  **enforce**; keep documentation aligned with `partial` and `docs-only` rows in
-  the matrix.
+  reference path.
+- Do not claim **governance** execution beyond what the runtime **enforces**.
+  The v0.5 lane enforces consent, revocation, and retention at the store level.
+  HTTP-level enforcement is not yet tested.
+- Do not claim **trust scoring** as implemented. The confidence scoring
+  system exists but the 5-factor trust score model (freshness, node_health,
+  calibration_state, install_quality, source_diversity) is fixture-only.
 
 ## Alignment rule
 
-`v0.1` architecture claims should not outrun the implementation-status
-classification used in:
-
-- `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
-
-If a surface is only `partial`, `docs-only`, or `planned`, the architecture
-should say so.
-
-If a broader accepted runnable slice is promoted later, update the versioned
-architecture documents and the evidence set together rather than treating status
-changes alone as a version bump.
+Architecture claims should not outrun the implementation-status classification.
+The unified execution plan (`../../program/execution-plan.md`) is the
+authoritative source for current position and remaining gaps.
 
 ## Related docs
 
+- `../../program/execution-plan.md` — unified execution plan
 - `../../program/v0.1/README.md`
 - `../../program/operating-packet/00-version-labels-and-lanes.md`
-- `../../program/operating-packet/05-revised-architecture-blueprint.md`
 - `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`
 - `technical-philosophy.md`
 - `milestone-roadmap.md`
 - `architecture-object-map.md`
-- `measurement-and-kpis-v0.1.md`
