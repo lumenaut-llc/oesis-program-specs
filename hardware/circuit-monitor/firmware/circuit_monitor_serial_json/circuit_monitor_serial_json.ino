@@ -46,8 +46,7 @@
 #define CM_WIFI_PASSWORD ""
 #endif
 
-static const char* kSchemaId = "oesis.circuit-monitor.v1";
-static const char* kSchemaVersion = "1.0.0";
+static const char* kSchemaVersion = "oesis.circuit-monitor.v1";
 static const char* kObservedAtPlaceholder = "1970-01-01T00:00:00Z";
 
 // --- Circuit state tracking ---
@@ -218,8 +217,7 @@ void emitPacket() {
   updateObservedAt();
   packet_seq++;
 
-  Serial.print("{\"schema_id\":"); printJsonString(kSchemaId);
-  Serial.print(",\"schema_version\":"); printJsonString(kSchemaVersion);
+  Serial.print("{\"schema_version\":"); printJsonString(kSchemaVersion);
   Serial.print(",\"node_id\":"); printJsonString(CM_NODE_ID);
   Serial.print(",\"firmware_version\":"); printJsonString(CM_FIRMWARE_VERSION);
   Serial.print(",\"uptime_s\":"); Serial.print(millis() / 1000UL);

@@ -12,6 +12,22 @@ Define the canonical evidence packet and normalized observation model used betwe
 - `oesis.flood-node.v1` — flood-node low-point depth evidence
 
 The bench-air-node MVP establishes the minimum structure future node schemas should preserve:
+
+### Mast-lite shared lineage
+
+The `mast-lite` outdoor node deliberately reuses `oesis.bench-air.v1` as its
+schema version. It produces the same packet structure and normalizes to the same
+`air.node.snapshot` observation type. The distinction is operational:
+
+- `location_mode` is `"sheltered"` or `"outdoor"` instead of `"indoor"`
+- `node_id` uses a `mast-lite-` prefix by convention
+- Placement, enclosure, and calibration differ per the mast-lite build guide
+
+The runtime does not require a separate schema for mast-lite. The inference
+engine treats mast-lite observations identically to bench-air observations
+except for install metadata. See `../../hardware/mast-lite/serial-json-contract.md`.
+
+### Other schemas
 - explicit schema versioning
 - stable node identity
 - observation timestamp
@@ -21,12 +37,12 @@ The bench-air-node MVP establishes the minimum structure future node schemas sho
 
 ## Schema discriminator field
 
-Most hardware families use `schema_version` as the top-level discriminator field
-(e.g., `"schema_version": "oesis.bench-air.v1"`). The circuit-monitor family
-uses `schema_id` instead (e.g., `"schema_id": "oesis.circuit-monitor.v1"`) with
-a separate `schema_version` for semver. The runtime ingest dispatcher accepts
-both field names. New hardware families should prefer `schema_version` for
-consistency with the majority pattern.
+All hardware families use `schema_version` as the top-level discriminator field
+(e.g., `"schema_version": "oesis.bench-air.v1"`,
+`"schema_version": "oesis.circuit-monitor.v1"`). The runtime ingest dispatcher
+also accepts a legacy `schema_id` field for backward compatibility with early
+circuit-monitor firmware, but new firmware and hardware families must use
+`schema_version`.
 
 ## Current implementation boundary
 

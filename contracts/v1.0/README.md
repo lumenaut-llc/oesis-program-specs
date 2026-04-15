@@ -56,6 +56,10 @@ Provide the additive `v1.0` contract lane without mutating the frozen
 - `schemas/deployment-metadata.schema.json`
 - `examples/trust-score.example.json`
 - `examples/deployment-metadata.example.json`
+- `circuit-monitor-observation-schema.md` — formal contract for circuit-monitor
+  packets and `equipment.circuit.snapshot` normalized observations
+- `schema-migration-v0.1-to-v1.0.md` — migration guide for additive field
+  changes between v0.1 and v1.0 schemas
 
 ## Current posture
 
