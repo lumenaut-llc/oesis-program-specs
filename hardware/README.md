@@ -49,6 +49,7 @@ Use `../architecture/system/deployment-maturity-ladder.md` and `parcel-kit/field
 | `flood-node/` | Optional low-point runoff depth evidence |
 | `weather-pm-mast/` | Optional richer outdoor PM and weather mast (second-wave) |
 | `thermal-pod/` | Optional scene-level thermal R&D (Pi + MLX90640, derived-only posture) |
+| `circuit-monitor/` | v1.5 bridge equipment-state adapter (CT clamp current-draw monitoring for HVAC and sump) |
 | `parcel-kit/` | Integrated BOM, procurement, installation, and field-hardening checklists |
 
 Planned **v1.5 bridge** hardware families (`indoor-response-node`, `power-outage-node`, `freeze-node`) are defined in `../architecture/system/node-taxonomy.md`; create matching `hardware/` subtrees when there is a build guide and contract, not before.
@@ -62,6 +63,7 @@ Start kit planning in `parcel-kit/integrated-parcel-kit-bom.md` and `parcel-kit/
 - `flood-node/README.md`
 - `weather-pm-mast/README.md`
 - `thermal-pod/README.md`
+- `circuit-monitor/README.md`
 - `parcel-kit/README.md`
 
 ## Baseline lane index

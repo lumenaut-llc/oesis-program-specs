@@ -239,13 +239,16 @@ This lets hardware vary without forcing the software stack to relearn the whole 
 
 The packet families should normalize into explicit observation families rather than one overloaded observation type.
 
-| Packet contract | Intended normalized observation | Status |
-| --- | --- | --- |
-| `oesis.bench-air.v1` | `air.node.snapshot` | implemented |
-| `oesis.bench-air.v1` from `mast-lite` | `air.node.snapshot` with outdoor install metadata | partially implemented through shared lineage |
-| `oesis.weather-pm-mast.v1` | `air.pm.snapshot` | implemented |
-| `oesis.flood-node.v1` | `flood.low_point.snapshot` | implemented |
-| `oesis.thermal-pod.v1` | `thermal.scene.snapshot` | not yet implemented |
+| Packet contract | Intended normalized observation | Ingest | Inference |
+| --- | --- | --- | --- |
+| `oesis.bench-air.v1` | `air.node.snapshot` | implemented | consumed |
+| `oesis.bench-air.v1` from `mast-lite` | `air.node.snapshot` with outdoor install metadata | partially implemented through shared lineage | consumed (same type) |
+| `oesis.circuit-monitor.v1` | `equipment.circuit.snapshot` | implemented | consumed (auto-derives `equipment_state_observation`) |
+| `oesis.weather-pm-mast.v1` | `air.pm.snapshot` | implemented | not yet consumed by inference |
+| `oesis.flood-node.v1` | `flood.low_point.snapshot` | implemented | not yet consumed by inference |
+| `oesis.thermal-pod.v1` | `thermal.scene.snapshot` | not yet implemented | not yet implemented |
+
+**Ingest vs inference distinction:** "implemented" in the ingest column means the normalizer exists and produces valid observations. "consumed" in the inference column means the inference engine accepts that observation type when computing parcel-state. Weather-pm and flood observations normalize successfully but do not yet feed into parcel-state inference — they are available for future inference integration or downstream use.
 
 ## Design consequences
 

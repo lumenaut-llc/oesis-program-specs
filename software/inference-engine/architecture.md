@@ -53,6 +53,20 @@ The first serious closed-loop target should be smoke protection:
 - contrastive explanation
 - provenance summary
 
+## Currently consumed observation types
+
+The inference engine currently accepts these observation types for parcel-state
+computation:
+
+- `air.node.snapshot` — from bench-air-node and mast-lite
+- `equipment.circuit.snapshot` — from circuit-monitor (auto-derived into
+  `equipment_state_observation` for house-state bridge)
+
+Other observation types (`air.pm.snapshot` from weather-pm-mast,
+`flood.low_point.snapshot` from flood-node) are normalized by the ingest service
+but not yet consumed by the inference engine. Integration into parcel-state
+reasoning is a future step.
+
 ## Inputs
 
 - normalized observations from the ingest service

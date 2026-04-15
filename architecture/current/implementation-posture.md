@@ -113,7 +113,6 @@ surface is complete.
 - richer sharing-settings and consent surfaces
 - revocation as a product guarantee
 - thermal scene observation family (only remaining unimplemented observation family)
-- thermal scene observation family
 - public parcel-resolution map support
 
 ### Governance execution status

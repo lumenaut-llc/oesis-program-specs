@@ -4,17 +4,29 @@
 
 Define the canonical evidence packet and normalized observation model used between hardware nodes and the ingest service.
 
-## First supported schema version
+## Supported schema versions
 
-- `oesis.bench-air.v1`
+- `oesis.bench-air.v1` — bench-air-node and mast-lite (shared lineage)
+- `oesis.circuit-monitor.v1` — circuit-monitor equipment-state adapter
+- `oesis.weather-pm-mast.v1` — weather-pm-mast outdoor PM and weather
+- `oesis.flood-node.v1` — flood-node low-point depth evidence
 
-This version covers the bench-air-node MVP and establishes the minimum structure future node schemas should preserve:
+The bench-air-node MVP establishes the minimum structure future node schemas should preserve:
 - explicit schema versioning
 - stable node identity
 - observation timestamp
 - sensor presence reporting
 - health telemetry
 - provenance-friendly raw payload retention
+
+## Schema discriminator field
+
+Most hardware families use `schema_version` as the top-level discriminator field
+(e.g., `"schema_version": "oesis.bench-air.v1"`). The circuit-monitor family
+uses `schema_id` instead (e.g., `"schema_id": "oesis.circuit-monitor.v1"`) with
+a separate `schema_version` for semver. The runtime ingest dispatcher accepts
+both field names. New hardware families should prefer `schema_version` for
+consistency with the majority pattern.
 
 ## Current implementation boundary
 

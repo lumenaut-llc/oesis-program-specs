@@ -38,7 +38,8 @@ the later **hazard → house state → action → verified outcome** chain.
 
 ## Inputs
 
-- hardware node packets such as `oesis.bench-air.v1`
+- hardware node packets: `oesis.bench-air.v1`, `oesis.circuit-monitor.v1`,
+  `oesis.weather-pm-mast.v1`, `oesis.flood-node.v1`
 - future external feeds such as weather, smoke, or flood context
 - node registration metadata
 - optional transport metadata such as remote IP, signal quality, or retry count
