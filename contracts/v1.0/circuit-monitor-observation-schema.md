@@ -97,4 +97,4 @@ pipeline at HIGH confidence (`source_kind: "direct_measurement"`).
 - `../../hardware/circuit-monitor/serial-json-contract.md` — authoritative packet shape
 - `../../hardware/circuit-monitor/README.md` — build guide entry point
 - `../../architecture/system/node-taxonomy.md` — taxonomy placement
-- `../schemas/equipment-state-observation.schema.json` — equipment-state schema
+- `schemas/equipment-state-observation.schema.json` — equipment-state schema

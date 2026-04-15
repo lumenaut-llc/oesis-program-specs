@@ -28,7 +28,7 @@ parcel view that explains the source mix.
 
 ## Related
 
-- `../v.0.1/` — v0.1 baseline (frozen)
+- `../v0.1/` — v0.1 baseline (frozen)
 - `../v1.0/` — v1.0 target release
 - `../../architecture/current/pre-1.0-version-progression.md` — promotion model
 - `../../architecture/current/milestone-roadmap.md` — milestone 2 maps to v0.2

@@ -14,15 +14,24 @@
     "/#diagrams"
   ],
   "approvedSourceRoots": [
-    "release/v1.0/",
-    "architecture/"
+    "release/v1.0/"
   ],
   "bundle_version": "v1.0",
   "excludedFromPublicNavigation": [
     "release/v1.0/reviewer-packet-index.md",
     "release/v1.0/publish-internal-map.md",
     "release/v1.0/preview-execution-plan.md",
-    "release/v1.0/launch-readiness-checklist.md"
+    "release/v1.0/launch-readiness-checklist.md",
+    "release/v1.0/NOTICE.md",
+    "release/v1.0/asset-class-license-and-publication-matrix.md",
+    "release/v1.0/contributor-and-review-guide.md",
+    "release/v1.0/open-source-v1-summary.md",
+    "release/v1.0/v1.0-acceptance-spec.md",
+    "release/v1.0/v1.0-gap-register.md",
+    "release/v1.0/v1.0-launch-checklist.md",
+    "release/v1.0/v1.0-pilot-minimum-subset.md",
+    "release/v1.0/v1.0-scope-matrix.md",
+    "release/v1.0/v1.0-scope.md"
   ],
   "generated_at": "2026-04-08T21:30:00Z",
   "legalRoot": "",

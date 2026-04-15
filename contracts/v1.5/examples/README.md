@@ -4,7 +4,7 @@ Put bridge-stage example payload deltas here when examples need to show
 house-state, intervention, verification, or response-metadata behavior that
 goes beyond the root `v0.1` baseline.
 
-Do not rewrite the baseline examples in `../../examples/` when the change is
+Do not rewrite the baseline examples in `../../v0.1/examples/` when the change is
 specific to the `v1.5` bridge lane.
 
 Current additions:

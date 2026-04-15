@@ -12,8 +12,8 @@ Current reference **measurement posture**. Detailed KPI suggestions remain in th
 root packet `../../program/operating-packet/08-kpi-framework.md`.
 
 This document **complements** `implementation-posture.md` and
-`../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`,
-filesystem path `v.0.1/`); it does not override
+`../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`,
+filesystem path `v0.1/`); it does not override
 status classifications or acceptance commands.
 
 ## KPI families (summary)
@@ -121,4 +121,4 @@ product improvement.
 - `v0.1-acceptance-criteria.md` — frozen software acceptance
 - `implementation-posture.md` — implemented / partial / planned truth
 - `milestone-roadmap.md` — when milestones unlock new measurement
-- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`) — status authority
+- `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`) — status authority

@@ -10,7 +10,8 @@ frozen root `v0.1` contract surface or overloading the additive `v1.0` lane.
 - Put `v1.5` schema deltas in `schemas/`
 - Put `v1.5` example deltas in `examples/`
 - Put `v1.5` bridge-specific contract notes beside this README
-- Keep root `../schemas/` and `../examples/` as the accepted `v0.1` baseline
+- Keep `../v0.1/schemas/` and `../v0.1/examples/` as the accepted `v0.1`
+  baseline
 - Keep `../v1.0/` for broader target-lane contract deltas that are not specific
   to the measurement-to-intervention bridge
 

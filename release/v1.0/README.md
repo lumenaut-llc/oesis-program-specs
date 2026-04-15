@@ -4,7 +4,7 @@
 
 This directory is the **canonical v1.0 public release packet root** for the current cut of program-specs: governance copy, release controls, open-release summaries, and pointers to technical acceptance. It supersedes path-based references to `release/2026-04-14/` in build tooling and publication bundles.
 
-The earlier **April preview** materials remain archived under `release/v.0.1/`
+The earlier **April preview** materials remain archived under `release/v0.1/`
 (release label **`v0.1`**) for history and diff review.
 
 ## What v1.0 means here (three lenses)
@@ -26,10 +26,10 @@ The earlier **April preview** materials remain archived under `release/v.0.1/`
 9. [`asset-class-license-and-publication-matrix.md`](asset-class-license-and-publication-matrix.md) — asset-class licensing and publication map
 10. [`contributor-and-review-guide.md`](contributor-and-review-guide.md) — contribution and review path
 11. [`open-release-v1-audit-checklist.md`](open-release-v1-audit-checklist.md) — readiness checklist
-12. Prior preview context (label **`v0.1`**, path `v.0.1/`):
-    [`../v.0.1/README.md`](../v.0.1/README.md)
+12. Prior preview context (label **`v0.1`**, path `v0.1/`):
+    [`../v0.1/README.md`](../v0.1/README.md)
 13. Implementation evidence (same lane):
-    [`../v.0.1/implementation-status-matrix.md`](../v.0.1/implementation-status-matrix.md)
+    [`../v0.1/implementation-status-matrix.md`](../v0.1/implementation-status-matrix.md)
     (refresh or fork when v1.0 rows change)
 
 ## Publication

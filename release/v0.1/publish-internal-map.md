@@ -4,7 +4,7 @@
 
 Give one folder-by-folder view of what should be treated as public-release material
 versus internal-only material for the v0.1 open release. The **canonical**
-public preview packet root in-repo is `release/v1.0/`; this `release/v.0.1/` tree
+public preview packet root in-repo is `release/v1.0/`; this `release/v0.1/` tree
 holds prior preview materials and the extended reviewer packet.
 
 This file is a release-control aid. It is not legal advice.
@@ -16,7 +16,7 @@ notices and claims/privacy rules:
 
 - `README.md`
 - `NOTICE.md`
-- `release/v1.0/` (canonical public packet); `release/v.0.1/` (prior preview / extended packet)
+- `release/v1.0/` (canonical public packet); `release/v0.1/` (prior preview / extended packet)
 - `legal/privacy/`
 - `legal/ip.md`
 - `legal/GOVERNANCE.md`
@@ -66,7 +66,7 @@ v0.1 release:
 | `repo/README.md`, `repo/NOTICE.md`, `repo/LICENSES.md` | publish | core entry points |
 | `README.md`, `NOTICE.md` | publish | core program entry points |
 | `release/v1.0/` | publish | canonical public preview set |
-| `release/v.0.1/` | publish (archived packet) | preview materials; reviewer index and matrices |
+| `release/v0.1/` | publish (archived packet) | preview materials; reviewer index and matrices |
 | `legal/privacy/` | publish | public governance posture |
 | `legal/ip.md` | publish | preview IP position |
 | `legal/GOVERNANCE.md` | publish | project governance posture |

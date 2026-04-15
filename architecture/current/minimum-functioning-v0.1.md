@@ -199,7 +199,7 @@ Use this file together with:
 
 - `reference-stack.md`
 - `implementation-posture.md`
-- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
+- `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 
 If a proposed `v0.1` requirement depends on an object that is still only
 `partial`, `docs-only`, or `planned`, it should not be treated as part of the

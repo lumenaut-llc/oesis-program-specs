@@ -2,7 +2,7 @@
 
 Use additive release lanes from the release directory root:
 
-- [`v.0.1/`](v.0.1/) — frozen v0.1 baseline (one parcel, one bench-air node)
+- [`v0.1/`](v0.1/) — frozen v0.1 baseline (one parcel, one bench-air node)
 - [`v0.2/`](v0.2/) — first widened parcel kit (bench-air + mast-lite)
 - [`v0.3/`](v0.3/) — first flood-capable runtime
 - [`v0.4/`](v0.4/) — multi-node registry and evidence composition

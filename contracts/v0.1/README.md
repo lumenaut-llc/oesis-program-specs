@@ -1,4 +1,13 @@
-# Contracts
+# Contracts v0.1
+
+`v0.1` is the frozen baseline contract lane.
+
+## Quick navigation
+
+- `schemas/README.md` — baseline machine-readable schema index
+- `examples/README.md` — baseline and transitional examples
+- `../v0.2/README.md`, `../v0.3/README.md`, `../v0.4/README.md`, `../v0.5/README.md` — promotion-marker lanes that currently inherit this baseline
+- `../v1.0/README.md`, `../v1.5/README.md` — additive lanes for explicit deltas
 
 ## Purpose
 
@@ -9,6 +18,7 @@ permissions, provenance, and baseline sharing surfaces.
 
 - **Baseline lane**: `v0.1/schemas/` and `v0.1/examples/` are the frozen
   `v0.1` contract surface.
+- **Promotion-marker lanes**: `v0.2/` through `v0.5/` currently inherit this baseline unless explicit lane-specific overrides are accepted.
 - **Additive lanes**: `v1.0/` and `v1.5/` hold forward contract deltas by lane.
 - **Compatibility policy**: when contract docs move, keep redirect stubs for
   high-traffic old links until migration is complete.

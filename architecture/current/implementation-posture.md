@@ -66,8 +66,8 @@ Sensing and hardware expansion order (aligned with
 - weather + PM later
 
 Classifications below should stay consistent with that ordering and with
-`../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`,
-filesystem path `v.0.1/`).
+`../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`,
+filesystem path `v0.1/`).
 
 **Ingest and temporal integrity** (normalization, receipt timing, buffering,
 replay, dedupe, staleness) are part of the **truth model** for the reference
@@ -143,7 +143,7 @@ describe data access as "gated by consent" or sharing as "policy-enforced."
 `v0.1` architecture claims should not outrun the implementation-status
 classification used in:
 
-- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
+- `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 
 If a surface is only `partial`, `docs-only`, or `planned`, the architecture
 should say so.

@@ -163,7 +163,7 @@ Current `v0.1` use:
 Main sources:
 - `../../contracts/node-registry-schema.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
-- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
+- `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 
 ### 7. Public context
 
@@ -198,7 +198,7 @@ Current `v0.1` use:
 Main sources:
 - `../../contracts/shared-neighborhood-signal-schema.md`
 - `../../software/shared-map/architecture.md`
-- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
+- `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 
 ### 9. Parcel state
 
@@ -256,7 +256,7 @@ Current `v0.1` use:
 
 Main sources:
 - `../../contracts/v0.1/schemas/`
-- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
+- `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 - `../../software/parcel-platform/README.md`
 
 ## Layered view
@@ -346,7 +346,7 @@ implemented in the current stack.
 
 This object map uses the same status vocabulary as:
 
-- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
+- `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 
 Do not let architecture prose imply that a `partial`, `docs-only`, or `planned`
 object is already a complete product/runtime surface.

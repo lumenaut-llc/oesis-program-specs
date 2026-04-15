@@ -234,6 +234,6 @@ Installation notes are implementation material, not default public-preview mater
 Before sharing install photos, wiring layouts, or close-up mounting details outside the core implementation group, check:
 
 - `../../legal/public-preview-scope.md`
-- `../../release/v.0.1/reviewer-packet-index.md` (release label `v0.1`, filesystem path `v.0.1/`)
+- `../../release/v0.1/reviewer-packet-index.md` (release label `v0.1`, filesystem path `v0.1/`)
 
 The public preview site should not imply that every documented install practice is already a polished consumer deployment path.

@@ -130,7 +130,6 @@
 - `shared/glossary/README.md`
 - `shared/glossary/resilient-home-intelligence.md`
 - `shared/skills/lean-directory-audit/SKILL.md`
-- `shared/skills/lean-directory-audit/agents/openai.yaml`
 - `shared/skills/lean-directory-audit/references/review-rubric.md`
 - `shared/skills/lean-directory-audit/scripts/scan_tree.py`
 - `shared/templates/build-guide-template.md`

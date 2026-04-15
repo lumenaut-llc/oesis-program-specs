@@ -47,7 +47,7 @@ ingest service currently normalizes only `oesis.bench-air.v1` packets. Flood-nod
 packets emitted by built hardware will be valid JSON but cannot be ingested or
 used for parcel-state inference until the flood observation family is implemented.
 
-See `../../release/v.0.1/implementation-status-matrix.md` for current status.
+See `../../release/v0.1/implementation-status-matrix.md` for current status.
 
 ## Inputs
 

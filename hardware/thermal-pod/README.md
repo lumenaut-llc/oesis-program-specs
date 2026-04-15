@@ -49,7 +49,7 @@ ingested or used for parcel-state inference until the thermal observation family
 is implemented. Additionally, privacy and retention posture must be resolved
 before this observation family enters the default pipeline.
 
-See `../../release/v.0.1/implementation-status-matrix.md` for current status.
+See `../../release/v0.1/implementation-status-matrix.md` for current status.
 
 ## Inputs
 

@@ -98,8 +98,8 @@ authored **alongside** them (repo root and `program/`):
 - `../../architecture/system/technical-philosophy-and-architecture.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
 - `../../software/v0.1/README.md`
-- `../../release/v.0.1/implementation-status-matrix.md` (release label
-  `v0.1`, filesystem path `v.0.1/`)
+- `../../release/v0.1/implementation-status-matrix.md` (release label
+  `v0.1`, filesystem path `v0.1/`)
 - `../../program/operating-packet/08-kpi-framework.md`
 
 ## Contributor rule

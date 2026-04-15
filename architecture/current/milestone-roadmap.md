@@ -284,4 +284,4 @@ Use it as a separate research lane until:
 - `component-boundaries.md`
 - `pre-1.0-version-progression.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
-- `../../release/v.0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v.0.1/`)
+- `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)

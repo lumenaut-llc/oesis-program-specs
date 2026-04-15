@@ -56,7 +56,7 @@ Primary references:
 
 - `public-preview-scope.md`
 - `holdback-list.md`
-- `release/v.0.1/social-posts.md`
+- `release/v0.1/social-posts.md`
 
 ## Step 4. Review the packet in order
 
