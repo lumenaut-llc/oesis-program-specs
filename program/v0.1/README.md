@@ -93,7 +93,7 @@ current reference stack: `../../architecture/current/milestone-roadmap.md`.
 ## Program structure
 
 - `../../architecture/` — canonical architecture home for current, future, and system narratives
-- [``](https://github.com/lumenaut-llc/oesis-hardware/blob/main/) — physical sensor nodes and installation systems
+- [`oesis-hardware`](https://github.com/lumenaut-llc/oesis-hardware) — physical sensor nodes and installation systems
 - `../../software/` — ingest, parcel platform, inference, and maps
 - `../../contracts/` — contract docs, schemas, and example payloads
 - `../../release/` — release packet materials and publication controls
