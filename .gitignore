@@ -22,3 +22,8 @@ build/
 
 # Media exports
 exports/
+
+# Firmware secrets (per-install config with Wi-Fi credentials, API keys, etc.)
+**/secrets.h
+**/config.h
+!**/config.example.h
