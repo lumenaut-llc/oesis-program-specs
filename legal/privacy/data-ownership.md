@@ -2,7 +2,7 @@
 
 ## Purpose
 
-State the dwelling-facing data ownership and control model for the v0.1
+State the dwelling-facing data ownership and control model for the v1.0
 open-release period.
 
 This file is a project policy draft, not legal advice.
@@ -39,6 +39,27 @@ To operate the product, the platform may need a limited right to:
 - retain limited governance and security records
 
 The platform does not receive a blanket ownership transfer merely because data is uploaded or processed.
+
+## Multi-node composition and calibration
+
+When multiple nodes contribute to a single parcel assessment (v0.4+), the
+following ownership and governance rules apply:
+
+- **Raw observations from each node remain parcel-operator-owned.** Composition
+  into a multi-node evidence summary does not change the ownership of the
+  underlying per-node data.
+- **Calibration weighting is metadata, not data.** Weights applied during
+  evidence composition (e.g., calibration state, source diversity scores) are
+  platform-generated metadata. They do not create a new ownership claim over the
+  underlying observations.
+- **Node registry metadata is parcel-operator-controlled.** The registry binding
+  nodes to a parcel (installation metadata, calibration state, siting records)
+  is under parcel-operator control and follows the same private-by-default rule.
+- **Trust scores are derived outputs.** The 5-factor trust score (freshness,
+  node_health, calibration_state, install_quality, source_diversity) is a
+  platform-generated assessment of evidence quality. It follows the derived
+  outputs rules below — the parcel operator can view it, but it does not
+  override their ownership of the underlying data.
 
 ## Private, shared, and public are different
 

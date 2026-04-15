@@ -18,6 +18,13 @@ At the repository level:
 - some technical materials may remain held back pending release sequencing or legal review
 - real participant-contributed parcel-linked data is not made open by default
 
+## Current release
+
+The current reference release is **v1.0 Tier A** (internal reference). All acceptance
+tests pass for lanes v0.1 through v1.0. See [`release/v1.0/v1.0-scope.md`](release/v1.0/v1.0-scope.md)
+for what this release claims, and [`release/v1.0/v1.0-gap-register.md`](release/v1.0/v1.0-gap-register.md)
+for known gaps.
+
 ## Start with these files
 
 - `LICENSE` (default terms for most documentation and specifications: CC BY-SA 4.0)
@@ -26,6 +33,7 @@ At the repository level:
 - `LICENSES.md`
 - `NOTICE.md`
 - `legal/ip.md`
+- `release/v1.0/v1.0-scope.md`
 - `release/v1.0/open-source-v1-summary.md`
 - `release/v1.0/asset-class-license-and-publication-matrix.md`
 

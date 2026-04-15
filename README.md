@@ -75,14 +75,22 @@ pip install -e .
 Validate the full pipeline:
 
 ```bash
-make oesis-check      # validate examples + run demo + verify CLI output
-make oesis-http-check # start local HTTP services, verify ingest -> inference -> parcel view
+make oesis-check        # validate examples + run demo + verify CLI output (v0.1)
+make oesis-v10-accept   # offline acceptance for v1.0 (trust scoring, multi-node, governance)
+make oesis-http-check   # start local HTTP services, verify ingest -> inference -> parcel view
 ```
 
 Run the demo pipeline (packet in, parcel view out):
 
 ```bash
 make oesis-demo
+```
+
+Run all lane acceptance tests:
+
+```bash
+make oesis-accept && make oesis-v02-accept && make oesis-v03-accept && \
+make oesis-v04-accept && make oesis-v05-accept && make oesis-v10-accept
 ```
 
 ### 3. Connect hardware (optional)
@@ -139,8 +147,8 @@ OESIS uses additive version lanes. Each lane is a progressively wider
 | **v0.2** | Two-node kit (bench-air + mast-lite) | Active |
 | **v0.3** | Flood-capable runtime (three-node kit) | Active |
 | **v0.4** | Multi-node registry + evidence composition | Active |
-| **v0.5** | Governance enforcement (consent, revocation, retention, export) | Active |
-| **v1.0** | Fielded parcel kit with trust scoring | Target |
+| **v0.5** | Governance enforcement (consent, revocation, retention, export) | Implemented |
+| **v1.0** | Trust scoring, multi-node evidence, contrastive explanations, divergence analysis | Implemented (Tier A) |
 | **v1.5** | Measurement-to-intervention bridge | Future |
 
 The runtime defaults to v0.1. Opt into a different lane with:
