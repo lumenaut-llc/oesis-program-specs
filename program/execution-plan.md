@@ -262,8 +262,8 @@ contrastive explanations, divergence analysis.
 | Node registry full lifecycle | **Resolved** | **Resolved** | **Implemented** in v0.4 |
 
 **Remaining work for v1.0 Tier A (internal pilot):**
-1. Implement trust scoring computation (5-factor model: freshness, node_health, calibration_state, install_quality, source_diversity)
-2. Add inference correctness test assertions (value-level, not just structural)
+1. ~~Implement trust scoring computation~~ — **Resolved**: `compute_trust_score.py` with 5-factor model integrated into `infer_parcel_state.py`
+2. ~~Add inference correctness test assertions~~ — **Resolved**: value-level assertions added to all acceptance tests (v0.1–v1.0); confidence range, status enums, hazard probability range, evidence mode, freshness, trust score structure
 
 **Additional work for v1.0 Tier B (external pilot):**
 3. Implement ingest authorization for live nodes

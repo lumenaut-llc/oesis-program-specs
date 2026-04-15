@@ -114,6 +114,7 @@ Keep these concepts separate:
 - Closed-loop summaries with PM2.5 delta tracking
 - Contrastive explanations (public-only counterfactual)
 - Divergence analysis (local vs public disagreement)
+- Trust scoring computation (5-factor model: freshness, node_health, calibration_state, install_quality, source_diversity)
 - All v0.5 governance inherited and tested
 
 ### Additional normalization (implemented)
@@ -123,7 +124,6 @@ Keep these concepts separate:
 
 ### Not implemented
 
-- Trust scoring computation (5-factor model: fixture only, no compute function)
 - Append-only observation/state history (snapshot-oriented)
 - Ingest authorization for live nodes
 - Wi-Fi transport with TLS
@@ -164,9 +164,10 @@ been tested.
 - Do not claim **governance** execution beyond what the runtime **enforces**.
   The v0.5 lane enforces consent, revocation, and retention at the store level.
   HTTP-level enforcement is not yet tested.
-- Do not claim **trust scoring** as implemented. The confidence scoring
-  system exists but the 5-factor trust score model (freshness, node_health,
-  calibration_state, install_quality, source_diversity) is fixture-only.
+- **Trust scoring** is implemented. The 5-factor trust score model (freshness,
+  node_health, calibration_state, install_quality, source_diversity) computes
+  in `compute_trust_score.py` and is integrated into `infer_parcel_state.py`.
+  The v1.0 acceptance test validates trust score structure and value ranges.
 
 ## Alignment rule
 
