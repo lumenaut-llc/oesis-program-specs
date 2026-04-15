@@ -69,8 +69,8 @@ distinction between "acceptance test passes" and "fully promoted" matters.
 
 | Gap | Status | Needed for |
 |-----|--------|------------|
-| Trust scoring computation | **Not implemented** — fixture data only, no `compute_trust_score()` | v1.0 |
-| Inference correctness assertions | **Not tested** — tests check structure, not values | All versions |
+| ~~Trust scoring computation~~ | **Resolved** — `compute_trust_score.py` with 5-factor model | ~~v1.0~~ |
+| ~~Inference correctness assertions~~ | **Resolved** — value-level assertions in all acceptance tests | ~~All versions~~ |
 | HTTP-level governance enforcement testing | **Not tested** — consent tested at API level only | v0.5, v1.0 |
 | Live public weather/smoke feeds with API keys | **Not implemented** — uses fixture data | v1.0 Tier B |
 | Ingest authorization for live nodes | **Not implemented** — serial capture only | v1.0 Tier B |
@@ -134,7 +134,7 @@ two-node parcel context, evidence source mix tracking.
 | Gap | Type | Status |
 |-----|------|--------|
 | Mast-lite independent build reproduction | Hardware | **Open** — guide exists; not independently confirmed |
-| Inference correctness testing | Testing | **Open** — structural tests only; no value assertions |
+| ~~Inference correctness testing~~ | Testing | **Resolved** — value-level assertions added |
 
 ---
 
@@ -160,7 +160,7 @@ three-node registry binding.
 |-----|------|--------|
 | Flood-node independent build reproduction | Hardware | **Open** — guide exists; not independently confirmed |
 | Flood-node field calibration validation | Hardware | **Open** — provisional calibration only |
-| Inference correctness testing (flood) | Testing | **Open** — structural tests only |
+| ~~Inference correctness testing (flood)~~ | Testing | **Resolved** — value-level assertions added |
 
 ---
 
@@ -189,7 +189,7 @@ calibration weighting, source diversity tracking.
 |-----|------|--------|
 | Installation metadata guided input | Product | **Open** — no operator-facing capture surface |
 | Deployment-quality flags in user view | Product | **Open** — tracked internally but not user-visible |
-| Quality-based weighting correctness | Testing | **Open** — structural tests only |
+| ~~Quality-based weighting correctness~~ | Testing | **Resolved** — value-level assertions added |
 
 ---
 
@@ -245,7 +245,7 @@ contrastive explanations, divergence analysis.
 
 | Gap | Tier A | Tier B | Current status |
 |-----|--------|--------|----------------|
-| Trust scoring computation | **Blocker** | **Blocker** | **Not implemented** — fixture only |
+| Trust scoring computation | **Resolved** | **Resolved** | **Implemented** — `compute_trust_score.py` integrated |
 | Mast-lite field hardening | Defer | **Blocker** | **Open** — hardware |
 | Ingest authorization for live nodes | Defer | **Blocker** | **Not implemented** |
 | Wi-Fi transport with TLS | Defer | **Blocker** | **Not implemented** |
@@ -329,19 +329,25 @@ PM2.5 deltas and improvement metrics.
 
 ## Acceptance test coverage honesty
 
-The current acceptance tests verify **pipeline execution and data structure
-completeness**. They do NOT verify:
+The acceptance tests now verify **pipeline execution, data structure
+completeness, and value-level correctness** including:
 
-- Inference value correctness (shelter_status, confidence, hazard probabilities)
+- ✅ Confidence range [0, 1]
+- ✅ Status enum validation (safe, watch, warning, danger, unknown, not_assessed)
+- ✅ Evidence mode validation
+- ✅ Hazard probability range [0, 1]
+- ✅ Freshness non-negative
+- ✅ Trust score structure and factor validation (v1.0)
+- ✅ Flood values physical reasonableness (v0.3+)
+- ✅ Registry calibration state enum (v0.4+)
+- ✅ Evidence contribution weight ranges (v0.4+)
+
+They still do **NOT** verify:
+
+- Behavioral inference correctness (e.g., "PM2.5 > 150 µg/m³ → shelter_status must not be safe")
 - Behavioral edge cases (concurrent revocations, consent re-grants)
 - HTTP-level governance enforcement (consent filtering on API responses)
-- Multi-node inference quality (whether additional sensors change output)
-- Flood inference correctness (whether water depth actually affects hazard)
 - Performance under load or real-time constraints
-
-**Recommendation:** Before promoting any version beyond v0.1, add value-level
-assertions to acceptance tests — e.g., "given PM2.5 > 150 µg/m³, shelter_status
-must not be 'all_clear'."
 
 ---
 
@@ -378,8 +384,7 @@ v0.1 ✅ ── v0.2 ✅* ── v0.3 ✅* ── v0.4 ✅* ── v0.5 ✅* ─
   │          │           │           │           │           │             hardware +
   │          │           │           │           │           │             closed loop
   │          │           │           │           │           │
-  │          │           │           │           │           └─ trust scoring
-  │          │           │           │           │              not computed;
+  │          │           │           │           │           └─ trust scoring ✅;
   │          │           │           │           │              field hardening
   │          │           │           │           │              not done
   │          │           │           │           │
@@ -405,13 +410,13 @@ v0.1 ✅ ── v0.2 ✅* ── v0.3 ✅* ── v0.4 ✅* ── v0.5 ✅* ─
 ```
 
 **The runtime is much further along than previously documented.** The primary
-gaps are now:
+remaining gaps are:
 
-1. **Trust scoring** — the one major software module not yet implemented
-2. **Hardware verification** — independent build reproductions for mast-lite and flood-node
-3. **Test depth** — structural smoke tests need value-level assertions
-4. **Product surfaces** — governance works at API level but has no operator-facing UI
-5. **Field infrastructure** — no live feeds, no ingest auth, no Wi-Fi transport
+1. **Hardware verification** — independent build reproductions for mast-lite and flood-node
+2. **Product surfaces** — governance works at API level but has no operator-facing UI
+3. **Field infrastructure** — no live feeds, no ingest auth, no Wi-Fi transport
+4. **HTTP-level governance testing** — consent enforced at store level, not tested on HTTP endpoints
+5. **Deployment packaging** — no Docker, systemd, or orchestration configs
 
 ---
 
