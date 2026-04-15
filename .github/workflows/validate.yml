@@ -1,0 +1,77 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  markdown-lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          config: .markdownlint-cli2.jsonc
+          globs: "**/*.md"
+
+  link-check:
+    name: Check internal links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for broken internal links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --offline
+            --include-fragments
+            --exclude-path node_modules
+            --exclude-path .git
+            "**/*.md"
+          fail: true
+
+  json-validate:
+    name: Validate JSON schemas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files are parseable
+        run: |
+          find . -name '*.json' -not -path './node_modules/*' -not -path './.git/*' | while read f; do
+            if ! python3 -c "import json; json.load(open('$f'))"; then
+              echo "Invalid JSON: $f"
+              exit 1
+            fi
+          done
+          echo "All JSON files valid."
+
+  secrets-check:
+    name: Check for secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for config.h or secrets.h in tracked files
+        run: |
+          if git ls-files | grep -E '(secrets\.h|config\.h)$' | grep -v 'config\.example\.h'; then
+            echo "ERROR: firmware secrets file tracked in git"
+            exit 1
+          fi
+
+      - name: Check for common secret patterns
+        run: |
+          if grep -rn --include='*.md' --include='*.json' --include='*.py' \
+            -E '(password|secret_key|api_key|access_token)\s*[:=]\s*"[^"]{8,}"' . \
+            --exclude-dir=.git --exclude-dir=node_modules; then
+            echo "WARNING: possible secret detected — review above matches"
+            exit 1
+          fi
+          echo "No secrets detected."

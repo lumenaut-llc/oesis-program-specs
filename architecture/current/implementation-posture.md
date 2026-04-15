@@ -91,6 +91,9 @@ status.
 - local inference API
 - local parcel-platform API
 - bench-air packet normalization
+- circuit-monitor packet normalization and equipment-state bridge
+- weather-pm-mast packet normalization
+- flood-node packet normalization
 
 Parcel-facing condition estimates (for example shelter, reentry, egress, and
 asset risk) are **functional interpretation** of fused evidence. **`implemented`**
@@ -109,8 +112,7 @@ surface is complete.
 
 - richer sharing-settings and consent surfaces
 - revocation as a product guarantee
-- flood-specific observation family
-- weather-pm outdoor observation family
+- thermal scene observation family (only remaining unimplemented observation family)
 - thermal scene observation family
 - public parcel-resolution map support
 

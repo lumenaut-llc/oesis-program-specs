@@ -24,6 +24,12 @@ here so the v1.5 bridge lane can evolve them additively from a v1.0 baseline
 rather than forking from v0.1. See `../../v1.5/README.md` for their primary
 architectural home.
 
+**Governance-layer contracts** (v1.0 deliverables — these support the sharing
+and research participation modes defined in `../../legal/privacy/permissions-matrix.md`):
+
+- `network-assist-signal.schema.json`
+- `research-data-export.schema.json`
+
 **Measurement-trust contracts** (v1.0 deliverables — these compose per-signal
 quality factors into parcel-level trust assessment):
 

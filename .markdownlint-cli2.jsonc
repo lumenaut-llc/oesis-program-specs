@@ -1,0 +1,22 @@
+{
+  // OESIS markdownlint configuration
+  "config": {
+    "default": true,
+    // Allow long lines — many spec tables and JSON blocks exceed 80 chars
+    "MD013": false,
+    // Allow duplicate headings in different sections
+    "MD024": { "siblings_only": true },
+    // Allow HTML in markdown (used for comments in templates)
+    "MD033": false,
+    // Allow bare URLs
+    "MD034": false,
+    // Allow multiple top-level headings (some docs have frontmatter)
+    "MD025": false,
+    // Allow trailing punctuation in headings
+    "MD026": { "punctuation": ".,;:!" }
+  },
+  "ignores": [
+    "node_modules/**",
+    ".git/**"
+  ]
+}

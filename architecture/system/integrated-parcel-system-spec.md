@@ -243,8 +243,8 @@ The packet families should normalize into explicit observation families rather t
 | --- | --- | --- |
 | `oesis.bench-air.v1` | `air.node.snapshot` | implemented |
 | `oesis.bench-air.v1` from `mast-lite` | `air.node.snapshot` with outdoor install metadata | partially implemented through shared lineage |
-| `oesis.weather-pm-mast.v1` | `air.pm_weather.snapshot` | not yet implemented |
-| `oesis.flood-node.v1` | `flood.low_point.snapshot` | not yet implemented |
+| `oesis.weather-pm-mast.v1` | `air.pm.snapshot` | implemented |
+| `oesis.flood-node.v1` | `flood.low_point.snapshot` | implemented |
 | `oesis.thermal-pod.v1` | `thermal.scene.snapshot` | not yet implemented |
 
 ## Design consequences

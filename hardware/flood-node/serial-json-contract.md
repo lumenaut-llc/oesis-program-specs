@@ -93,6 +93,14 @@ contract boundary.
 - `read_failures_total`: count of failed or invalid reads
 - `last_error`: `null` when healthy, otherwise a short string such as `adc_read_invalid`
 
+## Implementation status
+
+This hardware contract is **architecturally defined**. The corresponding software
+observation family (`flood.low_point.snapshot`) is implemented in the ingest path
+as of the current runtime. Field teams can build flood-nodes that emit valid JSON
+and the system can normalize and ingest it. See the observation family map in
+`../../architecture/system/integrated-parcel-system-spec.md` for overall status.
+
 ## Serial behavior
 
 - baud rate: `115200`

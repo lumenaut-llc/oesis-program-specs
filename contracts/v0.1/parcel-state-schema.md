@@ -96,6 +96,25 @@ minimum-functioning definition.
 - `freshness`
 - `provenance_summary`
 
+## v0.1 minimum subset
+
+The **v0.1 acceptance bar** (`minimum-functioning-v0.1.md`) requires only these
+fields to be present and quality-gated:
+
+- Core statuses: `shelter_status`, `reentry_status`, `egress_status`, `asset_risk_status`
+- `confidence`
+- `evidence_mode`
+- `reasons`
+- `freshness`
+- `provenance_summary`
+
+All other fields (`parcel_priors_applied`, `divergence_records`,
+`public_only_counterfactual`, `contrastive_explanations`, `explanation_payload`,
+`hazard_statuses`, hazard probabilities) are present in the schema for
+forward-compatibility and inference auditability, but their **quality is not
+gated until v0.2+** (see annotations in Supporting values above). Developers
+targeting v0.1 should implement the subset above first.
+
 ## Minimum parcel-state object
 
 ```json
