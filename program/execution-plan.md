@@ -4,7 +4,7 @@
 
 Single document that maps the full build sequence from current position through
 v1.5, connecting version slices, capability stages, milestones, blocker counts,
-implementation status, and technical work items across all three repositories.
+implementation status, and technical work items across all four repositories.
 
 This is the document to read when you need to answer: **where are we, what's
 next, and what does the full path look like?**
@@ -351,12 +351,13 @@ They still do **NOT** verify:
 
 ---
 
-## Three-repo coordination
+## Four-repo coordination
 
 | Repository | Role | Version alignment |
 |-----------|------|-------------------|
 | **oesis-program-specs** | Specifications, contracts, architecture, release planning | Version lane markers, release packets, acceptance criteria |
 | **oesis-runtime** | Python reference implementation | Runtime code, acceptance commands, `make oesis-v0x-accept` |
+| **[oesis-hardware](https://github.com/lumenaut-llc/oesis-hardware)** | Sensor node specs, firmware, BOMs, build guides | Hardware maturity tracks deployment maturity ladder; CERN-OHL-S-2.0 / AGPL-3.0 |
 | **oesis-public-site** | Next.js public preview | Public-facing materials; follows release-lane publication allowlist |
 
 **Build validation commands** (in oesis-runtime):

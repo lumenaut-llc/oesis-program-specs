@@ -17,11 +17,11 @@ Current split-stage decision.
 - release-packet assembly scaffolding
 - site publication support
 
-At the current maturity level, splitting it into a fourth repository would add:
+At the current maturity level, splitting it into a fifth repository would add:
 
 - another artifact boundary to maintain
 - another release sequence to coordinate
-- more cross-repo path and version management before the first three-repo split is stable
+- more cross-repo path and version management before the four-repo split (specs, runtime, hardware, public-site) is stable
 
 ## Re-evaluation gate
 
