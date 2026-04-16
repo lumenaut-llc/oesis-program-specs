@@ -28,12 +28,14 @@ Until broader stewardship roles are assigned, Liam is acting as:
 
 **2026-04-15 refresh:** All six acceptance suites (v0.1–v1.0) pass. Governance, sharing, consent, and revocation gates updated to reflect v0.5 implementation evidence. Licensing gate closed after 4-repo asset-class matrix review. Data-class validation confirmed across v0.1 and v1.0 schema lanes.
 
+**2026-04-16 refresh:** v1.0 Tier B implementation complete (runtime commit `07853d0`). Ingest authorization (DA-3), HTTP-level governance enforcement (GL-6), deployment-quality flags (PU-6), notice enforcement for sharing (PI-5), installation metadata capture (PU-5), live public feed support (DA-5), and Docker deployment packaging all implemented and passing. All features opt-in via env vars; no regressions across v0.1–v1.0 acceptance suites.
+
 ## Governance and legal gates
 
 | Item | Owner | Surface | Status | Notes |
 | --- | --- | --- | --- | --- |
 | Data classes are fixed and referenced by product/API work | Liam (technical) | docs, schemas, APIs | done | `make oesis-validate` and `make oesis-v10-validate` pass; 19 v1.0 example payloads validated. Data classes stable across v0.1–v1.0 lanes. |
-| Sharing modes are defined and aligned with UI and policy docs | Liam (governance/privacy) | parcel settings, docs | in progress | v0.5 acceptance validates sharing settings, consent lifecycle, and revocation at API level. Product UI for operator sharing management not yet built. |
+| Sharing modes are defined and aligned with UI and policy docs | Liam (governance/privacy) | parcel settings, docs | in progress | v0.5 acceptance validates sharing settings, consent lifecycle, and revocation at API level. v1.0 Tier B adds notice enforcement (PI-5): consent grants require `notice_acknowledged` before data leaves private context (2026-04-16). Product UI for operator sharing management not yet built. |
 | Claims and safety-language standard reviewed against public copy | Liam (release) | site, app, release copy | in progress | The release site and notice were written against the claims doc, but final release-owner review is still pending. |
 | Licensing split reviewed for software, hardware, docs, and datasets | Liam (legal/IP) | repo root, legal docs | done | Asset-class license matrix updated for 4-repo structure (specs, runtime, hardware, public-site). GL-4 gate closed 2026-04-15. |
 | Dataset release policy applied to all public artifacts | Liam (legal/IP) | repo, releases, pilots | not started | Policy exists, but artifact-by-artifact application is still pending. |
@@ -59,7 +61,7 @@ Until broader stewardship roles are assigned, Liam is acting as:
 | Rights request object implemented from schema | Liam (technical) | backend, support/admin flow | done | Reference rights-request stores and admin processing routes exist and are exercised in v0.5 acceptance. |
 | Parcel API includes visible data-class and sharing summaries where intended | Liam (technical) | parcel API | done | Parcel views expose `data_classes_visible` and `sharing_summary`. v0.5 acceptance validates. |
 | Shared-map API suppresses exact parcel identifiers and raw refs | Liam (technical) | shared map API | done | Shared-map aggregate-first path tested in v0.5 acceptance; `public_map_supported: false` enforced; revoked parcels suppressed. |
-| Revocation behavior stops future sharing promptly | Liam (governance/privacy) | backend jobs, map pipeline | done | v0.5 acceptance proves: `revoked_at` stops future sharing, shared-map suppresses revoked parcels. HTTP-level enforcement not yet tested (Tier B). |
+| Revocation behavior stops future sharing promptly | Liam (governance/privacy) | backend jobs, map pipeline | done | v0.5 acceptance proves: `revoked_at` stops future sharing, shared-map suppresses revoked parcels. v1.0 Tier B adds 8-test HTTP governance suite confirming consent grant, revocation, and access-log recording at HTTP level (2026-04-16). |
 
 ## Security and operator gates
 

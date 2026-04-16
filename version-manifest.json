@@ -1,6 +1,6 @@
 {
   "format_version": "1.0",
-  "generated_at": "2026-04-15T00:00:00Z",
+  "generated_at": "2026-04-16T00:00:00Z",
   "description": "Cross-repo version alignment manifest for the OESIS project. This file declares the current version state across all four repositories. Validate with: python3 scripts/cross_repo_sync_check.py",
 
   "repos": {
@@ -14,7 +14,7 @@
       "url": "https://github.com/lumenaut-llc/oesis-runtime",
       "role": "Python reference implementation",
       "license": "AGPL-3.0",
-      "last_verified_commit": "36325cce4000b9a5a337e3768b6ecafa0d79df12",
+      "last_verified_commit": "07853d03001eb81767178e9175f10b6a6c44971c",
       "package_version": "0.1.0"
     },
     "oesis-hardware": {
@@ -86,7 +86,7 @@
   },
 
   "acceptance_results": {
-    "last_verified": "2026-04-15",
+    "last_verified": "2026-04-16",
     "v0.1": "PASS",
     "v0.2": "PASS",
     "v0.3": "PASS",
