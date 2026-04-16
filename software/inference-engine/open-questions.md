@@ -1,5 +1,10 @@
 # Open Questions
 
+> **Status (2026-04-15):** All questions below now have recommended directions.
+> These directions are implemented in the v1.0 inference engine
+> (`oesis-runtime/oesis/inference/v1_0/`). Treat them as decided unless a
+> future architecture review reopens them.
+
 - What minimum evidence threshold should allow the engine to emit `safe`, `caution`, or `unsafe` instead of `unknown`?
 
   > **Recommended direction:** At least 1 local node with health OK and freshness < 15 minutes. Public context alone moves evidence_mode to public_only but should not produce non-unknown status without local confirmation.

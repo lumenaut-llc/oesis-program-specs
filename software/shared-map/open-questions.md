@@ -1,5 +1,10 @@
 # Open Questions
 
+> **Status (2026-04-15):** All questions below now have recommended directions.
+> These directions are reflected in the v1.0 shared-map implementation
+> (`oesis-runtime/oesis/shared_map/v1_0/`). Treat them as decided unless a
+> future architecture review reopens them.
+
 - What minimum participation threshold should be required before any neighborhood condition is shown?
 
   > **Recommended direction:** Minimum 3 participating parcels per cell before any neighborhood condition is shown. Below that, display 'insufficient coverage' rather than nothing.

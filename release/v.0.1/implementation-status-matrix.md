@@ -60,6 +60,8 @@ This matrix reflects the current local reference state after these checks passed
 
 **2026-04-08 — v0.1 completeness review:** the commands above were re-run successfully on Python 3.11.1, along with `make oesis-v10-accept`, `make oesis-v10-check`, and `make oesis-v10-http-check`. Hardware-side, `python3 -m oesis.ingest.extract_latest_packet` plus `python3 -m oesis.ingest.ingest_packet` were exercised on a synthetic serial log; the bench-air **operator runbook** was aligned to these module entrypoints. See `v0.1-scope-matrix.md`, `v0.1-gap-register.md`, `v0.1-pilot-minimum-subset.md`, `v0.1-osi-diagrams.md` (Mermaid), and `v0.1-osi-diagrams-text.md` (plain text) in this directory for scope, gaps, pilot-tier gates, and OSI layer views of each path.
 
+**2026-04-15 — v1.0 Tier A refresh:** All six acceptance suites (v0.1 through v1.0) pass via `python3 -m oesis.checks --lane <lane>`. Flood, weather-PM, and mast-lite observation families promoted from planned/partial to implemented. Bridge objects (house-state, intervention, verification, equipment-state, source-provenance) promoted from planned to partial — runtime inference integration exists but standalone API endpoints do not. Sharing/consent and revocation promoted from docs-only to implemented (v0.5 acceptance). Launch checklist at 17/44 gates complete. Hardware split to `oesis-hardware` repo complete; 4-repo structure operational.
+
 ## Deployment maturity note
 
 The repo now uses a separate deployment maturity overlay in addition to the capability roadmap.
@@ -79,9 +81,9 @@ In this matrix:
 | Local inference API | implemented | `python3 -m oesis.inference.serve_inference_api`, `make oesis-http-check` | Produces parcel-state outputs from normalized observation plus context. | Extend coverage to more observation families. |
 | Local parcel-platform API | implemented | `python3 -m oesis.parcel_platform.serve_parcel_api`, `make oesis-http-check` | Builds parcel views and evidence summaries in the current reference flow. | Distinguish reference governance flows from fuller product UX. |
 | Bench-air packet normalization | implemented | `python3 -m oesis.ingest.ingest_packet`, example packet validation | Current ingest path explicitly supports `oesis.bench-air.v1`. | Keep schema stable while new node classes come online. |
-| Mast-lite through shared packet lineage | partial | `software/operator-quickstart.md`, integrated parcel spec | Supported as long as `mast-lite` keeps the current `oesis.bench-air.v1` lineage with outdoor or sheltered metadata. | Add family-specific normalization only if and when the packet lineage diverges. |
-| Flood low-point observation family | planned | integrated parcel spec, node registry schema | `flood-node` is in the architecture and hardware docs. | Implement `flood.low_point.snapshot` in the canonical Python path. |
-| Weather PM outdoor observation family | planned | integrated parcel spec | `weather-pm-mast` is second-wave architecture, not current reference coverage. | Implement `air.pm_weather.snapshot`. |
+| Mast-lite through shared packet lineage | implemented | `make oesis-v02-accept` through `make oesis-v10-accept`; v1.0 acceptance normalizes mast-lite packets and infers parcel state | Uses `oesis.bench-air.v1` lineage with `location_mode: "sheltered"`. Shared normalizer; no family-specific normalization needed. | Field-hardening bundle (protected power, buffering, enclosure) not yet closed — see HR-2. |
+| Flood low-point observation family | implemented | `make oesis-v03-accept` through `make oesis-v10-accept`; `normalize_flood_packet.py` in runtime | `flood.low_point.snapshot` normalization and value extraction (water_depth_cm, distance_cm, dry_reference_distance_cm) work in the canonical Python path. | Independent field build reproduction not yet confirmed. |
+| Weather PM outdoor observation family | implemented | `make oesis-v10-accept`; `normalize_weather_pm_packet.py` in runtime | `air.pm_weather.snapshot` normalization works in the v1.0 canonical path. | Hardware deployment maturity remains below field-ready. |
 | Thermal scene observation family | planned | integrated parcel spec | `thermal-pod` remains in a separate R&D lane. | Implement `thermal.scene.snapshot` only after privacy and usefulness boundaries are stronger. |
 
 ## Governance, rights, and shared-map surfaces
@@ -94,8 +96,8 @@ In this matrix:
 | Operator access logging in reference flows | partial | access-log handling inside `serve_parcel_api.py` and related utilities | Reference logging exists for admin actions. | Prove complete parcel-linked access logging in broader operations. |
 | Shared-map aggregate API | partial | `python3 -m oesis.shared_map.serve_shared_map_api` | Aggregated neighborhood testing path exists. | Integrate it into broader checks and real review flows. |
 | Public shared map | docs-only | `public_map_supported: False` in shared-map API | The reference stack explicitly does not support a public parcel-resolution map. | Keep public-map red lines enforced if the shared-map surface grows. |
-| Sharing settings, consent, and rights schemas | docs-only | example payloads and schemas validated by `make oesis-validate` | Contracts and examples exist. | Implement matching product and operator surfaces. |
-| Revocation behavior as product guarantee | docs-only | launch-readiness checklist still marks this `not started` | Policy direction is documented. | Implement and verify prompt future-sharing cutoff behavior. |
+| Sharing settings, consent, and rights schemas | implemented | `make oesis-v05-accept`; consent lifecycle (grant, eligibility, rejection), sharing settings, and rights processing tested end-to-end | v0.5 acceptance validates full consent and sharing lifecycle at API level. | Product UI for operator sharing management (PU-7) not yet built. |
+| Revocation behavior as product guarantee | implemented | `make oesis-v05-accept`; revocation stops future sharing, shared-map suppresses revoked parcels | v0.5 acceptance proves revocation cutoff and map suppression. | HTTP-level consent filtering on API responses not yet tested (V05-G14). |
 
 ## Hardware and field path
 
@@ -113,12 +115,12 @@ In this matrix:
 
 | Surface | Status | Evidence | Current boundary | Next gap |
 | --- | --- | --- | --- | --- |
-| House-state support object | planned | `contracts/v1.0/schemas/house-state.schema.json` (forward-compatibility placement) | Schema and example exist; no runtime API surface. | Implement parcel-platform endpoints (`/house-state`) and pilot validation. |
-| House-capability support object | planned | `contracts/v1.5/schemas/house-capability.schema.json` | Schema and example exist; no runtime API surface. | Implement parcel-platform endpoints (`/capabilities`) and pilot validation. |
-| Intervention-event record | planned | `contracts/v1.5/schemas/intervention-event.schema.json` | Schema and example exist; no runtime API surface. | Implement parcel-platform endpoints (`/interventions`) and pilot validation. |
-| Verification-outcome record | planned | `contracts/v1.5/schemas/verification-outcome.schema.json` | Schema and example exist; no runtime API surface. | Implement parcel-platform endpoints (`/verification`) and pilot validation. |
-| Equipment-state-observation | planned | `contracts/v1.0/schemas/equipment-state-observation.schema.json` (forward-compatibility placement) | Schema and example exist; no ingest or runtime surface. | Implement observation family and ingest normalization path. |
-| Source-provenance-record | planned | `contracts/v1.0/schemas/source-provenance-record.schema.json` (forward-compatibility placement) | Schema and example exist; no runtime surface. | Implement provenance tracking in the ingest and inference paths. |
+| House-state support object | partial | `contracts/v1.0/schemas/house-state.schema.json`; v1.0 inference consumes house_state in `infer_parcel_state()` | Schema, example, and runtime inference integration exist. House-state influences closed-loop summaries and recommendation content. | No standalone parcel-platform endpoint (`/house-state`); no pilot-validated data. |
+| House-capability support object | partial | `contracts/v1.5/schemas/house-capability.schema.json`; v1.0 inference consumes house_capability | Schema, example, and runtime inference integration exist. | No standalone endpoint; v1.5 bridge scope. |
+| Intervention-event record | partial | `contracts/v1.5/schemas/intervention-event.schema.json`; v1.0 inference consumes intervention_event | Schema, example, and runtime inference integration exist. Closed-loop summary generation works. | No standalone endpoint; no real intervention data yet. |
+| Verification-outcome record | partial | `contracts/v1.5/schemas/verification-outcome.schema.json`; v1.0 inference consumes verification_outcome | Schema, example, and runtime inference integration exist. Verification assessment in inference pipeline works. | No standalone endpoint; no real verification data yet. |
+| Equipment-state-observation | partial | `contracts/v1.0/schemas/equipment-state-observation.schema.json`; v1.0 inference consumes equipment_state_observation | Schema, example, and v1.0 inference integration exist. Equipment state flows into parcel-state reasoning. | No standalone ingest normalization path or endpoint. |
+| Source-provenance-record | partial | `contracts/v1.0/schemas/source-provenance-record.schema.json`; v1.0 inference consumes source_provenance_record | Schema, example, and v1.0 inference integration exist. Provenance informs trust scoring. | No standalone provenance tracking endpoint. |
 | Control-compatibility | planned | `contracts/v1.5/schemas/control-compatibility.schema.json` | Schema and example exist; draft capture may begin under v1.5 bridge. | Full compatibility inventory is a v2.5 deliverable — see `../../architecture/system/architecture-gaps-by-stage.md`. |
 
 ## Release, legal, and public surfaces
@@ -130,7 +132,7 @@ In this matrix:
 | Reviewer packet assembly | implemented | `reviewer-packet-index.md` | Controlled packet lanes are now explicit. | Use named release owners to decide who receives which packet. |
 | Counsel packet assembly | implemented | `legal/send-to-counsel-checklist.md` and related filing docs | Archival counsel handoff path exists if later needed. | Only use if the project reopens a separate patent/counsel lane. |
 | Pilot packet assembly | implemented | pilot playbooks and pilot/research agreement template | Pilot docs exist for operator and participant review. | Assign named pilot owners and turn packet rules into operating practice. |
-| Launch readiness ownership and completion | docs-only | `launch-readiness-checklist.md` remains mostly `not started` | Gates are documented. | Assign owners, statuses, and evidence. |
+| Launch readiness ownership and completion | partial | `v1.0-launch-checklist.md`: 17 of 44 gates complete, 2 in progress, 25 not started | Tier A (internal reference) substantively complete. Tier B (external pilot) gates remain largely not started. | Assign named owners to remaining gates; close HR-2 and HR-4 when evidence arrives. |
 
 ## How to use this matrix
 

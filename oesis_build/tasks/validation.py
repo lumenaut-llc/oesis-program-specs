@@ -7,8 +7,8 @@ VALIDATION_TASK_NAMESPACE = TaskNamespace(
     name="validation",
     description="Future shared validation flows for publication and build checks.",
     planned_consumers=(
-        "Makefile",
-        "scripts/oesis_smoke_check.sh",
-        "scripts/oesis_http_smoke_check.sh",
+        "Makefile (oesis-runtime)",
+        "oesis-runtime: scripts/oesis_smoke_check.sh",
+        "oesis-runtime: scripts/oesis_http_smoke_check.sh",
     ),
 )

@@ -1,5 +1,10 @@
 # Open Questions
 
+> **Status (2026-04-15):** All questions below now have recommended directions.
+> These directions are reflected in the v1.0 parcel-platform implementation
+> (`oesis-runtime/oesis/parcel_platform/v1_0/`). Treat them as decided unless
+> a future architecture review reopens them.
+
 - Should the dwelling-facing UI show raw probabilities, or should it emphasize statuses plus short explanations?
 
   > **Recommended direction:** Statuses plus short explanations. Show confidence bands (low/medium/high) rather than numeric probabilities. Raw probabilities available in evidence-summary for advanced users.

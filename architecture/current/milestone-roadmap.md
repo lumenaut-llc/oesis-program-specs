@@ -178,7 +178,7 @@ fit the singular parcel-system contract.
 ### Current posture
 
 - `flood-node` hardware lane: `partial`
-- flood observation family in the canonical software path: `planned`
+- flood observation family in the canonical software path: `implemented` (v0.3+; `normalize_flood_packet.py` in runtime; v0.3–v1.0 acceptance all pass)
 
 ## Milestone 4: richer outdoor sensing
 
@@ -211,7 +211,7 @@ stable.
 ### Current posture
 
 - `weather-pm-mast` hardware lane: `partial`
-- PM/weather observation family in software: `planned`
+- PM/weather observation family in software: `implemented` (v1.0; `normalize_weather_pm_packet.py` in runtime; v1.0 acceptance passes)
 
 ## Milestone 5: shared neighborhood surface
 

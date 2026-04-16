@@ -23,9 +23,9 @@
 | ID | Gap | Status |
 |----|-----|--------|
 | V05-G3 | Retention cleanup: schedule with named owners | **Blocker** — utility exists; no schedule or owner assigned |
-| V05-G5 | Operator access logging: coverage not proven | Partial |
-| V05-G6 | Sharing settings surface for operator | Docs-only — no input surface |
-| V05-G8 | Rights request processing: operator-mediated flow | Partial — admin utility only |
+| V05-G5 | Operator access logging: coverage not proven | Partial — reference logging exists in `serve_parcel_api.py`; proving completeness is ongoing (SO-2 gate closed, broader audit pending) |
+| V05-G6 | Sharing settings surface for operator | Partial — API-level sharing settings implemented and tested in v0.5 acceptance; product UI not yet built (PU-7) |
+| V05-G8 | Rights request processing: operator-mediated flow | Partial — admin utility exists; `process_rights_requests` and export bundle work at API level |
 
 ## Non-goals
 

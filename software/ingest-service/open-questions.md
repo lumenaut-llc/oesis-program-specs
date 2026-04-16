@@ -1,5 +1,10 @@
 # Open Questions
 
+> **Status (2026-04-15):** All questions below now have recommended directions.
+> These directions are reflected in the v1.0 ingest implementation
+> (`oesis-runtime/oesis/ingest/v1_0/`). Treat them as decided unless a future
+> architecture review reopens them.
+
 - What is the first acceptable trust model for parcel operator-run nodes: shared secret, per-node token, signed payloads, or private-network-only?
 
   > **Recommended direction:** Private-network-only for v0.1 (serial extract or local HTTP). Shared-secret API key for v1.0 live deployment. Per-node tokens with rotation for v1.5+.
