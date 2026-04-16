@@ -1,44 +1,49 @@
 {
   "activePublicRelease": {
     "id": "v1.0",
-    "summary": "Release-scoped public packet and publication boundary for the Astro preview site; canonical markdown roots under release/v1.0/.",
-    "title": "OESIS public preview v1.0 packet"
+    "summary": "Release-scoped public packet and publication boundary for the project site; canonical markdown roots under release/v1.0/.",
+    "title": "OESIS open release packet"
   },
   "approvedAnchors": [
     "/#snapshot",
-    "/#roadmap",
-    "/#how-it-works",
-    "/#hardware-specs",
-    "/#software-specs",
-    "/#governance",
-    "/#diagrams"
+    "/why-it-matters/",
+    "/how-it-works/",
+    "/roadmap/",
+    "/program/",
+    "/pilot/",
+    "/systems/",
+    "/get-involved/",
+    "/workstreams/",
+    "/open-release/",
+    "/open-release/#hardware-specs",
+    "/open-release/#software-specs",
+    "/open-release/#release-packet-heading",
+    "/governance-and-privacy/",
+    "/diagrams/",
+    "/note/"
   ],
   "approvedSourceRoots": [
-    "release/v1.0/"
+    "release/v1.0/",
+    "release/v0.1/",
+    "release/v0.2/",
+    "release/v0.3/",
+    "release/v0.4/",
+    "release/v0.5/",
+    "legal/privacy/",
+    "architecture/",
+    "legal/"
   ],
   "bundle_version": "v1.0",
   "excludedFromPublicNavigation": [
-    "release/v1.0/reviewer-packet-index.md",
-    "release/v1.0/publish-internal-map.md",
-    "release/v1.0/preview-execution-plan.md",
-    "release/v1.0/launch-readiness-checklist.md",
-    "release/v1.0/NOTICE.md",
-    "release/v1.0/asset-class-license-and-publication-matrix.md",
-    "release/v1.0/contributor-and-review-guide.md",
-    "release/v1.0/open-source-v1-summary.md",
-    "release/v1.0/v1.0-acceptance-spec.md",
-    "release/v1.0/v1.0-gap-register.md",
-    "release/v1.0/v1.0-launch-checklist.md",
-    "release/v1.0/v1.0-pilot-minimum-subset.md",
-    "release/v1.0/v1.0-scope-matrix.md",
-    "release/v1.0/v1.0-scope.md"
+    "legal/counsel-questions/",
+    "legal/provisional-*"
   ],
-  "generated_at": "2026-04-08T21:30:00Z",
-  "legalRoot": "",
-  "privacyGovernanceRoot": "",
+  "generated_at": "2026-04-15T00:00:00Z",
+  "legalRoot": "legal/",
+  "privacyGovernanceRoot": "legal/privacy/",
   "programRoot": "",
   "releaseRoot": "release/v1.0/",
   "repoBlobBase": "https://github.com/lumenaut-llc/oesis-program-specs/blob/main/",
-  "source_commit": "d5ef94dc97d60ee81fd428d2ddd595bc909dd7a6",
+  "source_commit": "b99e4521019214b3adfc12e35e1a6931c7b2300b",
   "source_repo": "oesis-program-specs"
 }
