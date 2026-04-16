@@ -373,6 +373,7 @@ They still do **NOT** verify:
 | `make oesis-v04-accept` | **PASS** | v0.4 multi-node registry |
 | `make oesis-v05-accept` | **PASS** | v0.5 governance |
 | `make oesis-v10-accept` | **PASS** | v1.0 extended support objects |
+| `make oesis-v10-validate` | **PASS** | v1.0 schema validation (19 example payloads) |
 
 ---
 

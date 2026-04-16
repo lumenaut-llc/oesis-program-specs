@@ -21,7 +21,7 @@
 
 | ID | Gap | Status |
 |----|-----|--------|
-| V04-G1 | Node registry lifecycle: full end-to-end flow | Partial — schema exists; not exercised |
+| V04-G1 | Node registry lifecycle: full end-to-end flow | Partial — schema and v0.4 acceptance test exist (`make oesis-v04-accept` exercises register, bind, disable, replace, retire); full operator-facing flow not yet built |
 | V04-G2 | Installation metadata capture surface (CLI, form, or API) | Docs-only — no capture path |
 
 ## Non-goals

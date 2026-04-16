@@ -26,14 +26,16 @@ Until broader stewardship roles are assigned, Liam is acting as:
 - Controlled review packet dry run on April 1, 2026 resolved all `18` files listed in the current Packet 2 path from `reviewer-packet-index.md`.
 - Operator dry run on April 1, 2026 succeeded for `python3 -m oesis.parcel_platform.reference_pipeline`, `python3 -m oesis.ingest.ingest_packet oesis/assets/v0.1/examples/node-observation.example.json --parcel-id parcel_demo_001`, and preview-site HTTP checks returning `200 OK` for `http://127.0.0.1:8000/`.
 
+**2026-04-15 refresh:** All six acceptance suites (v0.1–v1.0) pass. Governance, sharing, consent, and revocation gates updated to reflect v0.5 implementation evidence. Licensing gate closed after 4-repo asset-class matrix review. Data-class validation confirmed across v0.1 and v1.0 schema lanes.
+
 ## Governance and legal gates
 
 | Item | Owner | Surface | Status | Notes |
 | --- | --- | --- | --- | --- |
-| Data classes are fixed and referenced by product/API work | Liam (technical) | docs, schemas, APIs | in progress | `make oesis-validate` passes and the reference services use the checked-in example contracts, but broader product/API coverage is still incomplete. |
-| Sharing modes are defined and aligned with UI and policy docs | Liam (governance/privacy) | parcel settings, docs | not started | Sharing schemas and policy docs exist, but there is no full parcel-settings UI yet. |
+| Data classes are fixed and referenced by product/API work | Liam (technical) | docs, schemas, APIs | done | `make oesis-validate` and `make oesis-v10-validate` pass; 19 v1.0 example payloads validated. Data classes stable across v0.1–v1.0 lanes. |
+| Sharing modes are defined and aligned with UI and policy docs | Liam (governance/privacy) | parcel settings, docs | in progress | v0.5 acceptance validates sharing settings, consent lifecycle, and revocation at API level. Product UI for operator sharing management not yet built. |
 | Claims and safety-language standard reviewed against public copy | Liam (release) | site, app, release copy | in progress | The release site and notice were written against the claims doc, but final release-owner review is still pending. |
-| Licensing split reviewed for software, hardware, docs, and datasets | Liam (legal/IP) | repo root, legal docs | not started | Licensing materials exist, but this review gate is not yet closed. |
+| Licensing split reviewed for software, hardware, docs, and datasets | Liam (legal/IP) | repo root, legal docs | done | Asset-class license matrix updated for 4-repo structure (specs, runtime, hardware, public-site). GL-4 gate closed 2026-04-15. |
 | Dataset release policy applied to all public artifacts | Liam (legal/IP) | repo, releases, pilots | not started | Policy exists, but artifact-by-artifact application is still pending. |
 | Trademark and compatibility language reviewed | Liam (release) | release copy, docs, branding | not started | No completed review evidence yet. |
 
@@ -52,19 +54,19 @@ Until broader stewardship roles are assigned, Liam is acting as:
 
 | Item | Owner | Surface | Status | Notes |
 | --- | --- | --- | --- | --- |
-| Sharing settings object implemented from schema | Liam (technical) | backend, parcel API | in progress | The reference parcel-view path validates sharing settings and emits a sharing summary, but the broader backend surface is incomplete. |
-| Consent record object implemented from schema | Liam (technical) | backend, audit trail | not started | Example and schema exist, but there is no operational consent backend flow yet. |
-| Rights request object implemented from schema | Liam (technical) | backend, support/admin flow | in progress | Reference rights-request stores and admin processing routes exist in the parcel-platform tree. |
-| Parcel API includes visible data-class and sharing summaries where intended | Liam (technical) | parcel API | in progress | Local reference parcel views expose `data_classes_visible` and `sharing_summary`, but the full API/UI surface is still narrow. |
-| Shared-map API suppresses exact parcel identifiers and raw refs | Liam (technical) | shared map API | in progress | The shared-map path is aggregate-first and the public map is disabled, but broader review is still pending. |
-| Revocation behavior stops future sharing promptly | Liam (governance/privacy) | backend jobs, map pipeline | not started | Revocation policy is documented, but prompt stop behavior is not yet implemented and verified. |
+| Sharing settings object implemented from schema | Liam (technical) | backend, parcel API | done | v0.5 acceptance validates sharing settings lifecycle: configure, consent, share, revoke. API-level implementation complete. |
+| Consent record object implemented from schema | Liam (technical) | backend, audit trail | done | v0.5 acceptance validates consent grant, eligibility check, and structurally-private rejection. Consent store operational. |
+| Rights request object implemented from schema | Liam (technical) | backend, support/admin flow | done | Reference rights-request stores and admin processing routes exist and are exercised in v0.5 acceptance. |
+| Parcel API includes visible data-class and sharing summaries where intended | Liam (technical) | parcel API | done | Parcel views expose `data_classes_visible` and `sharing_summary`. v0.5 acceptance validates. |
+| Shared-map API suppresses exact parcel identifiers and raw refs | Liam (technical) | shared map API | done | Shared-map aggregate-first path tested in v0.5 acceptance; `public_map_supported: false` enforced; revoked parcels suppressed. |
+| Revocation behavior stops future sharing promptly | Liam (governance/privacy) | backend jobs, map pipeline | done | v0.5 acceptance proves: `revoked_at` stops future sharing, shared-map suppresses revoked parcels. HTTP-level enforcement not yet tested (Tier B). |
 
 ## Security and operator gates
 
 | Item | Owner | Surface | Status | Notes |
 | --- | --- | --- | --- | --- |
-| Internal operator access rules are documented and distributed | Liam (governance/privacy) | ops, support, engineering | not started | Internal access policy is documented, but there is no evidence of distribution or operator rollout yet. |
-| Parcel-linked access is logged | Liam (technical) | admin tools, backend | in progress | Reference admin flows append operator access events, but broader parcel-linked access coverage is not yet proven. |
+| Internal operator access rules are documented and distributed | Liam (governance/privacy) | ops, support, engineering | in progress | Internal access policy documented; operator access logging implemented in reference flows (SO-2 closed in v1.0 checklist). Distribution/rollout pending. |
+| Parcel-linked access is logged | Liam (technical) | admin tools, backend | done | Reference admin flows append operator access events with timestamps and identity. v0.5 acceptance exercises access logging paths. |
 | Informal side-copy handling is prohibited operationally | Liam (governance/privacy) | ops practice | not started | Policy direction exists, but there is no operational rollout evidence yet. |
 | Incident path exists for privacy, visibility, and output issues | Liam (release) | pilot ops, support | not started | Incident playbook docs exist, but no named active ops path is assigned yet. |
 | Production-like demos avoid real household data | Liam (release) | demos, previews | done | Verified locally on April 1, 2026: the reference pipeline and smoke checks use checked-in example JSON rather than real parcel data. |

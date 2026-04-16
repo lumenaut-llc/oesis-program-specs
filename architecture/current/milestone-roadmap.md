@@ -144,8 +144,9 @@ disconnected devices.
 ### Current posture
 
 - `bench-air-node`: `implemented`
-- `mast-lite` hardware and shared packet lineage: `partial`
-- stronger registry-driven lifecycle: not yet complete
+- `mast-lite` software normalization and inference: `implemented` (v0.2+; shared `oesis.bench-air.v1` lineage)
+- `mast-lite` hardware independent build reproduction: `partial` (build guide exists; not independently confirmed)
+- stronger registry-driven lifecycle: `implemented` at API level (v0.4 acceptance); operator-facing flow not yet built
 
 ## Milestone 3: hazard-module expansion
 
