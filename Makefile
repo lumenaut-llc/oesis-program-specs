@@ -1,7 +1,7 @@
 RUNTIME_REPO ?= ../oesis-runtime
 PUBLIC_SITE_REPO ?= ../oesis-public-site
 
-.PHONY: oesis-demo oesis-validate oesis-accept oesis-check oesis-http-check public-site-install public-site-dev public-site-build public-site-preview repo-split-sync-runtime-assets repo-split-build-contracts-bundle repo-split-build-runtime-evidence-bundle repo-split-build-public-content-bundle repo-split-extract-site repo-split-extract-runtime repo-split-stage print-bundle print-bundle-full print-bundle-pdf
+.PHONY: cross-repo-sync oesis-demo oesis-validate oesis-accept oesis-check oesis-http-check public-site-install public-site-dev public-site-build public-site-preview repo-split-sync-runtime-assets repo-split-build-contracts-bundle repo-split-build-runtime-evidence-bundle repo-split-build-public-content-bundle repo-split-extract-site repo-split-extract-runtime repo-split-stage print-bundle print-bundle-full print-bundle-pdf
 
 # Read-only concat of v0.1 technical markdown → build/print/ (gitignored)
 print-bundle:
@@ -12,6 +12,9 @@ print-bundle-full:
 
 print-bundle-pdf:
 	python3 meta/print/bundle_v01_technical.py --extras --bench-air --pdf
+
+cross-repo-sync:
+	python3 scripts/cross_repo_sync_check.py
 
 oesis-demo:
 	$(MAKE) -C "$(RUNTIME_REPO)" oesis-demo

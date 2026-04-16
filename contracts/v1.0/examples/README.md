@@ -8,6 +8,7 @@ must differ from that baseline.
 
 Current `v1.0` additive example files:
 
+**Support objects and governance:**
 - `equipment-state-observation.example.json`
 - `source-provenance-record.example.json`
 - `consent-record.example.json`
@@ -18,3 +19,13 @@ Current `v1.0` additive example files:
 - `research-data-export.example.json`
 - `trust-score.example.json`
 - `deployment-metadata.example.json`
+
+**Observation families (raw and normalized):**
+- `node-observation-mast-lite.example.json`
+- `node-observation-flood.example.json`
+- `flood-observation.example.json`
+- `weather-pm-observation.example.json`
+- `circuit-monitor-observation.example.json`
+- `normalized-flood-observation.example.json`
+- `normalized-weather-pm-observation.example.json`
+- `normalized-circuit-observation.example.json`

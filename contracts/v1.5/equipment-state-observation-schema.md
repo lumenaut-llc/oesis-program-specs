@@ -60,4 +60,4 @@ passive inference method.
 - `house-state-schema.md`
 - `intervention-event-schema.md`
 - `verification-outcome-schema.md`
-- `../https://github.com/lumenaut-llc/oesis-hardware/blob/main/v1.5/equipment-state-adapter.md`
+- [`v1.5/equipment-state-adapter.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v1.5/equipment-state-adapter.md)

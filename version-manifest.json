@@ -1,0 +1,103 @@
+{
+  "format_version": "1.0",
+  "generated_at": "2026-04-15T00:00:00Z",
+  "description": "Cross-repo version alignment manifest for the OESIS project. This file declares the current version state across all four repositories. Validate with: python3 scripts/cross_repo_sync_check.py",
+
+  "repos": {
+    "oesis-program-specs": {
+      "url": "https://github.com/lumenaut-llc/oesis-program-specs",
+      "role": "Architecture, contracts, governance, release",
+      "license": "CC BY-SA 4.0 / AGPL-3.0",
+      "last_verified_commit": "81791c9af8876324c3098cd0e37edff1f62fb577"
+    },
+    "oesis-runtime": {
+      "url": "https://github.com/lumenaut-llc/oesis-runtime",
+      "role": "Python reference implementation",
+      "license": "AGPL-3.0",
+      "last_verified_commit": "36325cce4000b9a5a337e3768b6ecafa0d79df12",
+      "package_version": "0.1.0"
+    },
+    "oesis-hardware": {
+      "url": "https://github.com/lumenaut-llc/oesis-hardware",
+      "role": "Sensor node specs, firmware, BOMs",
+      "license": "CERN-OHL-S-2.0 / AGPL-3.0",
+      "last_verified_commit": "e4cad37dd814411d2a771a0835241baeb04adf8d"
+    },
+    "oesis-public-site": {
+      "url": "https://github.com/lumenaut-llc/oesis-public-site",
+      "role": "Public preview website",
+      "license": "AGPL-3.0",
+      "last_verified_commit": "2690c42d6cd1926c419729d9dd7813bb48df1c35"
+    }
+  },
+
+  "lanes": {
+    "v0.1": {
+      "status": "promoted",
+      "specs_examples": 30,
+      "specs_schemas": 26,
+      "runtime_examples": 30,
+      "acceptance_command": "python3 -m oesis.checks --lane v0.1"
+    },
+    "v0.2": {
+      "status": "promoted",
+      "specs_examples": 0,
+      "specs_examples_note": "Intentionally empty — inherits from v0.1 baseline",
+      "runtime_overlay_examples": 2,
+      "acceptance_command": "python3 -m oesis.checks --lane v0.2"
+    },
+    "v0.3": {
+      "status": "promoted",
+      "specs_examples": 0,
+      "specs_examples_note": "Intentionally empty — inherits from v0.1 baseline",
+      "runtime_overlay_examples": 3,
+      "acceptance_command": "python3 -m oesis.checks --lane v0.3"
+    },
+    "v0.4": {
+      "status": "promoted",
+      "specs_examples": 0,
+      "specs_examples_note": "Intentionally empty — inherits from v0.1 baseline",
+      "runtime_overlay_examples": 4,
+      "acceptance_command": "python3 -m oesis.checks --lane v0.4"
+    },
+    "v0.5": {
+      "status": "promoted",
+      "specs_examples": 0,
+      "specs_examples_note": "Intentionally empty — inherits from v0.1 baseline",
+      "runtime_overlay_examples": 5,
+      "acceptance_command": "python3 -m oesis.checks --lane v0.5"
+    },
+    "v1.0": {
+      "status": "active",
+      "specs_examples": 18,
+      "specs_schemas": 10,
+      "runtime_examples": 18,
+      "acceptance_command": "python3 -m oesis.checks --lane v1.0",
+      "validation_command": "make oesis-v10-validate"
+    },
+    "v1.5": {
+      "status": "draft",
+      "specs_examples": 6,
+      "specs_schemas": 6,
+      "runtime_examples": 6,
+      "acceptance_command": null,
+      "note": "Bridge lane — schemas and examples exist but no acceptance test yet"
+    }
+  },
+
+  "acceptance_results": {
+    "last_verified": "2026-04-15",
+    "v0.1": "PASS",
+    "v0.2": "PASS",
+    "v0.3": "PASS",
+    "v0.4": "PASS",
+    "v0.5": "PASS",
+    "v1.0": "PASS"
+  },
+
+  "consistency_rules": {
+    "canonical_example_lanes": ["v0.1", "v1.0", "v1.5"],
+    "rule": "For canonical lanes, every example in runtime must also exist in specs contracts. For overlay lanes (v0.2-v0.5), runtime may have test-fixture overlays that specs does not track.",
+    "validation": "python3 scripts/cross_repo_sync_check.py"
+  }
+}
