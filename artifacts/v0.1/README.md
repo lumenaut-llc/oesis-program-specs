@@ -26,6 +26,6 @@ truth. Update the source lanes first, then regenerate artifact bundles.
 
 ## Related
 
-- `../../contracts/v0.1/README.md`
+- [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/README.md)
 - `../../architecture/system/version-and-promotion-matrix.md`
 - `../../oesis_build/`

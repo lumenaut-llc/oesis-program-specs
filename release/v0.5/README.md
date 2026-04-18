@@ -45,5 +45,5 @@ The `pre-1.0-version-progression.md` places governance in v0.5 because:
 
 - `../v0.4/` — v0.4 baseline (registry and evidence composition)
 - `../v1.0/` — v1.0 target (requires governance from v0.5)
-- `../../contracts/v1.0/governance-operational-model.md`
+- [`v1.0/governance-operational-model.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/governance-operational-model.md)
 - `../../legal/privacy/permissions-matrix.md`

@@ -65,7 +65,7 @@ Current `v0.1` use:
 Main sources:
 - [`bench-air-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/README.md)
 - [`mast-lite/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/mast-lite/README.md)
-- `../../contracts/node-registry-schema.md`
+- [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
 
 ### 2. Packet / raw evidence
 
@@ -80,7 +80,7 @@ Current `v0.1` use:
 - the current live software path most concretely supports `oesis.bench-air.v1`
 
 Main sources:
-- `../../contracts/node-observation-schema.md`
+- [`node-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-observation-schema.md)
 - `../../software/ingest-service/interfaces.md`
 - [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/serial-json-contract.md)
 
@@ -124,8 +124,8 @@ Current `v0.1` use:
 - this is one of the strongest current boundaries in the stack
 
 Main sources:
-- `../../contracts/v0.1/README.md`
-- `../../contracts/v0.1/examples/normalized-observation.example.json`
+- [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/README.md)
+- [`v0.1/examples/normalized-observation.example.json`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/examples/normalized-observation.example.json)
 - `../../software/ingest-service/architecture.md`
 
 ### 5. Parcel context
@@ -142,7 +142,7 @@ Current `v0.1` use:
   end-user product surface
 
 Main sources:
-- `../../contracts/parcel-context-schema.md`
+- [`parcel-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-context-schema.md)
 - `reference-stack.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
 
@@ -161,7 +161,7 @@ Current `v0.1` use:
   surface
 
 Main sources:
-- `../../contracts/node-registry-schema.md`
+- [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
 - `../../architecture/system/integrated-parcel-system-spec.md`
 - `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 
@@ -178,7 +178,7 @@ Current `v0.1` use:
 - public context is already a live inference input, not just a future concept
 
 Main sources:
-- `../../contracts/public-context-schema.md`
+- [`public-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/public-context-schema.md)
 - `../../software/ingest-service/public-weather-adapter.md`
 - `../../software/ingest-service/public-smoke-adapter.md`
 
@@ -196,7 +196,7 @@ Current `v0.1` use:
 - still not a fully mature first-class product surface
 
 Main sources:
-- `../../contracts/shared-neighborhood-signal-schema.md`
+- [`shared-neighborhood-signal-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/shared-neighborhood-signal-schema.md)
 - `../../software/shared-map/architecture.md`
 - `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 
@@ -221,7 +221,7 @@ Current `v0.1` use:
 - this is the core output where the current architecture lands conclusions
 
 Main sources:
-- `../../contracts/parcel-state-schema.md`
+- [`parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md)
 - `technical-philosophy.md`
 - `reference-stack.md`
 
@@ -239,8 +239,8 @@ Current `v0.1` use:
 
 Main sources:
 - `../../software/parcel-platform/architecture.md`
-- `../../contracts/explanation-payload-schema.md`
-- `../../contracts/evidence-summary-schema.md`
+- [`explanation-payload-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/explanation-payload-schema.md)
+- [`evidence-summary-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/evidence-summary-schema.md)
 
 ### 11. Rights / sharing / export / audit objects
 
@@ -255,7 +255,7 @@ Current `v0.1` use:
 - important product surfaces are still partial or docs-only
 
 Main sources:
-- `../../contracts/v0.1/schemas/`
+- [`v0.1/schemas/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/schemas/)
 - `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 - `../../software/parcel-platform/README.md`
 
@@ -304,12 +304,12 @@ layer names and purposes** are in `../../program/operating-packet/05-revised-arc
 
 These objects are **not** part of the `v0.1` decision layer. They belong to
 capability-stage `v1.5` and exist here for architectural completeness. JSON
-schemas and examples are present in `contracts/v0.1/schemas/` for structural
-validation, but their design authority lives in `contracts/v1.5/` and
+schemas and examples are present in [`v0.1/schemas/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/schemas/) for structural
+validation, but their design authority lives in [`v1.5/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/) and
 `../../architecture/v1.5/house-state-and-verification-model.md`.
 
 Full contract triples (narrative doc + JSON schema + example) for all six objects
-are in `../../contracts/v1.5/`. See `../../contracts/v1.5/README.md` for the
+are in [`v1.5/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/). See [`v1.5/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/README.md) for the
 complete listing. Parcel-platform API endpoints for these objects are documented
 in `../../software/parcel-platform/interfaces.md` with `Status: planned`
 annotations.

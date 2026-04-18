@@ -1,14 +1,20 @@
 {
   "format_version": "1.0",
-  "generated_at": "2026-04-16T00:00:00Z",
-  "description": "Cross-repo version alignment manifest for the OESIS project. This file declares the current version state across all four repositories. Validate with: python3 scripts/cross_repo_sync_check.py",
+  "generated_at": "2026-04-17T00:00:00Z",
+  "description": "Cross-repo version alignment manifest for the OESIS project. This file declares the current version state across all five repositories. Validate with: python3 scripts/cross_repo_sync_check.py",
 
   "repos": {
     "oesis-program-specs": {
       "url": "https://github.com/lumenaut-llc/oesis-program-specs",
-      "role": "Architecture, contracts, governance, release",
+      "role": "Architecture, governance, release",
       "license": "CC BY-SA 4.0 / AGPL-3.0",
       "last_verified_commit": "81791c9af8876324c3098cd0e37edff1f62fb577"
+    },
+    "oesis-contracts": {
+      "url": "https://github.com/lumenaut-llc/oesis-contracts",
+      "role": "Canonical schemas, examples, and contract prose",
+      "license": "CC BY-SA 4.0 / AGPL-3.0",
+      "last_verified_commit": "60259c06bd994231dd0f9a615de89f051457b5cf"
     },
     "oesis-runtime": {
       "url": "https://github.com/lumenaut-llc/oesis-runtime",
@@ -86,7 +92,7 @@
   },
 
   "acceptance_results": {
-    "last_verified": "2026-04-16",
+    "last_verified": "2026-04-17",
     "v0.1": "PASS",
     "v0.2": "PASS",
     "v0.3": "PASS",

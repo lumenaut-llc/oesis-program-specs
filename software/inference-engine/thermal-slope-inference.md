@@ -141,8 +141,8 @@ Suppress thermal slope classification and emit `unknown` during:
 
 ## Related docs
 
-- `../../contracts/v1.5/equipment-state-observation-schema.md`
-- `../../contracts/v1.5/schemas/equipment-state-observation.schema.json`
+- [`v1.5/equipment-state-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/equipment-state-observation-schema.md)
+- [`v1.5/schemas/equipment-state-observation.schema.json`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/schemas/equipment-state-observation.schema.json)
 - `../../architecture/system/node-taxonomy.md`
 - `architecture.md`
 - `open-questions.md`

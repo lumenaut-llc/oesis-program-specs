@@ -59,4 +59,4 @@ scoring as a product surface, governance enforcement, or intervention logic.
 - `../v0.3/README.md`
 - `../../release/v0.4/README.md`
 - `../../release/v0.4/v0.4-implementation-status.md`
-- `../../contracts/v1.0/deployment-metadata-schema.md`
+- [`v1.0/deployment-metadata-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/deployment-metadata-schema.md)

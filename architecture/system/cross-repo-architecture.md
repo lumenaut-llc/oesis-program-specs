@@ -116,7 +116,7 @@ full four-axis model.
 
 ### How lanes stay synchronized
 
-1. **Specs** defines lane scope in `contracts/<lane>/` (schemas + examples)
+1. **Contracts** defines lane scope under `<lane>/` in [oesis-contracts](https://github.com/lumenaut-llc/oesis-contracts) (schemas + examples)
 2. **Runtime** materializes lane assets from `oesis/assets/<lane>/` overlaid on
    the v0.1 baseline
 3. **Canonical example lanes** (v0.1, v1.0, v1.5) must have identical examples

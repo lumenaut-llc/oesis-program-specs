@@ -72,7 +72,7 @@ Start with Packet 1, then add:
 3. `../../../architecture/current/README.md`
 4. `../../../architecture/current/reference-stack.md`
 5. `../../architecture/system/integrated-parcel-system-spec.md`
-6. `../../contracts/node-registry-schema.md`
+6. [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
 7. `../../../software/operator-quickstart.md`
 8. [`parcel-kit/integrated-parcel-kit-bom.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/integrated-parcel-kit-bom.md)
 9. [`parcel-kit/parcel-kit-procurement-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-kit-procurement-checklist.md)

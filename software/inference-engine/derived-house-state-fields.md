@@ -18,10 +18,10 @@ Open Environmental Sensing and Inference System
 
 ## Related files
 
-- `../../contracts/v1.5/house-state-schema.md`
+- [`v1.5/house-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/house-state-schema.md)
 - `hazard-logic-v0.md`
-- `../../contracts/v1.5/schemas/house-state.schema.json`
-- `../../contracts/v1.5/schemas/equipment-state-observation.schema.json`
+- [`v1.5/schemas/house-state.schema.json`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/schemas/house-state.schema.json)
+- [`v1.5/schemas/equipment-state-observation.schema.json`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/schemas/equipment-state-observation.schema.json)
 
 ---
 

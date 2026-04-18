@@ -41,18 +41,8 @@
 - `architecture/system/deployment-maturity-ladder.md`
 - `architecture/system/phase-roadmap.md`
 - ~~`hardware/`~~ — **Moved to [oesis-hardware](https://github.com/lumenaut-llc/oesis-hardware)**
-- `contracts/v0.1/README.md`
-- `contracts/v0.1/examples/README.md`
-- `contracts/v1.0/README.md`
-- `contracts/v1.0/examples/README.md`
-- `contracts/v1.0/schemas/README.md`
-- `contracts/node-registry-schema.md`
-- `contracts/node-observation-schema.md`
-- `contracts/parcel-context-schema.md`
-- `contracts/parcel-state-schema.md`
-- `artifacts/contracts-bundle/deployment-metadata-schema.md`
-- `artifacts/contracts-bundle/device-event-schema.md`
-- `artifacts/contracts-bundle/node-health-schema.md`
+- ~~`contracts/`~~ — **Moved to [oesis-contracts](https://github.com/lumenaut-llc/oesis-contracts)** (lane directories v0.1–v1.5, plus top-level `examples/` and `schemas/`)
+- ~~`artifacts/contracts-bundle/`~~ — **Moved to [oesis-contracts/bundles/contracts-bundle/](https://github.com/lumenaut-llc/oesis-contracts/blob/main/bundles/contracts-bundle/)**
 - `operations/pilots/README.md`
 - `operations/pilots/first-block-pilot.md`
 - `legal/privacy/README.md`

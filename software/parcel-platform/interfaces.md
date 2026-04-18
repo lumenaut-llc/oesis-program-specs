@@ -101,7 +101,7 @@ observation persistence and parcel-state caching — v0.4+ scope.
 ## Data contracts
 
 Primary input contract:
-- parcel-state snapshot from `contracts/parcel-state-schema.md`
+- parcel-state snapshot from [`parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md)
 
 Primary response shape for current state:
 - `parcel_id`

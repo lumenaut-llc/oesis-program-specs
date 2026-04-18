@@ -39,7 +39,7 @@ of the production contract and may be removed or gated in deployment.
 
 Primary MVP contract:
 - `oesis.bench-air.v1`
-  Defined in `contracts/node-observation-schema.md`
+  Defined in [`node-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-observation-schema.md)
 
 Shared-lineage contract:
 - `oesis.bench-air.v1` from `mast-lite`
@@ -86,9 +86,9 @@ Planned next bridge support events:
 
 First external adapter contract:
 - raw public weather payload
-  Normalized by `python3 -m oesis.ingest.normalize_public_weather_context` into the canonical public-context object defined in `contracts/public-context-schema.md`
+  Normalized by `python3 -m oesis.ingest.normalize_public_weather_context` into the canonical public-context object defined in [`public-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/public-context-schema.md)
 - raw public smoke payload
-  Normalized by `python3 -m oesis.ingest.normalize_public_smoke_context` into the canonical public-context object defined in `contracts/public-context-schema.md`
+  Normalized by `python3 -m oesis.ingest.normalize_public_smoke_context` into the canonical public-context object defined in [`public-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/public-context-schema.md)
 
 Expected minimum request body:
 

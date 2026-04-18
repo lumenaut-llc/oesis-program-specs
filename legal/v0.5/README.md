@@ -16,7 +16,7 @@
 ## Legal review items
 
 - Consent record schema and lifecycle compliance
-  (see `../../contracts/v1.0/governance-operational-model.md`)
+  (see [`v1.0/governance-operational-model.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/governance-operational-model.md))
 - Mark-not-delete revocation semantics: legal adequacy for data subject requests
 - Retention schedule: legal minimum/maximum retention periods
 - Export bundle: completeness requirements for data subject access requests
@@ -42,5 +42,5 @@
 - `../../release/v0.5/README.md`
 - `../../release/v0.5/v0.5-scope-matrix.md` (governance scope section)
 - `../../release/v0.5/v0.5-acceptance-criteria.md`
-- `../../contracts/v1.0/governance-operational-model.md`
+- [`v1.0/governance-operational-model.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/governance-operational-model.md)
 - `../../legal/privacy/data-ownership.md`

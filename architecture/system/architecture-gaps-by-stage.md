@@ -355,6 +355,6 @@ That prevents two common failures:
 - `version-and-promotion-matrix.md`
 - `node-taxonomy.md`
 - `integrated-parcel-system-spec.md`
-- `../../contracts/v0.1/README.md`
+- [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/README.md)
 - [`parcel-kit/field-hardening-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/field-hardening-checklist.md)
 - [`parcel-kit/pilot-field-kit.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/pilot-field-kit.md)

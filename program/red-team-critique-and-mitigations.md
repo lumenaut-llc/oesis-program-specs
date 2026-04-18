@@ -29,7 +29,7 @@ Parcel-level inference outputs are not materially better than what a user could 
 **Design response:** Divergence signals, contrastive explanations, metadata priors, and public-only counterfactuals are built into the parcel-state contract. The system is required to show where local conditions differ from public data, not just echo them.
 
 **Evidence in specs:**
-- `contracts/v0.1/parcel-state-schema.md` -- `divergence_records`, `public_only_counterfactual`, `contrastive_explanations`, `parcel_priors_applied`
+- [`v0.1/parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md) -- `divergence_records`, `public_only_counterfactual`, `contrastive_explanations`, `parcel_priors_applied`
 
 ### 3. Too broad
 
@@ -69,8 +69,8 @@ The system monitors environmental conditions around the parcel but cannot observ
 **Design response:** House-state contract includes `io_ratio`, `thermal_dynamics`, `equipment_state`, and `power_state`. Hardware specs for circuit monitor and equipment-state observation provide the observation path.
 
 **Evidence in specs:**
-- `contracts/v1.5/house-state-schema.md` -- `infiltration`, `thermal_dynamics`, `equipment_state`
-- `contracts/v1.0/equipment-state-observation-schema.md` -- equipment observation contract
+- [`v1.5/house-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/house-state-schema.md) -- `infiltration`, `thermal_dynamics`, `equipment_state`
+- [`v1.0/equipment-state-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/equipment-state-observation-schema.md) -- equipment observation contract
 - `hardware/circuit-monitor/` -- hardware path for house-state observation
 
 ### 7. Governance remains philosophical
@@ -80,8 +80,8 @@ Consent, data control, and homeowner ownership are mentioned in every document b
 **Design response:** Consent-store is a versioned contract with custody tiers, query-time eligibility checks, and mark-not-delete revocation semantics. Governance is an operational model, not a statement of values.
 
 **Evidence in specs:**
-- `contracts/v1.0/consent-store-schema.md` -- custody tiers, query-time eligibility
-- `contracts/v1.0/governance-operational-model.md` -- operational governance contract
+- [`v1.0/consent-store-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/consent-store-schema.md) -- custody tiers, query-time eligibility
+- [`v1.0/governance-operational-model.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/governance-operational-model.md) -- operational governance contract
 - `legal/privacy/permissions-matrix.md` -- permission enforcement matrix
 
 ### 8. Partial adoption does not work
@@ -92,8 +92,8 @@ Under sparse adoption -- few parcels, few nodes, incomplete coverage -- the syst
 
 **Evidence in specs:**
 - `program/operating-packet/01-core-thesis-and-framing.md` -- partial-adoption design requirement
-- `contracts/v0.1/parcel-state-schema.md` -- evidence mode tagging
-- `contracts/v1.0/network-assist-signal-schema.md` -- network-assist as additive, not required
+- [`v0.1/parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md) -- evidence mode tagging
+- [`v1.0/network-assist-signal-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/network-assist-signal-schema.md) -- network-assist as additive, not required
 
 ### 9. Maintenance burden
 
@@ -112,8 +112,8 @@ The user cannot see what this system does that a simpler stack -- a weather stat
 **Design response:** Contrastive explanations surface local-versus-public divergence directly in the parcel view. Verification outcomes prove closed-loop value by showing measurable differences after interventions. The system is designed to make its own distinctiveness visible, not just claimed.
 
 **Evidence in specs:**
-- `contracts/v0.1/parcel-state-schema.md` -- contrastive explanation structure
-- `contracts/v1.0/verification-outcome-schema.md` -- verified outcome with before/after delta
+- [`v0.1/parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md) -- contrastive explanation structure
+- [`v1.0/verification-outcome-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/verification-outcome-schema.md) -- verified outcome with before/after delta
 
 ## Pass/fail criteria
 

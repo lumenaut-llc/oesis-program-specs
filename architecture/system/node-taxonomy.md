@@ -129,5 +129,5 @@ Prefer public data, shared reports, and selected instrumentation over universal 
 - `deployment-maturity-ladder.md`
 - `architecture-gaps-by-stage.md`
 - `phase-roadmap.md`
-- `../../contracts/parcel-context-schema.md`
+- [`parcel-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-context-schema.md)
 - [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/README.md)

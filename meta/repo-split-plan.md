@@ -278,12 +278,48 @@ The split is healthy when:
 | oesis-hardware | Sensor node specs, firmware, BOMs | CERN-OHL-S-2.0 / AGPL-3.0 |
 | oesis-public-site | Public preview website | AGPL-3.0 |
 
+## Phase 6: Contracts split (complete)
+
+**Decision:** Extract `contracts/` and `artifacts/contracts-bundle/` into standalone `oesis-contracts` repository.
+
+**Rationale:**
+- 167 files (~752K) — the single largest subtree in oesis-program-specs
+- Already conceptually a published bundle; consumed by oesis-runtime (which mirrors under `oesis/assets/`) and oesis-public-site (via public-content-bundle)
+- Distinct lifecycle: schemas ship on lane promotions; architecture and release docs evolve on a different cadence
+- Machine-verifiable JSON artifacts with a clean version lane model (v0.1 – v1.5)
+
+**What moved:**
+- All lane directories: v0.1, v0.2, v0.3, v0.4, v0.5, v1.0, v1.5
+- Top-level `examples/` and `schemas/` directories
+- `artifacts/contracts-bundle/` → `bundles/contracts-bundle/` (co-located with source)
+
+**What stayed:**
+- `contracts/README.md` (redirect stub pointing to oesis-contracts)
+- `artifacts/contracts-bundle/README.md` (redirect stub)
+
+**Runtime behavior:** unchanged. Runtime continues to mirror schemas and examples under `oesis/assets/v*/` for offline acceptance tests; `cross_repo_sync_check.py` (in specs) now validates parity against `../oesis-contracts/` instead of `./contracts/`.
+
+**Cross-reference approach:** All relative markdown links like `](contracts/...)` and backtick refs like `` `contracts/v1.0/...` `` were rewritten to absolute GitHub URLs `https://github.com/lumenaut-llc/oesis-contracts/blob/main/...`. Handled by `scripts/rewrite_contracts_refs.py` (one-shot) plus `scripts/fixup_broken_contracts_urls.py` to catch pre-existing stale refs to bare filenames that had been relocated into lane dirs.
+
+**License:** dual-license model matching rest of the program — CC BY-SA 4.0 for prose `*.md`, AGPL-3.0 for JSON schemas and examples.
+
+**Result:** Five-repo structure:
+
+| Repo | Identity | License |
+|------|----------|---------|
+| oesis-program-specs | Architecture, governance, release | CC BY-SA 4.0 / AGPL-3.0 |
+| oesis-contracts | Canonical schemas, examples, contract prose | CC BY-SA 4.0 / AGPL-3.0 |
+| oesis-runtime | Python reference services | AGPL-3.0 |
+| oesis-hardware | Sensor node specs, firmware, BOMs | CERN-OHL-S-2.0 / AGPL-3.0 |
+| oesis-public-site | Public preview website | AGPL-3.0 |
+
 ## Current working rule
 
 Now that extraction is complete:
 
+- treat sibling repo `../oesis-contracts` as the schemas and examples source of truth
 - treat sibling repo `../oesis-runtime` as the runtime source of truth
 - treat sibling repo `../oesis-hardware` as the hardware specification and firmware source of truth
-- treat `contracts/`, `architecture/`, `legal/privacy/`, and `legal/` as the specification and policy source of truth
+- treat `architecture/`, `legal/privacy/`, and `legal/` as the specification and policy source of truth
 - treat sibling repo `../oesis-public-site` as the canonical publication surface
 - treat local `oesis/` and `sites/public-preview/` paths as migration pointers only

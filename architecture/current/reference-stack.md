@@ -70,7 +70,7 @@ flowchart LR
 
 - `../../software/ingest-service/architecture.md`
 - `../../software/ingest-service/README.md`
-- `../../contracts/v0.1/README.md`
+- [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/README.md)
 
 Normalization and ingest behavior should treat **timing, receipts, dedupe/replay,
 and staleness** as core truth surfaces, consistent with `../../program/operating-packet/05-revised-architecture-blueprint.md`
@@ -87,11 +87,11 @@ See also `v0.1-runtime-modules.md` and `v0.1-acceptance-criteria.md`.
 
 ### Canonical observations and context
 
-- `../../contracts/v0.1/README.md`
-- `../../contracts/public-context-schema.md`
-- `../../contracts/parcel-context-schema.md`
-- `../../contracts/node-registry-schema.md`
-- `../../contracts/explanation-payload-schema.md`
+- [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/README.md)
+- [`public-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/public-context-schema.md)
+- [`parcel-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-context-schema.md)
+- [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
+- [`explanation-payload-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/explanation-payload-schema.md)
 
 ### Parcel inference
 

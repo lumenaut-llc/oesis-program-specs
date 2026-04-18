@@ -32,5 +32,5 @@ This matters for the v1.5 bridge because:
 
 - `../../inference-engine/thermal-slope-inference.md` (full specification)
 - `derived-house-state-fields.md` (companion derived fields)
-- `../../../contracts/v1.5/equipment-state-observation-schema.md`
+- [`v1.5/equipment-state-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/equipment-state-observation-schema.md)
 - `../../../architecture/system/node-taxonomy.md` (tiered acquisition model)

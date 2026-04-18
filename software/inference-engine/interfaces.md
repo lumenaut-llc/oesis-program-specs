@@ -53,10 +53,10 @@ all of which are v0.4+ scope.
 ## Data contracts
 
 Primary input contract:
-- normalized observation records from `contracts/node-observation-schema.md`
-- optional parcel context records from `contracts/parcel-context-schema.md`
-- optional shared neighborhood signal records from `contracts/v0.1/schemas/shared-neighborhood-signal.schema.json`
-- optional public context records from `contracts/public-context-schema.md`
+- normalized observation records from [`node-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-observation-schema.md)
+- optional parcel context records from [`parcel-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-context-schema.md)
+- optional shared neighborhood signal records from [`v0.1/schemas/shared-neighborhood-signal.schema.json`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/schemas/shared-neighborhood-signal.schema.json)
+- optional public context records from [`public-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/public-context-schema.md)
 
 Current-truth input posture remains centered on the narrow baseline. Shared-lineage
 `mast-lite` observations may feed the engine, but treating them as a promoted
@@ -64,7 +64,7 @@ second local evidence lane belongs to **program-phase `v0.2`** in
 `../../architecture/system/version-and-promotion-matrix.md`.
 
 Primary output contract:
-- parcel-state snapshot defined in `contracts/parcel-state-schema.md`
+- parcel-state snapshot defined in [`parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md)
 
 Minimum parcel-state output fields:
 - `parcel_id`

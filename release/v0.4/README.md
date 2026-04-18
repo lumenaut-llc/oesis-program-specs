@@ -31,5 +31,5 @@ enforcement, or intervention logic.
 ## Related
 
 - `../v0.3/` — v0.3 baseline (flood-capable)
-- `../../contracts/v1.0/deployment-metadata-schema.md` — installation metadata
+- [`v1.0/deployment-metadata-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/deployment-metadata-schema.md) — installation metadata
 - `../../architecture/current/milestone-roadmap.md` — milestone 4 maps to v0.4

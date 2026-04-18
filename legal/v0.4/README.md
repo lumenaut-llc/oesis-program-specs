@@ -12,7 +12,7 @@
 ## Legal review items
 
 - Privacy classification of installation metadata fields
-  (see `../../contracts/v1.0/deployment-metadata-schema.md`)
+  (see [`v1.0/deployment-metadata-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/deployment-metadata-schema.md))
 - Retention posture for deployment metadata records
 - Operator access scope for installation metadata
 
@@ -26,4 +26,4 @@
 - `../v0.3/README.md`
 - `../../release/v0.4/README.md`
 - `../../release/v0.4/v0.4-scope-matrix.md`
-- `../../contracts/v1.0/deployment-metadata-schema.md`
+- [`v1.0/deployment-metadata-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/deployment-metadata-schema.md)

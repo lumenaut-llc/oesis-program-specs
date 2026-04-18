@@ -72,4 +72,4 @@ Revocation, sharing/consent execution, and some governance paths may remain **do
 - `deployment-maturity-ladder.md`
 - `integrated-parcel-system-spec.md`
 - `phase-roadmap.md`
-- `../../contracts/v0.1/README.md`
+- [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/README.md)

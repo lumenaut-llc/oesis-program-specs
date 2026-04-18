@@ -37,6 +37,6 @@ how that public label relates to:
 
 - `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`
 - `../../architecture/v1.5/README.md`
-- `../../contracts/v1.5/README.md`
+- [`v1.5/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/README.md)
 - `../../software/v1.5/README.md`
 - [`v1.5/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v1.5/README.md)

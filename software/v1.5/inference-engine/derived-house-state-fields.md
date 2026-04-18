@@ -17,7 +17,7 @@ The full computation logic, qualifying conditions, and threshold tables are in
 `../../inference-engine/derived-house-state-fields.md`.
 
 The contract fields these computations populate are in
-`../../../contracts/v1.5/house-state-schema.md` under `indoor_response`:
+[`v1.5/house-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/house-state-schema.md) under `indoor_response`:
 
 - `infiltration` — IO ratio, baseline, envelope class
 - `thermal_dynamics` — rise rate, time-to-threshold, recommendation
@@ -41,5 +41,5 @@ parcel-specific outcome predictions.
 
 - `../../inference-engine/derived-house-state-fields.md` (full logic)
 - `../../inference-engine/thermal-slope-inference.md` (HVAC mode inference)
-- `../../../contracts/v1.5/house-state-schema.md`
-- `../../../contracts/v1.5/equipment-state-observation-schema.md`
+- [`v1.5/house-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/house-state-schema.md)
+- [`v1.5/equipment-state-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/equipment-state-observation-schema.md)

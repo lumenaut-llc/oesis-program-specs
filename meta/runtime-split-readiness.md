@@ -52,7 +52,7 @@ With only `../oesis-runtime` checked out and dependencies installed:
 
 - **`contracts/`** here remains the published schema and example source of truth
   for the program.
-- **`contracts/v1.0/`** is the additive future-lane home for schema/example
+- **[`v1.0/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/)** is the additive future-lane home for schema/example
   deltas that must stay separate from the frozen default set.
 - The runtime may ship **copies** of examples and config under `oesis/assets/`
   for standalone execution; keep them aligned when contracts change.

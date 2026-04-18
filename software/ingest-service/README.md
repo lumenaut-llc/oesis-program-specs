@@ -40,7 +40,7 @@ From that repo root, use `python3 -m oesis.ingest.validate_examples` and the
 other `python3 -m oesis.ingest.*` commands.
 
 The first executable contract check is `python3 -m oesis.ingest.validate_examples`.
-It validates the current example payloads in `../../contracts/v0.1/examples/`
+It validates the current example payloads in [`v0.1/examples/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/examples/)
 against the MVP expectations for:
 - `oesis.bench-air.v1` node observations
 - parcel-state snapshots

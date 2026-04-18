@@ -20,8 +20,8 @@ Open Environmental Sensing and Inference System
 - `config/hazard_thresholds_v0.json`
 - `config/trust_gates_v0.json`
 - `python3 -m oesis.inference.infer_parcel_state` (in `oesis-runtime`)
-- `../../contracts/parcel-context-schema.md`
-- `../../contracts/evidence-mode-and-observability.md`
+- [`parcel-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-context-schema.md)
+- [`evidence-mode-and-observability.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/evidence-mode-and-observability.md)
 
 ## Content
 

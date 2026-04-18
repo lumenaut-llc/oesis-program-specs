@@ -71,12 +71,12 @@ tags. They are **not** the same as **capability stages** (`current v1`, `v1.5`, 
   because docs exist; requires contract/runtime boundary and evidence per that doc.
 - **Program phase `v1.0`** — first materially broader fielded system than the first
   narrow slice (see pre-1.0 progression); also used for the **runtime contract lane**
-  `contracts/v1.0/` over the frozen `v0.1` baseline; architecture now also exposes an
+  [`v1.0/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/) over the frozen `v0.1` baseline; architecture now also exposes an
   explicit `../../architecture/v1.0/` lane beside the transitional `../../architecture/future/`
   path — keep those meanings distinct from marketing “1.0” labels.
 - **Capability stage `v1.5`** — measurement-to-intervention **foundation** (house-state,
   action/outcome logs, read-side equipment signals); explicit bridge-stage lanes now
-  exist under `../../architecture/v1.5/`, `../../contracts/v1.5/`, `../../software/v1.5/`, and
+  exist under `../../architecture/v1.5/`, [`v1.5/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/), `../../software/v1.5/`, and
   [`v1.5/`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v1.5/); roadmap and contracts may be draft;
   full **controls-compatibility inventory** is primarily **`v2.5`**.
 - **Public or marketing “v1.0”** — website, release, or grant language; do not assume it

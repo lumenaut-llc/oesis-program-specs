@@ -1,37 +1,26 @@
-# Contracts Lane Index
+# Contracts
 
-Use this directory to navigate contract lanes by release posture.
+Schemas, examples, and contract prose have moved to [**oesis-contracts**](https://github.com/lumenaut-llc/oesis-contracts).
 
-## Lane matrix
+This directory is a pointer only; it has no canonical content.
 
-| Lane | Purpose | Current status | Where to start |
-| --- | --- | --- | --- |
-| `v0.1` | Frozen baseline contract surface | Active baseline | `v0.1/README.md` |
-| `v0.2` | Promotion marker: widened parcel kit | Inherits `v0.1` (no overrides) | `v0.2/README.md` |
-| `v0.3` | Promotion marker: flood-capable runtime | Inherits `v0.1` (no overrides) | `v0.3/README.md` |
-| `v0.4` | Promotion marker: multi-node + evidence composition | Inherits `v0.1` (no overrides) | `v0.4/README.md` |
-| `v0.5` | Promotion marker: governance enforcement | Inherits `v0.1` (no overrides) | `v0.5/README.md` |
-| `v1.0` | Additive lane for broader contract deltas | Active additive lane | `v1.0/README.md` |
-| `v1.5` | Additive bridge lane for response/verification objects | Active additive lane | `v1.5/README.md` |
+## Lane directories in oesis-contracts
 
-## Baseline lane
+- [v0.1](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/) — baseline (bench-air, consent, sharing, rights, access)
+- [v0.2](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.2/) – [v0.5](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.5/) — overlay lanes (inherit v0.1)
+- [v1.0](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/) — fielded lane (trust scoring, multi-node composition, deployment metadata)
+- [v1.5](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/) — bridge lane (house-state, equipment-state, intervention events, verification outcomes)
 
-- [`v0.1/README.md`](v0.1/README.md) — frozen baseline contract surface
-- [`v0.1/schemas/README.md`](v0.1/schemas/README.md) — canonical baseline schemas
-- [`v0.1/examples/README.md`](v0.1/examples/README.md) — canonical baseline examples
+## Why the split?
 
-## Promotion-marker lanes (currently inherit baseline)
+Contracts have their own lifecycle — schemas ship on lane promotions, while the program-specs repo (architecture, governance, release) evolves on a different cadence. See `meta/repo-split-plan.md` Phase 6 for the full rationale.
 
-- [`v0.2/README.md`](v0.2/README.md)
-- [`v0.3/README.md`](v0.3/README.md)
-- [`v0.4/README.md`](v0.4/README.md)
-- [`v0.5/README.md`](v0.5/README.md)
+## Validation
 
-These lanes are structurally complete (README + `examples/` + `schemas/`) and
-currently inherit `v0.1` until explicit lane-specific contract deltas are
-accepted.
+Cross-repo consistency (schemas + examples across `oesis-contracts`, `oesis-runtime`, and this repo) is still checked here:
 
-## Additive lanes
+```bash
+make cross-repo-sync
+```
 
-- [`v1.0/README.md`](v1.0/README.md)
-- [`v1.5/README.md`](v1.5/README.md)
+This requires both `../oesis-contracts/` and `../oesis-runtime/` as sibling checkouts.

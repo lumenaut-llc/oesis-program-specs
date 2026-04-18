@@ -3,7 +3,8 @@
 Cross-repo consistency check for OESIS multi-repo architecture.
 
 Compares schemas, examples, and version alignment across:
-  - oesis-program-specs (canonical contracts)
+  - oesis-program-specs (architecture, governance, release)
+  - oesis-contracts (canonical schemas and examples)
   - oesis-runtime (reference implementation)
   - oesis-hardware (sensor nodes and firmware)
 
@@ -21,6 +22,7 @@ import sys
 from pathlib import Path
 
 SPECS_ROOT = Path(__file__).resolve().parent.parent
+CONTRACTS_ROOT = SPECS_ROOT.parent / "oesis-contracts"
 RUNTIME_ROOT = SPECS_ROOT.parent / "oesis-runtime"
 HARDWARE_ROOT = SPECS_ROOT.parent / "oesis-hardware"
 
@@ -50,44 +52,47 @@ def check_repo_exists(path: Path, name: str) -> bool:
 
 
 def check_example_sync() -> list[str]:
-    """Compare canonical example files between specs and runtime."""
+    """Compare canonical example files between oesis-contracts and runtime."""
     errors: list[str] = []
+    if not check_repo_exists(CONTRACTS_ROOT, "oesis-contracts"):
+        errors.append("oesis-contracts not found; cannot check example sync")
+        return errors
     if not check_repo_exists(RUNTIME_ROOT, "oesis-runtime"):
         errors.append("oesis-runtime not found; cannot check example sync")
         return errors
 
     for lane in CANONICAL_EXAMPLE_LANES:
-        specs_dir = SPECS_ROOT / "contracts" / lane / "examples"
+        contracts_dir = CONTRACTS_ROOT / lane / "examples"
         runtime_dir = RUNTIME_ROOT / "oesis" / "assets" / lane / "examples"
 
-        specs_files = {
-            f.name for f in specs_dir.glob("*.json")
-        } if specs_dir.is_dir() else set()
+        contracts_files = {
+            f.name for f in contracts_dir.glob("*.json")
+        } if contracts_dir.is_dir() else set()
         runtime_files = {
             f.name for f in runtime_dir.glob("*.json")
         } if runtime_dir.is_dir() else set()
 
-        # Files in runtime but not specs (drift: runtime created examples specs doesn't own)
-        runtime_only = runtime_files - specs_files
+        # Files in runtime but not contracts (drift: runtime created examples contracts doesn't own)
+        runtime_only = runtime_files - contracts_files
         if runtime_only:
             for f in sorted(runtime_only):
-                errors.append(f"{lane}: example '{f}' exists in runtime but not specs")
+                errors.append(f"{lane}: example '{f}' exists in runtime but not oesis-contracts")
 
-        # Files in specs but not runtime (drift: specs has examples runtime doesn't use)
-        specs_only = specs_files - runtime_files
-        if specs_only:
-            for f in sorted(specs_only):
-                errors.append(f"{lane}: example '{f}' exists in specs but not runtime")
+        # Files in contracts but not runtime (drift: contracts has examples runtime doesn't use)
+        contracts_only = contracts_files - runtime_files
+        if contracts_only:
+            for f in sorted(contracts_only):
+                errors.append(f"{lane}: example '{f}' exists in oesis-contracts but not runtime")
 
         # Content mismatches
-        common = specs_files & runtime_files
+        common = contracts_files & runtime_files
         for f in sorted(common):
-            specs_hash = file_hash(specs_dir / f)
+            contracts_hash = file_hash(contracts_dir / f)
             runtime_hash = file_hash(runtime_dir / f)
-            if specs_hash != runtime_hash:
+            if contracts_hash != runtime_hash:
                 errors.append(
                     f"{lane}: example '{f}' content differs "
-                    f"(specs={specs_hash}, runtime={runtime_hash})"
+                    f"(contracts={contracts_hash}, runtime={runtime_hash})"
                 )
 
     return errors
@@ -96,9 +101,13 @@ def check_example_sync() -> list[str]:
 def check_schema_coverage() -> list[str]:
     """Verify every schema has at least one matching example."""
     errors: list[str] = []
+    if not check_repo_exists(CONTRACTS_ROOT, "oesis-contracts"):
+        errors.append("oesis-contracts not found; cannot check schema coverage")
+        return errors
+
     for lane in CANONICAL_EXAMPLE_LANES:
-        schemas_dir = SPECS_ROOT / "contracts" / lane / "schemas"
-        examples_dir = SPECS_ROOT / "contracts" / lane / "examples"
+        schemas_dir = CONTRACTS_ROOT / lane / "schemas"
+        examples_dir = CONTRACTS_ROOT / lane / "examples"
         if not schemas_dir.is_dir():
             continue
 
@@ -128,44 +137,52 @@ def check_runtime_lane_alignment() -> list[str]:
 
 
 def check_manifest_freshness() -> list[str]:
-    """Check if contracts-bundle manifest references the current HEAD."""
+    """Warn (not fail) if the contracts-bundle manifest lags current oesis-contracts HEAD.
+
+    Bundle regeneration is a deliberate step tied to schema releases, not every
+    commit, so a lagging manifest is a WARN rather than a hard drift.
+    """
     errors: list[str] = []
-    manifest_path = SPECS_ROOT / "artifacts" / "contracts-bundle" / "manifest.json"
+    if not check_repo_exists(CONTRACTS_ROOT, "oesis-contracts"):
+        return errors
+
+    manifest_path = CONTRACTS_ROOT / "bundles" / "contracts-bundle" / "manifest.json"
     if not manifest_path.is_file():
-        errors.append("contracts-bundle manifest.json not found")
+        errors.append("contracts-bundle manifest.json not found in oesis-contracts")
         return errors
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     bundle_commit = manifest.get("source_commit", "unknown")
 
-    # Get current HEAD
-    git_head = SPECS_ROOT / ".git" / "HEAD"
+    # Get current oesis-contracts HEAD
+    git_head = CONTRACTS_ROOT / ".git" / "HEAD"
     if git_head.is_file():
         ref = git_head.read_text().strip()
         if ref.startswith("ref: "):
-            ref_path = SPECS_ROOT / ".git" / ref.split("ref: ")[1]
+            ref_path = CONTRACTS_ROOT / ".git" / ref.split("ref: ")[1]
             if ref_path.is_file():
                 current_commit = ref_path.read_text().strip()
                 if current_commit != bundle_commit:
-                    errors.append(
-                        f"contracts-bundle manifest references commit {bundle_commit[:12]}, "
-                        f"but HEAD is {current_commit[:12]}. "
-                        "Regenerate the bundle."
+                    # Print as warning inline; do not add to errors.
+                    print(
+                        f"  {WARN} contracts-bundle manifest references commit "
+                        f"{bundle_commit[:12]}, but oesis-contracts HEAD is "
+                        f"{current_commit[:12]}. Consider regenerating the bundle."
                     )
 
     return errors
 
 
-def check_hardware_cross_refs() -> list[str]:
-    """Verify specs GitHub URLs to hardware repo reference real paths."""
+def _check_github_cross_refs(repo_root: Path, repo_slug: str, repo_label: str) -> list[str]:
+    """Shared helper: verify that GitHub URLs in specs markdown reference real paths in a sibling repo."""
     errors: list[str] = []
-    if not check_repo_exists(HARDWARE_ROOT, "oesis-hardware"):
-        errors.append("oesis-hardware not found; cannot check cross-references")
+    if not check_repo_exists(repo_root, repo_label):
+        errors.append(f"{repo_label} not found; cannot check cross-references")
         return errors
 
     import re
     url_pattern = re.compile(
-        r"https://github\.com/lumenaut-llc/oesis-hardware/blob/main/([^\s\)\"]+)"
+        rf"https://github\.com/lumenaut-llc/{re.escape(repo_slug)}/blob/main/([^\s\)\"]+)"
     )
 
     for md_file in SPECS_ROOT.rglob("*.md"):
@@ -182,18 +199,28 @@ def check_hardware_cross_refs() -> list[str]:
             # Skip inline examples like `/...` in prose
             if rel_path.startswith(".") or rel_path == "":
                 continue
-            hw_path = HARDWARE_ROOT / rel_path
-            if not hw_path.exists() and not (HARDWARE_ROOT / rel_path.rstrip("/")).is_dir():
+            target = repo_root / rel_path
+            if not target.exists() and not (repo_root / rel_path.rstrip("/")).is_dir():
                 try:
                     rel_md = md_file.relative_to(SPECS_ROOT)
                 except ValueError:
                     rel_md = md_file
                 errors.append(
-                    f"{rel_md}: broken hardware URL — "
-                    f"'{rel_path}' not found in oesis-hardware"
+                    f"{rel_md}: broken {repo_label} URL — "
+                    f"'{rel_path}' not found in {repo_label}"
                 )
 
     return errors
+
+
+def check_hardware_cross_refs() -> list[str]:
+    """Verify specs GitHub URLs to hardware repo reference real paths."""
+    return _check_github_cross_refs(HARDWARE_ROOT, "oesis-hardware", "oesis-hardware")
+
+
+def check_contracts_cross_refs() -> list[str]:
+    """Verify specs GitHub URLs to oesis-contracts reference real paths."""
+    return _check_github_cross_refs(CONTRACTS_ROOT, "oesis-contracts", "oesis-contracts")
 
 
 def check_version_manifest() -> list[str]:
@@ -225,11 +252,12 @@ def main() -> int:
     all_errors: list[str] = []
 
     checks = [
-        ("Example sync (specs <-> runtime)", check_example_sync),
+        ("Example sync (oesis-contracts <-> runtime)", check_example_sync),
         ("Schema coverage (every schema has an example)", check_schema_coverage),
         ("Runtime lane alignment", check_runtime_lane_alignment),
         ("Contracts-bundle manifest freshness", check_manifest_freshness),
         ("Hardware cross-reference validation", check_hardware_cross_refs),
+        ("Contracts cross-reference validation", check_contracts_cross_refs),
         ("Version manifest", check_version_manifest),
     ]
 

@@ -13,9 +13,9 @@ Legacy root paths remain as compatibility stubs.
 
 | Directory | Current canonical path | Canonical destination | Legacy path action |
 | --- | --- | --- | --- |
-| `contracts/` | `contracts/README.md` | `contracts/v0.1/README.md` | keep `contracts/README.md` as redirect |
-| `contracts/` schemas index | `contracts/schemas/README.md` | `contracts/v0.1/schemas/README.md` | keep old file as redirect |
-| `contracts/` examples index | `contracts/examples/README.md` | `contracts/v0.1/examples/README.md` | keep old file as redirect |
+| `contracts/` | [`README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/README.md) | [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/README.md) | keep [`README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/README.md) as redirect |
+| `contracts/` schemas index | [`schemas/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/schemas/README.md) | [`v0.1/schemas/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/schemas/README.md) | keep old file as redirect |
+| `contracts/` examples index | [`examples/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/examples/README.md) | [`v0.1/examples/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/examples/README.md) | keep old file as redirect |
 | `artifacts/` | `artifacts/README.md` | `artifacts/v0.1/README.md` | keep `artifacts/README.md` as redirect |
 | `release/` | `release/README.md` | `release/v0.1/README.md` (lane contract) | keep `release/README.md` as redirect |
 | `software/` | `software/README.md` | `software/v0.1/README.md` | keep `software/README.md` as redirect |

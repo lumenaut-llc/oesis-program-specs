@@ -94,8 +94,8 @@ fix: correct stale path in implementation-posture
 OESIS uses a lane overlay system (`v0.1` baseline, `v1.0` overlay, etc.). When
 your change affects a specific lane:
 
-- Place baseline contracts and examples under `contracts/v0.1/`
-- Place overlay additions under `contracts/v1.0/` or later
+- Place baseline contracts and examples under [`v0.1/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/)
+- Place overlay additions under [`v1.0/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/) or later
 - Set `OESIS_RUNTIME_LANE=v1.0` (or appropriate lane) when testing overlay
   features
 

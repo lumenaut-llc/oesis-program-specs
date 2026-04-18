@@ -43,4 +43,4 @@
 - `../../release/v0.5/README.md`
 - `../../release/v0.5/v0.5-acceptance-criteria.md`
 - `../../release/v0.5/v0.5-gap-register.md`
-- `../../contracts/v1.0/governance-operational-model.md`
+- [`v1.0/governance-operational-model.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/governance-operational-model.md)

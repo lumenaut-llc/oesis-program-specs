@@ -19,8 +19,8 @@ Open Environmental Sensing and Inference System
 - `interfaces.md`
 - `python3 -m oesis.ingest.normalize_public_smoke_context` (in `oesis-runtime`)
 - `public-source-metadata-standard.md`
-- `../../contracts/public-context-schema.md`
-- `../../contracts/v0.1/examples/raw-public-smoke.example.json`
+- [`public-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/public-context-schema.md)
+- [`v0.1/examples/raw-public-smoke.example.json`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/examples/raw-public-smoke.example.json)
 - `../../legal/licenses/demo-regional-smoke-v1-notice.md`
 
 ## Content
@@ -59,7 +59,7 @@ Example raw payload:
 
 ## Adapter output shape
 
-The adapter emits the canonical public-context object defined in `../../contracts/public-context-schema.md`.
+The adapter emits the canonical public-context object defined in [`public-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/public-context-schema.md).
 
 Initial hazard translation rules:
 
