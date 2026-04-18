@@ -25,6 +25,7 @@ SPECS_ROOT = Path(__file__).resolve().parent.parent
 CONTRACTS_ROOT = SPECS_ROOT.parent / "oesis-contracts"
 RUNTIME_ROOT = SPECS_ROOT.parent / "oesis-runtime"
 HARDWARE_ROOT = SPECS_ROOT.parent / "oesis-hardware"
+PUBLIC_SITE_ROOT = SPECS_ROOT.parent / "oesis-public-site"
 
 # Lanes where specs owns canonical examples (baseline + additive lanes).
 # Overlay lanes v0.2-v0.5 intentionally have no specs examples — runtime
@@ -245,6 +246,134 @@ def check_version_manifest() -> list[str]:
     return errors
 
 
+def _resolve_head(repo_root: Path) -> str | None:
+    """Read the commit SHA at HEAD without invoking git; returns None on failure."""
+    head = repo_root / ".git" / "HEAD"
+    if not head.is_file():
+        return None
+    ref = head.read_text().strip()
+    if ref.startswith("ref: "):
+        ref_path = repo_root / ".git" / ref.split("ref: ")[1]
+        if ref_path.is_file():
+            return ref_path.read_text().strip()
+        packed = repo_root / ".git" / "packed-refs"
+        if packed.is_file():
+            ref_name = ref.split("ref: ")[1]
+            for line in packed.read_text().splitlines():
+                if line.endswith(" " + ref_name):
+                    return line.split()[0]
+        return None
+    return ref  # detached HEAD
+
+
+def check_public_site_bundle_freshness() -> list[str]:
+    """Ensure publicContentBundle.ts records a contracts commit that still exists.
+
+    The site stamps contracts_verified_commit whenever the sync workflow runs.
+    Missing or stale SHAs here indicate the site never received a fanout or
+    a maintainer edited the bundle out-of-band.
+    """
+    errors: list[str] = []
+    if not check_repo_exists(PUBLIC_SITE_ROOT, "oesis-public-site"):
+        return errors  # soft-skip when site is not cloned (e.g., narrow CI jobs)
+
+    bundle_path = (
+        PUBLIC_SITE_ROOT / "src" / "generated" / "publicContentBundle.ts"
+    )
+    if not bundle_path.is_file():
+        errors.append(f"publicContentBundle.ts not found at {bundle_path}")
+        return errors
+
+    import re
+    match = re.search(
+        r'"contracts_verified_commit"\s*:\s*"([0-9a-f]{7,40})"',
+        bundle_path.read_text(encoding="utf-8"),
+    )
+    if not match:
+        print(
+            f"  {WARN} publicContentBundle.ts has no contracts_verified_commit "
+            f"field; run repo_split.py build-public-content-bundle to stamp it"
+        )
+        return errors
+
+    recorded = match.group(1)
+    current = _resolve_head(CONTRACTS_ROOT)
+    if current and not current.startswith(recorded) and not recorded.startswith(current):
+        print(
+            f"  {WARN} public-site records contracts {recorded[:12]}, but "
+            f"oesis-contracts HEAD is {current[:12]} — fanout may be lagging"
+        )
+
+    return errors
+
+
+def check_hardware_contract_urls() -> list[str]:
+    """Re-use the shared GitHub URL validator against oesis-hardware.
+
+    Unlike the specs-side URL check (which scans program-specs for links TO
+    hardware and contracts), this walks oesis-hardware's own markdown and
+    verifies any contracts URLs resolve in the sibling checkout.
+    """
+    errors: list[str] = []
+    if not check_repo_exists(HARDWARE_ROOT, "oesis-hardware"):
+        return errors
+    if not check_repo_exists(CONTRACTS_ROOT, "oesis-contracts"):
+        return errors
+
+    import re
+    url_pattern = re.compile(
+        r"https://github\.com/lumenaut-llc/oesis-contracts/blob/main/([^\s\)\"`]+)"
+    )
+
+    for md_file in HARDWARE_ROOT.rglob("*.md"):
+        if ".git" in md_file.parts or "node_modules" in md_file.parts:
+            continue
+        try:
+            content = md_file.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, PermissionError):
+            continue
+        for m in url_pattern.finditer(content):
+            rel = m.group(1).rstrip("/").rstrip("`").rstrip(".").rstrip(",")
+            if not rel or rel.startswith("."):
+                continue
+            if not (CONTRACTS_ROOT / rel).exists():
+                try:
+                    rel_md = md_file.relative_to(HARDWARE_ROOT)
+                except ValueError:
+                    rel_md = md_file
+                errors.append(
+                    f"{rel_md}: broken oesis-contracts URL — '{rel}' not found"
+                )
+    return errors
+
+
+def check_specs_verified_commit() -> list[str]:
+    """Warn if version-manifest's recorded oesis-contracts commit lags HEAD."""
+    manifest_path = SPECS_ROOT / "version-manifest.json"
+    if not manifest_path.is_file():
+        return []
+    if not check_repo_exists(CONTRACTS_ROOT, "oesis-contracts"):
+        return []
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return []
+
+    recorded = (
+        manifest.get("repos", {})
+        .get("oesis-contracts", {})
+        .get("last_verified_commit")
+    )
+    current = _resolve_head(CONTRACTS_ROOT)
+    if recorded and current and recorded != current:
+        print(
+            f"  {WARN} version-manifest records oesis-contracts {recorded[:12]}, "
+            f"but HEAD is {current[:12]} — run repo_split.py sync-specs-refs"
+        )
+    return []
+
+
 def main() -> int:
     print("OESIS cross-repo consistency check")
     print("=" * 50)
@@ -259,6 +388,9 @@ def main() -> int:
         ("Hardware cross-reference validation", check_hardware_cross_refs),
         ("Contracts cross-reference validation", check_contracts_cross_refs),
         ("Version manifest", check_version_manifest),
+        ("Public-site bundle freshness", check_public_site_bundle_freshness),
+        ("Hardware contracts URL validity", check_hardware_contract_urls),
+        ("Specs verified-commit freshness", check_specs_verified_commit),
     ]
 
     for name, check_fn in checks:

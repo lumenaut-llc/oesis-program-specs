@@ -59,8 +59,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Clone sibling repos
+      - name: Clone public sibling repos
+        # Only public repos can be cloned unauthenticated from PRs. The
+        # cross_repo_sync_check script soft-skips checks for any sibling
+        # whose directory is not present, so missing public-site here
+        # degrades gracefully. Full coverage (including public-site) runs
+        # nightly in cross-repo-drift.yml with the CONTRACTS_SYNC_PAT.
         run: |
+          git clone --depth 1 https://github.com/lumenaut-llc/oesis-contracts.git ../oesis-contracts
           git clone --depth 1 https://github.com/lumenaut-llc/oesis_runtime.git ../oesis-runtime
           git clone --depth 1 https://github.com/lumenaut-llc/oesis-hardware.git ../oesis-hardware
 
