@@ -2,7 +2,7 @@ RUNTIME_REPO ?= ../oesis-runtime
 CONTRACTS_REPO ?= ../oesis-contracts
 PUBLIC_SITE_REPO ?= ../oesis-public-site
 
-.PHONY: cross-repo-sync oesis-demo oesis-validate oesis-accept oesis-check oesis-http-check contracts-validate public-site-install public-site-dev public-site-build public-site-preview repo-split-sync-runtime-assets repo-split-build-contracts-bundle repo-split-build-runtime-evidence-bundle repo-split-build-public-content-bundle repo-split-extract-site repo-split-extract-runtime repo-split-stage print-bundle print-bundle-full print-bundle-pdf
+.PHONY: cross-repo-sync cross-repo-sync-fix cross-repo-sync-dry-run oesis-demo oesis-validate oesis-accept oesis-check oesis-http-check contracts-validate public-site-install public-site-dev public-site-build public-site-preview repo-split-sync-runtime-assets repo-split-build-contracts-bundle repo-split-build-runtime-evidence-bundle repo-split-build-public-content-bundle repo-split-extract-site repo-split-extract-runtime repo-split-stage print-bundle print-bundle-full print-bundle-pdf
 
 # Read-only concat of v0.1 technical markdown → build/print/ (gitignored)
 print-bundle:
@@ -16,6 +16,16 @@ print-bundle-pdf:
 
 cross-repo-sync:
 	python3 scripts/cross_repo_sync_check.py
+
+# Apply contracts->downstream propagation to all local sibling checkouts.
+# Use this locally when you've edited oesis-contracts and want the other
+# repos updated before opening PRs.
+cross-repo-sync-fix:
+	python3 scripts/repo_split.py all
+
+# Show what cross-repo-sync-fix would change without writing anything.
+cross-repo-sync-dry-run:
+	python3 scripts/repo_split.py --dry-run all
 
 contracts-validate:
 	@find "$(CONTRACTS_REPO)" -name "*.example.json" -exec python3 -m json.tool {} \; >/dev/null && echo "PASS oesis-contracts JSON syntax"

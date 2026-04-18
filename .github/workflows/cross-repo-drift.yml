@@ -1,0 +1,89 @@
+name: Cross-repo drift
+
+# Nightly safety net. Catches out-of-band edits (direct commits to a downstream
+# repo that bypass the fanout flow) within 24 hours by opening a drift issue.
+
+on:
+  schedule:
+    - cron: '0 13 * * *'  # 13:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout self
+        uses: actions/checkout@v4
+
+      - name: Clone sibling repos
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/lumenaut-llc/oesis-contracts.git ../oesis-contracts
+          git clone --depth 1 https://github.com/lumenaut-llc/oesis_runtime.git ../oesis-runtime
+          git clone --depth 1 https://github.com/lumenaut-llc/oesis_public_site.git ../oesis-public-site
+          git clone --depth 1 https://github.com/lumenaut-llc/oesis-hardware.git ../oesis-hardware
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run cross-repo sync check
+        id: check
+        shell: bash
+        run: |
+          set +e
+          python3 scripts/cross_repo_sync_check.py | tee drift-report.txt
+          echo "rc=$?" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Open drift issue
+        if: steps.check.outputs.rc != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('drift-report.txt', 'utf8');
+            // Close prior open drift issues first so we do not stack duplicates.
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'drift,automated',
+              state: 'open',
+            });
+            for (const issue of existing.data) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+                state_reason: 'not_planned',
+              });
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Cross-repo drift detected (${new Date().toISOString().slice(0,10)})`,
+              labels: ['drift', 'automated'],
+              body: [
+                'Nightly `cross-repo-drift` workflow detected inconsistencies across OESIS repos.',
+                'A maintainer likely pushed a direct edit to a downstream repo that bypassed `release-fanout`.',
+                '',
+                'Fix options:',
+                '1. Re-run `release-fanout` in `oesis-contracts` to regenerate sync PRs.',
+                '2. Revert the out-of-band edit in the affected repo.',
+                '3. Locally run `make cross-repo-sync-fix` in `oesis-program-specs` and open the resulting PRs.',
+                '',
+                '<details><summary>Full report</summary>',
+                '',
+                '```',
+                report,
+                '```',
+                '',
+                '</details>',
+              ].join('\n'),
+            });
