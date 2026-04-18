@@ -14,13 +14,13 @@
       "url": "https://github.com/lumenaut-llc/oesis-contracts",
       "role": "Canonical schemas, examples, and contract prose",
       "license": "CC BY-SA 4.0 / AGPL-3.0",
-      "last_verified_commit": "60259c06bd994231dd0f9a615de89f051457b5cf"
+      "last_verified_commit": "7e9d3fa37c58a7c5b7a3a4c2602328f117306574"
     },
     "oesis-runtime": {
       "url": "https://github.com/lumenaut-llc/oesis-runtime",
       "role": "Python reference implementation",
       "license": "AGPL-3.0",
-      "last_verified_commit": "07853d03001eb81767178e9175f10b6a6c44971c",
+      "last_verified_commit": "ac6bdacf335ee8853ec9e12b1a30739d74c40bba",
       "package_version": "0.1.0"
     },
     "oesis-hardware": {
@@ -33,7 +33,7 @@
       "url": "https://github.com/lumenaut-llc/oesis-public-site",
       "role": "Public preview website",
       "license": "AGPL-3.0",
-      "last_verified_commit": "2690c42d6cd1926c419729d9dd7813bb48df1c35"
+      "last_verified_commit": "c261c801be9aa08accc032a252d6012e23a8f0c3"
     }
   },
 
