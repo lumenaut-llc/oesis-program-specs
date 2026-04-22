@@ -59,6 +59,59 @@ Program-level system narrative and top-level operating model.
 - `household-recommendation-catalog.md` inventories candidate household action guidance.
 - Root-level canonical overview files still contain additional program framing and should be reconciled here over time.
 
+## Files in this lane, grouped by concern
+
+The flat `system/` directory holds ~30 canonical documents plus the `parts/` subdirectory. Grouped for discoverability — each entry links to the file and names its job in one line. Authority between `system/` and other lanes is resolved in [`../../meta/markdown-canonical-topic-matrix.md`](../../meta/markdown-canonical-topic-matrix.md); this section is navigation, not reauthorization.
+
+### Version axes and promotion
+- [`version-and-promotion-matrix.md`](version-and-promotion-matrix.md) — four-axis model (accepted slice / capability stage / deployment maturity / impl status).
+- [`phase-roadmap.md`](phase-roadmap.md) — Stages A–F with per-stage deployment posture.
+- [`architecture-gaps-by-stage.md`](architecture-gaps-by-stage.md) — gaps placed at the stage they must become explicit.
+- [`architectural-choices-by-stage.md`](architectural-choices-by-stage.md) — master summary of class / power / IP / transport / calibration per program-phase.
+
+### Integrated parcel system
+- [`integrated-parcel-system-spec.md`](integrated-parcel-system-spec.md) — unified parcel-kit architecture; hardware role map + deployment posture per node.
+- [`node-taxonomy.md`](node-taxonomy.md) — canonical node-family classification with posture tags; tiered acquisition model.
+- [`parts/`](parts/) — per-node aggregator pages (bench-air-node, mast-lite, flood-node, weather-pm-mast, thermal-pod, circuit-monitor).
+- [`sensor-placement-and-representativeness-guide.md`](sensor-placement-and-representativeness-guide.md) — placement → deployment class map; sensor variant selection principles.
+- [`deployment-maturity-ladder.md`](deployment-maturity-ladder.md) — deployment-class standards (power / IP / transport per class) + field-hardening bundle.
+
+### Platform programs (physical + adapter)
+- [`calibration-program.md`](calibration-program.md) — reference instruments, burn-in, admissibility, drift, §F build-spec metadata block, §G promotion-bar compliance. Physical sensors.
+- [`adapter-trust-program.md`](adapter-trust-program.md) — parallel program for Tier 1 / Tier 2 adapter-derived data.
+
+### Philosophy + technical posture
+- [`technical-philosophy-and-architecture.md`](technical-philosophy-and-architecture.md) — top-level principles and architectural rules.
+- [`cross-repo-architecture.md`](cross-repo-architecture.md) — how the four repos work together; calibration/admissibility cross-repo flow.
+
+### Product framing
+- [`vision-and-use-cases.md`](vision-and-use-cases.md) — long-term product vision, use-case surface.
+- [`product-requirements-phase-1.md`](product-requirements-phase-1.md) — first single-parcel release slice requirements.
+- [`feature-matrix-by-use-case.md`](feature-matrix-by-use-case.md) — use cases × sensors × outputs × constraints.
+
+### Operating models
+- [`block-level-operating-model.md`](block-level-operating-model.md) — shared block intelligence.
+- [`multi-unit-building-operating-model.md`](multi-unit-building-operating-model.md) — apartments, condos, shared buildings.
+- [`community-governance-and-operator-model.md`](community-governance-and-operator-model.md) — participation + operator boundaries.
+- [`resilience-hub-operating-model.md`](resilience-hub-operating-model.md) — community hubs.
+- [`neighborhood-pilot-design-package.md`](neighborhood-pilot-design-package.md) — early network-effect pilot structure.
+- [`route-readiness-model-overview.md`](route-readiness-model-overview.md) — route/access interpretation.
+
+### Shared-layer and neighborhood surfaces
+- [`shared-map-product-posture.md`](shared-map-product-posture.md) — what shared map is and isn't.
+- [`neighborhood-signal-transformation-overview.md`](neighborhood-signal-transformation-overview.md) — privacy-scoped path from home signals to block intelligence.
+- [`network-effect-measurement-methodology.md`](network-effect-measurement-methodology.md) — testing whether participation improves product.
+- [`household-recommendation-catalog.md`](household-recommendation-catalog.md) — candidate household action guidance.
+- [`recommendation-engine-and-safety-language.md`](recommendation-engine-and-safety-language.md) — guidance posture and language boundaries.
+
+### Context, participants, and pilots
+- [`home-and-parcel-context-capture-standard.md`](home-and-parcel-context-capture-standard.md) — minimum context for honest interpretation.
+- [`data-rights-and-participant-controls-ux-outline.md`](data-rights-and-participant-controls-ux-outline.md) — participant-facing control model.
+- [`pilot-success-metrics-and-evaluation.md`](pilot-success-metrics-and-evaluation.md) — how pilots are judged.
+
+### Canonical links
+- [`canonical-links.md`](canonical-links.md) — link authority roll-up.
+
 ## Related workstreams
 
 - data model

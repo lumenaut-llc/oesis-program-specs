@@ -63,6 +63,15 @@ One parcel, one bench-air lineage, one ingest path, one inference path, one parc
 
 Can we honestly produce a parcel view from one observation path?
 
+### Required deployment posture
+
+- **Deployment-maturity tier:** `v0.1` (bench prototype) per [`../../architecture/system/deployment-maturity-ladder.md`](../../architecture/system/deployment-maturity-ladder.md).
+- **Deployment class set:** indoor only.
+- **Power tier:** USB.
+- **IP tier:** none / IP20.
+- **Transport tier:** serial-only (v0.1 floor per gap register G3).
+- **Calibration rigor:** provisional per [`../../architecture/system/calibration-program.md`](../../architecture/system/calibration-program.md) §G at the `v0.1` tier; characterized references not required; readings not admissible to calibration dataset.
+
 ## `v1.0` — first broader fielded parcel-intelligence lane
 
 ### Core goal
@@ -102,6 +111,16 @@ Program milestones already describe the next hardware step as **indoor plus shel
 ### Success question
 
 Can we produce a more trustworthy parcel state from a real parcel kit and limited shared evidence?
+
+### Required deployment posture
+
+- **Deployment-maturity tier:** `v1.0` (first fielded kit) per [`../../architecture/system/deployment-maturity-ladder.md`](../../architecture/system/deployment-maturity-ladder.md). Promotion bar item 5 in [`../../architecture/current/pre-1.0-version-progression.md`](../../architecture/current/pre-1.0-version-progression.md) requires calibration-program §G compliance at this tier for every shipped node family.
+- **Deployment class set:** indoor + sheltered (adds `mast-lite`); outdoor class enters through flood-node (`v0.3`) and later weather-pm-mast.
+- **Power tier:** USB for indoor; 12V-DC or USB routed from indoor for sheltered; battery+solar or hardened mains for outdoor.
+- **IP tier:** IP20 indoor / IP44 sheltered / IP65 outdoor.
+- **Transport tier:** serial as floor; Wi-Fi permitted for sheltered and outdoor; LoRa / cellular permitted for outdoor beyond Wi-Fi reach. All transports preserve the `oesis.bench-air.v1` lineage; transport choice does not alter schema.
+- **Protective fixtures:** radiation shield required for any outdoor temperature reading (mast-lite, weather-pm-mast); rigid mount + zero reference + staff gauge for flood-node. Pre-verification readings excluded from calibration dataset per calibration-program §C.
+- **Calibration rigor:** characterized reference instruments populated per measurand per deployment class (gap G13); burn-in gate enforced for BME680-bearing nodes (gap G14); §F build-spec metadata block present for every node family (gap G16 for bench-air, G12 for mast-lite).
 
 ## `v1.5` — measurement-to-intervention bridge (capability stage, not a promoted runnable slice)
 
@@ -182,6 +201,13 @@ At least one product path should support:
 `hazard -> house state -> action -> measured outcome`
 
 without pretending that every action is automated or that the system already has a mature adaptation engine.
+
+### Required deployment posture
+
+- **Deployment-maturity tier:** `v1.5` (trust hardening) per [`../../architecture/system/deployment-maturity-ladder.md`](../../architecture/system/deployment-maturity-ladder.md); versioned calibration state, drift-aware offsets, maintenance-informed trust penalties expected.
+- **Deployment class set:** adds indoor bridge surfaces. `indoor-response-node` (indoor / USB / IP20 / Wi-Fi); `power-outage-node` (indoor / **battery-backed** — intrinsic to use case); `circuit-monitor` (mains-adjacent / low-power from measured circuit / electrical-enclosure IP20 / Wi-Fi).
+- **Adapter-derived data enters first-class:** Tier 1 passive inference (e.g., thermal-slope), Tier 2 cloud-API adapters (Ecobee, Nest, Sensibo, etc.), Tier 3 direct measurement (circuit-monitor). Governed by [`../../architecture/system/adapter-trust-program.md`](../../architecture/system/adapter-trust-program.md) — parallel program to calibration-program for adapters. Every adapter declares source authority, pinned API contract version, onboarding gate, cross-check posture.
+- **Calibration rigor:** physical-sensor nodes at calibration-program §G `v1.5` tier (versioned offsets); adapter-derived data at adapter-trust §G `v1.5` tier (verification logs versioned, schema-drift detection active).
 
 ### What still stays out
 

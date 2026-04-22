@@ -59,6 +59,14 @@ event publication for:
 - HVAC / purifier / recirculation / similar equipment state
 - action and verification records tied to later response windows
 
+### Planned: admissibility decision on each normalized observation
+
+Per ADR [0009](../../meta/adr/0009-admissibility-schema-split-facts-vs-decision.md) and [`../../architecture/system/calibration-program.md`](../../architecture/system/calibration-program.md) §C, the ingest service is the canonical place that computes the **admissibility decision** on each normalized observation. Schema carries the facts (`burn_in_complete`, `node_calibration_session_ref`, `node_deployment_maturity`, `node_deployment_class`, `protective_fixture_verified_at`, `placement_representativeness_class` for physical sensors; plus adapter-derived equivalents for Tier 1 / Tier 2 observations). Runtime attaches `admissible_to_calibration_dataset: bool` plus `admissibility_reasons: [string]` to each normalized observation.
+
+Branch rule: observations with `adapter_tier` absent or `tier_3_direct` are evaluated against calibration-program §C (8 checks). Observations with `adapter_tier: tier_1_passive` or `tier_2_adapter` are evaluated against [`../../architecture/system/adapter-trust-program.md`](../../architecture/system/adapter-trust-program.md) §C with adapter-specific reason codes.
+
+Status: **planned**. Schema extensions tracked as G17; runtime wiring tracked as G15. Until shipped, ingest emits observations without the admissibility decision and downstream consumers treat all normalized readings as "admissibility unknown."
+
 ## Internal modules
 
 - transport adapter

@@ -54,6 +54,8 @@ Why it belongs this early:
 Without indoor response, the system can describe outdoor hazard but cannot tell
 whether the house is actually buffering occupants from that hazard.
 
+Deployment posture: **indoor / USB / IP20 / Wi-Fi** per [`../system/deployment-maturity-ladder.md`](../system/deployment-maturity-ladder.md); physical-sensor node governed by [`../system/calibration-program.md`](../system/calibration-program.md) (reference instruments required per §A; §F metadata block declared in `oesis-builds/specs/indoor-response-node/v0-X.md`).
+
 ### `power-outage-node`
 
 Minimum measurements:
@@ -64,6 +66,8 @@ Minimum measurements:
 Richer battery, generator, and transfer posture can come later, but continuity
 and outage readiness belong in the bridge stage because household function
 during disruption is part of resilience, not an optional add-on.
+
+Deployment posture: **indoor / battery-backed / IP20 / Wi-Fi or LoRa**. Battery-backed power is intrinsic to the use case — a continuity monitor that loses power is useless. Calibration posture: physical-sensor node under calibration-program; status/transition detection characterized against a known reference (e.g., a switched-off utility circuit) per §A.
 
 ### `equipment-state-adapter`
 
@@ -80,6 +84,14 @@ Minimum read-side signals where relevant:
 This is an observation surface, not yet a controls platform.
 The point is to learn which operating surfaces exist at a parcel and what state
 they were in when outcomes changed.
+
+Deployment posture: **adapter (no physical power or enclosure of its own)**. Three acquisition tiers per [`../system/node-taxonomy.md`](../system/node-taxonomy.md):
+
+- **Tier 1 passive inference** (e.g., thermal-slope HVAC detection): zero hardware; governed by [`../system/adapter-trust-program.md`](../system/adapter-trust-program.md) with the inference method itself as the "source authority".
+- **Tier 2 cloud API** (Ecobee, Nest, Sensibo, Honeywell): no physical power; governed by adapter-trust program with OAuth2 / API-key source authority and pinned contract version.
+- **Tier 3 direct measurement** via `circuit-monitor`: **mains-adjacent / low-power from measured circuit / electrical-enclosure IP20 / Wi-Fi**; physical-sensor node under calibration-program.
+
+All three tiers feed the same `equipment-state-observation` schema; runtime selects the highest-fidelity source available per parcel.
 
 ### `action-log`
 

@@ -85,6 +85,18 @@ Weaknesses:
 - can still be distorted by sun, walls, pavement, or direct runoff peculiarities
 - requires better calibration and siting discipline
 
+## Deployment-class mapping
+
+Placement category determines the deployment class a node must be built to, which in turn determines power / IP / transport tier per [`deployment-maturity-ladder.md`](deployment-maturity-ladder.md) "Deployment-class standards". This table is the canonical link between placement language here and deployment-class language there:
+
+| Placement category | Required deployment class | Power tier | IP tier | Transport floor |
+| --- | --- | --- | --- | --- |
+| Indoor | indoor | USB from protected supply | none / IP20 | serial (v0.1 floor); Wi-Fi / wired LAN permitted |
+| Sheltered | sheltered | 12 V-DC from outdoor-rated adapter, or USB if within an enclosed space | IP44 | serial; Wi-Fi where coverage is reliable; LoRa permitted |
+| Outdoor | outdoor | Battery + solar with documented runtime floor, or mains with outdoor-rated PSU routed through conduit | IP54 (passive) / IP65+ (exposed mast) | serial during bring-up only; Wi-Fi where coverage is verified; LoRa or cellular for parcels beyond Wi-Fi reach |
+
+A node whose declared deployment class does not match its physical installation class produces readings that are inadmissible to the calibration dataset per [`calibration-program.md`](calibration-program.md) §C item 3. This is the enforcement link between placement discipline and admissibility.
+
 ## Representativeness classes
 
 The product should classify placement representativeness explicitly.
@@ -236,6 +248,45 @@ During pilots, the team should document:
 - treating all connected sensors as equally trustworthy
 - silently upgrading indoor readings into parcel truth
 - letting poor siting create false neighborhood gradients
+
+## Sensor variant selection principles
+
+When a sensor family ships in multiple variants (for example filtered vs unfiltered SHT45, or BME680 vs BME688), the choice of variant is not cosmetic. It must follow from the placement category the node will occupy and the measurand's tolerance requirements. The rules below are platform-level; specific variant part numbers live in each node's build spec.
+
+### Variant selection is driven by placement, not the reverse
+
+Placement decides the environmental envelope the sensor must tolerate. The sensor variant must be rated for that envelope before the node is spec'd. Picking the variant first and then discovering it cannot survive the intended placement produces field failures that cannot be corrected in software.
+
+### Required minimum tolerances by placement category
+
+| Placement category | Operating-temperature range | Humidity / condensation | Contamination |
+|---|---|---|---|
+| Indoor | Typical HVAC envelope, 10–35 °C | Non-condensing; standard variants acceptable | Dust from HVAC circulation; PTFE or membrane filter recommended near returns |
+| Sheltered | −10 to 50 °C depending on climate zone | Occasional condensation; PTFE or equivalent membrane filter required | Pollen, spider ingress, insect nest risk; enclosure membrane venting required |
+| Outdoor | Full local climate envelope, documented per parcel's climate zone | Condensation routine; sintered cap or equivalent protective fixture required | UV, salt (coastal), pollen, ember exposure (WUI), precipitation |
+
+A variant must be rated for the full envelope at the placement category it serves. Nodes deployed outside a sensor's rated envelope produce readings whose accuracy is unbounded; such readings are inadmissible under [`calibration-program.md`](calibration-program.md) §C.
+
+### Accuracy-tier requirements driven by formula sensitivity
+
+The hazard formula's coefficient sensitivity determines the accuracy floor a sensor variant must satisfy for its measurand to be admissible.
+
+Current requirements inferred from [`../../software/inference-engine/hazard-formula-v1.md`](../../software/inference-engine/hazard-formula-v1.md) and [`hazard-formula-v1-phase1.md`](../../software/inference-engine/hazard-formula-v1-phase1.md):
+
+| Measurand | Accuracy floor for admissibility | Rationale |
+|---|---|---|
+| Temperature (any placement) | ±0.3 °C or better across the operating range | The heat sensor term z-scores against climate-normal σ, which is typically 1–3 °C; a ±0.3 °C sensor is well inside that noise floor. Larger error would dominate the z-score. |
+| Relative humidity | ±3 % RH or better | Required for optional heat index / WBGT correction and for condensation-event detection |
+| Gas resistance (VOC trend) | No absolute accuracy floor; per-device rolling baseline is what the formula consumes | Repeatability and noise are what matter, not absolute ohms. Stability is gated by the burn-in policy in `calibration-program.md` §B |
+| PM2.5 | Accuracy floor TBD per sensor family when a PM-capable node lands | Not required for current hardware lanes |
+
+### Cost and availability
+
+Cost and availability are documented in the node build spec, not here. The platform policy requires that a chosen variant be: (a) sourceable at pilot scale, (b) replacement-compatible across revisions of the node family, and (c) retained as a line item in the `oesis-builds` BOM until explicitly retired. A variant that is temporarily unavailable is not a reason to drop to a lower-accuracy variant; it is a reason to pause deployment of that node family until the variant or an approved equivalent is back in stock.
+
+### Substitutions and equivalents
+
+Any substitution of a sensor variant (e.g., BME680 → BME688, or SHT45 → SHT45-AD1B to -AD2B) is a build decision that must be recorded in an `oesis-builds/decisions/<node>/` entry, and the substitution is valid only after the replacement's accuracy and envelope are verified against the standards above. A substitution cannot reduce the tolerance envelope or accuracy floor without a new calibration session and an update to the node's deployment-maturity posture.
 
 ## Open questions
 

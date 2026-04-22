@@ -220,6 +220,8 @@ The product should help people decide what to do next, not only show measurement
 
 The project should only expand into stronger control or adaptation claims after it can measure house state, log interventions, and verify whether those actions improved outcomes.
 
+Admissibility is the concrete mechanism by which this discipline runs. A reading enters inference only if it passes the calibration program's admissibility check (or the adapter-trust program's equivalent for Tier 1 / Tier 2 data). Inadmissible readings remain in audit logs but do not shape parcel claims. See [`calibration-program.md`](calibration-program.md) §C and [`adapter-trust-program.md`](adapter-trust-program.md) §C.
+
 ### Honest uncertainty before overclaiming
 
 The system must clearly separate:

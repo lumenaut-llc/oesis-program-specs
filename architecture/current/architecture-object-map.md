@@ -259,6 +259,58 @@ Main sources:
 - `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 - `../../software/parcel-platform/README.md`
 
+### 12. Calibration session / reference instrument
+
+Status: `docs-only`
+
+Role:
+- per-device record of a calibration session against a characterized reference instrument
+- authoritative source for a node's current calibration state (the field already referenced in §1 and §6)
+- produced under `oesis-builds/procedures/<node>/calibration.md` per `../system/calibration-program.md` §E
+
+Current `v0.1` use:
+- placeholder `references/TBD.md` file exists under bench-air procedures; no populated reference instrument yet (tracked as v0.1 gap register G13)
+- calibration session log format defined in calibration-program §E; no sessions logged yet
+
+Main sources:
+- `../system/calibration-program.md`
+- per-node calibration procedures under [`oesis-builds/procedures/`](https://github.com/lumenaut-llc/oesis-builds/tree/main/procedures)
+
+### 13. Admissibility fact
+
+Status: `planned`
+
+Role:
+- runtime-computed decision per normalized observation
+- carries `admissible_to_calibration_dataset: bool` plus reason codes
+- filters which readings can train hazard-formula coefficients or shape parcel-state claims
+- derived from schema facts carried on the canonical observation (tracked as v0.1 gap register G17)
+
+Current `v0.1` use:
+- not yet implemented in ingest or inference (tracked as v0.1 gap register G15)
+- facts the decision depends on are not yet in the observation schema (tracked as G17)
+
+Main sources:
+- `../system/calibration-program.md` §C
+- `../system/adapter-trust-program.md` §C
+
+### 14. Adapter source authority
+
+Status: `planned`
+
+Role:
+- declared origin for Tier 1 passive inference methods and Tier 2 cloud-API adapter data
+- carries pinned API contract version, authentication model, cross-check posture
+- analogous to reference instrument for physical sensors — the anchor against which adapter data is trusted
+
+Current `v0.1` use:
+- no adapters exist in v0.2 scope; this object becomes load-bearing at capability stage v1.5 (tracked as v0.1 gap register G18)
+- policy defined in `../system/adapter-trust-program.md`
+
+Main sources:
+- `../system/adapter-trust-program.md` §A
+- `../system/node-taxonomy.md` tiered acquisition model (Tier 1 / 2 / 3)
+
 ## Layered view
 
 The grouping below is the **object-map** shorthand for navigation. **Canonical
@@ -299,6 +351,12 @@ layer names and purposes** are in `../../program/operating-packet/05-revised-arc
 - export bundles
 - operator access events
 - retention cleanup reports
+
+### Trust and admissibility layer
+
+- calibration session / reference instrument
+- admissibility fact
+- adapter source authority (capability-stage `v1.5` bridge)
 
 ### Response and verification layer (capability-stage `v1.5` bridge)
 

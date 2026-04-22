@@ -117,6 +117,18 @@ Keep these concepts separate:
 - Trust scoring computation (5-factor model: freshness, node_health, calibration_state, install_quality, source_diversity)
 - All v0.5 governance inherited and tested
 
+### Calibration program and admissibility (docs-only / planned)
+
+- `../system/calibration-program.md` and `../system/adapter-trust-program.md`: **docs-only** (policy published 2026-04-19)
+- Reference instrument program execution (per-measurand per-deployment-class reference files under `oesis-builds/procedures/<node>/references/`): **planned** — tracked as G13
+- Burn-in gate enforcement in bring-up acceptance: **planned** — tracked as G14
+- Build-spec §F metadata blocks on node specs: **planned** — bench-air G16, mast-lite G12
+- Admissibility rule in ingest (`admissible_to_calibration_dataset` + reasons): **planned** — tracked as G15
+- Observation schema facts required by admissibility (cross-repo change to `oesis-contracts`): **planned** — tracked as G17
+- Adapter-trust program execution: **planned** — tracked as G18; load-bearing at capability stage v1.5
+
+Trust scoring (already listed under v1.0) consumes the `calibration_state` field. Once the calibration program executes, `calibration_state` will be populated by calibration sessions per calibration-program §E rather than by manual declaration.
+
 ### Additional normalization (implemented)
 
 - Circuit-monitor packet normalization and equipment-state bridge
@@ -132,6 +144,10 @@ Keep these concepts separate:
 - Installation metadata guided input surface
 - Sharing settings product UI
 - User-facing evidence view (beyond JSON)
+- Reference instrument program (characterized references per measurand per deployment class)
+- Build-spec §F metadata blocks
+- Admissibility rule runtime wiring
+- Observation schema extensions in `oesis-contracts` (admissibility facts)
 
 ### Hardware posture
 

@@ -21,15 +21,17 @@ Give one repo-wide vocabulary for **hardware node families**, **geography-gated 
 
 ## Current-truth hardware (accepted reference path today)
 
+Per-family posture tag: **(deployment-class / power tier / IP tier / transport floor)**. Tags summarize the defaults declared in [`deployment-maturity-ladder.md`](deployment-maturity-ladder.md) "Deployment-class standards"; per-node build specs in `oesis-builds/specs/<node>/v0-X.md` carry the authoritative §F metadata block per [`calibration-program.md`](calibration-program.md) §F.
+
 | Identifier | Role | Notes |
 | --- | --- | --- |
-| `bench-air-node` | Indoor or sheltered bench reference; `oesis.bench-air.v1` lineage | Proven end-to-end ingest → parcel view for this family |
+| `bench-air-node` | Indoor or sheltered bench reference; `oesis.bench-air.v1` lineage | Proven end-to-end ingest → parcel view for this family. Posture: **(indoor / USB / IP20 / serial)** |
 
 ## Next-promotion kit hardware (not the same as “fully proven”)
 
 | Identifier | Role | Notes |
 | --- | --- | --- |
-| `mast-lite` | First sheltered-outdoor reference; same packet lineage as bench-air | Architecturally in scope; runtime normalization and field validation are **partial** until the `v0.2` promotion bar in `../current/pre-1.0-version-progression.md` is met |
+| `mast-lite` | First sheltered-outdoor reference; same packet lineage as bench-air | Architecturally in scope; runtime normalization and field validation are **partial** until the `v0.2` promotion bar in `../current/pre-1.0-version-progression.md` is met. Posture: **(sheltered / 12V-DC or USB from indoor / IP44 / serial→Wi-Fi)**; radiation shield required as protective fixture per calibration-program §C |
 
 ## Geography-gated and second-wave hardware modules
 
@@ -37,15 +39,15 @@ Attach only when parcel risk, region, and use case justify them. None of these a
 
 | Identifier | Role | Typical staging |
 | --- | --- | --- |
-| `flood-node` | Low-point runoff depth and rise-rate evidence | Optional hazard module; ingest and inference implemented (`flood.low_point.snapshot`) |
-| `weather-pm-mast` | Richer outdoor PM, wind, rainfall | Second-wave outdoor lane; ingest and inference implemented (`air.pm.snapshot`) |
-| `freeze-node` | Cold-climate pipe-risk and exposed-space thermal evidence | Planned geography module; not required for warm-climate pilots |
+| `flood-node` | Low-point runoff depth and rise-rate evidence | Optional hazard module; ingest and inference implemented (`flood.low_point.snapshot`). Posture: **(outdoor / battery+solar or hardened mains / IP65 / serial→LoRa)**; rigid mount + zero-reference required as protective fixture |
+| `weather-pm-mast` | Richer outdoor PM, wind, rainfall | Second-wave outdoor lane; ingest and inference implemented (`air.pm.snapshot`). Posture: **(outdoor / mains with outdoor-rated PSU / IP65 / Wi-Fi)**; PM airflow module + radiation shield required |
+| `freeze-node` | Cold-climate pipe-risk and exposed-space thermal evidence | Planned geography module; not required for warm-climate pilots. Posture: **(sheltered / 12V-DC / IP44 / serial→Wi-Fi)** expected; final posture confirmed when build spec lands |
 
 ## Research- or privacy-gated hardware
 
 | Identifier | Role | Notes |
 | --- | --- | --- |
-| `thermal-pod` | Fixed-scene derived thermal context | R&D lane; keep outside default pilot until contract, usefulness, and retention posture are reviewed |
+| `thermal-pod` | Fixed-scene derived thermal context | R&D lane; keep outside default pilot until contract, usefulness, and retention posture are reviewed. Posture: **(research / mains / IP54 / Wi-Fi)**; declare deployment-maturity target below `v1.0` until scene + privacy posture clears |
 
 ## Capability-stage v1.5 bridge (planned hardware and adapters)
 
@@ -56,10 +58,10 @@ It is to collect the minimum surfaces needed to model how the house responds to 
 
 | Identifier | Kind | Minimum intent |
 | --- | --- | --- |
-| `indoor-response-node` | Hardware family (planned) | Indoor PM2.5, indoor temperature, indoor RH — lets the system see whether the house is buffering occupants from outdoor forcing |
-| `power-outage-node` | Hardware family or adapter (planned) | Mains up/down and backup-power posture — continuity and resilience floor during disruption |
-| `equipment-state-adapter` | Non-node or adapter surface | Read-side HVAC mode, fan, recirculation vs fresh air, purifier, shade/window, sump/pump where available |
-| `circuit-monitor` | Hardware family (implemented) | Non-invasive current-draw monitoring node using split-core CT clamps and PZEM-004T/016. Monitors HVAC and sump pump circuits for operating state, power draw, and cycle timing. Equipment-state adapter that feeds `hvac_mode`, `sump_state`, `equipment_running`, and power draw data into house-state at HIGH confidence. Optional equipment-state module -- not part of default Tier 1-2 parcel kit. See [`circuit-monitor/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/circuit-monitor/README.md) |
+| `indoor-response-node` | Hardware family (planned) | Indoor PM2.5, indoor temperature, indoor RH — lets the system see whether the house is buffering occupants from outdoor forcing. Posture: **(indoor / USB / IP20 / Wi-Fi)** |
+| `power-outage-node` | Hardware family or adapter (planned) | Mains up/down and backup-power posture — continuity and resilience floor during disruption. Posture: **(indoor / battery-backed / IP20 / Wi-Fi or LoRa)**; battery-backed power is intrinsic to the use case — continuity-monitor that loses power is useless |
+| `equipment-state-adapter` | Non-node or adapter surface | Read-side HVAC mode, fan, recirculation vs fresh air, purifier, shade/window, sump/pump where available. Posture: **adapter (no physical power of its own)**; governed by [`adapter-trust-program.md`](adapter-trust-program.md) rather than calibration-program |
+| `circuit-monitor` | Hardware family (implemented) | Non-invasive current-draw monitoring node using split-core CT clamps and PZEM-004T/016. Monitors HVAC and sump pump circuits for operating state, power draw, and cycle timing. Equipment-state adapter that feeds `hvac_mode`, `sump_state`, `equipment_running`, and power draw data into house-state at HIGH confidence. Optional equipment-state module -- not part of default Tier 1-2 parcel kit. Posture: **(mains-adjacent / low-power from measured circuit / IP20 electrical enclosure / Wi-Fi)**; Tier 3 direct measurement per this doc's tiered acquisition model. See [`circuit-monitor/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/circuit-monitor/README.md) |
 | `action-log` | Support object | Household or building actions (mode changes, purifier run, drain clearing, barrier install, backup activation) with timestamps and targets |
 | `outcome-log` / response verification | Support object | Whether actions improved observed conditions over defined windows (for example 30–90 minutes for smoke-related PM response) |
 | `building-and-site-metadata-surface` | Parcel-context extensions | Orientation, roof/color, shading, tree canopy, impervious area, low points, drainage, vents, filter path — part of response interpretation, not decorative metadata |
@@ -122,12 +124,30 @@ Prefer public data, shared reports, and selected instrumentation over universal 
 4. **v2 / v2.5:** bounded guidance, then compatibility inventory and bounded controls.
 5. **v4:** route and neighborhood resilience surfaces.
 
+## Per-node part sheets
+
+For one-page-per-node aggregator pages that pull together architecture, calibration, cross-repo links, and gap-register entries for each family, see [`parts/`](parts/):
+
+- [`parts/bench-air-node.md`](parts/bench-air-node.md)
+- [`parts/mast-lite.md`](parts/mast-lite.md)
+- [`parts/flood-node.md`](parts/flood-node.md)
+- [`parts/weather-pm-mast.md`](parts/weather-pm-mast.md)
+- [`parts/thermal-pod.md`](parts/thermal-pod.md)
+- [`parts/circuit-monitor.md`](parts/circuit-monitor.md)
+
+Part sheets aggregate via links; this taxonomy doc remains canonical for posture tags and acquisition-tier placement.
+
 ## Related docs
 
 - `version-and-promotion-matrix.md`
 - `integrated-parcel-system-spec.md`
 - `deployment-maturity-ladder.md`
+- `calibration-program.md` — calibration posture each node family must meet at its deployment-maturity tier; promotion-bar compliance in §G
+- `adapter-trust-program.md` — parallel policy for adapter-derived data (Tier 1 / Tier 2, plus circuit-monitor as Tier 3 direct)
+- `sensor-placement-and-representativeness-guide.md`
 - `architecture-gaps-by-stage.md`
+- `architectural-choices-by-stage.md` — master cross-phase summary
 - `phase-roadmap.md`
+- `parts/README.md` — per-node aggregator pages
 - [`parcel-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-context-schema.md)
 - [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/README.md)

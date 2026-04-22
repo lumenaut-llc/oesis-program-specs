@@ -22,6 +22,14 @@ core current-v1 product behavior.
 - public context layers suitable for map display
 - map publication policy constraints
 
+### Planned: admissibility gate on shared-layer eligibility
+
+Per gap register G22 and the shared-layer eligibility rule in [`../../architecture/system/sensor-placement-and-representativeness-guide.md`](../../architecture/system/sensor-placement-and-representativeness-guide.md) "Product behavior implications", shared-layer contribution requires the contributing node's most recent observation to be admissible per [`../../architecture/system/calibration-program.md`](../../architecture/system/calibration-program.md) §C (physical sensors) or [`../../architecture/system/adapter-trust-program.md`](../../architecture/system/adapter-trust-program.md) §C (adapter-derived).
+
+Concrete consequence: a well-placed but uncalibrated node (for example, a bench-air node without a populated reference instrument, G13) cannot contribute to shared-map aggregation even if it has an active sharing setting. The gate runs **after** sharing-policy check and **before** the thresholding / coarsening modules.
+
+Status: **planned**. Ships as part of the v0.5 governance slice or later. Until wired, the current aggregation-and-thresholding module treats all opted-in contributions as eligible — which over-counts during the v0.1 / v0.2 period where admissibility tooling itself (G15) is not yet active.
+
 ## Outputs
 
 - coarse shared neighborhood condition view

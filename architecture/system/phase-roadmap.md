@@ -64,6 +64,15 @@ This means a node family can be architecturally in scope for `current v1` while 
 
 Establish a credible parcel-first sensing and inference product that is useful with one home, honest under sparse evidence, and compatible with partial adoption.
 
+### Deployment posture
+
+Hardware for Stage A lives at **deployment-maturity `v0.1`** (bench) progressing to **`v1.0`** (first fielded kit) per [`deployment-maturity-ladder.md`](deployment-maturity-ladder.md). Class / power / IP / transport defaults by lane-family:
+
+- **`v0.1` reference slice:** indoor class, USB power, IP20, serial transport floor (per G3).
+- **`v0.2` widening:** indoor + sheltered classes; USB or 12V-DC for sheltered; IP44 for sheltered; serial or Wi-Fi; mast-lite radiation shield required.
+- **`v0.3` / `v0.4` / `v0.5`:** adds outdoor class (flood-node, eventually weather-pm-mast); battery+solar or hardened mains; IP65; serial→LoRa/Wi-Fi.
+- **Calibration rigor** scales with deployment-maturity tier per [`calibration-program.md`](calibration-program.md) §G.
+
 ### Outcomes
 
 - canonical parcel-state model and evidence-mode language
@@ -82,6 +91,7 @@ Establish a credible parcel-first sensing and inference product that is useful w
 - keep `unknown` and low-confidence outcomes honest
 - define recommendation-language boundaries before shipping action prompts
 - preserve the current parcel-state contract through this stage
+- document the calibration program and adapter-trust program as platform-level standards that every node and adapter family inherits (`calibration-program.md`, `adapter-trust-program.md`)
 
 ### Exit criteria
 
@@ -97,6 +107,16 @@ Establish a credible parcel-first sensing and inference product that is useful w
 
 Add the minimum new data needed so the platform can evolve from parcel sensing into parcel adaptation without pretending that the adaptation engine already exists.
 
+### Deployment posture
+
+Adds v1.5 bridge hardware and adapter surfaces. Class / power per family:
+
+- `indoor-response-node`: indoor / USB / IP20 / Wi-Fi — physical sensor, governed by `calibration-program`.
+- `power-outage-node`: indoor / **battery-backed** (intrinsic to use case) / IP20 / Wi-Fi or LoRa.
+- `circuit-monitor` (Tier 3 direct measurement): mains-adjacent / low-power from measured circuit / electrical-enclosure IP20 / Wi-Fi.
+- `equipment-state-adapter` (Tier 2 cloud API) and passive thermal-slope inference (Tier 1): adapter surfaces with no physical posture of their own — governed by [`adapter-trust-program.md`](adapter-trust-program.md) rather than calibration-program.
+- **Calibration rigor** target: `deployment maturity v1.5` (trust hardening) per calibration-program §G; versioned calibration state and drift-aware offsets expected.
+
 ### Core rule
 
 Collect the minimum data needed to model the relationship between outdoor hazards, house operating state, available interventions, and resulting outcomes.
@@ -109,6 +129,7 @@ Collect the minimum data needed to model the relationship between outdoor hazard
 - building and site metadata such as orientation, roof type or color, shading, tree canopy, impervious area, low points, drainage paths, vent locations, filter path, filter size, and higher-MERV support
 - intervention and response records such as `action-log`, `outcome-log`, and before/after response windows
 - **read-side** equipment-state and coarse capability hints (what exists / what is observed), without requiring a full **controls-compatibility inventory** — that inventory (interface classes, integration tiers, policy versioning) is primarily **Stage D / `v2.5`**
+- adapter-trust posture for `equipment-state-adapter` and passive thermal-slope inference: each adapter declares its source authority, pinned contract version, and cross-check posture per [`adapter-trust-program.md`](adapter-trust-program.md)
 
 ### Design rule
 
@@ -146,6 +167,10 @@ with evidence-quality limits carried into the outcome interpretation and without
 
 Turn parcel sensing plus `v1.5` support data into serious engineering guidance without implying autonomous control.
 
+### Deployment posture
+
+No new physical-sensor classes introduced; Stage C is software-layered on Stage B hardware. Adapter-trust program §G compliance expected at `deployment maturity v1.5` for every adapter consumed by guidance logic. Advisory outputs only; no control surfaces yet.
+
 ### Core capabilities
 
 - condition model
@@ -166,6 +191,10 @@ Turn parcel sensing plus `v1.5` support data into serious engineering guidance w
 ### Goal
 
 Prepare the system to interact with real homes through bounded, low-risk control surfaces and compatibility mapping.
+
+### Deployment posture
+
+Introduces control-side adapter surfaces; no new physical-sensor classes required beyond Stage B. Control-path adapters (Matter / Home Assistant / BACnet / cloud-only) each declare source-authority and bounded-control semantics via adapter-trust program §F. Promotion bar: every consumed adapter at `deployment maturity v2.0` (decision-policy support) per calibration-program §G / adapter-trust §G; cross-adapter consistency audits required.
 
 ### Core capabilities
 
@@ -196,6 +225,10 @@ Prepare the system to interact with real homes through bounded, low-risk control
 
 Move from current-state guidance into a real parcel adaptation engine.
 
+### Deployment posture
+
+Hardware requirements inherited from Stage D; no new physical-sensor classes. `deployment maturity v2.0` required for the whole in-use fleet to support adaptation memory — retired/degraded devices must be visibly tracked so learned priors don't encode defunct devices as baseline.
+
 ### Core capabilities
 
 - time-to-threshold outputs
@@ -209,6 +242,10 @@ Move from current-state guidance into a real parcel adaptation engine.
 ### Goal
 
 Extend beyond the house to route, egress, and shared neighborhood infrastructure resilience while preserving private-by-default household data handling.
+
+### Deployment posture
+
+Stage F introduces route / block / neighborhood surfaces built from aggregated parcel-private outputs. No new per-parcel hardware classes required beyond Stages A–E. Shared-layer eligibility is gated on per-contributor calibration-program admissibility per gap register G22.
 
 ### Core capabilities
 
@@ -227,7 +264,7 @@ These workstreams should advance continuously across phases:
 - privacy and consent tooling
 - sensor-health scoring
 - observability and provenance
-- calibration and deployment guidance
+- calibration program (reference instruments, burn-in, admissibility, drift) and adapter-trust program (source authority, API contract version, schema-drift detection)
 - shared terminology and claims discipline
 - local-first and degraded-connectivity behavior
 - partnership and governance models

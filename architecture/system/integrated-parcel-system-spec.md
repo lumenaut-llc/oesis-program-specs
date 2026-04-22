@@ -117,6 +117,24 @@ It should not inherit a deployability claim from the rest of the parcel kit.
 | Power / outage (planned) | `power-outage-node` | service / utility entry | mains and backup posture for continuity | **Capability `v1.5` bridge** — taxonomy only until built |
 | Freeze (planned) | `freeze-node` | crawlspace, garage, pipe-risk zones | cold-climate hazard evidence | **Geography-gated** — taxonomy only until built |
 
+### Deployment posture per node
+
+Posture defaults are inherited from the deployment-class standards in [`deployment-maturity-ladder.md`](deployment-maturity-ladder.md); each node's authoritative declaration lives in the §F metadata block of its `oesis-builds/specs/<node>/v0-X.md` spec per [`calibration-program.md`](calibration-program.md) §F. This table summarizes the defaults for quick reference.
+
+| Node family | Deployment class | Power source | IP tier | Transport floor | Protective fixtures required |
+| --- | --- | --- | --- | --- | --- |
+| `bench-air-node` | indoor | USB | none / IP20 | serial | none |
+| `mast-lite` | sheltered | 12V-DC or USB from indoor | IP44 | serial → Wi-Fi | radiation shield |
+| `weather-pm-mast` | outdoor | mains with outdoor-rated PSU | IP65 | Wi-Fi | radiation shield + PM airflow module |
+| `flood-node` | outdoor | battery + solar, or hardened mains | IP65 | serial → LoRa | rigid mount + zero-reference + staff gauge |
+| `thermal-pod` | outdoor (research) | mains | IP54 | Wi-Fi | hooded enclosure; privacy-reviewed field-of-view |
+| `indoor-response-node` | indoor | USB | none / IP20 | Wi-Fi | none |
+| `power-outage-node` | indoor | battery-backed | none / IP20 | Wi-Fi or LoRa | intrinsic — device must outlive the mains outage it observes |
+| `circuit-monitor` | mains-adjacent (indoor panel) | low-power from measured circuit | electrical enclosure (IP20) | Wi-Fi | electrical-code-compliant CT clamp installation |
+| `freeze-node` | sheltered | 12V-DC expected | IP44 | serial → Wi-Fi | TBD until build spec lands |
+
+Adapter-derived surfaces (`equipment-state-adapter`, passive inference methods) do not have physical posture and are governed instead by [`adapter-trust-program.md`](adapter-trust-program.md); they carry a §F block declaring source authority, contract version, and tier.
+
 ## Singular system topology
 
 ### Parcel identity layer
@@ -146,6 +164,17 @@ Minimum registry fields:
 - `last_seen_at`
 
 The registry is also where the repo should eventually attach deployment-maturity facts such as enclosure revision, service posture, storage class, and replacement history rather than quietly leaving those decisions out of the architecture.
+
+### Calibration and admissibility layer
+
+The calibration state referenced in the node registry is produced and governed by the calibration program at platform level (see [`calibration-program.md`](calibration-program.md) for physical sensors and [`adapter-trust-program.md`](adapter-trust-program.md) for Tier 1 / Tier 2 adapter-derived data).
+
+Two concepts are distinct and both belong to this layer:
+
+- **Calibration posture** — what the node is committed to per its §F build-spec metadata block: deployment class, deployment-maturity target, reference instruments, burn-in parameters, protective fixtures. A static declaration stored in the build spec; inherited on every observation.
+- **Admissibility decision** — the runtime outcome of the eight-point check in calibration-program §C (or the parallel check in adapter-trust-program §C for adapters). Computed on normalized observations; carries reason codes; filters which readings can train coefficients or feed inference.
+
+The observation record carries the **facts** required for admissibility (burn-in state, calibration session reference, deployment class, protective-fixture verification, etc.); runtime computes the **decision**. See the v0.1 gap register entry G17 for the cross-repo schema change this requires.
 
 ### Evidence transport layer
 
@@ -337,6 +366,8 @@ This is better treated as a `deployment maturity v1.5` target than a default `v1
 - install metadata standard that inference can trust
 - shared field-hardening checklist used across node families
 - explicit maturity labeling so controlled-review docs do not overstate deployability
+- calibration program §F build-spec metadata block populated for every active node family
+- admissibility tooling wiring in runtime (ingest produces the decision per calibration-program §C; inference consumes it)
 
 ## Recommended implementation decisions
 

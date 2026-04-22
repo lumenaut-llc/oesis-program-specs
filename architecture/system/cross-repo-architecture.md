@@ -160,13 +160,29 @@ metadata. The public site renders this without reading raw specs files.
 - Source: `artifacts/public-content-bundle/public-content-bundle.json`
 - Consumer: `oesis-public-site` via `src/generated/publicContentBundle.ts`
 
+## Calibration and admissibility across repos
+
+Calibration posture and admissibility decisions span all four repositories (plus `oesis-builds` for hardware procedures). The chain must be navigable end-to-end.
+
+| Repo | What it owns for calibration / admissibility |
+|---|---|
+| **oesis-program-specs** | Policy — [`architecture/system/calibration-program.md`](calibration-program.md) (§A–§G) and [`architecture/system/adapter-trust-program.md`](adapter-trust-program.md); promotion-bar item 5 in [`../current/pre-1.0-version-progression.md`](../current/pre-1.0-version-progression.md) |
+| **oesis-contracts** | Schema facts — observation record carries `burn_in_complete`, `node_calibration_session_ref`, `node_deployment_maturity`, `node_deployment_class`, `protective_fixture_verified_at`, `placement_representativeness_class` (physical sensors), plus adapter-derived equivalents. Admissibility **decision** fields do not live here. |
+| **oesis-runtime** | Admissibility decision — ingest computes `admissible_to_calibration_dataset` + `admissibility_reasons` on normalized observations; inference consumes but does not override |
+| **oesis-builds** | Execution — per-node build specs (§F metadata block), per-node calibration procedures, per-parcel verification records under `procedures/<node>/` |
+
+The schema-vs-runtime split (facts in schema; decision in runtime) is a deliberate architectural decision; see `calibration-program.md` §C "Schema vs runtime split". Schema changes required for this are tracked as v0.1 gap register entry G17.
+
 ## Adding a new capability
 
 When extending the system (new node family, new observation type, new
 governance surface), the work spans repos in this order:
 
 1. **Specs first:** Define the schema, create a canonical example, update the
-   relevant contract README, and place it in the correct lane
+   relevant contract README, and place it in the correct lane. For new node
+   or adapter families, confirm a calibration-program or adapter-trust-program
+   §F metadata block is declared in the node's build spec before schema
+   changes land.
 2. **Runtime second:** Implement the normalizer/inference/platform code, add
    the example to the correct asset lane, write acceptance tests
 3. **Hardware if applicable:** Design the node, write the serial-JSON contract,

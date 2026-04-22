@@ -80,6 +80,16 @@ computation:
 - versioned divergence-threshold configuration
 - policy constraints on whether shared neighborhood evidence is allowed for the parcel's active sharing mode
 
+### Planned: admissibility filter on normalized observations
+
+Per ADR [0009](../../meta/adr/0009-admissibility-schema-split-facts-vs-decision.md) and [`../../architecture/system/calibration-program.md`](../../architecture/system/calibration-program.md) §C, the inference engine consumes the `admissible_to_calibration_dataset: bool` + `admissibility_reasons: [string]` fields that ingest attaches to each normalized observation.
+
+- **Coefficient fitting** (when the v1 hazard formula's shadow path is active per [`hazard-formula-v1.md`](hazard-formula-v1.md)): admits **only** observations where `admissible_to_calibration_dataset: true`. Non-admissible observations remain in audit logs but do not train coefficients.
+- **Parcel-state computation**: may consume non-admissible observations but with reduced confidence and with `admissibility_reasons` surfaced in the explanation payload.
+- **Branch by tier**: observations with `adapter_tier: tier_1_passive` or `tier_2_adapter` are evaluated under [`../../architecture/system/adapter-trust-program.md`](../../architecture/system/adapter-trust-program.md) §C rather than calibration-program §C. The same `admissible_to_calibration_dataset` output is produced; only the rule set differs.
+
+Status: **planned**. Schema extensions tracked as G17; runtime wiring tracked as G15.
+
 ## Outputs
 
 - parcel-state snapshots

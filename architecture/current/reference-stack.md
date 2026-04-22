@@ -76,6 +76,10 @@ Normalization and ingest behavior should treat **timing, receipts, dedupe/replay
 and staleness** as core truth surfaces, consistent with `../../program/operating-packet/05-revised-architecture-blueprint.md`
 §2 and `implementation-posture.md`.
 
+Admissibility decisions are a first-class output of this layer. For each
+normalized observation, ingest emits `admissible_to_calibration_dataset: bool`
+plus `admissibility_reasons: [string]` per [`../system/calibration-program.md`](../system/calibration-program.md) §C (or [`../system/adapter-trust-program.md`](../system/adapter-trust-program.md) §C for adapter-derived data). The decision is runtime-computed; the facts it depends on are carried in the canonical observation schema (tracked as gap G17).
+
 Entry surfaces:
 
 - `make oesis-validate`
@@ -92,6 +96,9 @@ See also `v0.1-runtime-modules.md` and `v0.1-acceptance-criteria.md`.
 - [`parcel-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-context-schema.md)
 - [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
 - [`explanation-payload-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/explanation-payload-schema.md)
+- Observation schema extensions for admissibility facts are tracked in v0.1 gap register G17 (cross-repo change to `oesis-contracts`)
+- [`../system/calibration-program.md`](../system/calibration-program.md) — program-level calibration policy for physical sensors
+- [`../system/adapter-trust-program.md`](../system/adapter-trust-program.md) — program-level trust policy for Tier 1 / Tier 2 adapter-derived data
 
 ### Parcel inference
 
