@@ -27,9 +27,9 @@ Supporting specs:
 
 - `../current/README.md`
 - [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
-- [`parcel-kit/integrated-parcel-kit-bom.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/integrated-parcel-kit-bom.md)
-- [`parcel-kit/parcel-kit-procurement-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-kit-procurement-checklist.md)
-- [`parcel-kit/parcel-installation-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-installation-checklist.md)
+- [`parcel-kit/integrated-parcel-kit-bom.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/parcel-kit/integrated-parcel-kit-bom.md)
+- [`parcel-kit/parcel-kit-procurement-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/parcel-kit/parcel-kit-procurement-checklist.md)
+- [`parcel-kit/parcel-installation-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/parcel-kit/parcel-installation-checklist.md)
 - `deployment-maturity-ladder.md`
 - `node-taxonomy.md`
 - `version-and-promotion-matrix.md`
@@ -84,7 +84,7 @@ It is primarily a **deployment-maturity `v0.1`** slice (bench-proven, not field-
 - `mast-lite` for sheltered outdoor reference conditions
 - optional `flood-node` only on parcels where runoff is operationally relevant
 
-This tier is the **intended default integrated design** for the first field-credible parcel kit and aligns with program-phase **`v0.2`** once promoted. It is the first honest **deployment-maturity `v1.0`** target for the **kit as a whole** (still at **capability-stage `current v1`**), because it introduces the field-hardening bundle in [`parcel-kit/field-hardening-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/field-hardening-checklist.md) needed to call the parcel kit deployed rather than merely buildable.
+This tier is the **intended default integrated design** for the first field-credible parcel kit and aligns with program-phase **`v0.2`** once promoted. It is the first honest **deployment-maturity `v1.0`** target for the **kit as a whole** (still at **capability-stage `current v1`**), because it introduces the field-hardening bundle in [`parcel-kit/field-hardening-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/parcel-kit/field-hardening-checklist.md) needed to call the parcel kit deployed rather than merely buildable.
 
 Until **`v0.2` promotion** criteria are satisfied, treat Tier 2 as **next promotion**, not as “already proven in the reference runtime.” `mast-lite` share of the bench-air packet lineage is still **partially implemented** (see observation family map below).
 

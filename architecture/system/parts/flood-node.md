@@ -23,7 +23,7 @@ Low-point runoff depth and rise-rate sensor; introduces outdoor deployment class
 |---|---|---|---|
 | `v0-1` (planned) | not yet drafted | `oesis-builds/specs/flood-node/v0-1.md` — **does not exist** | Skeleton proposal at [`../../../meta/proposals/oesis-builds-node-skeletons.md`](../../../meta/proposals/oesis-builds-node-skeletons.md) Skeleton 2. |
 
-Build guide exists at [oesis-hardware/flood-node/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/flood-node) with provisional calibration only; independent reproduction not confirmed.
+Build guide exists at [oesis-hardware/v0.1/flood-node/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v0.1/flood-node) with provisional calibration only; independent reproduction not confirmed.
 
 ## Calibration posture
 
@@ -52,7 +52,7 @@ Governed by [`../calibration-program.md`](../calibration-program.md) (physical-s
 | Concern | Location |
 |---|---|
 | Architecture posture row | [`../node-taxonomy.md`](../node-taxonomy.md) geography-gated; [`../integrated-parcel-system-spec.md`](../integrated-parcel-system-spec.md) "Deployment posture per node" |
-| Hardware design | [oesis-hardware/flood-node/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/flood-node) |
+| Hardware design | [oesis-hardware/v0.1/flood-node/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v0.1/flood-node) |
 | Build spec | **missing** — skeleton in [`../../../meta/proposals/oesis-builds-node-skeletons.md`](../../../meta/proposals/oesis-builds-node-skeletons.md) |
 | Runtime normalizer | `oesis.ingest.v0_3.normalize_flood_packet` |
 | Packet schema | `oesis.flood-node.v1` → `flood.low_point.snapshot` — [oesis-contracts/v0.3/](https://github.com/lumenaut-llc/oesis-contracts/tree/main/v0.3) |

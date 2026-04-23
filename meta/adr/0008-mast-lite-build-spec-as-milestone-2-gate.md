@@ -4,7 +4,7 @@
 - Date: 2026-04-19
 - Owners: Open Environmental Sensing and Inference System (hardware + technical)
 - Related workstreams:
-  - oesis-hardware/mast-lite
+  - oesis-hardware/v0.1/mast-lite
   - oesis-builds/specs/mast-lite (planned)
   - architecture/current/milestone-roadmap
   - release/v.0.1 (gap-register G12)
@@ -17,7 +17,7 @@ However:
 - No build spec exists at `oesis-builds/specs/mast-lite/` (gap G12).
 - No calibration procedure exists.
 - No radiation-shield design or thermal-loading acceptance test is documented.
-- Hardware build-guide exists at `oesis-hardware/mast-lite/` but has not been independently reproduced.
+- Hardware build-guide exists at `oesis-hardware/v0.1/mast-lite/` but has not been independently reproduced.
 - The v1 hazard formula's primary heat path (per ADR 0007) assumes outdoor temperature from mast-lite.
 
 Two options presented:

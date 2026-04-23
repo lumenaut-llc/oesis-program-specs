@@ -29,7 +29,7 @@ This node has a **dual posture**: it is an adapter (Tier 3) by how it feeds evid
 |---|---|---|---|
 | `v0-1` (planned) | not yet drafted | `oesis-builds/specs/adapters/circuit-monitor/v0-1.md` — **does not exist** | Spec lives under `specs/adapters/` subtree (per [`../adapter-trust-program.md`](../adapter-trust-program.md) §F) rather than `specs/<node>/`. Skeleton proposal at [`../../../meta/proposals/oesis-builds-node-skeletons.md`](../../../meta/proposals/oesis-builds-node-skeletons.md) Skeleton 5. |
 
-Hardware at [oesis-hardware/circuit-monitor/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/circuit-monitor).
+Hardware at [oesis-hardware/v1.5/circuit-monitor/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v1.5/circuit-monitor).
 
 ## Trust posture
 
@@ -57,7 +57,7 @@ Governed by [`../adapter-trust-program.md`](../adapter-trust-program.md) — **n
 | Concern | Location |
 |---|---|
 | Architecture posture row | [`../node-taxonomy.md`](../node-taxonomy.md) `v1.5` bridge table; [`../integrated-parcel-system-spec.md`](../integrated-parcel-system-spec.md) "Deployment posture per node" |
-| Hardware design | [oesis-hardware/circuit-monitor/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/circuit-monitor) |
+| Hardware design | [oesis-hardware/v1.5/circuit-monitor/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v1.5/circuit-monitor) |
 | Build spec | **missing** — skeleton in [`../../../meta/proposals/oesis-builds-node-skeletons.md`](../../../meta/proposals/oesis-builds-node-skeletons.md) at `specs/adapters/circuit-monitor/v0-1.md` path |
 | Runtime normalizer | `oesis.ingest.v1_0.normalize_circuit_monitor_packet` (implemented per [`../../current/implementation-posture.md`](../../current/implementation-posture.md) "Additional normalization") |
 | Packet schema | `oesis.circuit-monitor.v1` → `equipment.circuit.snapshot` — [oesis-contracts/v1.0/circuit-monitor-observation-schema.md](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/circuit-monitor-observation-schema.md) |

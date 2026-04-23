@@ -37,4 +37,4 @@
 - `../v0.2/README.md`
 - `../../release/v0.3/README.md`
 - `../../release/v0.3/v0.3-acceptance-criteria.md`
-- [`flood-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/flood-node/README.md)
+- [`flood-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/flood-node/README.md)
