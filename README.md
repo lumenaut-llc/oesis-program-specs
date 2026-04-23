@@ -52,6 +52,44 @@ OESIS is split across four repositories:
 | **[oesis-hardware](https://github.com/lumenaut-llc/oesis-hardware)** | Sensor node specs, build guides, firmware, BOMs | CERN-OHL-S-2.0 / AGPL-3.0 |
 | **[oesis-public-site](https://github.com/lumenaut-llc/oesis-public-site)** | Public preview website | AGPL-3.0 |
 
+## Navigating this repo
+
+This repository holds architecture, contracts, release materials, and governance for OESIS. It is large (hundreds of markdown files) because the program has four independent version axes (program phase / capability stage / deployment maturity / runtime lane), multiple node families, and cross-repo coordination. Use this map to land on the right doc quickly.
+
+### Top-level directories
+
+| Directory | What lives there |
+|---|---|
+| [`architecture/`](architecture/) | Versioned architecture canon — `current/` (frozen v0.1), `system/` (cross-version), `v1.0/` (debated target), `v1.5/` (bridge stage), `decisions/` (doctrine), `future/` (redirect-only alias) |
+| [`program/`](program/) | Program framing, phasing, operating packet — `operating-packet/` is the numbered program narrative; `v0.1/`…`v0.5/` are per-slice framing |
+| [`release/`](release/) | Release packets and sign-off artifacts per slice — `v.0.1/` (canonical v0.1 release), `v0.2/`…`v1.5/` |
+| [`legal/`](legal/) | Privacy, licensing, governance rules, defensive publication, counsel questions — per-slice subdirectories |
+| [`operations/`](operations/) | Pilot docs, operator-facing checklists, per-slice rollout material |
+| [`software/`](software/) | Subsystem architecture prose (ingest-service, inference-engine, parcel-platform, shared-map). Canonical implementation tree lives in the sibling [oesis-runtime](https://github.com/lumenaut-llc/oesis-runtime) repo |
+| [`meta/`](meta/) | Manifests, ADRs, doc-discipline policy, proposals, print bundles |
+| [`artifacts/`](artifacts/) | Generated bundles (contracts-bundle, public-content-bundle, runtime-evidence-bundle) and per-slice artifact snapshots |
+
+### Reading paths by goal
+
+Pick the scenario that matches what you want, then follow the chain:
+
+- **"What is OESIS, at a glance?"** → this README (top) → [`architecture/system/vision-and-use-cases.md`](architecture/system/vision-and-use-cases.md) → [`program/operating-packet/01-core-thesis-and-framing.md`](program/operating-packet/01-core-thesis-and-framing.md)
+- **"I want to contribute runtime code."** → [oesis-runtime README](https://github.com/lumenaut-llc/oesis-runtime/blob/main/README.md) → [`architecture/current/reference-stack.md`](architecture/current/reference-stack.md) → [`architecture/current/v0.1-acceptance-criteria.md`](architecture/current/v0.1-acceptance-criteria.md) → [`architecture/current/v0.1-runtime-modules.md`](architecture/current/v0.1-runtime-modules.md)
+- **"I want to design or build hardware."** → [oesis-hardware README](https://github.com/lumenaut-llc/oesis-hardware/blob/main/README.md) → [oesis-builds GUIDE](https://github.com/lumenaut-llc/oesis-builds/blob/main/GUIDE.md) → [`architecture/system/deployment-maturity-ladder.md`](architecture/system/deployment-maturity-ladder.md) → [`architecture/system/calibration-program.md`](architecture/system/calibration-program.md) → [`architecture/system/parts/`](architecture/system/parts/) (per-node part sheet)
+- **"I want to review a promotion (v0.2, v1.0, etc.)."** → [`release/v.0.1/v0.1-scope-matrix.md`](release/v.0.1/v0.1-scope-matrix.md) (sign-off shape) → [`architecture/current/pre-1.0-version-progression.md`](architecture/current/pre-1.0-version-progression.md) (5-item promotion bar) → [`architecture/system/architectural-choices-by-stage.md`](architecture/system/architectural-choices-by-stage.md) (master summary) → [`release/v.0.1/v0.1-gap-register.md`](release/v.0.1/v0.1-gap-register.md) (G1–G24)
+- **"I want to understand a specific node family."** → [`architecture/system/parts/<node>.md`](architecture/system/parts/) (aggregator page, 6 nodes) → [`architecture/system/node-taxonomy.md`](architecture/system/node-taxonomy.md) (taxonomy) → cross-repo design: [oesis-hardware/<node>/](https://github.com/lumenaut-llc/oesis-hardware) → cross-repo execution: [oesis-builds/specs/<node>/](https://github.com/lumenaut-llc/oesis-builds/tree/main/specs)
+
+### Other navigation surfaces (don't duplicate — extend)
+
+The repo already has navigation artifacts for specific concerns:
+
+- [`architecture/README.md`](architecture/README.md) — architecture-specific reading order and lane-vocabulary map.
+- [`meta/markdown-canonical-topic-matrix.md`](meta/markdown-canonical-topic-matrix.md) — authority map: which lane is canonical for overlapping topics, which are redirects.
+- [`meta/repo-manifest.md`](meta/repo-manifest.md) — file-level manifest of the repo.
+- [`meta/doc-discipline.md`](meta/doc-discipline.md) — rules for when to extend an existing doc vs create a new one; read before adding a new `.md` file.
+
+If the navigation you need isn't captured above, extend one of these rather than creating a new navigation doc (per the discipline rule).
+
 ## Quick start
 
 ### 1. Read the specs (this repo)

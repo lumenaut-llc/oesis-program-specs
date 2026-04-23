@@ -38,8 +38,28 @@
 - `architecture/system/canonical-links.md`
 - `architecture/system/integrated-parcel-system-spec.md`
 - `architecture/system/architecture-gaps-by-stage.md`
+- `architecture/system/architectural-choices-by-stage.md`
+- `architecture/system/calibration-program.md`
+- `architecture/system/adapter-trust-program.md`
 - `architecture/system/deployment-maturity-ladder.md`
 - `architecture/system/phase-roadmap.md`
+- `architecture/system/parts/README.md`
+- `architecture/system/parts/bench-air-node.md`
+- `architecture/system/parts/mast-lite.md`
+- `architecture/system/parts/flood-node.md`
+- `architecture/system/parts/weather-pm-mast.md`
+- `architecture/system/parts/thermal-pod.md`
+- `architecture/system/parts/circuit-monitor.md`
+- `meta/doc-discipline.md`
+- `meta/adr/0007-hazard-formula-v1-sensor-primary-log-odds.md`
+- `meta/adr/0008-mast-lite-build-spec-as-milestone-2-gate.md`
+- `meta/adr/0009-admissibility-schema-split-facts-vs-decision.md`
+- `meta/adr/0010-adapter-trust-program-parallel-to-calibration.md`
+- `meta/adr/0011-doc-discipline-extend-before-creating.md`
+- `meta/proposals/oesis-builds-calibration-program-integration.md`
+- `meta/proposals/oesis-builds-node-skeletons.md`
+- `software/inference-engine/hazard-formula-v1.md`
+- `software/inference-engine/hazard-formula-v1-phase1.md`
 - ~~`hardware/`~~ — **Moved to [oesis-hardware](https://github.com/lumenaut-llc/oesis-hardware)**
 - ~~`contracts/`~~ — **Moved to [oesis-contracts](https://github.com/lumenaut-llc/oesis-contracts)** (lane directories v0.1–v1.5, plus top-level `examples/` and `schemas/`)
 - ~~`artifacts/contracts-bundle/`~~ — **Moved to [oesis-contracts/bundles/contracts-bundle/](https://github.com/lumenaut-llc/oesis-contracts/blob/main/bundles/contracts-bundle/)**

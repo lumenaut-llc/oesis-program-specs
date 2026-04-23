@@ -37,6 +37,16 @@ It is also the primary surface for showing sharing choices, consent state, and p
 - export/delete/revocation request entry points
 - future alerts or notification candidates
 
+### Planned: admissibility state in evidence surface
+
+Per ADR [0009](../../meta/adr/0009-admissibility-schema-split-facts-vs-decision.md) and gap register G24, the evidence summary and explanation payload will eventually surface the admissibility state of the observations that fed a parcel-state claim:
+
+- Per-observation: the `admissibility_reasons` list passed through from ingest (e.g., `burn_in_incomplete`, `reference_calibration_stale`, `fixture_unverified`, `contract_version_drift`).
+- Per-parcel summary: admissibility rate across the observation window; calibration-posture badge indicating whether contributing nodes meet `deployment maturity v1.0` per [`../../architecture/system/calibration-program.md`](../../architecture/system/calibration-program.md) §G.
+- Reason strings from a controlled vocabulary when confidence is degraded because of calibration state (distinct from confidence degradation caused by freshness, health, or placement).
+
+Status: **planned**. Waits for the v1.5 evidence-view product surface. Parcel-state itself consumes admissibility in inference (see [`../inference-engine/architecture.md`](../inference-engine/architecture.md)); exposing it in the platform's dwelling-facing surface is a later step so that language can be reviewed before admissibility jargon reaches end users.
+
 ## Internal modules
 
 - parcel-state reader

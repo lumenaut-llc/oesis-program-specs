@@ -79,15 +79,27 @@ authored **alongside** them (repo root and `program/`):
 1. `technical-philosophy.md`
 2. `reference-stack.md`
 3. `minimum-functioning-v0.1.md`
-4. `milestone-roadmap.md` — delivery sequence and relationship to program phases
-5. `v0.1-runtime-modules.md` — runtime package map (sibling checkout
+4. `v0.1-boundary-and-non-goals.md` — what v0.1 IS and IS NOT (scope boundary)
+5. `milestone-roadmap.md` — delivery sequence and relationship to program phases
+6. `v0.1-runtime-modules.md` — runtime package map (sibling checkout
    `../../../oesis-runtime`; see `implementation-posture.md` canonical homes)
-6. `v0.1-acceptance-criteria.md` — CLI/HTTP acceptance for the frozen slice
-7. `measurement-and-kpis-v0.1.md` — KPI family emphasis and traceability to acceptance
-8. `architecture-object-map.md`
-9. `implementation-posture.md`
-10. `component-boundaries.md`
-11. `pre-1.0-version-progression.md`
+7. `v0.1-acceptance-criteria.md` — CLI/HTTP acceptance for the frozen slice
+8. `measurement-and-kpis-v0.1.md` — KPI family emphasis and traceability to acceptance
+9. `architecture-object-map.md`
+10. `implementation-posture.md`
+11. `component-boundaries.md`
+12. `pre-1.0-version-progression.md`
+13. `v1.0-parcel-kit-architecture.md` — current-aligned design for the v1.0 target kit (bench-air + mast-lite + optional flood-node)
+
+## Why cross-version docs live in `current/`
+
+Three files in this lane describe content that spans program phases, yet they live here rather than in `../v1.0/`:
+
+- `milestone-roadmap.md` orders milestones from v0.1 (Milestone 1) through the v1.0-family targets (Milestones 2–5). It sits in `current/` because every milestone's sequencing is **current-implementation-aligned** — it describes how the program actually plans to grow the accepted reference slice, not a speculative alternative.
+- `pre-1.0-version-progression.md` defines the cross-version promotion bar. It lives in `current/` because the promotion policy is current truth the program operates under, not a proposal.
+- `v1.0-parcel-kit-architecture.md` describes the next accepted kit at the **detail level of the current design**, not as a debated alternative. Debated target-lane framing (goals, deltas, proposals, open questions) lives in `../v1.0/`; the concrete kit design that will be built lives here alongside v0.1 specifics.
+
+Rule of thumb: if a document describes the **accepted** trajectory or current design even when that trajectory extends beyond v0.1, it belongs in `current/`. If a document proposes an **alternative** to the accepted trajectory, it belongs in `../v1.0/`.
 
 ## Primary source alignment
 

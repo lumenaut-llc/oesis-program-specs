@@ -87,6 +87,7 @@ the capability stages.
 | --- | --- | --- |
 | device identity, packet timing, buffering, and staleness rules | `current v1` | the parcel-sensing baseline is not honest without them |
 | field-hardening and deployment quality | `current v1` plus deployment maturity | a parcel claim depends on where and how the node was installed |
+| calibration program: reference instruments, burn-in, admissibility, drift | `current v1` plus deployment maturity | parcel hazard claims require readings traceable to characterized references; defined in `calibration-program.md`, gates slice promotions per `../current/pre-1.0-version-progression.md` |
 | node health, deployment metadata, and device event history | `v1.5` | these are support objects that should not break the core parcel-state contract |
 | measurement-trust and maintenance-informed trust penalties | `v1.5` | stronger trust needs separate support objects and calibration posture |
 | observed equipment / house-state signals (read-side HVAC, fan, purifier, backup power, sump) | `v1.5` | bridge objects for response curves; not the same as a full compatibility inventory |

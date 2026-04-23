@@ -107,6 +107,44 @@ No node should be described as deployed or field-ready unless the repo documents
 - visible field status indicator if practical
 - spare-parts and replacement posture
 
+## Deployment-class standards
+
+The three deployment classes named in [`sensor-placement-and-representativeness-guide.md`](sensor-placement-and-representativeness-guide.md) (Indoor, Sheltered, Outdoor) carry platform-level standards for power, enclosure IP rating, and transport. Each node build spec declares its deployment class; the standards below are the defaults. A node may deviate from a default only with an explicit justification documented in its build spec (and where warranted, a gap register entry).
+
+These standards are independent of the capability-stage and accepted-slice axes. They belong to the deployment-maturity ladder because field-hardening is the axis they gate.
+
+### Power source tier by deployment class
+
+| Deployment class | Power source default | Minimum protection | Runtime floor |
+|---|---|---|---|
+| Indoor | USB from protected supply, or low-voltage DC from adapter | Reverse-polarity protection where applicable; avoid daisy-chain power sharing | Defined by the installation's wall outlet reliability |
+| Sheltered | 12 V regulated DC from an outdoor-rated adapter, or USB if the mount is within an enclosed space | Surge protection on entry; fused input; strain relief on cable path | 24 h minimum buffering or local store where ingest loss is consequential |
+| Outdoor | Battery + solar with documented runtime floor, or mains with outdoor-rated PSU routed through conduit | Surge + transient + weather protection on entry; fused; sealed connectors | 72 h runtime floor under worst-case solar; retention of last observations through power events |
+
+Pre-v0.1 bench bring-up may deviate (USB on a dev board is fine). Promotion to `deployment maturity v1.0` requires matching the class default or documenting why not.
+
+### Enclosure IP rating tier by deployment class
+
+| Deployment class | Enclosure rating floor | Typical features |
+|---|---|---|
+| Indoor | Not rated / IP20 acceptable | Dust-ingress management if near HVAC return; no water handling required |
+| Sheltered | IP44 minimum | Rain-splash resistant; venting or membrane vent to prevent condensation; drip-path controlled |
+| Outdoor | IP54 minimum for passive scenarios; IP65+ for exposed mast installations | Cable glands; venting via membrane; corrosion-aware hardware; UV-stable plastics |
+
+Where a node family requires a radiation shield, weather cowl, or other protective fixture (for example, an outdoor SHT45 mount), the fixture is treated as part of the enclosure for admissibility. Per [`calibration-program.md`](calibration-program.md) §C, readings taken before the protective fixture is verified against its acceptance test are inadmissible to the calibration dataset.
+
+### Transport tier by deployment class
+
+Short-term v0.1 posture is serial-only (see gap register G3). This table sets the long-term policy once transport lanes widen:
+
+| Deployment class | Permitted transports | Notes |
+|---|---|---|
+| Indoor | Serial (for v0.1 floor); Wi-Fi; wired LAN | Wi-Fi credentials and authorization are governed by the ingest-side design note tracked in G2 |
+| Sheltered | Serial; Wi-Fi where the mount is within reliable coverage; LoRa permitted | Same authorization requirements as Indoor |
+| Outdoor | Serial during bring-up only; Wi-Fi where coverage is verified; LoRa or cellular permitted for parcels beyond Wi-Fi reach | Transport choice must preserve packet-lineage semantics; no transport may reshape `oesis.bench-air.v1` payload |
+
+Transport choice does not alter the packet schema or the admissibility rule. A packet delivered over LoRa is held to the same schema and integrity requirements as one delivered over serial.
+
 ## Node-family maturity map
 
 | Node family | Current maturity posture | First honest maturity target | Key gap to close |

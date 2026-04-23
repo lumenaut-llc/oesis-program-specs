@@ -118,6 +118,37 @@ operating constraints, and the docs that define boundaries between them.
 If the docs and the system behavior diverge, the architecture has failed even if
 the code still runs.
 
+### 9. Admissibility is part of evidence boundaries, not an inference side-effect
+
+The system should treat calibration posture and admissibility decisions as
+first-class evidence-layer facts, not as ingest hygiene or inference
+implementation details.
+
+Two architectural commitments follow:
+
+- **Schema carries the facts, runtime computes the decision.** The canonical
+  observation schema carries the facts admissibility depends on (burn-in state,
+  calibration session reference, deployment class, protective-fixture
+  verification, adapter source authority); the admissibility decision itself —
+  the boolean plus reason codes — lives on the normalized observation in
+  runtime. This keeps schema stable as admissibility policy evolves, and
+  preserves the reasoning trail for audit.
+
+- **Physical-sensor trust and adapter-derived trust are parallel programs.**
+  Physical sensors are governed by the calibration program (reference
+  instruments, burn-in, drift); adapter-derived evidence (Tier 1 passive
+  inference, Tier 2 cloud APIs) is governed by the adapter-trust program
+  (source authority, API contract version, schema-drift detection). Both
+  produce the same admissibility output through different evidence paths; the
+  programs must stay independent to avoid conflating physical and API-contract
+  failure modes.
+
+Canonical docs:
+[`integrated-parcel-system-spec.md`](integrated-parcel-system-spec.md)
+"Calibration and admissibility layer";
+[`calibration-program.md`](calibration-program.md);
+[`adapter-trust-program.md`](adapter-trust-program.md).
+
 ## Architectural shape
 
 ### Layer 1. Evidence collection

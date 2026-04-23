@@ -40,6 +40,8 @@ versioned architecture canon.
 - `technical-philosophy.md`
 - `reference-stack.md`
 - `implementation-posture.md`
+- `../system/calibration-program.md`
+- `../system/adapter-trust-program.md`
 
 These files define the current cross-subsystem architecture.
 
@@ -58,6 +60,8 @@ These materials constrain what the architecture may do and claim.
 - shared-map stays downstream of parcel-private reasoning and policy-gated
 - docs-facing wrappers should not become competing implementations of the sibling
   **`oesis-runtime`** checkout (see **Canonical implementation** above)
+- calibration program and adapter-trust program own admissibility policy; ingest enforces and emits the decision; inference and parcel-platform consume but do not override
+- build specs in `oesis-builds/specs/<node>/` and adapter specs in `oesis-builds/specs/adapters/<adapter>/` own the §F metadata declaration; program-specs owns the policy those specs declare against
 
 ## Version rule
 

@@ -124,13 +124,36 @@ disconnected devices.
 - add `mast-lite`
 - bind both nodes through one parcel-scoped node registry
 - extend parcel evidence summaries so source mix is understandable
+- adopt **hazard formula v1** for smoke and heat per
+  `../../software/inference-engine/hazard-formula-v1.md`: sensor-primary
+  log-odds form, device-relative gas-resistance baseline, provenance-tagged
+  coefficients, divergence channels reported separately from probability
 
 ### Build requirements
 
 - stable indoor reference node installation
 - stable sheltered outdoor reference node installation
+- **`mast-lite` hardware build spec** published under
+  `oesis-builds/specs/mast-lite/v0-1.md`, with BOM, wiring, firmware pin-out,
+  and an independently reproducible build procedure
+- **`mast-lite` calibration procedure** published under
+  `oesis-builds/procedures/mast-lite/calibration.md`, citing at least one
+  characterized reference instrument (shared or distinct from bench-air P0.1)
+- **`mast-lite` radiation-shield design** documented in the build spec,
+  specifying passive or active ventilation and thermal-loading acceptance
+  tests; outdoor SHT45 readings without the shield are not admissible into
+  the calibration dataset
 - one registry model that binds both nodes to one `parcel_id`
 - install metadata and calibration state that operators and inference can trust
+- `v1_1/` inference module running **in shadow** alongside `v1_0/`, emitting
+  v1 probabilities and divergence to a versioned sink without affecting
+  user-visible parcel state
+- per-device rolling baseline maintained for bench-air gas resistance
+  (median + MAD over a 48 h window with recent-exclusion)
+- pilot incident labels ingested into a calibration dataset matching the
+  pilot-log readiness checklist in `hazard-formula-v1.md`
+- provenance schema enforced on every numeric entry in the v1 config; entries
+  without provenance fail validation
 
 ### Acceptance criteria
 
@@ -138,14 +161,40 @@ disconnected devices.
 - both nodes are bound to one parcel through the registry path
 - ingest and inference remain singular rather than splitting by node family
 - parcel outputs clearly explain indoor versus sheltered outdoor evidence
+- `mast-lite` build spec, calibration procedure, and radiation-shield design
+  exist in `oesis-builds/` and have been independently reproduced at least
+  once (closes gap register G12)
 - `mast-lite` survives sheltered outdoor validation without frequent resets or
   disappearing devices
+- `mast-lite` outdoor temperature readings pass a documented thermal-loading
+  acceptance test against the radiation shield; pre-shield readings are
+  excluded from the calibration dataset
+- **both** `bench-air-node` and `mast-lite` meet `deployment maturity v1.0`
+  calibration posture per
+  [`../system/calibration-program.md`](../system/calibration-program.md) —
+  reference instruments populated per measurand per deployment class,
+  burn-in gate enforced, admissibility rule active on ingest, build-spec
+  metadata block complete. Bench-air's v0.1 sign-off is not reopened;
+  the v0.2 promotion bar requires bench-air to reach v1.0 posture
+  forward. (Retroactivity scope per
+  [`pre-1.0-version-progression.md`](pre-1.0-version-progression.md).)
+- v1 hazard formula achieves better Brier score **and** better expected
+  calibration error than v0 replayed on the same pilot labels, per hazard,
+  before promotion from shadow
+- divergence against public/shared context is reported on every parcel-state
+  output when remote context is available; divergence never modifies `P_h`
+  directly
+- sensor-primacy contract holds numerically: `beta_sensor` exceeds the sum of
+  absolute prior coefficients by the margin configured in v1
 
 ### Current posture
 
 - `bench-air-node`: `implemented`
 - `mast-lite` software normalization and inference: `implemented` (v0.2+; shared `oesis.bench-air.v1` lineage)
 - `mast-lite` hardware independent build reproduction: `partial` (build guide exists; not independently confirmed)
+- `mast-lite` hardware build spec, calibration procedure, radiation-shield
+  design in `oesis-builds/`: **missing** (blocker; tracked as G12 and as
+  Phase 0.3 in `software/inference-engine/hazard-formula-v1-phase1.md`)
 - stronger registry-driven lifecycle: `implemented` at API level (v0.4 acceptance); operator-facing flow not yet built
 
 ## Milestone 3: hazard-module expansion

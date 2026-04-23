@@ -17,7 +17,7 @@ Use this document when writing roadmaps, kit language, or marketing so **taxonom
 | --- | --- | --- |
 | **Accepted runnable slice** | What end-to-end story is **promoted** as the current honest baseline? | `v0.1` today; `v0.2` when bench-air + mast-lite + contracts/runtime meet the promotion bar |
 | **Capability stage** | What **class of product behavior** is in scope for architecture and contracts? | `current v1` sensing/inference; `v1.5` intervention bridge objects |
-| **Deployment maturity** | Is this **node family** bench-grade or field-hardened? | Per family in `deployment-maturity-ladder.md` |
+| **Deployment maturity** | Is this **node family** bench-grade or field-hardened? | Per family in `deployment-maturity-ladder.md`; calibration posture required at each tier is in `calibration-program.md` |
 | **Implementation status** | For each surface, what is actually shipped vs drafted? | Runtime observation table in `integrated-parcel-system-spec.md` |
 
 **Folder note:** `architecture/current/` is the frozen **architecture lane** aligned with program-phase `v0.1`. That is **not** the same label as capability stage `current v1` (see `architecture-gaps-by-stage.md`).
@@ -69,7 +69,11 @@ Revocation, sharing/consent execution, and some governance paths may remain **do
 - `../current/pre-1.0-version-progression.md`
 - `node-taxonomy.md`
 - `architecture-gaps-by-stage.md`
+- `architectural-choices-by-stage.md`
 - `deployment-maturity-ladder.md`
+- `calibration-program.md`
+- `adapter-trust-program.md`
+- `sensor-placement-and-representativeness-guide.md`
 - `integrated-parcel-system-spec.md`
 - `phase-roadmap.md`
 - [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/README.md)
