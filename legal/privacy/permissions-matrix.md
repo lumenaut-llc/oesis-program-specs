@@ -26,6 +26,7 @@ Sharing permission does not grant control permission.
 - derived parcel states
 
 This includes later-stage private parcel data such as:
+
 - house-state telemetry
 - house capability and read-side equipment-state records
 - later control-compatibility records where the product reaches bounded-controls stages
@@ -37,14 +38,17 @@ This includes later-stage private parcel data such as:
 ### Mode 1. Private only
 
 Purpose:
+
 - parcel operator monitoring and parcel-local interpretation
 
 Allowed:
+
 - raw parcel observations visible to the parcel operator
 - exact parcel-state history visible to the parcel operator
 - public context used inside the parcel product
 
 Not allowed:
+
 - neighbor visibility into parcel-linked data
 - public map exposure
 - research reuse without separate opt-in
@@ -52,13 +56,16 @@ Not allowed:
 ### Mode 2. Network assist
 
 Purpose:
+
 - improve the platform's internal parcel inference or neighborhood trend logic without exposing parcel-attributed raw values to other users
 
 Allowed:
+
 - selected private signals used internally by platform services
 - model-quality and calibration use tied to service operation
 
 Required constraints:
+
 - separate opt-in from basic product use
 - no user-facing parcel attribution to other households
 - no repurposing into marketing, insurance, or unrelated analytics
@@ -66,14 +73,17 @@ Required constraints:
 ### Mode 3. Neighborhood aggregate contribution
 
 Purpose:
+
 - contribute to a neighborhood condition layer that works under partial adoption without exposing exact parcel conditions
 
 Allowed:
+
 - delayed and coarsened hazard indicators
 - thresholded trend summaries
 - neighborhood-cell or block-level aggregates
 
 Required constraints:
+
 - minimum participation threshold before display
 - no exact parcel marker for another home's contribution
 - no raw stream exposure
@@ -82,14 +92,17 @@ Required constraints:
 ### Mode 4. Research or pilot contribution
 
 Purpose:
+
 - bounded evaluation, pilot, or research work beyond normal product operation
 
 Allowed:
+
 - only under a separate, explicit opt-in
 - only for a documented purpose and retention period
 - only for approved recipients or program operators
 
 Required constraints:
+
 - narrower scope than general product terms
 - publication and redistribution rules stated up front
 - no assumption that research data becomes open data

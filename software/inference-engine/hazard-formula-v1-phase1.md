@@ -40,6 +40,7 @@ Done when: bring-up acceptance includes an explicit 48 h burn-in window per [`..
 **Decision (2026-04-19):** write the spec (option A). The alternative — scoping heat to bridge-path-only — was rejected because the indoor-bridge path cannot physically represent parcel-wide outdoor heat, which is the claim the parcel-state output needs to support.
 
 Done when:
+
 - `oesis-builds/specs/mast-lite/v0-1.md` exists with BOM, wiring, firmware pin-out, and a reproducible build procedure.
 - `oesis-builds/procedures/mast-lite/calibration.md` exists, citing at least one characterized reference instrument (may reuse the bench-air reference from P0.1, or add a distinct outdoor-suitable referent).
 - Radiation-shield design is documented inside the build spec, with a thermal-loading acceptance test. Readings from a unit without a verified shield are not admissible into the calibration dataset.

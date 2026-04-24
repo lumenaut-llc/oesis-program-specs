@@ -262,6 +262,7 @@ contrastive explanations, divergence analysis.
 | Node registry full lifecycle | **Resolved** | **Resolved** | **Implemented** in v0.4 |
 
 **Remaining work for v1.0 Tier A (internal pilot):**
+
 1. ~~Implement trust scoring computation~~ — **Resolved**: `compute_trust_score.py` with 5-factor model integrated into `infer_parcel_state.py`
 2. ~~Add inference correctness test assertions~~ — **Resolved**: value-level assertions added to all acceptance tests (v0.1–v1.0); confidence range, status enums, hazard probability range, evidence mode, freshness, trust score structure
 
@@ -289,6 +290,7 @@ to modify hazard probabilities and confidence. Closed-loop summaries track
 PM2.5 deltas and improvement metrics.
 
 **What exists (from v1.0 lane):**
+
 - House state as fallback PM2.5 source
 - House capability influence on smoke probability (+0.01 if recirculation available)
 - Intervention event → action logs with verification window timing
@@ -296,6 +298,7 @@ PM2.5 deltas and improvement metrics.
 - Closed-loop summary with before/after PM2.5 deltas and improvement ratios
 
 **What's still needed for v1.5 exit criteria:**
+
 - indoor-response-node hardware (planned)
 - power-outage-node hardware (planned)
 - equipment-state-adapter hardware (planned)

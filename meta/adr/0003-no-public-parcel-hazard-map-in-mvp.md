@@ -16,12 +16,14 @@ The project needs an explicit decision about whether MVP includes a public parce
 MVP will not include a public parcel-by-parcel hazard map based on real participant-contributed data.
 
 Early shared-map behavior is limited to:
+
 - coarse spatial units
 - delayed or batched updates
 - thresholded aggregate outputs
 - clear distinction between shared parcel operator contributions and public context
 
 MVP also prohibits:
+
 - exact parcel markers for real contributed hazard data
 - public listing of participating households
 - parcel-level publication of egress, reentry, occupancy-adjacent, or similar sensitive states
@@ -29,11 +31,13 @@ MVP also prohibits:
 ## Consequences
 
 Positive:
+
 - lowers singling-out and re-identification risk
 - reduces vulnerability-targeting risk
 - keeps early pilots aligned with private-by-default commitments
 
 Costs:
+
 - neighborhood features will feel less vivid or immediate
 - some community value is deferred until stronger privacy and coverage controls exist
 

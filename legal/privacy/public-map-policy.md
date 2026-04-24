@@ -17,6 +17,7 @@ Early versions should not publish a map that reveals or strongly suggests which 
 ## Allowed early shared-map posture
 
 If a shared map exists in MVP or pilot form, it should:
+
 - use coarse spatial units
 - use delayed or batched updates
 - require minimum participation thresholds
@@ -26,6 +27,7 @@ If a shared map exists in MVP or pilot form, it should:
 ## Publication review triggers
 
 Any shared map release should be reviewed for:
+
 - singling-out risk
 - re-identification risk
 - vulnerability targeting risk
@@ -42,6 +44,7 @@ Any shared map release should be reviewed for:
 ## User-facing disclosure
 
 Any shared map should disclose:
+
 - that participation is partial
 - that visible conditions may be delayed or aggregated
 - that public context and participant-contributed signals are not the same thing

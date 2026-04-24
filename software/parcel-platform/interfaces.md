@@ -32,6 +32,7 @@ and caching:
 
 These endpoints are not yet implemented in the reference runtime. They require
 observation persistence and parcel-state caching — v0.4+ scope.
+
 - `GET /v1/parcels/{parcel_id}/sharing`
   Return the current sharing-mode settings, notice versions, and revocation status.
 - `POST /v1/parcels/{parcel_id}/sharing`
@@ -101,9 +102,11 @@ observation persistence and parcel-state caching — v0.4+ scope.
 ## Data contracts
 
 Primary input contract:
+
 - parcel-state snapshot from [`parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md)
 
 Primary response shape for current state:
+
 - `parcel_id`
 - `computed_at`
 - `statuses`
@@ -132,6 +135,7 @@ Support-object response shapes:
 - `verification_outcomes`
 
 Primary response shape for evidence summary:
+
 - `parcel_id`
 - `computed_at`
 - `evidence_mode`

@@ -19,6 +19,7 @@ Access to parcel-linked private data should be need-based, time-bounded where pr
 ## Approval triggers
 
 Extra review should be required for:
+
 - bulk access to parcel-linked records
 - access for purposes beyond product operation, security, or approved support
 - exports of parcel-linked data
@@ -27,6 +28,7 @@ Extra review should be required for:
 ## Logging requirements
 
 Log at minimum:
+
 - who accessed the data
 - when access occurred
 - what class of data was accessed

@@ -19,6 +19,7 @@ The system never moves beyond sensing and interpretation. It gathers environment
 **Design response:** The v1.5 bridge is mandatory, not aspirational. House-state, intervention, and verification contracts are defined as hard requirements before the system claims to be more than monitoring. The phase model treats observation-only as an intermediate step, not a destination.
 
 **Evidence in specs:**
+
 - `program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md` -- v1.5 defined as measurement-to-intervention bridge
 - `architecture/v1.5/house-state-and-verification-model.md` -- verification outcome structure
 
@@ -29,6 +30,7 @@ Parcel-level inference outputs are not materially better than what a user could 
 **Design response:** Divergence signals, contrastive explanations, metadata priors, and public-only counterfactuals are built into the parcel-state contract. The system is required to show where local conditions differ from public data, not just echo them.
 
 **Evidence in specs:**
+
 - [`v0.1/parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md) -- `divergence_records`, `public_only_counterfactual`, `contrastive_explanations`, `parcel_priors_applied`
 
 ### 3. Too broad
@@ -38,6 +40,7 @@ The project pursues all layers simultaneously -- hardware families, inference en
 **Design response:** Hard stage boundaries with explicit non-goals per phase. Each version lane names what does not belong in it. The operating packet scores items as "keep," "dangerous," or "change now" and defends phase boundaries aggressively.
 
 **Evidence in specs:**
+
 - `program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md` -- "what does not belong" sections per phase
 - `release/v0.1/v0.1-pilot-minimum-subset.md` -- scope fence for v0.1
 - `program/operating-packet/04-architecture-review-keep-dangerous-change-now.md` -- scored review with danger ratings
@@ -49,6 +52,7 @@ The system describes conditions but does not solve anything. It tells you your a
 **Design response:** Smoke protection is the first mandatory proof case. The verification model requires before-state, intervention, and after-state at the same parcel, producing a verification outcome that can be evaluated.
 
 **Evidence in specs:**
+
 - `architecture/v1.5/house-state-and-verification-model.md` -- lines 197-209, first-closed-loop structure
 - `architecture/system/node-taxonomy.md` -- first-closed-loop-priority designation
 
@@ -59,6 +63,7 @@ The project expands sensor families (flood, thermal, mast, weather) while avoidi
 **Design response:** Tiered acquisition model prioritizes bridge surfaces before environmental expansion. Node taxonomy separates environmental observation nodes from house-state and intervention nodes, and sequences bridge nodes ahead of additional environmental coverage.
 
 **Evidence in specs:**
+
 - `architecture/system/node-taxonomy.md` -- tiered acquisition model, taxonomy prioritization
 - `architecture/v1.5/house-state-and-verification-model.md` -- bridge node requirements
 
@@ -69,6 +74,7 @@ The system monitors environmental conditions around the parcel but cannot observ
 **Design response:** House-state contract includes `io_ratio`, `thermal_dynamics`, `equipment_state`, and `power_state`. Hardware specs for circuit monitor and equipment-state observation provide the observation path.
 
 **Evidence in specs:**
+
 - [`v1.5/house-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/house-state-schema.md) -- `infiltration`, `thermal_dynamics`, `equipment_state`
 - [`v1.0/equipment-state-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/equipment-state-observation-schema.md) -- equipment observation contract
 - `hardware/circuit-monitor/` -- hardware path for house-state observation
@@ -80,6 +86,7 @@ Consent, data control, and homeowner ownership are mentioned in every document b
 **Design response:** Consent-store is a versioned contract with custody tiers, query-time eligibility checks, and mark-not-delete revocation semantics. Governance is an operational model, not a statement of values.
 
 **Evidence in specs:**
+
 - [`v1.0/consent-store-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/consent-store-schema.md) -- custody tiers, query-time eligibility
 - [`v1.0/governance-operational-model.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/governance-operational-model.md) -- operational governance contract
 - `legal/privacy/permissions-matrix.md` -- permission enforcement matrix
@@ -91,6 +98,7 @@ Under sparse adoption -- few parcels, few nodes, incomplete coverage -- the syst
 **Design response:** Graceful degradation via evidence modes. Each parcel output carries an evidence mode tag indicating what data contributed. Standalone parcel value is required before network-assist value. The system must be useful at a single parcel before it benefits from neighbors.
 
 **Evidence in specs:**
+
 - `program/operating-packet/01-core-thesis-and-framing.md` -- partial-adoption design requirement
 - [`v0.1/parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md) -- evidence mode tagging
 - [`v1.0/network-assist-signal-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.0/network-assist-signal-schema.md) -- network-assist as additive, not required
@@ -102,6 +110,7 @@ Deployment friction kills adoption. Hardware requires calibration, firmware upda
 **Design response:** Tiered acquisition model starts with zero-friction inference (public data, no hardware) before requiring hardware deployment. Node taxonomy stages hardware by maintenance burden. Deployment maturity ladder defines readiness criteria before each expansion step.
 
 **Evidence in specs:**
+
 - `architecture/system/node-taxonomy.md` -- Tier 1 (inference-only), Tier 2 (low-maintenance), Tier 3 (full deployment)
 - `architecture/system/deployment-maturity-ladder.md` -- readiness gates per deployment stage
 
@@ -112,6 +121,7 @@ The user cannot see what this system does that a simpler stack -- a weather stat
 **Design response:** Contrastive explanations surface local-versus-public divergence directly in the parcel view. Verification outcomes prove closed-loop value by showing measurable differences after interventions. The system is designed to make its own distinctiveness visible, not just claimed.
 
 **Evidence in specs:**
+
 - [`v0.1/parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md) -- contrastive explanation structure
 - [`v1.0/verification-outcome-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v1.5/verification-outcome-schema.md) -- verified outcome with before/after delta
 

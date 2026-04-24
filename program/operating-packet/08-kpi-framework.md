@@ -7,6 +7,7 @@
 Measure whether the system is producing trustworthy evidence.
 
 Suggested KPIs:
+
 - node uptime
 - packet completeness rate
 - median ingest latency
@@ -19,6 +20,7 @@ Suggested KPIs:
 Measure whether the system is more useful than raw feeds or standalone devices.
 
 Suggested KPIs:
+
 - percentage of parcels receiving a current status
 - percentage of parcel views rated actionable by users
 - median time from hazard onset to parcel status update
@@ -31,6 +33,7 @@ Suggested KPIs:
 Measure whether shared participation creates measurable benefit.
 
 Suggested KPIs:
+
 - confidence uplift when nearby shared evidence exists
 - reduction in parcels stuck in inferred_regional or stale mode
 - increase in coverage quality as node density rises
@@ -42,6 +45,7 @@ Suggested KPIs:
 Measure whether the data becomes useful beyond awareness.
 
 Suggested KPIs:
+
 - measured indoor PM improvement after smoke-related actions
 - indoor temperature reduction after heat-related actions
 - better route or access interpretation during runoff events
@@ -54,6 +58,7 @@ Suggested KPIs:
 Measure whether the product model is actually owner-controlled.
 
 Suggested KPIs:
+
 - opt-in sharing rate
 - revocation success rate
 - export completion rate
@@ -72,10 +77,13 @@ The five groups above default to parcel-facing metrics. As route, block, and lif
 ## Success by horizon
 
 ### Near term
+
 Success means the system can reliably collect and normalize parcel-relevant data, produce useful parcel views, and show that some users find it more actionable than public-only information.
 
 ### Mid term
+
 Success means network participation measurably increases coverage and confidence, and parcel context plus shared evidence materially improves local interpretation.
 
 ### Long term
+
 Success means the system accumulates enough structured history to support adaptation learning, intervention ranking, and neighborhood resilience planning.

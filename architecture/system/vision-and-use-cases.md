@@ -103,12 +103,14 @@ It should be framed as:
 The "self-protective house" vision should be interpreted as increasing measurability, interpretability, controllability, and verified adaptation over time.
 
 It should not be interpreted as:
+
 - magical architectural movement
 - unsupported automation claims
 - control without verification
 - centralized operator authority over household systems
 
 The disciplined path is:
+
 - sensing
 - inference
 - intervention ranking

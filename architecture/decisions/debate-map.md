@@ -49,6 +49,7 @@ Use this file for the tensions that influence both.
 Version pressure: `cross-version`, strongest in `v1.0`
 
 Affected objects:
+
 - parcel
 - public context
 - shared neighborhood signal
@@ -95,6 +96,7 @@ reality.
 Version pressure: `v0.1` now, `v1.0` later
 
 Affected objects:
+
 - normalized observation
 - parcel prior
 - public context
@@ -139,6 +141,7 @@ Do not make opaque models foundational to MVP trust.
 Version pressure: `v0.1` now
 
 Affected objects:
+
 - derived parcel condition
 - derived operational status
 - explanation record
@@ -180,6 +183,7 @@ Do not hide uncertainty in order to make the product feel smoother.
 Version pressure: primarily `v1.0`
 
 Affected objects:
+
 - sensor node
 - packet / raw evidence
 - normalized observation
@@ -225,6 +229,7 @@ Do not hard-code centralization into the trust model.
 Version pressure: `v0.1` now, `v1.0` later
 
 Affected objects:
+
 - sensor node
 - packet / raw evidence
 - collection path / home-platform ingest boundary
@@ -272,6 +277,7 @@ meaning of network in the first functioning version.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - sensor node
 - shared neighborhood signal
 - parcel view
@@ -315,6 +321,7 @@ first successful user experience.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - sharing policy
 - parcel
 - shared neighborhood signal
@@ -360,6 +367,7 @@ Retain exact raw owner data as private by default.
 Version pressure: primarily `v1.0`
 
 Affected objects:
+
 - parcel view
 - shared neighborhood signal
 - route and infrastructure segment
@@ -404,6 +412,7 @@ quality controls, and operational maturity justify it.
 Version pressure: `v0.1` now
 
 Affected objects:
+
 - sensor node
 - observation
 - derived parcel condition
@@ -446,6 +455,7 @@ uncertainty.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - derived parcel condition
 - derived operational status
 - explanation record
@@ -488,6 +498,7 @@ Do not force one generic number to carry all meanings.
 Version pressure: primarily `v1.0`
 
 Affected objects:
+
 - public context
 - derived parcel condition
 - derived operational status
@@ -530,6 +541,7 @@ model are strong enough to support them.
 Version pressure: strongest in `v1.0`
 
 Affected objects:
+
 - parcel
 - route and infrastructure segment
 - derived parcel condition
@@ -572,6 +584,7 @@ and access condition.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - packet schema
 - normalized observation
 - parcel
@@ -615,6 +628,7 @@ Favor modular architecture without premature fragmentation.
 Version pressure: `v0.1` now
 
 Affected objects:
+
 - explanation record
 - parcel view
 - evidence summary
@@ -657,6 +671,7 @@ notebook.
 Version pressure: `v0.1` now
 
 Affected objects:
+
 - public context
 - shared neighborhood signal
 - derived parcel condition
@@ -699,6 +714,7 @@ confidence and clear explanation of what is missing.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - sharing policy
 - explanation record
 - packet schema
@@ -741,6 +757,7 @@ rather than defaulting to closed control.
 Version pressure: `cross-version`, strongest at `v1.0` and beyond
 
 Affected objects:
+
 - public context
 - parcel prior
 - derived parcel condition
@@ -791,6 +808,7 @@ Related existing hooks: `architecture/system/architectural-choices-by-stage.md` 
 Version pressure: `v1.5` and beyond; begins biting as adapter surfaces enter scope
 
 Affected objects:
+
 - normalized observation
 - equipment-state observation (v1.5 bridge)
 - adapter source authority

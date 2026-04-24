@@ -22,6 +22,7 @@ The logic layer that turns normalized observations, public context, and explicit
 ## MVP focus
 
 The first MVP should support parcel inference from a small evidence set:
+
 - bench-air-node observations
 - optional public weather context
 - parcel metadata required for basic interpretation

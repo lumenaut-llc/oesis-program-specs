@@ -16,6 +16,7 @@ The repo needs an explicit decision separating openness of code and hardware fro
 The project will keep software, hardware designs, documentation, schemas, and synthetic examples open, while not treating real participant-contributed parcel-linked datasets as open by default.
 
 Working posture:
+
 - software source and service components: open license
 - hardware design files: open hardware license
 - documentation, governance text, and schemas: open documentation license
@@ -25,11 +26,13 @@ Working posture:
 ## Consequences
 
 Positive:
+
 - preserves openness where it supports trust, auditability, and ecosystem growth
 - avoids overcommitting real household data to irreversible public reuse
 - aligns licensing with the privacy model
 
 Costs:
+
 - some open-data advocates may view this as insufficiently open
 - additional governance is required for any future pilot or research dataset release
 

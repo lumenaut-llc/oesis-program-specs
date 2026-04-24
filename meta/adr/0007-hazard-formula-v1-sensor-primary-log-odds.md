@@ -31,6 +31,7 @@ $$\text{logit}(P_h) = \alpha_h + \beta_h \cdot S_h(t) + \sum_{i} \gamma_{h,i} \c
 - **Public and shared sources never appear in the logit.** They calibrate coefficients upstream and feed `divergence_score` channels downstream — reported alongside $P_h$, never folded into it.
 
 Additional commitments:
+
 - Smoke sensor term uses per-device rolling-baseline deviation of gas resistance (48h window, MAD-based σ), not fixed ohm cutoffs.
 - Heat sensor term uses per-parcel per-date z-scores against NCEI climate normals (both daily max and daily min), not a fixed HeatRisk onset temperature.
 - Every numeric value in the v1 config carries a provenance schema: `value`, `source`, `source_type`, `date`, `note`, plus `n_events` / `ci_95` for internally-fit values.
@@ -39,6 +40,7 @@ Additional commitments:
 ## Consequences
 
 Positive:
+
 - Each coefficient is calibratable against pilot labels via logistic or isotonic fit.
 - Brier score and ECE become reportable per hazard.
 - Sensor-primacy is a numerical constraint, not a convention.
@@ -46,6 +48,7 @@ Positive:
 - Every threshold cites a source; unsourced entries are visible and blocked.
 
 Negative:
+
 - Requires coefficient fitting against pilot data — gated by hardware calibration prerequisites (G13, G14, G17) and by having enough labeled pilot events per hazard (≥10 positive events per coefficient for internal fits, else coefficient stays literature-prior with citation).
 - Transition runs v1_1 in shadow against v0 until Brier/ECE beat v0 replayed on the same pilot labels — adds schedule overhead.
 - v1 heat primary path requires mast-lite outdoor temperature — blocked by G12.

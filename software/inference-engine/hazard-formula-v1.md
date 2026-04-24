@@ -9,6 +9,7 @@ Replace the v0 additive-band heuristic with an evidence-based, sensor-primary, l
 Draft — supersedes the band logic in `hazard-logic-v0.md` for smoke and heat once adopted. Flood remains on v0 posture until a flood-node exists.
 
 **Revisions:**
+
 - 2026-04-19 — Heat sensor term corrected. Initial draft treated `T_ref` as a fixed HeatRisk category-1 onset temperature per climate zone; NWS HeatRisk methodology is percentile-based per grid cell and per date, and uses both daily max and daily min. Section "Heat: S_heat(t)" rewritten accordingly. See `hazard-formula-v1-phase1.md` §4 for access-path detail and sources.
 
 ## Owner
@@ -103,6 +104,7 @@ Local climatology source: NOAA NCEI 30-year daily Climate Normals, preloaded per
 Humidity correction: optionally use heat index or WBGT approximation when humidity data is reliable. Default to dry-bulb with a documented accuracy note until humidity sensor calibration is verified.
 
 Bridge path — **bench-air indoor temperature only**:
+
 - Retained for pre-mast-lite deployments but with explicit discount: $\beta_{\text{heat,indoor}} \le 0.4 \cdot \beta_{\text{heat,outdoor}}$.
 - Day and night decomposition still applies where data allows, using indoor rolling percentiles per device as the reference if NCEI normals cannot be meaningfully applied to an indoor reading.
 - The indoor-penalty concept from `hazard_thresholds_v0.json:68` is preserved in spirit but implemented as a coefficient reduction, not a subtraction from probability.
@@ -152,6 +154,7 @@ Three features, all negative-only so they can reduce sensor weight but never fli
 | `heat_divergence_neighborhood` | local vs. shared heat index | sidecar |
 
 Divergence consumers:
+
 - Large positive divergence with confident local sensor → user-visible reason ("local sensor detected conditions regional sources have not").
 - Large negative divergence with confident regional source → trust gate may suppress `unsafe` escalation and surface "regional context disagrees with local reading" reason.
 
