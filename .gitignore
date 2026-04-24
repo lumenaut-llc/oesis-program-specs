@@ -23,6 +23,9 @@ build/
 # Media exports
 exports/
 
+# CI artifact — produced by sync-from-contracts.yml; not reviewed content
+sync-summary.json
+
 # Firmware secrets (per-install config with Wi-Fi credentials, API keys, etc.)
 **/secrets.h
 **/config.h

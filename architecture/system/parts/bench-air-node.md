@@ -51,7 +51,7 @@ Governed by [`../calibration-program.md`](../calibration-program.md) (physical-s
 | Concern | Location |
 |---|---|
 | Architecture posture row | [`../node-taxonomy.md`](../node-taxonomy.md) current-truth; [`../integrated-parcel-system-spec.md`](../integrated-parcel-system-spec.md) "Deployment posture per node" |
-| Hardware design | [oesis-hardware/bench-air-node/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/bench-air-node) (build-guide, wiring, serial-json-contract, firmware) |
+| Hardware design | [oesis-hardware/v0.1/bench-air-node/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v0.1/bench-air-node) (build-guide, wiring, serial-json-contract, firmware) |
 | Build spec (pinned) | [oesis-builds/specs/bench-air-node/v0-1.md](https://github.com/lumenaut-llc/oesis-builds/blob/main/specs/bench-air-node/v0-1.md) |
 | Build procedures | [oesis-builds/procedures/bench-air-node/](https://github.com/lumenaut-llc/oesis-builds/tree/main/procedures/bench-air-node) (bring-up, calibration, cross-check, stress-test) |
 | Build guide (practical) | [oesis-builds/GUIDE.md](https://github.com/lumenaut-llc/oesis-builds/blob/main/GUIDE.md) |

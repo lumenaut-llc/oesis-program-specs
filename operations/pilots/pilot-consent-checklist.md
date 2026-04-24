@@ -15,6 +15,7 @@ Provide a practical checklist for onboarding pilot participants without drifting
 ## Sharing explanation
 
 For each optional sharing mode offered in the pilot, confirm that the participant was told:
+
 - what data leaves the private parcel context
 - whether the outgoing data is delayed, derived, or aggregated
 - who may see it

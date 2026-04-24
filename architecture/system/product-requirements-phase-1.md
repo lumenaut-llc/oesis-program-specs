@@ -30,6 +30,7 @@ Not yet a full parcel adaptation or automation system.
 `current v1` is the parcel sensing and inference baseline.
 
 It should prove:
+
 - local sensing
 - parcel-state inference
 - confidence, freshness, and provenance
@@ -37,6 +38,7 @@ It should prove:
 - partial-adoption usefulness
 
 It should not yet claim:
+
 - intervention verification as a product guarantee
 - ranked retrofit optimization
 - automation compatibility as a core UX promise
@@ -183,6 +185,7 @@ The product shall capture enough home and parcel context to improve interpretati
 The system shall not imply that later-stage adaptation features already exist in the current product.
 
 Examples:
+
 - recommendations may mention recirculation or filtration if available, but the product should not imply that HVAC state is already being monitored unless that data path actually exists
 - the product may reference future support for intervention verification, but it should not present verification claims as current `v1` functionality
 
@@ -276,6 +279,7 @@ The product shall preserve parcel stewardship, private-by-default handling, and 
 The next stage after this product is `v1.5`, not a jump directly to automation.
 
 `v1.5` adds:
+
 - indoor PM2.5
 - indoor temperature and RH
 - mains status and backup-power state

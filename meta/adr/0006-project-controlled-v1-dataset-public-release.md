@@ -37,11 +37,13 @@ not made public merely because the project-controlled v1 dataset is public.
 ## Consequences
 
 Positive:
+
 - allows the project to publish the v1 dataset clearly and intentionally
 - preserves the project's private-by-default promise for later participants
 - reduces ambiguity about whether one public dataset changes the policy for all future data
 
 Costs:
+
 - requires careful designation of which dataset artifacts are actually part of the public release
 - requires provenance, scope, and licensing notes to travel with the released dataset
 - may disappoint people who expected either a blanket open-data posture or a blanket no-open-data posture

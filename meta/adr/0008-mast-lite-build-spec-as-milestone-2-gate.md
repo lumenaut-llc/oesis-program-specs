@@ -4,7 +4,7 @@
 - Date: 2026-04-19
 - Owners: Open Environmental Sensing and Inference System (hardware + technical)
 - Related workstreams:
-  - oesis-hardware/mast-lite
+  - oesis-hardware/v0.1/mast-lite
   - oesis-builds/specs/mast-lite (planned)
   - architecture/current/milestone-roadmap
   - release/v.0.1 (gap-register G12)
@@ -14,10 +14,11 @@
 Mast-lite is the sheltered-outdoor sensor node that completes the v0.2 two-node parcel kit (bench-air + mast-lite) per [`../../architecture/current/pre-1.0-version-progression.md`](../../architecture/current/pre-1.0-version-progression.md). It is architecturally required for program-phase v0.2 promotion.
 
 However:
+
 - No build spec exists at `oesis-builds/specs/mast-lite/` (gap G12).
 - No calibration procedure exists.
 - No radiation-shield design or thermal-loading acceptance test is documented.
-- Hardware build-guide exists at `oesis-hardware/mast-lite/` but has not been independently reproduced.
+- Hardware build-guide exists at `oesis-hardware/v0.1/mast-lite/` but has not been independently reproduced.
 - The v1 hazard formula's primary heat path (per ADR 0007) assumes outdoor temperature from mast-lite.
 
 Two options presented:
@@ -30,6 +31,7 @@ Two options presented:
 **Option A is chosen.** Mast-lite build spec, calibration procedure, and radiation-shield design become Milestone 2 acceptance gates. The v1 hazard formula's primary heat path is mast-lite outdoor temperature, not indoor-bridge-only.
 
 Concretely, Milestone 2 acceptance per [`../../architecture/current/milestone-roadmap.md`](../../architecture/current/milestone-roadmap.md) requires:
+
 - `oesis-builds/specs/mast-lite/v0-1.md` with BOM, wiring, firmware pin-out, reproducible build
 - `oesis-builds/procedures/mast-lite/calibration.md` with a characterized reference instrument
 - Radiation-shield design inside the build spec with thermal-loading acceptance test
@@ -39,11 +41,13 @@ Concretely, Milestone 2 acceptance per [`../../architecture/current/milestone-ro
 ## Consequences
 
 Positive:
+
 - Primary heat path is sensor-backed outdoor temperature, not an indoor proxy with 0.4× discount. Preserves sensor-primacy architectural claim (ADR 0007) for both hazards, not just smoke.
 - v0.2 promotion produces a credible two-node parcel kit rather than a one-node plus a degraded bridge.
 - Per-node part sheet [`../../architecture/system/parts/mast-lite.md`](../../architecture/system/parts/mast-lite.md) becomes the aggregator as the work progresses.
 
 Negative:
+
 - Adds real hardware-spec-writing work to Milestone 2. G12 is now a primary blocker; G13 (reference instruments) and G14 (burn-in gate) bite in parallel.
 - Milestone 2 promotion cannot happen purely via runtime changes; hardware work is on the critical path.
 - If mast-lite hardware owner is under-resourced, v0.2 blocks indefinitely.

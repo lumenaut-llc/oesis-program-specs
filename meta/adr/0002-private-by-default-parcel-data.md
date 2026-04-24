@@ -16,6 +16,7 @@ Without a hard architectural decision, future product work could blur these cate
 The platform adopts a private-by-default parcel data model.
 
 This means:
+
 - private parcel data, shared data, public context, derived parcel states, and administrative records are distinct classes
 - raw participant-contributed parcel-linked data is private by default
 - non-private sharing requires an explicit sharing mode and consent record
@@ -25,11 +26,13 @@ This means:
 ## Consequences
 
 Positive:
+
 - aligns architecture with trust claims
 - reduces risk of accidental public exposure of parcel-linked data
 - gives product, API, and policy work a stable common model
 
 Costs:
+
 - more metadata and policy plumbing is required
 - some features will ship more slowly because they need class-aware access control and consent handling
 - shared-map and analytics features must accept coarser and more limited inputs

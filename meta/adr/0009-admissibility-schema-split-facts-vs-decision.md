@@ -29,6 +29,7 @@ This affects `oesis-contracts` (canonical observation schema), `oesis-runtime` (
 Schema extensions (planned in `oesis-contracts` v1.0 lane; tracked as G17):
 
 Physical-sensor facts per [`../../architecture/system/calibration-program.md`](../../architecture/system/calibration-program.md) §C:
+
 - `burn_in_complete: bool`
 - `node_calibration_session_ref: string`
 - `node_deployment_maturity: enum` (`v0.1` | `v1.0` | `v1.5` | `v2.0`)
@@ -37,6 +38,7 @@ Physical-sensor facts per [`../../architecture/system/calibration-program.md`](.
 - `placement_representativeness_class: enum | null` (A / B / C / D)
 
 Adapter-derived facts per [`../../architecture/system/adapter-trust-program.md`](../../architecture/system/adapter-trust-program.md) §C:
+
 - `adapter_source_ref: string`
 - `adapter_contract_version: string`
 - `adapter_onboarding_ref: string`
@@ -44,6 +46,7 @@ Adapter-derived facts per [`../../architecture/system/adapter-trust-program.md`]
 - `adapter_tier: enum` (`tier_1_passive` | `tier_2_adapter` | `tier_3_direct`)
 
 Runtime outputs on normalized observations (never back-propagated to schema):
+
 - `admissible_to_calibration_dataset: bool`
 - `admissibility_reasons: [string]` (reason codes: `burn_in_incomplete`, `reference_calibration_stale`, `fixture_unverified`, `contract_version_drift`, `credentials_expired`, etc.)
 
@@ -52,6 +55,7 @@ Runtime branches on `adapter_tier`: absent or `tier_3_direct` → calibration-pr
 ## Consequences
 
 Positive:
+
 - **Schema stays stable** as admissibility policy evolves. Policy lives in code, not in contract.
 - **Every consumer sees the same facts** — no consumer re-probes the node registry or reference-calibration log.
 - **Audit trail preserved** on normalized records. Coefficient-fitting filters on the boolean; audit tooling reads reasons.
@@ -59,6 +63,7 @@ Positive:
 - Works across the two-programs architecture (calibration + adapter-trust) via the `adapter_tier` branch.
 
 Negative:
+
 - Observation schema grows by ~11 fields. For a schema already tracking node identity, timing, and sensor values, this is non-trivial size increase.
 - Cross-repo schema change required in `oesis-contracts` before `oesis-runtime` can produce or consume the decision fields. Coordination overhead.
 - Runtime consumers that cached observation structure need to accept the schema additions (additive, but still a contract change).

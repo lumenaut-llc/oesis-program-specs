@@ -16,6 +16,7 @@ Definition:
 Data linked to one parcel, household, or device deployment that is not shared by default beyond the parcel operator account and necessary service operations.
 
 Examples:
+
 - raw sensor observations
 - exact parcel identifier and geometry
 - exact node location
@@ -30,6 +31,7 @@ Examples:
 - intervention and verification histories tied to one parcel
 
 Handling rules:
+
 - private by default
 - highest sensitivity class in the product
 - must not be exposed in public APIs or public map layers
@@ -42,6 +44,7 @@ Definition:
 Data a parcel operator affirmatively elects to contribute beyond private parcel use under a documented sharing mode.
 
 Examples:
+
 - delayed hazard indicators
 - coarse spatial bins or neighborhood-cell signals
 - thresholded trend summaries
@@ -49,6 +52,7 @@ Examples:
 - event-based contribution during a declared or user-selected hazard window
 
 Handling rules:
+
 - opt-in only
 - separately governed from private parcel data
 - should default to derived or coarsened signals rather than raw streams
@@ -61,6 +65,7 @@ Definition:
 Third-party or public-source information used to interpret parcel conditions.
 
 Examples:
+
 - weather feeds
 - flood and hydrology context
 - smoke and air-quality context
@@ -69,6 +74,7 @@ Examples:
 - public alert feeds
 
 Handling rules:
+
 - store source, timestamp, freshness, and license metadata
 - clearly distinguish from participant-contributed data
 - do not imply local verification when the source is regional or delayed
@@ -79,6 +85,7 @@ Definition:
 System-generated interpretations about parcel conditions produced from one or more evidence sources.
 
 Examples:
+
 - stay, enter, escape, and asset condition outputs
 - confidence values
 - evidence mode
@@ -86,6 +93,7 @@ Examples:
 - hazard-specific probability or risk estimates
 
 Handling rules:
+
 - must be labeled as inferences, not facts
 - must include provenance and freshness support
 - must show uncertainty honestly
@@ -98,6 +106,7 @@ Definition:
 Records required to operate the system responsibly and demonstrate accountability.
 
 Examples:
+
 - consent records
 - sharing setting history
 - admin access logs
@@ -107,6 +116,7 @@ Examples:
 - notice and policy acceptance records
 
 Handling rules:
+
 - retained as evidence of governance actions
 - access restricted to personnel with operational need
 - kept separate from product telemetry where possible

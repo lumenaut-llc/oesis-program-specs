@@ -11,11 +11,13 @@ Open-source licensing of code and hardware does not grant an automatic right to 
 ## Allowed nominative use
 
 Others may generally use the project name to describe factual relationships such as:
+
 - forked from the project
 - compatible with the project's published interfaces
 - based on the project's open hardware files
 
 This use must not imply:
+
 - official approval
 - safety certification
 - validated emergency performance
@@ -24,6 +26,7 @@ This use must not imply:
 ## Restricted uses
 
 Do not use project names, logos, or marks in ways that suggest:
+
 - official parcel-safety certification
 - emergency-grade approval
 - verified compatibility where no review occurred
@@ -32,11 +35,13 @@ Do not use project names, logos, or marks in ways that suggest:
 ## Compatibility statements
 
 Preferred phrasing:
+
 - built against the published interface
 - designed for interoperability with the project schema
 - derived from the open hardware design
 
 Avoid phrasing such as:
+
 - certified safe
 - officially approved for evacuation use
 - trusted by the project for life-safety decisions
@@ -44,6 +49,7 @@ Avoid phrasing such as:
 ## Future certification program
 
 If the project later creates compatibility or quality marks, they should require:
+
 - published criteria
 - repeatable test procedures
 - revocation rules

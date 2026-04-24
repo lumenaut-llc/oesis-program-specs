@@ -17,6 +17,7 @@ Capability-stage `v1.5` introduces adapter-derived evidence into first-class inf
 - **Tier 3** direct measurement (e.g., circuit-monitor) — physical node governed by calibration-program.
 
 Tier 1 and Tier 2 evidence has fundamentally different failure modes than physical sensors:
+
 - Physical sensors drift due to aging, contamination, conditioning — calibration-program §D addresses this.
 - Adapters drift due to **API contract changes, credential revocation, source-authority deprecation, silent schema changes** — none of which calibration-program covers.
 
@@ -37,12 +38,14 @@ Rationale for parallel rather than merged: conflating physical-sensor failure mo
 ## Consequences
 
 Positive:
+
 - **Clean conceptual boundary.** Physical-sensor drift and adapter-contract drift are different problems; they get different programs with aligned structure.
 - **Parallel promotion bars.** Adapters reach `deployment maturity v1.0`/`v1.5`/`v2.0` per adapter-trust-program §G independent of physical-sensor fleet maturity.
 - **Unified admissibility output.** Both programs feed the same `admissible_to_calibration_dataset` decision on normalized observations, so downstream consumers see one concept.
 - **Scoped correctly for current work.** v0.2–v1.0 promotion involves zero adapters; program is docs-only until `v1.5` work begins. No runtime cost today.
 
 Negative:
+
 - **Two policy docs instead of one.** Future maintainers must remember both exist. Mitigated by cross-linking and by both docs using identical section structure.
 - **Risk of drift between the two programs.** If calibration-program §C adds a 9th admissibility check and adapter-trust-program §C doesn't, the programs fall out of sync. Mitigated by treating them as paired in any update that touches the §C check list.
 

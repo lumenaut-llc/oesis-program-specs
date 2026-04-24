@@ -38,16 +38,19 @@ of the production contract and may be removed or gated in deployment.
 ## Data contracts
 
 Primary MVP contract:
+
 - `oesis.bench-air.v1`
   Defined in [`node-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-observation-schema.md)
 
 Shared-lineage contract:
+
 - `oesis.bench-air.v1` from `mast-lite`
   Same packet family with outdoor or sheltered install metadata. Treat
   end-to-end use in the widened parcel kit as part of **program-phase `v0.2`**
   promotion rather than proof of a separate current-truth contract by itself.
 
 Planned next bridge contracts:
+
 - indoor-response observation family
   Future `v1.5` bridge input for indoor PM2.5, indoor temperature, and indoor
   RH. This is a priority addition for response modeling, but not part of the
@@ -78,6 +81,7 @@ Planned next bridge contracts:
   - purifier / shade / pump state where applicable
 
 Planned next bridge support events:
+
 - action-log entry
   Record what the house or household did, such as switching to recirculation,
   starting a purifier, lowering shades, or activating backup power.
@@ -85,6 +89,7 @@ Planned next bridge support events:
   Record whether conditions improved afterward over a bounded response window.
 
 First external adapter contract:
+
 - raw public weather payload
   Normalized by `python3 -m oesis.ingest.normalize_public_weather_context` into the canonical public-context object defined in [`public-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/public-context-schema.md)
 - raw public smoke payload
@@ -130,6 +135,7 @@ Expected minimum request body:
 ```
 
 Expected acceptance behavior:
+
 - reject packets without a supported `schema_version`
 - reject packets without `node_id` or `observed_at`
 - accept partial sensor content if presence and failure state are explicit
@@ -137,6 +143,7 @@ Expected acceptance behavior:
 - persist raw packet and normalized observation together or with a traceable link
 
 Normalized observation shape:
+
 - `observation_id`
 - `node_id`
 - `parcel_id` when node-to-parcel mapping is known
@@ -149,6 +156,7 @@ Normalized observation shape:
 - `raw_packet_ref`
 
 First normalized public-context shape:
+
 - `context_id`
 - `source_kind`
 - `source_name`

@@ -29,6 +29,7 @@ The current `v1` center of gravity remains parcel-state presentation.
 ## MVP focus
 
 The first version should do a small number of things well:
+
 - show the current parcel-state output
 - show the reasons and provenance summary behind it
 - show whether the assessment is based on local evidence, public evidence, or both
@@ -36,6 +37,7 @@ The first version should do a small number of things well:
 - keep sharing, rights requests, reference audit state, and retention actions inspectable for pilot operations
 
 **`v1.5` bridge** adds data capture and reference APIs for:
+
 - house-state support
 - house-capability support (coarse / read-side; not the full integration matrix)
 - optional draft storage for control-compatibility payloads where needed for experiments

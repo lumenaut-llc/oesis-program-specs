@@ -60,10 +60,10 @@ flowchart LR
 
 ### Raw evidence producers
 
-- [`bench-air-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/README.md)
-- [`mast-lite/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/mast-lite/README.md)
-- [`flood-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/flood-node/README.md)
-- [`thermal-pod/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/thermal-pod/README.md)
+- [`bench-air-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/README.md)
+- [`mast-lite/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/mast-lite/README.md)
+- [`flood-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/flood-node/README.md)
+- [`thermal-pod/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/thermal-pod/README.md)
 - `../../architecture/system/integrated-parcel-system-spec.md`
 
 ### Ingest boundary

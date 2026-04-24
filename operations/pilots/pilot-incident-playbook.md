@@ -30,6 +30,7 @@ Define a minimum response structure for incidents during a pilot involving parce
 ## Participant communication
 
 When participants need to be informed:
+
 - describe what happened in plain language
 - describe what data or outputs were affected
 - describe what actions were taken

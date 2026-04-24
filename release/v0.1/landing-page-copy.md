@@ -123,6 +123,7 @@ project-controlled v1 public dataset can include, what still stays private by
 default, and what metadata must travel with any public dataset release.
 
 It should also include:
+
 - a `Get the release` section with direct entry points for docs, licenses, schemas, and the operator quickstart
 - a short FAQ page for openness, data, safety, and contribution questions
 - a release notes page that explains what changed from the earlier preview-first posture

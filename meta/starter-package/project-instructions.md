@@ -6,6 +6,7 @@ This project is for a dwelling-scale environmental sensing and parcel-safety pla
 It is meant to become a decentralized, democratic, parcel-first climate adaptation system over time, but the current implementation scope remains staged and technically conservative.
 
 Core principles:
+
 - The parcel is the main object, not the sensor.
 - The platform computes parcel-level conditions and statuses using parcel priors, local sensor data if present, nearby shared sensor data if present, and external public data integrated only inside the platform.
 - Parcel operators own their raw data.
@@ -20,6 +21,7 @@ Core principles:
 - Always distinguish four tradeoffs: absolute accuracy, local recency, parcel relevance, and parcel operator agency.
 
 Canonical version map:
+
 - `current v1` = parcel sensing and inference baseline
 - `v1.5` = measurement-to-intervention foundation
 - `v2` = bounded adaptation guidance
@@ -28,11 +30,13 @@ Canonical version map:
 - `v4` = parcel + route + block resilience
 
 Scope boundary:
+
 - `current v1` should prove parcel-first sensing and inference under partial adoption.
 - `v1.5` is the first minimum bridge into house-state, intervention, controllability, and verification data.
 - Later stages may add guidance, compatibility mapping, bounded controls, and route/block resilience, but those should not be backfilled into `current v1` as if already implemented.
 
 Preferred operating style:
+
 - Keep recommendations practical and buildable.
 - Prefer modular phased roadmaps over all-at-once solutions.
 - Preserve consistency with the canonical project files.

@@ -16,6 +16,7 @@ The system still needs parcel operator-readable outputs, but they should not sou
 The project uses condition-estimate terminology rather than safety-determination terminology in user-facing concepts and core data contracts.
 
 Current parcel-state fields are:
+
 - `shelter_status`
 - `reentry_status`
 - `egress_status`
@@ -26,11 +27,13 @@ Product language should frame these as estimates, indicators, or risk signals ra
 ## Consequences
 
 Positive:
+
 - reduces claim and reliance risk
 - better matches uncertainty-aware inference behavior
 - aligns schemas, docs, and UI copy with conservative product posture
 
 Costs:
+
 - terms may feel less marketable or dramatic
 - some future contributors may try to reintroduce stronger language for simplicity or appeal
 

@@ -15,22 +15,26 @@ The project may, however, intentionally publish the project-controlled v1 datase
 ### 1. Synthetic examples and test fixtures
 
 Examples:
+
 - hand-authored example payloads
 - simulated hazard runs
 - generated benchmark data
 
 Release posture:
+
 - may be published in the repository
 - preferred open dataset category for early versions
 
 ### 2. Public reference datasets
 
 Examples:
+
 - weather or hydrology layers obtained from public agencies
 - public parcel basemap references where source terms allow redistribution
 - public topography or land-cover context
 
 Release posture:
+
 - only redistribute when the upstream license allows it
 - preserve attribution, notices, and source metadata
 - keep source-specific terms attached
@@ -38,12 +42,14 @@ Release posture:
 ### 3. Project-controlled v1 field dataset
 
 Examples:
+
 - raw sensor observations from parcel devices
 - exact parcel-linked derived histories
 - parcel-linked hazard contributions intentionally designated for the public release
 - derived parcel-state outputs tied to the v1 release
 
 Release posture:
+
 - may be published openly when the project has clear authority to release it
 - may be committed to the repository or mirrored externally when it is intentionally part of the public release
 - should carry explicit dataset terms, provenance notes, date range, and any caveats about representativeness
@@ -52,11 +58,13 @@ Release posture:
 ### 4. Future participant-contributed parcel-linked data
 
 Examples:
+
 - raw sensor observations from other households
 - exact parcel-linked derived histories from future participants
 - account-linked or household-linked telemetry from future deployments
 
 Release posture:
+
 - not public by default
 - require explicit publication authority and a separate documented decision
 - must not be assumed public merely because the project-controlled v1 dataset is public
@@ -64,10 +72,12 @@ Release posture:
 ### 5. Pilot or research datasets
 
 Examples:
+
 - bounded program exports for validation
 - study datasets derived from pilot deployments
 
 Release posture:
+
 - require a separate review, purpose statement, retention rule, and publication decision
 - should default to non-public handling unless a documented governance review approves release
 
@@ -93,6 +103,7 @@ Before any dataset is published or redistributed, confirm:
 ## MVP recommendation
 
 For early releases, publish only:
+
 - synthetic examples
 - schemas
 - validators
@@ -101,5 +112,6 @@ For early releases, publish only:
 - the project-controlled v1 dataset when intentionally included in the public release package
 
 Avoid publishing:
+
 - future participant-contributed parcel datasets without a separate explicit decision
 - neighborhood hazard maps derived from limited adoption pilots unless the project intentionally publishes them with clear scope, provenance, and owner authority

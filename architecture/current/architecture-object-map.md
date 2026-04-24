@@ -49,11 +49,13 @@ not first-class rows in this `v0.1` map.
 Status: `implemented`
 
 Role:
+
 - primary direct observation object
 - device health, uptime, and calibration state
 - install role and physical placement context
 
 Current `v0.1` use:
+
 - bench-air-node is the most concrete current observation source
 - mast-lite is partially supported through the current shared packet lineage
 - other node families exist in architecture and hardware docs but are not all
@@ -63,8 +65,9 @@ Current `v0.1` use:
   `../../architecture/system/node-taxonomy.md`
 
 Main sources:
-- [`bench-air-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/README.md)
-- [`mast-lite/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/mast-lite/README.md)
+
+- [`bench-air-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/README.md)
+- [`mast-lite/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/mast-lite/README.md)
 - [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
 
 ### 2. Packet / raw evidence
@@ -72,23 +75,27 @@ Main sources:
 Status: `implemented`
 
 Role:
+
 - transport and contract object emitted by hardware or raw external feeds
 - preserves raw evidence before normalization
 
 Current `v0.1` use:
+
 - packet contracts exist and are validated
 - the current live software path most concretely supports `oesis.bench-air.v1`
 
 Main sources:
+
 - [`node-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-observation-schema.md)
 - `../../software/ingest-service/interfaces.md`
-- [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/serial-json-contract.md)
+- [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/serial-json-contract.md)
 
 ### 3. Collection path / home-platform ingest boundary
 
 Status: `implemented`
 
 Role:
+
 - move node data from the device into the trusted ingest surface
 - preserve receipt truth, delivery visibility, and transport freshness
 - separate evidence availability from later inference and parcel conclusion logic
@@ -97,6 +104,7 @@ Role:
   plumbing
 
 Current `v0.1` use:
+
 - node-to-home/platform collection is already real in the current reference path
 - the first network meaning in `v0.1` is evidence collection, not neighborhood
   intelligence
@@ -104,6 +112,7 @@ Current `v0.1` use:
   architecture rather than hidden plumbing
 
 Main sources:
+
 - `../../software/ingest-service/architecture.md`
 - `../../software/operator-quickstart.md`
 - `reference-stack.md`
@@ -113,6 +122,7 @@ Main sources:
 Status: `implemented`
 
 Role:
+
 - canonical evidence object after ingest
 - stable downstream input to inference
 - primary bridge between packet contracts and parcel-state derivation
@@ -120,10 +130,12 @@ Role:
   freshness windows, and stale-data handling as architecture, not polish (`05` §2)
 
 Current `v0.1` use:
+
 - normalization is implemented for the current bench-air lineage
 - this is one of the strongest current boundaries in the stack
 
 Main sources:
+
 - [`v0.1/README.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/README.md)
 - [`v0.1/examples/normalized-observation.example.json`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/examples/normalized-observation.example.json)
 - `../../software/ingest-service/architecture.md`
@@ -133,15 +145,18 @@ Main sources:
 Status: `implemented`
 
 Role:
+
 - parcel-specific priors and interpretation context
 - site and installation information needed for honest inference
 
 Current `v0.1` use:
+
 - parcel context participates in the current reference pipeline
 - it exists more strongly as a contract and reference input than as a mature
   end-user product surface
 
 Main sources:
+
 - [`parcel-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-context-schema.md)
 - `reference-stack.md`
 - `../../architecture/system/integrated-parcel-system-spec.md`
@@ -151,16 +166,19 @@ Main sources:
 Status: `docs-only`
 
 Role:
+
 - binds nodes to one parcel
 - carries install role, location mode, hardware family, and schema lineage
 - prevents node identity from being confused with parcel truth
 
 Current `v0.1` use:
+
 - the registry contract is clearly defined
 - the full registry-driven operational path is not yet a complete product/runtime
   surface
 
 Main sources:
+
 - [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
 - `../../architecture/system/integrated-parcel-system-spec.md`
 - `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
@@ -170,14 +188,17 @@ Main sources:
 Status: `implemented`
 
 Role:
+
 - external regional or coarse context that may influence parcel conclusions
 - supports operation under partial local coverage
 
 Current `v0.1` use:
+
 - public weather and smoke adapters are part of the reference pipeline
 - public context is already a live inference input, not just a future concept
 
 Main sources:
+
 - [`public-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/public-context-schema.md)
 - `../../software/ingest-service/public-weather-adapter.md`
 - `../../software/ingest-service/public-smoke-adapter.md`
@@ -187,15 +208,18 @@ Main sources:
 Status: `partial`
 
 Role:
+
 - privacy-scoped shared inference object
 - supports neighborhood-aware reasoning without exposing exact parcel truth
 
 Current `v0.1` use:
+
 - contract exists
 - aggregation path exists
 - still not a fully mature first-class product surface
 
 Main sources:
+
 - [`shared-neighborhood-signal-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/shared-neighborhood-signal-schema.md)
 - `../../software/shared-map/architecture.md`
 - `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
@@ -205,6 +229,7 @@ Main sources:
 Status: `implemented`
 
 Role:
+
 - primary decision object
 - parcel-level condition estimate output
 - carries confidence, evidence mode, freshness, hazards, and explanation payload
@@ -217,10 +242,12 @@ narrow **`v0.1`** slice; see `../../program/operating-packet/functional-state-an
 program-phase **`v1.5`** in `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md`.
 
 Current `v0.1` use:
+
 - parcel-state generation is central to the current reference path
 - this is the core output where the current architecture lands conclusions
 
 Main sources:
+
 - [`parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md)
 - `technical-philosophy.md`
 - `reference-stack.md`
@@ -230,14 +257,17 @@ Main sources:
 Status: `implemented`
 
 Role:
+
 - presentation objects for dwelling-facing and operator-safe interpretation
 - separates product-safe summaries from lower-level parcel-state internals
 
 Current `v0.1` use:
+
 - parcel view and evidence summary are part of the reference stack and current
   local checks
 
 Main sources:
+
 - `../../software/parcel-platform/architecture.md`
 - [`explanation-payload-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/explanation-payload-schema.md)
 - [`evidence-summary-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/evidence-summary-schema.md)
@@ -247,14 +277,17 @@ Main sources:
 Status: `partial`
 
 Role:
+
 - governance-operational objects for sharing settings, consent, rights,
   export, access logging, and retention cleanup
 
 Current `v0.1` use:
+
 - several schemas and reference utilities exist
 - important product surfaces are still partial or docs-only
 
 Main sources:
+
 - [`v0.1/schemas/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/schemas/)
 - `../../release/v0.1/implementation-status-matrix.md` (release label `v0.1`, filesystem path `v0.1/`)
 - `../../software/parcel-platform/README.md`
@@ -264,15 +297,18 @@ Main sources:
 Status: `docs-only`
 
 Role:
+
 - per-device record of a calibration session against a characterized reference instrument
 - authoritative source for a node's current calibration state (the field already referenced in §1 and §6)
 - produced under `oesis-builds/procedures/<node>/calibration.md` per `../system/calibration-program.md` §E
 
 Current `v0.1` use:
+
 - placeholder `references/TBD.md` file exists under bench-air procedures; no populated reference instrument yet (tracked as v0.1 gap register G13)
 - calibration session log format defined in calibration-program §E; no sessions logged yet
 
 Main sources:
+
 - `../system/calibration-program.md`
 - per-node calibration procedures under [`oesis-builds/procedures/`](https://github.com/lumenaut-llc/oesis-builds/tree/main/procedures)
 
@@ -281,16 +317,19 @@ Main sources:
 Status: `planned`
 
 Role:
+
 - runtime-computed decision per normalized observation
 - carries `admissible_to_calibration_dataset: bool` plus reason codes
 - filters which readings can train hazard-formula coefficients or shape parcel-state claims
 - derived from schema facts carried on the canonical observation (tracked as v0.1 gap register G17)
 
 Current `v0.1` use:
+
 - not yet implemented in ingest or inference (tracked as v0.1 gap register G15)
 - facts the decision depends on are not yet in the observation schema (tracked as G17)
 
 Main sources:
+
 - `../system/calibration-program.md` §C
 - `../system/adapter-trust-program.md` §C
 
@@ -299,15 +338,18 @@ Main sources:
 Status: `planned`
 
 Role:
+
 - declared origin for Tier 1 passive inference methods and Tier 2 cloud-API adapter data
 - carries pinned API contract version, authentication model, cross-check posture
 - analogous to reference instrument for physical sensors — the anchor against which adapter data is trusted
 
 Current `v0.1` use:
+
 - no adapters exist in v0.2 scope; this object becomes load-bearing at capability stage v1.5 (tracked as v0.1 gap register G18)
 - policy defined in `../system/adapter-trust-program.md`
 
 Main sources:
+
 - `../system/adapter-trust-program.md` §A
 - `../system/node-taxonomy.md` tiered acquisition model (Tier 1 / 2 / 3)
 
@@ -391,6 +433,7 @@ and `../../program/operating-packet/09-phasing-v0.1-v1.0-v1.5.md` for phasing.
 The parcel is the primary decision object, but not the only architecture object.
 
 `v0.1` should be read as:
+
 - parcel-first for decisions
 - sensor-first for direct observation
 - collection-first for evidence availability

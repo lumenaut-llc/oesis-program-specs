@@ -30,6 +30,7 @@ Do not collapse these into one label. The project is strongest when the executab
 Purpose: capture direct observations and preserve raw evidence.
 
 Objects:
+
 - sensor node
 - node packet
 - raw packet archive
@@ -37,6 +38,7 @@ Objects:
 - device health snapshot
 
 Near-term posture:
+
 - bench-air first
 - mast-lite second
 - flood optional
@@ -48,6 +50,7 @@ Near-term posture:
 Purpose: turn raw packets into trustworthy normalized observations.
 
 Objects:
+
 - ingest receipt
 - normalized observation
 - packet lineage
@@ -63,6 +66,7 @@ This should be treated as core architecture, not implementation detail. Timing i
 Purpose: hold the slow-changing context that makes point observations meaningful.
 
 Objects:
+
 - parcel
 - parcel context
 - node registry
@@ -79,6 +83,7 @@ Route and access context should first appear here as parcel-adjacent context rat
 Purpose: fuse evidence into the current best estimate, with uncertainty.
 
 Objects:
+
 - local evidence
 - shared evidence
 - external public context
@@ -104,6 +109,7 @@ It should also remain parcel-first in a specific technical sense:
 Purpose: translate hazard state into operationally meaningful conditions.
 
 Objects:
+
 - shelter viability
 - reentry viability
 - egress viability
@@ -119,6 +125,7 @@ This layer should be made explicit. It is the bridge from environmental state to
 Purpose: enforce owner control, scoped sharing, and visibility rules.
 
 Objects:
+
 - sharing settings
 - consent record
 - rights request
@@ -134,6 +141,7 @@ This layer should exist even if some surfaces remain partial in the current impl
 Purpose: render parcel truth, evidence, and system health to users and operators.
 
 Objects:
+
 - parcel view
 - evidence summary
 - homeowner dashboard
@@ -146,12 +154,15 @@ Objects:
 The system should explicitly split three ideas that are currently too compressed inside parcel state:
 
 ### Hazard state
+
 What the environment is believed to be doing.
 
 ### Functional state
+
 What that means for shelter, egress, reentry, access, utility dependence, and asset exposure.
 
 ### Response state
+
 What actions are available, taken, or verified, and whether they changed outcomes.
 
 That split keeps the baseline simple while creating a clean bridge to later response and adaptation logic.
@@ -159,6 +170,7 @@ That split keeps the baseline simple while creating a clean bridge to later resp
 ## Minimal object map by stage
 
 ### `v0.1`
+
 - parcel
 - packet
 - normalized observation
@@ -175,6 +187,7 @@ The current parcel-state lane may already include additive audit fields for:
 - contrastive explanations
 
 ### `v1.0`
+
 - all of the above
 - node registry
 - installation metadata
@@ -184,6 +197,7 @@ The current parcel-state lane may already include additive audit fields for:
 - event history
 
 ### `v1.5`
+
 - all of the above
 - house state
 - indoor-response and outage evidence
@@ -208,6 +222,7 @@ later stage rather than part of the minimum bridge.
 ## Functional state and response (dedicated note)
 
 The bridge from hazard → operational meaning → verified response is spelled out in [`functional-state-and-response-model.md`](functional-state-and-response-model.md). It complements:
+
 - sensing and ingest layers above
 - parcel inference and evidence modes
 - [`07-information-layer-and-functional-recovery.md`](07-information-layer-and-functional-recovery.md) for the information-layer target

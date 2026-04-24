@@ -29,18 +29,21 @@ Establish **doc discipline** as a house rule in [`../doc-discipline.md`](../doc-
 5. **Redirect docs self-identify** in their first line, with the canonical path.
 
 Doc discipline is complemented by:
+
 - Root `README.md` "Navigating this repo" section (extends existing README rather than creating `MAP.md`).
 - Per-node part sheets under `architecture/system/parts/` — aggregators that cite, not duplicate.
 
 ## Consequences
 
 Positive:
+
 - **Proliferation slows.** Any new doc must pass the 5-question checklist; most proposed new docs become extensions.
 - **Aggregators have a pattern.** Part sheets, summary tables, and future consolidators follow rule 2 — cite upstream, don't restate — so they cannot drift.
 - **Authority is declared, not implicit.** Rule 3 means canonical ownership of overlapping topics is visible in the canonical-topic-matrix, not discovered by reader spelunking.
 - **Discipline is amendable.** Any proposal that cannot satisfy a rule goes to `architecture/decisions/debate-map.md` for amendment rather than quietly bypassing.
 
 Negative:
+
 - **One more thing to read.** New contributors must read doc-discipline before adding content. Mitigated by brevity (~120 lines) and the checklist being the most-cited surface.
 - **Judgment calls remain.** "Genuinely cross-cutting" is not crisp; reasonable reviewers can disagree. The checklist narrows the disagreement space but does not eliminate it.
 - **Back-compat.** Docs created before this rule may not meet rule 5 (redirect self-identification). Grandfathered — rule applies to new docs only.

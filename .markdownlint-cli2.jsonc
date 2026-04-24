@@ -13,7 +13,17 @@
     // Allow multiple top-level headings (some docs have frontmatter)
     "MD025": false,
     // Allow trailing punctuation in headings
-    "MD026": { "punctuation": ".,;:!" }
+    "MD026": { "punctuation": ".,;:!" },
+    // Allow unlabelled fenced code blocks — many are terminal output or
+    // prose-as-code without a meaningful syntax highlighter
+    "MD040": false,
+    // Allow ordered lists with non-sequential prefixes (outline numbering,
+    // cross-document item references)
+    "MD029": false,
+    // Allow emphasis used as visual subheadings (common in spec docs)
+    "MD036": false,
+    // Allow files that don't start with an H1 (PR templates, form docs)
+    "MD041": false
   },
   "ignores": [
     "node_modules/**",

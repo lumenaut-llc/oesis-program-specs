@@ -21,7 +21,7 @@ Research-gated scene-level thermal sensor (fixed field-of-view IR array). Kept o
 |---|---|---|---|
 | `v0-1` (planned) | not yet drafted | `oesis-builds/specs/thermal-pod/v0-1.md` — **does not exist** | Skeleton proposal at [`../../../meta/proposals/oesis-builds-node-skeletons.md`](../../../meta/proposals/oesis-builds-node-skeletons.md) Skeleton 4. |
 
-Hardware research at [oesis-hardware/thermal-pod/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/thermal-pod).
+Hardware research at [oesis-hardware/v0.1/thermal-pod/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v0.1/thermal-pod).
 
 ## Calibration posture
 
@@ -48,7 +48,7 @@ Governed by [`../calibration-program.md`](../calibration-program.md) (physical-s
 | Concern | Location |
 |---|---|
 | Architecture posture row | [`../node-taxonomy.md`](../node-taxonomy.md) research- or privacy-gated; [`../integrated-parcel-system-spec.md`](../integrated-parcel-system-spec.md) research lane |
-| Hardware research | [oesis-hardware/thermal-pod/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/thermal-pod) |
+| Hardware research | [oesis-hardware/v0.1/thermal-pod/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v0.1/thermal-pod) |
 | Build spec | **missing** — skeleton in [`../../../meta/proposals/oesis-builds-node-skeletons.md`](../../../meta/proposals/oesis-builds-node-skeletons.md) |
 | Runtime normalizer | not yet implemented |
 | Packet schema | `oesis.thermal-pod.v1` → `thermal.scene.snapshot` — planned; not yet in contracts |

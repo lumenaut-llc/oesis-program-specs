@@ -49,6 +49,7 @@ Use this file for the tensions that influence both.
 Version pressure: `cross-version`, strongest in `v1.0`
 
 Affected objects:
+
 - parcel
 - public context
 - shared neighborhood signal
@@ -95,6 +96,7 @@ reality.
 Version pressure: `v0.1` now, `v1.0` later
 
 Affected objects:
+
 - normalized observation
 - parcel prior
 - public context
@@ -139,6 +141,7 @@ Do not make opaque models foundational to MVP trust.
 Version pressure: `v0.1` now
 
 Affected objects:
+
 - derived parcel condition
 - derived operational status
 - explanation record
@@ -180,6 +183,7 @@ Do not hide uncertainty in order to make the product feel smoother.
 Version pressure: primarily `v1.0`
 
 Affected objects:
+
 - sensor node
 - packet / raw evidence
 - normalized observation
@@ -225,6 +229,7 @@ Do not hard-code centralization into the trust model.
 Version pressure: `v0.1` now, `v1.0` later
 
 Affected objects:
+
 - sensor node
 - packet / raw evidence
 - collection path / home-platform ingest boundary
@@ -272,6 +277,7 @@ meaning of network in the first functioning version.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - sensor node
 - shared neighborhood signal
 - parcel view
@@ -315,6 +321,7 @@ first successful user experience.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - sharing policy
 - parcel
 - shared neighborhood signal
@@ -360,6 +367,7 @@ Retain exact raw owner data as private by default.
 Version pressure: primarily `v1.0`
 
 Affected objects:
+
 - parcel view
 - shared neighborhood signal
 - route and infrastructure segment
@@ -404,6 +412,7 @@ quality controls, and operational maturity justify it.
 Version pressure: `v0.1` now
 
 Affected objects:
+
 - sensor node
 - observation
 - derived parcel condition
@@ -446,6 +455,7 @@ uncertainty.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - derived parcel condition
 - derived operational status
 - explanation record
@@ -488,6 +498,7 @@ Do not force one generic number to carry all meanings.
 Version pressure: primarily `v1.0`
 
 Affected objects:
+
 - public context
 - derived parcel condition
 - derived operational status
@@ -530,6 +541,7 @@ model are strong enough to support them.
 Version pressure: strongest in `v1.0`
 
 Affected objects:
+
 - parcel
 - route and infrastructure segment
 - derived parcel condition
@@ -572,6 +584,7 @@ and access condition.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - packet schema
 - normalized observation
 - parcel
@@ -615,6 +628,7 @@ Favor modular architecture without premature fragmentation.
 Version pressure: `v0.1` now
 
 Affected objects:
+
 - explanation record
 - parcel view
 - evidence summary
@@ -657,6 +671,7 @@ notebook.
 Version pressure: `v0.1` now
 
 Affected objects:
+
 - public context
 - shared neighborhood signal
 - derived parcel condition
@@ -699,6 +714,7 @@ confidence and clear explanation of what is missing.
 Version pressure: `cross-version`
 
 Affected objects:
+
 - sharing policy
 - explanation record
 - packet schema
@@ -736,6 +752,123 @@ Keep the technical and documentation base open where practical.
 Use governance, contribution standards, and clear provenance to protect quality
 rather than defaulting to closed control.
 
+## Debate 17: local parcel observation vs multi-scale climate roadmap
+
+Version pressure: `cross-version`, strongest at `v1.0` and beyond
+
+Affected objects:
+
+- public context
+- parcel prior
+- derived parcel condition
+- explanation record
+- shared neighborhood signal
+
+### Why it matters
+
+The project's real-time inference uses local sensor readings and near-real-time public context (NWS, AirNow, NOAA HMS). But the program's long-term value depends on connecting those readings to **multi-decadal climate information** — climate normals (NCEI 30-year), regional adaptation plans (state and county), long-horizon scenarios (IPCC RCPs, NOAA climate projections), and vulnerability overlays (CDC Heat Vulnerability Index, FEMA future-flood projections, Cal Fire WUI maps). That comparison is **not** what the v1 hazard formula's divergence channels do today. Divergence channels compare the moment; climate roadmaps describe the trajectory.
+
+Four structural differences that don't yet have architectural homes:
+
+- **Spatial aggregation** — parcel (meters) → tract → county → HUC watershed → climate region. No explicit ladder today.
+- **Temporal alignment** — real-time reading vs. 30-year normal vs. decadal trend vs. 2050 projection. Each has different uncertainty shapes.
+- **Scenario bearing** — climate projections are conditional on emission scenarios (RCP 4.5 vs 8.5), not "truth."
+- **Purpose divergence** — local readiness, regional planning, and adaptation-investment targeting each need the same data treated differently.
+
+### What the local-primary side gets right
+
+- local sensor is what the parcel operator can verify
+- matches parcel-first doctrine (debate 1)
+- avoids overclaim based on coarse regional projections
+- respects the sensor-primary architectural commitment in the v1 hazard formula
+
+### What the roadmap-primary side gets right
+
+- most decisions about adaptation happen at planning horizons, not event horizons
+- local trajectory is the information most communities actually lack
+- pairing parcel data with climate roadmap is the distinctive long-term value proposition
+- without it, OESIS remains "another sensor product"
+
+### Risk if overdone
+
+If local-primary is overdone, OESIS never bridges from real-time readings to the scenario and adaptation layer — it stays a sensing product without the climate-intelligence dimension.
+
+If roadmap-primary is overdone, OESIS starts making 2050-scenario claims based on a single parcel's bench-air readings — confidence theater at geologic timescale.
+
+### Provisional project stance
+
+Preserve the v1 formula's sensor-primary posture for real-time inference. Treat climate-roadmap context as a **separate, explicit output layer** with its own confidence model and its own admissibility rules — not as an additional term in the hazard-probability log-odds. When roadmap context is displayed alongside parcel-state, it should be presented as "trajectory" or "planning context," not as additional evidence for the current-hazard call.
+
+This debate is **open** — it will require a dedicated design document when the architectural work begins. Likely new program-level doc (sibling to `calibration-program.md` / `adapter-trust-program.md`): something like **scenario-context-program.md** covering source authorities (NCEI, FEMA, CDC, IPCC, state plans), temporal alignment rules, spatial aggregation ladder, and the scenario-vs-observation distinction.
+
+Related existing hooks: `architecture/system/architectural-choices-by-stage.md` (per-phase choice table; could eventually add a "scenario context tier" column), `sensor-placement-and-representativeness-guide.md` (placement representativeness already thinks in spatial scale), `adapter-trust-program.md` §A (source authority pattern likely transfers).
+
+## Debate 18: standardized OESIS contract vs ecosystem-native IoT adaptation
+
+Version pressure: `v1.5` and beyond; begins biting as adapter surfaces enter scope
+
+Affected objects:
+
+- normalized observation
+- equipment-state observation (v1.5 bridge)
+- adapter source authority
+- packet schema
+- sharing policy
+- admissibility decision
+
+### Why it matters
+
+The adapter-trust program handles **single-source** cloud-API adapters cleanly: Ecobee, Nest, Sensibo — one OAuth flow, one pinned API contract, one source authority. It does not yet handle:
+
+- **Local-network ecosystems** — Matter, Thread, Zigbee, Z-Wave, Apple HomeKit, Google Home, SmartThings. Each is a hub-rooted protocol with device discovery, not a cloud API.
+- **Building protocols** — BACnet, Modbus TCP, LonWorks for commercial and multi-unit. Controller-rooted, not cloud.
+- **Utility AMI** — smart meters over multiple vendor protocols (Itron, Landis+Gyr, etc.), often retrospective-only access.
+- **Consumer environmental** — PurpleAir, Davis, Ambient Weather, Tempest. Each with different API, quality, and privacy posture.
+- **Personal health / wearables** — Apple HealthKit, Google Fit, Fitbit. Very different consent model.
+- **Energy monitors** — Sense, Emporia, Shelly, TP-Link beyond the Tier 3 circuit-monitor path.
+
+Three sub-problems:
+
+- **Protocol adaptation** — how does OESIS speak to each ecosystem?
+- **Semantic normalization** — what does "HVAC mode" mean across Ecobee / Nest / BACnet / Matter / generic smart thermostat? A canonical vocabulary is needed.
+- **Multi-source trust composition** — if three adapters all report HVAC state, how are they reconciled? Adapter-trust §C handles per-source admissibility; multi-source fusion is distinct.
+
+### What the standardized-contract side gets right
+
+- one canonical data model keeps inference stable as adapters proliferate
+- semantic alignment prevents "HVAC mode" drift across sources
+- supports multi-source fusion rules in one place
+- preserves the "one parcel, one contract" architectural commitment
+- simpler governance — fewer variable surfaces to audit
+
+### What the ecosystem-native side gets right
+
+- every ecosystem that loses to OESIS's preferred model is an ecosystem OESIS can't integrate
+- users don't replace their Matter hub to accommodate OESIS
+- building owners don't rewrite their BACnet stack
+- adaptation-layer thinness is what makes open-source projects interoperate in the real world
+- matching the Matter data model where it already covers a concept avoids reinventing vocabularies
+
+### Risk if overdone
+
+If standardized-contract is overdone, OESIS becomes an isolated stack that requires users to leave their existing IoT investments behind — the opposite of useful partial adoption (debate 15).
+
+If ecosystem-native is overdone, OESIS loses its coherent inference story; "HVAC mode" means three different things in three different observations depending on which adapter produced them.
+
+### Provisional project stance
+
+Treat the canonical OESIS observation schema as the **target normalization**, and design adapters as **translators** from each ecosystem's native vocabulary into it. Where a canonical OESIS concept has a clear equivalent in a major standard (Matter, BACnet, CTA-2045), align the name and semantics deliberately. Where it doesn't, declare an OESIS-internal name with a mapping table.
+
+Three concrete implications:
+
+- Semantic vocabulary becomes a **separate architectural surface**: a canonical names document mapping internal OESIS concepts to each external ecosystem. Not yet written.
+- Adapter-trust §F gains an **ecosystem family** dimension above individual source authority: "this adapter is Matter-compatible" vs. "this adapter is Ecobee-v1-API-specific." Allows whole families to upgrade posture at once.
+- Multi-source fusion needs its own rule: preference order (Tier 3 direct > Tier 2 cloud > Tier 1 passive), confidence stacking, and per-measurand reconciliation policy.
+
+This debate is **open** — requires a dedicated design doc when the architectural work begins. Likely candidate: **semantic-vocabulary.md** or **iot-integration-standards.md** at the `system/` layer, coupled with an extension to `adapter-trust-program.md` §F introducing the ecosystem-family concept.
+
+Related existing hooks: `node-taxonomy.md` tiered acquisition model (Tier 1/2/3 is the starting structure; ecosystem family lives above tier), `adapter-trust-program.md` §A source-authority schema (adapts to multi-ecosystem), `architecture/system/architectural-choices-by-stage.md` (could eventually add ecosystem-alignment row).
+
 ## Cross-cutting decision rules
 
 When a new design question appears, test it against these checks:
@@ -771,3 +904,24 @@ next:
 3. hazard engine interface design
 4. route safety model scope for MVP
 5. pilot governance and quality thresholds for shared map visibility
+6. scenario-context-program for multi-scale climate-roadmap integration (debate 17) — likely sibling to `calibration-program.md` and `adapter-trust-program.md`
+7. semantic-vocabulary and ecosystem-family concept for IoT standardization (debate 18) — likely extension of `adapter-trust-program.md` §F plus a new canonical names document
+
+## How to use this file for frontier architectural questions
+
+Debates 17 and 18 are **frontier questions** — architectural design problems large enough to warrant dedicated design work, but not yet being actively designed. The pattern they establish:
+
+- **Frame the tension** with both sides doing justice (the "what each side gets right" sections).
+- **Name what structurally differs** from what the current architecture already handles, so a future reader doesn't assume existing programs cover the frontier.
+- **Identify likely architectural hooks** — the existing docs that will be extended or the new docs that will likely need creation.
+- **Record provisional stance** — what the program will currently act on while the full design is pending.
+- **Add a numbered entry to "Likely next decisions to formalize"** so the frontier is visible from a single list.
+
+A frontier question belongs in this file (not in the gap register, not in an ADR) when:
+
+- it will require dedicated design work rather than a single-step remediation (gap register);
+- it is not yet decided (ADR);
+- it is cross-version in nature (operates across program phases);
+- losing track of it would force future contributors to rediscover the same concerns.
+
+When a frontier question is ready to be designed, it either (a) gets a dedicated program doc at the `system/` layer, (b) becomes an ADR if the decision is narrow and crisp, or (c) gets split into concrete gap-register entries with named remediation paths. The debate entry stays in place as the frame for future readers; the design doc, ADR, or gaps are what move the work forward.

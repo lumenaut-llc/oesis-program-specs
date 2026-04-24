@@ -19,17 +19,21 @@
 ## Best immediate next moves
 
 ### 1. Freeze the real v0.1 scope in one short document
+
 **Done.** [`architecture/current/v0.1-boundary-and-non-goals.md`](../../architecture/current/v0.1-boundary-and-non-goals.md) defines what v0.1 IS and IS NOT. Version vocabulary for this repo: [`00-version-labels-and-lanes.md`](00-version-labels-and-lanes.md).
 
 ### 2. Hazard, functional, and response state
+
 The split and phase mapping live in [`05-revised-architecture-blueprint.md`](05-revised-architecture-blueprint.md) and [`functional-state-and-response-model.md`](functional-state-and-response-model.md).
 
 ### 3. Network-of-networks peering
+
 The architecture note [`06-network-of-networks-concepts.md`](06-network-of-networks-concepts.md) already covers this. Both `v0.1-boundary-and-non-goals.md` and `v1.0-parcel-kit-architecture.md` are now written in `architecture/current/`.
 
 ## Suggested use
 
 Use this packet as the basis for:
+
 - repo docs
 - grant language
 - architecture review packets

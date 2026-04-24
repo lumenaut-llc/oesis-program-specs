@@ -42,6 +42,7 @@ other `python3 -m oesis.ingest.*` commands.
 The first executable contract check is `python3 -m oesis.ingest.validate_examples`.
 It validates the current example payloads in [`v0.1/examples/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/examples/)
 against the MVP expectations for:
+
 - `oesis.bench-air.v1` node observations
 - parcel-state snapshots
 
@@ -67,6 +68,7 @@ of a mixed serial log so boot comments and other monitor noise do not need to be
 removed by hand.
 
 `python3 -m oesis.ingest.serve_ingest_api` is the minimal HTTP wrapper. It exposes:
+
 - `GET /v1/ingest/health`
 - `GET /v1/ingest/schemas`
 - `POST /v1/ingest/node-packets`
@@ -96,5 +98,5 @@ If you saved a full serial log instead of a clean packet file:
 1. Run `python3 -m oesis.ingest.extract_latest_packet serial.log --output packet.json`
 2. Run `python3 -m oesis.ingest.ingest_packet packet.json`
 
-The expected first-build serial payload shape is documented in [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/serial-json-contract.md).
-The full first-build operator path is documented in [`bench-air-node/operator-runbook.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/operator-runbook.md).
+The expected first-build serial payload shape is documented in [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/serial-json-contract.md).
+The full first-build operator path is documented in [`bench-air-node/operator-runbook.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/operator-runbook.md).
