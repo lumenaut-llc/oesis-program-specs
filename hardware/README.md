@@ -10,10 +10,10 @@ for the split-license model described in [`LICENSES.md`](../LICENSES.md).
 
 All node families are now in the oesis-hardware repository:
 
-- [bench-air-node](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/)
-- [mast-lite](https://github.com/lumenaut-llc/oesis-hardware/blob/main/mast-lite/)
-- [flood-node](https://github.com/lumenaut-llc/oesis-hardware/blob/main/flood-node/)
-- [weather-pm-mast](https://github.com/lumenaut-llc/oesis-hardware/blob/main/weather-pm-mast/)
-- [thermal-pod](https://github.com/lumenaut-llc/oesis-hardware/blob/main/thermal-pod/)
-- [circuit-monitor](https://github.com/lumenaut-llc/oesis-hardware/blob/main/circuit-monitor/)
-- [parcel-kit](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/) (BOMs, checklists, power guide)
+- [bench-air-node](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/)
+- [mast-lite](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/mast-lite/)
+- [flood-node](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/flood-node/)
+- [weather-pm-mast](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/weather-pm-mast/)
+- [thermal-pod](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/thermal-pod/)
+- [circuit-monitor](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v1.5/circuit-monitor/)
+- [parcel-kit](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/parcel-kit/) (BOMs, checklists, power guide)

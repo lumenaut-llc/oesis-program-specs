@@ -63,8 +63,8 @@ Current `v0.1` use:
   `../../architecture/system/node-taxonomy.md`
 
 Main sources:
-- [`bench-air-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/README.md)
-- [`mast-lite/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/mast-lite/README.md)
+- [`bench-air-node/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/README.md)
+- [`mast-lite/README.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/mast-lite/README.md)
 - [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
 
 ### 2. Packet / raw evidence
@@ -82,7 +82,7 @@ Current `v0.1` use:
 Main sources:
 - [`node-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-observation-schema.md)
 - `../../software/ingest-service/interfaces.md`
-- [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/serial-json-contract.md)
+- [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/serial-json-contract.md)
 
 ### 3. Collection path / home-platform ingest boundary
 

@@ -51,7 +51,7 @@ Governed by [`../calibration-program.md`](../calibration-program.md) (physical-s
 | Concern | Location |
 |---|---|
 | Architecture posture row | [`../node-taxonomy.md`](../node-taxonomy.md) next-promotion; [`../integrated-parcel-system-spec.md`](../integrated-parcel-system-spec.md) Tier 2 + "Deployment posture per node" |
-| Hardware design | [oesis-hardware/mast-lite/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/mast-lite) |
+| Hardware design | [oesis-hardware/v0.1/mast-lite/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v0.1/mast-lite) |
 | Build spec | **missing** — tracked as G12; skeleton in [`../../../meta/proposals/oesis-builds-node-skeletons.md`](../../../meta/proposals/oesis-builds-node-skeletons.md) |
 | Build procedures | not yet authored |
 | Runtime normalizer | Shared with bench-air via `oesis.bench-air.v1` lineage; `location_mode: "sheltered"` distinguishes mast-lite packets |
@@ -62,7 +62,7 @@ Governed by [`../calibration-program.md`](../calibration-program.md) (physical-s
 
 - **Build spec does not exist.** This is the central issue. Everything else derives from it. Milestone 2 promotion is blocked until the spec, calibration procedure, and radiation-shield design exist in `oesis-builds/`.
 - **Radiation shield non-optional.** Bare SHT45 outdoor readings are corrupted by solar loading (often 2–4 °C bias). Pre-shield readings are inadmissible per calibration-program §C item 7 — not advisory.
-- **Transport / power coordination.** USB from indoor through cable gland is permitted for sheltered class but requires weatherproof cable path, drip loop, and polyfuse per [oesis-hardware/parcel-kit/power-source-guide.md](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/power-source-guide.md).
+- **Transport / power coordination.** USB from indoor through cable gland is permitted for sheltered class but requires weatherproof cable path, drip loop, and polyfuse per [oesis-hardware/v0.1/parcel-kit/power-source-guide.md](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/parcel-kit/power-source-guide.md).
 - **Indoor vs sheltered vs outdoor confusion.** "Sheltered" ≠ "outdoor". A covered porch / breezeway / eave-protected wall is sheltered. An open mast is outdoor. Mast-lite targets sheltered. Outdoor-exposed siting requires weather-pm-mast or similar.
 
 ## Related

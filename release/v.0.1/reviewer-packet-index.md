@@ -74,9 +74,9 @@ Start with Packet 1, then add:
 5. `../../architecture/system/integrated-parcel-system-spec.md`
 6. [`node-registry-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-registry-schema.md)
 7. `../../../software/operator-quickstart.md`
-8. [`parcel-kit/integrated-parcel-kit-bom.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/integrated-parcel-kit-bom.md)
-9. [`parcel-kit/parcel-kit-procurement-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-kit-procurement-checklist.md)
-10. [`parcel-kit/parcel-installation-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/parcel-kit/parcel-installation-checklist.md)
+8. [`parcel-kit/integrated-parcel-kit-bom.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/parcel-kit/integrated-parcel-kit-bom.md)
+9. [`parcel-kit/parcel-kit-procurement-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/parcel-kit/parcel-kit-procurement-checklist.md)
+10. [`parcel-kit/parcel-installation-checklist.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/parcel-kit/parcel-installation-checklist.md)
 11. `../../../../../meta/backlog.md`
 
 Rules:

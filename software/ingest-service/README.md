@@ -96,5 +96,5 @@ If you saved a full serial log instead of a clean packet file:
 1. Run `python3 -m oesis.ingest.extract_latest_packet serial.log --output packet.json`
 2. Run `python3 -m oesis.ingest.ingest_packet packet.json`
 
-The expected first-build serial payload shape is documented in [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/serial-json-contract.md).
-The full first-build operator path is documented in [`bench-air-node/operator-runbook.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/bench-air-node/operator-runbook.md).
+The expected first-build serial payload shape is documented in [`bench-air-node/serial-json-contract.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/serial-json-contract.md).
+The full first-build operator path is documented in [`bench-air-node/operator-runbook.md`](https://github.com/lumenaut-llc/oesis-hardware/blob/main/v0.1/bench-air-node/operator-runbook.md).

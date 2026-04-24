@@ -25,7 +25,7 @@ Second-wave outdoor sensor node: PM2.5 plus weather (temperature, humidity, pres
 |---|---|---|---|
 | `v0-1` (planned) | not yet drafted | `oesis-builds/specs/weather-pm-mast/v0-1.md` — **does not exist** | Skeleton proposal at [`../../../meta/proposals/oesis-builds-node-skeletons.md`](../../../meta/proposals/oesis-builds-node-skeletons.md) Skeleton 3. |
 
-Hardware documented at [oesis-hardware/weather-pm-mast/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/weather-pm-mast); not independently built.
+Hardware documented at [oesis-hardware/v0.1/weather-pm-mast/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v0.1/weather-pm-mast); not independently built.
 
 ## Calibration posture
 
@@ -55,7 +55,7 @@ Governed by [`../calibration-program.md`](../calibration-program.md) (physical-s
 | Concern | Location |
 |---|---|
 | Architecture posture row | [`../node-taxonomy.md`](../node-taxonomy.md) geography-gated; [`../integrated-parcel-system-spec.md`](../integrated-parcel-system-spec.md) Tier 3 + "Deployment posture per node" |
-| Hardware design | [oesis-hardware/weather-pm-mast/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/weather-pm-mast) |
+| Hardware design | [oesis-hardware/v0.1/weather-pm-mast/](https://github.com/lumenaut-llc/oesis-hardware/tree/main/v0.1/weather-pm-mast) |
 | Build spec | **missing** — skeleton in [`../../../meta/proposals/oesis-builds-node-skeletons.md`](../../../meta/proposals/oesis-builds-node-skeletons.md) |
 | Runtime normalizer | `oesis.ingest.v1_0.normalize_weather_pm_packet` |
 | Packet schema | `oesis.weather-pm-mast.v1` → `air.pm.snapshot` — [oesis-contracts/v1.0/](https://github.com/lumenaut-llc/oesis-contracts/tree/main/v1.0) |
