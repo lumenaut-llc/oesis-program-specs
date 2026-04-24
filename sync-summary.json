@@ -1,13 +1,13 @@
 
-[sync-specs-refs] contracts @ 1124745a4ede
-  [32mPASS[0m updated oesis-contracts.last_verified_commit 7e9d3fa37c58 -> 1124745a4ede
+[sync-specs-refs] contracts @ 4bb10f3fddd4
+  [32mPASS[0m updated oesis-contracts.last_verified_commit 1124745a4ede -> 4bb10f3fddd4
 {
   "steps": [
     {
       "command": "sync-specs-refs",
-      "contracts_ref": "1124745a4edebfc25d289540203d73a989ef06b3",
+      "contracts_ref": "4bb10f3fddd4427b3165a88ab7fcb0e31fef414d",
       "updated": true,
-      "old_commit": "7e9d3fa37c58a7c5b7a3a4c2602328f117306574",
+      "old_commit": "1124745a4edebfc25d289540203d73a989ef06b3",
       "dry_run": false
     }
   ],
