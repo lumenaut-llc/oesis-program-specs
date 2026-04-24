@@ -11,6 +11,7 @@ The core risk is not ambition by itself. The real risk is letting the future arc
 **Runtime vs program vocabulary** (including why this repo does not use a `v0.2` lane name): see [`00-version-labels-and-lanes.md`](00-version-labels-and-lanes.md).
 
 This means the project should always distinguish between:
+
 - the narrow reference slice
 - the first broader fielded parcel-intelligence lane
 - the measurement-to-intervention bridge
@@ -144,23 +145,27 @@ The source bundle is explicit that **`v1.5`** is the first minimum bridge into *
 ### What gets added
 
 #### House-state and bridge surfaces
+
 - `indoor-response-node` for indoor PM2.5, indoor temperature, and indoor RH
 - `power-outage-node` for mains status and backup-power state
 - `equipment-state-adapter` for HVAC mode, fan state, recirculation versus fresh-air state, purifier state, and window/shade or sump/drain equipment state where relevant
 - building-and-site metadata surface for orientation, roof type or color, shading condition, tree canopy, impervious area, low points, drainage paths, vent locations, filter path, filter size, and higher-MERV support
 
 #### Intervention surfaces
+
 - `action-log` for what the household, building, or bounded recommendation path actually did
 - action target, action timestamp, actor, and intended reason
 - bounded recommendation log where the product suggested, but did not necessarily execute, a response
 
 #### Verification surfaces
+
 - `outcome-log` / response-verification surface for before/after windows
 - measured outcome summaries tied to the action window
 - response curves such as outdoor PM to indoor PM or outdoor heat to indoor heat burden
 - verification result, effect-size estimate, and confidence ceiling from evidence quality
 
 #### Trust support objects
+
 - node health object
 - deployment metadata object
 - device event history
@@ -168,6 +173,7 @@ The source bundle is explicit that **`v1.5`** is the first minimum bridge into *
 - maintenance-informed trust penalties
 
 #### Compatibility objects
+
 - control-compatibility record
 - integration class
 - local / cloud / manual-only flag
@@ -187,6 +193,7 @@ In this stage, compatibility objects should stay coarse and descriptive. A full 
 This phase proves that the product can model response, not only exposure.
 
 It should be able to begin answering:
+
 - how outdoor PM translates to indoor PM in this house
 - how outdoor heat translates to indoor heat burden in this house
 - what happens when HVAC switches to recirculate
@@ -233,6 +240,7 @@ with evidence-quality limits carried through to the outcome interpretation.
 The project stays credible when later-stage ideas are described as later-stage ideas.
 
 The system becomes fragile when:
+
 - route logic is described as if already operational in `v0.1`
 - adaptation logic is described as if already supported before `v1.5`
 - governance execution is described as complete while still mostly partial or docs-only

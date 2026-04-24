@@ -15,6 +15,7 @@ Mission:
 Build a dwelling-scale environmental sensing and parcel-safety platform that helps determine conditions at a specific house while becoming more precise when nearby homes also participate.
 
 Core framing:
+
 - This is not just a sensor dashboard.
 - It is a parcel-first situational platform.
 - The parcel is the main object, not the sensor.
@@ -25,6 +26,7 @@ Core framing:
 - The first hazards in scope are smoke, pluvial flooding/runoff, and heat.
 
 Why parcel-first matters:
+
 - It answers the real question: what is true for this property right now?
 - It works even when a house has no local node.
 - It combines direct evidence, neighbor evidence, parcel priors, and public context.
@@ -40,6 +42,7 @@ This section intentionally describes the baseline before the recent expansion to
 ### v1 baseline concept
 
 The current v1 baseline is primarily a dwelling-scale environmental sensing and parcel-awareness platform that:
+
 - combines parcel priors, local sensors if present, nearby shared sensors if present, and external public data integrated only inside the platform
 - computes parcel-level conditions/statuses for smoke, pluvial flooding/runoff, and heat
 - distinguishes observed vs inferred states
@@ -50,12 +53,14 @@ The current v1 baseline is primarily a dwelling-scale environmental sensing and 
 ### v1 baseline outputs per parcel
 
 Each parcel may eventually receive:
+
 - stay_safe
 - enter_safe
 - escape_safe
 - asset_safe
 
 Each output should include:
+
 - confidence: high / medium / low
 - evidence_mode: observed_local / inferred_neighbors / inferred_regional / stale
 - reasons: smoke / flood / heat / route / utility / other
@@ -63,6 +68,7 @@ Each output should include:
 ### v1 baseline physical system family
 
 The hardware side is modular and staged:
+
 1. bench air node
 2. outdoor mast-lite node
 3. weather + PM mast
@@ -72,6 +78,7 @@ The hardware side is modular and staged:
 ### v1 baseline hardware direction
 
 Bench / mast nodes:
+
 - ESP32-S3
 - SHT45
 - BME688
@@ -80,22 +87,26 @@ Bench / mast nodes:
 - optional UV sensor
 
 Flood node:
+
 - ESP32
 - MB7389 ultrasonic sensor
 
 Thermal pod:
+
 - Raspberry Pi 5
 - MLX90640 thermal array
 
 ### v1 baseline software direction
 
 Likely stack:
+
 - Next.js
 - Postgres + PostGIS
 - Supabase
 - H3
 
 Main layers:
+
 - physical sensing layer
 - platform/data layer
 - parcel inference layer
@@ -104,12 +115,14 @@ Main layers:
 ### v1 baseline data model assumptions
 
 Core categories:
+
 - private owner data
 - shared data
 - external public data
 - derived parcel states
 
 Representative core objects:
+
 - parcels
 - homes
 - users
@@ -129,6 +142,7 @@ The better claim is:
 This system aims to provide more current and more parcel-relevant local information than coarse regional systems can usually provide on their own, especially where official coverage is sparse or slow to reflect rapid local change.
 
 Important distinction:
+
 - better local recency does not automatically mean better absolute measurement accuracy
 - better parcel relevance does not automatically mean better regional truth
 
@@ -141,6 +155,7 @@ The project is not original because it invents environmental sensing from scratc
 It is original in synthesis.
 
 The distinctive combination is:
+
 - parcel-first reasoning
 - partial-adoption operation
 - parcel operator-held raw data
@@ -159,6 +174,7 @@ This appears most original as a system framing and integration project, not as a
 The current baseline is stronger than a generic smart-home idea, but it still risks remaining mostly a sensing-and-interpretation platform rather than a true adaptation system.
 
 Without further changes, v1 is at risk of becoming:
+
 - a hyperlocal sensor dashboard
 - a parcel-status layer without intervention loops
 - a system that knows external conditions but not how the house responds
@@ -179,6 +195,7 @@ Collect hazard data + house state data + intervention data + response data + con
 Or more precisely:
 
 Every important data stream should help answer one or more of these four questions:
+
 1. What is happening outside?
 2. What state is the house currently in?
 3. What action could the house take?
@@ -210,6 +227,7 @@ Purpose:
 Prove that the system can collect local data, integrate parcel priors and public context, and compute parcel-level states under sparse adoption.
 
 Core capabilities:
+
 - bench air node, mast-lite, weather + PM mast, flood node, thermal pod
 - ingest and normalize data
 - compute parcel priors
@@ -221,6 +239,7 @@ Core success test:
 Can the system provide more current and more parcel-relevant local information than coarse regional systems in some scenarios, while staying honest about uncertainty?
 
 Keep in scope:
+
 - outdoor sensing
 - parcel inference
 - observed vs inferred logic
@@ -228,6 +247,7 @@ Keep in scope:
 - governance and privacy model
 
 Do not overclaim yet:
+
 - full adaptation system
 - strong building automation
 - material retrofit optimization
@@ -239,6 +259,7 @@ Purpose:
 Prevent v1 from dead-ending into a sensor dashboard by adding the minimum data needed to model building response and later adaptation.
 
 Highest-value additions:
+
 - indoor PM2.5
 - indoor temperature and RH
 - HVAC mode / fan / recirculation state
@@ -254,6 +275,7 @@ Also "what did the house do, and did it work?"
 
 Core success test:
 Can the platform begin measuring response curves such as:
+
 - outdoor PM vs indoor PM
 - outdoor heat vs indoor heat response
 - rainfall and low-point depth vs driveway/route usability
@@ -265,16 +287,19 @@ Purpose:
 Turn sensing and inference into serious engineering outputs that guide operational and material decisions.
 
 Add three linked models:
+
 1. condition model
 2. building response model
 3. intervention model
 
 New outputs:
+
 - current condition estimate
 - operational recommendation
 - material implementation recommendation
 
 Examples:
+
 - switch HVAC to recirculate
 - run purifier
 - add MERV-13-capable filtration
@@ -282,6 +307,7 @@ Examples:
 - regrade driveway lip or drainage inlet
 
 Add intervention ranking dimensions:
+
 - effect size
 - cost
 - reversibility
@@ -298,6 +324,7 @@ Purpose:
 Prepare the system to interact with real homes rather than just observe them.
 
 Add controls inventory per parcel:
+
 - thermostat model and interface
 - local API / Matter / cloud-only / BACnet / Home Assistant compatibility
 - purifier controllability
@@ -307,17 +334,20 @@ Add controls inventory per parcel:
 - local controller availability
 
 Use a three-tier integration model:
+
 - Tier 1: advisory only
 - Tier 2: soft integration through Home Assistant / Matter / smart plugs / existing consumer devices
 - Tier 3: harder integration through BACnet or contractor-grade systems later
 
 First automation targets should be:
+
 - reversible
 - bounded
 - low-risk
 - easy to verify
 
 Good first examples:
+
 - HVAC recirculation during smoke
 - continuous fan mode during smoke
 - purifier activation
@@ -333,6 +363,7 @@ Purpose:
 Move from "current state + recommendations" to a real adaptation engine.
 
 New capabilities:
+
 - time-to-threshold outputs
 - time to unsafe / route compromise / recovery
 - compound hazard logic
@@ -341,12 +372,14 @@ New capabilities:
 - household capacity modeling
 
 Examples:
+
 - moderate smoke + indoor heat + power instability = compound household stress
 - this parcel now heats faster than it did last summer
 - this shading intervention reduced indoor peak by X over Y events
 - this drainage intervention added Z minutes of access time during runoff events
 
 Add household adaptation capacity data:
+
 - backup power availability
 - clean-air room availability
 - cooling assets
@@ -363,17 +396,20 @@ Purpose:
 Expand from house-only intelligence to physically and socially useful neighborhood adaptation.
 
 New layers:
+
 - parcel layer
 - route / egress layer
 - block / neighborhood support infrastructure layer
 
 Examples:
+
 - parcel OK, but route unsafe
 - home protected, but neighborhood cooling refuge weak
 - one extra node here reduces uncertainty for 14 parcels
 - this street drainage fix helps the most homes
 
 Potential community-level outputs:
+
 - shared clean-air refuge prioritization
 - block drainage failure points
 - shaded pedestrian route gaps
@@ -389,6 +425,7 @@ Purpose:
 The long-term vision is a self-enabling, self-protective house and neighborhood fabric.
 
 But the realistic interpretation is:
+
 - houses become increasingly measurable, interpretable, and controllable
 - bounded responses are automated only where safe and verifiable
 - material adaptations are informed by real observed outcomes
@@ -397,6 +434,7 @@ But the realistic interpretation is:
 This should not mean jumping directly to exotic kinetic architecture.
 
 The disciplined path is:
+
 - sensing
 - inference
 - intervention ranking
@@ -414,6 +452,7 @@ The house eventually becomes more self-protective not because it is magically ro
 This is the most important bridge section.
 
 ### Keep from baseline
+
 - outdoor temperature
 - humidity
 - pressure
@@ -426,6 +465,7 @@ This is the most important bridge section.
 ### Add now or as early as possible
 
 #### A. House-state data
+
 - indoor PM2.5
 - indoor temperature
 - indoor RH
@@ -438,6 +478,7 @@ This is the most important bridge section.
 - sump or drain equipment state if available
 
 #### B. Building and site metadata
+
 - house orientation
 - roof type/color
 - window orientation
@@ -453,6 +494,7 @@ This is the most important bridge section.
 - whether house can support higher-MERV filters
 
 #### C. Intervention and action logs
+
 - switched HVAC mode
 - ran purifier
 - closed windows
@@ -464,6 +506,7 @@ This is the most important bridge section.
 - other operational actions
 
 #### D. Response / verification data
+
 - outdoor PM vs indoor PM over time
 - outdoor heat vs indoor heat over time
 - rainfall and water depth vs access degradation
@@ -471,6 +514,7 @@ This is the most important bridge section.
 - retrofit installation date vs observed later performance
 
 #### E. Actuation compatibility inventory
+
 - thermostat model
 - API type
 - Matter support or not
@@ -483,6 +527,7 @@ This is the most important bridge section.
 - override rules
 
 #### F. Reliability / trust data
+
 - sensor calibration dates
 - filter replacement dates
 - HVAC service status
@@ -494,6 +539,7 @@ This is the most important bridge section.
 - manual override events
 
 #### G. Route / dependency / community data
+
 - primary and secondary exit route
 - nearby drainage chokepoints
 - street-level pooling zones
@@ -504,6 +550,7 @@ This is the most important bridge section.
 - shared neighborhood weak points
 
 ### Best compact rule
+
 The revised v1 premise should become:
 
 Collect the minimum data needed to model the relationship between outdoor hazards, house operating state, available interventions, and resulting outcomes.
@@ -516,6 +563,7 @@ Collect better local environmental data.
 ## 9. Why this is a serious technology path rather than concept art
 
 The project becomes serious when every subsystem can answer:
+
 - what can this measure?
 - what can this change?
 - how will we know the change helped?
@@ -523,6 +571,7 @@ The project becomes serious when every subsystem can answer:
 If a subsystem cannot answer all three, it is not yet a serious adaptation technology.
 
 The real technical loop is:
+
 1. observe
 2. infer
 3. decide
@@ -537,6 +586,7 @@ If it reaches step 5, it becomes a real adaptation system.
 ## 10. What should stay out of scope for now
 
 Do not jump directly to:
+
 - kinetic facades as the main near-term goal
 - autonomous structural decisions
 - evacuation commands driven by one cheap sensor
@@ -545,6 +595,7 @@ Do not jump directly to:
 - claiming universal superiority over official systems
 
 Near-term safe interpretation of "self-protective" should mean:
+
 - the house can sense
 - the platform can infer parcel state
 - the platform can recommend or trigger bounded low-risk actions
@@ -559,12 +610,14 @@ That is enough for a major first-generation system.
 The best first closed-loop adaptation case is smoke protection.
 
 ### Why smoke first
+
 - there are clear measurable indoor and outdoor signals
 - there are known interventions
 - current home electronics can already support some controls
 - results can be verified within minutes to hours
 
 ### First loop
+
 - outdoor PM sensing
 - indoor PM sensing
 - parcel state enters smoke-protect mode
@@ -575,6 +628,7 @@ The best first closed-loop adaptation case is smoke protection.
 This is the best first proof that the system can guide material implementation and bounded control rather than just describe the environment.
 
 After that:
+
 - runoff protection loop
 - heat protection loop
 
@@ -583,6 +637,7 @@ After that:
 ## 12. Governance and decentralization implications that should remain intact
 
 Do not lose these principles as the system becomes more ambitious:
+
 - private by default
 - shared by choice
 - parcel operators own raw data
@@ -601,30 +656,36 @@ The long-term adaptation engine should still be evaluated against the democratic
 Please evaluate this path critically.
 
 ### A. On the current baseline v1
+
 - Is the baseline v1 coherent and technically honest?
 - Is it too broad for a real MVP?
 - Which parts are strong now, and which are weak?
 
 ### B. On the path from baseline to adaptation system
+
 - Which added data streams are truly essential?
 - Which are premature?
 - What is the minimum addition to keep v1 from dead-ending into a sensor dashboard?
 
 ### C. On serious engineering value
+
 - Which loops are actually measurable and verifiable?
 - Which interventions could be ranked credibly?
 - Which outputs are operationally meaningful versus aspirational?
 
 ### D. On controls and actuation
+
 - What is the safest and most realistic path from advisory to bounded automation?
 - Which current home electronics are worth targeting first?
 - What should stay manual for a long time?
 
 ### E. On the long-term vision
+
 - Is the "self-protective house" end state technically coherent if interpreted as increasing controllability + verified adaptation rather than magical architectural movement?
 - What would make the long-term vision realistic versus delusional?
 
 ### F. On overall roadmap design
+
 - Is this the right sequence of stages?
 - What should be merged, cut, or reordered?
 - What is the smallest path that still preserves the long-term ambition?
@@ -636,6 +697,7 @@ Please evaluate this path critically.
 Please analyze this path as a serious engineering and systems roadmap.
 
 I want you to tell me:
+
 - what should stay in the baseline v1
 - what should be added immediately after baseline v1
 - what is the true minimum bridge from parcel sensing to parcel adaptation
@@ -647,6 +709,7 @@ I want you to tell me:
 - whether the sequence from current baseline to long-term end state is sound
 
 Please separate your answer into:
+
 - keep as baseline
 - add next
 - move later

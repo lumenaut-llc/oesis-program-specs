@@ -15,6 +15,7 @@ Companion to [`oesis-builds-calibration-program-integration.md`](oesis-builds-ca
 Per [`oesis-program-specs/architecture/system/calibration-program.md`](../../architecture/system/calibration-program.md) §F, every node family in scope requires a `oesis-builds/specs/<node>/v0-X.md` file with a YAML front-matter metadata block. Today, only `bench-air-node` has a spec (and its §F block is covered in the companion proposal as Edit 4).
 
 Five node families have no spec at all in `oesis-builds/specs/` today:
+
 - `mast-lite` — blocker for v0.2 promotion (gap G12)
 - `flood-node` — v0.3 lane
 - `weather-pm-mast` — v1.0 lane

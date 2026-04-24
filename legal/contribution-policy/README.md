@@ -16,12 +16,14 @@ For the current public preview packet, use `../../release/v1.0/contributor-and-r
 ## Inbound rights model
 
 Recommended MVP approach:
+
 - use a Developer Certificate of Origin-style signoff or equivalent attestation for ordinary contributions
 - require contributors to represent that they have the right to submit the work
 - require contributors to identify material third-party code, data, or design inputs
 - avoid a heavyweight bespoke CLA unless the project later needs centralized relicensing flexibility
 
 Patent posture:
+
 - rely on the patent terms of the applicable outbound licenses for normal contributions
 - require maintainers to flag any contribution that appears to include patent-sensitive methods, proprietary calibration logic, or external encumbrances
 

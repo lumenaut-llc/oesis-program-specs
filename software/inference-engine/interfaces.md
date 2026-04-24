@@ -53,6 +53,7 @@ all of which are v0.4+ scope.
 ## Data contracts
 
 Primary input contract:
+
 - normalized observation records from [`node-observation-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/node-observation-schema.md)
 - optional parcel context records from [`parcel-context-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-context-schema.md)
 - optional shared neighborhood signal records from [`v0.1/schemas/shared-neighborhood-signal.schema.json`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/schemas/shared-neighborhood-signal.schema.json)
@@ -64,9 +65,11 @@ second local evidence lane belongs to **program-phase `v0.2`** in
 `../../architecture/system/version-and-promotion-matrix.md`.
 
 Primary output contract:
+
 - parcel-state snapshot defined in [`parcel-state-schema.md`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/parcel-state-schema.md)
 
 Minimum parcel-state output fields:
+
 - `parcel_id`
 - `computed_at`
 - `shelter_status`
@@ -89,6 +92,7 @@ Minimum parcel-state output fields:
 - `provenance_summary`
 
 Expected engine behavior:
+
 - accept sparse evidence and lower confidence instead of fabricating certainty
 - score hazards independently before mapping to parcel-state outputs
 - treat local-vs-public divergence as a first-class signal rather than an error to smooth away
@@ -125,6 +129,7 @@ Minimum next bridge support inputs should include:
 - outcome / verification records describing whether measured conditions improved
 
 Priority next closed loop:
+
 - smoke protection should be the first serious end-to-end response proof:
   outdoor evidence, indoor-response evidence, bounded action, then measured
   verification over a defined response window.

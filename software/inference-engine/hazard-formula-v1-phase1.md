@@ -23,23 +23,24 @@ The statistical work in sections 1–4 assumes sensor data trustworthy enough to
 
 ### P0.1 — Characterized reference instrument
 
-**Blocker.** [`oesis-builds/procedures/bench-air-node/calibration.md`](../../../oesis-builds/procedures/bench-air-node/calibration.md) requires a characterized reference instrument for every calibration session, but `references/TBD.md` is a placeholder. No unit has been calibrated against a real referent. Coefficient fitting against this data would be statistically precise but physically meaningless.
+**Blocker.** [`oesis-builds/procedures/bench-air-node/calibration.md`](https://github.com/lumenaut-llc/oesis-builds/blob/main/procedures/bench-air-node/calibration.md) requires a characterized reference instrument for every calibration session, but `references/TBD.md` is a placeholder. No unit has been calibrated against a real referent. Coefficient fitting against this data would be statistically precise but physically meaningless.
 
 Done when: at least one reference instrument file exists per measurand per deployment class under [`oesis-builds/procedures/<node>/references/`](https://github.com/lumenaut-llc/oesis-builds/tree/main/procedures), matching the file format and minimum fields specified in [`../../architecture/system/calibration-program.md`](../../architecture/system/calibration-program.md) §A.
 
 ### P0.2 — Burn-in gate enforced in bring-up acceptance
 
-**Blocker for gas-resistance term only.** BME680 gas resistance needs 24–48 h conditioning on first power-up before the baseline is physically stable. [`oesis-builds/specs/bench-air-node/v0-1.md:211`](../../../oesis-builds/specs/bench-air-node/v0-1.md:211) currently checks "trending gradually," which is a posture observation, not a gate. The first 48 h of every device's data must be excluded from the calibration dataset, or the rolling baseline fits will encode conditioning artifacts.
+**Blocker for gas-resistance term only.** BME680 gas resistance needs 24–48 h conditioning on first power-up before the baseline is physically stable. [`oesis-builds/specs/bench-air-node/v0-1.md:211`](https://github.com/lumenaut-llc/oesis-builds/blob/main/specs/bench-air-node/v0-1.md#L211) currently checks "trending gradually," which is a posture observation, not a gate. The first 48 h of every device's data must be excluded from the calibration dataset, or the rolling baseline fits will encode conditioning artifacts.
 
 Done when: bring-up acceptance includes an explicit 48 h burn-in window per [`../../architecture/system/calibration-program.md`](../../architecture/system/calibration-program.md) §B, and the ingest pipeline tags observations as `burn_in_complete: false` until that window has passed for each device. Admissibility rule in calibration-program §C then excludes pre-burn-in readings automatically.
 
 ### P0.3 — Mast-lite build spec (decision: option A, 2026-04-19)
 
-**Blocker for heat primary path.** The canonical heat sensor term in [`hazard-formula-v1.md`](hazard-formula-v1.md) assumes an outdoor temperature source. Bench-air-node is documented as indoor-only ([`oesis-builds/specs/bench-air-node/v0-1.md:26`](../../../oesis-builds/specs/bench-air-node/v0-1.md:26)). Mast-lite is referenced in architecture and milestone docs but has no build spec, no calibration procedure, no BOM, no radiation-shield specification in `oesis-builds/`. The formula is ahead of the hardware.
+**Blocker for heat primary path.** The canonical heat sensor term in [`hazard-formula-v1.md`](hazard-formula-v1.md) assumes an outdoor temperature source. Bench-air-node is documented as indoor-only ([`oesis-builds/specs/bench-air-node/v0-1.md:26`](https://github.com/lumenaut-llc/oesis-builds/blob/main/specs/bench-air-node/v0-1.md#L26)). Mast-lite is referenced in architecture and milestone docs but has no build spec, no calibration procedure, no BOM, no radiation-shield specification in `oesis-builds/`. The formula is ahead of the hardware.
 
 **Decision (2026-04-19):** write the spec (option A). The alternative — scoping heat to bridge-path-only — was rejected because the indoor-bridge path cannot physically represent parcel-wide outdoor heat, which is the claim the parcel-state output needs to support.
 
 Done when:
+
 - `oesis-builds/specs/mast-lite/v0-1.md` exists with BOM, wiring, firmware pin-out, and a reproducible build procedure.
 - `oesis-builds/procedures/mast-lite/calibration.md` exists, citing at least one characterized reference instrument (may reuse the bench-air reference from P0.1, or add a distinct outdoor-suitable referent).
 - Radiation-shield design is documented inside the build spec, with a thermal-loading acceptance test. Readings from a unit without a verified shield are not admissible into the calibration dataset.

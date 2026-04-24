@@ -42,6 +42,7 @@ other `python3 -m oesis.ingest.*` commands.
 The first executable contract check is `python3 -m oesis.ingest.validate_examples`.
 It validates the current example payloads in [`v0.1/examples/`](https://github.com/lumenaut-llc/oesis-contracts/blob/main/v0.1/examples/)
 against the MVP expectations for:
+
 - `oesis.bench-air.v1` node observations
 - parcel-state snapshots
 
@@ -67,6 +68,7 @@ of a mixed serial log so boot comments and other monitor noise do not need to be
 removed by hand.
 
 `python3 -m oesis.ingest.serve_ingest_api` is the minimal HTTP wrapper. It exposes:
+
 - `GET /v1/ingest/health`
 - `GET /v1/ingest/schemas`
 - `POST /v1/ingest/node-packets`

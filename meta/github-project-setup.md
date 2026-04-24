@@ -47,6 +47,7 @@ Step-by-step through the GitHub web UI, since Project v2 field configuration is 
 Click **Settings** (top right) → **+ New field** for each:
 
 **Phase** (Single select)
+
 - v0.1
 - v0.2
 - v0.3
@@ -57,6 +58,7 @@ Click **Settings** (top right) → **+ New field** for each:
 - v2 / v2.5 / v3 / v4 (defer)
 
 **Node family** (Single select)
+
 - bench-air
 - mast-lite
 - flood-node
@@ -66,6 +68,7 @@ Click **Settings** (top right) → **+ New field** for each:
 - platform
 
 **Owner area** (Single select)
+
 - hardware
 - technical
 - governance
@@ -73,18 +76,21 @@ Click **Settings** (top right) → **+ New field** for each:
 - operations
 
 **Severity** (Single select)
+
 - blocker
 - important
 - defer
 - PRD-only
 
 **Program** (Single select — which platform program the gap belongs to)
+
 - calibration
 - adapter-trust
 - hazard-formula-v1
 - none
 
 **Promotion bar item** (Single select — which of the 5 items in `pre-1.0-version-progression.md` item 5 this blocks)
+
 - item 1 (architecture scope)
 - item 2 (contract/runtime boundary)
 - item 3 (acceptance commands)
@@ -96,6 +102,7 @@ Click **Settings** (top right) → **+ New field** for each:
 ### 3. Add the repos as sources
 
 Settings → **Manage access** → enable Project workflows for each repo:
+
 - lumenaut-llc/oesis-program-specs
 - lumenaut-llc/oesis-hardware
 - lumenaut-llc/oesis_runtime
@@ -143,6 +150,7 @@ done
 ### 6. Populate custom field values
 
 For each added issue, set:
+
 - **Phase** — from the label or issue body
 - **Node family** — from the label
 - **Owner area** — from the label
@@ -155,30 +163,36 @@ The field values should match labels; the fields exist because Project views can
 ### 7. Create views
 
 **View 1 — By phase** (default board)
+
 - Layout: Board
 - Group by: Phase
 - Sort: Severity (blocker first)
 
 **View 2 — By node family**
+
 - Layout: Board
 - Group by: Node family
 
 **View 3 — By owner**
+
 - Layout: Board
 - Group by: Owner area
 
 **View 4 — Critical path** (v1 hazard formula chain)
+
 - Layout: Table
 - Filter: `Program = hazard-formula-v1 OR Program = calibration`
 - Sort: Phase, then Severity
 - Shows the dependency chain G13 → G14 → G16/G17 → G15 → G11 in a readable row
 
 **View 5 — Open blockers**
+
 - Layout: Table
 - Filter: `Status != Done AND Severity = blocker`
 - Sort: Phase
 
 **View 6 — Good first issue**
+
 - Layout: Table
 - Filter: `label = "good first issue"`
 - For drive-by contributors landing at the Project for the first time
@@ -186,6 +200,7 @@ The field values should match labels; the fields exist because Project views can
 ## Setup — API-only alternative
 
 If you prefer full-automation, the full setup can be scripted via `gh project` and `gh api graphql`. However:
+
 - Project v2 custom-field configuration via API is verbose (each field needs a separate GraphQL mutation)
 - Views cannot be created via API today — view configuration is web-UI only
 

@@ -43,33 +43,41 @@ See whether this estimate came from your local devices, shared neighborhood sign
 ### Shelter status
 
 Label:
+
 - Shelter conditions
 
 Help text:
+
 - An estimate of current conditions for remaining at this parcel based on available evidence.
 
 ### Reentry status
 
 Label:
+
 - Reentry conditions
 
 Help text:
+
 - An estimate of current conditions for returning to this parcel based on available evidence.
 
 ### Egress status
 
 Label:
+
 - Egress conditions
 
 Help text:
+
 - An estimate of current conditions affecting exit from this parcel based on available evidence.
 
 ### Asset risk status
 
 Label:
+
 - Asset risk
 
 Help text:
+
 - An estimate of current risk to structures or site assets based on available evidence.
 
 ## Sharing settings copy
@@ -85,33 +93,41 @@ Your parcel data stays private by default. You can choose whether to contribute 
 ### Private-only mode
 
 Label:
+
 - Private only
 
 Description:
+
 - Your parcel data is used to generate condition estimates for your account and is not shared into neighborhood or research views.
 
 ### Network assist mode
 
 Label:
+
 - Help improve inference quality
 
 Description:
+
 - Allow selected parcel signals to be used internally for calibration and model-quality improvements. This does not make your exact parcel readings visible to other households.
 
 ### Neighborhood aggregate mode
 
 Label:
+
 - Contribute to neighborhood summaries
 
 Description:
+
 - Allow delayed and coarsened indicators from your parcel to contribute to neighborhood-level condition summaries. Other users should not see your exact parcel readings or exact parcel location from this setting alone.
 
 ### Research or pilot mode
 
 Label:
+
 - Join research or pilot sharing
 
 Description:
+
 - Allow data use for the specific pilot or research program described to you. This option should explain who is operating the program, how long the data is kept, and whether results may be published.
 
 ### Revocation helper text
@@ -123,17 +139,21 @@ You can turn off optional sharing later to stop future contributions. Previously
 ### Export action
 
 Button:
+
 - Export my parcel data
 
 Confirmation text:
+
 - Create a request for a machine-readable export of your parcel data and related condition history.
 
 ### Delete action
 
 Button:
+
 - Delete my parcel data
 
 Confirmation text:
+
 - Create a request to delete account-controlled parcel data held by the service, subject to limited security and legal exceptions.
 
 ### Rights status labels

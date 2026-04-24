@@ -74,6 +74,7 @@ G17 (observation-schema facts)     ──┘   G11 replay harness prototype
 ### Phase 1 tickets (linked)
 
 Software:
+
 - [G11 (#12)](https://github.com/lumenaut-llc/oesis-program-specs/issues/12) — umbrella, stays open through all children
 - [G17 (oesis-contracts#2)](https://github.com/lumenaut-llc/oesis-contracts/issues/2)
 - [G15 (oesis_runtime#4)](https://github.com/lumenaut-llc/oesis_runtime/issues/4)
@@ -82,6 +83,7 @@ Software:
 - G11 children: [replay harness (oesis_runtime#8)](https://github.com/lumenaut-llc/oesis_runtime/issues/8), [v1_1 scaffold (oesis_runtime#10)](https://github.com/lumenaut-llc/oesis_runtime/issues/10), [Brier/ECE (oesis_runtime#9)](https://github.com/lumenaut-llc/oesis_runtime/issues/9), [incident-log schema (#33)](https://github.com/lumenaut-llc/oesis-program-specs/issues/33), [NCEI preload (#32)](https://github.com/lumenaut-llc/oesis-program-specs/issues/32), [coefficient fitting (#34)](https://github.com/lumenaut-llc/oesis-program-specs/issues/34), [promotion criteria (oesis_runtime#11)](https://github.com/lumenaut-llc/oesis_runtime/issues/11)
 
 Hardware:
+
 - [G12 mast-lite (oesis-hardware#2)](https://github.com/lumenaut-llc/oesis-hardware/issues/2)
 - [G13 reference instruments (oesis-hardware#3)](https://github.com/lumenaut-llc/oesis-hardware/issues/3)
 - [G14 hardware (oesis-hardware#4)](https://github.com/lumenaut-llc/oesis-hardware/issues/4)

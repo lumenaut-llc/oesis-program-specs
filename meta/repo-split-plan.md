@@ -252,18 +252,21 @@ The split is healthy when:
 **Decision:** Extract `hardware/` into standalone `oesis-hardware` repository.
 
 **Rationale:**
+
 - 155 files including 11 Arduino sketches and 2 Python firmware scripts — actual executable code, not specifications
 - Separate license (CERN-OHL-S-2.0) from the rest of the repo
 - Different audience (hardware builders) and change cadence from software architecture
 - Zero coupling to oesis-runtime (runtime only validates `hardware_family` enum fields)
 
 **What moved:**
+
 - All node families: bench-air-node, mast-lite, flood-node, weather-pm-mast, thermal-pod, circuit-monitor
 - Cross-node resources: parcel-kit (BOMs, checklists, power guide)
 - Version lane directories: v0.1 through v1.5
 - Calibration reference
 
 **What stayed:**
+
 - `hardware/LICENSE` (CERN-OHL-S-2.0 text, referenced by LICENSES.md)
 - `hardware/README.md` (redirect stub pointing to oesis-hardware)
 
@@ -283,17 +286,20 @@ The split is healthy when:
 **Decision:** Extract `contracts/` and `artifacts/contracts-bundle/` into standalone `oesis-contracts` repository.
 
 **Rationale:**
+
 - 167 files (~752K) — the single largest subtree in oesis-program-specs
 - Already conceptually a published bundle; consumed by oesis-runtime (which mirrors under `oesis/assets/`) and oesis-public-site (via public-content-bundle)
 - Distinct lifecycle: schemas ship on lane promotions; architecture and release docs evolve on a different cadence
 - Machine-verifiable JSON artifacts with a clean version lane model (v0.1 – v1.5)
 
 **What moved:**
+
 - All lane directories: v0.1, v0.2, v0.3, v0.4, v0.5, v1.0, v1.5
 - Top-level `examples/` and `schemas/` directories
 - `artifacts/contracts-bundle/` → `bundles/contracts-bundle/` (co-located with source)
 
 **What stayed:**
+
 - `contracts/README.md` (redirect stub pointing to oesis-contracts)
 - `artifacts/contracts-bundle/README.md` (redirect stub)
 

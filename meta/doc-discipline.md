@@ -46,6 +46,7 @@ If a concept appears in ≥ 3 places, declare which is canonical in `meta/markdo
 This is the authority-map rule. It prevents confusion when two docs describe the same thing differently.
 
 Already in the matrix:
+
 - Program framing (thesis/problem) → `program/operating-packet/01-core-thesis-and-framing.md` canonical; `02`, `03` redirect.
 - Target-lane roadmap/spec/taxonomy → `architecture/system/` canonical; `architecture/v1.0/` docs redirect.
 

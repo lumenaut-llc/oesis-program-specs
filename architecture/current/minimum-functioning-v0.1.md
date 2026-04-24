@@ -46,6 +46,7 @@ This file answers that question directly.
 ### 1. Sensor node
 
 Role:
+
 - produce direct local observations
 - expose device health and freshness
 
@@ -54,6 +55,7 @@ Status in current reference path: `implemented`
 ### 2. Packet / raw evidence
 
 Role:
+
 - carry versioned local evidence into ingest
 
 Status in current reference path: `implemented`
@@ -61,6 +63,7 @@ Status in current reference path: `implemented`
 ### 3. Collection path / home-platform ingest boundary
 
 Role:
+
 - move node data from the device into the trusted ingest surface
 - preserve enough receipt, freshness, and delivery truth to support parcel
   conclusions honestly
@@ -70,6 +73,7 @@ Status in current reference path: `implemented`
 ### 4. Normalized observation
 
 Role:
+
 - create one canonical ingest output for downstream reasoning
 
 Status in current reference path: `implemented`
@@ -77,6 +81,7 @@ Status in current reference path: `implemented`
 ### 5. Parcel
 
 Role:
+
 - act as the primary decision anchor
 - give the system a concrete dwelling-facing scope
 
@@ -85,6 +90,7 @@ Status in current reference path: `implemented`
 ### 6. Parcel context
 
 Role:
+
 - provide enough site and install context to interpret evidence honestly
 
 Status in current reference path: `implemented`
@@ -92,6 +98,7 @@ Status in current reference path: `implemented`
 ### 7. Public context source
 
 Role:
+
 - provide weather or smoke context when local evidence is sparse or incomplete
 
 Status in current reference path: `implemented`
@@ -99,6 +106,7 @@ Status in current reference path: `implemented`
 ### 8. Derived parcel condition
 
 Role:
+
 - express what the system believes is true for the parcel now
 - carry confidence, evidence mode, and freshness
 
@@ -107,6 +115,7 @@ Status in current reference path: `implemented`
 ### 9. Derived operational status
 
 Role:
+
 - turn condition logic into user-facing operational conclusions
 
 Status in current reference path: `implemented`
@@ -117,6 +126,7 @@ status surfaces rather than through a richer independent object family.
 ### 10. Explanation record
 
 Role:
+
 - explain why the parcel condition and status were assigned
 - preserve source mix and trust cues
 
@@ -125,6 +135,7 @@ Status in current reference path: `implemented`
 ### 11. Parcel view
 
 Role:
+
 - present the current parcel answer, confidence, evidence mode, reasons, and
   freshness in one coherent surface
 
@@ -133,6 +144,7 @@ Status in current reference path: `implemented`
 ### 12. Minimum sharing policy
 
 Role:
+
 - keep exact parcel data private by default
 - support at least a simple technical distinction between private and broader
   sharing

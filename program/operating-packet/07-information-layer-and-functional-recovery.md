@@ -8,6 +8,7 @@ The best approach is not to build the biggest sensor network.
 It is to build the best evidence-to-impact system.
 
 For this project, the best information layer should optimize four things at once:
+
 - measurement accuracy
 - local recency
 - spatial relevance
@@ -16,6 +17,7 @@ For this project, the best information layer should optimize four things at once
 ## Evidence hierarchy
 
 Treat every input as one of these:
+
 - direct local observation
 - nearby shared observation
 - external public observation
@@ -27,6 +29,7 @@ Treat every input as one of these:
 Explicitly separate observed conditions from validated impacts.
 
 Examples:
+
 - smoke concentration is an observed or inferred condition
 - road closure is an impact state
 - power loss is an impact state
@@ -37,6 +40,7 @@ Examples:
 Think in terms of a continuously updated state estimate, not just sensor feeds plus a rules engine.
 
 For each parcel, route segment, or shared cell, the system should maintain:
+
 - current state value
 - uncertainty
 - freshness
@@ -46,6 +50,7 @@ For each parcel, route segment, or shared cell, the system should maintain:
 ## Timing integrity
 
 Treat these as first-class quality dimensions:
+
 - when was it measured
 - when was it transmitted
 - when was it ingested
@@ -55,6 +60,7 @@ Treat these as first-class quality dimensions:
 ## Functional state objects
 
 The system should move beyond hazard status into functional state objects such as:
+
 - route passability
 - shelter viability
 - clean-air refuge viability
@@ -69,6 +75,7 @@ The system should move beyond hazard status into functional state objects such a
 Add lifeline and dependency thinking sooner rather than later.
 
 Examples:
+
 - transportation dependence
 - energy dependence
 - communications dependence
@@ -90,10 +97,12 @@ Ask where one more sensor most improves the state estimate for parcels, routes, 
 This is the most important undernamed concept.
 
 Not just:
+
 - what is the hazard?
 - what is the parcel status?
 
 But:
+
 - what critical functions are impaired?
 - what dependencies matter?
 - what is degrading?

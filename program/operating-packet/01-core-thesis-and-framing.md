@@ -25,6 +25,7 @@ It is not the final boundary of the system.
 At baseline, this is not just a sensor kit and not just a dashboard.
 
 It is a system that:
+
 - gathers direct observations
 - fuses them with parcel priors and public context
 - estimates current local conditions
@@ -58,6 +59,7 @@ The current gap is a mismatch between the scale of available information and
 the scale of the real decision.
 
 The project opportunity is to become the missing layer between:
+
 - coarse public hazard systems
 - isolated consumer sensors and smart-home products
 - household operational decisions
@@ -74,6 +76,7 @@ intelligence layer that improves recency, parcel relevance, and adaptation
 learning without requiring homeowners to surrender raw data ownership.
 
 Value by scale:
+
 - households: better interpretation, not just more data
 - neighborhoods: partial-adoption intelligence and confidence uplift
 - long term: local adaptation evidence for preparedness and planning
@@ -84,6 +87,7 @@ Value by scale:
 This project is not most original as a sensor invention.
 
 Its distinctiveness is a systems synthesis that combines:
+
 - parcel-first reasoning
 - partial-adoption operation
 - homeowner-owned raw data
@@ -94,10 +98,12 @@ Its distinctiveness is a systems synthesis that combines:
 - a path from sensing toward adaptation and verified response
 
 Best originality claim:
+
 - original in system design, governance, inference framing, and multi-scale
   integration
 
 Positioning sentence:
+
 - original as a systems architecture and governance model connecting parcel
   sensing, uncertainty-aware inference, partial-adoption shared intelligence,
   and long-term resilience learning
@@ -105,6 +111,7 @@ Positioning sentence:
 ## Wording guardrails
 
 Use:
+
 - parcel-first, multi-scale
 - evidence-based
 - uncertainty-aware
@@ -115,6 +122,7 @@ Use:
 - route, block, and lifeline expansion over time
 
 Do not claim:
+
 - more accurate than all official systems
 - regulatory-grade by default
 - autonomous disaster authority

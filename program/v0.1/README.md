@@ -16,6 +16,7 @@ for decisions; it is not the final boundary of the program's long-term scope.
 ## Mission
 
 Create dwelling-scale environmental sensing and parcel-level situational intelligence that:
+
 - works for individual homes
 - improves with neighborhood participation
 - preserves owner control of parcel-linked data, including explicit public-release choices
@@ -110,6 +111,7 @@ current reference stack: `../../architecture/current/milestone-roadmap.md`.
 ## Current MVP outputs
 
 For each parcel:
+
 - shelter conditions estimate
 - reentry conditions estimate
 - egress conditions estimate
