@@ -22,6 +22,38 @@ Use this document when writing roadmaps, kit language, or marketing so **taxonom
 
 **Folder note:** `architecture/current/` is the frozen **architecture lane** aligned with program-phase `v0.1`. That is **not** the same label as capability stage `current v1` (see `architecture-gaps-by-stage.md`).
 
+### Axes are independent — read each separately
+
+The four axes describe orthogonal properties. An artifact's identity is the **tuple** of its position on each axis, not a single version label.
+
+```text
+  Program-phase ────┬────┬────┬────┬────┬────┬────┐
+  (release slice)  v0.1 v0.2 v0.3 v0.4 v0.5 v1.0 v1.5
+                                                   └─ draft / additive
+
+  Capability ──────┬───────────────────┬─────┬─────┬─────┬─────┐
+  (system features) current v1         v1.5  v2   v2.5  v3    v4
+                    (sensing+inference) (bridge) (guidance) (controls)
+
+  Deployment ──────┬─────────┬────────────┬─────────┐
+  (per node)        v0.1      v1.0          v1.5      v2.0
+                  (bench)   (field-ready) (trust-hard) (policy-aware)
+
+  Implementation ──┬───────────┬──────────┬──────────┐
+  (per surface)     implemented partial    docs-only  planned
+```
+
+**Worked examples:**
+
+| Artifact | Tuple |
+|---|---|
+| `bench-air-node` deployed in a v0.2 pilot today | (program-phase **v0.2**, capability **current v1**, deployment **v1.0**, implementation **implemented**) |
+| `equipment-state-observation` v1.5 schema | (program-phase **v1.0+**, capability **v1.5 bridge**, deployment **N/A**, implementation **docs-only**) |
+| Route-readiness model | (program-phase **later**, capability **v4**, deployment **N/A**, implementation **planned**) |
+| `mast-lite` build before reproduction | (program-phase **v0.2** target, capability **current v1**, deployment **v0.1**, implementation **partial**) |
+
+**Common collapse to avoid:** equating program-phase with capability stage. A `v0.2` slice promotion does **not** mean the system reached capability `v1.5` — it means the v0.2 release-acceptance bar was met within capability `current v1`.
+
 ## Product anchor: current truth, next promotion, later staged additions
 
 | | **Current truth** | **Next promotion** | **Later staged additions** |
@@ -48,6 +80,29 @@ Canonical detail: `../current/pre-1.0-version-progression.md`.
 | `v1.0` (program sense) | Materially broader system than the first narrow slice — distinct from website marketing labels |
 
 New `v0.x` slices should **only** ship when the runnable system boundary **materially** expands, not when a single schema draft appears.
+
+## Cross-repo lane coordination
+
+Each release-slice lane (`v0.1`–`v1.5`) appears in multiple repos with different posture per repo. Read this when you need to know "what is `v0.2` actually made of, and where does each piece live?"
+
+| Lane | oesis-contracts | oesis-runtime | oesis-program-specs | oesis-hardware | oesis-public-site |
+|---|---|---|---|---|---|
+| `v0.1` | **canonical** schemas + examples | full assets + per-module `v0_1/` code path | per-slice release packet | **canonical** node families nested in `v0.1/` | — |
+| `v0.2` | inherits v0.1 (empty stub) | full assets + `v0_2/` code path with overlay | per-slice release packet | inherits v0.1 (lane-index README) | — |
+| `v0.3` | inherits v0.1 (empty stub) | full assets + `v0_3/` code path | per-slice release packet | inherits v0.1 | — |
+| `v0.4` | inherits v0.1 (empty stub) | full assets + `v0_4/` code path | per-slice release packet | inherits v0.1 | — |
+| `v0.5` | inherits v0.1 (empty stub) | full assets + `v0_5/` code path | per-slice release packet | inherits v0.1 | — |
+| `v1.0` | additive deltas (`v1.0/schemas/`) | full assets + `v1_0/` code path | per-slice release packet | bridge stubs | bundled (`content/v1.0/`) — **only public lane** |
+| `v1.5` | additive deltas (`v1.5/schemas/`) | scaffolded; bridge code planned | draft release packet | **canonical** bridge node families (`v1.5/circuit-monitor/`, `indoor-response-node`, `power-outage-node`) | — |
+
+**Sync mechanisms keeping these aligned** (see `cross-repo-architecture.md` for the full inventory):
+
+- `cross_repo_sync_check.py` — example sync, schema coverage, lane alignment, hardware/contracts URL validation
+- `cross-repo-drift.yml` — nightly safety net for out-of-band edits
+- `release-fanout.yml` (in oesis-contracts) — propagates contract changes to consumers
+- `version-manifest.json` — machine-readable cross-repo alignment snapshot
+
+**Released bundle** (downstream-consumer surface): `oesis-contracts/bundles/contracts-bundle/` mirrors v0.1 fully. v1.0/v1.5 deltas are not bundled (consumers wanting newer lanes pull contracts directly).
 
 ## Capability stages (summary)
 
