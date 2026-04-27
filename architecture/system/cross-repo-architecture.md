@@ -130,8 +130,21 @@ full four-axis model.
 |-----------|-------|----------------|
 | `make cross-repo-sync` | specs | Example sync, schema coverage, lane alignment, manifest freshness, hardware URL validation |
 | `cross-repo-sync` CI job | specs GitHub Actions | Same checks on every push/PR |
+| `cross-repo-drift.yml` | specs GitHub Actions | Nightly safety net; opens drift issue when out-of-band edits land |
 | `cross-repo-example-sync` CI job | runtime GitHub Actions | Byte-compares canonical lane examples against specs |
+| `validate_examples.py` | contracts repo | Validates every example against its schema across v0.1, v1.0, v1.5, and the bundle |
 | `version-manifest.json` | specs repo root | Machine-readable snapshot of all 4 repos' alignment state |
+
+### Non-git satellite working dirs
+
+Two ancillary directories live alongside the four canonical repos but are **not git-managed**:
+
+| Working dir | Purpose | Sync posture |
+|---|---|---|
+| `oesis-builds/` | Build vault — per-unit specs, decisions, procedures, calibration logs | Soft-validated by `cross_repo_sync_check.py`'s `check_builds_cross_refs()`. Validates relative paths to sibling repos (e.g., `../../oesis-hardware/<lane>/<family>/`). Soft-skips when not present (CI does not clone). |
+| `oesis-wiki/` | Research notes and concept wiki | Soft-validated by `cross_repo_sync_check.py`'s `check_wiki_cross_refs()`. Validates textual sibling-repo path references resolve to real files. Soft-skips when not present. |
+
+These satellites are best-effort local-only validation surfaces — they catch drift when a maintainer runs `make cross-repo-sync` locally, but do not gate CI. Add them to a future automated lane if they migrate to git.
 
 ## Cross-repo artifact bundles
 

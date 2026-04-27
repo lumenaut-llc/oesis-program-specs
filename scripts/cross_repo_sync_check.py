@@ -26,6 +26,11 @@ CONTRACTS_ROOT = SPECS_ROOT.parent / "oesis-contracts"
 RUNTIME_ROOT = SPECS_ROOT.parent / "oesis-runtime"
 HARDWARE_ROOT = SPECS_ROOT.parent / "oesis-hardware"
 PUBLIC_SITE_ROOT = SPECS_ROOT.parent / "oesis-public-site"
+# Non-git satellite working dirs. Soft-skipped when not present (CI does not
+# clone these — they live as local working dirs maintained outside the
+# release-fanout flow, so coverage here is best-effort local validation).
+BUILDS_ROOT = SPECS_ROOT.parent / "oesis-builds"
+WIKI_ROOT = SPECS_ROOT.parent / "oesis-wiki"
 
 # Lanes where specs owns canonical examples (baseline + additive lanes).
 # Overlay lanes v0.2-v0.5 intentionally have no specs examples — runtime
@@ -347,6 +352,111 @@ def check_hardware_contract_urls() -> list[str]:
     return errors
 
 
+def check_builds_cross_refs() -> list[str]:
+    """Validate relative ../oesis-<repo>/ paths in oesis-builds markdown resolve.
+
+    oesis-builds is a non-git working dir with markdown links to sibling repos
+    via relative paths (e.g., ../../../oesis-hardware/v0.1/bench-air-node/...).
+    Without CI for builds itself, these references can break silently when a
+    sibling repo restructures. Soft-skips when builds is not present locally.
+    """
+    errors: list[str] = []
+    if not check_repo_exists(BUILDS_ROOT, "oesis-builds"):
+        return errors  # soft-skip: builds is not git-cloned in CI today
+
+    import re
+    pattern = re.compile(r"(?:\.\./)+oesis[_-][a-z_-]+/[^\s)\"'\]`#?]+")
+
+    for md_file in BUILDS_ROOT.rglob("*.md"):
+        if ".git" in md_file.parts or "node_modules" in md_file.parts:
+            continue
+        # Skip template files — they intentionally contain placeholder paths
+        # like `../oesis-hardware/<node>/firmware/` for the reader to fill in.
+        if "_template" in md_file.parts or "_templates" in md_file.parts:
+            continue
+        try:
+            content = md_file.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, PermissionError):
+            continue
+
+        for match in pattern.finditer(content):
+            rel = match.group(0).rstrip("/").rstrip(".").rstrip(",")
+            if not rel:
+                continue
+            # Skip template placeholders like <node>, <slug>, or glob patterns
+            # like ../oesis-hardware/** (used in vault-scope documentation, not
+            # as navigable paths).
+            if "<" in rel or ">" in rel or "*" in rel:
+                continue
+
+            target = (md_file.parent / rel).resolve()
+            if not target.exists():
+                try:
+                    rel_md = md_file.relative_to(BUILDS_ROOT)
+                except ValueError:
+                    rel_md = md_file
+                errors.append(
+                    f"oesis-builds/{rel_md}: broken relative path — "
+                    f"'{match.group(0)}' does not resolve"
+                )
+
+    return errors
+
+
+def check_wiki_cross_refs() -> list[str]:
+    """Validate textual oesis-<repo>/<path> references in oesis-wiki markdown.
+
+    oesis-wiki uses prose mentions rather than markdown links (e.g.,
+    backtick-wrapped `oesis-hardware/v0.1/<family>/file.md`). These are logical
+    pointers; they should reference real files relative to the oesis_master
+    parent dir. Restricts matching to references that end in a recognised
+    file extension to avoid noisy false positives on dir-name mentions.
+    Soft-skips when wiki is not present locally.
+    """
+    errors: list[str] = []
+    if not check_repo_exists(WIKI_ROOT, "oesis-wiki"):
+        return errors  # soft-skip
+
+    import re
+    # Only validate refs that end in a recognised file extension
+    pattern = re.compile(
+        r"oesis[_-][a-z_-]+/[a-zA-Z0-9._/-]+\."
+        r"(?:md|json|csv|toml|yaml|yml|h|cpp|py|sh|ino|ts|tsx|js)"
+    )
+
+    for md_file in WIKI_ROOT.rglob("*.md"):
+        if ".git" in md_file.parts or "node_modules" in md_file.parts:
+            continue
+        # Skip template files
+        if "_template" in md_file.parts or "_templates" in md_file.parts:
+            continue
+        try:
+            content = md_file.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, PermissionError):
+            continue
+
+        for match in pattern.finditer(content):
+            rel = match.group(0)
+            if not rel:
+                continue
+            # Skip refs containing template placeholders or globs
+            if "<" in rel or ">" in rel or "*" in rel:
+                continue
+
+            target = WIKI_ROOT.parent / rel
+            if not target.exists():
+                try:
+                    rel_md = md_file.relative_to(WIKI_ROOT)
+                except ValueError:
+                    rel_md = md_file
+                errors.append(
+                    f"oesis-wiki/{rel_md}: broken sibling-repo path — "
+                    f"'{rel}' not found in oesis_master"
+                )
+
+    return errors
+
+
 def check_specs_verified_commit() -> list[str]:
     """Warn if version-manifest's recorded oesis-contracts commit lags HEAD."""
     manifest_path = SPECS_ROOT / "version-manifest.json"
@@ -390,6 +500,8 @@ def main() -> int:
         ("Version manifest", check_version_manifest),
         ("Public-site bundle freshness", check_public_site_bundle_freshness),
         ("Hardware contracts URL validity", check_hardware_contract_urls),
+        ("Builds cross-reference validation (relative paths)", check_builds_cross_refs),
+        ("Wiki cross-reference validation (sibling-repo paths)", check_wiki_cross_refs),
         ("Specs verified-commit freshness", check_specs_verified_commit),
     ]
 
