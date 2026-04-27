@@ -365,7 +365,9 @@ def check_builds_cross_refs() -> list[str]:
         return errors  # soft-skip: builds is not git-cloned in CI today
 
     import re
-    pattern = re.compile(r"(?:\.\./)+oesis[_-][a-z_-]+/[^\s)\"'\]`#?]+")
+    # Stop set excludes whitespace, markdown link/wikilink terminators, common
+    # prose punctuation. `|` and `]` are wikilink syntax (`[[path|display]]`).
+    pattern = re.compile(r"(?:\.\./)+oesis[_-][a-z_-]+/[^\s)\"'\]`|#?]+")
 
     for md_file in BUILDS_ROOT.rglob("*.md"):
         if ".git" in md_file.parts or "node_modules" in md_file.parts:
@@ -390,6 +392,15 @@ def check_builds_cross_refs() -> list[str]:
                 continue
 
             target = (md_file.parent / rel).resolve()
+            # Wikilinks (`[[path]]`) and bare path mentions typically omit
+            # the .md extension. If the literal path doesn't resolve, try
+            # appending .md as a fallback before declaring drift. (Path.suffix
+            # is unreliable when path segments contain dots, e.g. `v.0.1/...`.)
+            if not target.exists():
+                with_md = target.parent / (target.name + ".md")
+                if with_md.exists():
+                    continue
+
             if not target.exists():
                 try:
                     rel_md = md_file.relative_to(BUILDS_ROOT)
@@ -424,6 +435,26 @@ def check_wiki_cross_refs() -> list[str]:
         r"(?:md|json|csv|toml|yaml|yml|h|cpp|py|sh|ino|ts|tsx|js)"
     )
 
+    # Phrases on the same line indicating an intentionally-aspirational
+    # reference (file expected to exist later, not yet written). These are
+    # author signals that the target file is acknowledged as missing — not
+    # drift. Wiki vault stewardship (oesis-wiki/CLAUDE.md) means we can't
+    # edit these files from this script anyway; better to skip cleanly.
+    placeholder_markers = (
+        "not yet written",
+        "not yet created",
+        "not yet added",
+        "not yet exists",
+        "expected:",
+        "expected to be at",
+        "pending:",
+        "(planned)",
+        "(tbd)",
+        "to be added",
+        "will live",
+        "when added",
+    )
+
     for md_file in WIKI_ROOT.rglob("*.md"):
         if ".git" in md_file.parts or "node_modules" in md_file.parts:
             continue
@@ -435,12 +466,24 @@ def check_wiki_cross_refs() -> list[str]:
         except (UnicodeDecodeError, PermissionError):
             continue
 
+        # Build a list of (ref, line_text) tuples so we can check line context
         for match in pattern.finditer(content):
             rel = match.group(0)
             if not rel:
                 continue
             # Skip refs containing template placeholders or globs
             if "<" in rel or ">" in rel or "*" in rel:
+                continue
+            # Skip wikilink-display segments leaked into the match
+            if "|" in rel:
+                rel = rel.split("|", 1)[0]
+            # Find the line containing this ref; skip if it has a placeholder marker
+            line_start = content.rfind("\n", 0, match.start()) + 1
+            line_end = content.find("\n", match.end())
+            if line_end == -1:
+                line_end = len(content)
+            line = content[line_start:line_end].lower()
+            if any(marker in line for marker in placeholder_markers):
                 continue
 
             target = WIKI_ROOT.parent / rel
