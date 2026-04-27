@@ -122,6 +122,45 @@ Approval rule:
 - release owner plus legal / IP owner review
 - attorney escalation where required
 
+## Decision class by repository scope
+
+The classes above describe the **type** of change. This table maps each repo (or repo subtree) to its **default class**, so contributors know which approval pattern applies before opening a PR.
+
+| Repo / subtree | Default class | Escalation triggers |
+|---|---|---|
+| `oesis-contracts/v*/schemas/` | Class 2 | Class 3 if change affects governance objects (consent, sharing, retention, rights-request, operator-access-event) |
+| `oesis-contracts/v*/examples/` | Class 1 | Class 2 if example demonstrates new sharing/consent flow |
+| `oesis-contracts/bundles/` | Class 2 | Bundle is a downstream-consumer surface |
+| `oesis-runtime/oesis/ingest/` | Class 1 | Class 2 if affecting admissibility checks or trust-scoring |
+| `oesis-runtime/oesis/inference/` | Class 1 | Class 2 if changing hazard math, calibration, or confidence-degradation rules |
+| `oesis-runtime/oesis/parcel_platform/` (governance utilities — `process_rights_requests.py`, `run_retention_cleanup.py`, `export_parcel_bundle.py`) | Class 2 | — |
+| `oesis-runtime/oesis/shared_map/` | Class 2 | Class 3 if changing public-map suppression, k-anonymity, or aggregation thresholds |
+| `oesis-program-specs/architecture/` | Class 1 | Class 2 if changing public-claim posture (claims-sensitive doctrine) |
+| `oesis-program-specs/legal/` | Class 3 | Always |
+| `oesis-program-specs/release/` | Class 3 | Always |
+| `oesis-program-specs/program/` (operating packet, execution plan) | Class 2 | Class 3 if changing public release-scope or holdback list |
+| `oesis-program-specs/meta/` (ADRs, milestones, proposals, plan-of-approach) | Class 1 | Class 2 if ADR changes governance posture; Class 3 if ADR changes release boundary |
+| `oesis-hardware/v*/parcel-kit/` | Class 2 | Field-hardening, BOM, install posture all affect deployment trust |
+| `oesis-hardware/v*/<node-family>/` (build guide, firmware, calibration) | Class 1 | Class 2 if changing calibration claims or trust posture |
+| `oesis-hardware/v*/calibration/` | Class 2 | Cross-cutting calibration policy |
+| `oesis-public-site/content/` | Class 3 | Public-facing copy is release-sensitive by definition |
+| `oesis-public-site/src/` (frontend code, no content) | Class 1 | Class 3 if changing publication boundary or content-bundle handling |
+| `oesis-builds` (non-git vault) | Class 1 | Vault stewardship rules apply (see `oesis-builds/CLAUDE.md`); Class 2 if affecting calibration session logs |
+| `oesis-wiki` (non-git vault) | Class 1 | Vault stewardship rules apply (see `oesis-wiki/CLAUDE.md`); wiki content updates go through wiki agent commands |
+
+### Multi-class escalation rule
+
+A change that touches files in multiple class buckets defaults to the **highest applicable class**. Example: a PR that updates an `oesis-runtime/oesis/inference/` admissibility check (Class 2) AND `oesis-program-specs/release/v0.5/` notes (Class 3) requires Class 3 approval (release owner + legal/IP owner) for the entire PR.
+
+### Cross-references
+
+Each repo's `CONTRIBUTING.md` should link to this table when explaining review expectations. Update those alongside any change to this table.
+
+### Out of scope here
+
+- Named approver lists (who currently fills release-owner, legal/IP-owner, governance/privacy-owner roles) — see role-assignment ticket
+- Tooling enforcement (CODEOWNERS files, branch-protection rules wiring this table into GitHub) — separate ticket if desired
+
 ## Hard governance boundaries
 
 The project should not:
