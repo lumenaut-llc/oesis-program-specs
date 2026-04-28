@@ -17,6 +17,9 @@ Subcommands:
                                  into runtime/oesis/assets/v*/examples/.
     build-public-content-bundle  Stamp contracts commit into the site's
                                  generated bundle; verify URL references.
+    build-contracts-bundle       Regenerate oesis-contracts/bundles/contracts-bundle/
+                                 from the v0.1 lane (schemas, examples, manifest).
+                                 Idempotent: no-op when bundle is already current.
     sync-hardware-refs           Verify that contract citations in hardware docs
                                  still resolve in contracts at the given ref.
     sync-specs-refs              Update version-manifest.json's
@@ -37,6 +40,7 @@ Exit codes:
 Run from oesis-program-specs repo root (default paths):
     python3 scripts/repo_split.py sync-runtime-assets
     python3 scripts/repo_split.py build-public-content-bundle
+    python3 scripts/repo_split.py build-contracts-bundle
     python3 scripts/repo_split.py sync-hardware-refs
     python3 scripts/repo_split.py sync-specs-refs
 """
@@ -274,6 +278,222 @@ def cmd_build_public_content_bundle(
 
 
 # --------------------------------------------------------------------------
+# build-contracts-bundle
+# --------------------------------------------------------------------------
+
+# The contracts-bundle/ snapshot mirrors v0.1 fully — schemas, examples,
+# and a manifest pinned to a contracts source_commit. External downstream
+# consumers pull this snapshot rather than tracking the full contracts repo.
+#
+# Mirror policy: the bundle is a v0.1 mirror, period. v1.0/v1.5 deltas
+# stay out until bundle policy explicitly extends to later lanes.
+
+CONTRACTS_BUNDLE_LANE = "v0.1"
+CONTRACTS_BUNDLE_REL_PATH = Path("bundles") / "contracts-bundle"
+
+
+def _read_lane_inventory(lane_dir: Path) -> tuple[dict[str, Path], dict[str, Path]]:
+    """Return (schemas_by_basename, examples_by_basename) for a lane dir."""
+    schemas_dir = lane_dir / "schemas"
+    examples_dir = lane_dir / "examples"
+    schemas: dict[str, Path] = {}
+    examples: dict[str, Path] = {}
+    if schemas_dir.is_dir():
+        for p in sorted(schemas_dir.glob("*.schema.json")):
+            schemas[p.name[: -len(".schema.json")]] = p
+    if examples_dir.is_dir():
+        for p in sorted(examples_dir.glob("*.example.json")):
+            examples[p.name[: -len(".example.json")]] = p
+    return schemas, examples
+
+
+def cmd_build_contracts_bundle(
+    contracts_root: Path,
+    contracts_ref: str,
+    dry_run: bool,
+) -> tuple[int, dict]:
+    """
+    Regenerate oesis-contracts/bundles/contracts-bundle/ from the v0.1 lane.
+
+    Idempotent: if every schema and example file already matches the source
+    byte-for-byte AND the manifest's schemas/examples maps already match the
+    on-disk inventory AND source_commit already matches contracts_ref, this
+    is a no-op (rc 0, no writes).
+
+    Returns rc:
+      0  bundle is current (or was successfully regenerated)
+      1  hard error (missing source lane, manifest unparseable, write failure)
+      2  dry-run found drift that would be written
+    """
+    summary = {
+        "command": "build-contracts-bundle",
+        "contracts_ref": contracts_ref,
+        "bundle_path": None,
+        "schemas_written": 0,
+        "examples_written": 0,
+        "manifest_updated": False,
+        "dry_run": dry_run,
+    }
+    errors: list[str] = []
+
+    lane_dir = contracts_root / CONTRACTS_BUNDLE_LANE
+    bundle_dir = contracts_root / CONTRACTS_BUNDLE_REL_PATH
+    manifest_path = bundle_dir / "manifest.json"
+
+    summary["bundle_path"] = str(bundle_dir)
+
+    if not lane_dir.is_dir():
+        errors.append(f"source lane not found: {lane_dir}")
+        summary["errors"] = errors
+        return 1, summary
+    if not manifest_path.is_file():
+        errors.append(
+            f"manifest not found: {manifest_path} — bootstrap a manifest first "
+            "(this generator regenerates content but expects the manifest "
+            "scaffold with bundle_version/lane/compatibility/schema_version_set "
+            "to already exist)"
+        )
+        summary["errors"] = errors
+        return 1, summary
+
+    src_schemas, src_examples = _read_lane_inventory(lane_dir)
+    if not src_schemas:
+        errors.append(f"no schemas found in {lane_dir}/schemas/")
+        summary["errors"] = errors
+        return 1, summary
+
+    bundle_schemas_dir = bundle_dir / "schemas"
+    bundle_examples_dir = bundle_dir / "examples"
+
+    schemas_to_write: list[tuple[Path, bytes]] = []
+    examples_to_write: list[tuple[Path, bytes]] = []
+    schemas_to_remove: list[Path] = []
+    examples_to_remove: list[Path] = []
+
+    # Plan schema writes (copy or update).
+    for name, src_path in src_schemas.items():
+        dest = bundle_schemas_dir / src_path.name
+        src_bytes = src_path.read_bytes()
+        if not dest.is_file() or dest.read_bytes() != src_bytes:
+            schemas_to_write.append((dest, src_bytes))
+
+    # Plan schema removals (bundle has files no longer in v0.1 source).
+    if bundle_schemas_dir.is_dir():
+        existing_schemas = {p.name for p in bundle_schemas_dir.glob("*.schema.json")}
+        source_schema_names = {p.name for p in src_schemas.values()}
+        for stale in sorted(existing_schemas - source_schema_names):
+            schemas_to_remove.append(bundle_schemas_dir / stale)
+
+    # Plan example writes.
+    for name, src_path in src_examples.items():
+        dest = bundle_examples_dir / src_path.name
+        src_bytes = src_path.read_bytes()
+        if not dest.is_file() or dest.read_bytes() != src_bytes:
+            examples_to_write.append((dest, src_bytes))
+
+    # Plan example removals.
+    if bundle_examples_dir.is_dir():
+        existing_examples = {p.name for p in bundle_examples_dir.glob("*.example.json")}
+        source_example_names = {p.name for p in src_examples.values()}
+        for stale in sorted(existing_examples - source_example_names):
+            examples_to_remove.append(bundle_examples_dir / stale)
+
+    # Plan manifest update.
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        errors.append(f"manifest is not JSON-parseable: {e}")
+        summary["errors"] = errors
+        return 1, summary
+
+    new_schemas_map = {
+        name: f"schemas/{src_path.name}" for name, src_path in sorted(src_schemas.items())
+    }
+    new_examples_map = {
+        name: f"examples/{src_path.name}" for name, src_path in sorted(src_examples.items())
+    }
+
+    manifest_changes = {}
+    if manifest.get("schemas") != new_schemas_map:
+        manifest_changes["schemas"] = True
+    if manifest.get("examples") != new_examples_map:
+        manifest_changes["examples"] = True
+    if manifest.get("source_commit") != contracts_ref:
+        manifest_changes["source_commit"] = True
+
+    # Anything to do?
+    nothing_to_do = (
+        not schemas_to_write
+        and not examples_to_write
+        and not schemas_to_remove
+        and not examples_to_remove
+        and not manifest_changes
+    )
+    if nothing_to_do:
+        print(f"  {PASS} bundle already up to date at {contracts_ref[:12]}")
+        return 0, summary
+
+    summary["schemas_written"] = len(schemas_to_write)
+    summary["examples_written"] = len(examples_to_write)
+    summary["schemas_removed"] = len(schemas_to_remove)
+    summary["examples_removed"] = len(examples_to_remove)
+    summary["manifest_updated"] = bool(manifest_changes)
+
+    if dry_run:
+        print(
+            f"  {INFO} would write {len(schemas_to_write)} schema(s), "
+            f"{len(examples_to_write)} example(s); "
+            f"remove {len(schemas_to_remove)} schema(s), "
+            f"{len(examples_to_remove)} example(s); "
+            f"manifest changes: {sorted(manifest_changes.keys()) or 'none'}"
+        )
+        return 2, summary
+
+    # Apply writes.
+    bundle_schemas_dir.mkdir(parents=True, exist_ok=True)
+    bundle_examples_dir.mkdir(parents=True, exist_ok=True)
+
+    try:
+        for dest, content in schemas_to_write:
+            dest.write_bytes(content)
+        for dest, content in examples_to_write:
+            dest.write_bytes(content)
+        for stale in schemas_to_remove:
+            stale.unlink()
+        for stale in examples_to_remove:
+            stale.unlink()
+    except OSError as e:
+        errors.append(f"write failure: {e}")
+        summary["errors"] = errors
+        return 1, summary
+
+    # Update manifest. Preserve key order: only mutate the fields we own.
+    manifest["schemas"] = new_schemas_map
+    manifest["examples"] = new_examples_map
+    manifest["source_commit"] = contracts_ref
+    manifest["generated_at"] = utc_now()
+
+    try:
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+    except OSError as e:
+        errors.append(f"manifest write failure: {e}")
+        summary["errors"] = errors
+        return 1, summary
+
+    print(
+        f"  {PASS} wrote {len(schemas_to_write)} schema(s), "
+        f"{len(examples_to_write)} example(s); "
+        f"removed {len(schemas_to_remove)} schema(s), "
+        f"{len(examples_to_remove)} example(s); "
+        f"manifest @ {contracts_ref[:12]}"
+    )
+    return 0, summary
+
+
+# --------------------------------------------------------------------------
 # sync-hardware-refs
 # --------------------------------------------------------------------------
 
@@ -475,6 +695,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=[
             "sync-runtime-assets",
             "build-public-content-bundle",
+            "build-contracts-bundle",
             "sync-hardware-refs",
             "sync-specs-refs",
             "all",
@@ -501,6 +722,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.subcommand != "all"
         else [
             "sync-runtime-assets",
+            "build-contracts-bundle",
             "build-public-content-bundle",
             "sync-hardware-refs",
             "sync-specs-refs",
@@ -521,6 +743,12 @@ def main(argv: list[str] | None = None) -> int:
                 args.contracts_root,
                 args.public_site_root,
                 args.specs_root,
+                contracts_ref,
+                args.dry_run,
+            )
+        elif step == "build-contracts-bundle":
+            rc, s = cmd_build_contracts_bundle(
+                args.contracts_root,
                 contracts_ref,
                 args.dry_run,
             )
