@@ -1,6 +1,6 @@
 {
   "format_version": "1.0",
-  "generated_at": "2026-04-24T00:39:08Z",
+  "generated_at": "2026-05-01T20:11:58Z",
   "description": "Cross-repo version alignment manifest for the OESIS project. This file declares the current version state across all five repositories. Validate with: python3 scripts/cross_repo_sync_check.py",
   "repos": {
     "oesis-program-specs": {
@@ -13,7 +13,7 @@
       "url": "https://github.com/lumenaut-llc/oesis-contracts",
       "role": "Canonical schemas, examples, and contract prose",
       "license": "CC BY-SA 4.0 / AGPL-3.0",
-      "last_verified_commit": "4bb10f3fddd4427b3165a88ab7fcb0e31fef414d"
+      "last_verified_commit": "c9ae5e6d0fad742278583e7729ce2f437412d74a"
     },
     "oesis-runtime": {
       "url": "https://github.com/lumenaut-llc/oesis-runtime",
